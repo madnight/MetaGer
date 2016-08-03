@@ -113,7 +113,15 @@
 			return view('hilfe')
 				->with('title', trans('titles.hilfe'))
 				->with('css', 'help.css')
-				->with('navbarFocus', 'dienste');
+				->with('navbarFocus', 'hilfe');
+		});
+
+		Route::get('faq', function()
+		{
+			return view('faq')
+				->with('title', trans('titles.faq'))
+				->with('css', 'help.css')
+				->with('navbarFocus', 'hilfe');
 		});
 
 		Route::get('widget', function()

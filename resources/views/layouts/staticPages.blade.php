@@ -35,7 +35,6 @@
 						</button>
 						@yield('homeIcon')
 					</div>
-					
 					<div class="collapse navbar-collapse" id="navbar-collapse">
 						<ul class="nav navbar-nav navbar-right">
 							<li @if ( !isset($navbarFocus) || $navbarFocus === 'suche') class="active" @endif >
@@ -50,6 +49,14 @@
 							</li>
 							<li @if (isset($navbarFocus) && $navbarFocus === 'datenschutz') class="active" @endif >
 								<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/datenschutz/") }}" id="navigationPrivacy">{{ trans('staticPages.nav3') }}</a></li>
+							<li @if (isset($navbarFocus) && $navbarFocus === 'hilfe') class="dropdown active" @else class="dropdown" @endif >
+								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navigationHilfe">{{ trans('staticPages.nav20') }}
+								<span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe/") }}">{{ trans('staticPages.nav20') }}</a></li>
+									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/faq/") }}">{{ trans('staticPages.nav21') }}</a></li>
+								</ul>
+							</li>
 							<li @if (isset($navbarFocus) && $navbarFocus === 'kontakt') class="dropdown active" @else class="dropdown" @endif >
 								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navigationKontakt">{{ trans('staticPages.nav18') }}
 								<span class="caret"></span></a>

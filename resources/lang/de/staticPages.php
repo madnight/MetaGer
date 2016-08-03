@@ -4,6 +4,8 @@ return [
 	'nav1' 				=> 'Suche',
 	'nav2' 				=> 'Spenden',
 	'nav3' 				=> 'Datenschutz',
+	'nav20'				=> 'Hilfe',
+	'nav21'				=> 'FAQ',
 	'nav4' 				=> 'Forum',
 	'nav5' 				=> 'Kontakt',
 	'nav6' 				=> 'Team',

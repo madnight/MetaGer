@@ -4,8 +4,6 @@ namespace App;
 use App;
 use App\lib\TextLanguageDetect\TextLanguageDetect;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
 use Jenssegers\Agent\Agent;
 use LaravelLocalization;
 use Log;
@@ -237,38 +235,6 @@ class MetaGer
 
         }
 
-        //Get current page form url e.g. &page=6
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $offset      = $currentPage - 1;
-
-        //Create a new Laravel collection from the array data
-        $collection = new Collection($this->results);
-
-        //Define how many items we want to be visible in each page
-        $perPage = $this->resultCount;
-
-        //Slice the collection to get the items to display in current page
-        $currentPageSearchResults = $collection->slice($offset * $perPage, $perPage)->all();
-
-        # Für diese 20 Links folgt nun unsere Boost-Implementation.
-        $currentPageSearchResults = $this->parseBoost($currentPageSearchResults);
-
-        # Für diese 20 Links folgt nun unsere Adgoal- Implementation.
-        $currentPageSearchResults = $this->parseAdgoal($currentPageSearchResults);
-
-        //Create our paginator and pass it to the view
-        $paginatedSearchResults = new LengthAwarePaginator($currentPageSearchResults, count($collection), $perPage);
-        $paginatedSearchResults->setPath('/meta/meta.ger3');
-        foreach ($this->request->all() as $key => $value) {
-            if ($key === "out") {
-                continue;
-            }
-
-            $paginatedSearchResults->addQuery($key, $value);
-        }
-
-        $this->results = $paginatedSearchResults;
-
         if (LaravelLocalization::getCurrentLocale() === "en") {
             $this->ads = [];
         }
@@ -289,6 +255,7 @@ class MetaGer
         if (count($this->results) <= 0) {
             $this->errors[] = "Leider konnten wir zu Ihrer Sucheingabe keine passenden Ergebnisse finden. Sie können aber versuchen diese anzupassen.";
         }
+
     }
 
     public function parseBoost($results)

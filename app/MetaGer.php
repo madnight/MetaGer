@@ -253,7 +253,7 @@ class MetaGer
         }
 
         if (count($this->results) <= 0) {
-            $this->errors[] = "Leider konnten wir zu Ihrer Sucheingabe keine passenden Ergebnisse finden. Sie können aber versuchen diese anzupassen.";
+            $this->errors[] = "Leider konnten wir zu Ihrer Sucheingabe keine passenden Ergebnisse finden.";
         }
 
     }

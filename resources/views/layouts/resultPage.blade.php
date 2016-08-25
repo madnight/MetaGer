@@ -26,12 +26,6 @@
 			@yield('results')
 		</div>
 	@endif
-	<nav aria-label="...">
-		<ul class="pager">
-		    <li @if($metager->lastSearchLink() === "#") class="disabled" @endif><a href="{{ $metager->lastSearchLink() }}">Zurück</a></li>
-			<li @if($metager->nextSearchLink() === "#") class="disabled" @endif><a href="{{ $metager->nextSearchLink() }}">Weiter Suchen</a></li>
-		</ul>
-	</nav>
 	<footer>
 		<div class="row">
 			<div class="col-xs-6">

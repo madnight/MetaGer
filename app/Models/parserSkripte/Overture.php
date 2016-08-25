@@ -87,6 +87,7 @@ class Overture extends Searchengine
         # Erstellen des neuen Suchmaschinenobjekts und anpassen des GetStrings:
         $last            = new Overture(simplexml_load_string($this->engine), $metager);
         $last->getString = preg_replace("/&Keywords=.*?&/si", "&", $last->getString) . "&" . $lastArgs;
+        $last->hash      = md5($last->host . $last->getString . $last->port . $last->name);
         $this->last      = $last;
     }
 
@@ -114,6 +115,7 @@ class Overture extends Searchengine
         # Erstellen des neuen Suchmaschinenobjekts und anpassen des GetStrings:
         $next            = new Overture(simplexml_load_string($this->engine), $metager);
         $next->getString = preg_replace("/&Keywords=.*?&/si", "&", $next->getString) . "&" . $nextArgs;
+        $next->hash      = md5($next->host . $next->getString . $next->port . $next->name);
         $this->next      = $next;
     }
 }

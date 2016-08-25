@@ -54,19 +54,25 @@ class Yandex extends Searchengine
 
     public function getLast(\App\MetaGer $metager, $result)
     {
-        if( $metager->getPage() <= 1 )
+        if ($metager->getPage() <= 1) {
             return;
-        $last            = new Yandex(simplexml_load_string($this->engine), $metager);
-        $last->getString .= "&page=" . ($metager->getPage() -1 );
+        }
+
+        $last = new Yandex(simplexml_load_string($this->engine), $metager);
+        $last->getString .= "&page=" . ($metager->getPage() - 1);
+        $last->hash = md5($last->host . $last->getString . $last->port . $last->name);
         $this->last = $last;
     }
 
     public function getNext(\App\MetaGer $metager, $result)
     {
-        if( count($this->results) <= 0 )
+        if (count($this->results) <= 0) {
             return;
-        $next            = new Yandex(simplexml_load_string($this->engine), $metager);
+        }
+
+        $next = new Yandex(simplexml_load_string($this->engine), $metager);
         $next->getString .= "&page=" . ($metager->getPage() + 1);
+        $next->hash = md5($next->host . $next->getString . $next->port . $next->name);
         $this->next = $next;
     }
 }

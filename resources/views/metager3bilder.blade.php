@@ -27,7 +27,7 @@
 			</div>
 	@endif
 	<div id="container">
-	@foreach($metager->getResults()->items() as $result)
+	@foreach($metager->getResults() as $result)
 		<div class="item">
 			<div class="img">
 				<a href="{{ $result->link }}" target="{{ $metager->getTab() }}"><img src="{{ $metager->getImageProxyLink($result->image) }}" width="150px" alt=""/></a>
@@ -36,8 +36,10 @@
 		</div>
 	@endforeach
 	</div>
-	<nav class="pager">
-		{!! $metager->getResults()->links() !!}
+	<nav aria-label="...">
+		<ul class="pager">
+		    <li @if($metager->lastSearchLink() === "#") class="disabled" @endif><a href="{{ $metager->lastSearchLink() }}">Zurück</a></li>
+			<li @if($metager->nextSearchLink() === "#") class="disabled" @endif><a href="{{ $metager->nextSearchLink() }}">Weiter Suchen</a></li>
+		</ul>
 	</nav>
 @endsection
-

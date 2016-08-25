@@ -51,4 +51,22 @@ class Yandex extends Searchengine
             );
         }
     }
+
+    public function getLast(\App\MetaGer $metager, $result)
+    {
+        if( $metager->getPage() <= 1 )
+            return;
+        $next            = new Yandex(simplexml_load_string($this->engine), $metager);
+        $next->getString .= "page=" . ($metager->getPage() -1 );
+        $this->next = $next;
+    }
+
+    public function getNext(\App\MetaGer $metager, $result)
+    {
+        if( count($this->results) <= 0 )
+            return;
+        $next            = new Yandex(simplexml_load_string($this->engine), $metager);
+        $next->getString .= "page=" . $metager->getPage();
+        $this->next = $next;
+    }
 }

@@ -5,8 +5,9 @@ namespace App\Models;
 class Result
 {
 
-    public function __construct(\SimpleXMLElement $provider, $titel, $link, $anzeigeLink, $descr, $gefVon, $sourceRank, $partnershop = false, $image = "", $price = 0)
+    public function __construct($provider, $titel, $link, $anzeigeLink, $descr, $gefVon, $sourceRank, $partnershop = false, $image = "", $price = 0)
     {
+        $provider          = simplexml_load_string($provider);
         $this->titel       = strip_tags(trim($titel));
         $this->link        = trim($link);
         $this->anzeigeLink = trim($anzeigeLink);

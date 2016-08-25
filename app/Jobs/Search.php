@@ -13,7 +13,7 @@ class Search extends Job implements ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
     
-    protected $hash, $host, $port, $name, $getString, $useragent, $fp, $sumaFile;
+    protected $hash, $host, $port, $name, $getString, $useragent, $fp;
     protected $buffer_length = 8192;
 
     /**
@@ -21,7 +21,7 @@ class Search extends Job implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($hash, $host, $port, $name, $getString, $useragent, $sumaFile)
+    public function __construct($hash, $host, $port, $name, $getString, $useragent)
     {
         $this->hash = $hash;
         $this->host = $host;
@@ -29,7 +29,6 @@ class Search extends Job implements ShouldQueue
         $this->name = $name;
         $this->getString = $getString;
         $this->useragent = $useragent;
-        $this->sumaFile = $sumaFile;
     }
 
     /**
@@ -48,13 +47,6 @@ class Search extends Job implements ShouldQueue
                 $this->readAnswer();
             }
         }
-    }
-
-    public function disable($sumaFile, $message)
-    {
-        $xml = simplexml_load_file($sumaFile);
-        $xml->xpath("//sumas/suma[@name='" . $this->name . "']")['0']['disabled'] = date(DATE_RFC822, mktime(date("H")+1,date("i"), date("s"), date("m"), date("d"), date("Y")));
-        $xml->saveXML($sumaFile);
     }
 
     private function readAnswer ()

@@ -36,15 +36,11 @@ abstract class Searchengine
             $this->homepage = "https://metager.de";
         }
 
-        $this->engine = $engine;
+        $this->engine = $engine->asXML();
 
         if (!isset($this->cacheDuration)) {
             $this->cacheDuration = 60;
         }
-
-        # Wir registrieren die Benutzung dieser Suchmaschine
-        $this->uses = intval(Redis::hget($this->name, "uses")) + 1;
-        Redis::hset($this->name, "uses", $this->uses);
 
         # Eine Suchmaschine kann automatisch temporär deaktiviert werden, wenn es Verbindungsprobleme gab:
         if (isset($this->disabled) && strtotime($this->disabled) <= time()) {
@@ -75,20 +71,31 @@ abstract class Searchengine
         $this->getString  = $this->generateGetString($q, $metager->getUrl(), $metager->getLanguage(), $metager->getCategory());
         $this->hash       = md5($this->host . $this->getString . $this->port . $this->name);
         $this->resultHash = $metager->getHashCode();
+    }
+
+    abstract public function loadResults($result);
+
+    public function getLast(MetaGer $metager, $result){
+
+    }
+    public function getNext(MetaGer $metager, $result){
+
+    }
+
+    public function startSearch(\App\MetaGer $metager)
+    {
         if (Cache::has($this->hash)) {
             $this->cached = true;
-            $this->retrieveResults();
+            $this->retrieveResults($metager);
         } else {
             # Die Anfragen an die Suchmaschinen werden nun von der Laravel-Queue bearbeitet:
             # Hinweis: solange in der .env der QUEUE_DRIVER auf "sync" gestellt ist, werden die Abfragen
             # nacheinander abgeschickt.
             # Sollen diese Parallel verarbeitet werden, muss ein anderer QUEUE_DRIVER verwendet werden.
             # siehe auch: https://laravel.com/docs/5.2/queues
-            $this->dispatch(new Search($this->resultHash, $this->host, $this->port, $this->name, $this->getString, $this->useragent, $metager->getSumaFile()));
+            $this->dispatch(new Search($this->resultHash, $this->host, $this->port, $this->name, $this->getString, $this->useragent));
         }
     }
-
-    abstract public function loadResults($result);
 
     public function rank(\App\MetaGer $metager)
     {
@@ -130,7 +137,7 @@ abstract class Searchengine
         }
     }
 
-    public function retrieveResults()
+    public function retrieveResults(MetaGer $metager)
     {
         if ($this->loaded) {
             return true;
@@ -149,6 +156,8 @@ abstract class Searchengine
 
         if ($body !== "") {
             $this->loadResults($body);
+            $this->getNext($metager, $body);
+            $this->getLast($metager, $body);
             $this->loaded = true;
             Redis::hdel('search.' . $this->hash, $this->name);
             return true;

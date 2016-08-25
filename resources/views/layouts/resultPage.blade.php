@@ -15,7 +15,6 @@
 	<meta content="{{ getmypid() }}" name="p" />
 	<meta content="{{ $eingabe }}" name="q" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="referrer" content="no-referrer" />
 	<link rel="search" type="application/opensearchdescription+xml" title="MetaGer: Sicher suchen &amp; finden, Privatsph&auml;re sch&uuml;tzen" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
 
 </head>
@@ -24,9 +23,15 @@
 		@include('layouts.researchandtabs')
 	@else
 		<div class="tab-content container-fluid">
-		@yield('results')
+			@yield('results')
 		</div>
 	@endif
+	<nav aria-label="...">
+		<ul class="pager">
+		    <li @if($metager->lastSearchLink() === "#") class="disabled" @endif><a href="{{ $metager->lastSearchLink() }}">Zurück</a></li>
+			<li @if($metager->nextSearchLink() === "#") class="disabled" @endif><a href="{{ $metager->nextSearchLink() }}">Weiter Suchen</a></li>
+		</ul>
+	</nav>
 	<footer>
 		<div class="row">
 			<div class="col-xs-6">

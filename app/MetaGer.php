@@ -3,6 +3,7 @@ namespace App;
 
 use App;
 use App\lib\TextLanguageDetect\TextLanguageDetect;
+use Cache;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
 use LaravelLocalization;
@@ -31,6 +32,7 @@ class MetaGer
     protected $warnings        = [];
     protected $errors          = [];
     protected $addedHosts      = [];
+    protected $startCount = 0;
     # Daten über die Abfrage
     protected $ip;
     protected $language;
@@ -56,6 +58,14 @@ class MetaGer
             $this->urlsBlacklisted    = explode("\n", $tmp);
         } else {
             Log::warning("Achtung: Eine, oder mehrere Blacklist Dateien, konnten nicht geöffnet werden");
+        }
+
+        $dir = app_path() . "/Models/parserSkripte/";
+        foreach (scandir($dir) as $filename) {
+            $path = $dir . $filename;
+            if (is_file($path)) {
+                require $path;
+            }
         }
 
         $this->languageDetect = new TextLanguageDetect();
@@ -180,16 +190,22 @@ class MetaGer
     public function combineResults()
     {
         foreach ($this->engines as $engine) {
+            if (isset($engine->next)) {
+                $this->next[] = $engine->next;
+            }
+            if (isset($engine->last)) {
+                $this->last[] = $engine->last;
+            }
             foreach ($engine->results as $result) {
                 if ($result->valid) {
                     $this->results[] = $result;
                 }
-
             }
             foreach ($engine->ads as $ad) {
                 $this->ads[] = $ad;
             }
         }
+
         uasort($this->results, function ($a, $b) {
             if ($a->getRank() == $b->getRank()) {
                 return 0;
@@ -209,13 +225,23 @@ class MetaGer
 
         $counter   = 0;
         $firstRank = 0;
+
+        if(isset($this->startForwards))
+        {
+            $this->startCount = $this->startForwards;
+        }elseif (isset($this->startBackwards)) {
+            $this->startCount = $this->startBackwards - count($this->results) - 1;
+        }else{
+            $this->startCount = 0;
+        }
+
         foreach ($this->results as $result) {
             if ($counter === 0) {
                 $firstRank = $result->rank;
             }
 
             $counter++;
-            $result->number = $counter;
+            $result->number = $counter + $this->startCount;
             $confidence     = 0;
             if ($firstRank > 0) {
                 $confidence = $result->rank / $firstRank;
@@ -254,6 +280,28 @@ class MetaGer
 
         if (count($this->results) <= 0) {
             $this->errors[] = "Leider konnten wir zu Ihrer Sucheingabe keine passenden Ergebnisse finden.";
+        }
+
+        if( isset($this->last) && count($this->last) > 0 )
+        {
+            $page = $this->page - 1;
+            $this->last = [
+                'page'  =>  $page,
+                'startBackwards'     =>  $this->results[0]->number,
+                'engines' => $this->last,
+            ];
+            Cache::put(md5(serialize($this->last)), serialize($this->last), 60);
+        }
+
+        if( isset($this->next) && count($this->next) > 0 && count($this->results) > 0)
+        {
+            $page = $this->page + 1;
+            $this->next = [
+                'page'  =>  $page,
+                'startForwards'     =>  $this->results[count($this->results)-1]->number,
+                'engines' => $this->next,
+            ];
+            Cache::put(md5(serialize($this->next)), serialize($this->next), 60);
         }
 
     }
@@ -447,39 +495,53 @@ class MetaGer
         $typeslist = [];
         $counter   = 0;
 
-        foreach ($enabledSearchengines as $engine) {
+        if ($request->has('next') && Cache::has($request->input('next')) && unserialize(Cache::get($request->input('next')))['page'] > 1 ) {
+            $next = unserialize(Cache::get($request->input('next')));
+            $this->page = $next['page'];
+            $engines = $next['engines'];
+            if(isset($next['startForwards']))
+                $this->startForwards = $next['startForwards'];
+            if(isset($next['startBackwards']))
+                $this->startBackwards = $next['startBackwards'];
+        } else {
+            foreach ($enabledSearchengines as $engine) {
 
-            if (!$siteSearchFailed && strlen($this->site) > 0 && (!isset($engine['hasSiteSearch']) || $engine['hasSiteSearch']->__toString() === "0")) {
+                if (!$siteSearchFailed && strlen($this->site) > 0 && (!isset($engine['hasSiteSearch']) || $engine['hasSiteSearch']->__toString() === "0")) {
 
-                continue;
+                    continue;
+                }
+                # Wenn diese Suchmaschine gar nicht eingeschaltet sein soll
+                $path = "App\Models\parserSkripte\\" . ucfirst($engine["package"]->__toString());
+
+                if (!file_exists(app_path() . "/Models/parserSkripte/" . ucfirst($engine["package"]->__toString()) . ".php")) {
+                    Log::error("Konnte " . $engine["name"] . " nicht abfragen, da kein Parser existiert");
+                    continue;
+                }
+
+                $time = microtime();
+
+                try
+                {
+                    $tmp = new $path($engine, $this);
+                } catch (\ErrorException $e) {
+                    Log::error("Konnte " . $engine["name"] . " nicht abfragen." . var_dump($e));
+                    continue;
+                }
+
+                if ($tmp->enabled && isset($this->debug)) {
+                    $this->warnings[] = $tmp->service . "   Connection_Time: " . $tmp->connection_time . "    Write_Time: " . $tmp->write_time . " Insgesamt:" . ((microtime() - $time) / 1000);
+                }
+
+                if ($tmp->isEnabled()) {
+                    $engines[] = $tmp;
+                }
+
             }
-            # Wenn diese Suchmaschine gar nicht eingeschaltet sein soll
-            $path = "App\Models\parserSkripte\\" . ucfirst($engine["package"]->__toString());
+        }
 
-            if (!file_exists(app_path() . "/Models/parserSkripte/" . ucfirst($engine["package"]->__toString()) . ".php")) {
-                Log::error("Konnte " . $engine["name"] . " nicht abfragen, da kein Parser existiert");
-                continue;
-            }
-
-            $time = microtime();
-
-            try
-            {
-                $tmp = new $path($engine, $this);
-            } catch (\ErrorException $e) {
-                Log::error("Konnte " . $engine["name"] . " nicht abfragen." . var_dump($e));
-                continue;
-            }
-
-            if ($tmp->enabled && isset($this->debug)) {
-                $this->warnings[] = $tmp->service . "   Connection_Time: " . $tmp->connection_time . "    Write_Time: " . $tmp->write_time . " Insgesamt:" . ((microtime() - $time) / 1000);
-            }
-
-            if ($tmp->isEnabled()) {
-                $engines[]                 = $tmp;
-                $this->sockets[$tmp->name] = $tmp->fp;
-            }
-
+        # Wir starten die Suche manuell:
+        foreach ($engines as $engine) {
+            $engine->startSearch($this);
         }
 
         # Jetzt werden noch alle Kategorien der Settings durchgegangen und die jeweils enthaltenen namen der Suchmaschinen gespeichert.
@@ -574,11 +636,10 @@ class MetaGer
             usleep(50000);
         }
 
-        #exit;
         foreach ($engines as $engine) {
             if (!$engine->loaded) {
                 try {
-                    $engine->retrieveResults();
+                    $engine->retrieveResults($this);
                 } catch (\ErrorException $e) {
                     Log::error($e);
 
@@ -648,7 +709,7 @@ class MetaGer
         $this->time = $request->input('time', 1000);
 
         # Page
-        $this->page = $request->input('page', 1);
+        $this->page = 1;
         # Lang
         $this->lang = $request->input('lang', 'all');
         if ($this->lang !== "de" && $this->lang !== "en" && $this->lang !== "all") {
@@ -847,6 +908,10 @@ class MetaGer
     {
         return $this->phrases;
     }
+    public function getPage()
+    {
+        return $this->page;
+    }
 
     public function getSumaFile()
     {
@@ -888,6 +953,10 @@ class MetaGer
             return 0;
         }
     }
+    public function getStartCount()
+    {
+        return $this->startCount;
+    }
     public function addHostCount($host)
     {
         $hash = md5($host);
@@ -928,7 +997,7 @@ class MetaGer
 
     public function generateSearchLink($fokus, $results = true)
     {
-        $requestData          = $this->request->except('page');
+        $requestData          = $this->request->except(['page', 'next']);
         $requestData['focus'] = $fokus;
         if ($results) {
             $requestData['out'] = "results";
@@ -950,7 +1019,7 @@ class MetaGer
     public function generateSiteSearchLink($host)
     {
         $host        = urlencode($host);
-        $requestData = $this->request->except(['page', 'out']);
+        $requestData = $this->request->except(['page', 'out', 'next']);
         $requestData['eingabe'] .= " site:$host";
         $requestData['focus'] = "web";
         $link                 = action('MetaGerSearch@search', $requestData);
@@ -960,7 +1029,7 @@ class MetaGer
     public function generateRemovedHostLink($host)
     {
         $host        = urlencode($host);
-        $requestData = $this->request->except(['page', 'out']);
+        $requestData = $this->request->except(['page', 'out', 'next']);
         $requestData['eingabe'] .= " -host:$host";
         $link = action('MetaGerSearch@search', $requestData);
         return $link;
@@ -969,9 +1038,33 @@ class MetaGer
     public function generateRemovedDomainLink($domain)
     {
         $domain      = urlencode($domain);
-        $requestData = $this->request->except(['page', 'out']);
+        $requestData = $this->request->except(['page', 'out', 'next']);
         $requestData['eingabe'] .= " -domain:$domain";
         $link = action('MetaGerSearch@search', $requestData);
+        return $link;
+    }
+
+    public function lastSearchLink()
+    {
+        if( isset($this->last) && count($this->last['engines']) > 0){
+            $requestData         = $this->request->except(['page', 'out']);
+            $requestData['next'] = md5(serialize($this->last));
+            $link                = action('MetaGerSearch@search', $requestData);
+        }else{
+            $link = "#";
+        }
+        return $link;
+    }
+
+    public function nextSearchLink()
+    {
+        if( isset($this->next) && count($this->next['engines']) > 0){
+            $requestData         = $this->request->except(['page', 'out']);
+            $requestData['next'] = md5(serialize($this->next));
+            $link                = action('MetaGerSearch@search', $requestData);
+        }else{
+            $link = "#";
+        }
         return $link;
     }
 

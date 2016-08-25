@@ -67,7 +67,6 @@ class Yandex extends Searchengine
             return;
         $next            = new Yandex(simplexml_load_string($this->engine), $metager);
         $next->getString .= "&page=" . ($metager->getPage() + 1);
-        print( $next->getString);
         $this->next = $next;
     }
 }

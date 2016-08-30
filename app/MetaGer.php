@@ -32,7 +32,7 @@ class MetaGer
     protected $warnings        = [];
     protected $errors          = [];
     protected $addedHosts      = [];
-    protected $startCount = 0;
+    protected $startCount      = 0;
     # Daten über die Abfrage
     protected $ip;
     protected $language;
@@ -223,15 +223,20 @@ class MetaGer
         }
         $this->results = $newResults;
 
+        # Boost implementation
+        $this->results = $this->parseBoost($this->results);
+
+        #Adgoal Implementation
+        $this->results = $this->parseAdgoal($this->results);
+
         $counter   = 0;
         $firstRank = 0;
 
-        if(isset($this->startForwards))
-        {
+        if (isset($this->startForwards)) {
             $this->startCount = $this->startForwards;
-        }elseif (isset($this->startBackwards)) {
+        } elseif (isset($this->startBackwards)) {
             $this->startCount = $this->startBackwards - count($this->results) - 1;
-        }else{
+        } else {
             $this->startCount = 0;
         }
 
@@ -282,24 +287,22 @@ class MetaGer
             $this->errors[] = "Leider konnten wir zu Ihrer Sucheingabe keine passenden Ergebnisse finden.";
         }
 
-        if( isset($this->last) && count($this->last) > 0 )
-        {
-            $page = $this->page - 1;
+        if (isset($this->last) && count($this->last) > 0) {
+            $page       = $this->page - 1;
             $this->last = [
-                'page'  =>  $page,
-                'startBackwards'     =>  $this->results[0]->number,
-                'engines' => $this->last,
+                'page'           => $page,
+                'startBackwards' => $this->results[0]->number,
+                'engines'        => $this->last,
             ];
             Cache::put(md5(serialize($this->last)), serialize($this->last), 60);
         }
 
-        if( isset($this->next) && count($this->next) > 0 && count($this->results) > 0)
-        {
-            $page = $this->page + 1;
+        if (isset($this->next) && count($this->next) > 0 && count($this->results) > 0) {
+            $page       = $this->page + 1;
             $this->next = [
-                'page'  =>  $page,
-                'startForwards'     =>  $this->results[count($this->results)-1]->number,
-                'engines' => $this->next,
+                'page'          => $page,
+                'startForwards' => $this->results[count($this->results) - 1]->number,
+                'engines'       => $this->next,
             ];
             Cache::put(md5(serialize($this->next)), serialize($this->next), 60);
         }
@@ -495,14 +498,18 @@ class MetaGer
         $typeslist = [];
         $counter   = 0;
 
-        if ($request->has('next') && Cache::has($request->input('next')) && unserialize(Cache::get($request->input('next')))['page'] > 1 ) {
-            $next = unserialize(Cache::get($request->input('next')));
+        if ($request->has('next') && Cache::has($request->input('next')) && unserialize(Cache::get($request->input('next')))['page'] > 1) {
+            $next       = unserialize(Cache::get($request->input('next')));
             $this->page = $next['page'];
-            $engines = $next['engines'];
-            if(isset($next['startForwards']))
+            $engines    = $next['engines'];
+            if (isset($next['startForwards'])) {
                 $this->startForwards = $next['startForwards'];
-            if(isset($next['startBackwards']))
+            }
+
+            if (isset($next['startBackwards'])) {
                 $this->startBackwards = $next['startBackwards'];
+            }
+
         } else {
             foreach ($enabledSearchengines as $engine) {
 
@@ -1046,11 +1053,11 @@ class MetaGer
 
     public function lastSearchLink()
     {
-        if( isset($this->last) && count($this->last['engines']) > 0){
+        if (isset($this->last) && count($this->last['engines']) > 0) {
             $requestData         = $this->request->except(['page', 'out']);
             $requestData['next'] = md5(serialize($this->last));
             $link                = action('MetaGerSearch@search', $requestData);
-        }else{
+        } else {
             $link = "#";
         }
         return $link;
@@ -1058,11 +1065,11 @@ class MetaGer
 
     public function nextSearchLink()
     {
-        if( isset($this->next) && count($this->next['engines']) > 0){
+        if (isset($this->next) && count($this->next['engines']) > 0) {
             $requestData         = $this->request->except(['page', 'out']);
             $requestData['next'] = md5(serialize($this->next));
             $link                = action('MetaGerSearch@search', $requestData);
-        }else{
+        } else {
             $link = "#";
         }
         return $link;

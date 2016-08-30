@@ -1,5 +1,7 @@
 <?php
 
 return [
-	'redirect'	=>	'(mit redirect)',
+    'redirect' => '(mit redirect)',
+    'weiter'   => 'Weitersuchen',
+    'zurueck'  => 'Zurück',
 ];

@@ -1065,7 +1065,7 @@ class MetaGer
 
     public function nextSearchLink()
     {
-        if (isset($this->next) && count($this->next['engines']) > 0) {
+        if (isset($this->next) && isset($this->next['engines']) && count($this->next['engines']) > 0) {
             $requestData         = $this->request->except(['page', 'out']);
             $requestData['next'] = md5(serialize($this->next));
             $link                = action('MetaGerSearch@search', $requestData);

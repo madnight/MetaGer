@@ -68,8 +68,7 @@ abstract class Searchengine
         } else {
             $q = $metager->getQ();
         }
-        $this->getString = $this->generateGetString($q, $metager->getUrl(), $metager->getLanguage(), $metager->getCategory());
-        die($this->getString);
+        $this->getString  = $this->generateGetString($q, $metager->getUrl(), $metager->getLanguage(), $metager->getCategory());
         $this->hash       = md5($this->host . $this->getString . $this->port . $this->name);
         $this->resultHash = $metager->getHashCode();
     }

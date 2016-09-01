@@ -43,4 +43,17 @@ class Witch extends Searchengine
         }
 
     }
+
+    public function getNext(\App\MetaGer $metager, $result)
+    {
+        if (count($this->results) <= 0) {
+            return;
+        }
+
+        $next            = new Witch(simplexml_load_string($this->engine), $metager);
+        $offset          = $metager->getPage() * 10;
+        $next->getString = preg_replace("/&cn=\d+/si", "&cn=$offset", $next->getString);
+        $next->hash      = md5($next->host . $next->getString . $next->port . $next->name);
+        $this->next      = $next;
+    }
 }

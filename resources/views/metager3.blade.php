@@ -43,7 +43,7 @@
 			@endforeach
 			<nav aria-label="...">
 				<ul class="pager">
-				    <li @if($metager->lastSearchLink() === "#") class="disabled" @endif><a href="{{ $metager->lastSearchLink() }}">{{ trans('results.zurueck') }}</a></li>
+				    <li @if($metager->getPage() === 1) class="disabled" @endif><a href="@if($metager->getPage() === 1) # @else javascript:history.back() @endif">{{ trans('results.zurueck') }}</a></li>
 					<li @if($metager->nextSearchLink() === "#") class="disabled" @endif><a href="{{ $metager->nextSearchLink() }}">{{ trans('results.weiter') }}</a></li>
 				</ul>
 			</nav>

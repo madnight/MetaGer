@@ -6,8 +6,10 @@ use App\Models\Searchengine;
 
 class Onenewspagevideo extends Searchengine
 {
-    public $results = [];
+    public $results     = [];
+    public $resultCount = 0;
 
+    private $offset = 0;
     public function __construct(\SimpleXMLElement $engine, \App\MetaGer $metager)
     {
         parent::__construct($engine, $metager);
@@ -37,6 +39,36 @@ class Onenewspagevideo extends Searchengine
                 $this->counter
             );
         }
+        if (count($this->results) > $this->resultCount) {
+            $this->resultCount += count($this->results);
+        }
+    }
 
+    public function getLast(\App\MetaGer $metager, $result)
+    {
+        if ($metager->getPage() <= 1) {
+            return;
+        }
+
+        $last              = new Onenewspagevideo(simplexml_load_string($this->engine), $metager);
+        $last->resultCount = $this->resultCount;
+        $last->offset      = $this->offset - $this->resultCount;
+        $last->getString .= "&o=" . $last->offset;
+        $last->hash = md5($last->host . $last->getString . $last->port . $last->name);
+        $this->last = $last;
+    }
+
+    public function getNext(\App\MetaGer $metager, $result)
+    {
+        if (count($this->results) <= 0) {
+            return;
+        }
+
+        $next              = new Onenewspagevideo(simplexml_load_string($this->engine), $metager);
+        $next->resultCount = $this->resultCount;
+        $next->offset      = $this->offset + $this->resultCount;
+        $next->getString .= "&o=" . $next->offset;
+        $next->hash = md5($next->host . $next->getString . $next->port . $next->name);
+        $this->next = $next;
     }
 }

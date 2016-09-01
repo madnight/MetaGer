@@ -75,10 +75,6 @@ abstract class Searchengine
 
     abstract public function loadResults($result);
 
-    public function getLast(MetaGer $metager, $result)
-    {
-
-    }
     public function getNext(MetaGer $metager, $result)
     {
 
@@ -159,7 +155,6 @@ abstract class Searchengine
         if ($body !== "") {
             $this->loadResults($body);
             $this->getNext($metager, $body);
-            $this->getLast($metager, $body);
             $this->loaded = true;
             Redis::hdel('search.' . $this->hash, $this->name);
             return true;

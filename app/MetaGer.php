@@ -1051,18 +1051,6 @@ class MetaGer
         return $link;
     }
 
-    public function lastSearchLink()
-    {
-        if (isset($this->last) && count($this->last['engines']) > 0) {
-            $requestData         = $this->request->except(['page', 'out']);
-            $requestData['next'] = md5(serialize($this->last));
-            $link                = action('MetaGerSearch@search', $requestData);
-        } else {
-            $link = "#";
-        }
-        return $link;
-    }
-
     public function nextSearchLink()
     {
         if (isset($this->next) && isset($this->next['engines']) && count($this->next['engines']) > 0) {

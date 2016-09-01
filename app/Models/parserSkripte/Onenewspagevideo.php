@@ -44,20 +44,6 @@ class Onenewspagevideo extends Searchengine
         }
     }
 
-    public function getLast(\App\MetaGer $metager, $result)
-    {
-        if ($metager->getPage() <= 1) {
-            return;
-        }
-
-        $last              = new Onenewspagevideo(simplexml_load_string($this->engine), $metager);
-        $last->resultCount = $this->resultCount;
-        $last->offset      = $this->offset - $this->resultCount;
-        $last->getString .= "&o=" . $last->offset;
-        $last->hash = md5($last->host . $last->getString . $last->port . $last->name);
-        $this->last = $last;
-    }
-
     public function getNext(\App\MetaGer $metager, $result)
     {
         if (count($this->results) <= 0) {

@@ -18,11 +18,17 @@
 		<link href="/css/bootstrap.css" rel="stylesheet" />
 		<link href="/css/style.css" rel="stylesheet" />
 		@if (isset($css))
-			<link href="/css/{{ $css }}" rel="stylesheet" />
+			@if(is_array($css))
+				@foreach($css as $el)
+					<link href="/css/{{ $el }}" rel="stylesheet" />
+				@endforeach
+			@else
+				<link href="/css/{{ $css }}" rel="stylesheet" />
+			@endif
 		@endif
 		<link id="theme" href="/css/theme.css.php" rel="stylesheet" />
 	</head>
-	 
+
 	<body>
 		<header>
 			<nav class="navbar navbar-default">
@@ -36,7 +42,7 @@
 						</button>
 						@yield('homeIcon')
 					</div>
-					
+
 					<div class="collapse navbar-collapse" id="navbar-collapse">
 						<ul class="nav navbar-nav navbar-right">
 							<li @if ( !isset($navbarFocus) || $navbarFocus === 'suche') class="active" @endif >
@@ -92,7 +98,7 @@
 		</header>
 		<div class="wrapper">
 			@if( App::isLocale('de') )
-			<div class="mg-panel container" id="spendenaufruf" style="margin-bottom:-6%;max-height:126px;text-align:center;padding:0px;margin-top:0px">
+			<div class="mg-panel container noprint" id="spendenaufruf" style="margin-bottom:-6%;max-height:126px;text-align:center;padding:0px;margin-top:0px">
 					<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/spendenaufruf") }}">
 					<img src="/img/aufruf.png" style="max-width:100%;max-height:126px;" alt="Spendenaufruf für die unabhängige, nicht-kommerzielle Internet-Suche" >
 					</a>
@@ -108,7 +114,7 @@
 				@yield('content')
 			</main>
 			@yield('optionalContent')
-			<footer>
+			<footer class="noprint">
 				<ul class="list-inline hidden-xs">
 					<li><a href="https://www.suma-ev.de/" target="_blank">
 						<img src="/img/suma_ev_logo-m1-greyscale.png" alt="SUMA-EV Logo"></a></li>
@@ -129,6 +135,6 @@
 				@endforeach
 			@endif
 			<!--[if lte IE 8]><script type="text/javascript" src="/js/html5shiv.min.js"></script><![endif]-->
-		</div>		
+		</div>
 	</body>
 </html>

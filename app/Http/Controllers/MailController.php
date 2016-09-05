@@ -89,7 +89,7 @@ class MailController extends Controller
 
             try {
                 if (Mail::send(['text' => 'kontakt.mail'], ['messageText' => $message], function ($message) use ($replyTo) {
-                    $message->to("office@suma-ev.de", $name = null);
+                    $message->to("dominik@suma-ev.de", $name = null);
                     $message->from($replyTo, $name = null);
                     $message->replyTo($replyTo, $name = null);
                     $message->subject("MetaGer - Spende");
@@ -106,9 +106,16 @@ class MailController extends Controller
             }
         }
 
-        return view('spende.spende')
-            ->with('title', 'Kontakt')
-            ->with('css', 'donation.css')
-            ->with($messageType, $messageToUser);
+        if ($messageType === "error") {
+            return view('spende.danke')
+                ->with('title', 'Kontakt')
+                ->with('css', 'donation.css')
+                ->with($messageType, $messageToUser);
+        } else {
+            $data = ['name' => $request->input('Name', 'Keine Angabe'), 'telefon' => $request->input('Telefon', 'Keine Angabe'), 'kontonummer' => $request->input('Kontonummer'), 'bankleitzahl' => $request->input('Bankleitzahl'), 'email' => $request->input('email', 'anonymous-user@metager.de'), 'nachricht' => $request->input('Nachricht')];
+            $data = base64_encode(serialize($data));
+            return redirect(url('/spende/danke', ['data' => $data]));
+        }
+
     }
 }

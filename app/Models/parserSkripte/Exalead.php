@@ -19,7 +19,7 @@ class Exalead extends Searchengine
         try {
             $content = simplexml_load_string($result);
         } catch (\Exception $e) {
-            abort(500, "$result is not a valid xml string");
+            return;
         }
 
         if (!$content) {

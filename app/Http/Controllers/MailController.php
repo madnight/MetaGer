@@ -89,7 +89,7 @@ class MailController extends Controller
 
             try {
                 if (Mail::send(['text' => 'kontakt.mail'], ['messageText' => $message], function ($message) use ($replyTo) {
-                    $message->to("dominik@suma-ev.de", $name = null);
+                    $message->to("office@suma-ev.de", $name = null);
                     $message->from($replyTo, $name = null);
                     $message->replyTo($replyTo, $name = null);
                     $message->subject("MetaGer - Spende");

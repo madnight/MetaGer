@@ -71,6 +71,7 @@ abstract class Searchengine
         $this->getString  = $this->generateGetString($q, $metager->getUrl(), $metager->getLanguage(), $metager->getCategory());
         $this->hash       = md5($this->host . $this->getString . $this->port . $this->name);
         $this->resultHash = $metager->getHashCode();
+        $this->canCache   = $metager->canCache();
     }
 
     abstract public function loadResults($result);
@@ -82,7 +83,7 @@ abstract class Searchengine
 
     public function startSearch(\App\MetaGer $metager)
     {
-        if (Cache::has($this->hash)) {
+        if ($this->canCache && Cache::has($this->hash)) {
             $this->cached = true;
             $this->retrieveResults($metager);
         } else {
@@ -142,11 +143,11 @@ abstract class Searchengine
         }
 
         $body = "";
-        if ($this->cacheDuration > 0 && Cache::has($this->hash)) {
+        if ($this->canCache && $this->cacheDuration > 0 && Cache::has($this->hash)) {
             $body = Cache::get($this->hash);
         } elseif (Redis::hexists('search.' . $this->resultHash, $this->name)) {
             $body = Redis::hget('search.' . $this->resultHash, $this->name);
-            if ($this->cacheDuration > 0) {
+            if ($this->canCache && $this->cacheDuration > 0) {
                 Cache::put($this->hash, $body, $this->cacheDuration);
             }
 

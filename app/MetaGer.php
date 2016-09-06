@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
 use LaravelLocalization;
 use Log;
+use Predis\Connection\ConnectionException;
 use Redis;
 
 class MetaGer
@@ -33,6 +34,7 @@ class MetaGer
     protected $errors          = [];
     protected $addedHosts      = [];
     protected $startCount      = 0;
+    protected $canCache        = false;
     # Daten über die Abfrage
     protected $ip;
     protected $language;
@@ -70,6 +72,13 @@ class MetaGer
 
         $this->languageDetect = new TextLanguageDetect();
         $this->languageDetect->setNameMode("2");
+
+        try {
+            Cache::has('test');
+            $this->canCache = true;
+        } catch (ConnectionException $e) {
+            $this->canCache = false;
+        }
     }
 
     public function getHashCode()
@@ -287,17 +296,7 @@ class MetaGer
             $this->errors[] = "Leider konnten wir zu Ihrer Sucheingabe keine passenden Ergebnisse finden.";
         }
 
-        if (isset($this->last) && count($this->last) > 0) {
-            $page       = $this->page - 1;
-            $this->last = [
-                'page'           => $page,
-                'startBackwards' => $this->results[0]->number,
-                'engines'        => $this->last,
-            ];
-            Cache::put(md5(serialize($this->last)), serialize($this->last), 60);
-        }
-
-        if (isset($this->next) && count($this->next) > 0 && count($this->results) > 0) {
+        if ($this->canCache() && isset($this->next) && count($this->next) > 0 && count($this->results) > 0) {
             $page       = $this->page + 1;
             $this->next = [
                 'page'          => $page,
@@ -305,6 +304,8 @@ class MetaGer
                 'engines'       => $this->next,
             ];
             Cache::put(md5(serialize($this->next)), serialize($this->next), 60);
+        } else {
+            $this->next = [];
         }
 
     }
@@ -972,6 +973,10 @@ class MetaGer
         } else {
             $this->addedHosts[$hash] = 1;
         }
+    }
+    public function canCache()
+    {
+        return $this->canCache;
     }
     public function getSite()
     {

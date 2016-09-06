@@ -72,13 +72,13 @@ Route::group(
                 ->with('css', 'donation.css')
                 ->with('navbarFocus', 'foerdern');
         });
-        Route::get('spende/danke/{data}', function ($data) {
+        Route::get('spende/danke/{data}', ['as' => 'danke', function ($data) {
             return view('spende.danke')
                 ->with('title', trans('titles.spende'))
                 ->with('css', ['donation.css', 'danke.css'])
                 ->with('navbarFocus', 'foerdern')
                 ->with('data', unserialize(base64_decode($data)));
-        });
+        }]);
         Route::get('partnershops', function () {
             return view('spende.partnershops')
                 ->with('title', trans('titles.partnershops'))

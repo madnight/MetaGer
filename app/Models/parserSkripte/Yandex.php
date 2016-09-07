@@ -54,7 +54,17 @@ class Yandex extends Searchengine
 
     public function getNext(\App\MetaGer $metager, $result)
     {
-        if (count($this->results) <= 0) {
+        # Wir müssen herausfinden, ob es überhaupt noch weitere Ergebnisse von Yandex gibt:
+        try {
+            $content     = simplexml_load_string($result);
+            $resultCount = intval($content->xpath('//yandexsearch/response/results/grouping/found[@priority="all"]')[0]->__toString());
+            $pageLast    = $content->xpath('//yandexsearch/response/results/grouping/page')[0];
+            $pageLast    = intval($pageLast["last"]->__toString());
+        } catch (\Exception $e) {
+            return;
+        }
+
+        if (count($this->results) <= 0 || $pageLast >= $resultCount) {
             return;
         }
 

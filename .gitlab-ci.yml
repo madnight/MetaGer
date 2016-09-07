@@ -2,7 +2,7 @@ update(144.76.113.134):
   tags:
   - 144.76.113.134
   only:
-    - master
+    - master@open-source/MetaGer
   before_script:
     # Abhängigkeiten überprüfen
     - which composer
@@ -39,7 +39,7 @@ update(metager2):
   tags:
   - metager2
   only:
-    - master
+    - master@open-source/MetaGer
   before_script:
     # Abhängigkeiten überprüfen
     - which composer
@@ -76,7 +76,7 @@ update(metager3.de):
   tags:
   - metager3
   only:
-    - development
+    - development@open-source/MetaGer
   before_script:
     # Abhängigkeiten überprüfen
     - which composer

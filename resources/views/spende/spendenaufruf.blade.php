@@ -23,8 +23,8 @@ MetaGer für die nächste Zeit gesichert.
 <p>
 Wenn Sie darüber hinaus an MetaGer mitarbeiten und auch programmieren
 möchten: Sie finden den Einstieg dazu und den Quellcode unter
-https://gitlab.metager3.de/open-source/MetaGer (Hintergrundinfo dazu im
-Heise-Ticker unter http://heise.de/-3295586) - wir freuen uns auf die
+<a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank">https://gitlab.metager3.de/open-source/MetaGer</a> (Hintergrundinfo dazu im
+Heise-Ticker unter <a href="http://heise.de/-3295586" target="_blank">http://heise.de/-3295586</a>) - wir freuen uns auf die
 Zusammenarbeit mit Ihnen!
 <p>
 Am 18. Juli 2016 um 15.26 Uhr hatte der SUMA-EV als Betreiber von metager.de

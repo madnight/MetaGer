@@ -5,62 +5,53 @@
 @section('navbarFocus.donate', 'class="dropdown active"')
 
 @section('content')
-<h1>Mit Ihnen zusammen: Für die unabhängige, nicht-kommerzielle Internet-Suche</a></h1>
+<h1>MetaGer sagt: <i>Danke!</i></a></h1>
 <p>
-MetaGer ist seit 16.08.2016 Freie Software unter GNU AGPL v3, damit unser strikter
-Schutz Ihrer Daten und Ihrer Privatsphäre öffentlich nachprüfbar ist. Sie müssen uns nichts glauben, SIE können selber kontrollieren,
-dass Ihre Daten bei uns geschützt werden.
-Weitere Hintergrundinfo dazu im <a href="http://heise.de/-3295586" target="_blank">Heise-Newsticker</a>.
-Den Quellcode von MetaGer erreichen Sie unter <a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank">https://gitlab.metager3.de/open-source/MetaGer</a>.
-</p>Mit Ihnen zusammen haben wir in den vergangenen Monaten eine neue
-Erfolgsstory geschrieben: die Zahl der MetaGer-Nutzer steigt weiter und
-stetig.  Es ist kein Strohfeuer kurzfristigen Erfolges, sondern es ist die
-Stetigkeit dieser Steigerung, die unseren Erfolg begründet.  In drei Jahren
-haben wir unsere Abfragezahlen verdreifacht.  Wir sind nach Expertenmeinung
-die sicherste Suchmaschine der Welt.  Unsere Suchergebnisse sind zielgenau
-und treffsicher.  Beides verdanken wir der Tatsache, dass wir Programmierer
-fest anstellen konnten.  Aber auch Programmierer können nicht allein von der
-Liebe zur Sache leben: Nur dank Ihrer Spendenbereitschaft konnten wir das
-finanziell stemmen.</p>
+Liebe hilfsbereite Menschen und metager-ische Freunde, wir hätten uns nie
+vorstellen können, dass es um MetaGer so eine wundervolle Community gibt:
+Die Spendenbereitsschaft ist oberhalb dessen, was wir uns bisher vorstellen
+konnten.  Sogar aus Übersee haben uns Spenden und Hilfsangebote erreicht.
 <p>
-Wir mussten auch einen Prozess gegen die Ausuferung des "Rechts auf
-Vergessen" (nach dem EuGH Urteil vom 13.5.2014) durchstehen, um weiterhin
-einen unzensierten Betrieb von Suchmaschinen zu ermöglichen
-(<a href="http://suma-ev.de/presse/Suchmaschine-MetaGer-totgeklagt.html" target="_blank">http://suma-ev.de/presse/Suchmaschine-MetaGer-totgeklagt.html</a>).  Wir haben
-in allen Instanzen gewonnen.  Anschließend jedoch hat die Klägerin sich für
-zahlungsunfähig erklärt.  Wir werden wohl auf den Kosten sitzenbleiben, was
-unsere Finanzen weiter belastet.
+Wir danken ganz herzlich allen, die für MetaGer gespendet haben! Wir haben
+uns vorher nicht vorstellen können, dass die Resonanz auf unseren
+Spendenaufruf so toll ist.  SIE haben es damit auch möglich gemacht, dass
+wir MetaGer jetzt international als freie Software in der Open-Source
+Community implementieren konnten.  MetaGer gibt es nun in Englisch und
+demnächst dank der Hilfe eines engagierten Auslandsdeutschen auch in
+Spanisch.  SIE alle haben damit den Betrieb und die Weiterentwicklung von
+MetaGer für die nächste Zeit gesichert.
+<p>
+Wenn Sie darüber hinaus an MetaGer mitarbeiten und auch programmieren
+möchten: Sie finden den Einstieg dazu und den Quellcode unter
+https://gitlab.metager3.de/open-source/MetaGer (Hintergrundinfo dazu im
+Heise-Ticker unter http://heise.de/-3295586) - wir freuen uns auf die
+Zusammenarbeit mit Ihnen!
+<p>
+Am 18. Juli 2016 um 15.26 Uhr hatte der SUMA-EV als Betreiber von metager.de
+den Spendenaufruf auf der MetaGer-Website gestartet.  Keine zwei Minuten
+später gingen die ersten Spenden ein.  Und das ging bis heute so weiter -
+es ist unglaublich toll zu erleben, wie unsere Nutzer die unabhängige und
+nicht-kommerzielle Internet-Suche mit MetaGer unterstützen!  Sowohl mit
+Spenden als auch mit motivierenden Worten.
+<p>
+Wir DANKEN! Und wir beenden den Spendenaufruf heute. Die Finanzierung
+unserer freien und unabhängigen Internetsuche ist nun für die nächste Zeit
+gesichert.
+<p>
+<b>Wir wissen jetzt, dass wir uns auf unsere User verlassen können. Das
+ist ein tolles Gefühl!</b>
+<p>
+P.S.: Wir haben auch allen, die dies zu erkennen gegeben haben, auf Wunsch
+Spendenbescheinigungen gesandt.  Bei einigen Spendern war das nicht möglich,
+weil keine Adresse angegeben war.  Wir können auch nicht ausschließen, dass
+wir evtl. jemanden übersehen haben.  In diesem wie in jenem Fall melden Sie
+sich bitte noch einmal.
+<p>
+Herzliche Grüße,
+das MetaGer-Team im SUMA-EV
 </p>
-<h3>
-Um unsere gemeinsamen Erfolge fortzuschreiben, benötigen wir jetzt wieder
-Ihre Hilfe.
-</h3>
-<p><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/spende") }}">{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/spende") }}</a></p>
-<p>
-Eine Internet-Suchmaschine muss stetig weiterentwickelt werden,
-wenn sie nicht binnen kurzem veraltet sein soll.  Unsere Werbeeinnahmen sind
-stark gesunken.  Eigentlich wollen wir in MetaGer auch gar keine Werbung. 
-Aber solange das Spendenaufkommen nicht reicht, können wir darauf noch nicht
-verzichten.
-</p>
-<p>
-Wir bitten um Ihre Hilfe, damit wir MetaGer als unabhängige Alternative in
-einem gemeinnützigen Verein weiter entwickeln und betreiben können.
-Große Teile des Internet versinken im Kommerz und Werbemüll.
-</p>
-<p>
-Lassen Sie uns gemeinsam ein Zeichen gegen die zunehmende Kommerzialisierung
-des Internet setzen!  Der Betreiberverein von MetaGer, der SUMA-EV, ist als
-gemeinnütziger Verein seit 2004 in das Register beim Amtsgericht Hannover
-unter VR200033 eingetragen.
-</p>
-<p>
-Bitte unterstützen Sie uns, damit die unabhängige, nicht-kommerzielle Suche
-im Internet weiter entwickelt und betrieben werden kann:
-<br />
-</p>
-<h3>Helfen Sie mit, dass freie Suchmaschinen im Internet frei bleiben. Das digitale Wissen der Welt muss ohne Bevormundung durch Staaten oder Konzerne frei zugänglich sein und bleiben.</h3>
-<div class="">
+<div class="" style="margin-top:50px">
+	<h1>Weiter spenden:</h1>s
 	<div class="col-sm-6">
 		<h2>{{ trans('spenden.bankinfo.1') }}</h2>
 		<p style="white-space:pre;">{{ trans('spenden.bankinfo.2') }}</p>
@@ -150,7 +141,7 @@ im Internet weiter entwickelt und betrieben werden kann:
 	</div>
 </div>
 <div id="left" class="col-lg-6 col-md-12 col-sm-12 others">
-		
-		
+
+
 	</div>
 @endsection

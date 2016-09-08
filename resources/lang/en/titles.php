@@ -13,5 +13,6 @@ return [
 	'settings' => 'Settings',
 	'websearch' => 'Websearch-Widget - MetaGer',
 	'sitesearch' => 'Sitesearch-Widget - MetaGer',
+	'faq'	=>	'FAQ - MetaGer',
 	'partnershops'	=>	'Partnershops - MetaGer',
 ];

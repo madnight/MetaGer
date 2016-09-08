@@ -57,6 +57,14 @@
 							</li>
 							<li @if (isset($navbarFocus) && $navbarFocus === 'datenschutz') class="active" @endif >
 								<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/datenschutz/") }}" id="navigationPrivacy">{{ trans('staticPages.nav3') }}</a></li>
+							<li @if (isset($navbarFocus) && $navbarFocus === 'hilfe') class="dropdown active" @else class="dropdown" @endif >
+								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navigationHilfe">{{ trans('staticPages.nav20') }}
+								<span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe/") }}">{{ trans('staticPages.nav20') }}</a></li>
+									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/faq/") }}">{{ trans('staticPages.nav21') }}</a></li>
+								</ul>
+							</li>
 							<li @if (isset($navbarFocus) && $navbarFocus === 'kontakt') class="dropdown active" @else class="dropdown" @endif >
 								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navigationKontakt">{{ trans('staticPages.nav18') }}
 								<span class="caret"></span></a>
@@ -79,7 +87,7 @@
 									<li><a href="http://code.metager.de/" target="_blank">{{ trans('staticPages.nav12') }}</a></li>
 									<li><a href="https://metager.to/" target="_blank">{{ trans('staticPages.nav13') }}</a></li>
 									<li><a href="http://forum.suma-ev.de/viewtopic.php?f=3&amp;t=43" target="_blank">{{ trans('staticPages.nav14') }}</a></li>
-									<li><a href="https://metager.de/klassik/zitat-suche/" target="_blank">{{ trans('staticPages.nav20') }}</a></li>
+									<li><a href="https://metager.de/klassik/zitat-suche/" target="_blank">{{ trans('staticPages.nav22') }}</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">

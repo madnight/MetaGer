@@ -14,14 +14,21 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 		<meta rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<meta rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-		<link rel="search" type="application/opensearchdescription+xml" title="MetaGer: Sicher suchen &amp; finden, Privatsph&auml;re sch&uuml;tzen" href="{{ action('StartpageController@loadPlugin', Request::all()) }}">
+		<link rel="search" type="application/opensearchdescription+xml" title="MetaGer: Sicher suchen &amp; finden, Privatsph&auml;re sch&uuml;tzen" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
 		<link href="/css/bootstrap.css" rel="stylesheet" />
 		<link href="/css/style.css" rel="stylesheet" />
 		@if (isset($css))
-			<link href="/css/{{ $css }}" rel="stylesheet" />
+			@if(is_array($css))
+				@foreach($css as $el)
+					<link href="/css/{{ $el }}" rel="stylesheet" />
+				@endforeach
+			@else
+				<link href="/css/{{ $css }}" rel="stylesheet" />
+			@endif
 		@endif
 		<link id="theme" href="/css/theme.css.php" rel="stylesheet" />
 	</head>
+
 	<body>
 		<header>
 			<nav class="navbar navbar-default">
@@ -35,6 +42,7 @@
 						</button>
 						@yield('homeIcon')
 					</div>
+
 					<div class="collapse navbar-collapse" id="navbar-collapse">
 						<ul class="nav navbar-nav navbar-right">
 							<li @if ( !isset($navbarFocus) || $navbarFocus === 'suche') class="active" @endif >
@@ -72,12 +80,14 @@
 								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('staticPages.nav15') }}
 								<span class="caret"></span></a>
 								<ul class="dropdown-menu">
+									<li><a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank">MetaGer Quellcode</a></li>
 									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe/") }}">{{ trans('staticPages.nav9') }}</a></li>
 									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/widget/") }}">{{ trans('staticPages.nav10') }}</a></li>
 									<li><a href="https://metager.de/klassik/asso/" target="_blank">{{ trans('staticPages.nav11') }}</a></li>
 									<li><a href="http://code.metager.de/" target="_blank">{{ trans('staticPages.nav12') }}</a></li>
 									<li><a href="https://metager.to/" target="_blank">{{ trans('staticPages.nav13') }}</a></li>
 									<li><a href="http://forum.suma-ev.de/viewtopic.php?f=3&amp;t=43" target="_blank">{{ trans('staticPages.nav14') }}</a></li>
+									<li><a href="https://metager.de/klassik/zitat-suche/" target="_blank">{{ trans('staticPages.nav22') }}</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
@@ -96,9 +106,9 @@
 		</header>
 		<div class="wrapper">
 			@if( App::isLocale('de') )
-			<div class="mg-panel container" id="spendenaufruf" style="margin-bottom:-6%;max-height:126px;text-align:center;padding:0px;margin-top:0px">
+			<div class="mg-panel container noprint" id="spendenaufruf" style="margin-bottom:-6%;max-height:50px;text-align:center;padding:0px;margin-top:0px">
 					<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/spendenaufruf") }}">
-					<img src="/img/aufruf.png" style="max-width:100%;max-height:126px;">
+					<img src="/img/aufruf.png" style="max-width:100%;max-height:50px;" alt="Spendenaufruf für die unabhängige, nicht-kommerzielle Internet-Suche" >
 					</a>
 			</div>
 			@endif
@@ -112,7 +122,7 @@
 				@yield('content')
 			</main>
 			@yield('optionalContent')
-			<footer>
+			<footer class="noprint">
 				<ul class="list-inline hidden-xs">
 					<li><a href="https://www.suma-ev.de/" target="_blank">
 						<img src="/img/suma_ev_logo-m1-greyscale.png" alt="SUMA-EV Logo"></a></li>
@@ -133,6 +143,6 @@
 				@endforeach
 			@endif
 			<!--[if lte IE 8]><script type="text/javascript" src="/js/html5shiv.min.js"></script><![endif]-->
-		</div>		
+		</div>
 	</body>
 </html>

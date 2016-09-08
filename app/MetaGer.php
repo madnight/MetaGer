@@ -1,105 +1,113 @@
 <?php
 namespace App;
 
+use App;
+use App\lib\TextLanguageDetect\TextLanguageDetect;
+use Cache;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
-use App;
-use Storage;
+use LaravelLocalization;
 use Log;
-use Config;
+use Predis\Connection\ConnectionException;
 use Redis;
-use App\lib\TextLanguageDetect\TextLanguageDetect;
-use App\lib\TextLanguageDetect\LanguageDetect\TextLanguageDetectException;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
-#use \Illuminate\Pagination\Paginator;
 
 class MetaGer
 {
-	# Einstellungen für die Suche
-	protected $fokus;
-	protected $eingabe;
-	protected $q;
-	protected $category;
-	protected $time;
-	protected $page;
-	protected $lang;
-	protected $cache = "";
-	protected $site;
-	protected $hostBlacklist = [];
-	protected $domainBlacklist = [];
-	protected $stopWords = [];
-    protected $phrases = [];
-	protected $engines = [];
-	protected $results = [];
-    protected $ads = [];
-	protected $warnings = [];
-    protected $errors = [];
-    protected $addedHosts = [];
-	# Daten über die Abfrage
-	protected $ip;
-	protected $language;
-	protected $agent;
-	# Konfigurationseinstellungen:
-	protected $sumaFile;
-	protected $mobile;
-	protected $resultCount;
-	protected $sprueche;
+    # Einstellungen für die Suche
+    protected $fokus;
+    protected $eingabe;
+    protected $q;
+    protected $category;
+    protected $time;
+    protected $page;
+    protected $lang;
+    protected $cache = "";
+    protected $site;
+    protected $hostBlacklist   = [];
+    protected $domainBlacklist = [];
+    protected $stopWords       = [];
+    protected $phrases         = [];
+    protected $engines         = [];
+    protected $results         = [];
+    protected $ads             = [];
+    protected $warnings        = [];
+    protected $errors          = [];
+    protected $addedHosts      = [];
+    protected $startCount      = 0;
+    protected $canCache        = false;
+    # Daten über die Abfrage
+    protected $ip;
+    protected $language;
+    protected $agent;
+    # Konfigurationseinstellungen:
+    protected $sumaFile;
+    protected $mobile;
+    protected $resultCount;
+    protected $sprueche;
     protected $domainsBlacklisted = [];
-    protected $urlsBlacklisted = [];
+    protected $urlsBlacklisted    = [];
     protected $url;
     protected $languageDetect;
 
-	function __construct()
-	{
-        $this->starttime = microtime(true);   
-        if( file_exists(config_path() . "/blacklistDomains.txt") && file_exists(config_path() . "/blacklistUrl.txt") )
-        {
+    public function __construct()
+    {
+        $this->starttime = microtime(true);
+        if (file_exists(config_path() . "/blacklistDomains.txt") && file_exists(config_path() . "/blacklistUrl.txt")) {
             # Blacklists einlesen:
-            $tmp = file_get_contents(config_path() . "/blacklistDomains.txt");
+            $tmp                      = file_get_contents(config_path() . "/blacklistDomains.txt");
             $this->domainsBlacklisted = explode("\n", $tmp);
-            $tmp = file_get_contents(config_path() . "/blacklistUrl.txt");
-            $this->urlsBlacklisted = explode("\n", $tmp);
-        }else
-        {
+            $tmp                      = file_get_contents(config_path() . "/blacklistUrl.txt");
+            $this->urlsBlacklisted    = explode("\n", $tmp);
+        } else {
             Log::warning("Achtung: Eine, oder mehrere Blacklist Dateien, konnten nicht geöffnet werden");
+        }
+
+        $dir = app_path() . "/Models/parserSkripte/";
+        foreach (scandir($dir) as $filename) {
+            $path = $dir . $filename;
+            if (is_file($path)) {
+                require $path;
+            }
         }
 
         $this->languageDetect = new TextLanguageDetect();
         $this->languageDetect->setNameMode("2");
-	}
 
-    public function getHashCode ()
+        try {
+            Cache::has('test');
+            $this->canCache = true;
+        } catch (ConnectionException $e) {
+            $this->canCache = false;
+        }
+    }
+
+    public function getHashCode()
     {
         $string = url()->full();
         return md5($string);
     }
 
-    public function rankAll ()
+    public function rankAll()
     {
-        foreach( $this->engines as $engine )
-        {
+        foreach ($this->engines as $engine) {
             $engine->rank($this);
         }
     }
 
-	public function createView()
-	{
-		$viewResults = [];
+    public function createView()
+    {
+        $viewResults = [];
 
         # Wir extrahieren alle notwendigen Variablen und geben Sie an unseren View:
-        foreach($this->results as $result)
-        {
+        foreach ($this->results as $result) {
             $viewResults[] = get_object_vars($result);
         }
 
         # Wir müssen natürlich noch den Log für die durchgeführte Suche schreiben:
         $this->createLogs();
 
-        if( $this->fokus === "bilder" )
-        {
-            switch ($this->out) 
-            {
+        if ($this->fokus === "bilder") {
+            switch ($this->out) {
                 case 'results':
                     return view('metager3bilderresults')
                         ->with('results', $viewResults)
@@ -107,7 +115,8 @@ class MetaGer
                         ->with('mobile', $this->mobile)
                         ->with('warnings', $this->warnings)
                         ->with('errors', $this->errors)
-                        ->with('metager', $this);
+                        ->with('metager', $this)
+                        ->with('browser', (new Agent())->browser());
                 default:
                     return view('metager3bilder')
                         ->with('results', $viewResults)
@@ -115,7 +124,8 @@ class MetaGer
                         ->with('mobile', $this->mobile)
                         ->with('warnings', $this->warnings)
                         ->with('errors', $this->errors)
-                        ->with('metager', $this);
+                        ->with('metager', $this)
+                        ->with('browser', (new Agent())->browser());
             }
         }
 
@@ -127,7 +137,8 @@ class MetaGer
                     ->with('mobile', $this->mobile)
                     ->with('warnings', $this->warnings)
                     ->with('errors', $this->errors)
-                    ->with('metager', $this);
+                    ->with('metager', $this)
+                    ->with('browser', (new Agent())->browser());
                 break;
             case 'results-with-style':
                 return view('metager3')
@@ -137,7 +148,8 @@ class MetaGer
                     ->with('warnings', $this->warnings)
                     ->with('errors', $this->errors)
                     ->with('metager', $this)
-                    ->with('suspendheader', "yes");
+                    ->with('suspendheader', "yes")
+                    ->with('browser', (new Agent())->browser());
                 break;
             default:
                 return view('metager3')
@@ -145,10 +157,11 @@ class MetaGer
                     ->with('mobile', $this->mobile)
                     ->with('warnings', $this->warnings)
                     ->with('errors', $this->errors)
-                    ->with('metager', $this);
+                    ->with('metager', $this)
+                    ->with('browser', (new Agent())->browser());
                 break;
         }
-	}
+    }
 
     private function createLogs()
     {
@@ -156,155 +169,174 @@ class MetaGer
         try
         {
             $logEntry = "";
-            $logEntry .= "[" . date(DATE_RFC822, mktime(date("H"),date("i"), date("s"), date("m"), date("d"), date("Y"))) . "]";
-            $logEntry .= " From=" . $this->ip;
+            $logEntry .= "[" . date(DATE_RFC822, mktime(date("H"), date("i"), date("s"), date("m"), date("d"), date("Y"))) . "]";
             $logEntry .= " pid=" . getmypid();
-            $anonId= md5("MySeCrEtSeEdFoRmd5"
-            .$this->request->header('Accept')
-            .$this->request->header('Accept-Charset')
-            .$this->request->header('Accept-Encoding')
-            .$this->request->header('HTTP_LANGUAGE')
-            .$this->request->header('User-Agent')
-            .$this->request->header('Keep-Alive')
-            .$this->request->header('X-Forwarded-For')
-            .date("H")); # Wichtig!! Den Parameter um die aktuelle Stunde erweitern. Ansonsten wäre die anonId dauerhaft einem Nutzer zuzuordnen.
-            $logEntry .= " anonId=$anonId";
             $logEntry .= " ref=" . $this->request->header('Referer');
             $useragent = $this->request->header('User-Agent');
             $useragent = str_replace("(", " ", $useragent);
             $useragent = str_replace(")", " ", $useragent);
             $useragent = str_replace(" ", "", $useragent);
-            $logEntry .= " ua=" . $useragent;
-            $logEntry .= " iter= mm= time=" . round((microtime(true)-$this->starttime), 2) . " serv=" . $this->fokus . " which= hits= stringSearch= QuickTips= SSS= check=";
+            $logEntry .= " time=" . round((microtime(true) - $this->starttime), 2) . " serv=" . $this->fokus;
             $logEntry .= " search=" . $this->eingabe;
             $redis->rpush('logs.search', $logEntry);
-        }catch( \Exception $e)
-        {
+        } catch (\Exception $e) {
             return;
         }
     }
 
-    public function removeInvalids ()
+    public function removeInvalids()
     {
         $results = [];
-        foreach($this->results as $result)
-        {
-            if($result->isValid($this))
+        foreach ($this->results as $result) {
+            if ($result->isValid($this)) {
                 $results[] = $result;
+            }
+
         }
         #$this->results = $results;
     }
 
-	public function combineResults ()
-	{
-		foreach($this->engines as $engine)
-		{
-            foreach($engine->results as $result)
-            {
-                if($result->valid)
-                    $this->results[] = $result;
+    public function combineResults()
+    {
+        foreach ($this->engines as $engine) {
+            if (isset($engine->next)) {
+                $this->next[] = $engine->next;
             }
-            foreach($engine->ads as $ad)
-            {
+            if (isset($engine->last)) {
+                $this->last[] = $engine->last;
+            }
+            foreach ($engine->results as $result) {
+                if ($result->valid) {
+                    $this->results[] = $result;
+                }
+            }
+            foreach ($engine->ads as $ad) {
                 $this->ads[] = $ad;
             }
-		}
-        uasort($this->results, function($a, $b){
-            if($a->getRank() == $b->getRank())
+        }
+
+        uasort($this->results, function ($a, $b) {
+            if ($a->getRank() == $b->getRank()) {
                 return 0;
+            }
+
             return ($a->getRank() < $b->getRank()) ? 1 : -1;
         });
         # Validate Results
         $newResults = [];
-        foreach($this->results as $result)
-        {
-            if($result->isValid($this))
+        foreach ($this->results as $result) {
+            if ($result->isValid($this)) {
                 $newResults[] = $result;
+            }
+
         }
         $this->results = $newResults;
 
-        $counter = 0;
+        # Boost implementation
+        $this->results = $this->parseBoost($this->results);
+
+        #Adgoal Implementation
+        $this->results = $this->parseAdgoal($this->results);
+
+        $counter   = 0;
         $firstRank = 0;
-        foreach($this->results as $result)
-        {
-            if($counter === 0)
+
+        if (isset($this->startForwards)) {
+            $this->startCount = $this->startForwards;
+        } elseif (isset($this->startBackwards)) {
+            $this->startCount = $this->startBackwards - count($this->results) - 1;
+        } else {
+            $this->startCount = 0;
+        }
+
+        foreach ($this->results as $result) {
+            if ($counter === 0) {
                 $firstRank = $result->rank;
+            }
+
             $counter++;
-            $result->number = $counter;
-            $confidence = 0;
-            if($firstRank > 0)
-                $confidence = $result->rank/$firstRank;
-            else
+            $result->number = $counter + $this->startCount;
+            $confidence     = 0;
+            if ($firstRank > 0) {
+                $confidence = $result->rank / $firstRank;
+            } else {
                 $confidence = 0;
-            if($confidence > 0.65)
+            }
+
+            if ($confidence > 0.65) {
                 $result->color = "#FF4000";
-            elseif($confidence > 0.4)
+            } elseif ($confidence > 0.4) {
                 $result->color = "#FF0080";
-            elseif($confidence > 0.2)
+            } elseif ($confidence > 0.2) {
                 $result->color = "#C000C0";
-            else
+            } else {
                 $result->color = "#000000";
+            }
+
         }
 
-        //Get current page form url e.g. &page=6
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $offset= $currentPage-1;
-
-        //Create a new Laravel collection from the array data
-        $collection = new Collection($this->results);
-
-        //Define how many items we want to be visible in each page
-        $perPage = $this->resultCount;
-
-        //Slice the collection to get the items to display in current page
-        $currentPageSearchResults = $collection->slice($offset * $perPage, $perPage)->all();
-
-        # Für diese 20 Links folgt nun unsere Adgoal Implementation.
-        $currentPageSearchResults = $this->parseAdgoal($currentPageSearchResults);
-
-        //Create our paginator and pass it to the view
-        $paginatedSearchResults= new LengthAwarePaginator($currentPageSearchResults, count($collection), $perPage);
-        $paginatedSearchResults->setPath('/meta/meta.ger3');
-        foreach($this->request->all() as $key => $value)
-        {
-            if( $key === "out" )
-                continue;
-            $paginatedSearchResults->addQuery($key, $value);
+        if (LaravelLocalization::getCurrentLocale() === "en") {
+            $this->ads = [];
         }
-
-        $this->results = $paginatedSearchResults;
 
         $this->validated = false;
-        if( isset($this->password) )
-        {
+        if (isset($this->password)) {
             # Wir bieten einen bezahlten API-Zugriff an, bei dem dementsprechend die Werbung ausgeblendet wurde:
             # Aktuell ist es nur die Uni-Mainz. Deshalb überprüfen wir auch nur diese.
             $password = getenv('mainz');
-            $eingabe = $this->eingabe;
+            $eingabe  = $this->eingabe;
             $password = md5($eingabe . $password);
-            if( $this->password === $password )
-            {
-                $this->ads = [];
+            if ($this->password === $password) {
+                $this->ads       = [];
                 $this->validated = true;
             }
         }
-	}
 
+        if (count($this->results) <= 0) {
+            $this->errors[] = "Leider konnten wir zu Ihrer Sucheingabe keine passenden Ergebnisse finden.";
+        }
+
+        if ($this->canCache() && isset($this->next) && count($this->next) > 0 && count($this->results) > 0) {
+            $page       = $this->page + 1;
+            $this->next = [
+                'page'          => $page,
+                'startForwards' => $this->results[count($this->results) - 1]->number,
+                'engines'       => $this->next,
+            ];
+            Cache::put(md5(serialize($this->next)), serialize($this->next), 60);
+        } else {
+            $this->next = [];
+        }
+
+    }
+
+    public function parseBoost($results)
+    {
+        foreach ($results as $result) {
+            if (preg_match('/^(http[s]?\:\/\/)?(www.)?amazon\.de/', $result->anzeigeLink)) {
+                if (preg_match('/\?/', $result->anzeigeLink)) {
+                    $result->link .= '&tag=boostmg01-21';
+                } else {
+                    $result->link .= '?tag=boostmg01-21';
+                }
+                $result->partnershop = true;
+
+            }
+        }
+        return $results;
+    }
     public function parseAdgoal($results)
     {
-        $publicKey = getenv('adgoal_public');
+        $publicKey  = getenv('adgoal_public');
         $privateKey = getenv('adgoal_private');
-        if( $publicKey === FALSE )
-        {
+        if ($publicKey === false) {
             return $results;
         }
         $tldList = "";
-        try{
-            foreach($results as $result)
-            {
+        try {
+            foreach ($results as $result) {
                 $link = $result->anzeigeLink;
-                if(strpos($link, "http") !== 0)
-                {
+                if (strpos($link, "http") !== 0) {
                     $link = "http://" . $link;
                 }
                 $tldList .= parse_url($link, PHP_URL_HOST) . ",";
@@ -315,102 +347,103 @@ class MetaGer
             # Hashwert
             $hash = md5("meta" . $publicKey . $tldList . "GER");
 
-            # Query 
+            # Query
             $query = urlencode($this->q);
 
-            $link = "https://api.smartredirect.de/api_v2/CheckForAffiliateUniversalsearchMetager.php?p=" . $publicKey . "&k=" . $hash . "&tld=" . $tldList . "&q=" . $query; 
+            $link   = "https://api.smartredirect.de/api_v2/CheckForAffiliateUniversalsearchMetager.php?p=" . $publicKey . "&k=" . $hash . "&tld=" . $tldList . "&q=" . $query;
             $answer = json_decode(file_get_contents($link));
 
-
             # Nun müssen wir nur noch die Links für die Advertiser ändern:
-            foreach($answer as $el)
-            {
+            foreach ($answer as $el) {
                 $hoster = $el[0];
-                $hash = $el[1];
+                $hash   = $el[1];
 
-                foreach($results as $result)
-                {
-                    if( $hoster === $result->tld )
-                    {
+                foreach ($results as $result) {
+                    if ($hoster === $result->tld) {
                         # Hier ist ein Advertiser:
                         # Das Logo hinzufügen:
-                        $result->image = "https://img.smartredirect.de/logos_v2/120x60/" . $hash . ".gif";
+                        if ($result->image !== "") {
+                            $result->logo = "https://img.smartredirect.de/logos_v2/60x30/" . $hash . ".gif";
+                        } else {
+                            $result->image = "https://img.smartredirect.de/logos_v2/120x60/" . $hash . ".gif";
+                        }
+
                         # Den Link hinzufügen:
                         $publicKey = $publicKey;
                         $targetUrl = $result->anzeigeLink;
-                        if(strpos($targetUrl, "http") !== 0)
+                        if (strpos($targetUrl, "http") !== 0) {
                             $targetUrl = "http://" . $targetUrl;
-                        $hash = md5($targetUrl . $privateKey);
-                        $newLink = "https://api.smartredirect.de/api_v2/ClickGate.php?p=" . $publicKey . "&k=" . $hash . "&url=" . urlencode($targetUrl) . "&q=" . $query;
-                        $result->link = $newLink;
+                        }
+
+                        $gateHash            = md5($targetUrl . $privateKey);
+                        $newLink             = "https://api.smartredirect.de/api_v2/ClickGate.php?p=" . $publicKey . "&k=" . $gateHash . "&url=" . urlencode($targetUrl) . "&q=" . $query;
+                        $result->link        = $newLink;
                         $result->partnershop = true;
                     }
                 }
             }
-        }catch(\ErrorException $e)
-        {
+        } catch (\ErrorException $e) {
             return $results;
         }
 
         return $results;
     }
 
-	public function createSearchEngines (Request $request)
-	{
+    public function createSearchEngines(Request $request)
+    {
 
-        if( !$request->has("eingabe") )
+        if (!$request->has("eingabe")) {
             return;
+        }
 
-		# Überprüfe, welche Sumas eingeschaltet sind
-        $xml = simplexml_load_file($this->sumaFile);
+        # Überprüfe, welche Sumas eingeschaltet sind
+        $xml                  = simplexml_load_file($this->sumaFile);
         $enabledSearchengines = [];
-        $overtureEnabled = FALSE;
-        $countSumas = 0;
-        $sumas = $xml->xpath("suma");
-        if($this->fokus === "angepasst")
-        {
-            foreach($sumas as $suma)
-            {
-                if($request->has($suma["name"]) 
-                	|| ( $this->fokus !== "bilder" 
-                		&& ($suma["name"]->__toString() === "qualigo" 
-                			|| $suma["name"]->__toString() === "similar_product_ads" 
-                			|| ( !$overtureEnabled && $suma["name"]->__toString() === "overtureAds" )
-                			)
-                		)
-                	){
+        $overtureEnabled      = false;
+        $countSumas           = 0;
+        $sumas                = $xml->xpath("suma");
+        if ($this->fokus === "angepasst") {
+            foreach ($sumas as $suma) {
+                if ($request->has($suma["name"])
+                    || ($this->fokus !== "bilder"
+                        && ($suma["name"]->__toString() === "qualigo"
+                            || $suma["name"]->__toString() === "similar_product_ads"
+                            || (!$overtureEnabled && $suma["name"]->__toString() === "overtureAds")
+                        )
+                    )
+                ) {
 
-                	if(!(isset($suma['disabled']) && $suma['disabled']->__toString() === "1"))
-                    {
-                        if($suma["name"]->__toString() === "overture" || $suma["name"]->__toString() === "overtureAds")
-                        {
-                            $overtureEnabled = TRUE;
+                    if (!(isset($suma['disabled']) && $suma['disabled']->__toString() === "1")) {
+                        if ($suma["name"]->__toString() === "overture" || $suma["name"]->__toString() === "overtureAds") {
+                            $overtureEnabled = true;
                         }
-                        if( $suma["name"]->__toString() !== "qualigo" && $suma["name"]->__toString() !== "similar_product_ads" && $suma["name"]->__toString() !== "overtureAds" )
+                        if ($suma["name"]->__toString() !== "qualigo" && $suma["name"]->__toString() !== "similar_product_ads" && $suma["name"]->__toString() !== "overtureAds") {
                             $countSumas += 1;
+                        }
+
                         $enabledSearchengines[] = $suma;
                     }
                 }
             }
-        }else{
-            foreach($sumas as $suma){
-                $types = explode(",",$suma["type"]);
-                if(in_array($this->fokus, $types) 
-                	|| ( $this->fokus !== "bilder" 
-                		&& ($suma["name"]->__toString() === "qualigo" 
-                			|| $suma["name"]->__toString() === "similar_product_ads" 
-                			|| ( !$overtureEnabled && $suma["name"]->__toString() === "overtureAds" )
-                			)
-                		)
-                	){
-                    if(!(isset($suma['disabled']) && $suma['disabled']->__toString() === "1"))
-                    {
-                        if($suma["name"]->__toString() === "overture" || $suma["name"]->__toString() === "overtureAds")
-                        {
-                            $overtureEnabled = TRUE;
+        } else {
+            foreach ($sumas as $suma) {
+                $types = explode(",", $suma["type"]);
+                if (in_array($this->fokus, $types)
+                    || ($this->fokus !== "bilder"
+                        && ($suma["name"]->__toString() === "qualigo"
+                            || $suma["name"]->__toString() === "similar_product_ads"
+                            || (!$overtureEnabled && $suma["name"]->__toString() === "overtureAds")
+                        )
+                    )
+                ) {
+                    if (!(isset($suma['disabled']) && $suma['disabled']->__toString() === "1")) {
+                        if ($suma["name"]->__toString() === "overture" || $suma["name"]->__toString() === "overtureAds") {
+                            $overtureEnabled = true;
                         }
-                        if( $suma["name"]->__toString() !== "qualigo" && $suma["name"]->__toString() !== "similar_product_ads" && $suma["name"]->__toString() !== "overtureAds" )
+                        if ($suma["name"]->__toString() !== "qualigo" && $suma["name"]->__toString() !== "similar_product_ads" && $suma["name"]->__toString() !== "overtureAds") {
                             $countSumas += 1;
+                        }
+
                         $enabledSearchengines[] = $suma;
                     }
                 }
@@ -419,142 +452,118 @@ class MetaGer
 
         # Sonderregelung für alle Suchmaschinen, die zu den Minisuchern gehören. Diese können alle gemeinsam über einen Link abgefragt werden
         $subcollections = [];
-        $tmp = [];
-        foreach($enabledSearchengines as $engine )
-        {
-            if( isset($engine['minismCollection']) )
+        $tmp            = [];
+        foreach ($enabledSearchengines as $engine) {
+            if (isset($engine['minismCollection'])) {
                 $subcollections[] = $engine['minismCollection']->__toString();
-            else
+            } else {
                 $tmp[] = $engine;
+            }
+
         }
         $enabledSearchengines = $tmp;
-        if( sizeof($subcollections) > 0)
-        {
-            $count = sizeof($subcollections) * 10;
-            $minisucherEngine = $xml->xpath('suma[@name="minism"]')[0];  
-            $subcollections = urlencode("(" . implode(" OR ", $subcollections) . ")");
+        if (sizeof($subcollections) > 0) {
+            $count                        = sizeof($subcollections) * 10;
+            $minisucherEngine             = $xml->xpath('suma[@name="minism"]')[0];
+            $subcollections               = urlencode("(" . implode(" OR ", $subcollections) . ")");
             $minisucherEngine["formData"] = str_replace("<<SUBCOLLECTIONS>>", $subcollections, $minisucherEngine["formData"]);
             $minisucherEngine["formData"] = str_replace("<<COUNT>>", $count, $minisucherEngine["formData"]);
-            $enabledSearchengines[] = $minisucherEngine;
+            $enabledSearchengines[]       = $minisucherEngine;
         }
 
         #die(var_dump($enabledSearchengines));
 
-        if( $countSumas <= 0 )
-        {
+        if ($countSumas <= 0) {
             $this->errors[] = "Achtung: Sie haben in ihren Einstellungen keine Suchmaschine ausgewählt.";
         }
-		$engines = [];
+        $engines = [];
 
         $siteSearchFailed = false;
-        if( strlen($this->site) > 0 )
-        {
+        if (strlen($this->site) > 0) {
             # Wenn eine Sitesearch durchgeführt werden soll, überprüfen wir ob eine der Suchmaschinen überhaupt eine Sitesearch unterstützt:
             $enginesWithSite = 0;
-            foreach($enabledSearchengines as $engine)
-            {
-                if( isset($engine['hasSiteSearch']) && $engine['hasSiteSearch']->__toString() === "1" )
-                {
+            foreach ($enabledSearchengines as $engine) {
+                if (isset($engine['hasSiteSearch']) && $engine['hasSiteSearch']->__toString() === "1") {
                     $enginesWithSite++;
                 }
             }
-            if( $enginesWithSite === 0 )
-            {
-                $this->errors[] = "Sie wollten eine Sitesearch auf " . $this->site . " durchführen. Leider unterstützen die eingestellten Suchmaschinen diese nicht. Sie können <a href=\"" . $this->generateSearchLink("web", false) . "\">hier</a> die Sitesearch im Web-Fokus durchführen. Es werden ihnen Ergebnisse ohne Sitesearch angezeigt.";
+            if ($enginesWithSite === 0) {
+                $this->errors[]   = "Sie wollten eine Sitesearch auf " . $this->site . " durchführen. Leider unterstützen die eingestellten Suchmaschinen diese nicht. Sie können <a href=\"" . $this->generateSearchLink("web", false) . "\">hier</a> die Sitesearch im Web-Fokus durchführen. Es werden ihnen Ergebnisse ohne Sitesearch angezeigt.";
                 $siteSearchFailed = true;
-            }else
-            {
+            } else {
                 $this->warnings[] = "Sie führen eine Sitesearch durch. Es werden nur Ergebnisse von der Seite: <a href=\"http://" . $this->site . "\" target=\"_blank\">\"" . $this->site . "\"</a> angezeigt.";
             }
 
         }
 
         $typeslist = [];
-        $counter = 0;
+        $counter   = 0;
 
-		foreach($enabledSearchengines as $engine){
-
-            if( !$siteSearchFailed && strlen($this->site) > 0 && ( !isset($engine['hasSiteSearch']) || $engine['hasSiteSearch']->__toString() === "0")  )
-            {
-                
-                continue;
-            }
-            # Wenn diese Suchmaschine gar nicht eingeschaltet sein soll
-            $path = "App\Models\parserSkripte\\" . ucfirst($engine["package"]->__toString());
-
-            $time = microtime();
-            $tmp = new $path($engine, $this);
-
-            if($tmp->enabled && isset($this->debug))
-            {
-                $this->warnings[] = $tmp->service . "   Connection_Time: " . $tmp->connection_time . "    Write_Time: " . $tmp->write_time . " Insgesamt:" . ((microtime()-$time)/1000);
+        if ($request->has('next') && Cache::has($request->input('next')) && unserialize(Cache::get($request->input('next')))['page'] > 1) {
+            $next       = unserialize(Cache::get($request->input('next')));
+            $this->page = $next['page'];
+            $engines    = $next['engines'];
+            if (isset($next['startForwards'])) {
+                $this->startForwards = $next['startForwards'];
             }
 
-            if($tmp->isEnabled())
-            {
-                $engines[] = $tmp;
-                $this->sockets[$tmp->name] = $tmp->fp;
+            if (isset($next['startBackwards'])) {
+                $this->startBackwards = $next['startBackwards'];
             }
 
-            # Alternativ
-            # Hier wird direkt eine Liste der Fokustypen erstellt, die bei der Suche verwendet werden: [0] => [web, nachrichten]
-            /*if($engine["name"] !== "overtureAds") {
-                $type = explode(",", $engine["type"]);
-                if(!$type[0] == "") {
-                    $typeslist[$counter++] = $type;
+        } else {
+            foreach ($enabledSearchengines as $engine) {
+
+                if (!$siteSearchFailed && strlen($this->site) > 0 && (!isset($engine['hasSiteSearch']) || $engine['hasSiteSearch']->__toString() === "0")) {
+
+                    continue;
                 }
-            }*/
+                # Wenn diese Suchmaschine gar nicht eingeschaltet sein soll
+                $path = "App\Models\parserSkripte\\" . ucfirst($engine["package"]->__toString());
 
-		}
+                if (!file_exists(app_path() . "/Models/parserSkripte/" . ucfirst($engine["package"]->__toString()) . ".php")) {
+                    Log::error("Konnte " . $engine["name"] . " nicht abfragen, da kein Parser existiert");
+                    continue;
+                }
 
-        # Alternativ
-        # Jetzt wird geguckt, ob diese Liste überhaupt Typen enthält und für jeden Typen des ersten Eintrags (oder späteren falls dieser "" ist) wird geguckt, ob sich dieser Typ in allen folgenden Einträgen finden lässt. Diese Einträge sind nie "web", da diese Suche meist eh auch möglich ist und ohnehin wie die angepasste Suche funktioniert. Am Ende wird geguckt ob es einen Typen gab, der in allen Elementen enthalten ist. Dieser wird als Fokus gesetzt.
-        /*if(!empty($typeslist)) {
-            foreach($typeslist as $matchTypeSearch) {
-                if(!empty($matchTypeSearch) && $matchTypeSearch[0] !== "") {
-                    $toMatch = $matchTypeSearch;
-                    break;
+                $time = microtime();
+
+                try
+                {
+                    $tmp = new $path($engine, $this);
+                } catch (\ErrorException $e) {
+                    Log::error("Konnte " . $engine["name"] . " nicht abfragen." . var_dump($e));
+                    continue;
                 }
-            }
-            $toMatch = $typeslist[0];
-            array_shift($typeslist);
-            $matchedType = "";
-            foreach($toMatch as $matchType) {
-                if($matchType !== "web" && $matchType !== "") {
-                    $matched = true;
-                    foreach($typeslist as $otherTypes) {
-                        if(!in_array($matchType, $otherTypes)) {
-                            $matched = false;
-                        }
-                    }
-                    if($matched) {
-                        $matchedType = $matchType;
-                        break;
-                    }
+
+                if ($tmp->enabled && isset($this->debug)) {
+                    $this->warnings[] = $tmp->service . "   Connection_Time: " . $tmp->connection_time . "    Write_Time: " . $tmp->write_time . " Insgesamt:" . ((microtime() - $time) / 1000);
                 }
+
+                if ($tmp->isEnabled()) {
+                    $engines[] = $tmp;
+                }
+
             }
-            if($matchedType !== "") {
-                $this->fokus = $matchedType;
-            }
-        }*/
+        }
+
+        # Wir starten die Suche manuell:
+        foreach ($engines as $engine) {
+            $engine->startSearch($this);
+        }
 
         # Jetzt werden noch alle Kategorien der Settings durchgegangen und die jeweils enthaltenen namen der Suchmaschinen gespeichert.
         $foki = [];
-        foreach($sumas as $suma)
-        {
-            if( (!isset($suma['disabled']) || $suma['disabled'] === "") && ( !isset($suma['userSelectable']) || $suma['userSelectable']->__toString() === "1") )
-            {
-                if( isset($suma['type']) )
-                {
+        foreach ($sumas as $suma) {
+            if ((!isset($suma['disabled']) || $suma['disabled'] === "") && (!isset($suma['userSelectable']) || $suma['userSelectable']->__toString() === "1")) {
+                if (isset($suma['type'])) {
                     $f = explode(",", $suma['type']->__toString());
-                    foreach($f as $tmp)
-                    {
-                        $name = $suma['name']->__toString();
+                    foreach ($f as $tmp) {
+                        $name                                    = $suma['name']->__toString();
                         $foki[$tmp][$suma['name']->__toString()] = $name;
                     }
-                }else
-                {
-                    $name = $suma['name']->__toString();
+                } else {
+                    $name                                        = $suma['name']->__toString();
                     $foki["andere"][$suma['name']->__toString()] = $name;
                 }
             }
@@ -562,30 +571,30 @@ class MetaGer
 
         # Es werden auch die Namen der aktuell aktiven Suchmaschinen abgespeichert.
         $realEngNames = [];
-        foreach($enabledSearchengines as $realEng) {
+        foreach ($enabledSearchengines as $realEng) {
             $nam = $realEng["name"]->__toString();
-            if($nam !== "qualigo" && $nam !== "overtureAds") {
+            if ($nam !== "qualigo" && $nam !== "overtureAds") {
                 $realEngNames[] = $nam;
             }
         }
         # Anschließend werden diese beiden Listen verglichen (jeweils eine der Fokuslisten für jeden Fokus), um herauszufinden ob sie vielleicht identisch sind. Ist dies der Fall, so hat der Nutzer anscheinend Suchmaschinen eines kompletten Fokus eingestellt. Der Fokus wird dementsprechend angepasst.
-        foreach($foki as $fok => $engs) {
-            $isFokus = true;
+        foreach ($foki as $fok => $engs) {
+            $isFokus      = true;
             $fokiEngNames = [];
-            foreach($engs as $eng) {
+            foreach ($engs as $eng) {
                 $fokiEngNames[] = $eng;
             }
-            foreach($fokiEngNames as $fen) {
-                if(!in_array($fen, $realEngNames)) {
+            foreach ($fokiEngNames as $fen) {
+                if (!in_array($fen, $realEngNames)) {
                     $isFokus = false;
                 }
             }
-            foreach($realEngNames as $ren) {
-                if(!in_array($ren, $fokiEngNames)) {
+            foreach ($realEngNames as $ren) {
+                if (!in_array($ren, $fokiEngNames)) {
                     $isFokus = false;
                 }
             }
-            if($isFokus) {
+            if ($isFokus) {
                 $this->fokus = $fok;
             }
         }
@@ -595,97 +604,100 @@ class MetaGer
         # aber natürlich nicht ewig.
         # Die Verbindung steht zu diesem Zeitpunkt und auch unsere Request wurde schon gesendet.
         # Wir geben der Suchmaschine nun bis zu 500ms Zeit zu antworten.
-        $enginesToLoad = count($engines);
+
+        # Wir zählen die Suchmaschinen, die durch den Cache beantwortet wurden:
+        $enginesToLoad = 0;
+        $canBreak      = false;
+        foreach ($engines as $engine) {
+            if ($engine->cached) {
+                $enginesToLoad--;
+                if ($overtureEnabled && ($engine->name === "overture" || $engine->name === "overtureAds")) {
+                    $canBreak = true;
+                }
+
+            }
+        }
+        $enginesToLoad += count($engines);
         $loadedEngines = 0;
-        $timeStart = microtime(true);
-
-        while( true )
-        {
-            $time = (microtime(true) - $timeStart) * 1000;
+        $timeStart     = microtime(true);
+        while (true) {
+            $time          = (microtime(true) - $timeStart) * 1000;
             $loadedEngines = intval(Redis::hlen('search.' . $this->getHashCode()));
-            $canBreak = true;
-            if( $overtureEnabled && !Redis::hexists('search.' . $this->getHashCode(), 'overture') && !Redis::hexists('search.' . $this->getHashCode(), 'overtureAds'))
-                $canBreak = false;
-
+            if ($overtureEnabled && (Redis::hexists('search.' . $this->getHashCode(), 'overture') || Redis::hexists('search.' . $this->getHashCode(), 'overtureAds'))) {
+                $canBreak = true;
+            }
 
             # Abbruchbedingung
-            if($time < 500)
-            {
-                if(($enginesToLoad === 0 || $loadedEngines >= $enginesToLoad) && $canBreak)
+            if ($time < 500) {
+                if (($enginesToLoad === 0 || $loadedEngines >= $enginesToLoad) && $canBreak) {
                     break;
-            }elseif( $time >= 500 && $time < $this->time)
-            {
-                if( ($enginesToLoad === 0 || ($loadedEngines / ($enginesToLoad * 1.0)) >= 0.8) && $canBreak )
+                }
+
+            } elseif ($time >= 500 && $time < $this->time) {
+                if (($enginesToLoad === 0 || ($loadedEngines / ($enginesToLoad * 1.0)) >= 0.8) && $canBreak) {
                     break;
-            }else
-            {
+                }
+
+            } else {
                 break;
             }
             usleep(50000);
         }
 
-        
-        foreach($engines as $engine)
-        {
-            if(!$engine->loaded)
-            {
-                try{
-                    $engine->retrieveResults();
-                } catch(\ErrorException $e)
-                {
+        foreach ($engines as $engine) {
+            if (!$engine->loaded) {
+                try {
+                    $engine->retrieveResults($this);
+                } catch (\ErrorException $e) {
                     Log::error($e);
-                    
+
                 }
             }
         }
-        
+
         # und verwerfen den Rest:
-        foreach( $engines as $engine )
-        {
-            if( !$engine->loaded )
+        foreach ($engines as $engine) {
+            if (!$engine->loaded) {
                 $engine->shutdown();
+            }
+
         }
 
         $this->engines = $engines;
-	}
+    }
 
-	public function parseFormData (Request $request)
-	{
-		if($request->input('encoding', '') !== "utf8")
-		{
-			# In früheren Versionen, als es den Encoding Parameter noch nicht gab, wurden die Daten in ISO-8859-1 übertragen
-			$input = $request->all();
-			foreach($input as $key => $value)
-			{
-				$input[$key] = mb_convert_encoding("$value", "UTF-8", "ISO-8859-1");
-			}
-			$request->replace($input);
-		}
+    public function parseFormData(Request $request)
+    {
+        if ($request->input('encoding', '') !== "utf8") {
+            # In früheren Versionen, als es den Encoding Parameter noch nicht gab, wurden die Daten in ISO-8859-1 übertragen
+            $input = $request->all();
+            foreach ($input as $key => $value) {
+                $input[$key] = mb_convert_encoding("$value", "UTF-8", "ISO-8859-1");
+            }
+            $request->replace($input);
+        }
         $this->url = $request->url();
-		# Zunächst überprüfen wir die eingegebenen Einstellungen:
+        # Zunächst überprüfen wir die eingegebenen Einstellungen:
         # FOKUS
         $this->fokus = trans('fokiNames.'
-        	. $request->input('focus', 'web'));
-        if(strpos($this->fokus,"."))
-        {
+            . $request->input('focus', 'web'));
+        if (strpos($this->fokus, ".")) {
             $this->fokus = trans('fokiNames.web');
         }
 
         # SUMA-FILE
-        if(App::isLocale("en")){
+        if (App::isLocale("en")) {
             $this->sumaFile = config_path() . "/sumas.xml";
-        }else{
+        } else {
             $this->sumaFile = config_path() . "/sumas.xml";
         }
-        if(!file_exists($this->sumaFile))
-        {
+        if (!file_exists($this->sumaFile)) {
             die("Suma-File konnte nicht gefunden werden");
         }
 
         # Sucheingabe:
         $this->eingabe = trim($request->input('eingabe', ''));
-        if(strlen($this->eingabe) === 0)
-        {
+        if (strlen($this->eingabe) === 0) {
             $this->warnings[] = 'Achtung: Sie haben keinen Suchbegriff eingegeben. Sie können ihre Suchbegriffe oben eingeben und es erneut versuchen.';
         }
         $this->q = $this->eingabe;
@@ -694,292 +706,277 @@ class MetaGer
         $this->ip = $request->ip();
 
         # Language:
-        if( isset($_SERVER['HTTP_LANGUAGE']) )
-        {
+        if (isset($_SERVER['HTTP_LANGUAGE'])) {
             $this->language = $_SERVER['HTTP_LANGUAGE'];
-        }else
-        {
+        } else {
             $this->language = "";
         }
         # Category
         $this->category = $request->input('category', '');
         # Request Times:
         $this->time = $request->input('time', 1000);
-       
+
         # Page
-        $this->page = $request->input('page', 1);
+        $this->page = 1;
         # Lang
         $this->lang = $request->input('lang', 'all');
-        if ( $this->lang !== "de" && $this->lang !== "en" && $this->lang !== "all" )
-        {
-        	$this->lang = "all";
+        if ($this->lang !== "de" && $this->lang !== "en" && $this->lang !== "all") {
+            $this->lang = "all";
         }
-        $this->agent = new Agent();
+        $this->agent  = new Agent();
         $this->mobile = $this->agent->isMobile();
 
         #Sprüche
         $this->sprueche = $request->input('sprueche', 'off');
-        if($this->sprueche === "off" )
+        if ($this->sprueche === "off") {
             $this->sprueche = true;
-        else
+        } else {
             $this->sprueche = false;
+        }
+
         # Ergebnisse pro Seite:
         $this->resultCount = $request->input('resultCount', '20');
 
         # Manchmal müssen wir Parameter anpassen um den Sucheinstellungen gerecht zu werden:
-        if( $request->has('dart') )
-        {
-        	$this->time = 10000;
-        	$this->warnings[] = "Hinweis: Sie haben Dart-Europe aktiviert. Die Suche kann deshalb länger dauern und die maximale Suchzeit wurde auf 10 Sekunden hochgesetzt.";
+        if ($request->has('dart')) {
+            $this->time       = 10000;
+            $this->warnings[] = "Hinweis: Sie haben Dart-Europe aktiviert. Die Suche kann deshalb länger dauern und die maximale Suchzeit wurde auf 10 Sekunden hochgesetzt.";
         }
-        if( $this->time <= 500 || $this->time > 20000 )
-        {
-        	$this->time = 1000;
+        if ($this->time <= 500 || $this->time > 20000) {
+            $this->time = 1000;
         }
-        if( $request->has('minism') && ( $request->has('fportal') || $request->has('harvest') ) )
-        {
-        	$input = $request->all();
-        	$newInput = [];
-        	foreach($input as $key => $value)
-        	{
-        		if( $key !== "fportal" && $key !== "harvest" )
-        		{
-        			$newInput[$key] = $value;
-        		}
-        	}
-        	$request->replace($newInput);
+        if ($request->has('minism') && ($request->has('fportal') || $request->has('harvest'))) {
+            $input    = $request->all();
+            $newInput = [];
+            foreach ($input as $key => $value) {
+                if ($key !== "fportal" && $key !== "harvest") {
+                    $newInput[$key] = $value;
+                }
+            }
+            $request->replace($newInput);
         }
-        if( $request->has('ebay') )
-        {
-        	$this->time = 2000;
-        	$this->warnings[] = "Hinweis: Sie haben Ebay aktiviert. Die Suche kann deshalb länger dauern und die maximale Suchzeit wurde auf 2 Sekunden hochgesetzt.";
+        if (App::isLocale("en")) {
+            $this->sprueche = "off";
         }
-        if( App::isLocale("en") )
-        {
-        	$this->sprueche = "off";
+        if ($this->resultCount <= 0 || $this->resultCount > 200) {
+            $this->resultCount = 1000;
         }
-        if($this->resultCount <= 0 || $this->resultCount > 200 )
-        {
-        	$this->resultCount = 1000;
+        if ($request->has('onenewspageAll') || $request->has('onenewspageGermanyAll')) {
+            $this->time  = 5000;
+            $this->cache = "cache";
         }
-        if( $request->has('onenewspageAll') || $request->has('onenewspageGermanyAll') )
-        {
-        	$this->time = 5000;
-        	$this->cache = "cache";
-        }
-        if( $request->has('tab'))
-        {
-            if($request->input('tab') === "off")
-            {
+        if ($request->has('tab')) {
+            if ($request->input('tab') === "off") {
                 $this->tab = "_blank";
-            }else
-            {
+            } else {
                 $this->tab = "_self";
             }
-        }else
-        {
+        } else {
             $this->tab = "_blank";
         }
-        if( $request->has('password') )
+        if ($request->has('password')) {
             $this->password = $request->input('password');
-        if( $request->has('quicktips') )
+        }
+
+        if ($request->has('quicktips')) {
             $this->quicktips = false;
-        else
+        } else {
             $this->quicktips = true;
+        }
 
         $this->out = $request->input('out', "html");
-        if($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style")
+        if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style") {
             $this->out = "html";
-        $this->request = $request;
-	}
+        }
 
-	public function checkSpecialSearches (Request $request)
-	{
-		# Site Search:
-		if(preg_match("/(.*)\bsite:(\S+)(.*)/si", $this->q, $match))
-		{
-			$this->site = $match[2];
-			$this->q = $match[1] . $match[3];
-		}
-        if( $request->has('site') )
-        {
+        $this->request = $request;
+    }
+
+    public function checkSpecialSearches(Request $request)
+    {
+        # Site Search:
+        if (preg_match("/(.*)\bsite:(\S+)(.*)/si", $this->q, $match)) {
+            $this->site = $match[2];
+            $this->q    = $match[1] . $match[3];
+        }
+        if ($request->has('site')) {
             $this->site = $request->input('site');
         }
-		# Wenn die Suchanfrage um das Schlüsselwort "-host:*" ergänzt ist, sollen bestimmte Hosts nicht eingeblendet werden
-		# Wir prüfen, ob das hier der Fall ist:
-		while(preg_match("/(.*)(^|\s)-host:(\S+)(.*)/si", $this->q, $match))
-		{
-			$this->hostBlacklist[] = $match[3];
-			$this->q = $match[1] . $match[4];
-		}
-		if( sizeof($this->hostBlacklist) > 0 )
-		{
-			$hostString = "";
-			foreach($this->hostBlacklist as $host)
-			{
-				$hostString .= $host . ", ";
-			}
-			$hostString = rtrim($hostString, ", ");
-			$this->warnings[] = "Ergebnisse von folgenden Hosts werden nicht angezeigt: \"" . $hostString . "\"";
-		}
-		# Wenn die Suchanfrage um das Schlüsselwort "-domain:*" ergänzt ist, sollen bestimmte Domains nicht eingeblendet werden
-		# Wir prüfen, ob das hier der Fall ist:
-		while(preg_match("/(.*)(^|\s)-domain:(\S+)(.*)/si", $this->q, $match))
-		{
-			$this->domainBlacklist[] = $match[3];
-			$this->q = $match[1] . $match[4];
-		}
-		if( sizeof($this->domainBlacklist) > 0 )
-		{
-			$domainString = "";
-			foreach($this->domainBlacklist as $domain)
-			{
-				$domainString .= $domain . ", ";
-			}
-			$domainString = rtrim($domainString, ", ");
-			$this->warnings[] = "Ergebnisse von folgenden Domains werden nicht angezeigt: \"" . $domainString . "\"";
-		}
-		
-		# Alle mit "-" gepräfixten Worte sollen aus der Suche ausgeschlossen werden.
-		# Wir prüfen, ob das hier der Fall ist:
-		while(preg_match("/(.*)(^|\s)-(\S+)(.*)/si", $this->q, $match))
-		{
-			$this->stopWords[] = $match[3];
-			$this->q = $match[1] . $match[4];
-		}
-		if( sizeof($this->stopWords) > 0 )
-		{
-			$stopwordsString = "";
-			foreach($this->stopWords as $stopword)
-			{
-				$stopwordsString .= $stopword . ", ";
-			}
-			$stopwordsString = rtrim($stopwordsString, ", ");
-			$this->warnings[] = "Sie machen eine Ausschlusssuche. Ergebnisse mit folgenden Wörtern werden nicht angezeigt: \"" . $stopwordsString . "\"";
-		}
+        # Wenn die Suchanfrage um das Schlüsselwort "-host:*" ergänzt ist, sollen bestimmte Hosts nicht eingeblendet werden
+        # Wir prüfen, ob das hier der Fall ist:
+        while (preg_match("/(.*)(^|\s)-host:(\S+)(.*)/si", $this->q, $match)) {
+            $this->hostBlacklist[] = $match[3];
+            $this->q               = $match[1] . $match[4];
+        }
+        if (sizeof($this->hostBlacklist) > 0) {
+            $hostString = "";
+            foreach ($this->hostBlacklist as $host) {
+                $hostString .= $host . ", ";
+            }
+            $hostString       = rtrim($hostString, ", ");
+            $this->warnings[] = "Ergebnisse von folgenden Hosts werden nicht angezeigt: \"" . $hostString . "\"";
+        }
+        # Wenn die Suchanfrage um das Schlüsselwort "-domain:*" ergänzt ist, sollen bestimmte Domains nicht eingeblendet werden
+        # Wir prüfen, ob das hier der Fall ist:
+        while (preg_match("/(.*)(^|\s)-domain:(\S+)(.*)/si", $this->q, $match)) {
+            $this->domainBlacklist[] = $match[3];
+            $this->q                 = $match[1] . $match[4];
+        }
+        if (sizeof($this->domainBlacklist) > 0) {
+            $domainString = "";
+            foreach ($this->domainBlacklist as $domain) {
+                $domainString .= $domain . ", ";
+            }
+            $domainString     = rtrim($domainString, ", ");
+            $this->warnings[] = "Ergebnisse von folgenden Domains werden nicht angezeigt: \"" . $domainString . "\"";
+        }
 
-		# Meldung über eine Phrasensuche
-        $p = "";
+        # Alle mit "-" gepräfixten Worte sollen aus der Suche ausgeschlossen werden.
+        # Wir prüfen, ob das hier der Fall ist:
+        while (preg_match("/(.*)(^|\s)-(\S+)(.*)/si", $this->q, $match)) {
+            $this->stopWords[] = $match[3];
+            $this->q           = $match[1] . $match[4];
+        }
+        if (sizeof($this->stopWords) > 0) {
+            $stopwordsString = "";
+            foreach ($this->stopWords as $stopword) {
+                $stopwordsString .= $stopword . ", ";
+            }
+            $stopwordsString  = rtrim($stopwordsString, ", ");
+            $this->warnings[] = "Sie machen eine Ausschlusssuche. Ergebnisse mit folgenden Wörtern werden nicht angezeigt: \"" . $stopwordsString . "\"";
+        }
+
+        # Meldung über eine Phrasensuche
+        $p   = "";
         $tmp = $this->q;
-		while(preg_match("/(.*)\"(.+)\"(.*)/si", $tmp, $match)){
-            $tmp = $match[1] . $match[3];
+        while (preg_match("/(.*)\"(.+)\"(.*)/si", $tmp, $match)) {
+            $tmp             = $match[1] . $match[3];
             $this->phrases[] = strtolower($match[2]);
-		}
-        foreach($this->phrases as $phrase)
-        {
+        }
+        foreach ($this->phrases as $phrase) {
             $p .= "\"$phrase\", ";
         }
         $p = rtrim($p, ", ");
-        if(sizeof($this->phrases) > 0)
+        if (sizeof($this->phrases) > 0) {
             $this->warnings[] = "Sie führen eine Phrasensuche durch: $p";
-	}
+        }
 
-    public function getFokus ()
+    }
+
+    public function getFokus()
     {
         return $this->fokus;
     }
 
-    public function getIp ()
+    public function getIp()
     {
         return $this->ip;
     }
 
-    public function getEingabe ()
+    public function getEingabe()
     {
         return $this->eingabe;
     }
 
-    public function getQ ()
+    public function getQ()
     {
-            return $this->q;
+        return $this->q;
     }
 
-    public function getUrl ()
+    public function getUrl()
     {
         return $this->url;
     }
-    public function getTime ()
+    public function getTime()
     {
         return $this->time;
     }
 
-    public function getLanguage ()
+    public function getLanguage()
     {
         return $this->language;
     }
 
-    public function getLang ()
+    public function getLang()
     {
         return $this->lang;
     }
 
-    public function getSprueche ()
+    public function getSprueche()
     {
         return $this->sprueche;
     }
 
-    public function getCategory ()
+    public function getCategory()
     {
         return $this->category;
     }
 
-    public function getPhrases ()
+    public function getPhrases()
     {
         return $this->phrases;
     }
+    public function getPage()
+    {
+        return $this->page;
+    }
 
-    public function getSumaFile ()
+    public function getSumaFile()
     {
         return $this->sumaFile;
     }
 
-    public function getUserHostBlacklist ()
+    public function getUserHostBlacklist()
     {
         return $this->hostBlacklist;
     }
 
-    public function getUserDomainBlacklist ()
+    public function getUserDomainBlacklist()
     {
         return $this->domainBlacklist;
     }
 
-    public function getDomainBlacklist ()
+    public function getDomainBlacklist()
     {
         return $this->domainsBlacklisted;
     }
 
-    public function getUrlBlacklist ()
+    public function getUrlBlacklist()
     {
         return $this->urlsBlacklisted;
     }
-    public function getLanguageDetect ()
+    public function getLanguageDetect()
     {
         return $this->languageDetect;
     }
-    public function getStopWords ()
+    public function getStopWords()
     {
         return $this->stopWords;
     }
     public function getHostCount($host)
     {
-        if(isset($this->addedHosts[$host]))
-        {
+        if (isset($this->addedHosts[$host])) {
             return $this->addedHosts[$host];
-        }else
-        {
+        } else {
             return 0;
         }
+    }
+    public function getStartCount()
+    {
+        return $this->startCount;
     }
     public function addHostCount($host)
     {
         $hash = md5($host);
-        if(isset($this->addedHosts[$hash]))
-        {
+        if (isset($this->addedHosts[$hash])) {
             $this->addedHosts[$hash] += 1;
-        }else
-        {
+        } else {
             $this->addedHosts[$hash] = 1;
         }
+    }
+    public function canCache()
+    {
+        return $this->canCache;
     }
     public function getSite()
     {
@@ -987,12 +984,23 @@ class MetaGer
     }
     public function addLink($link)
     {
+        if (strpos($link, "http://") === 0) {
+            $link = substr($link, 7);
+        }
+
+        if (strpos($link, "https://") === 0) {
+            $link = substr($link, 8);
+        }
+
+        if (strpos($link, "www.") === 0) {
+            $link = substr($link, 4);
+        }
+
+        $link = trim($link, "/");
         $hash = md5($link);
-        if(isset($this->addedLinks[$hash]))
-        {
+        if (isset($this->addedLinks[$hash])) {
             return false;
-        }else
-        {
+        } else {
             $this->addedLinks[$hash] = 1;
 
             return true;
@@ -1001,12 +1009,14 @@ class MetaGer
 
     public function generateSearchLink($fokus, $results = true)
     {
-        $requestData = $this->request->except('page');
+        $requestData          = $this->request->except(['page', 'next']);
         $requestData['focus'] = $fokus;
-        if($results)
+        if ($results) {
             $requestData['out'] = "results";
-        else
+        } else {
             $requestData['out'] = "";
+        }
+
         $link = action('MetaGerSearch@search', $requestData);
         return $link;
     }
@@ -1020,55 +1030,69 @@ class MetaGer
 
     public function generateSiteSearchLink($host)
     {
-        $host = urlencode($host);
-        $requestData = $this->request->except(['page','out']);
+        $host        = urlencode($host);
+        $requestData = $this->request->except(['page', 'out', 'next']);
         $requestData['eingabe'] .= " site:$host";
         $requestData['focus'] = "web";
-        $link = action('MetaGerSearch@search', $requestData);
+        $link                 = action('MetaGerSearch@search', $requestData);
         return $link;
     }
 
-    public function generateRemovedHostLink ($host)
+    public function generateRemovedHostLink($host)
     {
-        $host = urlencode($host);
-        $requestData = $this->request->except(['page','out']);
+        $host        = urlencode($host);
+        $requestData = $this->request->except(['page', 'out', 'next']);
         $requestData['eingabe'] .= " -host:$host";
         $link = action('MetaGerSearch@search', $requestData);
         return $link;
     }
 
-    public function generateRemovedDomainLink ($domain)
+    public function generateRemovedDomainLink($domain)
     {
-        $domain = urlencode($domain);
-        $requestData = $this->request->except(['page','out']);
+        $domain      = urlencode($domain);
+        $requestData = $this->request->except(['page', 'out', 'next']);
         $requestData['eingabe'] .= " -domain:$domain";
         $link = action('MetaGerSearch@search', $requestData);
         return $link;
     }
 
-    public function getTab ()
+    public function nextSearchLink()
+    {
+        if (isset($this->next) && isset($this->next['engines']) && count($this->next['engines']) > 0) {
+            $requestData         = $this->request->except(['page', 'out']);
+            $requestData['next'] = md5(serialize($this->next));
+            $link                = action('MetaGerSearch@search', $requestData);
+        } else {
+            $link = "#";
+        }
+        return $link;
+    }
+
+    public function getTab()
     {
         return $this->tab;
     }
-    public function getResults ()
+    public function getResults()
     {
         return $this->results;
     }
     public function popAd()
     {
-        if(count($this->ads) > 0)
+        if (count($this->ads) > 0) {
             return get_object_vars(array_shift($this->ads));
-        else
+        } else {
             return null;
+        }
+
     }
     public function getImageProxyLink($link)
     {
-        $requestData = [];
+        $requestData        = [];
         $requestData["url"] = $link;
-        $link = action('Pictureproxy@get', $requestData);
+        $link               = action('Pictureproxy@get', $requestData);
         return $link;
     }
-    public function showQuicktips ()
+    public function showQuicktips()
     {
         return $this->quicktips;
     }

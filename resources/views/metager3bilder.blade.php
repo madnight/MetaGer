@@ -19,25 +19,20 @@
 			</ul>
 		</div>
 	@endif
-	@if( !$metager->validated && App::isLocale('de') )
-	<div class="mg-panel container" id="spendenaufruf" style="margin-bottom:20px;max-height:126px;max-width:100%;text-align:center;padding:0px;margin-top:0px">
-					<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/spendenaufruf") }}">
-					<img src="/img/aufruf.png" style="max-width:100%;max-height:126px;">
-					</a>
-			</div>
-	@endif
 	<div id="container">
-	@foreach($metager->getResults()->items() as $result)
+	@foreach($metager->getResults() as $result)
 		<div class="item">
 			<div class="img">
-				<a href="{{ $result->link }}" target="{{ $metager->getTab() }}"><img src="{{ $metager->getImageProxyLink($result->image) }}" width="150px" alt="Bild nicht gefunden"/></a>
+				<a href="{{ $result->link }}" target="{{ $metager->getTab() }}"><img src="{{ $metager->getImageProxyLink($result->image) }}" width="150px" alt=""/></a>
 				<span class="label label-default">{{ strip_tags($result->gefVon) }}</span>
 			</div>
 		</div>
 	@endforeach
 	</div>
-	<nav class="pager">
-		{!! $metager->getResults()->links() !!}
+	<nav aria-label="...">
+		<ul class="pager">
+		    <li @if($metager->getPage() === 1) class="disabled" @endif><a href="@if($metager->getPage() === 1) # @else javascript:history.back() @endif">{{ trans('results.zurueck') }}</a></li>
+			<li @if($metager->nextSearchLink() === "#") class="disabled" @endif><a href="{{ $metager->nextSearchLink() }}">{{ trans('results.weiter') }}</a></li>
+		</ul>
 	</nav>
 @endsection
-

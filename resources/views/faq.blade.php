@@ -4,96 +4,157 @@
 
 @section('content')
 <h1>MetaGer - FAQ</h1>
-<h2>Suchwortassoziator</h2>
-<p>Bei einer Suche in einem bestimmten Fachgebiet sind oftmals die richtigen Suchw&ouml;rter, die Fachbegriffe und das Begriffsumfeld noch gar nicht bekannt. Um dieses Begriffsumfeld erschlie&szlig;en zu k&ouml;nnen, haben wir den <a href="https://metager.de/klassik/asso/" target="_blank">MetaGer-Web-Assoziator</a> entwickelt. Sie finden das Tool unter dem Reiter &quot;Dienste&quot;. Gibt man in diesen ein Suchwort ein, welches dem zu untersuchenden Fachgebiet nahe kommt, dann wird versucht, typische Fachbegriffe dieses Gebietes aus dem web zu extrahieren.</p>
+<h2>Kostenlose Dienste</h2>
+<h3>Suchwortassoziator</h3>
+<p>Als Hilfe f&uuml;r die Erschließung eines Begriffsumfelds haben wir den <a href="https://metager.de/klassik/asso/" target="_blank">MetaGer-Web-Assoziator</a> entwickelt. Sie finden das Tool unter dem Reiter &quot;Dienste&quot;. Gibt man in diesen ein Suchwort ein, welches dem zu untersuchenden Fachgebiet irgendwie nahe kommt, dann wird versucht, typische Fachbegriffe dieses Gebietes aus dem WWW zu extrahieren.</p>
 <p>Beispiel: Sie m&ouml;chten mehr &uuml;ber Zeckenbisse und deren Gefahren wissen, aber ihnen fallen die medizinischen Fachbegriffe f&uuml;r Erkrankungen aus diesem Bereich nicht mehr ein. Die Eingabe des Wortes &quot;Zeckenbisse&quot; in den Web-Assoziator liefert dann u.a. die Begriffe &quot;Borreliose&quot; und &quot;fsme&quot;.</p>
-<p>Da diese Assoziationsanalyse u.a. aus Web-Dokumenten selber gewonnen wird, ist sie sprachunabh&auml;ngig, das hei&szlig;t Sie k&ouml;nnen bei Eingabe deutscher W&ouml;rter Fachbegriffe aus beliebigen Sprachen gewinnen (und umgekehrt). Wenn Ihnen andererseits Assoziationsanalysen auffallen, die mit Hilfe Ihrer Fachkenntnisse besser sein k&ouml;nnten, dann z&ouml;gern Sie bitte nicht, uns dieses mitsamt Ihrem Verbesserungsvorschlag <a href="https://metager.de/kontakt/" target="_blank">&uuml;ber unser Kontaktformular</a> mitzuteilen.</p>
+<p>Da diese Assoziationsanalyse u.a. aus Web-Dokumenten selber gewonnen wird, ist sie sprachunabh&auml;ngig; d.h. Sie k&ouml;nnen bei Eingabe deutscher W&ouml;rter Fachbegriffe aus beliebigen Sprachen gewinnen (und umgekehrt). Wenn Ihnen andererseits Assoziationsanalysen auffallen, die mit Hilfe Ihrer Fachkenntnisse besser sein k&ouml;nnten, dann z&ouml;gern Sie bitte nicht, uns dieses samt Ihrem Verbesserungsvorschlag <a href="https://metager.de/kontakt/" target="_blank">&uuml;ber unser Kontaktformular</a> mitzuteilen.</p>
+<h3>MetaGer Widget</h3>
+<p>MetaGerWidget MetaGerWidget
+Hierbei handelt es sich um einen Codegenerator, der es Ihnen erm&ouml;glicht, MetaGer in Ihre Webseite einzubinden. Sie k&ouml;nnen damit dann nach Belieben auf Ihrer eigenen Seite oder im Internet suchen lassen. Bei allen Fragen: <a href="https://metager.de/kontakt/" target="_blank">unser Kontaktformular</a></p>
+<h3>URL-Verk&uuml;rzer</h3>
+<p>Sie finden den URL-Verk&uuml;rzer unter &quot;Dienste&quot;. Wenn Sie einen extrem langen Link- oder Domainnamen haben, k&ouml;nnen Sie diesen hier in eine kurze und pr&auml;gnante Form bringen. Metager sorgt dann zusammen mit Yourls f&uuml;r die Weiterleitung.</p>
 <h2>Anonymit&auml;t und Datensicherheit</h2>
 <h3>Cookies, Session-IDs und IP-Adressen</h3>
-<p>Nichts von alldem wird hier bei MetaGer gespeichert, aufgehoben oder sonst irgendwie verarbeitet. Weil wir diese Thematik f&uuml;r extrem wichtig halten, haben wir auch M&ouml;glichkeiten geschaffen, die Ihnen helfen k&ouml;nnen, bei uns ein H&ouml;chstma&szlig; an Sicherheit zu erreichen: den MetaGer-TOR-Hidden-Service und unseren Proxyserver.</p>
-<p>Genauere Informationen dazu, zu anderen Themen und auch allgemein zu unserem Umgang mit Daten finden Sie in unserem <a class="collapsed" href="#faq">MetaGer FAQ</a> der Liste der h&auml;ufig gefragten Fragen und Antworten. Wenn Ihnen weiteres auf- oder einf&auml;llt, was man ein- oder ausstellen k&ouml;nnen sollte, oder wenn Sie dazu Fragen haben: Schreiben Sie uns eine <a href="https://metager.de/kontakt/" target="_blank">Mail.</a></p>
-<h2 id="faq">Die h&auml;ufigsten Fragen und Antworten zu MetaGer:</h2>
-<ol>
-	<li><p>Was ist MetaGer?</p>
-		<p>MetaGer ist eine Suchmaschine, welche deutschsprachige (und bei Bedarf auch internationale) Suchdienste parallel nach den von Ihnen eingegebenen Suchworten absucht und alle Ergebnisse zusammenfasst. So etwas nennt man eine Meta-Suchmaschine. Per Hand m&uuml;sste man also etliche Suchmaschinen nacheinander absuchen und alle Ergebnisse vergleichen und zusammenf&uuml;hren. Diese Arbeit kann einem die Metasuchmaschine abnehmen.</p>
-		<p>Erfahren Sie mehr &uuml;ber Meta-Suchmaschinen auf <a href="https://de.wikipedia.org/wiki/Metasuchmaschine" target="_blank">Wikipedia</a>, oder lesen Sie f&uuml;r eine ausf&uuml;hrliche Beschreibung den Aufsatz &quot;Die Internet-Suchmaschinen der Zukunft&quot; (Zeitschrift c&#039;t 13/98, S. 178, Heise Verlag).</p></li>
-		<li><p>Warum sollte man mehrere Suchmaschinen benutzen?</p>
-		<p>Jede einzelne Suchmaschine kennt nur einen Bruchteil der Informationen im Internet - nach fr&uuml;heren Untersuchungen am NEC Lab waren es im besten Falle ca. ein Drittel. Eine Studie des NEC Lab vom Februar 1999 zeigte beispielsweise, dass der Abdeckungsgrad der Suchmaschinen nur ca. 16% des Web-Inhaltes betrug. Andere Studien gehen teilweise sogar von einem noch deutlich geringeren Abdeckungsgrad aus. auch aktuellere vergleichende Untersuchungen der Suchmaschinen Google, Ask Jeeves, MSN Search und Yahoo an der University of Pittsburgh und der Penn State University zeigen klare Vorteile der Meta-Suche.</p></li>
-	<li>Wenn Meta-Suchmaschinen so &quot;toll&quot; sind, wozu braucht man denn &uuml;berhaupt noch &quot;normale&quot; Suchmaschinen?</li>
-	<ul>
-		<li>Erstens: Meta-Suchmaschinen &quot;leben&quot; von den &quot;normalen&quot; Suchmaschinen , da sie diese nach Suchergebnissen abfragen.</li>
-		<li>Zweitens: So &quot;toll&quot; sind Meta-Suchmaschinen nun auch wieder nicht: Sie k&ouml;nnen nur so gut (oder schlecht) sein, wie der &quot;kleinste gemeinsame Nenner&quot; aller von der Metamaschine abgesuchten &quot;normalen&quot; Suchmaschinen. Letztere bieten h&auml;ufig oft wesentlich detailliertere Suchm&ouml;glichkeiten; d.h. Sie k&ouml;nnen, wenn Sie die Zielrichtung Ihrer Suche erstmal kennen, dann genauer und treffsicherer dort suchen. Daher empfehlen wir f&uuml;r detaillierte Suchvorg&auml;nge die Suchmachinen direkt zu benutzen. F&uuml;r einen ersten Einstieg und &Uuml;berblick, und die Entscheidung, bei welcher Suchmaschine sucht man weiter, ist hingegen eine Meta-Suchmaschine wahrscheinlich besser geeignet. Eine gute und ziemlich vollst&auml;ndige &Uuml;bersicht deutscher Suchmaschinen finden Sie auf <a href="http://www.klug-suchen.de/" target="_blank">klug-suchen.de.</a></li>
-	</ul>
-	<li><p>Welche Suchdienste sucht MetaGer ab?</p>
-		<p>Das h&auml;ngt von ihrem ausgewählten Suchfokus ab. Wenn Sie selbst festlegen möchten welche Suchmaschinen abgesucht werden und welche nicht, können Sie dies auf der Startseite unter dem Fokus &quot;<a href="https://metager.de/settings/" target="_blank">anpassen</a>&quot; tun. </p></li>
-	<li>Warum gibt es keinen Schalter &quot;Suche &uuml;ber alle Suchdienste&quot;?</li>
-	<p>Daf&uuml;r gibt es zwei Gr&uuml;nde:</p>
-	<ul>
-		<li>Weil etliche der abgesuchten Suchdienste das nicht wollen: Wenn es so einen Schalter g&auml;be, dann w&uuml;rden die Suchdienste mit kleineren Hardware-Resourcen von MetaGer durch die vielen Abfragen &quot;platt gemacht&quot; werden - und das wollen wir nat&uuml;rlich nicht.</li>
-		<li>Weil es nicht sinnvoll ist: Wir suchen mit MetaGer sehr viele Suchdienste der unterschiedlichsten Art ab. Dabei macht es z.B. keinen Sinn, auf der Suche nach wissenschaftlichen Ergebnissen auch die Produktsuchmaschinen einzuschalten und umgekehrt. Die Ergebnisse aus unterschiedlichsten Bereichen einer Suche eignen sich nicht zum Vermischen.</li>
-	</ul>
-	<li><p>Warum fragt Ihr den Suchdienst XY [nicht ab | nicht mehr ab | doch ab]?</p>
-		<p>Sie k&ouml;nnen davon ausgehen, dass wir alle Suchdienste von Bedeutung kennen. Wenn davon einer bei uns nicht aufgenommen ist, dann hat das handfeste Gr&uuml;nde, beispielsweise:</p>
-		<ul>
-			<li>Technische Gr&uuml;nde: die Verbindung dorthin ist zu schwach, der dortige Rechner zu klein usw.</li>
-			<li>Konzeptionelle Gr&uuml;nde: dieser Suchdienst bietet z.B. keine Option f&uuml;r eine deutschsprachige Suche</li>
-			<li>&quot;Politische&quot; Gr&uuml;nde: dieser Suchdienstbetreiber &quot;mag&quot; uns nicht (was wir selbstverst&auml;ndlich respektieren m&uuml;ssen)</li>
-			<li>Gr&uuml;nde bei uns: wir beurteilen das Angebot dieses Suchdienstbetreibers als f&uuml;r MetaGer nicht genügend</li>
-			<li>und viele andere mehr ...</li>
-		</ul>
-	</li>
-	<li><p>Wie sucht MetaGer?</p>
-		<p>MetaGer gibt Ihr/e Suchwort/e an die Suchdienste weiter, und holt von dort die Ergebnisse ab. Vorher macht MetaGer allerdings noch etwas: wir suchen in einer vorwiegend lokalen Wissensbasis, das sind die QuickTips. Diese QuickTip-Suche l&auml;uft parallel zu der Meta-Suche.</p></li>
-	<li><p>Was macht MetaGer mit den Ergebnissen der Suchdienste?</p>
-	 <p>MetaGer versucht, die Ergebnisse m&ouml;glichst sinnvoll aufzubereiten. Dabei werden (m&ouml;glichst) alle doppelten Treffer (Doubletten) zu einem zusammengefasst. Eine 100%ige Erkennung von Doubletten ist allerdings unm&ouml;glich.</p></li>
-	<li>
-		<p>Einer der von MetaGer abgefragten Suchdienste (der auch tats&auml;chlich geantwortet hat), findet auf einmal nichts mehr, auch nicht Begriffe, zu denen er bisher immer etwas gefunden hat - was ist da los?</p>
-		<p>Dann ist dasselbe passiert, wie in dem hiervor beschriebenen Absatz: Einer der von MetaGer abgefragten Suchdienste hat sein Ausgabeformat ge&auml;ndert, und bringt damit unsere Programme durcheinander. In diesem Falle bitten wir Sie, uns dann sofort eine Mail zu senden, damit wir etwas dagegen tun k&ouml;nnen.</p></li>
-	<li><p>Fragw&uuml;rdige Inhalte</p></li>
-	<ul>
-		<li>Ich habe &quot;Treffer&quot; erhalten, die nichts mit meiner Frage zu tun hatten - wie ist das m&ouml;glich?</li>
-		<li>Ich habe &quot;Treffer&quot; erhalten, die finde ich (mehr als) &auml;rgerlich: dort steht nichts als Unsinn geschrieben!</li>
-		<li>Ich habe &quot;Treffer&quot; erhalten, die finde ich nicht nur &auml;rgerlich, sondern die enthalten meiner Meinung nach illegale Inhalte!</li>
-	</ul>
-	<p>Wenn Sie im Internet etwas finden, das Sie f&uuml;r illegal oder jugendgef&auml;hrdend halten, dann k&ouml;nnen Sie sich per Mail an hotline@jugendschutz.net wenden oder Sie gehen auf http://www.jugendschutz.net/ und f&uuml;llen das dort zu findende Beschwerdeformular aus. Sinnvoll ist ein kurzer Hinweis, was Sie konkret f&uuml;r unzul&auml;ssig halten und wie Sie auf dieses Angebot gesto&szlig;en sind. Direkt an uns k&ouml;nnen Sie fragw&uuml;rdige Inhalte auch melden. Schreiben Sie dazu eine Mail an unseren <a href="mailto:jugendschutz@metager.de" class="link">Jugendschutzbeauftragten</a></p>
-	<li><p>Kann ich MetaGer in meine eigene Homepage einbauen?</p>
-			<p>Ja, das k&ouml;nnen Sie gern machen, und das geht auch ganz einfach: 
-Klicken Sie oben rechts im Menu auf &quot;Dienste -&gt; Widget&quot; und folgen Sie den Anweisungen. Das Tool generiert einen Code nach Ihren Angaben, den Sie dann so in Ihre Internetseiten einf&uuml;gen k&ouml;nnen. Sie haben die Wahl zwischen einer kompletten Websuche und einer Suche, die sich nur auf Ihre eigenen Webseiten bezieht. Oder nat&uuml;rlich beides!</p></li>
-	<li><p>Kann ich MetaGer per E-Mail benutzen, also eine Abfrage per E-Mail abschicken und die Antwort sp&auml;ter erhalten?</p>
-		<p>Das ging bis vor einiger Zeit in Zusammenarbeit und dank der Unterst&uuml;tzung des International Centre for Theoretical Physics in Triest mittels eines Mail-To-Web Gateways. Leider ist dieser Service dort offenbar eingestellt. Kurz-und-gut (nein: schlecht): derzeit geht das leider nicht.</p></li>
-	<li><p>Wo kann ich bei MetaGer meine Homepage/URL/etc. anmelden?</p>
-		<p>Gar nicht. MetaGer ist eine MetaSuchmaschine. Sie sucht nicht selber, sondern l&auml;sst andere Suchdienste suchen. Wenn Sie Ihre eigenen WWW-Seiten den Suchmaschinen bekannt geben wollen, dann m&uuml;ssen Sie die Suchmaschinen einzeln aufsuchen, bei denen Sie Ihre Seiten anmelden wollen.</p></li>
-	<li><p>Wie genau funktioniert das Ranking bei MetaGer?</p>
-		<p>Dazu machen wir aus nahe liegenden Gr&uuml;nden keine Angaben</p></li>
-	<li><p>Mit meinem XYZ-Browser und dem XYZ-Betriebssystem kann ich MetaGer nicht abfragen. Was tun?</p>
-		<p>Versuchen Sie unbedingt zu allererst, das aktuelle Plugin zu installieren. Zum Installieren einfach auf den Link direkt unter dem Suchfeld klicken. Dort sollte Ihr Browser schon erkannt worden sein. Wenn Sie dann noch Probleme haben sollten, wenden Sie sich bitte an uns: office@suma-ev.de</p></li>
-	<li><p>Wo habt ihr eigentlich all&#039; die klugen Spr&uuml;che eures &quot;Spr&uuml;cheklopfers&quot; her?</p>
-		<p>Sie sind aus Quellen im Internet zusammengesucht. Den gr&ouml;&szlig;ten Teil hatte uns netterweise Alexander Hammer zur Verf&uuml;gung gestellt. Sch&ouml;nen Dank!
-Nebenbei bemerkt: Wir teilen keineswegs die inhaltliche Meinung, die in jedem Spruch zum Ausdruck kommt! Spr&uuml;che sollen und m&uuml;ssen kontroverses darstellen. Wer keine andere Meinung als die seine akzeptieren kann, sollte den Spr&uuml;cheklopfer ausschalten.(Durch unsere &ldquo;anpassen&ldquo;-Funktion)</p></li>
-	<li><p>Wie kann ich die Anzeige meiner vorherigen Suchen l&ouml;schen?</p>
-		<p>Folgende nette Mail ist symptomatisch f&uuml;r diese Art der Frage:</p>
-		<p>Sehr geehrte Damen und Herren, ich habe ein Problem mit den Suchfunktionen. Das Problem ist, wenn ich eine gewisse Suche z.B. Erotikseiten durchgef&uuml;hrt habe, wie l&auml;sst sich diese Suche wieder l&ouml;schen? Wenn ich nur ein E eingebe, erscheinen darunter wieder Erotikseiten. Das m&ouml;chte ich wegen meiner Kinder vermeiden.</p>
-		<p>Die Antwort darauf: Dieses Problem hat NICHTS mit MetaGer zu tun, sondern ist eine Einstellung Ihres lokalen Systems (Browser und/oder Betriebssystem). Wie Sie das abschalten oder l&ouml;schen, m&uuml;ssen Sie auf Ihrem System selber herausfinden. Hierbei einfach unsere Suche benutzten.</p></li>
-	<li><p>Wie haltet ihr es eigentlich mit dem Datenschutz, wie lange wird bei euch was gespeichert?</p>
-		<p>Der Schutz pers&ouml;nlicher Daten ist uns so wichtig, dass wir alles, was dem zuwiderlaufen k&ouml;nnte, gar nicht erst machen: es gibt bei uns keine Cookies oder Session-IDs oder irgendetwas, was so etwas erm&ouml;glichen w&uuml;rde.</p>
-		<p>Was es bei jeder Suchmaschine gibt (und wogegen auch wir nichts tun k&ouml;nnen), das sind die bei den Abfragen mitgesendeten IP-Adressen. Auch dies k&ouml;nnen personenbezogene Daten sein. Darum speichern wir auch diese Adressen NICHT - und zwar &uuml;berhaupt nicht, auch nicht tageweise, und schon gar nicht f&uuml;r Jahre. Sondern die IP-Adressen werden bereits, w&auml;hrend Ihre Suche noch l&auml;uft, anonymisiert. Auch die anonymisierten IP-Adressen speichern wir NICHT, denn es ist sonst nicht auszuschlie&szlig;en, dass sie in der Zukunft mit stark verbesserten Entschl&uuml;sselungsverfahren deanonymisiert werden k&ouml;nnten. Und: IP-Adressen werden in keinem Falle an andere, von MetaGer abgefragte Suchdienste weitergegeben. Nach unseren Erfahrungen kommt der Betrieb von Suchmaschinen sehr gut OHNE Speicherung von IP-Adressen aus.</p>
-		<ul>
-			<li><p>Wenn Sie generell (unabh&auml;ngig von MetaGer) ohne Speicherung Ihrer IP-Adresse im Internet surfen wollen, dann k&ouml;nnen Sie am einfachsten einen der freien und kostenlosen Proxies benutzen; unter http://www.freeproxies.org/list.htm finden sie z.B. eine umfangreiche Liste des FreeProxies.org Netzwerkes oder bei Speedtest.at. Da sich die kostenlosen Proxies &uuml;ber Werbung finanzieren, m&uuml;ssen sie mit st&ouml;renden Werbeeinblendungen rechnen. Wenn Sie das vermeiden wollen, k&ouml;nnen Sie einen der kommerziellen Proxy-Anonymisierungsdienste verwenden: wie z.B. www.anonymizer.com. Hier k&ouml;nnen Sie, nach Tarifen gestaffelt, auch eine h&ouml;here Leistungsf&auml;higkeit erwarten. Bei der Anonymisierung durch Proxies sind Sie gegen&uuml;ber dem Betreiber des Dienstes allerdings nicht anonym - Sie m&uuml;ssen dem Betreiber also vertrauen, dass er Ihre Anonymit&auml;t wahrt.</p></li>
-			<li><p>Wenn Sie Ihre Anonymit&auml;t noch weiter absichern wollen, dann k&ouml;nnen Sie Teilnehmer am Tor Netzwerk werden. MetaGer bietet f&uuml;r den Zugang &uuml;ber das Tor-Netz einen &quot;Tor-hidden&quot;-Zugang an: die Einzelheiten sind <a href="https://metager.de/hilfe/#TORanleitung" target="_blank">hier</a> beschrieben. Da der Umgang mit dem Tor-Netz und die Installation eines Tor-Browsers f&uuml;r viele Nutzer doch eine erhebliche H&uuml;rde darstellen, haben wir eine weitere M&ouml;glichkeit bereit gestellt, auch die MetaGer-Ergebnisseiten anonym zu erreichen: einen Proxyserver</p></li>
-			<li><p>Um ihn zu verwenden, m&uuml;ssen Sie auf der MetaGer-Ergebnisseite nur auf den Link &quot;anonym &ouml;ffnen&quot; rechts neben dem eigentlichen Ergebnislink klicken. Dann wird Ihre Anfrage an die Ziel-Webseite &uuml;ber unseren anonymisierenden Proxy-Server geleitet, und Ihre pers&ouml;nlichen Daten bleiben weiterhin v&ouml;llig gesch&uuml;tzt. Wichtig: wenn Sie ab dieser Stelle den Links auf den Seiten folgen, bleiben Sie durch den Proxy gesch&uuml;tzt. Sie k&ouml;nnen aber oben im Adressfeld keine neue Adresse ansteuern. In diesem Fall verlieren Sie den Schutz. Ob Sie noch gesch&uuml;tzt sind, sehen Sie ebenfalls im Adressfeld. Es zeigt: https://proxy.suma-ev.de/?url=HierStehtDieEigentlicheAdresse.</p></li>
-			<li><p>Selbstverst&auml;ndlich erfolgt der Zugang zu MetaGer immer automatisch nur &uuml;ber das verschl&uuml;sselnde https-Protokoll. Damit sind Ihre Suchabfragen auch auf dem &Uuml;bertragungsweg von Ihrem PC zum MetaGer-Server sicher. Vielleicht noch ein paar Worte zur Anonymit&auml;t im Internet generell. Wir wollen hier nicht die Frage diskutieren, ob &quot;Anonymit&auml;t im Internet&quot; eher ein &quot;moralisches Grundrecht&quot; oder eher ein &quot;&Uuml;bel&quot; ist - f&uuml;r beides gibt es Argumente. Aber Sie sollten wissen, dass Anonymit&auml;t im Internet kein &quot;entweder-oder&quot; Begriff ist. Es gibt (wie im richtigen Leben) immer nur mehr oder weniger Anonymit&auml;t. Bei uns haben Sie mehr davon. Ganz genau wissen wir das nat&uuml;rlich auch nicht, was in anderen Suchmaschinen vor sich geht. Es ist wahrscheinlich aber so, dass die meisten Suchmaschinen IP-Adressen usw. speichern. Denn wenn sie es nicht t&auml;ten, w&uuml;rden sie es gross und deutlich schreiben. Was andere Suchmaschinen dann mit diesen Daten machen, das ist die gr&ouml;&szlig;te Unbekannte. Dass Google diese Daten auswertet ist am Beispiel Flu Trends (Grippewellenvorhersage) augenf&auml;llig. Und so wie &quot;Flu Trends&quot; kann man nat&uuml;rlich auch andere Trends damit vorhersagen (Kaufverhaltenswellen, politische Meinungswellen usw).</p></li>
-		</ul>
-	</li>
-	<li><p>&Uuml;ber welche Wege kann nun eine Zuordnung zu Personen hergestellt werden?</p>
-		<p>Die Zuordnung kann dann hergestellt werden, wenn sich ein Nutzer bei einem Dienst eines Anbieters (z.B. Google-Mail) pers&ouml;nlich angemeldet hat. Dann wird ein Cookie f&uuml;r diesen Anmelder gesetzt. Bei einer sp&auml;teren Suche ist dann dieser Anmelder anhand des Cookies identifiziert. Es sein denn: der (schlaue) Anwender l&ouml;scht den Cookie ;-) Aber die wenigsten tun das. Eine exakte Zuordnung &uuml;ber die IP-Adresse zur Person ist nur mit Hilfe des Providers m&ouml;glich. Dies wird im Normalfall wahrscheinlich nicht geschehen. Aber es gibt weitere Indizien: auch anhand einer wechselnden IP ist ohne Mithilfe des Providers eine ungef&auml;hre geografische Zuordnung m&ouml;glich. Dar&uuml;ber hinaus sendet der Browser weitere Daten, wie z.B. den User-Agent, dessen genaue Version und Arbeitsumgebung, das Betriebssystem und dessen exakte Version und ggf. Patch-Level. Auch mit diesen Daten ist eine Zuordnung zur Person des Anmelders, wenn dessen Daten durch die Anmeldung zu einem Dienst erst einmal bekannt sind, mit hoher Wahrscheinlichkeit m&ouml;glich.</p></li>
-	<li><p>Wie ist MetaGer eigentlich entstanden, wie ist die Geschichte von MetaGer?</p>
-		<p>MetaGer gibt es seit 1996 ... die Einzelheiten der Entstehungsgeschichte kann man hier in einem Interview nachlesen: http://blog.suma-ev.de/node/207.</p></li>
-	<li><p>Darf ich einen Link auf euch setzen? oder Darf ich auf euch verlinken?</p>
-		<p>Ja! Sie d&uuml;rfen tausende von Links auf uns setzen!! Sie d&uuml;rfen das selbst dann, wenn Sie &uuml;ber manche Dinge des Lebens eine andere Meinung haben als wir, selbst dann, wenn Sie nicht die gleiche Partei w&auml;hlen oder eine andere Meinung &uuml;ber die einzig richtige Art der Rechtschreibung haben. Sie d&uuml;rfen Links auf alles von uns setzen, was Sie wollen. Je mehr, je besser!</p></li>
-	<li><p>MetaGer als TOR-hidden-Service</p>
-		<p>Bei MetaGer werden schon seit vielen Jahren die Internet-Adressen der Nutzer anonymisiert und nicht gespeichert. Nichtsdestotrotz sind diese Adressen auf dem MetaGer-Server sichtbar: wenn sich also ein Angreifer auf MetaGer eingehackt haben sollte, dann kann dieser Angreifer Ihre Adressen mitlesen und auf seinen Servern speichern. Nun befindet sich MetaGer zwar in der sicherlich am denkbar besten gegen Hacker gesicherten Umgebung, n&auml;mlich dem Rechenzentrum der Uni Hannover, aber eine 100%ige Sicherheit gegen Hacker - seien es NSA-Staats-Hacker oder andere - gibt es nirgends. Daher haben wir einen neuen Zugang zu MetaGer implementiert, der nach heutigem Stand des Wissens die h&ouml;chste Sicherheitsstufe bietet, bei dem Ihre Internet-Adressen auf dem MetaGer-Server gar nicht erst sichtbar werden:
-Der MetaGer-TOR-hidden-Service - erreichbar &uuml;ber: <a href="https://metager.de/tor/" target="_blank">https://metager.de/tor/</a></p>
-		<p>Ohne in diffizile Details zu verzweigen, hier eine kurze Anleitung, wie Sie MetaGer &uuml;ber diesen Service nutzen k&ouml;nnen (der Klick allein auf den o.g. Link gen&uuml;gt nicht!): 1) Gehen Sie auf die Webseite des TOR-Projektes: und dort klicken auf: &quot;Download Tor&quot;. 2) Den &quot;Tor-Browser&quot; auf Ihrem PC installieren. Das ist wirklich einfach, es muss nichts kompiliert/konfiguriert etc. werden. Dieser Tor-Browser ist eine angepasste Instanz des Firefox. 3) In diesem Tor-Browser die Adresse http://metager.de/tor eingeben 4) Dann auf den Button klicken: &quot;MetaGer hidden &ouml;ffnen&quot; Dann nutzen Sie MetaGer so anonym, wie es nach heutigem Stand der Internet-Technik m&ouml;glich ist. Wenn Sie den &quot;Tor Browser&quot; installiert haben, dann k&ouml;nnen Sie den MetaGer-TOR-hidden-Service auch direkt erreichen: http://b7cxf4dkdsko6ah2.onion/tor/ Wer mehr &uuml;ber den TOR-hidden-Service wissen m&ouml;chte: unter https://www.torproject.org/docs/hidden-services.html.en gibt es eine gute Erkl&auml;rung. In diesen Zeiten der Internet-Total&uuml;berwachung sollten wir tun, was wir k&ouml;nnen, um den &Uuml;berwachern das Spionieren zu erschweren - zumindest aber &quot;Sand ins Getriebe streuen&quot;.</p>
-	</li>
-</ol>
+<p>Nichts von alldem wird hier bei MetaGer gespeichert, aufgehoben oder sonst irgendwie verarbeitet. Weil wir diese Thematik f&uuml;r extrem wichtig halten, haben wir auch M&ouml;glichkeiten geschaffen, die Ihnen helfen k&ouml;nnen, hier ein H&ouml;chstmaß an Sicherheit zu erreichen: den MetaGer-TOR-Hidden-Service und unseren Proxyserver.</p>
+<p>Genauere Informationen dazu finden Sie unter der &Uuml;berschrift &quot;Dienste&quot;.</p>
+<h3>Tor-Hidden-Service</h3>
+<p>Bei MetaGer werden schon seit vielen Jahren die IP-Adressen der Nutzer anonymisiert und nicht gespeichert. Nichtsdestotrotz sind diese Adressen auf dem MetaGer-Server sichtbar: wenn MetaGer also einmal kompromittiert sein sollte, dann k&ouml;nnte dieser Angreifer Ihre Adressen mitlesen und speichern. Um dem h&ouml;chsten Sicherheitsbed&uuml;rfnis entgegenzukommen, unterhalten wir eine MetaGer-Repr&auml;sentanz im Tor-Netzwerk: den MetaGer-TOR-hidden-Service - erreichbar &uuml;ber: <a href="https://metager.de/tor/" target="_blank">https://metager.de/tor/</a>. F&uuml;r die Benutzung ben&ouml;tigen Sie einen speziellen Browser, den Sie etwa auf <a href="https://www.torproject.org/" target="_blank">https://www.torproject.org/</a> herunter laden k&ouml;nnen.</p>
+<p>MetaGer erreichen Sie in diesem Browser dann unter: http://b7cxf4dkdsko6ah2.onion/tor/.</p>
+<h3>MetaGer Proxyserver</h3>
+<p>Um ihn zu verwenden, m&uuml;ssen Sie auf der MetaGer-Ergebnisseite nur auf den Link "anonym &ouml;ffnen" rechts neben dem Ergebnislink klicken. Dann wird Ihre Anfrage an die Zielwebseite &uuml;ber unseren anonymisierenden Proxy-Server geleitet und Ihre pers&ouml;nlichen Daten bleiben weiterhin v&ouml;llig gesch&uuml;tzt. Wichtig: wenn Sie ab dieser Stelle den Links auf den Seiten folgen, bleiben Sie durch den Proxy gesch&uuml;tzt. Sie k&ouml;nnen aber oben im Adressfeld keine neue Adresse ansteuern. In diesem Fall verlieren Sie den Schutz. Ob Sie noch gesch&uuml;tzt sind, sehen Sie ebenfalls im Adressfeld. Es zeigt: https://proxy.suma-ev.de/?url=hier steht die eigentlich Adresse.</p>
+<h2 id="faq">FAQ</h2>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Was ist MetaGer?</h3>
+  </div>
+  <div class="panel-body">
+    <p>MetaGer ist eine Suchmaschine, die Suchdienste parallel nach den von Ihnen eingegebenen Suchworten absucht und alle Ergebnisse zusammenfasst. MetaGer arbeitet die Ergebnisse sinnvoll auf. Dabei werden etwa (m&ouml;glichst) alle doppelten Treffer (Doubletten) zu einem zusammengefasst. Eine vollst&auml;ndige Erkennung von Doubletten ist allerdings unm&ouml;glich. So etwas nennt man eine Meta-Suchmaschine. Wenn man also sinnvoll suchen will, dann muss man etliche Suchmaschinen nacheinander "von Hand" absuchen und alle Ergebnisse vergleichen und zusammenf&uuml;hren. Diese Arbeit kann einem ein Automat - die Metasuchmaschine – abnehmen. Dazu kommt der h&ouml;here Abdeckungsgrad, denn nicht jede Suchmaschine kennt das ganze Internet. N&auml;heres zu Metasuchmaschinen finden Sie bei <a href="https://de.wikipedia.org/wiki/Metasuchmaschine" target="_blank">Wikipedia</a>. Vielleicht gen&uuml;gen Ihnen die Ergebnisse, die Ihnen MetaGer pr&auml;sentiert, vielleicht m&ouml;chten Sie mit einer einzelnen Suchmaschine nochmals suchen. In der Ergebnisliste sehen Sie an jedem Ergebnis, woher es kam und k&ouml;nnen auch direkt klicken. Viele weitere Suchmaschinen finden Sie zum Beispiel hier: <a href="http://www.klug-suchen.de/" target="_blank">klug-suchen.de</a>.</p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Welche Suchdienste sucht MetaGer ab?</h3>
+  </div>
+  <div class="panel-body">
+    <p>Sie finden die Liste unter dem Men&uuml;punkt &quot;anpassen&quot; &uuml;ber dem Suchfeld. Alle, die Sie selbst nicht ausgeschaltet haben, werden abgesucht.</p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Warum gibt es keinen Schalter "Suche &uuml;ber alle Suchdienste"?</h3>
+  </div>
+  <div class="panel-body">
+    <p>Im Wesentlichen liegt das daran, dass sich die Anforderungen manchmal widersprechen. Es macht z.B. keinen Sinn, auf der Suche nach wissenschaftlichen Ergebnissen auch die Produktsuchmaschinen einzuschalten und umgekehrt. Diese Ergebnisse eignen sich nicht zum Vermischen.</p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Warum fragt Ihr den Suchdienst XY [nicht ab | nicht mehr ab | doch ab]?</h3>
+  </div>
+  <div class="panel-body">
+    <p>Wenn wir einen Suchdienst nicht mehr abfragen, den wir fr&uuml;her dabei hatten, dann hat das entweder technische, konzeptionelle oder &quot;politische Gr&uuml;nde&quot; (die Verbindung dorthin ist zu schwach, der dortige Rechner zu klein, die Ergebnisse passen nicht richtig, dieser Suchdienst bietet z.B. keine Option f&uuml;r eine deutschsprachige Suche,  dieser Suchdienstbetreiber "mag" uns nicht -was wir selbstverst&auml;ndlich respektieren m&uuml;ssen).</p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Ein Suchdienst antwortet nicht mehr</h3>
+  </div>
+  <div class="panel-body">
+    <p>Einer der von MetaGer abgefragten Suchdienste (der sonst geantwortet hat), findet auf einmal nichts mehr, auch nicht Begriffe, zu denen er bisher immer etwas gefunden hat - was ist da los? Vermutlich hat dieser Suchdienst sein Ausgabeformat ge&auml;ndert, und bringt damit unsere Programme durcheinander. In diesem Falle bitten wir Sie, uns dann sofort eine Mail zu senden, damit wir etwas dagegen tun k&ouml;nnen.</p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Fragw&uuml;rdige Inhalte</h3>
+  </div>
+  <div class="panel-body">
+    <p>Ich habe "Treffer" erhalten, die finde ich nicht nur &auml;rgerlich, sondern die enthalten meiner Meinung nach illegale Inhalte!</p>
+	<p>Wenn Sie im Internet etwas finden, das Sie f&uuml;r illegal oder jugendgef&auml;hrdend halten, dann k&ouml;nnen Sie sich per Mail an hotline@jugendschutz.net wenden oder Sie gehen auf http://www.jugendschutz.net/ und f&uuml;llen das dort zu findende Beschwerdeformular aus. Sinnvoll ist ein kurzer Hinweis, was Sie konkret f&uuml;r unzul&auml;ssig halten und wie Sie auf dieses Angebot gestoßen sind. Direkt an uns k&ouml;nnen Sie fragw&uuml;rdige Inhalte auch melden. Schreiben Sie dazu eine Mail an unseren Jugendschutzbeauftragten (<a href="mailto:jugendschutz@metager.de" target="_blank">jugendschutz@metager.de</a>).</p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Kann ich MetaGer in meine eigene Homepage einbauen?</h3>
+  </div>
+  <div class="panel-body">
+    <p>Kein Problem! Gerne! Genauere Informationen dazu finden Sie unter der &Uuml;berschrift &quot;Dienste&quot;, unter dem Punkt &quot;Widget&quot;.</p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Wo kann ich bei MetaGer meine Homepage/URL/etc. Anmelden ?</h3>
+  </div>
+  <div class="panel-body">
+    <p>Gar nicht. MetaGer ist eine MetaSuchmaschine. Sie sucht nicht selber, sondern l&auml;sst andere Suchdienste suchen. Wenn Sie Ihre eigenen WWW-Seiten den Suchmaschinen bekannt geben wollen, dann m&uuml;ssen Sie die Suchmaschinen einzeln aufsuchen, bei denen Sie Ihre Seiten anmelden wollen.</p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Wie genau funktioniert das Ranking bei MetaGer?</h3>
+  </div>
+  <div class="panel-body">
+    <p>Dazu machen wir aus nahe liegenden Gr&uuml;nden keine Angaben</p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Mit meinem XYZ-Browser und dem XYZ-Betriebssystem kann ich MetaGer nicht abfragen. Was tun?</h3>
+  </div>
+  <div class="panel-body">
+    <p>Versuchen Sie bitte zuerst, das aktuelle Plugin zu installieren. Zum Installieren einfach auf den Link direkt unter dem Suchfeld klicken. Dort sollte Ihr Browser schon erkannt worden sein. Wenn Sie dann noch Probleme haben sollten, wenden Sie sich bitte an uns: office@suma-ev.de</p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Wo habt ihr eigentlich all' die klugen Spr&uuml;che eures "Spr&uuml;cheklopfers" her?</h3>
+  </div>
+  <div class="panel-body">
+    <p>Sie sind aus Quellen im Internet zusammengesucht. Den gr&ouml;ßten Teil hatte uns netterweise Alexander Hammer zur Verf&uuml;gung gestellt. Sch&ouml;nen Dank! Nebenbei bemerkt: Wir teilen keineswegs die inhaltliche Meinung, die in jedem Spruch zum Ausdruck kommt! Spr&uuml;che sollen und m&uuml;ssen kontroverses darstellen. Unter &quot;anpassen&quot; k&ouml;nnen Sie sie ausschalten.</p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Wie kann ich die Anzeige meiner vorherigen Suchen l&ouml;schen?</h3>
+  </div>
+  <div class="panel-body">
+    <p>Die Suchvorschl&auml;ge liefert Ihnen Ihr Webbrowser und dort k&ouml;nnen Sie sie auch ausschalten. Meist geht das &uuml;ber die Chronik.</p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Wie haltet ihr es eigentlich mit dem Datenschutz, wie lange wird bei euch was gespeichert?</h3>
+  </div>
+  <div class="panel-body">
+    <p>Der Schutz pers&ouml;nlicher Daten ist uns so wichtig, dass wir alles, was dem zuwiderlaufen k&ouml;nnte, gar nicht erst machen: es gibt bei uns keine Cookies oder Session-IDs oder irgendetwas, was so etwas erm&ouml;glichen w&uuml;rde. Siehe auch: https://metager.de/datenschutz/</p>
+	<p>Was es bei jeder Suchmaschine gibt (und wogegen auch wir nichts tun k&ouml;nnen), das sind die bei den Abfragen mitgesendeten IP-Adressen. Auch dies k&ouml;nnen personenbezogene Daten sein. Darum speichern wir auch diese Adressen NICHT - und zwar &uuml;berhaupt nicht, auch nicht tageweise, und schon gar nicht f&uuml;r Jahre. Die IP-Adressen werden bereits w&auml;hrend Ihre Suche noch l&auml;uft, anonymisiert. Auch die anonymisierten IP-Adressen speichern wir NICHT und geben sie auch nicht an die von MetaGer abgefragten Suchdienste weiter. Nach unseren Erfahrungen kommt der Betrieb von Suchmaschinen sehr gut OHNE Speicherung von IP-Adressen aus. Was tun wir zus&auml;tzlich?</p>
+	<p>Wenn Sie generell (unabh&auml;ngig von MetaGer) ohne Speicherung Ihrer IP-Adresse im Internet surfen wollen, dann k&ouml;nnen Sie am einfachsten einen der freien und werbefinanzierten Proxies benutzen, einen kommerziellen anmieten, oder den f&uuml;r Sie kostenlosen MetaGer-Proxy verwenden. Genauere Informationen dazu finden Sie unter der &Uuml;berschrift &quot;Dienste&quot;.</p>
+	<p>Wenn Sie Ihre Anonymit&auml;t noch weiter absichern wollen, dann k&ouml;nnen Sie Teilnehmer am Tor-Netzwerk werden. Genauere Informationen dazu finden Sie unter der &Uuml;berschrift &quot;Dienste&quot;.</p>
+	<p>Selbstverst&auml;ndlich erfolgt der Zugang zu MetaGer immer automatisch nur &uuml;ber das verschl&uuml;sselnde https-Protokoll. Damit sind Ihre Suchabfragen auch auf dem &Uuml;bertragungsweg von Ihrem PC zum MetaGer-Server sicher.</p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">&Uuml;ber welche Wege kann eine Zuordnung zu Personen hergestellt werden?</h3>
+  </div>
+  <div class="panel-body">
+    <p>Die Zuordnung kann dann hergestellt werden, wenn sich ein Nutzer bei einem Dienst eines Anbieters (z.B. Google-Mail) pers&ouml;nlich angemeldet hat. Dann wird ein Cookie f&uuml;r diesen Anmelder gesetzt. Bei einer sp&auml;teren Suche ist dann dieser Anmelder anhand des Cookies identifiziert. Es sein denn: der (schlaue) Anwender l&ouml;scht den Cookie ;-) Aber die wenigsten tun das. Eine exakte Zuordnung &uuml;ber die IP-Adresse zur Person ist nur mit Hilfe des Providers m&ouml;glich. Dies wird im Normalfall wahrscheinlich nicht geschehen. Aber es gibt weitere Indizien: auch anhand einer wechselnden IP ist ohne Mithilfe des Providers eine ungef&auml;hre geografische Zuordnung m&ouml;glich. Dar&uuml;ber hinaus sendet der Browser weitere Daten, wie z.B. den User-Agent, dessen genaue Version und Arbeitsumgebung, das Betriebssystem und dessen exakte Version und ggf. Patch-Level. Auch mit diesen Daten ist eine Zuordnung zur Person des Anmelders, wenn dessen Daten durch die Anmeldung zu einem Dienst erst einmal bekannt sind, mit hoher Wahrscheinlichkeit m&ouml;glich.</p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Wie ist MetaGer eigentlich entstanden, wie ist die Geschichte von MetaGer?</h3>
+  </div>
+  <div class="panel-body">
+    <p>MetaGer gibt es seit 1996 ... die Einzelheiten der Entstehungsgeschichte kann man hier in einem Interview nachlesen: http://blog.suma-ev.de/node/207.</p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Darf ich einen Link auf euch setzen? oder Darf ich auf euch verlinken ?</h3>
+  </div>
+  <div class="panel-body">
+    <p>Ja! Sie d&uuml;rfen 1000-sende von Links auf uns setzen!! Sie d&uuml;rfen das selbst dann, wenn Sie &uuml;ber manche Dinge des Lebens eine andere Meinung haben als wir, selbst dann, wenn Sie nicht die gleiche Partei w&auml;hlen oder eine andere Meinung &uuml;ber die einzig richtige Art der Rechtschreibung haben. Sie d&uuml;rfen Links auf alles von uns setzen, was Sie wollen. Je mehr, je besser! Noch lieber w&auml;re es uns nat&uuml;rlich, wenn Sie (vielleicht im Rahmen der Verbesserung Ihrer Webseiten) unser Widget nutzen w&uuml;rden. Bitte schauen Sie unter dem Punkt &quot;Dienste&quot; nach.</p>
+  </div>
+</div>
 @endsection

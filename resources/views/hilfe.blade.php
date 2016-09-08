@@ -3,122 +3,39 @@
 @section('title', $title )
 
 @section('content')
-<h1>{{ trans('hilfe.head.1') }}</h1>
-<p>{{ trans('hilfe.head.2') }}</p>
-<h2>{{ trans('hilfe.help.1') }}</h2>
-<h3>{{ trans('hilfe.help.2') }}</h3>
+<h1>MetaGer - Hilfe</h1>
+<h2>Einstellungen</h2>
+<h3>Allgemein</h3>
 <ul>
-	<li>{{ trans('hilfe.help.3') }}</li>
-	<li>{{ trans('hilfe.help.4') }}</li>
-	<li>{{ trans('hilfe.help.5') }}</li>
+	<li>Alle Einstellungen finden Sie, indem Sie auf den Suchfokus &quot;anpassen&quot; klicken</li>
+	<li>Links neben dem Eingabefeld finden Sie den Farbtropfen, der Ihnen eine Anpassung der Farben gestattet.</li>
+	<li>Ein Plugin f&uuml;r die allermeisten Browser finden Sie leicht &uuml;ber den Link gleich unter dem Suchfeld, bei dem Ihr Browser bereits voreingestellt sein sollte.</li>
 </ul>
-<h2>{{ trans('hilfe.help.6') }}</h2>
-<h3>{{ trans('hilfe.help.7') }}</h3>
+<h3>Auswahl des Suchfokus</h3>
+<p>Die Voreinstellungen von MetaGer sind so, dass sie f&uuml;r m&ouml;glichst viele Nutzer die m&ouml;glichst besten Ergebnisse liefern. Sie k&ouml;nnen aus MetaGer jedoch wesentlich mehr und treffendere Ergebnisse herausholen, wenn Sie vor Ihrer Suche einen Augenblick &uuml;berlegen, aus welchem Bereich die von Ihnen gesuchten Ergebnisse kommen sollen.</p>
+<h4>Beispiel: Eine Suche mit Fokus auf Nachrichten</h4>
 <ul>
-	<li>{{ trans('hilfe.help.8') }}</li>
+	<li>Klicken Sie auf der Startseite auf &ldquo;Nachrichten&ldquo;.</li>
+	<li>F&uuml;hren Sie Ihre Suche normal &uuml;ber das Suchfeld durch.</li>
+	<li>Sie sehen je nach ausgew&auml;hltem Fokus angepasste Ergebnisse.</li>
+	<li>Falls Ihnen die angebotenen Einstellungen nicht zusagen, k&ouml;nnen Sie sich unter &ldquo;anpassen&ldquo; einen eigenen Fokus zusammenstellen.</li>
 </ul>
-<h4>{{ trans('hilfe.help.9') }}</h4>
+<h3>Die angepassten Einstellungen als Standard setzen</h3>
+<p>Falls Sie keinen unserer angebotenen Foki benutzen, sodern einen selbst zusammengestellten, m&uuml;ssen Sie, um diesen dauerhaft verwenden zu k&ouml;nnen, Ihre Einstellungen bei Ihnen im Browser speichern. Daf&uuml;r haben Sie unten auf der Seite zwei Kn&ouml;pfe zur Verf&uuml;gung: Der eine generiert eine Variante unser Startseite in der Ihre Einstellungen hinterlegt sind, solange Sie über diese Seite suchen. Sie k&ouml;nnen diese Startseite als Lezeseichen speichern. Der andere Knopf speichert die Einstellungen in Ihrem Browser im so gennanten &ldquo;Local Storage&ldquo;. Daf&uuml;r darf bei Ihnen Javscript nicht ausgeschaltet sein.</p>
+<h2>Sucheingabe</h2>
+<h3>Stoppworte</h3>
 <ul>
-	<li>{{ trans('hilfe.help.10') }}</li>
-	<li>{{ trans('hilfe.help.11') }}</li>
-	<li>{{ trans('hilfe.help.12') }}</li>
-	<li>{{ trans('hilfe.help.13') }}</li>
+	<li>Wenn Sie unter den MetaGer-Suchergebnissen solche ausschlie&szlig;en wollen, in denen bestimmte Worte (Ausschlussworte / Stopworte) vorkommen, dann erreichen Sie dies, indem Sie diese Worte mit einem &quot;-&quot; versehen.</li>
+	<li>Beispiel: Sie suchen ein neues Auto, aber auf keinen Fall einen BMW. Ihre Eingabe lautet also: <div class="well well-sm">auto neu -bmw</div></li>
 </ul>
-<h3>{{ trans('hilfe.help.14') }}</h3>
-<p>{{ trans('hilfe.help.15') }}</p>
-<h2>{{ trans('hilfe.help.16') }}</h2>
-<h3>{{ trans('hilfe.help.17') }}</h3>
+<h3>Mehrwortsuche</h3>
+<p>Bei einer Mehrwortsuche werden als Voreinstellung diejenigen Dokumente gesucht, in denen alle Worte vorkommen. Die Suche nach mehreren Begriffen zeigt ann&auml;hernd gleiche Ergebnisse mit oder ohne Verwendung von Anf&uuml;hrungszeichen. Wenn Sie jedoch zum Beispiel ein l&auml;ngeres Zitat oder so etwas suchen, sollten Sie Anf&uuml;hrungszeichen verwenden.</p>
 <ul>
-	<li>{{ trans('hilfe.help.18') }}</li>
-	<li>{{ trans('hilfe.help.19') }}</li>
+	<li>Beispiel: die Suche nach <div class="well well-sm">&quot;in den &ouml;den Fensterh&ouml;hlen&quot;</div> liefert viele Ergebnisse, aber spannend (und genauer) wird es bei der Suche <div class="well well-sm">Schiller &quot;in den &ouml;den Fensterh&ouml;hlen&quot;</div></li>
 </ul>
-<h3>{{ trans('hilfe.help.20') }}</h3>
-<p>{{ trans('hilfe.help.21') }}</p>
+<h3>Gro&szlig;-/ Kleinschreibung</h3>
+<p>Gro&szlig;- und Kleinschreibung wird bei der Suche nicht unterschieden, es handelt sich um eine rein inhaltliche Suche.</p>
 <ul>
-	<li>{{ trans('hilfe.help.22') }}</li>
+	<li>Beispiel: die Suche nach <div class="well well-sm">gro&szlig;schreibung</div> liefert also genau die gleichen Ergebnisse wie <div class="well well-sm">GRO&szlig;SCHREIBUNG</div></li>
 </ul>
-<h3>{{ trans('hilfe.help.23') }}</h3>
-<p>{{ trans('hilfe.help.24') }}</p>
-<h3>{{ trans('hilfe.help.25') }}</h3>
-<p>{{ trans('hilfe.help.26') }} <a href="https://metager.de/klassik/asso/" target="_blank">{{ trans('hilfe.help.27') }}</a>{{ trans('hilfe.help.28') }}</p>
-<p>{{ trans('hilfe.help.29') }}</p>
-<p>{{ trans('hilfe.help.30') }} <a href="https://metager.de/kontakt/" target="_blank">{{ trans('hilfe.help.31') }}</a> {{ trans('hilfe.help.32') }}</p>
-<h2>{{ trans('hilfe.help.33') }}</h2>
-<h3>{{ trans('hilfe.help.34') }}</h3>
-<p>{{ trans('hilfe.help.35') }}</p>
-<p>{{ trans('hilfe.help.36') }} <a class="collapsed" href="#faq">MetaGer FAQ</a> {{ trans('hilfe.help.37') }} <a href="https://metager.de/kontakt/" target="_blank">Mail.</a></p>
-<h1 id="faq">{{ trans('hilfe.faq.1') }}</h1>
-<ol>
-	<li><p>{{ trans('hilfe.faq.2') }}</p>
-		<p>{{ trans('hilfe.faq.3') }}</p></li>
-		<li><p>{{ trans('hilfe.faq.4') }}</p>
-		<p>{{ trans('hilfe.faq.5') }}</p></li>
-	<li><p>{{ trans('hilfe.faq.6') }}</p>
-		<p>{{ trans('hilfe.faq.7') }} <a href="https://de.wikipedia.org/wiki/Metasuchmaschine" target="_blank">Wikipedia</a>, {{ trans('hilfe.faq.8') }}</p></li>
-	<li>{{ trans('hilfe.faq.9') }}</li>
-	<ul>
-		<li>{{ trans('hilfe.faq.10') }}</li>
-		<li>{{ trans('hilfe.faq.11') }} <a href="http://www.klug-suchen.de/" target="_blank">klug-suchen.de.</a></li>
-	</ul>
-	<li><p>{{ trans('hilfe.faq.12') }}</p>
-		<p>{{ trans('hilfe.faq.13') }}</p></li>
-	<li>{{ trans('hilfe.faq.14') }}</li>
-	<p>{{ trans('hilfe.faq.15') }}</p>
-	<ul>
-		<li>{{ trans('hilfe.faq.16') }}</li>
-		<li>{{ trans('hilfe.faq.17') }}</li>
-	</ul>
-	<li><p>{{ trans('hilfe.faq.18') }}</p>
-		<p>{{ trans('hilfe.faq.19') }}</p></li>
-	<li><p>{{ trans('hilfe.faq.20') }}</p>
-		<p>{{ trans('hilfe.faq.21') }}</p></li>
-	<li><p>{{ trans('hilfe.faq.22') }}</p>
-	 <p>{{ trans('hilfe.faq.23') }}</p></li>
-	<li>
-		<p>{{ trans('hilfe.faq.24') }}</p>
-		<p>{{ trans('hilfe.faq.25') }}</p></li>
-	<li><p>{{ trans('hilfe.faq.26') }}</p></li>
-	<ul>
-		<li>{{ trans('hilfe.faq.27') }}</li>
-		<li>{{ trans('hilfe.faq.28') }}</li>
-		<li>{{ trans('hilfe.faq.29') }}</li>
-	</ul>
-	<p>{{ trans('hilfe.faq.30') }} <a href="mailto:jugendschutz@metager.de" class="link">{{ trans('hilfe.faq.31') }}</a></p>
-	<li><p>{{ trans('hilfe.faq.32') }}</p>
-			<p>{{ trans('hilfe.faq.33') }}</p></li>
-	<li><p>{{ trans('hilfe.faq.34') }}</p>
-		<p>{{ trans('hilfe.faq.35') }}</p></li>
-	<li><p>{{ trans('hilfe.faq.36') }}</p>
-		<p>{{ trans('hilfe.faq.37') }}</p></li>
-	<li><p>{{ trans('hilfe.faq.38') }}</p>
-		<p>{{ trans('hilfe.faq.39') }}</p></li>
-	<li><p>{{ trans('hilfe.faq.40') }}</p>
-		<p>{{ trans('hilfe.faq.41') }}</p></li>
-	<li><p>{{ trans('hilfe.faq.42') }}</p>
-		<p>{{ trans('hilfe.faq.43') }}</p></li>
-	<li><p>{{ trans('hilfe.faq.44') }}</p>
-		<p>{{ trans('hilfe.faq.45') }}</p>
-		<p>{{ trans('hilfe.faq.46') }}</p>
-		<p>{{ trans('hilfe.faq.47') }}</p></li>
-	<li><p>{{ trans('hilfe.faq.48') }}</p>
-		<p>{{ trans('hilfe.faq.49') }}</p>
-		<p>{{ trans('hilfe.faq.50') }}</p>
-		<ul>
-			<li><p>{{ trans('hilfe.faq.51') }}</p></li>
-			<li><p>{{ trans('hilfe.faq.52') }} <a href="https://metager.de/hilfe/#TORanleitung" target="_blank">{{ trans('hilfe.faq.53') }}</a> {{ trans('hilfe.faq.54') }}</p></li>
-			<li><p>{{ trans('hilfe.faq.55') }}</p></li>
-			<li><p>{{ trans('hilfe.faq.56') }}</p></li>
-		</ul>
-	</li>
-	<li><p>{{ trans('hilfe.faq.57') }}</p>
-		<p>{{ trans('hilfe.faq.58') }}</p></li>
-	<li><p>{{ trans('hilfe.faq.59') }}</p>
-		<p>{{ trans('hilfe.faq.60') }}</p></li>
-	<li><p>{{ trans('hilfe.faq.61') }}</p>
-		<p>{{ trans('hilfe.faq.62') }}</p></li>
-	<li><p>{{ trans('hilfe.faq.63') }}</p>
-		<p>{{ trans('hilfe.faq.64') }} <a href="https://metager.de/tor/" target="_blank">https://metager.de/tor/</a></p>
-		<p>{{ trans('hilfe.faq.65') }}</p>
-	</li>
-</ol>
 @endsection

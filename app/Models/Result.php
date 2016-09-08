@@ -40,8 +40,6 @@ class Result
         $this->rank           = 0;
         $this->partnershop    = $partnershop;
         $this->image          = $image;
-
-        #die($this->anzeigeLink . "\r\n" . $this->strippedHost);
     }
 
     public function rank(\App\MetaGer $metager)

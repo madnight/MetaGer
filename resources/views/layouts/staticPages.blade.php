@@ -100,7 +100,7 @@
 			@if( App::isLocale('de') )
 			<div class="mg-panel container noprint" id="spendenaufruf" style="margin-bottom:-6%;max-height:50px;text-align:center;padding:0px;margin-top:0px">
 					<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/spendenaufruf") }}">
-					<img src="/img/aufruf.png" style="max-width:100%;max-height:50px;" alt="Spendenaufruf für die unabhängige, nicht-kommerzielle Internet-Suche" >
+					<img src="/img/danke.png" style="max-width:100%;max-height:50px;" alt="Spendenaufruf für die unabhängige, nicht-kommerzielle Internet-Suche" >
 					</a>
 			</div>
 			@endif

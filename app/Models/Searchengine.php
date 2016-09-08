@@ -14,30 +14,46 @@ abstract class Searchengine
     use DispatchesJobs;
 
     protected $ch; # Curl Handle zum erhalten der Ergebnisse
-    public $fp;
-    protected $getString = "";
-    protected $engine;
-    protected $counter      = 0;
-    protected $socketNumber = null;
-    public $enabled         = true;
-    public $results         = [];
-    public $ads             = [];
-    public $write_time      = 0;
-    public $connection_time = 0;
-    public $loaded          = false;
-    public $cached          = false;
+    protected $getString = ""; # Der String für die Get-Anfrage
+    protected $engine; # Die ursprüngliche Engine XML
+    public $enabled = true; # true, wenn die Suchmaschine nicht explizit disabled ist
+    public $results = []; # Die geladenen Ergebnisse
+    public $ads     = []; # Die geladenen Werbungen
+    public $loaded  = false; # wahr, sobald die Ergebnisse geladen wurden
+    public $cached  = false;
+
+    public $ip; # Die IP aus der metager
+    public $gefVon; # Der HTML-Code für die Verlinkung des Suchanbieters
+    public $uses; # Die Anzahl der Nutzungen dieser Suchmaschine
+    public $homepage; # Die Homepage dieser Suchmaschine
+    public $name; # Der Name dieser Suchmaschine
+    public $disabled; # Ob diese Suchmaschine ausgeschaltet ist
+    public $useragent; # Der HTTP Useragent
+    public $startTime; # Die Zeit der Erstellung dieser Suchmaschine
+    public $hash; # Der Hash-Wert dieser Suchmaschine
+
+    public $fp; # Wird für Artefakte benötigt
+    protected $socketNumber = null; # Wird für Artefakte benötigt
+    protected $counter      = 0; # Wird eventuell für Artefakte benötigt
+    public $write_time      = 0; # Wird eventuell für Artefakte benötigt
+    public $connection_time = 0; # Wird eventuell für Artefakte benötigt
 
     public function __construct(\SimpleXMLElement $engine, MetaGer $metager)
     {
+        # Versucht möglichst viele attribute aus dem engine XML zu laden
         foreach ($engine->attributes() as $key => $value) {
             $this->$key = $value->__toString();
         }
+
+        # Standardhomepage metager.de
         if (!isset($this->homepage)) {
             $this->homepage = "https://metager.de";
         }
 
+        # Speichert die XML der Engine
         $this->engine = $engine->asXML();
 
+        # Cache Standarddauer 60
         if (!isset($this->cacheDuration)) {
             $this->cacheDuration = 60;
         }
@@ -51,12 +67,12 @@ abstract class Searchengine
             return;
         }
 
-        # User-Agent definieren:
         $this->useragent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1";
         $this->ip        = $metager->getIp();
         $this->gefVon    = "<a href=\"" . $this->homepage . "\" target=\"_blank\">" . $this->displayName . "</a>";
         $this->startTime = microtime();
 
+        # Suchstring generieren
         $q = "";
         if (isset($this->hasSiteSearch) && $this->hasSiteSearch === "1") {
             if (strlen($metager->getSite()) === 0) {
@@ -76,26 +92,30 @@ abstract class Searchengine
 
     abstract public function loadResults($result);
 
+    # ???
     public function getNext(MetaGer $metager, $result)
     {
 
     }
 
+    # Prüft, ob die Suche bereits gecached ist, ansonsted wird sie als Job dispatched
     public function startSearch(\App\MetaGer $metager)
     {
         if ($this->canCache && Cache::has($this->hash)) {
             $this->cached = true;
             $this->retrieveResults($metager);
         } else {
-            # Die Anfragen an die Suchmaschinen werden nun von der Laravel-Queue bearbeitet:
-            # Hinweis: solange in der .env der QUEUE_DRIVER auf "sync" gestellt ist, werden die Abfragen
-            # nacheinander abgeschickt.
-            # Sollen diese Parallel verarbeitet werden, muss ein anderer QUEUE_DRIVER verwendet werden.
-            # siehe auch: https://laravel.com/docs/5.2/queues
+            /* Die Anfragen an die Suchmaschinen werden nun von der Laravel-Queue bearbeitet:
+             *  Hinweis: solange in der .env der QUEUE_DRIVER auf "sync" gestellt ist, werden die Abfragen
+             *  nacheinander abgeschickt.
+             *  Sollen diese Parallel verarbeitet werden, muss ein anderer QUEUE_DRIVER verwendet werden.
+             *  siehe auch: https://laravel.com/docs/5.2/queues
+             */
             $this->dispatch(new Search($this->resultHash, $this->host, $this->port, $this->name, $this->getString, $this->useragent));
         }
     }
 
+    # Ruft die Ranking-Funktion aller Ergebnisse auf.
     public function rank(\App\MetaGer $metager)
     {
         foreach ($this->results as $result) {
@@ -103,6 +123,7 @@ abstract class Searchengine
         }
     }
 
+    # Magic ???
     private function setStatistic($key, $val)
     {
 
@@ -112,6 +133,7 @@ abstract class Searchengine
         $this->$key = $newVal;
     }
 
+    # Entfernt wenn gesetzt das disabled="1" für diese Suchmaschine aus der sumas.xml
     public function enable($sumaFile, $message)
     {
         Log::info($message);
@@ -125,6 +147,7 @@ abstract class Searchengine
         fclose($this->fp);
     }
 
+    # Öffnet einen neuen Socket für diese Engine
     public function getSocket()
     {
         $number = Redis::hget('search.' . $this->hash, $this->name);
@@ -136,6 +159,7 @@ abstract class Searchengine
         }
     }
 
+    # Fragt die Ergebnisse von Redis ab und lädt Sie
     public function retrieveResults(MetaGer $metager)
     {
         if ($this->loaded) {
@@ -169,6 +193,7 @@ abstract class Searchengine
         Redis::del($this->host . "." . $this->socketNumber);
     }
 
+    # Erstellt den für die Get-Anfrage genutzten Host-Link
     protected function getHost()
     {
         $return = "";
@@ -180,6 +205,88 @@ abstract class Searchengine
         $return .= $this->host;
         return $return;
     }
+
+    # Erstellt den für die Get-Anfrage genutzten String
+    private function generateGetString($query, $url, $language, $category)
+    {
+        $getString = "";
+
+        # Skript:
+        if (strlen($this->skript) > 0) {
+            $getString .= $this->skript;
+        } else {
+            $getString .= "/";
+        }
+
+        # FormData:
+        if (strlen($this->formData) > 0) {
+            $getString .= "?" . $this->formData;
+        }
+
+        # Wir müssen noch einige Platzhalter in dem GET-String ersetzen:
+        # Useragent
+        if (strpos($getString, "<<USERAGENT>>")) {
+            $getString = str_replace("<<USERAGENT>>", $this->urlEncode($this->useragent), $getString);
+        }
+
+        # Query
+        if (strpos($getString, "<<QUERY>>")) {
+            $getString = str_replace("<<QUERY>>", $this->urlEncode($query), $getString);
+        }
+
+        # IP
+        if (strpos($getString, "<<IP>>")) {
+            $getString = str_replace("<<IP>>", $this->urlEncode($this->ip), $getString);
+        }
+
+        # Language
+        if (strpos($getString, "<<LANGUAGE>>")) {
+            $getString = str_replace("<<LANGUAGE>>", $this->urlEncode($language), $getString);
+        }
+
+        # Category
+        if (strpos($getString, "<<CATEGORY>>")) {
+            $getString = str_replace("<<CATEGORY>>", $this->urlEncode($category), $getString);
+        }
+
+        # Affildata
+        if (strpos($getString, "<<AFFILDATA>>")) {
+            $getString = str_replace("<<AFFILDATA>>", $this->getOvertureAffilData($url), $getString);
+        }
+        return $getString;
+    }
+
+    # Wandelt einen String nach aktuell gesetztem inputEncoding dieser Searchengine in URL-Format um
+    protected function urlEncode($string)
+    {
+        if (isset($this->inputEncoding)) {
+            return urlencode(mb_convert_encoding($string, $this->inputEncoding));
+        } else {
+            return urlencode($string);
+        }
+    }
+
+    # Liefert Sonderdaten für Yahoo
+    private function getOvertureAffilData($url)
+    {
+        $affil_data = 'ip=' . $this->ip;
+        $affil_data .= '&ua=' . $this->useragent;
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $affil_data .= '&xfip=' . $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        $affilDataValue = $this->urlEncode($affil_data);
+        # Wir benötigen die ServeUrl:
+        $serveUrl = $this->urlEncode($url);
+
+        return "&affilData=" . $affilDataValue . "&serveUrl=" . $serveUrl;
+    }
+
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    # Artefaktmethoden
 
     public function getCurlInfo()
     {
@@ -199,76 +306,5 @@ abstract class Searchengine
     public function removeCurlHandle($mh)
     {
         curl_multi_remove_handle($mh, $this->ch);
-    }
-
-    private function generateGetString($query, $url, $language, $category)
-    {
-        $getString = "";
-
-        # Skript:
-        if (strlen($this->skript) > 0) {
-            $getString .= $this->skript;
-        } else {
-            $getString .= "/";
-        }
-
-        # FormData:
-        if (strlen($this->formData) > 0) {
-            $getString .= "?" . $this->formData;
-        }
-
-        # Wir müssen noch einige Platzhalter in dem GET-String ersetzen:
-        if (strpos($getString, "<<USERAGENT>>")) {
-            $getString = str_replace("<<USERAGENT>>", $this->urlEncode($this->useragent), $getString);
-        }
-
-        if (strpos($getString, "<<QUERY>>")) {
-            $getString = str_replace("<<QUERY>>", $this->urlEncode($query), $getString);
-        }
-
-        if (strpos($getString, "<<IP>>")) {
-            $getString = str_replace("<<IP>>", $this->urlEncode($this->ip), $getString);
-        }
-
-        if (strpos($getString, "<<LANGUAGE>>")) {
-            $getString = str_replace("<<LANGUAGE>>", $this->urlEncode($language), $getString);
-        }
-
-        if (strpos($getString, "<<CATEGORY>>")) {
-            $getString = str_replace("<<CATEGORY>>", $this->urlEncode($category), $getString);
-        }
-
-        if (strpos($getString, "<<AFFILDATA>>")) {
-            $getString = str_replace("<<AFFILDATA>>", $this->getOvertureAffilData($url), $getString);
-        }
-        return $getString;
-    }
-
-    protected function urlEncode($string)
-    {
-        if (isset($this->inputEncoding)) {
-            return urlencode(mb_convert_encoding($string, $this->inputEncoding));
-        } else {
-            return urlencode($string);
-        }
-    }
-
-    private function getOvertureAffilData($url)
-    {
-        $affil_data = 'ip=' . $this->ip;
-        $affil_data .= '&ua=' . $this->useragent;
-        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $affil_data .= '&xfip=' . $_SERVER['HTTP_X_FORWARDED_FOR'];
-        }
-        $affilDataValue = $this->urlEncode($affil_data);
-        # Wir benötigen die ServeUrl:
-        $serveUrl = $this->urlEncode($url);
-
-        return "&affilData=" . $affilDataValue . "&serveUrl=" . $serveUrl;
-    }
-
-    public function isEnabled()
-    {
-        return $this->enabled;
     }
 }

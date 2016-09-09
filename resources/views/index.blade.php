@@ -7,7 +7,7 @@
 @section('navbarFocus.donate', 'class="dropdown"')
 
 @section('content')
-	<div class="modal fade" id="plugin-modal" tab-index="-1" role="dialog">
+  <div class="modal fade" id="plugin-modal" tab-index="-1" role="dialog">
       <div class="modal-dialog ">
         <div class="content modal-content">
           <div class="modal-header">
@@ -26,6 +26,8 @@
                 {{ trans('index.plugin.head.4') }}
               @elseif ($browser === 'Edge')
                 {{ trans('index.plugin.head.5') }}
+              @elseif ($browser === 'Safari')
+                {{ trans('index.plugin.head.6') }}
               @else
                 $(".seperator").addClass("hidden");
               @endif
@@ -106,12 +108,14 @@
                 <li>Im Bereich darunter tragen Sie "https://metager.de" in das Feld "Webadresse eingeben" ein und klicken auf das "+" Symbol</li>
                 <li>Entfernen Sie alle Einträge, die beim Start nicht geöffnet werden sollen (z.B. about:start), indem Sie rechts auf das kleine "x" klicken.</li>
               </ol>
+            @elseif ($browser === 'Safari')
+                {!! trans('index.plugin.safari') !!}
             @endif
           </div>
         </div>
       </div>
     </div>
-	 <h1 id="mglogo">
+   <h1 id="mglogo">
             <a class="hidden-xs" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}">MetaGer
             </a>
           </h1>
@@ -220,13 +224,13 @@
               </li>
               <li class="hidden-xs seperator">|
               </li>
-              <li id="plug" @unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge')
+              <li id="plug" @unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge' || $browser === 'Safari')
                 class="hidden" @endunless >
                 <a href="#" id="plugin" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default" title="{{ trans('index.plugintitle') }}">{{ trans('index.plugin') }}</a>
               </li>
             </ul>
           </figure>
-        
+
 @endsection
 
 @section('optionalContent')

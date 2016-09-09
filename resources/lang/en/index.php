@@ -68,5 +68,5 @@ return [
     'plugin.edge.4'       => 'Scroll down until you reach "Search in adress bar with" and click "Change"',
     'plugin.edge.5'       => 'Select "MetaGer: Search and Find Savely, Protect Privacy..." and click on "Set as default"',
 
-    'plugin.safari'       => '<ol><li>Start by installing the <a href="http://www.opensearchforsafari.com/" target="_blank">OpenSearchforSafari</a> Extension.<li>Rufen Sie MetaGer auf und fügen Sie MetaGer mit dem OpenSearch-Knopf(Lupen-Symbol) in der Safari-Men&uuml;leiste hinzu.<li>L&ouml;schen Sie (nach Bedarf) die anderen Suchmaschinen aus dem OpenSearch-PlugIn, indem Sie das "X" neben diesen betätigen.<li>Sie können nun über den OpenSearch-Knopf(Lupe) mit MetaGer suchen.',
+    'plugin.safari'       => '<ol><li>Start by installing the <a href="http://www.opensearchforsafari.com/" target="_blank">OpenSearchforSafari</a> extension.<li>Visit MetaGer and it to your browser using the OpenSearch button in your safari toolbar.<li>Optionally delete other search engines from your OpenSearch extension.<li>You can now search with MetaGer using the OpenSearch button.',
 ];

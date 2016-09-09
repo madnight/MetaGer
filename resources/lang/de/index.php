@@ -67,5 +67,5 @@ return [
     'plugin.edge.4'       => 'Scrollen Sie erneut nach unten bis zum Punkt "In Adressleiste suchen mit" und klicken Sie auf "Ändern"',
     'plugin.edge.5'       => 'Wählen Sie "MetaGer: Sicher suchen & finden..." und klicken Sie auf "Als Standard"',
 
-    'plugin.safari'       => '<ol><li>Installieren Sie das Safari-PlugIn <a href="http://www.opensearchforsafari.com/" target="_blank">OpenSearchforSafari</a><li>Rufen Sie MetaGer auf und fügen Sie MetaGer mit dem OpenSearch-Knopf(Lupen-Symbol) in der Safari-Men&uuml;leiste hinzu.<li>L&ouml;schen Sie (nach Bedarf) die anderen Suchmaschinen aus dem OpenSearch-PlugIn, indem Sie das "X" neben diesen betätigen.<li>Sie können nun über den OpenSearch-Knopf(Lupe) mit MetaGer suchen.',
+    'plugin.safari'       => '<ol><li>Installieren Sie das Safari-PlugIn <a href="http://www.opensearchforsafari.com/" target="_blank">OpenSearchforSafari</a>.<li>Rufen Sie MetaGer auf und fügen Sie MetaGer mit dem OpenSearch-Knopf(Lupen-Symbol) in der Safari-Men&uuml;leiste hinzu.<li>L&ouml;schen Sie (nach Bedarf) die anderen Suchmaschinen aus dem OpenSearch-PlugIn, indem Sie das "X" neben diesen betätigen.<li>Sie können nun über den OpenSearch-Knopf(Lupe) mit MetaGer suchen.',
 ];

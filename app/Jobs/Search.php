@@ -73,7 +73,6 @@ class Search extends Job implements ShouldQueue
             if (sizeof(($tmp = explode(": ", $data))) === 2) {
                 $headers[strtolower(trim($tmp[0]))] = trim($tmp[1]);
             }
-
             $c++;
         } while (true);
 
@@ -230,7 +229,7 @@ class Search extends Job implements ShouldQueue
             $timeElapsed = microtime(true) - $time;
             if ($timeElapsed > 0.5) {
                 # Irgendwas ist mit unserem Socket passiert. Wir brauchen einen neuen:
-                if ($this->fp) {
+                if ($this->fp && is_resource($this->fp)) {
                     fclose($this->fp);
                 }
 
@@ -244,10 +243,8 @@ class Search extends Job implements ShouldQueue
                 $tmp = fwrite($this->fp, $string);
             } catch (\ErrorException $e) {
                 # Irgendwas ist mit unserem Socket passiert. Wir brauchen einen neuen:
-                try {
+                if ($this->fp && is_resource($this->fp)) {
                     fclose($this->fp);
-                } catch (\ErrorException $e) {
-
                 }
 
                 Redis::del($this->name . "." . $this->socketNumber);
@@ -266,9 +263,11 @@ class Search extends Job implements ShouldQueue
             }
 
         }
+
         if ($sent === strlen($out)) {
             return true;
         }
+
         return false;
     }
 
@@ -283,6 +282,7 @@ class Search extends Job implements ShouldQueue
         # 1. Stelle fest, ob dieser Socket neu erstellt wurde, oder ob ein existierender geöffnet wurde.
         $counter = 0;
         $fp      = null;
+        $time    = microtime(true);
         do {
 
             if (intval(Redis::exists($this->host . ".$counter")) === 0) {
@@ -300,7 +300,10 @@ class Search extends Job implements ShouldQueue
                 stream_set_blocking($fp, 0);
                 $string = fgets($fp, 8192);
                 if ($string !== false || feof($fp)) {
-                    fclose($fp);
+                    if ($this->fp && is_resource($this->fp)) {
+                        fclose($fp);
+                    }
+
                     continue;
                 }
                 break;

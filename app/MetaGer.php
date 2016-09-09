@@ -51,9 +51,11 @@ class MetaGer
 
     public function __construct()
     {
+        # Timer starten
         $this->starttime = microtime(true);
+
+        # Versuchen Blacklists einzulesen
         if (file_exists(config_path() . "/blacklistDomains.txt") && file_exists(config_path() . "/blacklistUrl.txt")) {
-            # Blacklists einlesen:
             $tmp                      = file_get_contents(config_path() . "/blacklistDomains.txt");
             $this->domainsBlacklisted = explode("\n", $tmp);
             $tmp                      = file_get_contents(config_path() . "/blacklistUrl.txt");
@@ -62,6 +64,7 @@ class MetaGer
             Log::warning("Achtung: Eine, oder mehrere Blacklist Dateien, konnten nicht geöffnet werden");
         }
 
+        # Parser Skripte einhängen
         $dir = app_path() . "/Models/parserSkripte/";
         foreach (scandir($dir) as $filename) {
             $path = $dir . $filename;
@@ -70,9 +73,11 @@ class MetaGer
             }
         }
 
+        # Spracherkennung starten
         $this->languageDetect = new TextLanguageDetect();
         $this->languageDetect->setNameMode("2");
 
+        # Cachebarkeit testen
         try {
             Cache::has('test');
             $this->canCache = true;
@@ -81,19 +86,7 @@ class MetaGer
         }
     }
 
-    public function getHashCode()
-    {
-        $string = url()->full();
-        return md5($string);
-    }
-
-    public function rankAll()
-    {
-        foreach ($this->engines as $engine) {
-            $engine->rank($this);
-        }
-    }
-
+    # Erstellt aus den gesammelten Ergebnissen den View
     public function createView()
     {
         $viewResults = [];
@@ -127,60 +120,39 @@ class MetaGer
                         ->with('metager', $this)
                         ->with('browser', (new Agent())->browser());
             }
-        }
-
-        switch ($this->out) {
-            case 'results':
-                return view('metager3results')
-                    ->with('results', $viewResults)
-                    ->with('eingabe', $this->eingabe)
-                    ->with('mobile', $this->mobile)
-                    ->with('warnings', $this->warnings)
-                    ->with('errors', $this->errors)
-                    ->with('metager', $this)
-                    ->with('browser', (new Agent())->browser());
-                break;
-            case 'results-with-style':
-                return view('metager3')
-                    ->with('results', $viewResults)
-                    ->with('eingabe', $this->eingabe)
-                    ->with('mobile', $this->mobile)
-                    ->with('warnings', $this->warnings)
-                    ->with('errors', $this->errors)
-                    ->with('metager', $this)
-                    ->with('suspendheader', "yes")
-                    ->with('browser', (new Agent())->browser());
-                break;
-            default:
-                return view('metager3')
-                    ->with('eingabe', $this->eingabe)
-                    ->with('mobile', $this->mobile)
-                    ->with('warnings', $this->warnings)
-                    ->with('errors', $this->errors)
-                    ->with('metager', $this)
-                    ->with('browser', (new Agent())->browser());
-                break;
-        }
-    }
-
-    private function createLogs()
-    {
-        $redis = Redis::connection('redisLogs');
-        try
-        {
-            $logEntry = "";
-            $logEntry .= "[" . date(DATE_RFC822, mktime(date("H"), date("i"), date("s"), date("m"), date("d"), date("Y"))) . "]";
-            $logEntry .= " pid=" . getmypid();
-            $logEntry .= " ref=" . $this->request->header('Referer');
-            $useragent = $this->request->header('User-Agent');
-            $useragent = str_replace("(", " ", $useragent);
-            $useragent = str_replace(")", " ", $useragent);
-            $useragent = str_replace(" ", "", $useragent);
-            $logEntry .= " time=" . round((microtime(true) - $this->starttime), 2) . " serv=" . $this->fokus;
-            $logEntry .= " search=" . $this->eingabe;
-            $redis->rpush('logs.search', $logEntry);
-        } catch (\Exception $e) {
-            return;
+        } else {
+            switch ($this->out) {
+                case 'results':
+                    return view('metager3results')
+                        ->with('results', $viewResults)
+                        ->with('eingabe', $this->eingabe)
+                        ->with('mobile', $this->mobile)
+                        ->with('warnings', $this->warnings)
+                        ->with('errors', $this->errors)
+                        ->with('metager', $this)
+                        ->with('browser', (new Agent())->browser());
+                    break;
+                case 'results-with-style':
+                    return view('metager3')
+                        ->with('results', $viewResults)
+                        ->with('eingabe', $this->eingabe)
+                        ->with('mobile', $this->mobile)
+                        ->with('warnings', $this->warnings)
+                        ->with('errors', $this->errors)
+                        ->with('metager', $this)
+                        ->with('suspendheader', "yes")
+                        ->with('browser', (new Agent())->browser());
+                    break;
+                default:
+                    return view('metager3')
+                        ->with('eingabe', $this->eingabe)
+                        ->with('mobile', $this->mobile)
+                        ->with('warnings', $this->warnings)
+                        ->with('errors', $this->errors)
+                        ->with('metager', $this)
+                        ->with('browser', (new Agent())->browser());
+                    break;
+            }
         }
     }
 
@@ -193,7 +165,6 @@ class MetaGer
             }
 
         }
-        #$this->results = $results;
     }
 
     public function combineResults()
@@ -222,6 +193,7 @@ class MetaGer
 
             return ($a->getRank() < $b->getRank()) ? 1 : -1;
         });
+
         # Validate Results
         $newResults = [];
         foreach ($this->results as $result) {
@@ -325,6 +297,7 @@ class MetaGer
         }
         return $results;
     }
+
     public function parseAdgoal($results)
     {
         $publicKey  = getenv('adgoal_public');
@@ -391,7 +364,6 @@ class MetaGer
 
     public function createSearchEngines(Request $request)
     {
-
         if (!$request->has("eingabe")) {
             return;
         }
@@ -400,10 +372,11 @@ class MetaGer
         $xml                  = simplexml_load_file($this->sumaFile);
         $enabledSearchengines = [];
         $overtureEnabled      = false;
-        $countSumas           = 0;
+        $sumaCount            = 0;
         $sumas                = $xml->xpath("suma");
-        if ($this->fokus === "angepasst") {
-            foreach ($sumas as $suma) {
+
+        foreach ($sumas as $suma) {
+            if ($this->fokus === "angepasst") {
                 if ($request->has($suma["name"])
                     || ($this->fokus !== "bilder"
                         && ($suma["name"]->__toString() === "qualigo"
@@ -418,15 +391,12 @@ class MetaGer
                             $overtureEnabled = true;
                         }
                         if ($suma["name"]->__toString() !== "qualigo" && $suma["name"]->__toString() !== "similar_product_ads" && $suma["name"]->__toString() !== "overtureAds") {
-                            $countSumas += 1;
+                            $sumaCount += 1;
                         }
-
                         $enabledSearchengines[] = $suma;
                     }
                 }
-            }
-        } else {
-            foreach ($sumas as $suma) {
+            } else {
                 $types = explode(",", $suma["type"]);
                 if (in_array($this->fokus, $types)
                     || ($this->fokus !== "bilder"
@@ -441,9 +411,8 @@ class MetaGer
                             $overtureEnabled = true;
                         }
                         if ($suma["name"]->__toString() !== "qualigo" && $suma["name"]->__toString() !== "similar_product_ads" && $suma["name"]->__toString() !== "overtureAds") {
-                            $countSumas += 1;
+                            $sumaCount += 1;
                         }
-
                         $enabledSearchengines[] = $suma;
                     }
                 }
@@ -471,30 +440,13 @@ class MetaGer
             $enabledSearchengines[]       = $minisucherEngine;
         }
 
-        #die(var_dump($enabledSearchengines));
-
-        if ($countSumas <= 0) {
+        if ($sumaCount <= 0) {
             $this->errors[] = "Achtung: Sie haben in ihren Einstellungen keine Suchmaschine ausgewählt.";
         }
         $engines = [];
 
-        $siteSearchFailed = false;
-        if (strlen($this->site) > 0) {
-            # Wenn eine Sitesearch durchgeführt werden soll, überprüfen wir ob eine der Suchmaschinen überhaupt eine Sitesearch unterstützt:
-            $enginesWithSite = 0;
-            foreach ($enabledSearchengines as $engine) {
-                if (isset($engine['hasSiteSearch']) && $engine['hasSiteSearch']->__toString() === "1") {
-                    $enginesWithSite++;
-                }
-            }
-            if ($enginesWithSite === 0) {
-                $this->errors[]   = "Sie wollten eine Sitesearch auf " . $this->site . " durchführen. Leider unterstützen die eingestellten Suchmaschinen diese nicht. Sie können <a href=\"" . $this->generateSearchLink("web", false) . "\">hier</a> die Sitesearch im Web-Fokus durchführen. Es werden ihnen Ergebnisse ohne Sitesearch angezeigt.";
-                $siteSearchFailed = true;
-            } else {
-                $this->warnings[] = "Sie führen eine Sitesearch durch. Es werden nur Ergebnisse von der Seite: <a href=\"http://" . $this->site . "\" target=\"_blank\">\"" . $this->site . "\"</a> angezeigt.";
-            }
-
-        }
+        # Wenn eine Sitesearch durchgeführt werden soll, überprüfen wir ob eine der Suchmaschinen überhaupt eine Sitesearch unterstützt
+        $siteSearchFailed = $this->checkCanNotSitesearch($enabledSearchengines);
 
         $typeslist = [];
         $counter   = 0;
@@ -552,6 +504,36 @@ class MetaGer
             $engine->startSearch($this);
         }
 
+        $this->adjustFocus($sumas, $enabledSearchengines);
+
+        /* Nun passiert ein elementarer Schritt.
+         * Wir warten auf die Antwort der Suchmaschinen, da wir vorher nicht weiter machen können.
+         * Aber natürlich nicht ewig.
+         * Die Verbindung steht zu diesem Zeitpunkt und auch unsere Request wurde schon gesendet.
+         * Wir geben der Suchmaschine nun bis zu 500ms Zeit zu antworten.
+         */
+
+        # Wir zählen die Suchmaschinen, die durch den Cache beantwortet wurden:
+        $enginesToLoad = 0;
+        $canBreak      = false;
+        foreach ($engines as $engine) {
+            if ($engine->cached) {
+                $enginesToLoad--;
+                if ($overtureEnabled && ($engine->name === "overture" || $engine->name === "overtureAds")) {
+                    $canBreak = true;
+                }
+            }
+        }
+
+        $enginesToLoad += count($engines);
+
+        $this->waitForResults($enginesToLoad, $overtureEnabled, $canBreak);
+
+        $this->retrieveResults($engines);
+    }
+
+    public function adjustFocus($sumas, $enabledSearchengines)
+    {
         # Jetzt werden noch alle Kategorien der Settings durchgegangen und die jeweils enthaltenen namen der Suchmaschinen gespeichert.
         $foki = [];
         foreach ($sumas as $suma) {
@@ -577,6 +559,7 @@ class MetaGer
                 $realEngNames[] = $nam;
             }
         }
+
         # Anschließend werden diese beiden Listen verglichen (jeweils eine der Fokuslisten für jeden Fokus), um herauszufinden ob sie vielleicht identisch sind. Ist dies der Fall, so hat der Nutzer anscheinend Suchmaschinen eines kompletten Fokus eingestellt. Der Fokus wird dementsprechend angepasst.
         foreach ($foki as $fok => $engs) {
             $isFokus      = true;
@@ -598,26 +581,29 @@ class MetaGer
                 $this->fokus = $fok;
             }
         }
+    }
 
-        # Nun passiert ein elementarer Schritt.
-        # Wir warten auf die Antwort der Suchmaschinen, da wir vorher nicht weiter machen können.
-        # aber natürlich nicht ewig.
-        # Die Verbindung steht zu diesem Zeitpunkt und auch unsere Request wurde schon gesendet.
-        # Wir geben der Suchmaschine nun bis zu 500ms Zeit zu antworten.
-
-        # Wir zählen die Suchmaschinen, die durch den Cache beantwortet wurden:
-        $enginesToLoad = 0;
-        $canBreak      = false;
-        foreach ($engines as $engine) {
-            if ($engine->cached) {
-                $enginesToLoad--;
-                if ($overtureEnabled && ($engine->name === "overture" || $engine->name === "overtureAds")) {
-                    $canBreak = true;
+    public function checkCanNotSitesearch($enabledSearchengines)
+    {
+        if (strlen($this->site) > 0) {
+            $enginesWithSite = 0;
+            foreach ($enabledSearchengines as $engine) {
+                if (isset($engine['hasSiteSearch']) && $engine['hasSiteSearch']->__toString() === "1") {
+                    $enginesWithSite++;
                 }
-
+            }
+            if ($enginesWithSite === 0) {
+                $this->errors[] = "Sie wollten eine Sitesearch auf " . $this->site . " durchführen. Leider unterstützen die eingestellten Suchmaschinen diese nicht. Sie können <a href=\"" . $this->generateSearchLink("web", false) . "\">hier</a> die Sitesearch im Web-Fokus durchführen. Es werden ihnen Ergebnisse ohne Sitesearch angezeigt.";
+                return true;
+            } else {
+                $this->warnings[] = "Sie führen eine Sitesearch durch. Es werden nur Ergebnisse von der Seite: <a href=\"http://" . $this->site . "\" target=\"_blank\">\"" . $this->site . "\"</a> angezeigt.";
+                return false;
             }
         }
-        $enginesToLoad += count($engines);
+    }
+
+    public function waitForResults($enginesToLoad, $overtureEnabled, $canBreak)
+    {
         $loadedEngines = 0;
         $timeStart     = microtime(true);
         while (true) {
@@ -643,24 +629,26 @@ class MetaGer
             }
             usleep(50000);
         }
+    }
 
+    public function retrieveResults($engines)
+    {
+        # Von geladenen Engines die Ergebnisse holen
         foreach ($engines as $engine) {
             if (!$engine->loaded) {
                 try {
                     $engine->retrieveResults($this);
                 } catch (\ErrorException $e) {
                     Log::error($e);
-
                 }
             }
         }
 
-        # und verwerfen den Rest:
+        # Nicht fertige Engines verwefen
         foreach ($engines as $engine) {
             if (!$engine->loaded) {
                 $engine->shutdown();
             }
-
         }
 
         $this->engines = $engines;
@@ -668,6 +656,7 @@ class MetaGer
 
     public function parseFormData(Request $request)
     {
+        # Sichert, dass der request in UTF-8 formatiert ist
         if ($request->input('encoding', '') !== "utf8") {
             # In früheren Versionen, als es den Encoding Parameter noch nicht gab, wurden die Daten in ISO-8859-1 übertragen
             $input = $request->all();
@@ -678,14 +667,12 @@ class MetaGer
         }
         $this->url = $request->url();
         # Zunächst überprüfen wir die eingegebenen Einstellungen:
-        # FOKUS
-        $this->fokus = trans('fokiNames.'
-            . $request->input('focus', 'web'));
+        # Fokus
+        $this->fokus = trans('fokiNames.' . $request->input('focus', 'web'));
         if (strpos($this->fokus, ".")) {
             $this->fokus = trans('fokiNames.web');
         }
-
-        # SUMA-FILE
+        # Suma-File
         if (App::isLocale("en")) {
             $this->sumaFile = config_path() . "/sumas.xml";
         } else {
@@ -694,18 +681,15 @@ class MetaGer
         if (!file_exists($this->sumaFile)) {
             die("Suma-File konnte nicht gefunden werden");
         }
-
-        # Sucheingabe:
+        # Sucheingabe
         $this->eingabe = trim($request->input('eingabe', ''));
         if (strlen($this->eingabe) === 0) {
             $this->warnings[] = 'Achtung: Sie haben keinen Suchbegriff eingegeben. Sie können ihre Suchbegriffe oben eingeben und es erneut versuchen.';
         }
         $this->q = $this->eingabe;
-
-        # IP:
+        # IP
         $this->ip = $request->ip();
-
-        # Language:
+        # Language
         if (isset($_SERVER['HTTP_LANGUAGE'])) {
             $this->language = $_SERVER['HTTP_LANGUAGE'];
         } else {
@@ -713,9 +697,8 @@ class MetaGer
         }
         # Category
         $this->category = $request->input('category', '');
-        # Request Times:
+        # Request Times
         $this->time = $request->input('time', 1000);
-
         # Page
         $this->page = 1;
         # Lang
@@ -725,18 +708,15 @@ class MetaGer
         }
         $this->agent  = new Agent();
         $this->mobile = $this->agent->isMobile();
-
-        #Sprüche
+        # Sprüche
         $this->sprueche = $request->input('sprueche', 'off');
         if ($this->sprueche === "off") {
             $this->sprueche = true;
         } else {
             $this->sprueche = false;
         }
-
         # Ergebnisse pro Seite:
         $this->resultCount = $request->input('resultCount', '20');
-
         # Manchmal müssen wir Parameter anpassen um den Sucheinstellungen gerecht zu werden:
         if ($request->has('dart')) {
             $this->time       = 10000;
@@ -777,24 +757,22 @@ class MetaGer
         if ($request->has('password')) {
             $this->password = $request->input('password');
         }
-
         if ($request->has('quicktips')) {
             $this->quicktips = false;
         } else {
             $this->quicktips = true;
         }
-
         $this->out = $request->input('out', "html");
+        # Standard output format html
         if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style") {
             $this->out = "html";
         }
-
         $this->request = $request;
     }
 
     public function checkSpecialSearches(Request $request)
     {
-        # Site Search:
+        # Site Search
         if (preg_match("/(.*)\bsite:(\S+)(.*)/si", $this->q, $match)) {
             $this->site = $match[2];
             $this->q    = $match[1] . $match[3];
@@ -802,8 +780,9 @@ class MetaGer
         if ($request->has('site')) {
             $this->site = $request->input('site');
         }
+
+        # Host Blacklisting
         # Wenn die Suchanfrage um das Schlüsselwort "-host:*" ergänzt ist, sollen bestimmte Hosts nicht eingeblendet werden
-        # Wir prüfen, ob das hier der Fall ist:
         while (preg_match("/(.*)(^|\s)-host:(\S+)(.*)/si", $this->q, $match)) {
             $this->hostBlacklist[] = $match[3];
             $this->q               = $match[1] . $match[4];
@@ -816,8 +795,9 @@ class MetaGer
             $hostString       = rtrim($hostString, ", ");
             $this->warnings[] = "Ergebnisse von folgenden Hosts werden nicht angezeigt: \"" . $hostString . "\"";
         }
+
+        # Domain Blacklisting
         # Wenn die Suchanfrage um das Schlüsselwort "-domain:*" ergänzt ist, sollen bestimmte Domains nicht eingeblendet werden
-        # Wir prüfen, ob das hier der Fall ist:
         while (preg_match("/(.*)(^|\s)-domain:(\S+)(.*)/si", $this->q, $match)) {
             $this->domainBlacklist[] = $match[3];
             $this->q                 = $match[1] . $match[4];
@@ -831,8 +811,8 @@ class MetaGer
             $this->warnings[] = "Ergebnisse von folgenden Domains werden nicht angezeigt: \"" . $domainString . "\"";
         }
 
+        # Stopwords
         # Alle mit "-" gepräfixten Worte sollen aus der Suche ausgeschlossen werden.
-        # Wir prüfen, ob das hier der Fall ist:
         while (preg_match("/(.*)(^|\s)-(\S+)(.*)/si", $this->q, $match)) {
             $this->stopWords[] = $match[3];
             $this->q           = $match[1] . $match[4];
@@ -846,7 +826,7 @@ class MetaGer
             $this->warnings[] = "Sie machen eine Ausschlusssuche. Ergebnisse mit folgenden Wörtern werden nicht angezeigt: \"" . $stopwordsString . "\"";
         }
 
-        # Meldung über eine Phrasensuche
+        # Phrasensuche
         $p   = "";
         $tmp = $this->q;
         while (preg_match("/(.*)\"(.+)\"(.*)/si", $tmp, $match)) {
@@ -861,6 +841,196 @@ class MetaGer
             $this->warnings[] = "Sie führen eine Phrasensuche durch: $p";
         }
 
+    }
+
+    public function nextSearchLink()
+    {
+        if (isset($this->next) && isset($this->next['engines']) && count($this->next['engines']) > 0) {
+            $requestData         = $this->request->except(['page', 'out']);
+            $requestData['next'] = md5(serialize($this->next));
+            $link                = action('MetaGerSearch@search', $requestData);
+        } else {
+            $link = "#";
+        }
+        return $link;
+    }
+
+    public function rankAll()
+    {
+        foreach ($this->engines as $engine) {
+            $engine->rank($this);
+        }
+    }
+
+# Hilfsfunktionen
+
+    public function showQuicktips()
+    {
+        return $this->quicktips;
+    }
+
+    public function popAd()
+    {
+        if (count($this->ads) > 0) {
+            return get_object_vars(array_shift($this->ads));
+        } else {
+            return null;
+        }
+
+    }
+
+    public function canCache()
+    {
+        return $this->canCache;
+    }
+
+    public function createLogs()
+    {
+        $redis = Redis::connection('redisLogs');
+        try
+        {
+            $logEntry = "";
+            $logEntry .= "[" . date(DATE_RFC822, mktime(date("H"), date("i"), date("s"), date("m"), date("d"), date("Y"))) . "]";
+            $logEntry .= " pid=" . getmypid();
+            $logEntry .= " ref=" . $this->request->header('Referer');
+            $useragent = $this->request->header('User-Agent');
+            $useragent = str_replace("(", " ", $useragent);
+            $useragent = str_replace(")", " ", $useragent);
+            $useragent = str_replace(" ", "", $useragent);
+            $logEntry .= " time=" . round((microtime(true) - $this->starttime), 2) . " serv=" . $this->fokus;
+            $logEntry .= " search=" . $this->eingabe;
+            $redis->rpush('logs.search', $logEntry);
+        } catch (\Exception $e) {
+            return;
+        }
+    }
+
+    public function addLink($link)
+    {
+        if (strpos($link, "http://") === 0) {
+            $link = substr($link, 7);
+        }
+
+        if (strpos($link, "https://") === 0) {
+            $link = substr($link, 8);
+        }
+
+        if (strpos($link, "www.") === 0) {
+            $link = substr($link, 4);
+        }
+
+        $link = trim($link, "/");
+        $hash = md5($link);
+        if (isset($this->addedLinks[$hash])) {
+            return false;
+        } else {
+            $this->addedLinks[$hash] = 1;
+
+            return true;
+        }
+    }
+
+    public function addHostCount($host)
+    {
+        $hash = md5($host);
+        if (isset($this->addedHosts[$hash])) {
+            $this->addedHosts[$hash] += 1;
+        } else {
+            $this->addedHosts[$hash] = 1;
+        }
+    }
+
+# Generators
+
+    public function generateSearchLink($fokus, $results = true)
+    {
+        $requestData          = $this->request->except(['page', 'next']);
+        $requestData['focus'] = $fokus;
+        if ($results) {
+            $requestData['out'] = "results";
+        } else {
+            $requestData['out'] = "";
+        }
+
+        $link = action('MetaGerSearch@search', $requestData);
+        return $link;
+    }
+
+    public function generateQuicktipLink()
+    {
+        $link = action('MetaGerSearch@quicktips');
+
+        return $link;
+    }
+
+    public function generateSiteSearchLink($host)
+    {
+        $host        = urlencode($host);
+        $requestData = $this->request->except(['page', 'out', 'next']);
+        $requestData['eingabe'] .= " site:$host";
+        $requestData['focus'] = "web";
+        $link                 = action('MetaGerSearch@search', $requestData);
+        return $link;
+    }
+
+    public function generateRemovedHostLink($host)
+    {
+        $host        = urlencode($host);
+        $requestData = $this->request->except(['page', 'out', 'next']);
+        $requestData['eingabe'] .= " -host:$host";
+        $link = action('MetaGerSearch@search', $requestData);
+        return $link;
+    }
+
+    public function generateRemovedDomainLink($domain)
+    {
+        $domain      = urlencode($domain);
+        $requestData = $this->request->except(['page', 'out', 'next']);
+        $requestData['eingabe'] .= " -domain:$domain";
+        $link = action('MetaGerSearch@search', $requestData);
+        return $link;
+    }
+
+# Komplexe Getter
+
+    public function getHostCount($host)
+    {
+        if (isset($this->addedHosts[$host])) {
+            return $this->addedHosts[$host];
+        } else {
+            return 0;
+        }
+    }
+
+    public function getImageProxyLink($link)
+    {
+        $requestData        = [];
+        $requestData["url"] = $link;
+        $link               = action('Pictureproxy@get', $requestData);
+        return $link;
+    }
+
+    public function getHashCode()
+    {
+        $string = url()->full();
+        return md5($string);
+    }
+
+# Einfache Getter
+
+    public function getSite()
+    {
+        return $this->site;
+    }
+
+    public function getTab()
+    {
+        return $this->tab;
+    }
+
+    public function getResults()
+    {
+        return $this->results;
     }
 
     public function getFokus()
@@ -945,155 +1115,19 @@ class MetaGer
     {
         return $this->urlsBlacklisted;
     }
+
     public function getLanguageDetect()
     {
         return $this->languageDetect;
     }
+
     public function getStopWords()
     {
         return $this->stopWords;
     }
-    public function getHostCount($host)
-    {
-        if (isset($this->addedHosts[$host])) {
-            return $this->addedHosts[$host];
-        } else {
-            return 0;
-        }
-    }
+
     public function getStartCount()
     {
         return $this->startCount;
-    }
-    public function addHostCount($host)
-    {
-        $hash = md5($host);
-        if (isset($this->addedHosts[$hash])) {
-            $this->addedHosts[$hash] += 1;
-        } else {
-            $this->addedHosts[$hash] = 1;
-        }
-    }
-    public function canCache()
-    {
-        return $this->canCache;
-    }
-    public function getSite()
-    {
-        return $this->site;
-    }
-    public function addLink($link)
-    {
-        if (strpos($link, "http://") === 0) {
-            $link = substr($link, 7);
-        }
-
-        if (strpos($link, "https://") === 0) {
-            $link = substr($link, 8);
-        }
-
-        if (strpos($link, "www.") === 0) {
-            $link = substr($link, 4);
-        }
-
-        $link = trim($link, "/");
-        $hash = md5($link);
-        if (isset($this->addedLinks[$hash])) {
-            return false;
-        } else {
-            $this->addedLinks[$hash] = 1;
-
-            return true;
-        }
-    }
-
-    public function generateSearchLink($fokus, $results = true)
-    {
-        $requestData          = $this->request->except(['page', 'next']);
-        $requestData['focus'] = $fokus;
-        if ($results) {
-            $requestData['out'] = "results";
-        } else {
-            $requestData['out'] = "";
-        }
-
-        $link = action('MetaGerSearch@search', $requestData);
-        return $link;
-    }
-
-    public function generateQuicktipLink()
-    {
-        $link = action('MetaGerSearch@quicktips');
-
-        return $link;
-    }
-
-    public function generateSiteSearchLink($host)
-    {
-        $host        = urlencode($host);
-        $requestData = $this->request->except(['page', 'out', 'next']);
-        $requestData['eingabe'] .= " site:$host";
-        $requestData['focus'] = "web";
-        $link                 = action('MetaGerSearch@search', $requestData);
-        return $link;
-    }
-
-    public function generateRemovedHostLink($host)
-    {
-        $host        = urlencode($host);
-        $requestData = $this->request->except(['page', 'out', 'next']);
-        $requestData['eingabe'] .= " -host:$host";
-        $link = action('MetaGerSearch@search', $requestData);
-        return $link;
-    }
-
-    public function generateRemovedDomainLink($domain)
-    {
-        $domain      = urlencode($domain);
-        $requestData = $this->request->except(['page', 'out', 'next']);
-        $requestData['eingabe'] .= " -domain:$domain";
-        $link = action('MetaGerSearch@search', $requestData);
-        return $link;
-    }
-
-    public function nextSearchLink()
-    {
-        if (isset($this->next) && isset($this->next['engines']) && count($this->next['engines']) > 0) {
-            $requestData         = $this->request->except(['page', 'out']);
-            $requestData['next'] = md5(serialize($this->next));
-            $link                = action('MetaGerSearch@search', $requestData);
-        } else {
-            $link = "#";
-        }
-        return $link;
-    }
-
-    public function getTab()
-    {
-        return $this->tab;
-    }
-    public function getResults()
-    {
-        return $this->results;
-    }
-    public function popAd()
-    {
-        if (count($this->ads) > 0) {
-            return get_object_vars(array_shift($this->ads));
-        } else {
-            return null;
-        }
-
-    }
-    public function getImageProxyLink($link)
-    {
-        $requestData        = [];
-        $requestData["url"] = $link;
-        $link               = action('Pictureproxy@get', $requestData);
-        return $link;
-    }
-    public function showQuicktips()
-    {
-        return $this->quicktips;
     }
 }

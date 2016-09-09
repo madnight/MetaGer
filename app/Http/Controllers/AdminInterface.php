@@ -3,85 +3,78 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use Redis;
-use Response;
 
 class AdminInterface extends Controller
 {
-    public function index (Request $request)
+    public function index(Request $request)
     {
         $time = $request->input('time', 60);
 
-    	# Zunächst einmal die Redis-Verbindung:
-    	$redis = Redis::connection('redisLogs');
+        # Zunächst einmal die Redis-Verbindung:
+        $redis = Redis::connection('redisLogs');
 
-    	# Dann lesen wir alle Server aus:
-    	$member = $redis->smembers('logs.worker');
-        $today = strtotime(date(DATE_RFC822, mktime(0,0,0, date("m"), date("d"), date("Y"))));
-        $beginningTime = strtotime(date(DATE_RFC822, mktime(date("H"),date("i")-$time, date("s"), date("m"), date("d"), date("Y")))) - $today;
+        # Dann lesen wir alle Server aus:
+        $member        = $redis->smembers('logs.worker');
+        $today         = strtotime(date(DATE_RFC822, mktime(0, 0, 0, date("m"), date("d"), date("Y"))));
+        $beginningTime = strtotime(date(DATE_RFC822, mktime(date("H"), date("i") - $time, date("s"), date("m"), date("d"), date("Y")))) - $today;
 
-    	# Jetzt besorgen wir uns die Daten für jeden Server:
-    	$data = [];
-    	foreach( $member as $mem )
-    	{
-    		$tmp = $redis->hgetall('logs.worker.' . $mem);
+        # Jetzt besorgen wir uns die Daten für jeden Server:
+        $data = [];
+        foreach ($member as $mem) {
+            $tmp = $redis->hgetall('logs.worker.' . $mem);
             ksort($tmp, SORT_NUMERIC);
             $tmp2 = [];
-            foreach($tmp as $el => $value)
-            {
-                if($el >= $beginningTime)
-                    $data[$mem][$el] = $value ;
+            foreach ($tmp as $el => $value) {
+                if ($el >= $beginningTime) {
+                    $data[$mem][$el] = $value;
+                }
+
             }
-    	}
+        }
         #$data = [ 5 => "majm", 2 => "mngsn", 7 => "akljsd"];
         #arsort($data);
-    	return view('admin.admin')
-    		->with('data', $data)
-    		->with('title', "Admin-Interface-MetaGer")
+        return view('admin.admin')
+            ->with('data', $data)
+            ->with('title', "Admin-Interface-MetaGer")
             ->with('time', $time);
     }
 
     public function count()
     {
         $logToday = "mg3.log";
-        if(file_exists("/var/log/metager/".$logToday))
-        {
-            $logToday = file("/var/log/metager/".$logToday);
-        }else
-        {
+        if (file_exists("/var/log/metager/" . $logToday)) {
+            $logToday = file("/var/log/metager/" . $logToday);
+        } else {
             return redirect('');
         }
-        $oldLogs = [];
-        $yesterday = 0;
-        $rekordTag = 0;
+        $oldLogs       = [];
+        $yesterday     = 0;
+        $rekordTag     = 0;
         $rekordTagDate = "";
-        $size = 0;
-        $count = 0;
-        for($i = 1; $i <= 28; $i ++ )
-        {
+        $size          = 0;
+        $count         = 0;
+        for ($i = 1; $i <= 28; $i++) {
             $logDate = "/var/log/metager/archive/mg3.log.$i";
-            if( file_exists($logDate) )
-            {
-                $sameTime = exec("grep -n '" . date('H') . ":" . date('i') . ":' $logDate | tail -1 | cut -f1 -d':'");
+            if (file_exists($logDate)) {
+                $sameTime  = exec("grep -n '" . date('H') . ":" . date('i') . ":' $logDate | tail -1 | cut -f1 -d':'");
                 $insgesamt = exec("wc -l $logDate | cut -f1 -d' '");
-                if($insgesamt > $rekordTag)
-                {
-                    $rekordTag = $insgesamt;
+                if ($insgesamt > $rekordTag) {
+                    $rekordTag         = $insgesamt;
                     $rekordTagSameTime = $sameTime;
-                    $rekordTagDate = date("d.m.Y", mktime(date("H"),date("i"), date("s"), date("m"), date("d")-$i, date("Y")));
+                    $rekordTagDate     = date("d.m.Y", mktime(date("H"), date("i"), date("s"), date("m"), date("d") - $i, date("Y")));
                 }
-                $oldLogs[$i]['sameTime'] = $sameTime;
-                $oldLogs[$i]['insgesamt'] = $insgesamt;
+                $oldLogs[$i]['sameTime']  = number_format(floatval($sameTime), 0, ",", ".");
+                $oldLogs[$i]['insgesamt'] = number_format(floatval($insgesamt), 0, ",", ".");
                 # Nun noch den median:
                 $count += $insgesamt;
                 $size++;
-                if($size > 0)
-                    $oldLogs[$i]['median'] = ($count/$size);
+                if ($size > 0) {
+                    $oldLogs[$i]['median'] = number_format(floatval(round($count / $size)), 0, ",", ".");
+                }
+
             }
         }
-
 
         return view('admin.count')
             ->with('title', 'Suchanfragen - MetaGer')
@@ -91,14 +84,13 @@ class AdminInterface extends Controller
             ->with('rekordTagSameTime', number_format(floatval($rekordTagSameTime), 0, ",", "."))
             ->with('rekordDate', $rekordTagDate);
     }
-    public function check ()
+    public function check()
     {
-        $q = "";
+        $q     = "";
         $redis = Redis::connection('redisLogs');
-        if($redis)
-        {
+        if ($redis) {
             $q = $redis->lrange("logs.search", -1, -1)[0];
-            $q = substr($q, strpos($q, "search=")+7);
+            $q = substr($q, strpos($q, "search=") + 7);
         }
         return view('admin.check')
             ->with('title', 'Wer sucht was? - MetaGer')

@@ -2,33 +2,33 @@
 
 return [
     'title'                    => 'MetaGer - FAQ',
-    'dienste'                  => 'Kostenlose Dienste',
+    'dienste'                  => 'Tools-free of charge',
 
-    'suchwortassoziator.title' => 'Suchwortassoziator',
-    'suchwortassoziator.1'     => 'Als Hilfe f&uuml;r die Erschließung eines Begriffsumfelds haben wir den <a href="https://metager.de/klassik/asso/" target="_blank">MetaGer-Web-Assoziator</a> entwickelt. Sie finden das Tool unter dem Reiter &quot;Dienste&quot;. Gibt man in diesen ein Suchwort ein, welches dem zu untersuchenden Fachgebiet irgendwie nahe kommt, dann wird versucht, typische Fachbegriffe dieses Gebietes aus dem WWW zu extrahieren.',
-    'suchwortassoziator.2'     => 'Beispiel: Sie m&ouml;chten mehr &uuml;ber Zeckenbisse und deren Gefahren wissen, aber ihnen fallen die medizinischen Fachbegriffe f&uuml;r Erkrankungen aus diesem Bereich nicht mehr ein. Die Eingabe des Wortes &quot;Zeckenbisse&quot; in den Web-Assoziator liefert dann u.a. die Begriffe &quot;Borreliose&quot; und &quot;fsme&quot;.',
-    'suchwortassoziator.3'     => 'Da diese Assoziationsanalyse u.a. aus Web-Dokumenten selber gewonnen wird, ist sie sprachunabh&auml;ngig; d.h. Sie k&ouml;nnen bei Eingabe deutscher W&ouml;rter Fachbegriffe aus beliebigen Sprachen gewinnen (und umgekehrt). Wenn Ihnen andererseits Assoziationsanalysen auffallen, die mit Hilfe Ihrer Fachkenntnisse besser sein k&ouml;nnten, dann z&ouml;gern Sie bitte nicht, uns dieses samt Ihrem Verbesserungsvorschlag <a href="https://metager.de/kontakt/" target="_blank">&uuml;ber unser Kontaktformular</a> mitzuteilen.',
+    'suchwortassoziator.title' => 'finding connotations to searchwords',
+    'suchwortassoziator.1'     => 'Ask the <a href="https://metager.de/klassik/asso/" target="_blank">MetaGer-Web-Assoziator</a> (Tools/Associator) to find connotations in a subject area. The service doesn&apos;t append upon any language because it uses webdocuments as a source. Therefore, you find any connotations to your used language and vice-versa.',
+    'suchwortassoziator.2'     => 'Example: you want to know more about &quot;tick bites&quot; and its dangers but you forgot the technical terms around this issue. The &quot;Assoziator&quot; presents &quot;Borreliose&quot; and &quot;fsme&quot; among others.',
+    'suchwortassoziator.3'     => 'Please let us know if something unsuitable appears. Please use our <a href="https://metager.de/kontakt/" target="_blank">contact form</a>.',
 
-    'widget.title'             => 'MetaGer Widget',
-    'widget.1'                 => 'Hierbei handelt es sich um einen Codegenerator, der es Ihnen erm&ouml;glicht, MetaGer in Ihre Webseite einzubinden. Sie k&ouml;nnen damit dann nach Belieben auf Ihrer eigenen Seite oder im Internet suchen lassen. Bei allen Fragen: <a href="https://metager.de/kontakt/" target="_blank">unser Kontaktformular</a>',
+    'widget.title'             => 'MetaGer widget',
+    'widget.1'                 => 'Provide full MetaGer functionality to your own website! Just select Tools/widget on our startpage, decide whether you want a powerful websearch or a sitesearch -which may be useful on your own sites. Enter the domainname and let the script do the rest. Questions to: <a href="https://metager.de/kontakt/" target="_blank">contact form</a>',
 
-    'urlshort.title'           => 'URL-Verk&uuml;rzer',
-    'urlshort.1'               => 'Sie finden den URL-Verk&uuml;rzer unter &quot;Dienste&quot;. Wenn Sie einen extrem langen Link- oder Domainnamen haben, k&ouml;nnen Sie diesen hier in eine kurze und pr&auml;gnante Form bringen. Metager sorgt dann zusammen mit Yourls f&uuml;r die Weiterleitung.',
+    'urlshort.title'           => 'URL-shortener',
+    'urlshort.1'               => 'Click: &quot;Tools/URL-shortener&quot;: Imagine your nice website &quot;http://www.all-lawn-tennis-clubs-strawberry-sales-price-check.co.uk&quot;. Just shorten it to &quot;metager.to/check-all&quot; or anything you like. MetaGer and Yourls then provide the redirection.',
 
-    'datenschutz.title'        => 'Anonymit&auml;t und Datensicherheit',
-    'datenschutz.1'            => 'Cookies, Session-IDs und IP-Adressen',
-    'datenschutz.2'            => 'Nichts von alldem wird hier bei MetaGer gespeichert, aufgehoben oder sonst irgendwie verarbeitet. Weil wir diese Thematik f&uuml;r extrem wichtig halten, haben wir auch M&ouml;glichkeiten geschaffen, die Ihnen helfen k&ouml;nnen, hier ein H&ouml;chstmaß an Sicherheit zu erreichen: den MetaGer-TOR-Hidden-Service und unseren Proxyserver.',
-    'datenschutz.3'            => 'Genauere Informationen dazu finden Sie unter der &Uuml;berschrift &quot;Dienste&quot;.',
+    'datenschutz.title'        => 'Privacy',
+    'datenschutz.1'            => 'cookies, session-IDs, IP addresses',
+    'datenschutz.2'            => 'We don&apos;t store or work with any personal information. We provide further privacy security services as follows:',
+    'datenschutz.3'            => '',
 
-    'tor.title'                => 'Tor-Hidden-Service',
-    'tor.1'                    => 'Bei MetaGer werden schon seit vielen Jahren die IP-Adressen der Nutzer anonymisiert und nicht gespeichert. Nichtsdestotrotz sind diese Adressen auf dem MetaGer-Server sichtbar: wenn MetaGer also einmal kompromittiert sein sollte, dann k&ouml;nnte dieser Angreifer Ihre Adressen mitlesen und speichern. Um dem h&ouml;chsten Sicherheitsbed&uuml;rfnis entgegenzukommen, unterhalten wir eine MetaGer-Repr&auml;sentanz im Tor-Netzwerk: den MetaGer-TOR-hidden-Service - erreichbar &uuml;ber: <a href="https://metager.de/tor/" target="_blank">https://metager.de/tor/</a>. F&uuml;r die Benutzung ben&ouml;tigen Sie einen speziellen Browser, den Sie etwa auf <a href="https://www.torproject.org/" target="_blank">https://www.torproject.org/</a> herunter laden k&ouml;nnen.',
-    'tor.2'                    => 'MetaGer erreichen Sie in diesem Browser dann unter: http://b7cxf4dkdsko6ah2.onion/tor/.',
+    'tor.title'                => 'Tor Hidden Service',
+    'tor.1'                    => 'MetaGer provides the highest reachable security level for your privacy (anonymised IP addresses, servers under german privacy protection law). For further security needs or fear of compromised servers you may use the MetaGer-Tor branch. Please download the specialized webbrowser from <a href="https://www.torproject.org/" target="_blank">https://www.torproject.org/</a>. You will find help there, too.',
+    'tor.2'                    => 'MetaGer Tor address: http://b7cxf4dkdsko6ah2.onion/tor/',
 
-    'proxy.title'              => 'MetaGer Proxyserver',
-    'proxy.1'                  => 'Um ihn zu verwenden, m&uuml;ssen Sie auf der MetaGer-Ergebnisseite nur auf den Link "anonym &ouml;ffnen" rechts neben dem Ergebnislink klicken. Dann wird Ihre Anfrage an die Zielwebseite &uuml;ber unseren anonymisierenden Proxy-Server geleitet und Ihre pers&ouml;nlichen Daten bleiben weiterhin v&ouml;llig gesch&uuml;tzt. Wichtig: wenn Sie ab dieser Stelle den Links auf den Seiten folgen, bleiben Sie durch den Proxy gesch&uuml;tzt. Sie k&ouml;nnen aber oben im Adressfeld keine neue Adresse ansteuern. In diesem Fall verlieren Sie den Schutz. Ob Sie noch gesch&uuml;tzt sind, sehen Sie ebenfalls im Adressfeld. Es zeigt: https://proxy.suma-ev.de/?url=hier steht die eigentlich Adresse.',
+    'proxy.title'              => 'MetaGer proxy server',
+    'proxy.1'                  => 'Looking at the MetaGer result page, you will find a link &quot;open anonymously&quot; marked by a small lock at the right of every single result. Use this link to hide behind the MetaGer proxy server. The provided protection is limited to the website you reached from our result page. Protection persists while you find https://proxy.suma-ev.de/?url=...in your webbrowser‘s address field.',
 
     'faq.title'                => 'FAQ',
-    'faq.1.h'                  => 'Was ist MetaGer?',
+    'faq.1.h'                  => 'MetaGer – what is it?',
     'faq.1.b'                  => 'MetaGer ist eine Suchmaschine, die Suchdienste parallel nach den von Ihnen eingegebenen Suchworten absucht und alle Ergebnisse zusammenfasst. MetaGer arbeitet die Ergebnisse sinnvoll auf. Dabei werden etwa (m&ouml;glichst) alle doppelten Treffer (Doubletten) zu einem zusammengefasst. Eine vollst&auml;ndige Erkennung von Doubletten ist allerdings unm&ouml;glich. So etwas nennt man eine Meta-Suchmaschine. Wenn man also sinnvoll suchen will, dann muss man etliche Suchmaschinen nacheinander "von Hand" absuchen und alle Ergebnisse vergleichen und zusammenf&uuml;hren. Diese Arbeit kann einem ein Automat - die Metasuchmaschine – abnehmen. Dazu kommt der h&ouml;here Abdeckungsgrad, denn nicht jede Suchmaschine kennt das ganze Internet. N&auml;heres zu Metasuchmaschinen finden Sie bei <a href="https://de.wikipedia.org/wiki/Metasuchmaschine" target="_blank">Wikipedia</a>. Vielleicht gen&uuml;gen Ihnen die Ergebnisse, die Ihnen MetaGer pr&auml;sentiert, vielleicht m&ouml;chten Sie mit einer einzelnen Suchmaschine nochmals suchen. In der Ergebnisliste sehen Sie an jedem Ergebnis, woher es kam und k&ouml;nnen auch direkt klicken. Viele weitere Suchmaschinen finden Sie zum Beispiel hier: <a href="http://www.klug-suchen.de/" target="_blank">klug-suchen.de</a>.',
     'faq.2.h'                  => 'Welche Suchdienste sucht MetaGer ab?',
     'faq.2.b'                  => 'Sie finden die Liste unter dem Men&uuml;punkt &quot;anpassen&quot; &uuml;ber dem Suchfeld. Alle, die Sie selbst nicht ausgeschaltet haben, werden abgesucht.',

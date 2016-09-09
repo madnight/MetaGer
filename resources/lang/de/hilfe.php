@@ -4,7 +4,7 @@ return [
     'title'               => 'MetaGer - Hilfe',
     'einstellungen'       => 'Einstellungen',
 
-    'allgemein.title'     => 'Allgemein',
+    'allgemein.title'     => 'Allgemeine Einstellungen',
     'allgemein.1'         => 'Alle Einstellungen finden Sie unter dem Suchfokus &quot;anpassen&quot;.',
     'allgemein.2'         => 'Der Farbtropfen links neben dem Suchfeld erm&ouml;glicht Ihnen eine individuelle Farbeinstellung für die Startseite.',
     'allgemein.3'         => 'Ein Plugin f&uuml;r die allermeisten Browser finden Sie leicht &uuml;ber den Link gleich unter dem Suchfeld, wo Ihr Browser bereits voreingestellt sein sollte.',

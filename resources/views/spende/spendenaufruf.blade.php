@@ -29,12 +29,12 @@ Zusammenarbeit mit Ihnen!
 <p>
 Am 18. Juli 2016 um 15.26 Uhr hatte der SUMA-EV als Betreiber von metager.de
 den Spendenaufruf auf der MetaGer-Website gestartet.  Keine zwei Minuten
-später gingen die ersten Spenden ein.  Und das ging bis heute so weiter -
+später gingen die ersten Spenden ein.  Und das ging bis dann so weiter -
 es ist unglaublich toll zu erleben, wie unsere Nutzer die unabhängige und
 nicht-kommerzielle Internet-Suche mit MetaGer unterstützen!  Sowohl mit
 Spenden als auch mit motivierenden Worten.
 <p>
-Wir DANKEN! Und wir beenden den Spendenaufruf heute. Die Finanzierung
+Wir DANKEN! Und wir haben den Spendenaufruf am 8.9.2016 beendet. Die Finanzierung
 unserer freien und unabhängigen Internetsuche ist nun für die nächste Zeit
 gesichert.
 <p>

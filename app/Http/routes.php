@@ -159,6 +159,12 @@ Route::group(
         Route::get('owi', function () {
             return redirect('https://metager.de/klassik/en/owi/');
         });
+        Route::get('MG20', function () {
+            return redirect('https://metager.de/klassik/MG20');
+        });
+        Route::get('databund', function () {
+            return redirect('https://metager.de/klassik/databund');
+        });
         Route::get('languages', 'LanguageController@createOverview');
         Route::get('languages/edit/{from}/{to}/{exclude?}', 'LanguageController@createEditPage');
     });

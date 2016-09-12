@@ -3,6 +3,7 @@
 @section('title', $title )
 
 @section('content')
+<div class="alert alert-warning" role="alert">{!! trans('faq.achtung') !!}</div>
 <h1>{!! trans('faq.title') !!}</h1>
 <h2>{!! trans('faq.dienste') !!}</h2>
 <h3>{!! trans('faq.suchwortassoziator.title') !!}</h3>
@@ -69,7 +70,7 @@
   </div>
   <div class="panel-body">
     <p>{!! trans('faq.faq.6.b.1') !!}</p>
-	<p>{!! trans('faq.faq.6.b.2') !!}</p>
+  <p>{!! trans('faq.faq.6.b.2') !!}</p>
   </div>
 </div>
 <div class="panel panel-default">
@@ -126,10 +127,10 @@
   </div>
   <div class="panel-body">
     <p>{!! trans('faq.faq.13.b.1') !!}</p>
-	<p>{!! trans('faq.faq.13.b.2') !!}</p>
-	<p>{!! trans('faq.faq.13.b.3') !!}</p>
-	<p>{!! trans('faq.faq.13.b.4') !!}</p>
-	<p>{!! trans('faq.faq.13.b.5') !!}</p>
+  <p>{!! trans('faq.faq.13.b.2') !!}</p>
+  <p>{!! trans('faq.faq.13.b.3') !!}</p>
+  <p>{!! trans('faq.faq.13.b.4') !!}</p>
+  <p>{!! trans('faq.faq.13.b.5') !!}</p>
   </div>
 </div>
 <div class="panel panel-default">

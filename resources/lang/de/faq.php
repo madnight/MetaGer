@@ -4,7 +4,7 @@ return [
     'achtung'                  => 'Achtung, da sich unsere Website in der aktiven Entwicklung befindet, kann es dazu kommen, dass sich immer wieder Änderungen an Aufbau und Funktion der Website ergeben. Wir versuchen stets das FAQ schnellstmöglich den Änderungen entsprechend anzupassen, können jedoch nicht verhindern, dass es zu temporären Unstimmigkeiten in Teilen der Erklärungen kommt.',
 
     'title'                    => 'MetaGer - FAQ',
-    'dienste'                  => 'Kostenlose Dienste',
+    'dienste'                  => 'Dienste',
 
     'suchwortassoziator.title' => 'Suchwortassoziator',
     'suchwortassoziator.1'     => 'Als Hilfe f&uuml;r die Erschließung eines Begriffsumfelds haben wir den <a href="https://metager.de/klassik/asso/" target="_blank">MetaGer-Web-Assoziator</a> entwickelt. Sie finden das Tool unter dem Reiter &quot;Dienste&quot;. Gibt man in diesen ein Suchwort ein, welches dem zu untersuchenden Fachgebiet irgendwie nahe kommt, dann wird versucht, typische Fachbegriffe dieses Gebietes aus dem WWW zu extrahieren.',
@@ -16,7 +16,7 @@ return [
 
     'urlshort.title'           => 'URL-Verk&uuml;rzer',
     'urlshort.1'               => 'Sie finden den URL-Verk&uuml;rzer unter &quot;Dienste&quot;. Wenn Sie einen extrem langen Link- oder Domainnamen haben, k&ouml;nnen Sie diesen hier in eine kurze und pr&auml;gnante Form bringen. Metager sorgt dann zusammen mit Yourls f&uuml;r die Weiterleitung.',
-
+    'dienste.kostenlos'        => 'Selbstverständlich sind all unsere Dienste kostenlos',
     'datenschutz.title'        => 'Anonymit&auml;t und Datensicherheit',
     'datenschutz.1'            => 'Cookies, Session-IDs und IP-Adressen',
     'datenschutz.2'            => 'Nichts von alldem wird hier bei MetaGer gespeichert, aufgehoben oder sonst irgendwie verarbeitet. Weil wir diese Thematik f&uuml;r extrem wichtig halten, haben wir auch M&ouml;glichkeiten geschaffen, die Ihnen helfen k&ouml;nnen, hier ein H&ouml;chstmaß an Sicherheit zu erreichen: den MetaGer-TOR-Hidden-Service und unseren Proxyserver.',

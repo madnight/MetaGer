@@ -3,6 +3,7 @@
 @section('title', $title )
 
 @section('content')
+<div class="alert alert-warning" role="alert">{!! trans('hilfe.achtung') !!}</div>
 <h1>{!! trans('hilfe.title') !!}</h1>
 <h2>{!! trans('hilfe.einstellungen') !!}</h2>
 <h3>{!! trans('hilfe.allgemein.title') !!}</h3>

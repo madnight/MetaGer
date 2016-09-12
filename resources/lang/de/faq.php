@@ -7,7 +7,7 @@ return [
     'dienste'                  => 'Dienste',
 
     'suchwortassoziator.title' => 'Suchwortassoziator',
-    'suchwortassoziator.1'     => 'Als Hilfe f&uuml;r die Erschließung eines Begriffsumfelds haben wir den <a href="https://metager.de/klassik/asso/" target="_blank">MetaGer-Web-Assoziator</a> entwickelt. Sie finden das Tool unter dem Reiter &quot;Dienste&quot;. Gibt man in diesen ein Suchwort ein, welches dem zu untersuchenden Fachgebiet irgendwie nahe kommt, dann wird versucht, typische Fachbegriffe dieses Gebietes aus dem WWW zu extrahieren.',
+    'suchwortassoziator.1'     => 'Als Hilfe f&uuml;r die Erschließung eines Begriffsumfelds haben wir den <a href="https://metager.de/klassik/asso/" target="_blank">MetaGer-Web-Assoziator</a> entwickelt. Sie finden das Tool auch direkt unter dem Reiter &quot;Dienste&quot;. Gibt man in diesen ein Suchwort ein, welches dem zu untersuchenden Fachgebiet irgendwie nahe kommt, dann wird versucht, typische Fachbegriffe dieses Gebietes aus dem WWW zu extrahieren.',
     'suchwortassoziator.2'     => 'Beispiel: Sie m&ouml;chten mehr &uuml;ber Zeckenbisse und deren Gefahren wissen, aber ihnen fallen die medizinischen Fachbegriffe f&uuml;r Erkrankungen aus diesem Bereich nicht mehr ein. Die Eingabe des Wortes &quot;Zeckenbisse&quot; in den Web-Assoziator liefert dann u.a. die Begriffe &quot;Borreliose&quot; und &quot;fsme&quot;.',
     'suchwortassoziator.3'     => 'Da diese Assoziationsanalyse u.a. aus Web-Dokumenten selber gewonnen wird, ist sie sprachunabh&auml;ngig; d.h. Sie k&ouml;nnen bei Eingabe deutscher W&ouml;rter Fachbegriffe aus beliebigen Sprachen gewinnen (und umgekehrt). Wenn Ihnen andererseits Assoziationsanalysen auffallen, die mit Hilfe Ihrer Fachkenntnisse besser sein k&ouml;nnten, dann z&ouml;gern Sie bitte nicht, uns dieses samt Ihrem Verbesserungsvorschlag <a href="https://metager.de/kontakt/" target="_blank">&uuml;ber unser Kontaktformular</a> mitzuteilen.',
 
@@ -15,7 +15,7 @@ return [
     'widget.1'                 => 'Hierbei handelt es sich um einen Codegenerator, der es Ihnen erm&ouml;glicht, MetaGer in Ihre Webseite einzubinden. Sie k&ouml;nnen damit dann nach Belieben auf Ihrer eigenen Seite oder im Internet suchen lassen. Bei allen Fragen: <a href="https://metager.de/kontakt/" target="_blank">unser Kontaktformular</a>',
 
     'urlshort.title'           => 'URL-Verk&uuml;rzer',
-    'urlshort.1'               => 'Sie finden den URL-Verk&uuml;rzer unter &quot;Dienste&quot;. Wenn Sie einen extrem langen Link- oder Domainnamen haben, k&ouml;nnen Sie diesen hier in eine kurze und pr&auml;gnante Form bringen. Metager sorgt dann zusammen mit Yourls f&uuml;r die Weiterleitung.',
+    'urlshort.1'               => 'Sie finden den <a href="https://metager.to/" target="_blank">URL-Verk&uuml;rzer</a> auch direkt unter &quot;Dienste&quot;. Wenn Sie einen extrem langen Link- oder Domainnamen haben, k&ouml;nnen Sie diesen hier in eine kurze und pr&auml;gnante Form bringen. MetaGer sorgt dann zusammen mit Yourls f&uuml;r die Weiterleitung.',
     'dienste.kostenlos'        => 'Selbstverständlich sind all unsere Dienste kostenlos',
     'datenschutz.title'        => 'Anonymit&auml;t und Datensicherheit',
     'datenschutz.1'            => 'Cookies, Session-IDs und IP-Adressen',

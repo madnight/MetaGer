@@ -2,12 +2,8 @@
 
 @section('title', $title )
 
-@section('navbarFocus.search', 'class="active"')
-
-@section('navbarFocus.donate', 'class="dropdown"')
-
 @section('content')
-	<div class="modal fade" id="plugin-modal" tab-index="-1" role="dialog">
+  <div class="modal fade" id="plugin-modal" tab-index="-1" role="dialog">
       <div class="modal-dialog ">
         <div class="content modal-content">
           <div class="modal-header">
@@ -111,7 +107,7 @@
         </div>
       </div>
     </div>
-	 <h1 id="mglogo">
+   <h1 id="mglogo">
             <a class="hidden-xs" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}">MetaGer
             </a>
           </h1>
@@ -226,7 +222,7 @@
               </li>
             </ul>
           </figure>
-        
+
 @endsection
 
 @section('optionalContent')

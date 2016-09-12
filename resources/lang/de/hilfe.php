@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'achtung'             => 'Achtung, da sich unsere Website in der aktiven Entwicklung befindet, kann es dazu kommen, dass sich immer wieder Änderungen an Aufbau und Funktion der Website ergeben. Wir versuchen stets die Hilfe schnellstmöglich den Änderungen entsprechend anzupassen, können jedoch nicht verhindern, dass es zu temporären Unstimmigkeiten in Teilen der Erklärungen kommt.',
+
     'title'               => 'MetaGer - Hilfe',
     'einstellungen'       => 'Einstellungen',
 
@@ -20,9 +22,9 @@ return [
 
     'mehrwortsuche.title' => 'Mehrwortsuche',
     'mehrwortsuche.1'     => 'Bei einer Mehrwortsuche werden als Voreinstellung diejenigen Dokumente gesucht, in denen möglichst alle Worte vorkommen, oder solche, die denen möglichst nahe kommen. Die Suche nach mehreren Begriffen zeigt ann&auml;hernd gleiche Ergebnisse mit oder ohne Verwendung von Anf&uuml;hrungszeichen. Wenn Sie jedoch zum Beispiel ein l&auml;ngeres Zitat oder so etwas suchen, sollten Sie Anf&uuml;hrungszeichen verwenden.',
-    'mehrwortsuche.2'     => 'Beispiel: die Suche nach <div class="well well-sm">&quot;in den &ouml;den Fensterh&ouml;hlen&quot;</div> liefert viele Ergebnisse, aber spannend (und genauer) wird es bei der Suche <div class="well well-sm">Schiller &quot;in den &ouml;den Fensterh&ouml;hlen&quot;</div>',
+    'mehrwortsuche.2'     => 'Beispiel: die Suche nach <div class="well well-sm">&quot;in den öden Fensterhöhlen&quot;</div> liefert viele Ergebnisse, aber spannend (und genauer) wird es bei der Suche <div class="well well-sm">Schiller &quot;in den &ouml;den Fensterh&ouml;hlen&quot;</div>',
 
     'grossklein.title'    => 'Gro&szlig;-/ Kleinschreibung',
     'grossklein.1'        => 'Gro&szlig;- und Kleinschreibung wird bei der Suche nicht unterschieden, es handelt sich um eine rein inhaltliche Suche.',
-    'grossklein.2'        => 'Beispiel: die Suche nach <div class="well well-sm">gro&szlig;schreibung</div> liefert also genau die gleichen Ergebnisse wie <div class="well well-sm">GRO&szlig;SCHREIBUNG</div>',
+    'grossklein.2'        => 'Beispiel: die Suche nach <div class="well well-sm">gro&szlig;schreibung</div> liefert genau die gleichen Ergebnisse wie <div class="well well-sm">GRO&szlig;SCHREIBUNG</div>',
 ];

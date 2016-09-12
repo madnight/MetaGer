@@ -88,6 +88,7 @@ abstract class Searchengine
         $this->hash       = md5($this->host . $this->getString . $this->port . $this->name);
         $this->resultHash = $metager->getHashCode();
         $this->canCache   = $metager->canCache();
+        if (!isset($this->additionalHeaders)) {$this->additionalHeaders = "";}
     }
 
     abstract public function loadResults($result);
@@ -111,7 +112,7 @@ abstract class Searchengine
              *  Sollen diese Parallel verarbeitet werden, muss ein anderer QUEUE_DRIVER verwendet werden.
              *  siehe auch: https://laravel.com/docs/5.2/queues
              */
-            $this->dispatch(new Search($this->resultHash, $this->host, $this->port, $this->name, $this->getString, $this->useragent));
+            $this->dispatch(new Search($this->resultHash, $this->host, $this->port, $this->name, $this->getString, $this->useragent, $this->additionalHeaders));
         }
     }
 

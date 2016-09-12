@@ -13,7 +13,7 @@ class Search extends Job implements ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
-    protected $hash, $host, $port, $name, $getString, $useragent, $fp;
+    protected $hash, $host, $port, $name, $getString, $useragent, $fp, $additionalHeaders;
     protected $buffer_length = 8192;
 
     /**
@@ -21,14 +21,15 @@ class Search extends Job implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($hash, $host, $port, $name, $getString, $useragent)
+    public function __construct($hash, $host, $port, $name, $getString, $useragent, $additionalHeaders)
     {
-        $this->hash      = $hash;
-        $this->host      = $host;
-        $this->port      = $port;
-        $this->name      = $name;
-        $this->getString = $getString;
-        $this->useragent = $useragent;
+        $this->hash              = $hash;
+        $this->host              = $host;
+        $this->port              = $port;
+        $this->name              = $name;
+        $this->getString         = $getString;
+        $this->useragent         = $useragent;
+        $this->additionalHeaders = $additionalHeaders;
     }
 
     /**
@@ -220,6 +221,10 @@ class Search extends Job implements ShouldQueue
         $out .= "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\n";
         $out .= "Accept-Language: de,en-US;q=0.7,en;q=0.3\r\n";
         $out .= "Accept-Encoding: gzip, deflate, br\r\n";
+        foreach (explode("$#!#$", $this->additionalHeaders) as $additionalHeader) {
+            $out .= str_replace("$#!!#$", "$#!#$", $additionalHeader);
+        }
+        $out .= $this->additionalHeaders;
         $out .= "Connection: keep-alive\r\n\r\n";
         # Anfrage senden:
         $sent   = 0;

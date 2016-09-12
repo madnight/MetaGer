@@ -222,7 +222,7 @@ class Search extends Job implements ShouldQueue
         $out .= "Accept-Language: de,en-US;q=0.7,en;q=0.3\r\n";
         $out .= "Accept-Encoding: gzip, deflate, br\r\n";
         foreach (explode("$#!#$", $this->additionalHeaders) as $additionalHeader) {
-            $out .= str_replace("$#!!#$", "$#!#$", $additionalHeader);
+            $out .= str_replace("$#!!#$", "$#!#$", $additionalHeader) . "\r\n";
         }
         $out .= $this->additionalHeaders;
         $out .= "Connection: keep-alive\r\n\r\n";

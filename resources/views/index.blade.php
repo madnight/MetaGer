@@ -7,7 +7,7 @@
 @section('navbarFocus.donate', 'class="dropdown"')
 
 @section('content')
-	<div class="modal fade" id="plugin-modal" tab-index="-1" role="dialog">
+  <div class="modal fade" id="plugin-modal" tab-index="-1" role="dialog">
       <div class="modal-dialog ">
         <div class="content modal-content">
           <div class="modal-header">
@@ -26,6 +26,8 @@
                 {{ trans('index.plugin.head.4') }}
               @elseif ($browser === 'Edge')
                 {{ trans('index.plugin.head.5') }}
+              @elseif ($browser === 'Safari')
+                {{ trans('index.plugin.head.6') }}
               @else
                 $(".seperator").addClass("hidden");
               @endif
@@ -38,8 +40,8 @@
                 <li>{{ trans('index.plugin.firefox.1') }}<img src="/img/Firefox.png" width="100%" /></li>
                 <li>{{ trans('index.plugin.firefox.2') }}<img src="/img/Firefox_Standard.png" width="100%" /></li>
               </ol>
-              <h4>MetaGer als Startseite im {{ $browser }} einrichten</h4>
               <hr />
+              <h4>MetaGer als Startseite im {{ $browser }} einrichten</h4>
               <ol>
                 <li>Klicken Sie oben rechts im Browser auf <span class="glyphicon glyphicon-menu-hamburger"></span> und öffnen Sie die "Einstellungen"</li>
                 <li>Tragen Sie im Feld "Startseite" "https://metager.de" ein.</li>
@@ -50,8 +52,8 @@
                 <li>{!! trans('index.plugin.chrome.2') !!}</li>
                 <li>{{ trans('index.plugin.chrome.3') }}</li>
               </ol>
-              <h4>MetaGer als Startseite im {{ $browser }} einrichten</h4>
               <hr />
+              <h4>MetaGer als Startseite im {{ $browser }} einrichten</h4>
               <ol>
                 <li>Klicken Sie oben rechts im Browser auf <span class="glyphicon glyphicon-option-vertical"></span> und öffnen Sie die "Einstellungen"</li>
                 <li>Im Bereich "Beim Start" wählen Sie "Bestimmte Seite oder Seiten öffnen und klicken anschließend auf "Seiten festlegen"</li>
@@ -66,8 +68,8 @@
                 <li>{{ trans('index.plugin.opera.6') }}</li>
                 <li><small>{{ trans('index.plugin.opera.7') }}<a href="https://www.mozilla.org/de/firefox/new/" target="_blank">{{ trans('index.plugin.opera.8') }}</a>{{ trans('index.plugin.opera.9') }}</small>
               </ol>
-              <h4>MetaGer als Startseite im {{ $browser }} einrichten</h4>
               <hr />
+              <h4>MetaGer als Startseite im {{ $browser }} einrichten</h4>
               <ol>
                 <li>Klicken Sie im Browser-Menü auf "Bearbeiten"->"Einstellungen"</li>
                 <li>Im Bereich "Beim Starten" wählen Sie "Eine bestimmte Seite, oder bestimmte Seiten öffnen
@@ -83,8 +85,8 @@
                 <li>{{ trans('index.plugin.IE.6') }}</li>
                 <li>{{ trans('index.plugin.IE.7') }}</li>
               </ol>
-              <h4>MetaGer als Startseite im {{ $browser }} einrichten</h4>
               <hr />
+              <h4>MetaGer als Startseite im {{ $browser }} einrichten</h4>
               <ol>
                 <li>Klicken Sie oben rechts im Browser auf <span class="glyphicon glyphicon-cog"></span> und öffnen Sie die "Internetoptionen"</li>
                 <li>Falls MetaGer die einzige Startseite sein soll, markieren Sie im Textfeld den kompletten Text und ersetzen Ihn durch "https://metager.de"</li>
@@ -97,8 +99,8 @@
                 <li>{{ trans('index.plugin.edge.4') }}</li>
                 <li>{{ trans('index.plugin.edge.5') }}</li>
               </ol>
-              <h4>MetaGer als Startseite im {{ $browser }} einrichten</h4>
               <hr />
+              <h4>MetaGer als Startseite im {{ $browser }} einrichten</h4>
               <ol>
                 <li>Klicken Sie oben rechts im Browser auf <span class="glyphicon glyphicon-option-horizontal"></span> und öffnen Sie die "Einstellungen"</li>
                 <li>Wählen Sie im Bereich "Öffnen mit" den Punkt "Bestimmte Seite(n)" aus</li>
@@ -106,12 +108,14 @@
                 <li>Im Bereich darunter tragen Sie "https://metager.de" in das Feld "Webadresse eingeben" ein und klicken auf das "+" Symbol</li>
                 <li>Entfernen Sie alle Einträge, die beim Start nicht geöffnet werden sollen (z.B. about:start), indem Sie rechts auf das kleine "x" klicken.</li>
               </ol>
+            @elseif ($browser === 'Safari')
+                {!! trans('index.plugin.safari') !!}
             @endif
           </div>
         </div>
       </div>
     </div>
-	 <h1 id="mglogo">
+   <h1 id="mglogo">
             <a class="hidden-xs" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}">MetaGer
             </a>
           </h1>
@@ -220,13 +224,13 @@
               </li>
               <li class="hidden-xs seperator">|
               </li>
-              <li id="plug" @unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge')
+              <li id="plug" @unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge' || $browser === 'Safari')
                 class="hidden" @endunless >
                 <a href="#" id="plugin" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default" title="{{ trans('index.plugintitle') }}">{{ trans('index.plugin') }}</a>
               </li>
             </ul>
           </figure>
-        
+
 @endsection
 
 @section('optionalContent')

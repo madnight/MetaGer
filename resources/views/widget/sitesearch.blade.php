@@ -3,20 +3,7 @@
 @section('title', $title )
 
 @section('content')
-<script type="text/javascript">
-        function copyCode() {
-            $("#codesnippet").select();
-            try {
-                var successful = document.execCommand('copy');
-                if( successful )
-                    alert('{{ trans('websearch.alert.success') }}');
-                else
-                    alert('{{ trans('websearch.alert.failure') }}');
-            } catch (err) {
-                alert('{{ trans('websearch.alert.failure') }}');
-            }
-        }
-</script>
+<script type="text/javascript" src="/js/widgets.js"></script>
 <h1>{{ trans('sitesearch.head.1') }}</h1>
 <p>{{ trans('sitesearch.head.2') }}</p>
 <h2>{{ trans('sitesearch.head.3') }}</h2>
@@ -33,7 +20,7 @@
   <input type="hidden" name="encoding" value="utf8">
   <input type="hidden" name="site" value="{{ $site }}">
 </form>
-<h2>{{ trans('sitesearch.generated.5') }} <button class="btn btn-default" type="submit" onclick="copyCode()"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> {{ trans('websearch.head.copy') }}</button></h2>
+<h2>{{ trans('sitesearch.generated.5') }} <button id="copyButton" class="btn btn-default" type="submit" onclick="copyCode()"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> {{ trans('websearch.head.copy') }}</button></h2>
 <textarea id="codesnippet" readonly style="width:100%;height:500px">&lt;form class="metager-searchform" action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}/meta/meta.ger3" method="get" accept-charset="UTF-8" &gt;
   &lt;style type="text/css" scoped&gt;
   .metager-searchinput {

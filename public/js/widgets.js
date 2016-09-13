@@ -14,3 +14,6 @@ function copyCode() {
         $('#copyButton').addClass('btn-danger');
     }
 }
+window.onload = function() {
+    $('#copyButton').bind('click', copyCode);
+};

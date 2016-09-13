@@ -7,13 +7,12 @@
 @section('navbarFocus.donate', 'class="dropdown"')
 
 @section('content')
-	<div class="modal fade" id="plugin-modal" tab-index="-1" role="dialog">
+  <div class="modal fade" id="plugin-modal" tab-index="-1" role="dialog">
       <div class="modal-dialog ">
         <div class="content modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;
-              </span>
+              <span aria-hidden="true">&times;</span>
             </button>
             <h4>
               @if ($browser === 'Firefox' || $browser === 'Mozilla')
@@ -111,7 +110,7 @@
         </div>
       </div>
     </div>
-	 <h1 id="mglogo">
+   <h1 id="mglogo">
             <a class="hidden-xs" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}">MetaGer
             </a>
           </h1>
@@ -119,49 +118,38 @@
             <fieldset id="foki">
               <input id="web" type="radio" name="focus" value="web" form="searchForm" @if ($focus === 'web') checked @endif required="">
               <label id="web-label" for="web">
-                <span class="glyphicon glyphicon-globe">
-                </span>
-                <span class="content">Web
-                </span>
+                <span class="glyphicon glyphicon-globe"></span>
+                <span class="content">{{ trans('index.foki.web') }}</span>
               </label>
               <input id="bilder" type="radio" name="focus" value="bilder" form="searchForm" @if ($focus === 'bilder') checked @endif required="">
               <label id="bilder-label" for="bilder">
-                <span class="glyphicon glyphicon-picture">
-                </span>
-                <span class="content">{{ trans('index.foki.bilder') }}
-                </span>
+                <span class="glyphicon glyphicon-picture"></span>
+                <span class="content">{{ trans('index.foki.bilder') }}</span>
               </label>
               <input id="nachrichten" type="radio" name="focus" value="nachrichten" form="searchForm" @if ($focus === 'nachrichten') checked @endif required="">
               <label id="nachrichten-label" for="nachrichten">
-                <span class="glyphicon glyphicon-bullhorn">
-                </span>
-                <span class="content">{{ trans('index.foki.nachrichten') }}
-                </span>
+                <span class="glyphicon glyphicon-bullhorn"></span>
+                <span class="content">{{ trans('index.foki.nachrichten') }}</span>
               </label>
               <input id="wissenschaft" type="radio" name="focus" value="wissenschaft" form="searchForm" @if ($focus === 'wissenschaft') checked @endif required="">
               <label id="wissenschaft-label" for="wissenschaft">
-                <span class="glyphicon glyphicon-file">
-                </span>
-                <span class="content">{{ trans('index.foki.wissenschaft') }}
-                </span>
+                <span class="glyphicon glyphicon-file"></span>
+                <span class="content">{{ trans('index.foki.wissenschaft') }}</span>
               </label>
               <input id="produkte" type="radio" name="focus" value="produktsuche" form="searchForm" @if ($focus === 'produkte') checked @endif required="">
               <label id="produkte-label" for="produkte">
-                <span class="glyphicon glyphicon-shopping-cart">
-                </span>
-                <span class="content">{{ trans('index.foki.produkte') }}
-                </span>
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+                <span class="content">{{ trans('index.foki.produkte') }}</span>
               </label>
               <input id="angepasst" type="radio" name="focus" value="angepasst" form="searchForm" @if ($focus === 'angepasst') checked @endif required="">
               <label id="anpassen-label" for="angepasst">
-                <span class="glyphicon glyphicon-cog">
-                </span>
+                <span class="glyphicon glyphicon-cog"></span>
                 <span class="content">
                   <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/settings") }}">
                   @if ($focus === 'angepasst')
-                  {{ trans('index.foki.angepasst') }}
+                    {{ trans('index.foki.angepasst') }}
                   @else
-                  {{ trans('index.foki.anpassen') }}
+                    {{ trans('index.foki.anpassen') }}
                   @endif
                   </a>
                 </span>
@@ -226,7 +214,7 @@
               </li>
             </ul>
           </figure>
-        
+
 @endsection
 
 @section('optionalContent')

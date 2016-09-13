@@ -29,10 +29,10 @@
 	<footer>
 		<div class="row">
 			<div class="col-xs-6">
-				<a class="btn btn-default" href="/">MetaGer-Startseite</a>
+				<a class="btn btn-default" href="/">{!! trans('resultPage.startseite') !!}</a>
 			</div>
 			<div class="col-xs-6">
-				<a class="btn btn-default" href="/impressum/">Impressum</a>
+				<a class="btn btn-default" href="/impressum/">{!! trans('resultPage.impressum') !!}</a>
 			</div>
 		</div>
 	</footer>

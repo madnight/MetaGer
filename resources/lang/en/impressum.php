@@ -15,13 +15,11 @@ Deutschland/Germany',
 Tel.: ++49-(0)511-34000070
 EMail: <a href="mailto:office@suma-ev.de">office@suma-ev.de</a><a href="/kontakt/"> - Public-PGP-Key</a>
 <a href="/kontakt/">encrypted contact form</a>',
-
     'info.4'     => 'Board:
 <a href="http://www.intares.de/service_provider_info/management.html">Dr. Bernhard Biedermann</a>, <a href="http://www.nebel.de/unternehmen/vita.shtml">Michael Nebel</a>, <a href="http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann">Dr. Wolfgang Sander-Beuermann</a>',
     'info.5'     => 'Management:
 <a href="http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann">Dr. Wolfgang Sander-Beuermann</a>
-Public-PGP-Key: ',
-    'info.5.5'   => '
+Public-PGP-Key: <a href="https://metager.de/en/team/pubkey-wsb">https://metager.de/en/team/pubkey-wsb</a>
 Facebook: <a href="https://www.facebook.com/wolfgang.sanderbeuermann%0A">https://www.facebook.com/wolfgang.sanderbeuermann</a>
 Twitter: <a href="http://twitter.com/wosabeu">http://twitter.com/wosabeu</a>',
     'info.6'     => 'Youth Protection Commissioner: Georg Becker
@@ -34,7 +32,6 @@ under VR200033.
 sales tax identification number: DE 300 464 091
 
 The "Gottfried Wilhelm Leibniz Universität Hannover" is a statutory body.',
-
-    'info.11'    => 'Liability Note:',
-    'info.12'    => 'Despite thorough content control we do not take responsability for any content of external links. For the content of external links only their operators are reliable.',
+    'info.9'     => 'Liability Note:',
+    'info.10'    => 'Despite thorough content control we do not take responsability for any content of external links. For the content of external links only their operators are reliable.',
 ];

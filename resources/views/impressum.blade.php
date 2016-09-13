@@ -10,10 +10,10 @@
 <address>{!! trans('impressum.info.2') !!}</address>
 <address>{!! trans('impressum.info.3') !!}</address>
 <p>{!! trans('impressum.info.4') !!}</p>
-<p>{!! trans('impressum.info.5') !!}<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/team/pubkey-wsb") }}">{!! url('/team/pubkey-wsb') !!}</a></p>
+<p>{!! trans('impressum.info.5') !!}</p>
 <p>{!! trans('impressum.info.6') !!}</p>
 <p>{!! trans('impressum.info.7') !!}</p>
 <p>{!! trans('impressum.info.8') !!}</p>
-<h2>{!! trans('impressum.info.11') !!}</h2>
-<p>{!! trans('impressum.info.12') !!}</p>
+<h2>{!! trans('impressum.info.9') !!}</h2>
+<p>{!! trans('impressum.info.10') !!}</p>
 @endsection

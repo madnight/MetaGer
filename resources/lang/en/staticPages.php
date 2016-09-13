@@ -23,6 +23,7 @@ return [
     'nav18'            => 'Contact',
     'nav19'            => 'Language',
     'nav22'            => 'Citation Search',
+    'nav24'            => 'MetaGer source code',
 
     'navigationToggle' => 'show navigation',
 

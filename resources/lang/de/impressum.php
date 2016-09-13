@@ -15,13 +15,11 @@ Deutschland/Germany',
 Tel.: ++49-(0)511-34000070
 EMail: <a href="mailto:office@suma-ev.de">office@suma-ev.de</a><a href="/kontakt/"> - Public-PGP-Key</a>
 <a href="/kontakt/">Verschlüsselndes Kontakformular</a>',
-
     'info.4'     => 'Vorstand:
 <a href="http://www.intares.de/service_provider_info/management.html">Dr. Bernhard Biedermann</a>, <a href="http://www.nebel.de/unternehmen/vita.shtml">Michael Nebel</a>, <a href="http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann">Dr. Wolfgang Sander-Beuermann</a>',
     'info.5'     => 'Geschäftsführung:
 <a href="http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann">Dr. Wolfgang Sander-Beuermann</a>
-Public-PGP-Key: ',
-    'info.5.5'   => '
+Public-PGP-Key: <a href="https://metager.de/team/pubkey-wsb">https://metager.de/team/pubkey-wsb</a>
 Facebook: <a href="https://www.facebook.com/wolfgang.sanderbeuermann%0A">https://www.facebook.com/wolfgang.sanderbeuermann</a>
 Twitter: <a href="http://twitter.com/wosabeu">http://twitter.com/wosabeu</a>',
     'info.6'     => 'Jugendschutzbeauftragter: Georg Becker
@@ -36,7 +34,6 @@ Umsatzsteueridentifikationsnummer: DE 300 464 091
 
 Die "Gottfried Wilhelm Leibniz Universität Hannover" ist eine
 Körperschaft des öffentlichen Rechts.',
-
-    'info.11'    => 'Haftungshinweis:',
-    'info.12'    => 'Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.',
+    'info.9'     => 'Haftungshinweis:',
+    'info.10'    => 'Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.',
 ];

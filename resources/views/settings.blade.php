@@ -5,7 +5,7 @@
 @section('content')
 	<form action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}" method="get">
 		<h1>{{ trans('settings.head.1') }}</h1>
-		<p id="lead">{{ trans('settings.head.2') }} <a href="#unten">{{ trans('settings.head.3') }}</a> {{ trans('settings.head.4') }}</p>
+		<p id="lead">{{ trans('settings.head.2') }}</p>
 		<h2>{{ trans('settings.allgemein.1') }}</h2>
 		<input type="hidden" name="focus" value="angepasst">
 		<div class="checkbox">

@@ -16,6 +16,8 @@ your E-Mail adress on the money transfer form.',
     'logos.1'                   => 'Comfortably with Paypal<br>Via Paypal by credit card too (without PayPal registration),',
     'logos.2'                   => 'or Bitcoins',
 
+    'bitcoins'                  => 'Our Bitcoin adress:',
+
     'lastschrift.1'             => 'Donate by wire transfer',
     'lastschrift.2'             => 'Enter your account data along with the desired amount. We will debit your bank account accordingly.',
     'lastschrift.3'             => 'Please enter your name:',
@@ -29,7 +31,7 @@ your E-Mail adress on the money transfer form.',
     'lastschrift.9'             => 'Donate',
     'lastschrift.10'            => 'Your information is transmitted encrypted and is not read by a third party. The amount you enter will be debited from your account by us. SUMA-EV only uses your information for accounting; Your information is not passed on. Donations to the SUMA-EV are tax-deductible, because the association is recognized as charitable by the Finanzamt Hannover Nord (revenue board), listed in the register of associations, Amtsgericht Hannover under VR200033. A certificate for single donations above 200,-EUR is sent automatically. For donations below 200,-EUR an account current is enough for tax-deduction.',
 
-    'drucken'                   => 'print'
+    'drucken'                   => 'print',
 
     'about.1'                   => 'About us',
     'about.2'                   => 'The German search engine MetaGer is operated and permanently refined by SUMA-EV - Verein für freien Wissenszugang.  We are a charitable NGO and one of our goals is the development and operation of search engines.  We do not receive any public funds and therefore are relying on your donations.

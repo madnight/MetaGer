@@ -134,7 +134,7 @@ class LanguageController extends Controller
             $t = $this->deMultidimensionalizeArray($t);
         }
 
-        #die(var_dump($t));
+        $t = $this->createHints($t, $to);
 
         return view('languages.edit')
             ->with('texts', $t)
@@ -145,7 +145,26 @@ class LanguageController extends Controller
             ->with('langTexts', $langTexts)
             ->with('sum', $sum)
             ->with('css', 'editLanguage.css')
+            ->with('js', ['editLanguage.js'])
             ->with('new', $ex["new"]);
+    }
+
+    private function createHints($t, $to)
+    {
+        foreach ($t as $key => $langTexts) {
+            if ($langTexts !== "") {
+                foreach ($langTexts as $lang => $text) {
+                    if ($lang !== $to) {
+                        if (preg_match("/\s:\S+/si", $text)) {
+                            #die("test");
+                            $t[$key][$lang] = preg_replace("/(\s)(:\S+)/si", "$1<a class=\"text-danger hint\" data-toggle=\"tooltip\" data-trigger=\"hover\" data-placement=\"auto\" title=\"Dies ist ein Variablenname. Er wird dort, wo der Text verwendet wird durch einen dynamischen Wert ersetzt. In der Übersetzung sollte dieser deshalb auch so wie er ist in den Satz integriert werden.\" data-container=\"body\" >$2</a>", $text);
+                        }
+
+                    }
+                }
+            }
+        }
+        return $t;
     }
 
     private function getValues($values, $prefix = "")
@@ -218,13 +237,13 @@ class LanguageController extends Controller
         return $tmp;
     }
 
-    private function startsWith($haystack, $needle)
+    public function startsWith($haystack, $needle)
     {
         // search backwards starting from haystack length characters from the end
         return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;
     }
 
-    private function endsWith($haystack, $needle)
+    public function endsWith($haystack, $needle)
     {
         // search forward starting from end minus needle length characters
         return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);

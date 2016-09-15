@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'achtung'             => 'Achtung, da sich unsere Website in der aktiven Entwicklung befindet, kann es dazu kommen, dass sich immer wieder Änderungen an Aufbau und Funktion der Website ergeben. Wir versuchen stets die Hilfe schnellstmöglich den Änderungen entsprechend anzupassen, können jedoch nicht verhindern, dass es zu temporären Unstimmigkeiten in Teilen der Erklärungen kommt.',
+
     'title'               => 'MetaGer - Hilfe',
     'einstellungen'       => 'Einstellungen',
 
@@ -21,8 +23,7 @@ return [
     'mehrwortsuche.title' => 'Mehrwortsuche',
     'mehrwortsuche.1'     => 'Bei einer Mehrwortsuche werden als Voreinstellung diejenigen Dokumente gesucht, in denen möglichst alle Worte vorkommen, oder solche, die denen möglichst nahe kommen. Die Suche nach mehreren Begriffen zeigt annähernd gleiche Ergebnisse mit oder ohne Verwendung von Anführungszeichen. Wenn Sie jedoch zum Beispiel ein längeres Zitat oder so etwas suchen, sollten Sie Anführungszeichen verwenden.',
     'mehrwortsuche.2'     => 'Beispiel: die Suche nach <div class="well well-sm">"in den öden Fensterhöhlen"</div> liefert viele Ergebnisse, aber spannend (und genauer) wird es bei der Suche <div class="well well-sm">Schiller "in den öden Fensterhöhlen"</div>',
-
     'grossklein.title'    => 'Gro&szlig;-/ Kleinschreibung',
     'grossklein.1'        => 'Gro&szlig;- und Kleinschreibung wird bei der Suche nicht unterschieden, es handelt sich um eine rein inhaltliche Suche.',
-    'grossklein.2'        => 'Beispiel: die Suche nach <div class="well well-sm">gro&szlig;schreibung</div> liefert also genau die gleichen Ergebnisse wie <div class="well well-sm">GRO&szlig;SCHREIBUNG</div>',
+    'grossklein.2'        => 'Beispiel: die Suche nach <div class="well well-sm">gro&szlig;schreibung</div> liefert genau die gleichen Ergebnisse wie <div class="well well-sm">GRO&szlig;SCHREIBUNG</div>',
 ];

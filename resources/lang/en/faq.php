@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'achtung'                  => 'Warning! For our website is in constant development there are continuous changes to the structure and functionality of our website. We try to update our help pages as quickly as possible, but can not prevent temporary mistakes.',
+
     'title'                    => 'MetaGer - FAQ',
     'dienste'                  => 'Tools-free of charge',
 
@@ -29,4 +31,7 @@ return [
 
     'faq.title'                => 'FAQ',
     'faq.1.h'                  => 'MetaGer – what is it?',
+    'faq.10.b'                 => 'Versuchen Sie bitte zuerst, das aktuelle Plugin zu installieren. Zum Installieren einfach auf den Link direkt unter dem Suchfeld klicken. Dort sollte Ihr Browser schon erkannt worden sein. Wenn Sie dann noch Probleme haben sollten, wenden Sie sich bitte an uns: <a href="mailto:office@suma-ev.de" target="_blank">office@suma-ev.de</a>',
+    'faq.13.b.1'               => 'Der Schutz pers&ouml;nlicher Daten ist uns so wichtig, dass wir alles, was dem zuwiderlaufen k&ouml;nnte, gar nicht erst machen: es gibt bei uns keine Cookies oder Session-IDs oder irgendetwas, was so etwas erm&ouml;glichen w&uuml;rde. Siehe auch: <a href="https://metager.de/datenschutz/" target="_blank">https://metager.de/datenschutz/</a>',
+    'faq.15.b'                 => 'MetaGer gibt es seit 1996 ... die Einzelheiten der Entstehungsgeschichte kann man hier in einem Interview nachlesen: <a href="http://blog.suma-ev.de/node/207" target="_blank">http://blog.suma-ev.de/node/207</a>.',
 ];

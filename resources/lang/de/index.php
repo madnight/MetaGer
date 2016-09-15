@@ -36,6 +36,7 @@ return [
     'plugin.head.3'       => 'MetaGer zum Opera hinzufügen',
     'plugin.head.4'       => 'MetaGer zum Internet Explorer hinzufügen',
     'plugin.head.5'       => 'MetaGer zum Microsoft Edge hinzufügen',
+    'plugin.head.6'       => 'MetaGer zum Safari hinzufügen',
     'plugin.head.info'    => '(aktuelle Sucheinstellungen werden übernommen)',
 
     'plugin.firefox.1'    => 'Klicken Sie in Ihrem Browser oben rechts im Suchfeld auf die Lupe mit dem kleinen "+" und dann auf "MetaGer hinzufügen" (siehe Bild)',
@@ -68,4 +69,6 @@ return [
     'plugin.edge.3'       => 'Scrollen Sie nach unten und klicken auf "Erweiterte Einstellungen anzeigen"',
     'plugin.edge.4'       => 'Scrollen Sie erneut nach unten bis zum Punkt "In Adressleiste suchen mit" und klicken Sie auf "Ändern"',
     'plugin.edge.5'       => 'Wählen Sie "MetaGer: Sicher suchen & finden..." und klicken Sie auf "Als Standard"',
+
+    'plugin.safari'       => '<ol><li>Installieren Sie das Safari-PlugIn <a href="http://www.opensearchforsafari.com/" target="_blank">OpenSearchforSafari</a>.<li>Rufen Sie MetaGer auf und fügen Sie MetaGer mit dem OpenSearch-Knopf(Lupen-Symbol) in der Safari-Men&uuml;leiste hinzu.<li>L&ouml;schen Sie (nach Bedarf) die anderen Suchmaschinen aus dem OpenSearch-PlugIn, indem Sie das "X" neben diesen betätigen.<li>Sie können nun über den OpenSearch-Knopf(Lupe) mit MetaGer suchen.',
 ];

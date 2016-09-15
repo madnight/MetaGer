@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'achtung'             => 'Warning! For our website is in constant development there are continuous changes to the structure and functionality of our website. We try to update our help pages as quickly as possible, but can not prevent temporary mistakes.',
+
     'allgemein.title' => 'common settings',
     'allgemein.1'     => 'You may change general settings by choosing "customize".',
     'allgemein.2'     => 'The colour drop on the left side of the search field allows you to apply your favourite colour to MetaGer.',

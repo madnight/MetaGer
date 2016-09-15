@@ -30,6 +30,7 @@ return [
     'plugin.head.3'       => 'Add MetaGer to your Opera',
     'plugin.head.4'       => 'Add MetaGer to your Internet Explorer',
     'plugin.head.5'       => 'Add MetaGer to your Microsoft Edge',
+    'plugin.head.6'       => 'Add MetaGer to your Safari',
 
     'plugin.firefox.1'    => 'Click on the magnifying glass with the small green "+" and then on "Add MetaGer.." (picture 1)',
     'plugin.firefox.2'    => 'Now right click on the new MetaGer Logo in the List and select "Make MetaGer the default search engine" (picture2)',
@@ -67,4 +68,6 @@ return [
     'plugin.edge.3'       => 'Scroll down and click on "View advanced settings"',
     'plugin.edge.4'       => 'Scroll down until you reach "Search in adress bar with" and click "Change"',
     'plugin.edge.5'       => 'Select "MetaGer: Search and Find Savely, Protect Privacy..." and click on "Set as default"',
+
+    'plugin.safari'       => '<ol><li>Start by installing the <a href="http://www.opensearchforsafari.com/" target="_blank">OpenSearchforSafari</a> extension.<li>Visit MetaGer and it to your browser using the OpenSearch button in your safari toolbar.<li>Optionally delete other search engines from your OpenSearch extension.<li>You can now search with MetaGer using the OpenSearch button.',
 ];

@@ -2,10 +2,6 @@
 
 @section('title', $title )
 
-@section('navbarFocus.search', 'class="active"')
-
-@section('navbarFocus.donate', 'class="dropdown"')
-
 @section('content')
   <div class="modal fade" id="plugin-modal" tab-index="-1" role="dialog">
       <div class="modal-dialog ">

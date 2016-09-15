@@ -165,4 +165,7 @@ Route::group(
         Route::get('databund', function () {
             return redirect('https://metager.de/klassik/databund');
         });
+        Route::get('languages', 'LanguageController@createOverview');
+        Route::get('languages/edit/{from}/{to}/{exclude?}', 'LanguageController@createEditPage');
+        Route::post('languages/edit/{from}/{to}/{exclude?}', 'MailController@sendLanguageFile');
     });

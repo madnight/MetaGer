@@ -160,12 +160,12 @@ class MailController extends Controller
 
         $message = "Moin moin,\n\nein Benutzer hat eine Sprachdatei aktualisiert.\nSollten die Texte so in Ordnung sein, ersetzt, oder erstellt die Datei aus dem Anhang in folgendem Pfad:\n$filename\n\nFolgend zusätzlich der Inhalt der Datei:\n\n$output";
 
-        #Mail::send(['text' => 'kontakt.mail'], ['messageText' => $message], function ($message) use ($output, $filename) {
-        #    $message->subject('MetaGer - Sprachdatei');
-        #    $message->from('noreply@metager.de');
-        #    $message->to('dominik@suma-ev.de');
-        #    $message->attachData($output, basename($filename));
-        #});
+        Mail::send(['text' => 'kontakt.mail'], ['messageText' => $message], function ($message) use ($output, $filename) {
+            $message->subject('MetaGer - Sprachdatei');
+            $message->from('noreply@metager.de');
+            $message->to('office@suma-ev.de');
+            $message->attachData($output, basename($filename));
+        });
 
         # Wir haben nun eine Mail an uns geschickt, welche die entsprechende Datei beinhaltet.
         # Nun müssen wir den Nutzer eigentlich nur noch zurück leiten und die Letzte bearbeitete Datei ausschließen:

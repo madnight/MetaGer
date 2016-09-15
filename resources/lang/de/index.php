@@ -9,6 +9,8 @@ return [
     'foki.anpassen'       => 'anpassen',
     'foki.angepasst'      => 'angepasst',
 
+    'design'              => 'Persönliches Design auswählen'
+
     'conveyor'            => 'Einkaufen bei MetaGer-Fördershops',
     'partnertitle'        => 'MetaGer unterstützen, ohne Mehrkosten für Sie',
 

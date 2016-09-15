@@ -1,6 +1,7 @@
 <?php
 
 return [
-    'starseite' => 'MetaGer-Startseite',
-    'impressum' => 'Impressum',
+    'opensearch' => 'MetaGer: Sicher suchen & finden, Privatsphäre schützen',
+    'starseite'  => 'MetaGer-Startseite',
+    'impressum'  => 'Impressum',
 ];

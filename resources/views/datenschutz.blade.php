@@ -22,11 +22,11 @@
 </ul>
 <h2>{!! trans('datenschutz.twitter') !!}</h2>
 <pre><p>&gt; 7.4.2014 C. Schulzki-Haddouti @kooptech
-&gt; MetaGer d&uuml;rfte im Moment die sicherste Suchmaschine weltweit sein</p>
+&gt; MetaGer dürfte im Moment die sicherste Suchmaschine weltweit sein</p>
 <p>&gt; 8.4.2014 Stiftung Datenschutz @DS_Stiftung
-&gt; Wenn das Suchergebnis anonym bleiben soll: @MetaGer, die gemeinn&uuml;tzige
+&gt; Wenn das Suchergebnis anonym bleiben soll: @MetaGer, die gemeinnützige
 &gt; Suchmaschine aus #Hannover</p>
-<p>&gt; 8.4.2014 Markus K&auml;kenmeister @markus2009
+<p>&gt; 8.4.2014 Markus Käkenmeister @markus2009
 &gt; Suchmaschine ohne Tracking</p>
 <p>&gt; 8.4.2014 Marko [~sHaKaL~] @mobilef0rensics Nice; anonymous Search and find
 &gt; with MetaGer</p>

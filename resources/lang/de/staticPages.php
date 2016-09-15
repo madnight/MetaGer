@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'opensearch'       => 'MetaGer: Sicher suchen & finden, Privatsphäre schützen',
+
     'nav1'             => 'Suche',
     'nav2'             => 'Spenden',
     'nav3'             => 'Datenschutz',

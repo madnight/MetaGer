@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'title' => 'Ups. Das h&auml;tte nicht passieren d&uuml;rfen.',
-    'text'  => 'Bei Ihrer Anfrage ist etwas schief gegangen. Wir versuchen, m&ouml;glichst schnell, der Sache auf den Grund zu gehen.',
+    'title' => 'Ups. Das hätte nicht passieren dürfen.',
+    'text'  => 'Bei Ihrer Anfrage ist etwas schief gegangen. Wir versuchen, möglichst schnell, der Sache auf den Grund zu gehen.',
 ];

@@ -37,12 +37,6 @@ return [
     'plugin.chrome.1'     => 'Click ',
     'plugin.chrome.2'     => 'here',
     'plugin.chrome.3'     => ', to add MetaGer as a search engine.',
-    'plugin.chrome.4'     => 'Click OK on the next Popup',
-    'plugin.chrome.5'     => '(If the OK.button is disabled, MetaGer is already registered as a search engine. In this case click cancel and go on with step 2.)',
-    'plugin.chrome.6'     => 'Click this icon in the top right corner of your browser',
-    'plugin.chrome.7'     => 'Select "Settings"',
-    'plugin.chrome.8'     => 'In the search section, click on "Manage Search Engines"',
-    'plugin.chrome.9'     => 'In the displayed list, find MetaGer. Move your mouse over the entry and then click on "Make Default"',
 
     'plugin.opera.1'      => 'Click ',
     'plugin.opera.2'      => 'here',

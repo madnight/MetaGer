@@ -167,4 +167,5 @@ Route::group(
         });
         Route::get('languages', 'LanguageController@createOverview');
         Route::get('languages/edit/{from}/{to}/{exclude?}', 'LanguageController@createEditPage');
+        Route::post('languages/edit/{from}/{to}/{exclude?}', 'MailController@sendLanguageFile');
     });

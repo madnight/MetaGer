@@ -152,13 +152,15 @@ class LanguageController extends Controller
     private function createHints($t, $to)
     {
         foreach ($t as $key => $langTexts) {
-            foreach ($langTexts as $lang => $text) {
-                if ($lang !== $to) {
-                    if (preg_match("/\s:\S+/si", $text)) {
-                        #die("test");
-                        $t[$key][$lang] = preg_replace("/(\s)(:\S+)/si", "$1<a class=\"text-danger hint\" data-toggle=\"tooltip\" data-trigger=\"hover\" data-placement=\"auto\" title=\"Dies ist ein Variablenname. Er wird dort, wo der Text verwendet wird durch einen dynamischen Wert ersetzt. In der Übersetzung sollte dieser deshalb auch so wie er ist in den Satz integriert werden.\" data-container=\"body\" >$2</a>", $text);
-                    }
+            if ($langTexts !== "") {
+                foreach ($langTexts as $lang => $text) {
+                    if ($lang !== $to) {
+                        if (preg_match("/\s:\S+/si", $text)) {
+                            #die("test");
+                            $t[$key][$lang] = preg_replace("/(\s)(:\S+)/si", "$1<a class=\"text-danger hint\" data-toggle=\"tooltip\" data-trigger=\"hover\" data-placement=\"auto\" title=\"Dies ist ein Variablenname. Er wird dort, wo der Text verwendet wird durch einen dynamischen Wert ersetzt. In der Übersetzung sollte dieser deshalb auch so wie er ist in den Satz integriert werden.\" data-container=\"body\" >$2</a>", $text);
+                        }
 
+                    }
                 }
             }
         }

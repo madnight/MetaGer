@@ -19,7 +19,14 @@
 			<tr @if(floor(($values['textCount'] / count($sum)) * 100) < 100) class="danger" @else class="success" @endif>
 				<td>{{$lang}}</td>
 				<td>{{ $values['textCount'] . "/" . count($sum)}} Texten übersetzt. ({{ floor(($values['textCount'] / count($sum)) * 100) }} %)</td>
-				<td><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), url("/languages/edit", ['from'=>'all', 'to'=>'de'])) }}" class="btn btn-default @if(!$deComplete && $lang !== "de" || floor(($values['textCount'] / count($sum)) * 100) === 100) disabled @endif">Texte für "{{ $lang }}" ergänzen</a></td>
+				<td><a href="
+				@if( $lang === "de" && floor(($values['textCount'] / count($sum)) * 100) < 100)
+				{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), url("/languages/edit", ['from'=>'all', 'to'=>'de'])) }}
+				@elseif($lang !== "de" && floor(($values['textCount'] / count($sum)) * 100) < 100)
+				{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), url("/languages/edit", ['from'=>'de', 'to'=>$lang])) }}
+				@else
+				#
+				@endif " class="btn btn-default @if((!$deComplete && $lang !== "de") || floor(($values['textCount'] / count($sum)) * 100) >= 100) disabled @endif">Texte für "{{ $lang }}" ergänzen</a></td>
 			</tr>
 		@endforeach
 	</tbody>

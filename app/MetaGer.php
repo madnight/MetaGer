@@ -156,17 +156,6 @@ class MetaGer
         }
     }
 
-    public function removeInvalids()
-    {
-        $results = [];
-        foreach ($this->results as $result) {
-            if ($result->isValid($this)) {
-                $results[] = $result;
-            }
-
-        }
-    }
-
     public function combineResults()
     {
         foreach ($this->engines as $engine) {
@@ -362,6 +351,10 @@ class MetaGer
         return $results;
     }
 
+    /*
+     * Die Erstellung der Suchmaschinen bis die Ergebnisse da sind mit Unterfunktionen
+     */
+
     public function createSearchEngines(Request $request)
     {
         if (!$request->has("eingabe")) {
@@ -375,6 +368,14 @@ class MetaGer
         $sumaCount            = 0;
         $sumas                = $xml->xpath("suma");
 
+        /* Erstellt die Liste der eingestellten Sumas
+         * Der einzige Unterschied bei angepasstem Suchfokus ist, dass nicht nach den Typen einer Suma, sondern den im Request mitgegebenen Typen entschieden wird
+         * Ansonsten wird genau das selbe geprüft und gemacht:
+         * Handelt es sich um spezielle Suchmaschinen die immer an sein müssen
+         * Wenn es Overture ist vermerken dass Overture an ist
+         * Suma Zähler erhöhen
+         * Zu Liste hinzufügen
+         */
         foreach ($sumas as $suma) {
             if ($this->fokus === "angepasst") {
                 if ($request->has($suma["name"])
@@ -466,32 +467,35 @@ class MetaGer
         } else {
             foreach ($enabledSearchengines as $engine) {
 
+                # Wenn diese Suchmaschine gar nicht eingeschaltet sein soll
                 if (!$siteSearchFailed && strlen($this->site) > 0 && (!isset($engine['hasSiteSearch']) || $engine['hasSiteSearch']->__toString() === "0")) {
-
                     continue;
                 }
-                # Wenn diese Suchmaschine gar nicht eingeschaltet sein soll
+
+                # Setze Pfad zu Parser
                 $path = "App\Models\parserSkripte\\" . ucfirst($engine["package"]->__toString());
 
+                # Prüfe ob Parser vorhanden
                 if (!file_exists(app_path() . "/Models/parserSkripte/" . ucfirst($engine["package"]->__toString()) . ".php")) {
                     Log::error(trans('metaGer.engines.noParser', ['engine' => $engine["name"]]));
                     continue;
                 }
 
+                # Es wird versucht die Suchengine zu erstellen
                 $time = microtime();
-
-                try
-                {
+                try {
                     $tmp = new $path($engine, $this);
                 } catch (\ErrorException $e) {
                     Log::error(trans('metaGer.engines.cantQuery', ['engine' => $engine["name"], 'error' => var_dump($e)]));
                     continue;
                 }
 
+                # Ausgabe bei Debug-Modus
                 if ($tmp->enabled && isset($this->debug)) {
                     $this->warnings[] = $tmp->service . "   Connection_Time: " . $tmp->connection_time . "    Write_Time: " . $tmp->write_time . " Insgesamt:" . ((microtime() - $time) / 1000);
                 }
 
+                # Wenn die neu erstellte Engine eingeschaltet ist, wird sie der Liste hinzugefügt
                 if ($tmp->isEnabled()) {
                     $engines[] = $tmp;
                 }
@@ -653,6 +657,10 @@ class MetaGer
 
         $this->engines = $engines;
     }
+
+    /*
+     * Ende
+     */
 
     public function parseFormData(Request $request)
     {
@@ -859,6 +867,17 @@ class MetaGer
     }
 
 # Hilfsfunktionen
+
+    public function removeInvalids()
+    {
+        $results = [];
+        foreach ($this->results as $result) {
+            if ($result->isValid($this)) {
+                $results[] = $result;
+            }
+
+        }
+    }
 
     public function showQuicktips()
     {

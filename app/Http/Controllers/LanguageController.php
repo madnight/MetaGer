@@ -34,8 +34,9 @@ class LanguageController extends Controller
                     $tmp = include $filename;
                     foreach ($tmp as $key => $value) {
                         $sum = array_merge($sum, $this->getValues([$key => $value], basename($filename)));
+                        $langTexts[$dir]["textCount"] += count($this->getValues([$key => $value]));
                     }
-                    $langTexts[$dir]["textCount"] += count($tmp);
+
                 }
 
             }
@@ -83,9 +84,10 @@ class LanguageController extends Controller
                     foreach ($tmp as $key => $value) {
                         $sum                                    = array_merge($sum, $this->getValues([$key => $value], basename($filename)));
                         $texts[basename($filename)][$key][$dir] = $value;
+                        $langTexts[$dir] += count($this->getValues([$key => $value]));
                     }
                     $filePath[basename($filename)] = preg_replace("/lang\/.*?\//si", "lang/$to/", substr($filename, strpos($filename, "lang")));
-                    $langTexts[$dir] += count($tmp);
+
                 }
 
             }
@@ -111,13 +113,23 @@ class LanguageController extends Controller
             if ($has) {
                 continue;
             }
-
+            while ($this->hasToMuchDimensions($text)) {
+                $text = $this->deMultidimensionalizeArray($text);
+            }
             # Hier können wir später die bereits bearbeiteten Dateien ausschließen.
             foreach ($text as $textname => $languages) {
 
+                if ($languages === "") {
+                    continue;
+                }
+
+                $complete = true;
                 foreach ($languages as $lang => $value) {
                     if ($lang !== $to) {
                         $langs = array_add($langs, $lang, $lang);
+                    }
+                    if (!isset($languages[$to]) && isset($languages[$lang])) {
+                        $complete = false;
                     }
 
                 }
@@ -130,10 +142,7 @@ class LanguageController extends Controller
 
         }
 
-        while ($this->hasToMuchDimensions($t)) {
-            $t = $this->deMultidimensionalizeArray($t);
-        }
-
+        $t = $this->htmlEscape($t, $to);
         $t = $this->createHints($t, $to);
 
         return view('languages.edit')
@@ -149,6 +158,20 @@ class LanguageController extends Controller
             ->with('new', $ex["new"]);
     }
 
+    private function htmlEscape($t, $to)
+    {
+        foreach ($t as $key => $langTexts) {
+            if ($langTexts !== "") {
+                foreach ($langTexts as $lang => $text) {
+                    if ($lang !== $to) {
+                        $t[$key][$lang] = htmlspecialchars($text);
+                    }
+                }
+            }
+        }
+        return $t;
+    }
+
     private function createHints($t, $to)
     {
         foreach ($t as $key => $langTexts) {
@@ -156,8 +179,10 @@ class LanguageController extends Controller
                 foreach ($langTexts as $lang => $text) {
                     if ($lang !== $to) {
                         if (preg_match("/\s:\S+/si", $text)) {
-                            #die("test");
                             $t[$key][$lang] = preg_replace("/(\s)(:\S+)/si", "$1<a class=\"text-danger hint\" data-toggle=\"tooltip\" data-trigger=\"hover\" data-placement=\"auto\" title=\"Dies ist ein Variablenname. Er wird dort, wo der Text verwendet wird durch einen dynamischen Wert ersetzt. In der Übersetzung sollte dieser deshalb auch so wie er ist in den Satz integriert werden.\" data-container=\"body\" >$2</a>", $text);
+                        }
+                        if (preg_match("/&lt;.*?&gt;/si", $text)) {
+                            $t[$key][$lang] = preg_replace("/(&lt;.*?&gt;)/si", "<a class=\"text-danger hint\" data-toggle=\"tooltip\" data-trigger=\"hover\" data-placement=\"auto\" title=\"Dies ist ein sogenanntes HTML-Tag. Wenn Sie sich das zutrauen, bauen Sie diese HTML Tags gerne so wie sie sind in Ihre Übersetzung ein. Achten Sie hierbei darauf, dass der Text zwischen den Tags auch bei der Übersetzung an der logisch gleichen Stelle von den Tags umfasst ist.\" data-container=\"body\" >$1</a>", $text);
                         }
 
                     }

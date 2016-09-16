@@ -61,7 +61,7 @@ class MetaGer
             $tmp                      = file_get_contents(config_path() . "/blacklistUrl.txt");
             $this->urlsBlacklisted    = explode("\n", $tmp);
         } else {
-            Log::warning("Achtung: Eine, oder mehrere Blacklist Dateien, konnten nicht geöffnet werden");
+            Log::warning(trans('metaGer.blacklist.failed'));
         }
 
         # Parser Skripte einhängen
@@ -153,17 +153,6 @@ class MetaGer
                         ->with('browser', (new Agent())->browser());
                     break;
             }
-        }
-    }
-
-    public function removeInvalids()
-    {
-        $results = [];
-        foreach ($this->results as $result) {
-            if ($result->isValid($this)) {
-                $results[] = $result;
-            }
-
         }
     }
 
@@ -265,7 +254,7 @@ class MetaGer
         }
 
         if (count($this->results) <= 0) {
-            $this->errors[] = "Leider konnten wir zu Ihrer Sucheingabe keine passenden Ergebnisse finden.";
+            $this->errors[] = trans('metaGer.results.failed');
         }
 
         if ($this->canCache() && isset($this->next) && count($this->next) > 0 && count($this->results) > 0) {
@@ -362,6 +351,10 @@ class MetaGer
         return $results;
     }
 
+    /*
+     * Die Erstellung der Suchmaschinen bis die Ergebnisse da sind mit Unterfunktionen
+     */
+
     public function createSearchEngines(Request $request)
     {
         if (!$request->has("eingabe")) {
@@ -375,6 +368,14 @@ class MetaGer
         $sumaCount            = 0;
         $sumas                = $xml->xpath("suma");
 
+        /* Erstellt die Liste der eingestellten Sumas
+         * Der einzige Unterschied bei angepasstem Suchfokus ist, dass nicht nach den Typen einer Suma, sondern den im Request mitgegebenen Typen entschieden wird
+         * Ansonsten wird genau das selbe geprüft und gemacht:
+         * Handelt es sich um spezielle Suchmaschinen die immer an sein müssen
+         * Wenn es Overture ist vermerken dass Overture an ist
+         * Suma Zähler erhöhen
+         * Zu Liste hinzufügen
+         */
         foreach ($sumas as $suma) {
             if ($this->fokus === "angepasst") {
                 if ($request->has($suma["name"])
@@ -441,7 +442,7 @@ class MetaGer
         }
 
         if ($sumaCount <= 0) {
-            $this->errors[] = "Achtung: Sie haben in ihren Einstellungen keine Suchmaschine ausgewählt.";
+            $this->errors[] = trans('metaGer.settings.noneSelected');
         }
         $engines = [];
 
@@ -466,32 +467,35 @@ class MetaGer
         } else {
             foreach ($enabledSearchengines as $engine) {
 
+                # Wenn diese Suchmaschine gar nicht eingeschaltet sein soll
                 if (!$siteSearchFailed && strlen($this->site) > 0 && (!isset($engine['hasSiteSearch']) || $engine['hasSiteSearch']->__toString() === "0")) {
-
                     continue;
                 }
-                # Wenn diese Suchmaschine gar nicht eingeschaltet sein soll
+
+                # Setze Pfad zu Parser
                 $path = "App\Models\parserSkripte\\" . ucfirst($engine["package"]->__toString());
 
+                # Prüfe ob Parser vorhanden
                 if (!file_exists(app_path() . "/Models/parserSkripte/" . ucfirst($engine["package"]->__toString()) . ".php")) {
-                    Log::error("Konnte " . $engine["name"] . " nicht abfragen, da kein Parser existiert");
+                    Log::error(trans('metaGer.engines.noParser', ['engine' => $engine["name"]]));
                     continue;
                 }
 
+                # Es wird versucht die Suchengine zu erstellen
                 $time = microtime();
-
-                try
-                {
+                try {
                     $tmp = new $path($engine, $this);
                 } catch (\ErrorException $e) {
-                    Log::error("Konnte " . $engine["name"] . " nicht abfragen." . var_dump($e));
+                    Log::error(trans('metaGer.engines.cantQuery', ['engine' => $engine["name"], 'error' => var_dump($e)]));
                     continue;
                 }
 
+                # Ausgabe bei Debug-Modus
                 if ($tmp->enabled && isset($this->debug)) {
                     $this->warnings[] = $tmp->service . "   Connection_Time: " . $tmp->connection_time . "    Write_Time: " . $tmp->write_time . " Insgesamt:" . ((microtime() - $time) / 1000);
                 }
 
+                # Wenn die neu erstellte Engine eingeschaltet ist, wird sie der Liste hinzugefügt
                 if ($tmp->isEnabled()) {
                     $engines[] = $tmp;
                 }
@@ -654,6 +658,10 @@ class MetaGer
         $this->engines = $engines;
     }
 
+    /*
+     * Ende
+     */
+
     public function parseFormData(Request $request)
     {
         # Sichert, dass der request in UTF-8 formatiert ist
@@ -676,12 +684,12 @@ class MetaGer
             $this->sumaFile = config_path() . "/sumas.xml";
         }
         if (!file_exists($this->sumaFile)) {
-            die("Suma-File konnte nicht gefunden werden");
+            die(trans('metaGer.formdata.cantLoad'));
         }
         # Sucheingabe
         $this->eingabe = trim($request->input('eingabe', ''));
         if (strlen($this->eingabe) === 0) {
-            $this->warnings[] = 'Achtung: Sie haben keinen Suchbegriff eingegeben. Sie können ihre Suchbegriffe oben eingeben und es erneut versuchen.';
+            $this->warnings[] = trans('metaGer.formdata.noSearch');
         }
         $this->q = $this->eingabe;
         # IP
@@ -717,7 +725,7 @@ class MetaGer
         # Manchmal müssen wir Parameter anpassen um den Sucheinstellungen gerecht zu werden:
         if ($request->has('dart')) {
             $this->time       = 10000;
-            $this->warnings[] = "Hinweis: Sie haben Dart-Europe aktiviert. Die Suche kann deshalb länger dauern und die maximale Suchzeit wurde auf 10 Sekunden hochgesetzt.";
+            $this->warnings[] = trans('metaGer.formdata.dartEurope');
         }
         if ($this->time <= 500 || $this->time > 20000) {
             $this->time = 1000;
@@ -790,7 +798,7 @@ class MetaGer
                 $hostString .= $host . ", ";
             }
             $hostString       = rtrim($hostString, ", ");
-            $this->warnings[] = "Ergebnisse von folgenden Hosts werden nicht angezeigt: \"" . $hostString . "\"";
+            $this->warnings[] = trans('metaGer.formdata.hostBlacklist', ['host' => $hostString]);
         }
 
         # Domain Blacklisting
@@ -805,7 +813,7 @@ class MetaGer
                 $domainString .= $domain . ", ";
             }
             $domainString     = rtrim($domainString, ", ");
-            $this->warnings[] = "Ergebnisse von folgenden Domains werden nicht angezeigt: \"" . $domainString . "\"";
+            $this->warnings[] = trans('metaGer.formdata.domainBlacklist', ['domain' => $domainString]);
         }
 
         # Stopwords
@@ -820,7 +828,7 @@ class MetaGer
                 $stopwordsString .= $stopword . ", ";
             }
             $stopwordsString  = rtrim($stopwordsString, ", ");
-            $this->warnings[] = "Sie machen eine Ausschlusssuche. Ergebnisse mit folgenden Wörtern werden nicht angezeigt: \"" . $stopwordsString . "\"";
+            $this->warnings[] = trans('metaGer.formdata.stopwords', ['stopwords' => $stopwordsString]);
         }
 
         # Phrasensuche
@@ -835,9 +843,8 @@ class MetaGer
         }
         $p = rtrim($p, ", ");
         if (sizeof($this->phrases) > 0) {
-            $this->warnings[] = "Sie führen eine Phrasensuche durch: $p";
+            $this->warnings[] = trans('metaGer.formdata.phrase', ['phrase' => $p]);
         }
-
     }
 
     public function nextSearchLink()
@@ -860,6 +867,17 @@ class MetaGer
     }
 
 # Hilfsfunktionen
+
+    public function removeInvalids()
+    {
+        $results = [];
+        foreach ($this->results as $result) {
+            if ($result->isValid($this)) {
+                $results[] = $result;
+            }
+
+        }
+    }
 
     public function showQuicktips()
     {

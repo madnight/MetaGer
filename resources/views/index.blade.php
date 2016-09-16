@@ -160,18 +160,18 @@
                 <div class="input-group">
                   <div class="input-group-addon">
                     <button type="button" data-toggle="popover" data-html="true" data-container="body" title="{{ trans('index.design') }}" data-content='&lt;ul id="color-chooser" class="list-inline list-unstyled"&gt;
-&lt;li &gt;&lt;a id="standard" data-rgba="255,194,107,1" href="javascript:void(0)"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li &gt;&lt;a id="standardHard" data-rgba="255,128,0,1" href="javascript:void(0)"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li &gt;&lt;a id="blue" data-rgba="164,192,230,1" href="javascript:void(0)"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li &gt;&lt;a id="blueHard" data-rgba="2,93,140,1" href="javascript:void(0)"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li &gt;&lt;a id="green" data-rgba="177,226,163,1" href="javascript:void(0)"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li &gt;&lt;a id="greenHard" data-rgba="127,175,27,1" href="javascript:void(0)"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li &gt;&lt;a id="red" data-rgba="255,92,92,1" href="javascript:void(0)"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li &gt;&lt;a id="redHard" data-rgba="255,0,0,1" href="javascript:void(0)"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li &gt;&lt;a id="pink" data-rgba="255,196,246,1" href="javascript:void(0)"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li &gt;&lt;a id="pinkHard" data-rgba="254,67,101,1" href="javascript:void(0)"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li &gt;&lt;a id="black" data-rgba="238,238,238,1" href="javascript:void(0)"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li &gt;&lt;a id="blackHard" data-rgba="50,50,50,1" href="javascript:void(0)"&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li &gt;&lt;a id="standard" data-rgba="255,194,107,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li &gt;&lt;a id="standardHard" data-rgba="255,128,0,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li &gt;&lt;a id="blue" data-rgba="164,192,230,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li &gt;&lt;a id="blueHard" data-rgba="2,93,140,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li &gt;&lt;a id="green" data-rgba="177,226,163,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li &gt;&lt;a id="greenHard" data-rgba="127,175,27,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li &gt;&lt;a id="red" data-rgba="255,92,92,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li &gt;&lt;a id="redHard" data-rgba="255,0,0,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li &gt;&lt;a id="pink" data-rgba="255,196,246,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li &gt;&lt;a id="pinkHard" data-rgba="254,67,101,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li &gt;&lt;a id="black" data-rgba="238,238,238,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li &gt;&lt;a id="blackHard" data-rgba="50,50,50,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;'>
                       <span class="glyphicon glyphicon-tint">
                       </span>

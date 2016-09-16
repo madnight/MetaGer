@@ -37,7 +37,7 @@ In der nächsten Spalte findest du entweder Texte der Sprache für die uns einig
 		@else
 		<tr>
 			<td class="name">{{preg_replace("/(\s*).*#(.*)$/si", "$1$2", $name)}}</td>
-			<td>@if(isset($langValues[$to])) <input type="text" size="50" form="submit" name="{{$name}}" value="{{$langValues[$to]}}" readonly /> @else <input type="text" size="50" form="submit" name="_new_{{$name}}" /> @endif</td>
+			<td>@if(isset($langValues[$to])) <textarea type="text" rows="1" cols="50" form="submit" name="{{$name}}" readonly >{{$langValues[$to]}}</textarea> @else <textarea rows="1" cols="50" form="submit" name="_new_{{$name}}" ></textarea> @endif</td>
 			@foreach($langs as $lang => $value)
 			<td>{!! $langValues[$lang] or "" !!}</td>
 			@endforeach

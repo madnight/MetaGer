@@ -34,10 +34,10 @@
         @if( strpos(rtrim(Request::header('REFERER'), '/'), LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") )  === 0 && ( $browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'IE' || $browser === 'Edge') )
         <div id="searchplugin" class="alert alert-warning alert-dismissible" role="alert" style="">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                Wussten Sie, dass Ihr {{ $browser }} MetaGer als Standardsuchmaschine verwenden kann?
+                {!! trans('researchandtabs.plugin.1', ['browser' => $browser]) !!}
                 <br />
                 <div style="">
-                    <a href="{{ action('StartpageController@loadStartPage', Request::all()) }}#plugin-modal" target="_blank" type="button" class="btn btn-info" style="">Zeig mir wie</a>
+                    <a href="{{ action('StartpageController@loadStartPage', Request::all()) }}#plugin-modal" target="_blank" type="button" class="btn btn-info" style="">{!! trans('researchandtabs.plugin.2') !!}</a>
                 </div>
         </div>
         @endif
@@ -45,15 +45,15 @@
         @if( $metager->getFokus() === "web" )
         <li id="webTabSelector" role="presentation" data-loaded="1" class="active">
             <a aria-controls="web" data-href="#web" href="#web">
-                <span class='glyphicon glyphicon-globe'></span> 
-                <span class="hidden-xs">Web</span>
+                <span class='glyphicon glyphicon-globe'></span>
+                <span class="hidden-xs">{{ trans('index.foki.web') }}</span>
             </a>
         </li>
         @else
             <li data-loaded="0" id="webTabSelector" role="presentation">
                 <a aria-controls="web" data-href="{{ $metager->generateSearchLink('web') }}" href="{{ $metager->generateSearchLink('web') }}">
-                    <span class='glyphicon glyphicon-globe'></span> 
-                    <span class="hidden-xs">Web</span>
+                    <span class='glyphicon glyphicon-globe'></span>
+                    <span class="hidden-xs">{{ trans('index.foki.web') }}</span>
                 </a>
             </li>
         @endif
@@ -61,14 +61,14 @@
         @if( $metager->getFokus() === "bilder" )
         <li id="bilderTabSelector" role="presentation" data-loaded="1" class="active">
             <a aria-controls="bilder" data-href="#bilder" href="#bilder">
-                <span class='glyphicon glyphicon-picture'></span> 
+                <span class='glyphicon glyphicon-picture'></span>
                 <span class="hidden-xs">{{ trans('index.foki.bilder') }}</span>
             </a>
         </li>
         @else
         <li data-loaded="0" id="bilderTabSelector" role="presentation">
             <a aria-controls="bilder" data-href="{{ $metager->generateSearchLink('bilder') }}" href="{{ $metager->generateSearchLink('bilder') }}">
-                <span class='glyphicon glyphicon-picture'></span> 
+                <span class='glyphicon glyphicon-picture'></span>
                 <span class="hidden-xs">{{ trans('index.foki.bilder') }}</span>
             </a>
         </li>
@@ -77,14 +77,14 @@
         @if( $metager->getFokus() === "nachrichten" )
         <li id="nachrichtenTabSelector" role="presentation" data-loaded="1" class="active">
             <a aria-controls="nachrichten" data-href="#nachrichten" href="#nachrichten">
-                <span class='glyphicon glyphicon-bullhorn'></span> 
+                <span class='glyphicon glyphicon-bullhorn'></span>
                 <span class="hidden-xs">{{ trans('index.foki.nachrichten') }}</span>
             </a>
         </li>
         @else
         <li data-loaded="0" id="nachrichtenTabSelector" role="presentation" >
             <a aria-controls="nachrichten" data-href="{{ $metager->generateSearchLink('nachrichten') }}" href="{{ $metager->generateSearchLink('nachrichten') }}">
-                <span class='glyphicon glyphicon-bullhorn'></span> 
+                <span class='glyphicon glyphicon-bullhorn'></span>
                 <span class="hidden-xs">{{ trans('index.foki.nachrichten') }}</span>
             </a>
         </li>
@@ -93,14 +93,14 @@
         @if( $metager->getFokus() === "wissenschaft" )
         <li id="wissenschaftTabSelector" role="presentation" data-loaded="1" class="active">
             <a aria-controls="wissenschaft" data-href="#wissenschaft" href="#wissenschaft">
-                <span class='glyphicon glyphicon-file'></span> 
+                <span class='glyphicon glyphicon-file'></span>
                 <span class="hidden-xs">{{ trans('index.foki.wissenschaft') }}</span>
             </a>
         </li>
         @else
         <li data-loaded="0" id="wissenschaftTabSelector" role="presentation">
             <a aria-controls="wissenschaft" data-href="{{ $metager->generateSearchLink('wissenschaft') }}" href="{{ $metager->generateSearchLink('wissenschaft') }}">
-                <span class='glyphicon glyphicon-file'></span> 
+                <span class='glyphicon glyphicon-file'></span>
                 <span class="hidden-xs">{{ trans('index.foki.wissenschaft') }}</span>
             </a>
         </li>
@@ -109,14 +109,14 @@
         @if( $metager->getFokus() === "produktsuche" )
         <li id="produktsucheTabSelector" role="presentation" data-loaded="1" class="active">
             <a aria-controls="produktsuche" data-href="#produktsuche" href="#produktsuche">
-                <span class='glyphicon glyphicon-shopping-cart'></span> 
+                <span class='glyphicon glyphicon-shopping-cart'></span>
                 <span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
             </a>
         </li>
         @else
         <li data-loaded="0" id="produktsucheTabSelector" role="presentation" >
             <a aria-controls="produktsuche" data-href="{{ $metager->generateSearchLink('produktsuche') }}" href="{{ $metager->generateSearchLink('produktsuche') }}">
-                <span class='glyphicon glyphicon-shopping-cart'></span> 
+                <span class='glyphicon glyphicon-shopping-cart'></span>
                 <span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
             </a>
         </li>
@@ -125,7 +125,7 @@
         @if( $metager->getFokus() === "angepasst" )
         <li id="angepasstTabSelector" role="presentation" data-loaded="1" class="active">
             <a aria-controls="angepasst" data-href="#angepasst" href="#angepasst">
-                <span class='glyphicon glyphicon-cog'></span> 
+                <span class='glyphicon glyphicon-cog'></span>
                 <span class="hidden-xs">{{ trans('index.foki.angepasst') }}</span>
             </a>
         </li>
@@ -133,7 +133,7 @@
         </ul>
 
         <div class="tab-content container-fluid">
-            
+
             @if( $metager->getFokus() === "web" )
             <div role="tabpanel" class="tab-pane active" id="web">
                 <div class="row">
@@ -147,9 +147,9 @@
                 </div>
             </div>
             @endif
-            
 
-            
+
+
             @if( $metager->getFokus() === "bilder" )
             <div role="tabpanel" class="tab-pane active" id="bilder">
                 <div class="row">
@@ -163,9 +163,9 @@
                 </div>
             </div>
             @endif
-            
 
-            
+
+
             @if( $metager->getFokus() === "nachrichten" )
             <div role="tabpanel" class="tab-pane active" id="nachrichten">
                 <div class="row">
@@ -179,7 +179,7 @@
                 </div>
             </div>
             @endif
-            
+
             @if( $metager->getFokus() === "wissenschaft" )
             <div role="tabpanel" class="tab-pane active" id="wissenschaft">
                 <div class="row">
@@ -193,7 +193,7 @@
                 </div>
             </div>
             @endif
-            
+
             @if( $metager->getFokus() === "produktsuche" )
             <div role="tabpanel" class="tab-pane active" id="produktsuche">
                 <div class="row">
@@ -207,9 +207,9 @@
                 </div>
             </div>
             @endif
-           
 
-            
+
+
             @if( $metager->getFokus() === "angepasst" )
             <div role="tabpanel" class="tab-pane active" id="angepasst">
                 <div class="row">

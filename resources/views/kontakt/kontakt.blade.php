@@ -3,27 +3,27 @@
 @section('title', $title )
 
 @section('content')
-<h1>{{ trans('kontakt.headline.1') }}</h1>
-<h2>{{ trans('kontakt.headline.2') }}</h2>
+<h1>{!! trans('kontakt.headline.1') !!}</h1>
+<h2>{!! trans('kontakt.headline.2') !!}</h2>
 <p><span class="bold">{!! trans('kontakt.headline.3') !!}</span>
-<span>{{ trans('kontakt.headline.4') }}</span></p>
-<h2>{{ trans('kontakt.form.1') }}</h2>
-<p>{{ trans('kontakt.form.2') }} <a href="mailto:office@suma-ev.de">email</a> {{ trans('kontakt.form.3') }}</p>
-<p>{{ trans('kontakt.form.4') }}</p>
-<p class="bold">{{ trans('kontakt.form.5') }}</p>
+<span>{!! trans('kontakt.headline.4') !!}</span></p>
+<h2>{!! trans('kontakt.form.1') !!}</h2>
+<p>{!! trans('kontakt.form.2') !!}</p>
+<p>{!! trans('kontakt.form.3') !!}</p>
+<p class="bold">{!! trans('kontakt.form.4') !!}</p>
 <form class="contact" name="contact" method="post" action="{{ LaravelLocalization::getLocalizedURL() }}">
   {{ csrf_field() }}
   <div class="form-group">
-    <input class="form-control" name="email" placeholder="Ihre e-mail-Adresse (optional)" type="text"></div>
+    <input class="form-control" name="email" placeholder="{!! trans('kontakt.form.5') !!}" type="text"></div>
   <div class="form-group">
-    <textarea class="form-control" id="message" name="message" placeholder="Ihre Nachricht"></textarea></div>
+    <textarea class="form-control" id="message" name="message" placeholder="{!! trans('kontakt.form.6') !!}"></textarea></div>
   <div class="form-group">
-    <p><span class="bold">{{ trans('kontakt.form.6') }} <a href="http://openpgpjs.org/.">OpenPGP.js</a> {{ trans('kontakt.form.7') }}</span>
-<span>{{ trans('kontakt.form.8') }}</span></p>
-    <button title="" data-original-title="" class="btn btn-default" type="submit">{{ trans('kontakt.form.9') }}</button></div></form>
-<h2>{{ trans('kontakt.mail.1') }}</h2>
-<p>{{ trans('kontakt.mail.2') }} <a href="mailto:office@suma-ev.de">office@suma-ev.de</a>
-{{ trans('kontakt.mail.3') }}</p>
+    <p><span class="bold">{!! trans('kontakt.form.7') !!} <a href="http://openpgpjs.org/.">OpenPGP.js</a> {!! trans('kontakt.form.8') !!}</span>
+<span>{!! trans('kontakt.form.9') !!}</span></p>
+    <button title="" data-original-title="" class="btn btn-default" type="submit">{!! trans('kontakt.form.10') !!}</button></div></form>
+<h2>{!! trans('kontakt.mail.1') !!}</h2>
+<p>{!! trans('kontakt.mail.2') !!}
+{!! trans('kontakt.mail.3') !!}</p>
 <textarea id="pubkey" style="width:50%" rows="8" readonly>-----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: GnuPG v1
 
@@ -87,10 +87,7 @@ geiG3j1J/CaDBZqPBaBflK0UWR5nxCsoOk7i5f3isUeXSVLTnA+K9HkQ6D/Gt5vx
 2soXShIyIak9DeUifcuf1w/ZpL8MXCMDZ2LN2jYVJB8c4g==
 =LZAA
 -----END PGP PUBLIC KEY BLOCK-----</textarea>
-<h2>{{ trans('kontakt.letter.1') }}</h2>
-<p>{{ trans('kontakt.letter.2') }}</p>
-<adress>SUMA-EV
-Röselerstr. 3
-30159 Hannover
-Germany</adress>
+<h2>{!! trans('kontakt.letter.1') !!}</h2>
+<p>{!! trans('kontakt.letter.2') !!}</p>
+<adress>{!! trans('kontakt.letter.3') !!}</adress>
 @endsection

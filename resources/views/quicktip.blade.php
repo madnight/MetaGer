@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>MetaGer Quicktips</title>
+		<title>{!! trans('quicktip.title') !!}</title>
 		<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="/css/quicktips.css" />
 	</head>

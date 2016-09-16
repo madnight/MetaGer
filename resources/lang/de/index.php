@@ -1,12 +1,15 @@
 <?php
 
 return [
+    'foki.web'            => 'Web',
     'foki.bilder'         => 'Bilder',
     'foki.nachrichten'    => 'Nachrichten',
     'foki.wissenschaft'   => 'Wissenschaft',
     'foki.produkte'       => 'Produkte',
     'foki.anpassen'       => 'anpassen',
     'foki.angepasst'      => 'angepasst',
+
+    'design'              => 'Persönliches Design auswählen'
 
     'conveyor'            => 'Einkaufen bei MetaGer-Fördershops',
     'partnertitle'        => 'MetaGer unterstützen, ohne Mehrkosten für Sie',

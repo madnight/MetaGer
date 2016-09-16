@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'opensearch'       => 'MetaGer: Sicher suchen & finden, Privatsphäre schützen',
+
     'nav1'             => 'Suche',
     'nav2'             => 'Spenden',
     'nav3'             => 'Datenschutz',
@@ -23,6 +25,7 @@ return [
     'nav18'            => 'Kontakt',
     'nav19'            => 'Sprache',
     'nav22'            => 'Zitatsuche',
+    'nav24'            => 'MetaGer Quellcode',
 
     'navigationToggle' => 'Navigation anzeigen',
 

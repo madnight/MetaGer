@@ -178,8 +178,8 @@ class LanguageController extends Controller
             if ($langTexts !== "") {
                 foreach ($langTexts as $lang => $text) {
                     if ($lang !== $to) {
-                        if (preg_match("/\s:\S+/si", $text)) {
-                            $t[$key][$lang] = preg_replace("/(\s)(:\S+)/si", "$1<a class=\"text-danger hint\" data-toggle=\"tooltip\" data-trigger=\"hover\" data-placement=\"auto\" title=\"Dies ist ein Variablenname. Er wird dort, wo der Text verwendet wird durch einen dynamischen Wert ersetzt. In der Übersetzung sollte dieser deshalb auch so wie er ist in den Satz integriert werden.\" data-container=\"body\" >$2</a>", $text);
+                        if (preg_match("/:\w+/si", $text)) {
+                            $t[$key][$lang] = preg_replace("/(:\w+)/si", "<a class=\"text-danger hint\" data-toggle=\"tooltip\" data-trigger=\"hover\" data-placement=\"auto\" title=\"Dies ist ein Variablenname. Er wird dort, wo der Text verwendet wird durch einen dynamischen Wert ersetzt. In der Übersetzung sollte dieser deshalb auch so wie er ist in den Satz integriert werden.\" data-container=\"body\" >$1</a>", $text);
                         }
                         if (preg_match("/&lt;.*?&gt;/si", $text)) {
                             $t[$key][$lang] = preg_replace("/(&lt;.*?&gt;)/si", "<a class=\"text-danger hint\" data-toggle=\"tooltip\" data-trigger=\"hover\" data-placement=\"auto\" title=\"Dies ist ein sogenanntes HTML-Tag. Wenn Sie sich das zutrauen, bauen Sie diese HTML Tags gerne so wie sie sind in Ihre Übersetzung ein. Achten Sie hierbei darauf, dass der Text zwischen den Tags auch bei der Übersetzung an der logisch gleichen Stelle von den Tags umfasst ist.\" data-container=\"body\" >$1</a>", $text);

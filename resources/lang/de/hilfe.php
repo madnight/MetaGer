@@ -9,7 +9,7 @@ return [
     'allgemein.title'     => 'Allgemeine Einstellungen',
     'allgemein.1'         => 'Alle Einstellungen finden Sie unter dem Suchfokus "anpassen".',
     'allgemein.2'         => 'Der Farbtropfen links neben dem Suchfeld ermöglicht Ihnen eine individuelle Farbeinstellung für die Startseite.',
-    'allgemein.3'         => 'Ein Plugin für die allermeisten Browser finden Sie <a href="https://metager.de/#plugin-modal" target="_blank">direkt</a> unter dem Suchfeld, wo Ihr Browser bereits voreingestellt sein sollte.',
+    'allgemein.3'         => 'Ein Plugin für die allermeisten Browser finden Sie <a href="/#plugin-modal" target="_blank">direkt</a> unter dem Suchfeld, wo Ihr Browser bereits voreingestellt sein sollte.',
 
     'suchfokus.title'     => 'Auswahl des Suchfokus',
     'suchfokus.1'         => 'Über dem Suchfeld finden Sie fünf Sucheinstellungen, die den meisten Anforderungen genügen ( "Web", "Bilder", "Nachrichten", "Wissenschaft" sowie "Produkte" ). Über den Button "anpassen" rechts daneben können Sie persönliche Feineinstellungen dazu vornehmen. Zuletzt entscheiden Sie über die Verwendung Ihrer Einstellungen. Sie finden ganz unten unter den Einstellungen drei Buttons: entweder benutzen Sie die Einstellung nur für eine Suche (hierfür können Sie auch ein Lesezeichen setzen), für eine dauerhafte Verwendung, oder Sie können dafür ein Plugin erstellen. MetaGer speichert Ihre Einstellungen dann im sogenannten "Local Storage" (des Browsers), hierfür benötigen Sie Javascript.',

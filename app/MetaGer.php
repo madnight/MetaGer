@@ -593,10 +593,10 @@ class MetaGer
                 }
             }
             if ($enginesWithSite === 0) {
-                $this->errors[] = "Sie wollten eine Sitesearch auf " . $this->site . " durchführen. Leider unterstützen die eingestellten Suchmaschinen diese nicht. Sie können <a href=\"" . $this->generateSearchLink("web", false) . "\">hier</a> die Sitesearch im Web-Fokus durchführen. Es werden ihnen Ergebnisse ohne Sitesearch angezeigt.";
+                $this->errors[] = trans('metaGer.sitesearch.failed', ['site' => $this->site, 'searchLink' => $this->generateSearchLink("web", false)]);
                 return true;
             } else {
-                $this->warnings[] = "Sie führen eine Sitesearch durch. Es werden nur Ergebnisse von der Seite: <a href=\"http://" . $this->site . "\" target=\"_blank\">\"" . $this->site . "\"</a> angezeigt.";
+                $this->warnings[] = trans('metaGer.sitesearch.success', ['site' => $this->site]);
                 return false;
             }
         }

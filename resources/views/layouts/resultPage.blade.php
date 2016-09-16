@@ -15,7 +15,7 @@
 	<meta content="{{ getmypid() }}" name="p" />
 	<meta content="{{ $eingabe }}" name="q" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="search" type="application/opensearchdescription+xml" title="MetaGer: Sicher suchen &amp; finden, Privatsph&auml;re sch&uuml;tzen" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
+	<link rel="search" type="application/opensearchdescription+xml" title="{!! trans('resultPage.opensearch') !!}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
 
 </head>
 <body id="resultBody">
@@ -29,10 +29,10 @@
 	<footer>
 		<div class="row">
 			<div class="col-xs-6">
-				<a class="btn btn-default" href="/">MetaGer-Startseite</a>
+				<a class="btn btn-default" href="/">{!! trans('resultPage.startseite') !!}</a>
 			</div>
 			<div class="col-xs-6">
-				<a class="btn btn-default" href="/impressum/">Impressum</a>
+				<a class="btn btn-default" href="/impressum/">{!! trans('resultPage.impressum') !!}</a>
 			</div>
 		</div>
 	</footer>

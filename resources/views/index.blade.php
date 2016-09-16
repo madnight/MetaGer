@@ -8,8 +8,7 @@
         <div class="content modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;
-              </span>
+              <span aria-hidden="true">&times;</span>
             </button>
             <h4>
               @if ($browser === 'Firefox' || $browser === 'Mozilla')
@@ -119,49 +118,38 @@
             <fieldset id="foki">
               <input id="web" type="radio" name="focus" value="web" form="searchForm" @if ($focus === 'web') checked @endif required="">
               <label id="web-label" for="web">
-                <span class="glyphicon glyphicon-globe">
-                </span>
-                <span class="content">Web
-                </span>
+                <span class="glyphicon glyphicon-globe"></span>
+                <span class="content">{{ trans('index.foki.web') }}</span>
               </label>
               <input id="bilder" type="radio" name="focus" value="bilder" form="searchForm" @if ($focus === 'bilder') checked @endif required="">
               <label id="bilder-label" for="bilder">
-                <span class="glyphicon glyphicon-picture">
-                </span>
-                <span class="content">{{ trans('index.foki.bilder') }}
-                </span>
+                <span class="glyphicon glyphicon-picture"></span>
+                <span class="content">{{ trans('index.foki.bilder') }}</span>
               </label>
               <input id="nachrichten" type="radio" name="focus" value="nachrichten" form="searchForm" @if ($focus === 'nachrichten') checked @endif required="">
               <label id="nachrichten-label" for="nachrichten">
-                <span class="glyphicon glyphicon-bullhorn">
-                </span>
-                <span class="content">{{ trans('index.foki.nachrichten') }}
-                </span>
+                <span class="glyphicon glyphicon-bullhorn"></span>
+                <span class="content">{{ trans('index.foki.nachrichten') }}</span>
               </label>
               <input id="wissenschaft" type="radio" name="focus" value="wissenschaft" form="searchForm" @if ($focus === 'wissenschaft') checked @endif required="">
               <label id="wissenschaft-label" for="wissenschaft">
-                <span class="glyphicon glyphicon-file">
-                </span>
-                <span class="content">{{ trans('index.foki.wissenschaft') }}
-                </span>
+                <span class="glyphicon glyphicon-file"></span>
+                <span class="content">{{ trans('index.foki.wissenschaft') }}</span>
               </label>
               <input id="produkte" type="radio" name="focus" value="produktsuche" form="searchForm" @if ($focus === 'produkte') checked @endif required="">
               <label id="produkte-label" for="produkte">
-                <span class="glyphicon glyphicon-shopping-cart">
-                </span>
-                <span class="content">{{ trans('index.foki.produkte') }}
-                </span>
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+                <span class="content">{{ trans('index.foki.produkte') }}</span>
               </label>
               <input id="angepasst" type="radio" name="focus" value="angepasst" form="searchForm" @if ($focus === 'angepasst') checked @endif required="">
               <label id="anpassen-label" for="angepasst">
-                <span class="glyphicon glyphicon-cog">
-                </span>
+                <span class="glyphicon glyphicon-cog"></span>
                 <span class="content">
                   <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/settings") }}">
                   @if ($focus === 'angepasst')
-                  {{ trans('index.foki.angepasst') }}
+                    {{ trans('index.foki.angepasst') }}
                   @else
-                  {{ trans('index.foki.anpassen') }}
+                    {{ trans('index.foki.anpassen') }}
                   @endif
                   </a>
                 </span>
@@ -171,7 +159,7 @@
               <form id="searchForm" method="GET" action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/meta/meta.ger3") }}" accept-charset="UTF-8">
                 <div class="input-group">
                   <div class="input-group-addon">
-                    <button type="button" data-toggle="popover" data-html="true" data-container="body" title="Pers&ouml;nliches Design ausw&auml;hlen" data-content='&lt;ul id="color-chooser" class="list-inline list-unstyled"&gt;
+                    <button type="button" data-toggle="popover" data-html="true" data-container="body" title="{{ trans('index.design') }}" data-content='&lt;ul id="color-chooser" class="list-inline list-unstyled"&gt;
 &lt;li &gt;&lt;a id="standard" data-rgba="255,194,107,1" href="javascript:void(0)"&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li &gt;&lt;a id="standardHard" data-rgba="255,128,0,1" href="javascript:void(0)"&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li &gt;&lt;a id="blue" data-rgba="164,192,230,1" href="javascript:void(0)"&gt;&lt;/a&gt;&lt;/li&gt;

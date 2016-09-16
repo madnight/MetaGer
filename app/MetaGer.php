@@ -668,10 +668,7 @@ class MetaGer
         $this->url = $request->url();
         # Zunächst überprüfen wir die eingegebenen Einstellungen:
         # Fokus
-        $this->fokus = trans('fokiNames.' . $request->input('focus', 'web'));
-        if (strpos($this->fokus, ".")) {
-            $this->fokus = trans('fokiNames.web');
-        }
+        $this->fokus = $request->input('focus', 'web');
         # Suma-File
         if (App::isLocale("en")) {
             $this->sumaFile = config_path() . "/sumas.xml";

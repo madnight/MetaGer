@@ -61,7 +61,7 @@ class MetaGer
             $tmp                      = file_get_contents(config_path() . "/blacklistUrl.txt");
             $this->urlsBlacklisted    = explode("\n", $tmp);
         } else {
-            Log::warning("Achtung: Eine, oder mehrere Blacklist Dateien, konnten nicht geöffnet werden");
+            Log::warning(trans('metaGer.blacklist.failed'));
         }
 
         # Parser Skripte einhängen
@@ -265,7 +265,7 @@ class MetaGer
         }
 
         if (count($this->results) <= 0) {
-            $this->errors[] = "Leider konnten wir zu Ihrer Sucheingabe keine passenden Ergebnisse finden.";
+            $this->errors[] = trans('metaGer.results.failed');
         }
 
         if ($this->canCache() && isset($this->next) && count($this->next) > 0 && count($this->results) > 0) {
@@ -441,7 +441,7 @@ class MetaGer
         }
 
         if ($sumaCount <= 0) {
-            $this->errors[] = "Achtung: Sie haben in ihren Einstellungen keine Suchmaschine ausgewählt.";
+            $this->errors[] = trans('metaGer.settings.noneSelected');
         }
         $engines = [];
 
@@ -474,7 +474,7 @@ class MetaGer
                 $path = "App\Models\parserSkripte\\" . ucfirst($engine["package"]->__toString());
 
                 if (!file_exists(app_path() . "/Models/parserSkripte/" . ucfirst($engine["package"]->__toString()) . ".php")) {
-                    Log::error("Konnte " . $engine["name"] . " nicht abfragen, da kein Parser existiert");
+                    Log::error(trans('metaGer.engines.noParser', ['engine' => $engine["name"]]));
                     continue;
                 }
 
@@ -484,7 +484,7 @@ class MetaGer
                 {
                     $tmp = new $path($engine, $this);
                 } catch (\ErrorException $e) {
-                    Log::error("Konnte " . $engine["name"] . " nicht abfragen." . var_dump($e));
+                    Log::error(trans('metaGer.engines.cantQuery', ['engine' => $engine["name"], 'error' => var_dump($e)]));
                     continue;
                 }
 
@@ -679,12 +679,12 @@ class MetaGer
             $this->sumaFile = config_path() . "/sumas.xml";
         }
         if (!file_exists($this->sumaFile)) {
-            die("Suma-File konnte nicht gefunden werden");
+            die(trans('metaGer.formdata.cantLoad'));
         }
         # Sucheingabe
         $this->eingabe = trim($request->input('eingabe', ''));
         if (strlen($this->eingabe) === 0) {
-            $this->warnings[] = 'Achtung: Sie haben keinen Suchbegriff eingegeben. Sie können ihre Suchbegriffe oben eingeben und es erneut versuchen.';
+            $this->warnings[] = trans('metaGer.formdata.noSearch');
         }
         $this->q = $this->eingabe;
         # IP
@@ -720,7 +720,7 @@ class MetaGer
         # Manchmal müssen wir Parameter anpassen um den Sucheinstellungen gerecht zu werden:
         if ($request->has('dart')) {
             $this->time       = 10000;
-            $this->warnings[] = "Hinweis: Sie haben Dart-Europe aktiviert. Die Suche kann deshalb länger dauern und die maximale Suchzeit wurde auf 10 Sekunden hochgesetzt.";
+            $this->warnings[] = trans('metaGer.formdata.dartEurope');
         }
         if ($this->time <= 500 || $this->time > 20000) {
             $this->time = 1000;
@@ -793,7 +793,7 @@ class MetaGer
                 $hostString .= $host . ", ";
             }
             $hostString       = rtrim($hostString, ", ");
-            $this->warnings[] = "Ergebnisse von folgenden Hosts werden nicht angezeigt: \"" . $hostString . "\"";
+            $this->warnings[] = trans('metaGer.formdata.hostBlacklist', ['host' => $hostString]);
         }
 
         # Domain Blacklisting
@@ -808,7 +808,7 @@ class MetaGer
                 $domainString .= $domain . ", ";
             }
             $domainString     = rtrim($domainString, ", ");
-            $this->warnings[] = "Ergebnisse von folgenden Domains werden nicht angezeigt: \"" . $domainString . "\"";
+            $this->warnings[] = trans('metaGer.formdata.domainBlacklist', ['domain' => $domainString]);
         }
 
         # Stopwords
@@ -823,7 +823,7 @@ class MetaGer
                 $stopwordsString .= $stopword . ", ";
             }
             $stopwordsString  = rtrim($stopwordsString, ", ");
-            $this->warnings[] = "Sie machen eine Ausschlusssuche. Ergebnisse mit folgenden Wörtern werden nicht angezeigt: \"" . $stopwordsString . "\"";
+            $this->warnings[] = trans('metaGer.formdata.stopwords', ['stopwords' => $stopwordsString]);
         }
 
         # Phrasensuche
@@ -838,9 +838,8 @@ class MetaGer
         }
         $p = rtrim($p, ", ");
         if (sizeof($this->phrases) > 0) {
-            $this->warnings[] = "Sie führen eine Phrasensuche durch: $p";
+            $this->warnings[] = trans('metaGer.formdata.phrase', ['phrase' => $p]);
         }
-
     }
 
     public function nextSearchLink()

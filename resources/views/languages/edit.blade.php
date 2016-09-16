@@ -3,13 +3,13 @@
 @section('title', $title )
 
 @section('content')
-<h1>MetaGer - Übersetzungen</h1>
-<p>Vielen Dank, dass du erwägst MetaGer bei der Übersetzung seiner Texte zu unterstützen. Dir wird im unteren Bereich eine Datei und tabellarisch die dazugehörigen Texte angezeigt. Das Feld "#ID" dient dabei nur der Orientierung und ist für die Übersetzung unwichtig.
-In der nächsten Spalte findest du entweder Texte der Sprache für die uns einige Übersetzungen fehlen, oder aber ein Textfeld. Wird hier für eine Reihe ein Textfeld angezeigt, so fehlen uns die Texte in der angegebenen Sprache.</p>
-<p>Du kannst uns unterstützen, indem du dir die Referenztexte in den folgenden Spalten (rechts daneben) ansiehst und nach Möglichkeit eine Übersetzung in der gesuchten Sprache in das Textfeld einträgst.</p>
+<h1>{{ trans('languages.header') }}</h1>
+<p>{{ trans('languages.beschreibung.1') }}</p>
+<p>{{ trans('languages.beschreibung.2') }}</p>
 <div class="progress">
   <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="{{ round(100 * (($langTexts[$to]+$new) / count($sum))) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round(100 * (($langTexts[$to]+$new) / count($sum))) }}%">
-  {{ ($langTexts[$to]+$new) . "/" . count($sum) . " Texten übersetzt (" . round(100 * (($langTexts[$to]+$new) / count($sum))) . "%)"}}
+  {{ trans('languages.progress', ['uebersetzteTexte'=> ($langTexts[$to]+$new), 'textCount'=>count($sum), 'percentage'=>round(100 * (($langTexts[$to]+$new) / count($sum)))]) }}
+
   </div>
 </div>
 <h1>{{$filename}}</h1>
@@ -47,7 +47,7 @@ In der nächsten Spalte findest du entweder Texte der Sprache für die uns einig
 		@endforeach
 	</tbody>
 </table>
-<p>Sobald du mit deinen Texten zufrieden bist, kannst du uns diese mit einem Klick auf folgenden Knopf automatisch zusenden. Wenn es mehr fehlende Texte in der angegebenen Sprache gibt, wird dein Browser dich danach direkt zu diesen leiten.</p>
-<p><b>Hinweis</b>: Die übermittelten Texte werden von diesem Tool erst erkannt, sobald diese von uns gesichtet und eingefügt wurden. Wenn du deine Arbeit sichern möchtest um diese zu einem späteren Zeitpunkt fortzusetzen (auch wenn wir deine bisherige Arbeit noch nicht übernehmen konnten), so reicht es vollkommen, den aktuellen Link aus deiner Browserleiste zu kopieren und zu einem späteren Zeitpunkt wieder aufzurufen.</p>
+<p>{{ trans('languages.hinweis.1') }}</p>
+<p>{!! trans('languages.hinweis.2') !!}</p>
 <button class="btn btn-success" type="submit" form="submit">Daten übermitteln</button>
 @endsection

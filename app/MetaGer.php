@@ -252,6 +252,7 @@ class MetaGer
             $password = md5($eingabe . $password);
             if ($this->password === $password) {
                 $this->ads       = [];
+                $this->products  = [];
                 $this->validated = true;
             }
         }

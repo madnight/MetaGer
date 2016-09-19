@@ -30,6 +30,7 @@ class MetaGer
     protected $engines         = [];
     protected $results         = [];
     protected $ads             = [];
+    protected $products        = [];
     protected $warnings        = [];
     protected $errors          = [];
     protected $addedHosts      = [];
@@ -90,7 +91,6 @@ class MetaGer
     public function createView()
     {
         $viewResults = [];
-
         # Wir extrahieren alle notwendigen Variablen und geben Sie an unseren View:
         foreach ($this->results as $result) {
             $viewResults[] = get_object_vars($result);
@@ -172,6 +172,9 @@ class MetaGer
             }
             foreach ($engine->ads as $ad) {
                 $this->ads[] = $ad;
+            }
+            foreach ($engine->products as $product) {
+                $this->products[] = $product;
             }
         }
 
@@ -383,6 +386,7 @@ class MetaGer
                         && ($suma["name"]->__toString() === "qualigo"
                             || $suma["name"]->__toString() === "similar_product_ads"
                             || (!$overtureEnabled && $suma["name"]->__toString() === "overtureAds")
+                            || $suma["name"]->__toString() == "rlvproduct"
                         )
                     )
                 ) {
@@ -404,6 +408,7 @@ class MetaGer
                         && ($suma["name"]->__toString() === "qualigo"
                             || $suma["name"]->__toString() === "similar_product_ads"
                             || (!$overtureEnabled && $suma["name"]->__toString() === "overtureAds")
+                            || $suma["name"]->__toString() == "rlvproduct"
                         )
                     )
                 ) {
@@ -891,6 +896,26 @@ class MetaGer
         } else {
             return null;
         }
+
+    }
+
+    public function hasProducts()
+    {
+        if (count($this->products) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getProducts()
+    {
+        $return = [];
+        foreach ($this->products as $product) {
+            $return[] = get_object_vars($product);
+        }
+        #die(var_dump($return));
+        return $return;
 
     }
 

@@ -8,7 +8,7 @@
 			    <div class="product">
 			      	<a href="{{$product["link"]}}" title="{{$product["titel"]}}" target="_blank">
 				      	<div class="price">{!!$product["price"]!!}</div>
-				        <img src="{{ $product["image"] }}" />
+				        <img src="{{ $metager->getImageProxyLink($product["image"]) }}" />
 				        <p class="title">{{$product["titel"]}}</p>
 				        <p class="shop">{{$product["gefVon"]}}</p>
 				        <p class="shipping">Versand gratis</p>

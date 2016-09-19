@@ -400,7 +400,7 @@ a:hover {
 
 .popover-content {
     /*padding-left: 0;
-	padding-right:0;*/
+    padding-right:0;*/
 }
 
 .options-list > li {}
@@ -524,4 +524,58 @@ footer a {
     #searchplugin {
         display: initial;
     }
+}
+
+.product {
+    text-align: center;
+    border: 1px dotted lightgrey;
+    padding: 5px;
+    max-width: 150px;
+}
+
+.product a {
+    color: #333;
+}
+
+.product .price {
+    position: relative;
+    top: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    text-align: left;
+    width: 80px;
+}
+
+.product .title {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    max-height: 31px;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+
+.product .shop {
+    font-size: 10px;
+    text-align: left;
+    color: green;
+    margin-bottom: 6px;
+}
+
+.product .shipping {
+    font-size: 10px;
+    text-align: left;
+}
+
+.lightslider {
+    overflow: visible!important;
+}
+
+.lSPrev > span, .lSNext > span {
+    background-color: black;
+    padding: 5px;
+}
+
+#mark {
+    font-size: 10px;
 }

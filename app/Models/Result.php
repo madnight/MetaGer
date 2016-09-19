@@ -60,6 +60,7 @@ class Result
         $this->rank           = 0;
         $this->partnershop    = $partnershop;
         $this->image          = $image;
+        $this->price          = $price;
     }
 
     /* Ranked das Ergebnis nach folgenden Aspekten:

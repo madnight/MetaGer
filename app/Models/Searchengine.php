@@ -16,11 +16,12 @@ abstract class Searchengine
     protected $ch; # Curl Handle zum erhalten der Ergebnisse
     protected $getString = ""; # Der String für die Get-Anfrage
     protected $engine; # Die ursprüngliche Engine XML
-    public $enabled = true; # true, wenn die Suchmaschine nicht explizit disabled ist
-    public $results = []; # Die geladenen Ergebnisse
-    public $ads     = []; # Die geladenen Werbungen
-    public $loaded  = false; # wahr, sobald die Ergebnisse geladen wurden
-    public $cached  = false;
+    public $enabled  = true; # true, wenn die Suchmaschine nicht explizit disabled ist
+    public $results  = []; # Die geladenen Ergebnisse
+    public $ads      = []; # Die geladenen Werbungen
+    public $products = []; # Die geladenen Produkte
+    public $loaded   = false; # wahr, sobald die Ergebnisse geladen wurden
+    public $cached   = false;
 
     public $ip; # Die IP aus der metager
     public $gefVon; # Der HTML-Code für die Verlinkung des Suchanbieters

@@ -29,4 +29,6 @@ return [
     'speichern.2'     => 'Einstellungen dauerhaft speichern',
     'speichern.3'     => 'Plugin mit diesen Einstellungen generieren',
     'speichern.4'     => 'Einstellungen zurücksetzen',
+
+    'request'         => 'Mit welcher Methode soll MetaGer abgefragt werden',
 ];

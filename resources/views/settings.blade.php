@@ -33,6 +33,11 @@
 			<option value="5000">{!! trans('settings.zeit.4') !!}</option>
 			<option value="10000">{!! trans('settings.zeit.5') !!}</option>
 			<option value="20000">{!! trans('settings.zeit.6') !!}</option></select>
+		<label class="select-label">{{ trans('settings.request') }}:</label>
+		<select class="form-control" name="request">
+			<option value="GET" selected>GET</option>
+			<option value="POST">POST</option>
+		</select>
 		<h2>{!! trans('settings.suchmaschinen.1') !!} <small><a class="allUnchecker">{!! trans('settings.suchmaschinen.2') !!}</a></small></h2>
 		@foreach( $foki as $fokus => $sumas )
 			<div class="headingGroup {{ $fokus }}">

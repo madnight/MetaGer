@@ -28,23 +28,27 @@ class Fernsehsuche extends Searchengine
 
         $results = $content->response->docs;
         foreach ($results as $result) {
-            $title       = $result->show . " : " . $result->title;
-            $link        = urldecode($result->url);
-            $anzeigeLink = $link;
-            $descr       = $result->description;
-            $image       = "http://api-resources.fernsehsuche.de" . $result->thumbnail;
-            $this->counter++;
-            $this->results[] = new \App\Models\Result(
-                $this->engine,
-                $title,
-                $link,
-                $anzeigeLink,
-                $descr,
-                $this->gefVon,
-                $this->counter,
-                false,
-                $image
-            );
+            try {
+                $title       = $result->show . " : " . $result->title;
+                $link        = urldecode($result->url);
+                $anzeigeLink = $link;
+                $descr       = $result->description;
+                $image       = "http://api-resources.fernsehsuche.de" . $result->thumbnail;
+                $this->counter++;
+                $this->results[] = new \App\Models\Result(
+                    $this->engine,
+                    $title,
+                    $link,
+                    $anzeigeLink,
+                    $descr,
+                    $this->gefVon,
+                    $this->counter,
+                    false,
+                    $image
+                );
+            } catch (\ErrorException $e) {
+
+            }
         }
     }
 }

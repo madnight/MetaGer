@@ -94,7 +94,7 @@ class MetaGerSearch extends Controller
 
         $mquicktips = array_merge($mquicktips, $quicktips);
 
-        # Uns Natürlich das wussten Sie schon:
+        # Und Natürlich das wussten Sie schon:
         $file = storage_path() . "/app/public/tips.txt";
         if (file_exists($file)) {
             $tips = file($file);

@@ -578,5 +578,13 @@ footer a {
 }
 
 #mark {
-    font-size: 10px;
+    font-size: 13px;
+}
+
+#mark a {
+    margin-left: 3px;
+}
+
+.product img {
+    max-width: 100px;
 }

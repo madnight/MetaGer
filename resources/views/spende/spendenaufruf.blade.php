@@ -51,7 +51,7 @@ Herzliche Grüße,
 das MetaGer-Team im SUMA-EV
 </p>
 <div class="" style="margin-top:50px">
-	<h1>Weiter spenden:</h1>s
+	<h1>Weiter spenden:</h1>
 	<div class="col-sm-6">
 		<h2>{{ trans('spenden.bankinfo.1') }}</h2>
 		<p style="white-space:pre;">{{ trans('spenden.bankinfo.2') }}</p>

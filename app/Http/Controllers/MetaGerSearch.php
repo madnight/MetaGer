@@ -6,6 +6,7 @@ use App;
 use App\Http\Controllers\Controller;
 use App\MetaGer;
 use Illuminate\Http\Request;
+use LaravelLocalization;
 
 class MetaGerSearch extends Controller
 {
@@ -94,7 +95,7 @@ class MetaGerSearch extends Controller
 
         $mquicktips = array_merge($mquicktips, $quicktips);
 
-        # Uns Natürlich das wussten Sie schon:
+        # Und Natürlich das wussten Sie schon:
         $file = storage_path() . "/app/public/tips.txt";
         if (file_exists($file)) {
             $tips = file($file);
@@ -111,6 +112,10 @@ class MetaGerSearch extends Controller
 
             $mquicktips[] = ['title' => $ad['title'], 'descr' => $ad['descr'], 'URL' => $ad['URL']];
         }
+
+        # Und en Spendenaufruf:
+        $mquicktips[] = ['title' => trans('quicktip.spende.title'), 'descr' => trans('quicktip.spende.descr'), 'URL' => LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "spendenaufruf")];
+
         return view('quicktip')
             ->with('spruch', $spruch)
             ->with('mqs', $mquicktips);

@@ -1,7 +1,7 @@
 <div class="row lightSliderContainer hidden">
 	<div class="col-sm-1 hidden-xs"></div>
 	<div class="resultInformation col-xs-12 col-sm-11">
-		<span id="mark"><img src="/img/boosticon.png" alt="" height="13" /><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "partnershops") }}" target="_blank">Partnershops</a></span>
+		<span id="mark">Produktanzeigen:</span>
 		<ul class="lightSlider" >
 			@foreach($products as $product)
 			<li>

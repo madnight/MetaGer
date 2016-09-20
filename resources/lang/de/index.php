@@ -42,7 +42,7 @@ return [
     'plugin.firefox.1'    => 'Klicken Sie in Ihrem Browser oben rechts im Suchfeld auf die Lupe mit dem kleinen "+" und dann auf "MetaGer hinzufügen" (siehe Bild)',
     'plugin.firefox.2'    => 'Klicken Sie nun mit der rechten Maustaste auf das neue MetaGer Logo in der Liste und auf "als Standard Suchmaschine verwenden" (siehe Bild)',
     'plugin.firefox.3'    => 'MetaGer als Startseite im :browser einrichten',
-    'plugin.firefox.4'    => 'Klicken Sie oben rechts im Browser auf <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span><span class=".sr-only">die drei horizontalen Striche</span> (Menü) und öffnen Sie die "Einstellungen"',
+    'plugin.firefox.4'    => 'Klicken Sie oben rechts im Browser auf <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span><span class="sr-only">die drei horizontalen Striche</span> (Menü) und öffnen Sie die "Einstellungen"',
     'plugin.firefox.5'    => 'Tragen Sie im Feld "Startseite" "https://metager.de" ein.',
 
     'plugin.chrome.1'     => 'Klicken Sie in Ihrem Chrome oben rechts auf <span class="glyphicon glyphicon-option-vertical"></span> und im folgenden Menü auf "Einstellungen", um die Einstellungen Ihres Chromes zu öffnen.',

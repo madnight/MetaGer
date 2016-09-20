@@ -26,18 +26,18 @@
 							<ul class="options-list list-unstyled">
 								<li>
 									<a href="{{ $metager->generateSiteSearchLink($result->strippedHost) }}">
-										Suche auf dieser Domain neu starten
+										{!! trans('result.options.1') !!}
 									</a>
 								</li>
 								<li>
 									<a href="{{ $metager->generateRemovedHostLink($result->strippedHost) }}">
-										{{ $result->strippedHost }} ausblenden
+										{!! trans('result.options.2', ['host' => $result->strippedHost]) !!}
 									</a>
 								</li>
 								@if( $result->strippedHost !== $result->strippedDomain )
 								<li>
 								<a href="{{ $metager->generateRemovedDomainLink($result->strippedDomain) }}">
-								*.{{ $result->strippedDomain }} ausblenden
+									{!! trans('result.options.3', ['domain' => $result->strippedDomain]) !!}
 								</a>
 								</li>
 								@endif
@@ -51,12 +51,12 @@
 				@if( isset($result->partnershop) && $result->partnershop === TRUE )
 				<span class="partnershop-info">
 				<img src="/img/boosticon.png" height="13" alt="">
-				<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/partnershops") }}" target="_blank">Partnershop</a>
+				<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/partnershops") }}" target="_blank">{!! trans('result.options.4') !!}</a>
 				</span>
 				@endif
 				<a class="proxy" onmouseover="$(this).popover('show');" onmouseout="$(this).popover('hide');" data-toggle="popover" data-placement="auto right" data-container="body" data-content="Der Link wird anonymisiert geöffnet. Ihre Daten werden nicht zum Zielserver übetragen. Möglicherweise funktionieren manche Webseiten nicht wie gewohnt." href="{{ $result->proxyLink }}" target="{{ $metager->getTab() }}">
 					<img src="/img/proxyicon.png" alt="" />
-					anonym öffnen
+					{!! trans('result.options.5') !!}
 				</a>
 			</div>
 			</div>

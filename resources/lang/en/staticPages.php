@@ -18,11 +18,12 @@ return [
     'nav13'            => 'URL-Shortener',
     'nav14'            => 'TOR-Hidden-Service',
     'nav15'            => 'Tools',
-    'nav16'            => 'Support',
+    'nav16'            => 'Support Us',
     'nav17'            => 'Purchase at affiliate shops',
     'nav18'            => 'Contact',
     'nav19'            => 'Language',
     'nav22'            => 'Citation Search',
+    'nav24'            => 'MetaGer source code',
 
     'navigationToggle' => 'show navigation',
 

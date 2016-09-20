@@ -147,7 +147,7 @@ Route::group(
 
         Route::get('settings', 'StartpageController@loadSettings');
 
-        Route::get('meta/meta.ger3', 'MetaGerSearch@search');
+        Route::match(['get', 'post'], 'meta/meta.ger3', 'MetaGerSearch@search');
         Route::get('meta/picture', 'Pictureproxy@get');
         Route::get('clickstats', 'LogController@clicklog');
         Route::get('pluginClose', 'LogController@pluginClose');
@@ -165,4 +165,7 @@ Route::group(
         Route::get('databund', function () {
             return redirect('https://metager.de/klassik/databund');
         });
+        Route::get('languages', 'LanguageController@createOverview');
+        Route::get('languages/edit/{from}/{to}/{exclude?}', 'LanguageController@createEditPage');
+        Route::post('languages/edit/{from}/{to}/{exclude?}', 'MailController@sendLanguageFile');
     });

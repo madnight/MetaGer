@@ -1,15 +1,15 @@
 <?php
 
 return [
-    "head_1"	=>	"Metager Widget de búsqueda",
-    "head_2"	=>	"Aquí encuentra el Metger-Widget para su sitio web",
-    "head_3"	=>	"Sitio web donde buscar",
-    "head_4"	=>	"Introducir sitio web",
-    "head_5"	=>	"Generar",
-    "generated_1"	=>	"Prevista",
-    "generated_2"	=>	"Buscar y encontrar seguro con MetaGer ",
-    "generated_3"	=>	"Buscar con MetaGer",
-    "generated_4"	=>	"Buscar",
-    "generated_5"	=>	"Código",
-    "generated_6"	=>	"es"
+    "head.1"	=>	"Metager Widget de búsqueda",
+    "head.2"	=>	"Aquí encuentra el Metger-Widget para su sitio web",
+    "head.3"	=>	"Sitio web donde buscar",
+    "head.4"	=>	"Introducir sitio web",
+    "head.5"	=>	"Generar",
+    "generated.1"	=>	"Prevista",
+    "generated.2"	=>	"Buscar y encontrar seguro con MetaGer ",
+    "generated.3"	=>	"Buscar con MetaGer",
+    "generated.4"	=>	"Buscar",
+    "generated.5"	=>	"Código",
+    "generated.6"	=>	"es"
 ];

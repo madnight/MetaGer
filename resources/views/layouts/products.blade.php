@@ -11,7 +11,7 @@
 				        <img src="{{ $metager->getImageProxyLink($product["image"]) }}" />
 				        <p class="title">{{$product["titel"]}}</p>
 				        <p class="shop">{{$product["gefVon"]}}</p>
-				        <p class="shipping">Versand gratis</p>
+				        <p class="shipping">{{$product["additionalInformation"]["shipping"]}}</p>
 				    </a>
 			    </div>
 			</li>

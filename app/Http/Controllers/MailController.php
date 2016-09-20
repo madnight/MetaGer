@@ -123,16 +123,17 @@ class MailController extends Controller
 
     public function sendLanguageFile(Request $request, $from, $to, $exclude = "")
     {
-
         $filename = $request->input('filename');
 
         # Wir erstellen nun zunächst den Inhalt der Datei:
         $data = [];
         $new  = 0;
         foreach ($request->all() as $key => $value) {
+
             if ($key === "filename" || $value === "") {
                 continue;
             }
+            $key = base64_decode($key);
             if (strpos($key, "_new_") === 0 && $value !== "") {
                 $new++;
                 $key = substr($key, strpos($key, "_new_") + 5);
@@ -151,6 +152,7 @@ class MailController extends Controller
             }
 
         }
+
         $output = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         $output = preg_replace("/\{/si", "[", $output);
         $output = preg_replace("/\}/si", "]", $output);

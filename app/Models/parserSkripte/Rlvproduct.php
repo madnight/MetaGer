@@ -33,7 +33,8 @@ class RlvProduct extends Searchengine
                 $counter,
                 $partnershop = false,
                 $image,
-                $result["price"]
+                $result["price"],
+                ['shipping' => $result["distribution"]]
             );
         }
     }

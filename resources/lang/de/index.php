@@ -81,7 +81,7 @@ return [
     'plugin.edge.3'       => 'Scrollen Sie nach unten und klicken auf "Erweiterte Einstellungen anzeigen"',
     'plugin.edge.4'       => 'Scrollen Sie erneut nach unten bis zum Punkt "In Adressleiste suchen mit" und klicken Sie auf "Ändern"',
     'plugin.edge.5'       => 'Wählen Sie "MetaGer: Sicher suchen & finden..." und klicken Sie auf "Als Standard"',
-    'plugin.edge.6'       => 'MetaGer als Startseite im {{ $browser }} einrichten',
+    'plugin.edge.6'       => 'MetaGer als Startseite im :browser einrichten',
     'plugin.edge.7'       => 'Klicken Sie oben rechts im Browser auf <span class="glyphicon glyphicon-option-horizontal"></span> und öffnen Sie die "Einstellungen"',
     'plugin.edge.8'       => 'Wählen Sie im Bereich "Öffnen mit" den Punkt "Bestimmte Seite(n)" aus',
     'plugin.edge.9'       => 'Im Dropdown-Menü darunter wählen Sie "Benutzerdefiniert" aus',

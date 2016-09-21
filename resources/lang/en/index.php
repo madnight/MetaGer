@@ -36,7 +36,7 @@ return [
     "plugin.firefox.3"	=>	"Use MetaGer as start page in :browser",
     "plugin.firefox.4"	=>	"Click top right in your browser on <span class=\"glyphicon glyphicon-menu-hamburger\" aria-hidden=\"true\"></span><span class=\"sr-only\">the three small horizontal lines</span> (menu) and open \"Preferences\"",
     "plugin.firefox.5"	=>	"Type in field \"Home Page\" => \"https://metager.de/en/\"",
-    "plugin.chrome.1"	=>	"Click in your Chrome browser on <span class=\"glyphicon glyphicon-option-vertical\"><\/span> and in the next menu on \"Preferences\" to open the settings of your Chrome browser",
+    "plugin.chrome.1"	=>	"Click in your Chrome browser on <span class=\"glyphicon glyphicon-option-vertical\"></span> and in the next menu on \"Preferences\" to open the settings of your Chrome browser",
     "plugin.chrome.2"	=>	"Click in field \"Search\" on manage search engines",
     "plugin.chrome.3"	=>	"Now you will find an entry \"MetaGer\". Move your mouse over that entry and click on \"Standard\",",
     "plugin.chrome.4"	=>	"Set up MetaGer as start page in your browser",

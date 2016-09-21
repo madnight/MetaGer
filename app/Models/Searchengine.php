@@ -178,7 +178,6 @@ abstract class Searchengine
             }
 
         }
-
         if ($body !== "") {
             $this->loadResults($body);
             $this->getNext($metager, $body);

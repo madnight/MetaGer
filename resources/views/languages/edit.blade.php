@@ -48,5 +48,6 @@
 </table>
 <p>{{ trans('languages.hinweis.1') }}</p>
 <p>{!! trans('languages.hinweis.2') !!}</p>
+<p>{!! trans('languages.hinweis.3') !!}</p>
 <button class="btn btn-success" type="submit" form="submit">Daten übermitteln</button>
 @endsection

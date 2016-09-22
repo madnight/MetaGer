@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('log:rotate')->everyMinute();
+        $schedule->command('log:rotate')->everyTenMinutes();
         // $schedule->command('inspire')
         //          ->hourly();
     }

@@ -554,11 +554,19 @@ class MetaGer
                     # Wenn foki für diese Suchmaschine angegeben sind
                     $focuses = explode(",", $suma['type']->__toString());
                     foreach ($focuses as $foc) {
-                        $foki[$foc][] = $suma['name']->__toString();
+                        if (isset($suma['minismCollection'])) {
+                            $foki[$foc][] = "minism";
+                        } else {
+                            $foki[$foc][] = $suma['name']->__toString();
+                        }
                     }
                 } else {
                     # Wenn keine foki für diese Suchmaschine angegeben sind
-                    $foki["andere"][] = $suma['name']->__toString();
+                    if (isset($suma['minismCollection'])) {
+                        $foki["andere"][] = "minism";
+                    } else {
+                        $foki["andere"][] = $suma['name']->__toString();
+                    }
                 }
             }
         }

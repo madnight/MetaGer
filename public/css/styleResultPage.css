@@ -11,13 +11,6 @@
     margin-top: 0;
 }
 
-header * {}
-
-#foki li {
-    /* background-color: rgba(255, 255, 255, 0.93); */
-    /* border-top-right-radius: 5px; */
-}
-
 .nav-tabs > li.active {}
 
 nav-tabs > li.active {
@@ -25,9 +18,7 @@ nav-tabs > li.active {
 }
 
 .tab-pane.active {
-    /* -webkit-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.55); */
     -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.55);
-    /* box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.55); */
     padding: 10px 0;
     padding-top: 0;
 }
@@ -72,7 +63,6 @@ nav-tabs > li.active {
     #research .visible-xs {
         display: inline-block!important;
     }
-    #research nav ul li + li + li {}
 }
 
 .input-group-addon {
@@ -90,7 +80,6 @@ nav .input-group {
 
 header nav {
     height: 100%;
-    /* margin-left: 15px; */
 }
 
 header ul {
@@ -135,7 +124,6 @@ header ul {
     font-weight: bold;
     line-height: 1;
     white-space: nowrap;
-    /* padding: 5px 0; */
 }
 
 #search {
@@ -144,8 +132,6 @@ header ul {
     width: 50px;
     height: 100%;
 }
-
-#reSearch {}
 
 #reSearch a {
     color: black;
@@ -169,7 +155,6 @@ header ul {
 body {
     height: 100%;
     background-image: inherit;
-    /* background-attachment: fixed; */
     background-color: rgba(2, 93, 140, .03);
 }
 
@@ -197,7 +182,7 @@ a:hover {
 }
 
 
-/* Hier der Style fÃƒÆ’Ã‚Â¼r unsere Tabliste */
+/* Hier der Style für unsere Tabliste */
 
 #foki {
     background-color: white;
@@ -217,11 +202,10 @@ a:hover {
 }
 
 
-/* Hier der Style fÃƒÆ’Ã‚Â¼r unseren Spruch */
+/* Hier der Style für unseren Spruch */
 
 #spruch {
     padding: 10px;
-    /* margin-top: 10px; */
     margin-bottom: 0;
     padding-bottom: 10px;
     padding-left: 65px;
@@ -251,11 +235,10 @@ a:hover {
 }
 
 
-/* Hier der Style fÃƒÆ’Ã‚Â¼r die einzelnen Ergebnisboxen */
+/* Hier der Style für die einzelnen Ergebnisboxen */
 
 .result {
     margin-bottom: 10px;
-    /* padding:0 50px; */
     width: 100%
 }
 
@@ -402,13 +385,6 @@ a:hover {
     max-width: 100%;
 }
 
-.popover-content {
-    /*padding-left: 0;
-    padding-right:0;*/
-}
-
-.options-list > li {}
-
 .options-list > li:hover {
     background-color: lightgrey;
 }
@@ -443,7 +419,7 @@ a:hover {
 }
 
 
-/* Hier der Style fÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¼r die Bilder */
+/* Hier der Style für die Bilder */
 
 #fit-width .masonry {
     margin: 0 auto;
@@ -460,7 +436,7 @@ a:hover {
 }
 
 
-/* Hier der Style fÃƒÆ’Ã‚Â¼r die Werbeboxen */
+/* Hier der Style für die Werbeboxen */
 
 .result.ad {}
 
@@ -473,7 +449,7 @@ a:hover {
 }
 
 
-/* Style fÃƒÆ’Ã‚Â¼r den Footer */
+/* Style für den Footer */
 
 footer {
     text-align: center;
@@ -484,14 +460,14 @@ footer a {
 }
 
 
-/* Ein resetter fÃƒÆ’Ã‚Â¼r Floats */
+/* Ein resetter für Floats */
 
 .clearfix {
     clear: both;
 }
 
 
-/* Placeholder fÃƒÆ’Ã‚Â¼r ladende Tabs */
+/* Placeholder für ladende Tabs */
 
 .loader {
     text-align: center;

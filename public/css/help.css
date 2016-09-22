@@ -1,16 +1,22 @@
-* {}
-
-h3 {
-    font-size: 21px;
-    margin-bottom: 5px;
-}
-
 p {
     white-space: pre-wrap;
 }
 
 h1 {
     margin-bottom: 25px;
+}
+
+h3 {
+    font-size: 21px;
+    margin-bottom: 5px;
+}
+
+h1 + h2 {
+    margin-top: 0;
+}
+
+h2 + h3 {
+    margin-top: 0;
 }
 
 main {
@@ -28,12 +34,4 @@ main ul {
 
 .well-sm {
     margin: 10px 0px;
-}
-
-h1 + h2 {
-    margin-top: 0;
-}
-
-h2 + h3 {
-    margin-top: 0;
 }

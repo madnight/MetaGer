@@ -524,18 +524,19 @@ class MetaGer
          */
 
         # Wir zählen die Suchmaschinen, die durch den Cache beantwortet wurden:
-        $enginesToLoad = 0;
+        $enginesToLoad = [];
         $canBreak      = false;
         foreach ($engines as $engine) {
             if ($engine->cached) {
-                $enginesToLoad--;
                 if ($overtureEnabled && ($engine->name === "overture" || $engine->name === "overtureAds")) {
                     $canBreak = true;
                 }
+            } else {
+                # Das Array zählt einerseits die Suchmaschinen, auf die wir warten und andererseits
+                # welche Suchmaschinen nicht rechtzeitig geantwortet haben.
+                $enginesToLoad[$engine->name] = false;
             }
         }
-
-        $enginesToLoad += count($engines);
 
         $this->waitForResults($enginesToLoad, $overtureEnabled, $canBreak);
 
@@ -616,6 +617,10 @@ class MetaGer
     {
         $loadedEngines = 0;
         $timeStart     = microtime(true);
+
+        # Auf wie viele Suchmaschinen warten wir?
+        $engineCount = count($enginesToLoad);
+
         while (true) {
             $time          = (microtime(true) - $timeStart) * 1000;
             $loadedEngines = intval(Redis::hlen('search.' . $this->getHashCode()));
@@ -625,12 +630,12 @@ class MetaGer
 
             # Abbruchbedingung
             if ($time < 500) {
-                if (($enginesToLoad === 0 || $loadedEngines >= $enginesToLoad) && $canBreak) {
+                if (($engineCount === 0 || $loadedEngines >= $engineCount) && $canBreak) {
                     break;
                 }
 
             } elseif ($time >= 500 && $time < $this->time) {
-                if (($enginesToLoad === 0 || ($loadedEngines / ($enginesToLoad * 1.0)) >= 0.8) && $canBreak) {
+                if (($engineCount === 0 || ($loadedEngines / ($engineCount * 1.0)) >= 0.8) && $canBreak) {
                     break;
                 }
 
@@ -639,6 +644,13 @@ class MetaGer
             }
             usleep(50000);
         }
+
+        # Wir haben nun so lange wie möglich gewartet. Wir registrieren nun noch die Suchmaschinen, die geanwortet haben.
+        $answered = Redis::hgetall('search.' . $this->getHashCode());
+        foreach ($answered as $key => $value) {
+            $enginesToLoad[$key] = true;
+        }
+        $this->enginesToLoad = $enginesToLoad;
     }
 
     public function retrieveResults($engines)
@@ -940,7 +952,19 @@ class MetaGer
             $useragent = str_replace(" ", "", $useragent);
             $logEntry .= " time=" . round((microtime(true) - $this->starttime), 2) . " serv=" . $this->fokus;
             $logEntry .= " search=" . $this->eingabe;
-            $redis->rpush('logs.search', $logEntry);
+
+            # 2 Arten von Logs in einem wird die Anzahl der Abfragen an eine Suchmaschine gespeichert und in der anderen
+            # die Anzahl, wie häufig diese Ergebnisse geliefert hat.
+            $enginesToLoad = $this->enginesToLoad;
+            $redis->pipeline(function ($pipe) use ($enginesToLoad, $logEntry) {
+                $pipe->rpush('logs.search', $logEntry);
+                foreach ($this->enginesToLoad as $name => $answered) {
+                    $pipe->incr('logs.engines.requests.' . $name);
+                    if ($answered) {
+                        $pipe->incr('logs.engines.answered.' . $name);
+                    }
+                }
+            });
         } catch (\Exception $e) {
             return;
         }

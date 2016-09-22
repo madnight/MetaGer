@@ -1,26 +1,19 @@
-* {
-	
-}
-
 p {
     white-space: pre-wrap;
+    margin: 20px 0;
 }
 
 h1 {
     margin-bottom: 25px;
 }
 
-p {
-    margin: 20px 0;
+h2 {
+    font-size: 20px;
+    margin-top: 10px;
 }
 
 main {
     text-align: left;
-}
-
-h2 {
-    font-size: 20px;
-    margin-top: 10px;
 }
 
 address {

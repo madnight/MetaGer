@@ -96,4 +96,37 @@ class AdminInterface extends Controller
             ->with('title', 'Wer sucht was? - MetaGer')
             ->with('q', $q);
     }
+
+    public function engines()
+    {
+        # Wir laden den Inhalt der Log Datei und übergeben ihn an den view
+        $file = "/var/log/metager/engine.log";
+        if (file_exists($file) && is_readable($file)) {
+            $engineStats = file_get_contents($file);
+            # Daten vom JSON Format dekodieren
+            $engineStats = json_decode($engineStats, true);
+
+            # Eine Sortierung wäre nicht das verkehrteste
+            uasort($engineStats["recent"], function ($a, $b) {
+                if ($a["requests"] == $b["requests"]) {
+                    return 0;
+                }
+
+                return ($a["requests"] < $b["requests"]) ? 1 : -1;
+            });
+
+            uasort($engineStats["overall"], function ($a, $b) {
+                if ($a["requests"] == $b["requests"]) {
+                    return 0;
+                }
+
+                return ($a["requests"] < $b["requests"]) ? 1 : -1;
+            });
+            return view('admin.engines')
+                ->with('engineStats', $engineStats)
+                ->with('title', "Suchmaschinenstatus - MetaGer");
+        } else {
+            return redirect(url('admin'));
+        }
+    }
 }

@@ -2,7 +2,7 @@
     font-family: Liberation Sans, sans-serif;
 }
 
-.hostlabel a, .hostlabel a:visited {
+.hostlabel a:link, .hostlabel a:visited {
     color: #FFFFFF;
 }
 
@@ -33,7 +33,7 @@ nav-tabs > li.active {
 }
 
 
-/* Hier der Style fÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¼r unsere Suchleiste */
+/* Hier der Style für unsere Suchleiste */
 
 #researchBar {}
 
@@ -173,7 +173,7 @@ body {
     background-color: rgba(2, 93, 140, .03);
 }
 
-.resultInformation a {
+a:link {
     color: #0000FF;
 }
 

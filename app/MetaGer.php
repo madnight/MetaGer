@@ -575,7 +575,7 @@ class MetaGer
         $realEngNames = [];
         foreach ($enabledSearchengines as $realEng) {
             $nam = $realEng["name"]->__toString();
-            if ($nam !== "qualigo" && $nam !== "overtureAds") {
+            if ($nam !== "qualigo" && $nam !== "overtureAds" && $nam !== "rlvproduct") {
                 $realEngNames[] = $nam;
             }
         }

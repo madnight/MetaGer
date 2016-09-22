@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sumas>
-	<!-- Eine ausführliche Beschreibung der verwendeten Attribute gibt es unter: https://gitlab.metager3.de/open-source/MetaGer/wikis/sumas-xml -->
+	<!-- Eine ausführliche Beschreibung der verwendeten Attribute gibt es unter: https://gitlab.metager3.de/open-source/MetaGer/wikis/sumas-xml 
 	<suma
 		name="suchmaschine"
 		host="www.suchmaschine.de"
@@ -19,4 +19,5 @@
 		hasSiteSearch="1"
 		cacheDuration="60"
 	></suma>
+	-->
 </sumas>

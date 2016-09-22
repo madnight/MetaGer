@@ -24,7 +24,7 @@
 		<div class="item">
 			<div class="img">
 				<a href="{{ $result->link }}" target="{{ $metager->getTab() }}"><img src="{{ $metager->getImageProxyLink($result->image) }}" width="150px" alt=""/></a>
-				<span class="label label-default">{{ strip_tags($result->gefVon) }}</span>
+				<span class="label label-default hostlabel">{!! $result->gefVon !!}</span>
 			</div>
 		</div>
 	@endforeach

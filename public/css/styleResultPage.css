@@ -2,6 +2,10 @@
     font-family: Liberation Sans, sans-serif;
 }
 
+.hostlabel a, .hostlabel a:visited {
+    color: #FFFFFF;
+}
+
 .row {
     margin: 10px 15px;
     margin-top: 0;
@@ -169,7 +173,7 @@ body {
     background-color: rgba(2, 93, 140, .03);
 }
 
-a:link {
+.resultInformation a {
     color: #0000FF;
 }
 

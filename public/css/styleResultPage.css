@@ -2,6 +2,10 @@
     font-family: Liberation Sans, sans-serif;
 }
 
+.hostlabel a:link, .hostlabel a:visited {
+    color: #FFFFFF;
+}
+
 .row {
     margin: 10px 15px;
     margin-top: 0;
@@ -29,7 +33,7 @@ nav-tabs > li.active {
 }
 
 
-/* Hier der Style fÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¼r unsere Suchleiste */
+/* Hier der Style für unsere Suchleiste */
 
 #researchBar {}
 

@@ -47,10 +47,10 @@
 		</div>
 	</div>
 	<label class="non-bold">
-		Der Beitrag wird jährlich zum 01. August im voraus abgebucht, bzw. ab Eintrittsdatum anteilig für das erste Jahr. 
+		Der Beitrag wird jährlich zum 01. August im voraus abgebucht, bzw. ab Eintrittsdatum anteilig für das erste Jahr.
 	</label>
 	<label class="non-bold">
-		Ich stimme der Veröffentlichung meines Namens, meiner Funktion und meiner E-Mail-Adresse im Internet und/oder in Papierform zu (gewünschtes ankreuzen): 
+		Ich stimme der Veröffentlichung meines Namens, meiner Funktion und meiner E-Mail-Adresse im Internet und/oder in Papierform zu (gewünschtes ankreuzen):
 	</label>
 	<div class="row">
 		<div class="col-xs-2">

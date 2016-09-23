@@ -1,3 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sumas>
+	<!-- Eine ausführliche Beschreibung der verwendeten Attribute gibt es unter: https://gitlab.metager3.de/open-source/MetaGer/wikis/sumas-xml 
+	<suma
+		name="suchmaschine"
+		host="www.suchmaschine.de"
+		skript="/suche/"
+		formData="sprache=de&amp;sortieren=true&amp;&amp;queue=&lt;&lt;QUERY&gt;&gt;"
+		package="suchmaschine"
+		displayName="Meine Suchmaschine"
+		homepage="www.suchmaschine.de/welcome"
+		port="443"
+		inputEncoding="Latin1"
+		userSelectable="1"
+		type="web, nachrichten"
+		engineBoost="1.2"
+		additionalHeaders="$#!#$"
+		disabled="0"
+		hasSiteSearch="1"
+		cacheDuration="60"
+	></suma>
+	-->
 </sumas>

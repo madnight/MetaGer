@@ -47,8 +47,8 @@ class StartpageController extends Controller
             ->with('tab', $request->input('param_tab', 'off'))
             ->with('focusPages', $focusPages)
             ->with('browser', $browser)
-            ->with('navbarFocus', 'suche');
-
+            ->with('navbarFocus', 'suche')
+            ->with('css', 'index.css');
     }
 
     public function loadPage($subpage)

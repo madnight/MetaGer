@@ -543,51 +543,63 @@ class MetaGer
         $this->retrieveResults($engines);
     }
 
+    # Passt den Suchfokus an, falls für einen Fokus genau alle vorhandenen Sumas eingeschaltet sind
     public function adjustFocus($sumas, $enabledSearchengines)
     {
-        # Jetzt werden noch alle Kategorien der Settings durchgegangen und die jeweils enthaltenen namen der Suchmaschinen gespeichert.
-        $foki = [];
+        # Findet für alle Foki die enthaltenen Sumas
+        $foki = []; # [fokus][suma] => [suma]
         foreach ($sumas as $suma) {
             if ((!isset($suma['disabled']) || $suma['disabled'] === "") && (!isset($suma['userSelectable']) || $suma['userSelectable']->__toString() === "1")) {
                 if (isset($suma['type'])) {
-                    $f = explode(",", $suma['type']->__toString());
-                    foreach ($f as $tmp) {
-                        $name                                    = $suma['name']->__toString();
-                        $foki[$tmp][$suma['name']->__toString()] = $name;
+                    # Wenn foki für diese Suchmaschine angegeben sind
+                    $focuses = explode(",", $suma['type']->__toString());
+                    foreach ($focuses as $foc) {
+                        if (isset($suma['minismCollection'])) {
+                            $foki[$foc][] = "minism";
+                        } else {
+                            $foki[$foc][] = $suma['name']->__toString();
+                        }
                     }
                 } else {
-                    $name                                        = $suma['name']->__toString();
-                    $foki["andere"][$suma['name']->__toString()] = $name;
+                    # Wenn keine foki für diese Suchmaschine angegeben sind
+                    if (isset($suma['minismCollection'])) {
+                        $foki["andere"][] = "minism";
+                    } else {
+                        $foki["andere"][] = $suma['name']->__toString();
+                    }
                 }
             }
         }
 
-        # Es werden auch die Namen der aktuell aktiven Suchmaschinen abgespeichert.
+        # Findet die Namen der aktuell eingeschalteten Sumas
         $realEngNames = [];
         foreach ($enabledSearchengines as $realEng) {
             $nam = $realEng["name"]->__toString();
-            if ($nam !== "qualigo" && $nam !== "overtureAds") {
+            if ($nam !== "qualigo" && $nam !== "overtureAds" && $nam !== "rlvproduct") {
                 $realEngNames[] = $nam;
             }
         }
 
         # Anschließend werden diese beiden Listen verglichen (jeweils eine der Fokuslisten für jeden Fokus), um herauszufinden ob sie vielleicht identisch sind. Ist dies der Fall, so hat der Nutzer anscheinend Suchmaschinen eines kompletten Fokus eingestellt. Der Fokus wird dementsprechend angepasst.
-        foreach ($foki as $fok => $engs) {
+        foreach ($foki as $fok => $engines) {
             $isFokus      = true;
             $fokiEngNames = [];
-            foreach ($engs as $eng) {
+            foreach ($engines as $eng) {
                 $fokiEngNames[] = $eng;
             }
+            # Jede eingeschaltete Engine ist für diesen Fokus geeignet
             foreach ($fokiEngNames as $fen) {
                 if (!in_array($fen, $realEngNames)) {
                     $isFokus = false;
                 }
             }
+            # Jede im Fokus erwartete Engine ist auch eingeschaltet
             foreach ($realEngNames as $ren) {
                 if (!in_array($ren, $fokiEngNames)) {
                     $isFokus = false;
                 }
             }
+            # Wenn die Listen identisch sind, setze den Fokus um
             if ($isFokus) {
                 $this->fokus = $fok;
             }

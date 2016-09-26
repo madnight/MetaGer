@@ -96,9 +96,8 @@ class MetaGerSearch extends Controller
         $mquicktips = array_merge($mquicktips, $quicktips);
 
         # Wussten Sie schon:
-        $NUMBER_OF_TIPS = 21;
-
         $title = trans('tips.shorttitle');
+
         # Workaround für eine variable Tipanzahl trotz Übersetzungsdateien:
         # Es wird so lange versucht den nächsten Tip zu lesen, bis dieser "leer" ist, also mit dem Key übereinstimmt.
         $tips = [];

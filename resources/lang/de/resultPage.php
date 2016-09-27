@@ -2,6 +2,6 @@
 
 return [
     'opensearch' => 'MetaGer: Sicher suchen & finden, Privatsphäre schützen',
-    'starseite'  => 'MetaGer-Startseite',
+    'startseite'  => 'MetaGer-Startseite',
     'impressum'  => 'Impressum',
 ];

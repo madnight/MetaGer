@@ -16,7 +16,9 @@
 	<meta content="{{ $eingabe }}" name="q" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="search" type="application/opensearchdescription+xml" title="{!! trans('resultPage.opensearch') !!}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
-
+	@if( isset($metager->theme) && $metager->theme != "none" )
+	<link type="text/css" rel="stylesheet" href="/css/themes/{{ $metager->theme }}.css" />
+	@endif
 	<link type="text/css" rel="stylesheet" href="/css/lightslider.css" />
 
 

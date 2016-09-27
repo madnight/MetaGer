@@ -26,7 +26,6 @@ Route::group(
         Route::get('impressum', function () {
             return view('impressum')
                 ->with('title', trans('titles.impressum'))
-                ->with('css', 'impressum.css')
                 ->with('navbarFocus', 'kontakt');
         });
         Route::get('impressum.html', function () {
@@ -36,13 +35,11 @@ Route::group(
         Route::get('about', function () {
             return view('about')
                 ->with('title', trans('titles.about'))
-                ->with('css', 'about.css')
                 ->with('navbarFocus', 'kontakt');
         });
         Route::get('team', function () {
             return view('team.team')
                 ->with('title', trans('titles.team'))
-                ->with('css', 'team.css')
                 ->with('navbarFocus', 'kontakt');
         });
         Route::get('team/pubkey-wsb', function () {
@@ -82,8 +79,7 @@ Route::group(
         Route::get('partnershops', function () {
             return view('spende.partnershops')
                 ->with('title', trans('titles.partnershops'))
-                ->with('navbarFocus', 'foerdern')
-                ->with('css', 'partnershops.css');
+                ->with('navbarFocus', 'foerdern');
         });
 
         Route::get('beitritt', function () {
@@ -107,14 +103,12 @@ Route::group(
         Route::get('datenschutz', function () {
             return view('datenschutz')
                 ->with('title', trans('titles.datenschutz'))
-                ->with('css', 'privacy.css')
                 ->with('navbarFocus', 'datenschutz');
         });
 
         Route::get('hilfe', function () {
             return view('hilfe')
                 ->with('title', trans('titles.hilfe'))
-                ->with('css', 'help.css')
                 ->with('navbarFocus', 'hilfe');
         });
 

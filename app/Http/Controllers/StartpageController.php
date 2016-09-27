@@ -149,7 +149,6 @@ class StartpageController extends Controller
         return view('settings')
             ->with('foki', $foki)
             ->with('title', 'Einstellungen')
-            ->with('css', 'settings.css')
             ->with('js', ['settings.js'])
             ->with('navbarFocus', 'suche');
         die(var_dump($foki));

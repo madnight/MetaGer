@@ -9,7 +9,7 @@
 <p>{!! trans('datenschutz.general.1') !!}</a></p>
 <p>{!! trans('datenschutz.general.3') !!}</p>
 <h2>{!! trans('datenschutz.policy.1') !!}</h2>
-<ul id="privacyList">
+<ul class="dotlist">
 	<li>{!! trans('datenschutz.policy.2') !!}</li>
 	<li>{!! trans('datenschutz.policy.5') !!}</li>
 	<li>{!! trans('datenschutz.policy.6') !!}</li>

@@ -2,7 +2,7 @@
 	<head>
 		<title>{!! trans('quicktip.title') !!}</title>
 		<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="/css/quicktips.css" />
+		<link rel="stylesheet" type="text/css" href="/css/style.css" />
 	</head>
 	<body>
 		@if( $spruch !== "" )

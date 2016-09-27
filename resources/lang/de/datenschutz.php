@@ -5,12 +5,7 @@ return [
 
     'general.1' => 'Datenschutz und Privatsphäre gehören für uns zu den wichtigsten Gütern im Internet. Sie sind absolut schützenswert und dürfen keinesfalls kommerziell genutzt werden. Im Folgenden eine kurze Auflistung unserer Vorgehensweise. Eine ausführliche Darstellung mit Hintergrund-Informationen, warum wir die einzige wirklich sichere Suchmaschine betreiben, finden Sie <a href="https://suma-ev.de/presse/Sicher-suchen-UND-finden-mit-MetaGer.html">hier.</a>',
 
-    'general.3' => 'Nur Software, die frei und quellcode-offen ist, kann von jedem überprüft
-werden.  In allen anderen Fällen müssen User GLAUBEN, was Betreiber oder
-"Gütesiegel"-Verkäufer behaupten.  MetaGer ist Freie Software unter
-unter GNU-AGPLv3 Lizenz (siehe dazu Nachricht im Heise-Ticker:
-<a href="http://heise.de/-3295586" target="_blank">http://heise.de/-3295586</a>). Der MetaGer-Quellcode steht Ihnen unter folgendem Link zur Verfügung:
-<a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank">https://gitlab.metager3.de/open-source/MetaGer</a><br />Sie müssen uns nichts glauben: SIE können es selber kontrollieren!',
+    'general.3' => 'Nur Software, die frei und quellcode-offen ist, kann von jedem überprüft werden.  In allen anderen Fällen müssen User GLAUBEN, was Betreiber oder "Gütesiegel"-Verkäufer behaupten.  MetaGer ist Freie Software unter unter GNU-AGPLv3 Lizenz (siehe dazu Nachricht im Heise-Ticker: <a href="http://heise.de/-3295586" target="_blank">http://heise.de/-3295586</a>). Der MetaGer-Quellcode steht Ihnen unter folgendem Link zur Verfügung: <a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank">https://gitlab.metager3.de/open-source/MetaGer</a><br />Sie müssen uns nichts glauben: SIE können es selber kontrollieren!',
 
     'policy.1'  => 'Unsere Vorgehensweise/Policy:',
     'policy.2'  => 'Wir speichern weder Ihre IP-Adresse, noch den

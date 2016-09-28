@@ -62,7 +62,7 @@ class MetaGer
             $tmp                      = file_get_contents(config_path() . "/blacklistUrl.txt");
             $this->urlsBlacklisted    = explode("\n", $tmp);
         } else {
-            Log::warning(trans('metaGer.blacklist.failed'));
+            Log::warning("Achtung: Eine, oder mehrere Blacklist Dateien, konnten nicht geöffnet werden");
         }
 
         # Parser Skripte einhängen
@@ -498,7 +498,7 @@ class MetaGer
 
             # Prüfe ob Parser vorhanden
             if (!file_exists(app_path() . "/Models/parserSkripte/" . ucfirst($engine["package"]->__toString()) . ".php")) {
-                Log::error(trans('metaGer.engines.noParser', ['engine' => $engine["name"]]));
+                Log::error("Konnte " . $engine["name"] . " nicht abfragen, da kein Parser existiert");
                 continue;
             }
 
@@ -507,7 +507,7 @@ class MetaGer
             try {
                 $tmp = new $path($engine, $this);
             } catch (\ErrorException $e) {
-                Log::error(trans('metaGer.engines.cantQuery', ['engine' => $engine["name"], 'error' => var_dump($e)]));
+                Log::error("Konnte " . $engine["name"] . " nicht abfragen. " . var_dump($e));
                 continue;
             }
 

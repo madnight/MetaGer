@@ -1,14 +1,9 @@
 <?php
 
 return [
-    'blacklist.failed'       => 'Achtung: Eine, oder mehrere Blacklist Dateien, konnten nicht geöffnet werden',
-
     'results.failed'         => 'Leider konnten wir zu Ihrer Sucheingabe keine passenden Ergebnisse finden.',
 
     'settings.noneSelected'  => 'Achtung: Sie haben in ihren Einstellungen keine Suchmaschine ausgewählt.',
-
-    'engines.noParser'       => 'Konnte :engine nicht abfragen, da kein Parser existiert',
-    'engines.cantQuery'      => 'Konnte :engine nicht abfragen. :errror',
 
     'formdata.cantLoad'      => 'Suma-File konnte nicht gefunden werden',
     'formdata.noSearch'      => 'Achtung: Sie haben keinen Suchbegriff eingegeben. Sie können ihre Suchbegriffe oben eingeben und es erneut versuchen.',

@@ -2,17 +2,6 @@
     font-family: Liberation Sans, sans-serif;
 }
 
-.mg-panel {
-    margin: 0 auto;
-    margin-top: 7%;
-    padding: 10px 20px;
-    margin-bottom: 0;
-    background-color: white;
-    -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
-    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
-}
-
 label a {
     color: inherit;
 }
@@ -26,8 +15,6 @@ li#info {
     white-space: pre-line;
 }
 
-a.hidden-xs {}
-
 .navbar-default {
     background-color: white;
     border-radius: 0;
@@ -36,6 +23,30 @@ a.hidden-xs {}
 .row {
     margin-left: 0;
     margin-right: 0;
+}
+
+.mg-panel {
+    text-align: left;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 10px 20px;
+    margin-bottom: 0;
+    background-color: white;
+    -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+.input-group-addon {
+    padding: 0;
+}
+
+.form-group {
+    font-family: sans-serif;
+    font-size: 16px;
+    color: black;
+    background-color: transparent;
+    text-align: center;
 }
 
 section {
@@ -48,10 +59,6 @@ section {
 body > div {
     background-color: transparent;
     padding-top: 70px;
-}
-
-.input-group-addon {
-    padding: 0;
 }
 
 footer ul.list-inline {
@@ -86,14 +93,6 @@ body ul {
     text-align: center;
     margin-left: 0!important;
     margin-top: 10px;
-}
-
-.form-group {
-    font-family: sans-serif;
-    font-size: 16px;
-    color: black;
-    background-color: transparent;
-    text-align: center;
 }
 
 fieldset input[type=text] {
@@ -154,4 +153,421 @@ header {
     z-index: 500;
     width: 100%;
     height: 50px;
+}
+
+.dotlist {
+    list-style-type: disc;
+    text-align: left;
+}
+
+.dotlist li {
+    margin-bottom: 5px;
+}
+
+.well-sm {
+    margin: 10px 0px;
+}
+
+address {
+    white-space: pre;
+}
+
+.subheading {
+    font-size: 20px;
+    margin: 20px 0px;
+    white-space: pre-wrap;
+}
+
+p {
+    white-space: pre-wrap;
+}
+
+form {
+    margin: 10px 0px;
+}
+
+div#right {
+    background-color: #FFDCC1;
+    border-radius: 5px;
+    padding: 20px;
+    padding-top: 0;
+}
+
+div#right p {
+    white-space: normal;
+    border-bottom: 1px solid black;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+}
+
+.bitcoins {
+    text-align: center;
+}
+
+div#left {
+    padding-right: 35px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+code {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+form.contact {
+    max-width: 500px;
+}
+
+textarea#message {
+    height: 200px;
+}
+
+.checkbox {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+label.select-label {
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.settings-btn {
+    margin-top: 25px;
+}
+
+.settings-btn + .settings-btn {
+    margin-left: 10px;
+}
+
+.fokus-category {
+    font-size: 20px;
+}
+
+.settings-form-control {
+    width: 200px;
+    margin-top: 10px;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.settings-checkbox .settings-glyphicon {
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+
+/* Widgets */
+
+.metager-searchinput {
+    height: 30px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #555;
+    background-color: #FFF;
+    background-image: none;
+    border: 1px solid #CCC;
+    border-right: 0px none;
+    border-radius: 4px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    margin: 0px;
+}
+
+.metager-searchbutton {
+    height: 30px;
+    width: 100px;
+    border-left: 0px none;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border: 1px solid #CCC;
+    padding: 6px 12px;
+    margin: 0px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    white-space: nowrap;
+    color: #555;
+    text-align: center;
+    background-color: #EEE;
+}
+
+.metager-logo {
+    height: 30px;
+    float: left;
+    top: -2px;
+    margin-right: 3px;
+}
+
+code {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.non-bold {
+    font-weight: normal;
+}
+
+@media print {
+    .noprint {
+        display: none!important;
+    }
+}
+
+.donation-form-group label {
+    font-weight: bold;
+}
+
+.donation-form-group {
+    text-align: left;
+    font-size: 12px;
+}
+
+.beitritt-form-group {
+    text-align: left;
+}
+
+#color-chooser #standard {
+    background-color: rgb(255, 194, 107);
+}
+
+#color-chooser #standardHard {
+    background-color: rgb(255, 128, 0);
+}
+
+#color-chooser #green {
+    background-color: rgb(177, 226, 163);
+}
+
+#color-chooser #greenHard {
+    background-color: rgb(127, 175, 27);
+}
+
+#color-chooser #blue {
+    background-color: rgb(164, 192, 230);
+}
+
+#color-chooser #blueHard {
+    background-color: rgb(2, 93, 140);
+}
+
+#color-chooser #red {
+    background-color: rgb(255, 92, 92);
+}
+
+#color-chooser #redHard {
+    background-color: rgb(255, 0, 0);
+}
+
+#color-chooser #pink {
+    background-color: rgb(255, 196, 246);
+}
+
+#color-chooser #pinkHard {
+    background-color: rgb(254, 67, 101);
+}
+
+#color-chooser #black {
+    background-color: rgb(238, 238, 238);
+}
+
+#color-chooser #blackHard {
+    background-color: rgb(50, 50, 50);
+}
+
+#color-chooser {
+    padding: 0;
+}
+
+#color-chooser a {
+    display: block;
+    width: 50px;
+    height: 50px;
+}
+
+#color-chooser li {
+    width: 50px;
+    margin: 0;
+}
+
+#moreInformation {
+    box-shadow: none;
+    margin-top: 5%;
+    text-align: center;
+    -moz-box-shadow: none;
+}
+
+#moreInformation ul {
+    /* text-align: left; */
+    padding: 0;
+}
+
+#moreInformation ul li {
+    color: grey;
+}
+
+#moreInformation > div {
+    font-size: 15px;
+}
+
+#moreInformation h2 {
+    color: grey;
+    font-size: 25px;
+}
+
+#moreInformation a:hover {
+    text-decoration: underline;
+}
+
+#searchForm button {
+    width: 50px;
+    line-height: 100%;
+    height: 28px;
+    border: 0;
+    background-color: transparent;
+    padding: 0;
+}
+
+#mglogo {
+    width: 100%;
+    text-align: center;
+}
+
+#mglogo > a {
+    display: block;
+    width: 200px;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-family: Liberation Sans, sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 1.0em;
+    line-height: 1;
+    white-space: nowrap;
+    padding: 0.4em 0;
+    border-radius: .25em;
+    margin: 0 auto;
+}
+
+#sponsors a {
+    font-size: 0.8em;
+}
+
+#sponsors h2 {
+    font-size: 1.5em!important;
+}
+
+#foki label > span {
+    margin-right: 5px;
+}
+
+#foki label span {
+    background-color: transparent;
+}
+
+#foki input {
+    visibility: hidden;
+}
+
+#foki input:checked + label {
+    font-weight: bold;
+    background-color: #e3e3e3;
+}
+
+#foki input + label {
+    border-radius: 4px;
+    padding: 7px 20px;
+    font-weight: normal;
+}
+
+#foki input + label:hover {
+    cursor: pointer;
+    background-color: #f6f6f6;
+}
+
+.modal-content {
+    border-radius: 0;
+    -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+#anpassen-label a.content {
+    color: inherit;
+}
+
+.mutelink {
+    color: grey;
+}
+
+#plugin-modal ol > li {
+    margin-bottom: 5px;
+}
+
+.quicktip {
+    margin-bottom: 15px;
+    padding: 10px;
+    line-height: 1.2 !important;
+    font-family: Georgia, "Times New Roman", Palatino, Times, serif;
+    color: #000;
+    border-left: 3px solid #FB0;
+    font-size: 14px;
+}
+
+.wikiqtextract {
+    font-family: Georgia, "Times New Roman", Palatino, Times, serif;
+}
+
+.wikiqtextract p {
+    margin-bottom: 0;
+}
+
+.qtheader {
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+
+#spruch {
+    margin-bottom: 20px;
+    padding: 5px;
+    line-height: 1.2 !important;
+    color: #070;
+    border-left: 3px solid #070;
+    font-size: 16px;
+    font-family: Georgia, "Times New Roman", Palatino, Times, serif;
+}
+
+.author {
+    float: right !important;
+}
+
+.quicktip h1 {
+    font-size: 22px;
+    margin-top: 0px;
+}
+
+.quicktip.aufruf {
+    border-left: 3px solid #FF4000;
+    color: #FF4000;
+}
+
+.language-textarea {
+    resize: none;
+    overflow: hidden;
+}
+
+.language-name {
+    white-space: pre;
+}
+
+.kontakt-form-group {
+    text-align: left;
+    font-size: 14px;
 }

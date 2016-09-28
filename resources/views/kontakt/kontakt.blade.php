@@ -13,11 +13,11 @@
 <p class="bold">{!! trans('kontakt.form.4') !!}</p>
 <form class="contact" name="contact" method="post" action="{{ LaravelLocalization::getLocalizedURL() }}">
   {{ csrf_field() }}
-  <div class="form-group">
+  <div class="form-group kontakt-form-group">
     <input class="form-control" name="email" placeholder="{!! trans('kontakt.form.5') !!}" type="text"></div>
-  <div class="form-group">
+  <div class="form-group kontakt-form-group">
     <textarea class="form-control" id="message" name="message" placeholder="{!! trans('kontakt.form.6') !!}"></textarea></div>
-  <div class="form-group">
+  <div class="form-group kontakt-form-group">
     <p><span class="bold">{!! trans('kontakt.form.7') !!} <a href="http://openpgpjs.org/.">OpenPGP.js</a> {!! trans('kontakt.form.8') !!}</span>
 <span>{!! trans('kontakt.form.9') !!}</span></p>
     <button title="" data-original-title="" class="btn btn-default" type="submit">{!! trans('kontakt.form.10') !!}</button></div></form>
@@ -89,5 +89,5 @@ geiG3j1J/CaDBZqPBaBflK0UWR5nxCsoOk7i5f3isUeXSVLTnA+K9HkQ6D/Gt5vx
 -----END PGP PUBLIC KEY BLOCK-----</textarea>
 <h2>{!! trans('kontakt.letter.1') !!}</h2>
 <p>{!! trans('kontakt.letter.2') !!}</p>
-<adress>{!! trans('kontakt.letter.3') !!}</adress>
+<address>{!! trans('kontakt.letter.3') !!}</address>
 @endsection

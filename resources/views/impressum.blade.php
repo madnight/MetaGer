@@ -4,8 +4,8 @@
 
 @section('content')
 <h1>{!! trans('impressum.title') !!}</h1>
-<h2>{!! trans('impressum.headline.1') !!}</h2>
-<h2>{!! trans('impressum.headline.2') !!}</h2>
+<h2 class="subheading">{!! trans('impressum.headline.1') !!}
+</h2>
 <p>{!! trans('impressum.info.1') !!}</p>
 <address>{!! trans('impressum.info.2') !!}</address>
 <address>{!! trans('impressum.info.3') !!}</address>

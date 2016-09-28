@@ -2,18 +2,6 @@
     font-family: Liberation Sans, sans-serif;
 }
 
-.mg-panel {
-    text-align: left;
-    margin: 0 auto;
-    margin-top: 20px;
-    padding: 10px 20px;
-    margin-bottom: 0;
-    background-color: white;
-    -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
-    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
-}
-
 label a {
     color: inherit;
 }
@@ -27,8 +15,6 @@ li#info {
     white-space: pre-line;
 }
 
-a.hidden-xs {}
-
 .navbar-default {
     background-color: white;
     border-radius: 0;
@@ -37,6 +23,30 @@ a.hidden-xs {}
 .row {
     margin-left: 0;
     margin-right: 0;
+}
+
+.mg-panel {
+    text-align: left;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 10px 20px;
+    margin-bottom: 0;
+    background-color: white;
+    -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+.input-group-addon {
+    padding: 0;
+}
+
+.form-group {
+    font-family: sans-serif;
+    font-size: 16px;
+    color: black;
+    background-color: transparent;
+    text-align: center;
 }
 
 section {
@@ -49,10 +59,6 @@ section {
 body > div {
     background-color: transparent;
     padding-top: 70px;
-}
-
-.input-group-addon {
-    padding: 0;
 }
 
 footer ul.list-inline {
@@ -87,14 +93,6 @@ body ul {
     text-align: center;
     margin-left: 0!important;
     margin-top: 10px;
-}
-
-.form-group {
-    font-family: sans-serif;
-    font-size: 16px;
-    color: black;
-    background-color: transparent;
-    text-align: center;
 }
 
 fieldset input[type=text] {

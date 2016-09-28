@@ -26,8 +26,6 @@ nav-tabs > li.active {
 
 /* Hier der Style für unsere Suchleiste */
 
-#researchBar {}
-
 .tab-pane .alert {
     margin: 10px 0;
     padding: 5px 15px;
@@ -51,8 +49,6 @@ nav-tabs > li.active {
     height: 100%;
     display: block;
 }
-
-#research * {}
 
 #research ul.list-inline {
     margin-left: 0;
@@ -437,12 +433,6 @@ a:hover {
 
 
 /* Hier der Style für die Werbeboxen */
-
-.result.ad {}
-
-.result.ad .link a {}
-
-.result.ad .description {}
 
 .result.ad .hoster {
     color: green;

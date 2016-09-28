@@ -858,7 +858,15 @@ class MetaGer
 
     public function checkSpecialSearches(Request $request)
     {
-        # Site Search
+        $this->searchCheckSitesearch($request);
+        $this->searchCheckHostBlacklist();
+        $this->searchCheckDomainBlacklist();
+        $this->searchCheckStopwords();
+        $this->searchCheckPhrase();
+    }
+
+    public function searchCheckSitesearch($request)
+    {
         if (preg_match("/(.*)\bsite:(\S+)(.*)/si", $this->q, $match)) {
             $this->site = $match[2];
             $this->q    = $match[1] . $match[3];
@@ -866,9 +874,10 @@ class MetaGer
         if ($request->has('site')) {
             $this->site = $request->input('site');
         }
+    }
 
-        # Host Blacklisting
-        # Wenn die Suchanfrage um das Schlüsselwort "-host:*" ergänzt ist, sollen bestimmte Hosts nicht eingeblendet werden
+    public function searchCheckHostBlacklist()
+    {
         while (preg_match("/(.*)(^|\s)-host:(\S+)(.*)/si", $this->q, $match)) {
             $this->hostBlacklist[] = $match[3];
             $this->q               = $match[1] . $match[4];
@@ -881,9 +890,10 @@ class MetaGer
             $hostString       = rtrim($hostString, ", ");
             $this->warnings[] = trans('metaGer.formdata.hostBlacklist', ['host' => $hostString]);
         }
+    }
 
-        # Domain Blacklisting
-        # Wenn die Suchanfrage um das Schlüsselwort "-domain:*" ergänzt ist, sollen bestimmte Domains nicht eingeblendet werden
+    public function searchCheckDomainBlacklist()
+    {
         while (preg_match("/(.*)(^|\s)-domain:(\S+)(.*)/si", $this->q, $match)) {
             $this->domainBlacklist[] = $match[3];
             $this->q                 = $match[1] . $match[4];
@@ -896,9 +906,10 @@ class MetaGer
             $domainString     = rtrim($domainString, ", ");
             $this->warnings[] = trans('metaGer.formdata.domainBlacklist', ['domain' => $domainString]);
         }
+    }
 
-        # Stopwords
-        # Alle mit "-" gepräfixten Worte sollen aus der Suche ausgeschlossen werden.
+    public function searchCheckStopwords()
+    {
         while (preg_match("/(.*)(^|\s)-(\S+)(.*)/si", $this->q, $match)) {
             $this->stopWords[] = $match[3];
             $this->q           = $match[1] . $match[4];
@@ -911,8 +922,10 @@ class MetaGer
             $stopwordsString  = rtrim($stopwordsString, ", ");
             $this->warnings[] = trans('metaGer.formdata.stopwords', ['stopwords' => $stopwordsString]);
         }
+    }
 
-        # Phrasensuche
+    public function searchCheckPhrase()
+    {
         $p   = "";
         $tmp = $this->q;
         while (preg_match("/(.*)\"(.+)\"(.*)/si", $tmp, $match)) {
@@ -972,7 +985,6 @@ class MetaGer
         } else {
             return null;
         }
-
     }
 
     public function hasProducts()
@@ -990,9 +1002,7 @@ class MetaGer
         foreach ($this->products as $product) {
             $return[] = get_object_vars($product);
         }
-        #die(var_dump($return));
         return $return;
-
     }
 
     public function canCache()

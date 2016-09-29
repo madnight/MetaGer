@@ -4,7 +4,6 @@ return [
     'title'      => 'Site Notice',
 
     'headline.1' => '<a href="http://suma-ev.de/" target="_blank">SUMA-EV - Verein für freien Wissenszugang (e.V.)</a>',
-    'headline.2' => 'in cooperation with the <a href="http://www.uni-hannover.de/" target="_blank">Leibniz Universität Hannover</a>',
 
     'info.1'     => 'Wikipedia-entry for the <a href="http://de.wikipedia.org/wiki/Suma_e.V." target="_blank">SUMA-EV</a>',
     'info.2'     => 'SUMA-EV

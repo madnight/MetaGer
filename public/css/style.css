@@ -390,6 +390,19 @@
     margin-bottom: 5px;
 }
 
+.logo h1 {
+    margin: 0;
+    height: 100%;
+    padding-left: 20px;
+    padding-top: 8px;
+    font-family: sans-serif;
+    font-style: italic;
+    margin: 0;
+    font-weight: bold;
+    line-height: 1;
+    white-space: nowrap;
+}
+
 
 /*
 

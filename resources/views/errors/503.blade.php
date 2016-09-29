@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Be right back.</title>
-		<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" type="text/css" href="/css/503.css" />
-	</head>
-	<body>
-		<div class="container">
-			<div class="content">
-				<div class="title">Be right back.</div>
-			</div>
-		</div>
-	</body>
-</html>
+@extends('layouts.subPages')
+
+@section('title', 'Fehler 500 - Service nicht verfügbar')
+
+@section('content')
+<h1>{{ trans('503.title') }}</h1>
+<p>{{ trans('503.text') }}</p>
+@if( config('app.debug') )
+<pre>{{ $exception }}</pre>
+@endif
+@endsection

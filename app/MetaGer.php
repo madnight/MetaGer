@@ -62,7 +62,7 @@ class MetaGer
             $tmp                      = file_get_contents(config_path() . "/blacklistUrl.txt");
             $this->urlsBlacklisted    = explode("\n", $tmp);
         } else {
-            Log::warning(trans('metaGer.blacklist.failed'));
+            Log::warning("Achtung: Eine, oder mehrere Blacklist Dateien, konnten nicht geöffnet werden");
         }
 
         # Parser Skripte einhängen
@@ -361,19 +361,21 @@ class MetaGer
 
     public function createSearchEngines(Request $request)
     {
+        # Wenn es kein Suchwort gibt
         if (!$request->has("eingabe")) {
             return;
         }
 
-        # Überprüfe, welche Sumas eingeschaltet sind
         $xml                  = simplexml_load_file($this->sumaFile);
+        $sumas                = $xml->xpath("suma");
         $enabledSearchengines = [];
         $overtureEnabled      = false;
         $sumaCount            = 0;
-        $sumas                = $xml->xpath("suma");
 
         /* Erstellt die Liste der eingestellten Sumas
-         * Der einzige Unterschied bei angepasstem Suchfokus ist, dass nicht nach den Typen einer Suma, sondern den im Request mitgegebenen Typen entschieden wird
+         * Der einzige Unterschied bei angepasstem Suchfokus ist,
+         * dass nicht nach den Typen einer Suma,
+         * sondern den im Request mitgegebenen Typen entschieden wird.
          * Ansonsten wird genau das selbe geprüft und gemacht:
          * Handelt es sich um spezielle Suchmaschinen die immer an sein müssen
          * Wenn es Overture ist vermerken dass Overture an ist
@@ -381,54 +383,24 @@ class MetaGer
          * Zu Liste hinzufügen
          */
         foreach ($sumas as $suma) {
-            if ($this->fokus === "angepasst") {
-                if ($request->has($suma["name"])
-                    || ($this->fokus !== "bilder"
-                        && ($suma["name"]->__toString() === "qualigo"
-                            || $suma["name"]->__toString() === "similar_product_ads"
-                            || (!$overtureEnabled && $suma["name"]->__toString() === "overtureAds")
-                            || $suma["name"]->__toString() == "rlvproduct"
-                        )
-                    )
-                ) {
-
-                    if (!(isset($suma['disabled']) && $suma['disabled']->__toString() === "1")) {
-                        if ($suma["name"]->__toString() === "overture" || $suma["name"]->__toString() === "overtureAds") {
-                            $overtureEnabled = true;
-                        }
-                        if ($suma["name"]->__toString() !== "qualigo" && $suma["name"]->__toString() !== "similar_product_ads" && $suma["name"]->__toString() !== "overtureAds") {
-                            $sumaCount += 1;
-                        }
-                        $enabledSearchengines[] = $suma;
-                    }
+            if ($this->sumaIsSelected($suma, $request)
+                || ($this->isBildersuche()
+                    && $this->sumaIsAdsuche($suma, $overtureEnabled))
+                && (!$this->sumaIsDisabled($suma))) {
+                if ($this->sumaIsOverture($suma)) {
+                    $overtureEnabled = true;
                 }
-            } else {
-                $types = explode(",", $suma["type"]);
-                if (in_array($this->fokus, $types)
-                    || ($this->fokus !== "bilder"
-                        && ($suma["name"]->__toString() === "qualigo"
-                            || $suma["name"]->__toString() === "similar_product_ads"
-                            || (!$overtureEnabled && $suma["name"]->__toString() === "overtureAds")
-                            || $suma["name"]->__toString() == "rlvproduct"
-                        )
-                    )
-                ) {
-                    if (!(isset($suma['disabled']) && $suma['disabled']->__toString() === "1")) {
-                        if ($suma["name"]->__toString() === "overture" || $suma["name"]->__toString() === "overtureAds") {
-                            $overtureEnabled = true;
-                        }
-                        if ($suma["name"]->__toString() !== "qualigo" && $suma["name"]->__toString() !== "similar_product_ads" && $suma["name"]->__toString() !== "overtureAds") {
-                            $sumaCount += 1;
-                        }
-                        $enabledSearchengines[] = $suma;
-                    }
+                if ($this->sumaIsNotAdsuche($suma)) {
+                    $sumaCount += 1;
                 }
+                $enabledSearchengines[] = $suma;
             }
         }
 
         # Sonderregelung für alle Suchmaschinen, die zu den Minisuchern gehören. Diese können alle gemeinsam über einen Link abgefragt werden
         $subcollections = [];
-        $tmp            = [];
+
+        $tmp = [];
         foreach ($enabledSearchengines as $engine) {
             if (isset($engine['minismCollection'])) {
                 $subcollections[] = $engine['minismCollection']->__toString();
@@ -439,91 +411,41 @@ class MetaGer
         }
         $enabledSearchengines = $tmp;
         if (sizeof($subcollections) > 0) {
-            $count                        = sizeof($subcollections) * 10;
-            $minisucherEngine             = $xml->xpath('suma[@name="minism"]')[0];
-            $subcollections               = urlencode("(" . implode(" OR ", $subcollections) . ")");
-            $minisucherEngine["formData"] = str_replace("<<SUBCOLLECTIONS>>", $subcollections, $minisucherEngine["formData"]);
-            $minisucherEngine["formData"] = str_replace("<<COUNT>>", $count, $minisucherEngine["formData"]);
-            $enabledSearchengines[]       = $minisucherEngine;
+            $enabledSearchengines[] = $this->loadMiniSucher($xml, $subcollections);
         }
 
         if ($sumaCount <= 0) {
             $this->errors[] = trans('metaGer.settings.noneSelected');
         }
+
         $engines = [];
 
-        # Wenn eine Sitesearch durchgeführt werden soll, überprüfen wir ob eine der Suchmaschinen überhaupt eine Sitesearch unterstützt
+        # Wenn eine Sitesearch durchgeführt werden soll, überprüfen wir ob überhaupt eine der Suchmaschinen eine Sitesearch unterstützt
         $siteSearchFailed = $this->checkCanNotSitesearch($enabledSearchengines);
 
         $typeslist = [];
         $counter   = 0;
 
-        if ($request->has('next') && Cache::has($request->input('next')) && unserialize(Cache::get($request->input('next')))['page'] > 1) {
-            $next       = unserialize(Cache::get($request->input('next')));
-            $this->page = $next['page'];
-            $engines    = $next['engines'];
-            if (isset($next['startForwards'])) {
-                $this->startForwards = $next['startForwards'];
-            }
-
-            if (isset($next['startBackwards'])) {
-                $this->startBackwards = $next['startBackwards'];
-            }
-
+        if ($this->requestIsCached($request)) {
+            $engines = $this->getCachedEngines($request);
         } else {
-            foreach ($enabledSearchengines as $engine) {
-
-                # Wenn diese Suchmaschine gar nicht eingeschaltet sein soll
-                if (!$siteSearchFailed && strlen($this->site) > 0 && (!isset($engine['hasSiteSearch']) || $engine['hasSiteSearch']->__toString() === "0")) {
-                    continue;
-                }
-
-                # Setze Pfad zu Parser
-                $path = "App\Models\parserSkripte\\" . ucfirst($engine["package"]->__toString());
-
-                # Prüfe ob Parser vorhanden
-                if (!file_exists(app_path() . "/Models/parserSkripte/" . ucfirst($engine["package"]->__toString()) . ".php")) {
-                    Log::error(trans('metaGer.engines.noParser', ['engine' => $engine["name"]]));
-                    continue;
-                }
-
-                # Es wird versucht die Suchengine zu erstellen
-                $time = microtime();
-                try {
-                    $tmp = new $path($engine, $this);
-                } catch (\ErrorException $e) {
-                    Log::error(trans('metaGer.engines.cantQuery', ['engine' => $engine["name"], 'error' => var_dump($e)]));
-                    continue;
-                }
-
-                # Ausgabe bei Debug-Modus
-                if ($tmp->enabled && isset($this->debug)) {
-                    $this->warnings[] = $tmp->service . "   Connection_Time: " . $tmp->connection_time . "    Write_Time: " . $tmp->write_time . " Insgesamt:" . ((microtime() - $time) / 1000);
-                }
-
-                # Wenn die neu erstellte Engine eingeschaltet ist, wird sie der Liste hinzugefügt
-                if ($tmp->isEnabled()) {
-                    $engines[] = $tmp;
-                }
-
-            }
+            $engines = $this->actuallyCreateSearchEngines($enabledSearchengines, $siteSearchFailed);
         }
 
-        # Wir starten die Suche manuell:
+        # Wir starten alle Suchen
         foreach ($engines as $engine) {
             $engine->startSearch($this);
         }
 
         $this->adjustFocus($sumas, $enabledSearchengines);
 
-        /* Nun passiert ein elementarer Schritt.
-         * Wir warten auf die Antwort der Suchmaschinen, da wir vorher nicht weiter machen können.
-         * Aber natürlich nicht ewig.
-         * Die Verbindung steht zu diesem Zeitpunkt und auch unsere Request wurde schon gesendet.
-         * Wir geben der Suchmaschine nun bis zu 500ms Zeit zu antworten.
+        /* Wir warten auf die Antwort der Suchmaschinen
+         * Die Verbindung steht zu diesem Zeitpunkt und auch unsere Requests wurden schon gesendet.
+         * Wir zählen die Suchmaschinen, die durch den Cache beantwortet wurden:
+         * $enginesToLoad zählt einerseits die Suchmaschinen auf die wir warten und andererseits
+         * welche Suchmaschinen nicht rechtzeitig geantwortet haben.
          */
 
-        # Wir zählen die Suchmaschinen, die durch den Cache beantwortet wurden:
         $enginesToLoad = [];
         $canBreak      = false;
         foreach ($engines as $engine) {
@@ -532,8 +454,6 @@ class MetaGer
                     $canBreak = true;
                 }
             } else {
-                # Das Array zählt einerseits die Suchmaschinen, auf die wir warten und andererseits
-                # welche Suchmaschinen nicht rechtzeitig geantwortet haben.
                 $enginesToLoad[$engine->name] = false;
             }
         }
@@ -541,6 +461,135 @@ class MetaGer
         $this->waitForResults($enginesToLoad, $overtureEnabled, $canBreak);
 
         $this->retrieveResults($engines);
+    }
+
+    # Spezielle Suchen und Sumas
+
+    public function sumaIsSelected($suma, $request)
+    {
+        if ($this->fokus === "angepasst") {
+            if ($request->has($suma["name"])) {
+                return true;
+            }
+        } else {
+            $types = explode(",", $suma["type"]);
+            if (in_array($this->fokus, $types)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function actuallyCreateSearchEngines($enabledSearchengines, $siteSearchFailed)
+    {
+        $engines = [];
+        foreach ($enabledSearchengines as $engine) {
+
+            # Wenn diese Suchmaschine gar nicht eingeschaltet sein soll
+            if (!$siteSearchFailed
+                && strlen($this->site) > 0
+                && (!isset($engine['hasSiteSearch'])
+                    || $engine['hasSiteSearch']->__toString() === "0")) {
+                continue;
+            }
+
+            # Setze Pfad zu Parser
+            $path = "App\Models\parserSkripte\\" . ucfirst($engine["package"]->__toString());
+
+            # Prüfe ob Parser vorhanden
+            if (!file_exists(app_path() . "/Models/parserSkripte/" . ucfirst($engine["package"]->__toString()) . ".php")) {
+                Log::error("Konnte " . $engine["name"] . " nicht abfragen, da kein Parser existiert");
+                continue;
+            }
+
+            # Es wird versucht die Suchengine zu erstellen
+            $time = microtime();
+            try {
+                $tmp = new $path($engine, $this);
+            } catch (\ErrorException $e) {
+                Log::error("Konnte " . $engine["name"] . " nicht abfragen. " . var_dump($e));
+                continue;
+            }
+
+            # Ausgabe bei Debug-Modus
+            if ($tmp->enabled && isset($this->debug)) {
+                $this->warnings[] = $tmp->service . "   Connection_Time: " . $tmp->connection_time . "    Write_Time: " . $tmp->write_time . " Insgesamt:" . ((microtime() - $time) / 1000);
+            }
+
+            # Wenn die neu erstellte Engine eingeschaltet ist, wird sie der Liste hinzugefügt
+            if ($tmp->isEnabled()) {
+                $engines[] = $tmp;
+            }
+        }
+        return $engines;
+    }
+
+    public function isBildersuche()
+    {
+        return $this->fokus !== "bilder";
+    }
+
+    public function sumaIsAdsuche($suma, $overtureEnabled)
+    {
+        return
+        $suma["name"]->__toString() === "qualigo"
+        || $suma["name"]->__toString() === "similar_product_ads"
+        || (!$overtureEnabled
+            && $suma["name"]->__toString() === "overtureAds")
+        || $suma["name"]->__toString() == "rlvproduct";
+    }
+
+    public function sumaIsDisabled($suma)
+    {
+        return
+        isset($suma['disabled'])
+        && $suma['disabled']->__toString() === "1";
+    }
+
+    public function sumaIsOverture($suma)
+    {
+        return
+        $suma["name"]->__toString() === "overture"
+        || $suma["name"]->__toString() === "overtureAds";
+    }
+
+    public function sumaIsNotAdsuche($suma)
+    {
+        return
+        $suma["name"]->__toString() !== "qualigo"
+        && $suma["name"]->__toString() !== "similar_product_ads"
+        && $suma["name"]->__toString() !== "overtureAds";
+    }
+
+    public function requestIsCached($request)
+    {
+        return
+        $request->has('next')
+        && Cache::has($request->input('next'))
+        && unserialize(Cache::get($request->input('next')))['page'] > 1;
+    }
+
+    public function getCachedEngines($request)
+    {
+        $next       = unserialize(Cache::get($request->input('next')));
+        $this->page = $next['page'];
+        $engines    = $next['engines'];
+        if (isset($next['startForwards'])) {
+            $this->startForwards = $next['startForwards'];
+        }
+        if (isset($next['startBackwards'])) {
+            $this->startBackwards = $next['startBackwards'];
+        }
+        return $engines;
+    }
+
+    public function loadMiniSucher($xml, $subcollections)
+    {
+        $minisucherEngine             = $xml->xpath('suma[@name="minism"]')[0];
+        $subcollections               = urlencode("(" . implode(" OR ", $subcollections) . ")");
+        $minisucherEngine["formData"] = str_replace("<<SUBCOLLECTIONS>>", $subcollections, $minisucherEngine["formData"]);
+        $minisucherEngine["formData"] = str_replace("<<COUNT>>", sizeof($subcollections) * 10, $minisucherEngine["formData"]);
+        return $minisucherEngine;
     }
 
     # Passt den Suchfokus an, falls für einen Fokus genau alle vorhandenen Sumas eingeschaltet sind
@@ -688,9 +737,9 @@ class MetaGer
         $this->engines = $engines;
     }
 
-    /*
-     * Ende
-     */
+/*
+ * Ende Suchmaschinenerstellung und Ergebniserhalt
+ */
 
     public function parseFormData(Request $request)
     {
@@ -750,6 +799,8 @@ class MetaGer
         } else {
             $this->sprueche = false;
         }
+        # Theme
+        $this->theme = preg_replace("/[^[:alnum:][:space:]]/u", '', $request->input('theme', 'none'));
         # Ergebnisse pro Seite:
         $this->resultCount = $request->input('resultCount', '20');
         # Manchmal müssen wir Parameter anpassen um den Sucheinstellungen gerecht zu werden:
@@ -807,7 +858,15 @@ class MetaGer
 
     public function checkSpecialSearches(Request $request)
     {
-        # Site Search
+        $this->searchCheckSitesearch($request);
+        $this->searchCheckHostBlacklist();
+        $this->searchCheckDomainBlacklist();
+        $this->searchCheckStopwords();
+        $this->searchCheckPhrase();
+    }
+
+    public function searchCheckSitesearch($request)
+    {
         if (preg_match("/(.*)\bsite:(\S+)(.*)/si", $this->q, $match)) {
             $this->site = $match[2];
             $this->q    = $match[1] . $match[3];
@@ -815,9 +874,10 @@ class MetaGer
         if ($request->has('site')) {
             $this->site = $request->input('site');
         }
+    }
 
-        # Host Blacklisting
-        # Wenn die Suchanfrage um das Schlüsselwort "-host:*" ergänzt ist, sollen bestimmte Hosts nicht eingeblendet werden
+    public function searchCheckHostBlacklist()
+    {
         while (preg_match("/(.*)(^|\s)-host:(\S+)(.*)/si", $this->q, $match)) {
             $this->hostBlacklist[] = $match[3];
             $this->q               = $match[1] . $match[4];
@@ -830,9 +890,10 @@ class MetaGer
             $hostString       = rtrim($hostString, ", ");
             $this->warnings[] = trans('metaGer.formdata.hostBlacklist', ['host' => $hostString]);
         }
+    }
 
-        # Domain Blacklisting
-        # Wenn die Suchanfrage um das Schlüsselwort "-domain:*" ergänzt ist, sollen bestimmte Domains nicht eingeblendet werden
+    public function searchCheckDomainBlacklist()
+    {
         while (preg_match("/(.*)(^|\s)-domain:(\S+)(.*)/si", $this->q, $match)) {
             $this->domainBlacklist[] = $match[3];
             $this->q                 = $match[1] . $match[4];
@@ -845,9 +906,10 @@ class MetaGer
             $domainString     = rtrim($domainString, ", ");
             $this->warnings[] = trans('metaGer.formdata.domainBlacklist', ['domain' => $domainString]);
         }
+    }
 
-        # Stopwords
-        # Alle mit "-" gepräfixten Worte sollen aus der Suche ausgeschlossen werden.
+    public function searchCheckStopwords()
+    {
         while (preg_match("/(.*)(^|\s)-(\S+)(.*)/si", $this->q, $match)) {
             $this->stopWords[] = $match[3];
             $this->q           = $match[1] . $match[4];
@@ -860,8 +922,10 @@ class MetaGer
             $stopwordsString  = rtrim($stopwordsString, ", ");
             $this->warnings[] = trans('metaGer.formdata.stopwords', ['stopwords' => $stopwordsString]);
         }
+    }
 
-        # Phrasensuche
+    public function searchCheckPhrase()
+    {
         $p   = "";
         $tmp = $this->q;
         while (preg_match("/(.*)\"(.+)\"(.*)/si", $tmp, $match)) {
@@ -921,7 +985,6 @@ class MetaGer
         } else {
             return null;
         }
-
     }
 
     public function hasProducts()
@@ -939,9 +1002,7 @@ class MetaGer
         foreach ($this->products as $product) {
             $return[] = get_object_vars($product);
         }
-        #die(var_dump($return));
         return $return;
-
     }
 
     public function canCache()

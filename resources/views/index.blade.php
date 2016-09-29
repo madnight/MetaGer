@@ -191,6 +191,7 @@
                     @foreach ($focusPages as $fp)
                       <input type="hidden" name={{ $fp }} value="on">
                     @endforeach
+                  <input type="hidden" name="theme" value={{ $theme }}>
                   @elseif( !App::isLocale('de') )
                   <input type="hidden" name="lang" value="{{ App::getLocale() }}">
                   @else

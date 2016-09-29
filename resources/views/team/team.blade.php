@@ -4,7 +4,7 @@
 
 @section('content')
 	<h1>Team</h1>
-	<ul id="teamList">
+	<ul class="dotlist">
 		<li>
 			<a href="https://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann" target="_blank">Sander-Beuermann, Wolfgang</a>, Dr.-Ing. - {!! trans('team.role.1') !!} -
 			<a href="mailto:wsb@suma-ev.de">wsb@suma-ev.de</a> -

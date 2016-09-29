@@ -95,24 +95,16 @@ class MetaGerSearch extends Controller
 
         $mquicktips = array_merge($mquicktips, $quicktips);
 
-        # Wussten Sie schon:
-        $title = trans('tips.shorttitle');
+        # Und Natürlich das wussten Sie schon:
+        $file = storage_path() . "/app/public/tips.txt";
+        if (file_exists($file)) {
+            $tips = file($file);
+            $tip  = $tips[array_rand($tips)];
 
-        # Workaround für eine variable Tipanzahl trotz Übersetzungsdateien:
-        # Es wird so lange versucht den nächsten Tip zu lesen, bis dieser "leer" ist, also mit dem Key übereinstimmt.
-        $tips = [];
-        for ($i = 1;; $i++) {
-            $nextTip = trans('tips.tip.' . $i);
-            if ($nextTip == 'tips.tip.' . $i) {
-                break;
-            } else {
-                $tips[] = $nextTip;
-            }
+            $mquicktips[] = ['title' => 'Wussten Sie schon?', 'descr' => $tip, 'URL' => '/tips'];
         }
-        $tip          = $tips[array_rand($tips)];
-        $mquicktips[] = ['title' => $title, 'descr' => $tip, 'URL' => '/tips'];
 
-        # Werbelinks:
+        # Uns die Werbelinks:
         $file = storage_path() . "/app/public/ads.txt";
         if (file_exists($file)) {
             $ads = json_decode(file_get_contents($file), true);
@@ -121,7 +113,7 @@ class MetaGerSearch extends Controller
             $mquicktips[] = ['title' => $ad['title'], 'descr' => $ad['descr'], 'URL' => $ad['URL']];
         }
 
-        # Spendenaufruf:
+        # Und en Spendenaufruf:
         $mquicktips[] = ['title' => trans('quicktip.spende.title'), 'descr' => trans('quicktip.spende.descr'), 'URL' => LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "spendenaufruf")];
 
         return view('quicktip')
@@ -132,14 +124,10 @@ class MetaGerSearch extends Controller
 
     public function tips()
     {
+        $file = storage_path() . "/app/public/tips.txt";
         $tips = [];
-        for ($i = 1;; $i++) {
-            $nextTip = trans('tips.tip.' . $i);
-            if ($nextTip == 'tips.tip.' . $i) {
-                break;
-            } else {
-                $tips[] = $nextTip;
-            }
+        if (file_exists($file)) {
+            $tips = file($file);
         }
         return view('tips')
             ->with('title', 'MetaGer - Tipps & Tricks')

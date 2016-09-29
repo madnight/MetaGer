@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'starseite' => 'MetaGer start page',
+    'startseite' => 'MetaGer start page',
     'impressum' => 'legal notice',
 ];

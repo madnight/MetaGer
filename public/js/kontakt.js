@@ -29,7 +29,11 @@ function encrypt() {
             return true;
         }
     } else {
-        window.alert("Fehler: Ihr Browser wird nicht unterstützt. Bitte installieren Sie einen aktuellen Broweser wie z.B. Mozilla Firefox.");
+        if (isEnglish()) {
+            window.alert("Error: Your browser is not supported. Please install an up to date browser like Mozilla Firefox.");
+        } else {
+            window.alert("Fehler: Ihr Browser wird nicht unterstützt. Bitte installieren Sie einen aktuellen Broweser wie z.B. Mozilla Firefox.");
+        }
         return false;
     }
 }

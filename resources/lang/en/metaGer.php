@@ -3,6 +3,7 @@
 return [
     "results.failed"         => "Unfortunately we have no results for your search",
     "settings.noneSelected"  => "Attention: you did not choose any search engine",
+    "engines.noParser"       => "Could not query :engine because of missing parser",
     "formdata.cantLoad"      => "Could not find suma-file",
     "formdata.noSearch"      => "Attention: you did not type in any search word/s. Please type search words and try again",
     "formdata.dartEurope"    => "Hint: you have activated Dart-Europe. Therefore the response time might be longer and is set to 10 sec",

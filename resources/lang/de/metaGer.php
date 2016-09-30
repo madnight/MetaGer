@@ -5,6 +5,8 @@ return [
 
     'settings.noneSelected'  => 'Achtung: Sie haben in ihren Einstellungen keine Suchmaschine ausgewählt.',
 
+    'engines.noParser'       => 'Konnte :engine nicht abfragen, da kein Parser existiert.',
+
     'formdata.cantLoad'      => 'Suma-File konnte nicht gefunden werden',
     'formdata.noSearch'      => 'Achtung: Sie haben keinen Suchbegriff eingegeben. Sie können ihre Suchbegriffe oben eingeben und es erneut versuchen.',
     'formdata.dartEurope'    => 'Hinweis: Sie haben Dart-Europe aktiviert. Die Suche kann deshalb länger dauern und die maximale Suchzeit wurde auf 10 Sekunden hochgesetzt.',

@@ -499,6 +499,7 @@ class MetaGer
             # Prüfe ob Parser vorhanden
             if (!file_exists(app_path() . "/Models/parserSkripte/" . ucfirst($engine["package"]->__toString()) . ".php")) {
                 Log::error("Konnte " . $engine["name"] . " nicht abfragen, da kein Parser existiert");
+                $this->errors[] = trans('metaGer.engines.noParser', ['engine' => $engine["name"]]);
                 continue;
             }
 

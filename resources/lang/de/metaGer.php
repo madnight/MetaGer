@@ -5,7 +5,7 @@ return [
 
     'settings.noneSelected'  => 'Achtung: Sie haben in ihren Einstellungen keine Suchmaschine ausgewählt.',
 
-    'engines.noParser'       => 'Konnte :engine nicht abfragen, da kein Parser existiert.',
+    'engines.noParser'       => 'Beim Abfragen von :engine ist ein Fehler aufgetreten. Bitte benachrichtigen Sie uns unter: <a href="mailto:office@suma-ev.de?subject=Fehlender Parser: :engine">office@suma-ev.de</a>',
 
     'formdata.cantLoad'      => 'Suma-File konnte nicht gefunden werden',
     'formdata.noSearch'      => 'Achtung: Sie haben keinen Suchbegriff eingegeben. Sie können ihre Suchbegriffe oben eingeben und es erneut versuchen.',

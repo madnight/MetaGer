@@ -1,7 +1,7 @@
 [	
 	{
 		"title" : "MetaGer4You:",
-		"descr" : "Maßgeschneiderte Suchlösungen für Ihr Unternehmen - fragen Sie uns:  <a href=\"mailto:office@suma-ev.de\">office@suma-ev.de</a>",
+		"descr" : "Maßgeschneiderte Suchlösungen für Ihr Unternehmen - fragen Sie uns:  <a href=\"mailto:office@suma-ev.de\">office@suma-ev.de</a> - oder verwenden Sie unser einfaches und kostenloses <a href=\"https://metager.de/widget/\" target=_blank>Widget</a>.",
 		"URL" : "mailto:office@suma-ev.de"
 
 	}

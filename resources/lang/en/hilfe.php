@@ -1,5 +1,3 @@
-
-
 <?php
 
 return [
@@ -19,6 +17,7 @@ return [
     "datenschutz.title"	=>	"Privacy",
     "datenschutz.1"	=>	"cookies, session-IDs, IP addresses",
     "datenschutz.2"	=>	"We don&apos;t store or work with any personal information. We provide further privacy security services as follows:",
+    "datenschutz.3"	=>	"For more details see \"Tools\" above.",
     "tor.title"	=>	"Tor Hidden Service",
     "tor.1"	=>	"MetaGer provides the highest reachable security level for your privacy (anonymised IP addresses, servers under german privacy protection law). For further security needs or fear of compromised servers you may use the MetaGer-Tor branch. Please download the specialized webbrowser from <a href=\"https://www.torproject.org/\" target=\"_blank\">https://www.torproject.org/</a>. You will find help there, too.",
     "tor.2"	=>	"MetaGer Tor address: http://b7cxf4dkdsko6ah2.onion/tor/",
@@ -41,4 +40,3 @@ return [
     "grossklein.1"	=>	"Upper case will not be distinguished from lower case",
     "grossklein.2"	=>	"Searching for <div class=\"well well-sm\">Shakespeare</div> or <div class=\"well well-sm\">SHAKESPEARE</div> will deliver the same results that <div class=\"well well-sm\">shakespeare</div>"
 ];
-

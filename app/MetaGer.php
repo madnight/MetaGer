@@ -100,8 +100,6 @@ class MetaGer
         $this->createLogs();
 
         if ($this->fokus === "bilder") {
-            # Bei der Bildersuche wird die Anzahl der Ergebnisse pro Seite begrenzt
-            $viewResults = array_slice($viewResults, 0, config('settings.maxPictureResults', 30), true);
             switch ($this->out) {
                 case 'results':
                     return view('metager3bilderresults')

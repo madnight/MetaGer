@@ -22,5 +22,7 @@ return [
     "faq.8.h"	=>	"How can I register my homepage on MetaGer?",
     "faq.8.b"	=>	"You can't. MetaGer is a metasearch engine. It does not search itself, but lets search others. If you want to propagate your homepage, you have to visit all the other search engines for that purpose",
     "faq.9.h"	=>	"How does the MetaGer Ranking work?",
-    "faq.9.b"	=>	"You would have to check our source code to find out."
+    "faq.9.b"	=>	"You would have to check our source code to find out.",
+    "faq.10.h"	=>	"I can't use MetaGer with my browser xyz and operating system xyz. Need help!",
+    "faq.15.h"	=>	"How was MetaGer started, what is the story behind MetaGer?"
 ];

@@ -5,7 +5,6 @@ return [
 
     'title'      => 'MetaGer - FAQ',
 
-    'faq.title'  => 'FAQ',
     'faq.1.h'    => 'Was ist MetaGer?',
     'faq.1.b'    => 'MetaGer ist eine Suchmaschine, die Suchdienste parallel nach den von Ihnen eingegebenen Suchworten absucht und alle Ergebnisse zusammenfasst. MetaGer arbeitet die Ergebnisse sinnvoll auf. Dabei werden etwa (möglichst) alle doppelten Treffer (Doubletten) zu einem zusammengefasst. Eine vollständige Erkennung von Doubletten ist allerdings unmöglich. So etwas nennt man eine Meta-Suchmaschine. Wenn man also sinnvoll suchen will, dann muss man etliche Suchmaschinen nacheinander "von Hand" absuchen und alle Ergebnisse vergleichen und zusammenführen. Diese Arbeit kann einem ein Automat - die Metasuchmaschine – abnehmen. Dazu kommt der höhere Abdeckungsgrad, denn nicht jede Suchmaschine kennt das ganze Internet. Näheres zu Metasuchmaschinen finden Sie bei <a href="https://de.wikipedia.org/wiki/Metasuchmaschine" target="_blank">Wikipedia</a>. Vielleicht genügen Ihnen die Ergebnisse, die Ihnen MetaGer präsentiert, vielleicht möchten Sie mit einer einzelnen Suchmaschine nochmals suchen. In der Ergebnisliste sehen Sie an jedem Ergebnis, woher es kam und können auch direkt klicken. Viele weitere Suchmaschinen finden Sie zum Beispiel hier: <a href="http://www.klug-suchen.de/" target="_blank">klug-suchen.de</a>.',
     'faq.2.h'    => 'Welche Suchdienste sucht MetaGer ab?',

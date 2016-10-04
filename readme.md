@@ -14,13 +14,6 @@
 * redis-server
 * Das Perl-Paket: Lingua::Identify (http://search.cpan.org/~ambs/Lingua-Identify-0.56/lib/Lingua/Identify.pm)
 
-## MetaGer zu langsam?
-Damit MetaGer so schnell wird, wie auf unserem Live-Server, erfordert es ein wenig Konfigurationsarbeit. Der Grund, warum die Version nach dem Checkout langsamer als normal ist, ist der, dass die eingestellten Suchmaschinen im Standard seriell abgefragt werden.
-Das heißt, dass bei einer Suche mit 20 Suchmaschinen eine Suchmaschine nach der anderen abgefragt wird.
-Die parallele Abarbeitung kann mit Hilfe von Laravels Queue-System ( https://laravel.com/docs/5.2/queues ) hergestellt werden.
-Im Standard, ist in der Datei ".env" QUEUE_DRIVER=sync gesetzt.
-Wir verwenden auf unseren Servern den QUEUE_DRIVER=redis und haben mit Hilfe von Supervisor ( https://laravel.com/docs/5.2/queues#supervisor-configuration ) eine Menge queue:worker Prozesse am laufen, die für eine parallele Bearbeitung sorgen.
-
 ## Offizielle Dokumentation
 
 Die Dokumentation ist im Wiki des Gitlab-Projektes zu finden.

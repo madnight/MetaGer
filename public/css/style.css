@@ -31,7 +31,7 @@ By ID
 #spruch {
     margin-bottom: 20px;
     padding: 5px;
-    line-height: 1.2 !important;
+    line-height: 1.2;
     color: #070;
     border-left: 3px solid #070;
     font-size: 16px;
@@ -122,7 +122,7 @@ Mixed
 }
 
 #sponsors h2 {
-    font-size: 1.5em!important;
+    font-size: 1.5em;
 }
 
 #foki label > span {
@@ -165,7 +165,6 @@ Mixed
 }
 
 #moreInformation ul {
-    /* text-align: left; */
     padding: 0;
 }
 
@@ -318,9 +317,6 @@ By Class
     text-align: left;
     font-size: 14px;
 }
-
-
-/* Widgets */
 
 .metager-searchinput {
     height: 30px;
@@ -531,15 +527,6 @@ By Element
     font-family: Liberation Sans, sans-serif;
 }
 
-label a {
-    color: inherit;
-}
-
-label a:hover {
-    text-decoration: none;
-    color: inherit;
-}
-
 section {
     padding: 10px;
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.55);
@@ -551,6 +538,60 @@ footer {
     margin-top: 8%;
     bottom: 0;
     width: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    position: fixed;
+    background-color: white;
+    z-index: 500;
+    width: 100%;
+    height: 50px;
+}
+
+address {
+    white-space: pre;
+}
+
+p {
+    white-space: pre-wrap;
+}
+
+form {
+    margin: 10px 0px;
+}
+
+code {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+
+/* 
+
+
+
+
+
+Mixed 
+
+
+
+
+
+*/
+
+label a {
+    color: inherit;
+}
+
+label a:hover {
+    text-decoration: none;
+    color: inherit;
 }
 
 footer li {
@@ -598,43 +639,9 @@ nav h1 {
     white-space: nowrap;
 }
 
-body {
-    margin: 0;
-}
-
-header {
-    position: fixed;
-    background-color: white;
-    z-index: 500;
-    width: 100%;
-    height: 50px;
-}
-
 header nav a {
     text-decoration: none;
     color: rgb(119, 119, 119);
-}
-
-address {
-    white-space: pre;
-}
-
-p {
-    white-space: pre-wrap;
-}
-
-form {
-    margin: 10px 0px;
-}
-
-code {
-    white-space: pre-wrap;
-    word-break: break-word;
-}
-
-code {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
 }
 
 body > div {

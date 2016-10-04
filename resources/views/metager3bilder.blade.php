@@ -20,11 +20,11 @@
 		</div>
 	@endif
 	<div id="container">
-	@foreach($results as $result)
+	@foreach($metager->getResults() as $result)
 		<div class="item">
 			<div class="img">
-				<a href="{{ $result['link'] }}" target="{{ $metager->getTab() }}"><img src="{{ $metager->getImageProxyLink($result['image']) }}" width="150px" alt=""/></a>
-				<span class="label label-default hostlabel">{!! $result['gefVon'] !!}</span>
+				<a href="{{ $result->link }}" target="{{ $metager->getTab() }}"><img src="{{ $metager->getImageProxyLink($result->image) }}" width="150px" alt=""/></a>
+				<span class="label label-default hostlabel">{!! $result->gefVon !!}</span>
 			</div>
 		</div>
 	@endforeach

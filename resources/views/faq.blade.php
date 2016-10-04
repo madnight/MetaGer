@@ -5,8 +5,6 @@
 @section('content')
 <div class="alert alert-warning" role="alert">{!! trans('faq.achtung') !!}</div>
 <h1>{!! trans('faq.title') !!}</h1>
-
-<h2 id="faq">{!! trans('faq.faq.title') !!}</h2>
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">{!! trans('faq.faq.1.h') !!}</h3>

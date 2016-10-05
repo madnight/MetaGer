@@ -4,14 +4,16 @@
 }
 
 a {
-    color: #aaaaff;
+    color: #90a0f0;
 }
 
 #foki input:checked + label{
-    background-color: #909090;
+    background-color: #707070;
 }
 
 .navbar {
+    background-color: #505050;
+    border-color: #505050;
     border-bottom: 3px solid #707070;
 	box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
 }
@@ -21,17 +23,17 @@ a {
 }
 
 .navbar-default .navbar-nav > .active > a {
-    background-color: #909090!important;
+    background-color: #707070!important;
 }
 
 .btn-default {
-    background-color: #909090;
+    background-color: #707070;
     border-color: transparent;
     color: antiquewhite;
 }
 
 .form-control {
-    background-color: #909090;
+    background-color: #707070;
     border-color: #909090;
     color: antiquewhite;
 }
@@ -41,7 +43,7 @@ a {
 }
 
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover {
-    background-color: #909090;
+    background-color: #707070;
 }
 
 .caret {
@@ -49,7 +51,7 @@ a {
 }
 
 .input-group-addon {
-    background-color: #909090;
+    background-color: #707070;
     border: 1px solid #909090;
 }
 
@@ -117,12 +119,6 @@ pre {
     border-color: #909090;
 }
 
-.panel-default > .panel-heading {
-    color: antiquewhite;
-    background-color: #707070;
-    border-color: #909090;
-}
-
 .panel-title {
     color: antiquewhite;
     background-color: #707070;
@@ -138,7 +134,7 @@ pre {
 }
 
 .form-control::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #404040;
+   color:    antiquewhite;
    opacity:  1;
 }
 
@@ -146,19 +142,95 @@ pre {
    color:    #404040;
 }
 
-.navbar-default .navbar-collapse {
-    border-color: #505050;
+.panel-default {
+    border-color: #909090;
 }
 
-.navbar-default {
-    background-color: #505050;
-    border-radius: 0;
+.panel-default > .panel-heading {
+    color: antiquewhite;
+    background-color: #707070;
+    border-color: #909090;
 }
 
+/* Result Page */
 
+.result .description {
+    color: antiquewhite;
+    font-size: 16px;
+}
 
+/*
+a:link, a:visited {
+    color: #90a0f0;
+}
+*/
 
+.result:not(.ad) .hoster {
+    font-size: 14px;
+    color: #b0b0b0;
+}
 
+.result:not(.ad) .hoster a {
+    color: #b0b0b0;
+}
+
+.result > .number {
+    color: burlywood !important; /* Wird normalerweise inline gesetzt */
+}
+
+.result .title {
+    color: burlywood;
+    font-size: 18px;
+}
+
+.pager li > a, .pager li > span {
+    background-color: #909090;
+    border-color: #c0c0c0;
+    color: antiquewhite;
+}
+
+.pager .disabled > a, .pager .disabled > a:hover, .pager .disabled > a:focus, .pager .disabled > span {
+    color: antiquewhite;
+    background-color: #909090;
+}
+
+footer a {
+    color: antiquewhite !important;
+}
+
+.quicktip {
+    font-family: Georgia, "Times New Roman", Palatino, Times, serif;
+    color: antiquewhite;
+    border-color: #909090;
+    font-size: 16px;
+}
+
+.btn-default:focus, .btn-default.focus, .btn-default:hover, .btn-default:active {
+    color: antiquewhite;
+    background-color: #909090;
+    border-color: #909090;
+}
+
+a:hover {
+    cursor: pointer;
+    color: #6771AB;
+}
+
+.text-muted {
+    color: #b0b0b0;
+}
+
+.result.ad .description {
+    color: #95cf5e;
+}
+
+.result.ad .title {
+    color: #95cf5e;
+}
+
+.result.ad .hoster {
+    color: #95cf5e;
+}
 
 
 
@@ -178,15 +250,15 @@ body#resultBody{
 
 
 input[type=text]:focus, textarea:focus, input[type=email]:focus, input[type=tel]:focus, .form-control:focus {
-    outline-color: #c0c0c0;
-    -webkit-box-shadow: 0px 0px 2px 2px #c0c0c0;
-	-moz-box-shadow: 0px 0px 2px 2px #c0c0c0;
-	box-shadow: 0px 0px 2px 2pxc0c0c0;
+    outline-color: #909090;
+    -webkit-box-shadow: 0px 0px 2px 2px #909090;
+	-moz-box-shadow: 0px 0px 2px 2px #909090;
+	box-shadow: 0px 0px 2px 2px909090;
     border: 1px solid #c0c0c0;
 }
 
 #mglogo > a {
-	background-image: linear-gradient(#909090 0%, #909090 250%);
+	background-image: linear-gradient(#707070 0%, #707070 250%);
     background-color: transparent;
     color: antiquewhite;
 }

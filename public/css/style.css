@@ -295,7 +295,7 @@ By Class
     margin-top: 20px;
     padding: 10px 20px;
     margin-bottom: 0;
-    background-color: white;
+    /*! background-color: white; */
     -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
@@ -639,13 +639,8 @@ nav h1 {
     white-space: nowrap;
 }
 
-header nav a {
-    text-decoration: none;
-    color: rgb(119, 119, 119);
-}
-
 body > div {
-    background-color: transparent;
+    /*! background-color: transparent; */
     padding-top: 70px;
 }
 

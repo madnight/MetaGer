@@ -1,0 +1,213 @@
+* {
+    background-color: #505050;
+    color: antiquewhite;
+}
+
+a {
+    color: #aaaaff;
+}
+
+#foki input:checked + label{
+    background-color: #909090;
+}
+
+.navbar {
+    border-bottom: 3px solid #707070;
+	box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+.navbar li a {
+    color: antiquewhite !important;
+}
+
+.navbar-default .navbar-nav > .active > a {
+    background-color: #909090!important;
+}
+
+.btn-default {
+    background-color: #909090;
+    border-color: transparent;
+    color: antiquewhite;
+}
+
+.form-control {
+    background-color: #909090;
+    border-color: #909090;
+    color: antiquewhite;
+}
+
+.dropdown-menu {
+    background-color: #505050;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover {
+    background-color: #909090;
+}
+
+.caret {
+    background-color: transparent;
+}
+
+.input-group-addon {
+    background-color: #909090;
+    border: 1px solid #909090;
+}
+
+#moreInformation ul li {
+    color: antiquewhite;
+}
+
+#moreInformation h2 {
+    color: antiquewhite;
+}
+
+.mutelink {
+    color: antiquewhite
+}
+
+div#right {
+    background-color: #606060;
+}
+
+div#right h3 {
+    background-color: #606060;
+}
+
+div#right p {
+    background-color: #606060;
+}
+
+#foki {
+    background-color: #505050;
+}
+
+.tab-content {
+    background-color: #505050;
+}
+
+.content-wrapper {
+    background-color: #505050;
+}
+
+.nav-tabs {
+    border-bottom: none;
+}
+
+#foki li.active a {
+    background-color: #505050;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    border: none;
+}
+
+pre {
+    background-color: #505050;
+    border: 1px solid antiquewhite;
+}
+
+.alert-warning {
+    background-color: #8B8B60;
+    color: #3D3D30;
+    border-color: #979750;
+}
+
+.well {
+    background-color: #606060;
+    border-color: #909090;
+}
+
+.panel-default > .panel-heading {
+    color: antiquewhite;
+    background-color: #707070;
+    border-color: #909090;
+}
+
+.panel-title {
+    color: antiquewhite;
+    background-color: #707070;
+}
+
+.form-control::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #404040;
+}
+
+.form-control:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #404040;
+   opacity:  1;
+}
+
+.form-control::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #404040;
+   opacity:  1;
+}
+
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #404040;
+}
+
+.navbar-default .navbar-collapse {
+    border-color: #505050;
+}
+
+.navbar-default {
+    background-color: #505050;
+    border-radius: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Aus der theme.css */
+
+body{
+	background-color: #505050;
+	background-attachment: fixed;
+}
+
+body#resultBody{
+	background-image: inherit;
+}
+
+
+input[type=text]:focus, textarea:focus, input[type=email]:focus, input[type=tel]:focus, .form-control:focus {
+    outline-color: #c0c0c0;
+    -webkit-box-shadow: 0px 0px 2px 2px #c0c0c0;
+	-moz-box-shadow: 0px 0px 2px 2px #c0c0c0;
+	box-shadow: 0px 0px 2px 2pxc0c0c0;
+    border: 1px solid #c0c0c0;
+}
+
+#mglogo > a {
+	background-image: linear-gradient(#909090 0%, #909090 250%);
+    background-color: transparent;
+    color: antiquewhite;
+}
+
+.logo h1{
+	color: antiquewhite;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+	background-color: #909;
+	border-color: #909;
+}
+
+.pagination > li > a, .pagination > li > span{
+	color: #909;
+}
+
+.pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus{
+	color: #909;
+}
+
+.lSPrev > span, .lSNext > span {
+	color: #909;
+}

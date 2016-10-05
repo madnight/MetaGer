@@ -26,7 +26,10 @@
 				<link href="/css/{{ $css }}" rel="stylesheet" />
 			@endif
 		@endif
-		<link id="theme" href="/css/theme.css.php" rel="stylesheet" />
+
+		<!-- In Erprobung -->
+		<!-- <link id="theme" href="/css/theme.css.php" rel="stylesheet" /> -->
+		<link href="/css/themeDark.css" rel="stylesheet" />
 	</head>
 
 	<body>

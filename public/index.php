@@ -7,6 +7,12 @@
  * @author   Taylor Otwell <taylorotwell@gmail.com>
  */
 
+# Manchmal passiert es, dass ein Proxy sowohl den HEADER HTTP_FORWARDED, als auch den HEADER "HTTP_X_FORWARDED_FOR" setzt
+# Wir löschen den einen und verwenden Ihn nicht:
+if (isset($_SERVER["HTTP_FORWARDED"]) && isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+    unset($_SERVER["HTTP_FORWARDED"]);
+}
+
  # Unser erster Schritt wird sein, IP-Adresse und USER-Agent zu anonymisieren, damit 
  # nicht einmal wir selbst noch Zugriff auf die Daten haben:
 if( !isset($_SERVER['HTTP_X_FORWARDED_FOR']) && isset($_SERVER['REMOTE_ADDR']) )

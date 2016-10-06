@@ -3,9 +3,11 @@
     color: antiquewhite;
 }
 
-a {
-    color: #90a0f0;
+a, a:link, a:visited {
+    color: #f5a25c;
+    text-decoration: none;
 }
+
 
 #foki input:checked + label{
     background-color: #707070;
@@ -23,16 +25,10 @@ a {
 }
 
 .navbar-default .navbar-nav > .active > a {
-    background-color: #707070!important;
+    background-color: #707070 !important;
 }
 
 .btn-default {
-    background-color: #707070;
-    border-color: transparent;
-    color: antiquewhite;
-}
-
-.form-control {
     background-color: #707070;
     border-color: #909090;
     color: antiquewhite;
@@ -63,8 +59,8 @@ a {
     color: antiquewhite;
 }
 
-.mutelink {
-    color: antiquewhite
+a:link.mutelink, a:visited.mutelink{
+    color: antiquewhite;
 }
 
 div#right {
@@ -83,6 +79,11 @@ div#right p {
     background-color: #505050;
 }
 
+#foki input + label:hover {
+    cursor: pointer;
+    background-color: #707070;
+}
+
 .tab-content {
     background-color: #505050;
 }
@@ -95,10 +96,6 @@ div#right p {
     border-bottom: none;
 }
 
-#foki li.active a {
-    background-color: #505050;
-}
-
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     border: none;
 }
@@ -109,8 +106,8 @@ pre {
 }
 
 .alert-warning {
-    background-color: #8B8B60;
-    color: #3D3D30;
+    background-color: #656433;
+    color: antiquewhite;
     border-color: #979750;
 }
 
@@ -124,12 +121,18 @@ pre {
     background-color: #707070;
 }
 
+.form-control {
+    background-color: #707070;
+    border-color: #909090;
+    color: antiquewhite;
+}
+
 .form-control::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color:    #404040;
+    color:    #antiquewhite;
 }
 
 .form-control:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #404040;
+   color:    #antiquewhite;
    opacity:  1;
 }
 
@@ -139,7 +142,7 @@ pre {
 }
 
 .form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color:    #404040;
+   color:    #antiquewhite;
 }
 
 .panel-default {
@@ -152,6 +155,18 @@ pre {
     border-color: #909090;
 }
 
+.btn-primary {
+    color: antiquewhite;
+    background-color: #6C7233;
+    border-color: #4D4D14;
+}
+
+.btn-danger {
+    color: antiquewhite;
+    background-color: #b07534;
+    border-color: #68491c;
+}
+
 /* Result Page */
 
 .result .description {
@@ -159,11 +174,17 @@ pre {
     font-size: 16px;
 }
 
-/*
-a:link, a:visited {
-    color: #90a0f0;
+.result.ad .description {
+    color: #8ccf55;
 }
-*/
+
+.result.ad .title {
+    color: #63b715;
+}
+
+.resultInformation .link a:link, .resultInformation .link a:visited {
+    color: #f5a25c;
+}
 
 .result:not(.ad) .hoster {
     font-size: 14px;
@@ -179,19 +200,23 @@ a:link, a:visited {
 }
 
 .result .title {
-    color: burlywood;
+    color: #e18d20;
     font-size: 18px;
 }
 
 .pager li > a, .pager li > span {
-    background-color: #909090;
-    border-color: #c0c0c0;
+    background-color: #707070;
+    border-color: #909090;
     color: antiquewhite;
+}
+
+.pager li > a:hover {
+    background-color: #909090;
 }
 
 .pager .disabled > a, .pager .disabled > a:hover, .pager .disabled > a:focus, .pager .disabled > span {
     color: antiquewhite;
-    background-color: #909090;
+    background-color: #707070;
 }
 
 footer a {
@@ -213,29 +238,61 @@ footer a {
 
 a:hover {
     cursor: pointer;
-    color: #6771AB;
+    color: #9c6232;
 }
 
 .text-muted {
     color: #b0b0b0;
 }
 
-.result.ad .description {
-    color: #95cf5e;
-}
-
-.result.ad .title {
-    color: #95cf5e;
+.alert-danger, .alert-danger a, .alert-danger ul, .alert-danger li {
+    background-color: #707070;
+    border-color: #909090;
 }
 
 .result.ad .hoster {
-    color: #95cf5e;
+    color: #b0b0b0;
 }
 
+.nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: #707070;
+}
 
+#searchplugin > div > a {
+    color: antiquewhite;
+    background-color: #707070;
+    border-color: #909090;
+}
 
+#searchplugin div {
+    background-color: #656433;
+}
 
+#foki li.active a {
+    background-color: #707070;
+}
 
+#foki li.active a span {
+    background-color: #707070;
+}
+
+#foki li.active a:hover span {
+    background-color: #707070;
+}
+
+#foki li a:hover {
+    border-color: #909090;
+    border: none;
+}
+
+#foki li a:hover span {
+    background-color: #707070;
+}
+
+.glyphicon-search {
+    background-color: transparent;
+}
 
 /* Aus der theme.css */
 
@@ -265,21 +322,4 @@ input[type=text]:focus, textarea:focus, input[type=email]:focus, input[type=tel]
 
 .logo h1{
 	color: antiquewhite;
-}
-
-.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
-	background-color: #909;
-	border-color: #909;
-}
-
-.pagination > li > a, .pagination > li > span{
-	color: #909;
-}
-
-.pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus{
-	color: #909;
-}
-
-.lSPrev > span, .lSNext > span {
-	color: #909;
 }

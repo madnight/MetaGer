@@ -8,7 +8,12 @@
 <p>{{ trans('sitesearch.head.2') }}</p>
 <h2>{{ trans('sitesearch.head.3') }}</h2>
 <form method="GET" action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/sitesearch/") }}" accept-charset="UTF-8">
-  <input class="metager-searchinput" name="site" placeholder="{{ trans('sitesearch.head.4') }}" required="" value="{{ $site }}"><button class="metager-searchbutton" type="submit">{{ trans('sitesearch.head.5') }}</button>
+  <div class="input-group">
+    <input type="text"  class="form-control" name="site" placeholder="{{ trans('sitesearch.head.4') }}" required="" value="{{ $site }}">
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="submit">{{ trans('sitesearch.head.5') }}</button>
+    </span>
+  </div>
 </form>
 @if ($site !== '')
 <h2>{{ trans('sitesearch.generated.1') }}</h2>

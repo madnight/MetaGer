@@ -71,5 +71,9 @@ return [
         "attribute-name"	=>	[
             "rule-name"	=>	"eigene-nachricht"
         ]
-    ]
+    ],
+    "dimensions"	=>	":attribute hat die falsche Größe.",
+    "file"	=>	"Das Feld :attribute muss eine Datei sein.",
+    "mimetypes"	=>	"Das Feld :attribute muss eine Datei vom Typ :values sein.",
+    "uploaded"	=>	":attribute konnte nicht hochgeladen werden."
 ];

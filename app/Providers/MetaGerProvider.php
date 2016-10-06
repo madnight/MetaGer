@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\MetaGer;
 
 class MetaGerProvider extends ServiceProvider
 {
@@ -24,9 +23,8 @@ class MetaGerProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(MetaGer::class, function($app) {
+        $this->app->singleton(MetaGer::class, function ($app) {
             return new MetaGer();
         });
     }
-
 }

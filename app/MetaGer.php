@@ -2,7 +2,6 @@
 namespace App;
 
 use App;
-use App\lib\TextLanguageDetect\TextLanguageDetect;
 use Cache;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
@@ -73,10 +72,6 @@ class MetaGer
                 require $path;
             }
         }
-
-        # Spracherkennung starten
-        $this->languageDetect = new TextLanguageDetect();
-        $this->languageDetect->setNameMode("2");
 
         # Cachebarkeit testen
         try {

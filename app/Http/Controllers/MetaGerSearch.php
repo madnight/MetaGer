@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App;
-use App\Http\Controllers\Controller;
 use App\MetaGer;
 use Illuminate\Http\Request;
 use LaravelLocalization;
@@ -138,5 +137,4 @@ class MetaGerSearch extends Controller
     {
         return file_get_contents($url);
     }
-
 }

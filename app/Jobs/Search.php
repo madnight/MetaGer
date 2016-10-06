@@ -2,16 +2,15 @@
 
 namespace App\Jobs;
 
-use App\Jobs\Job;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Redis;
 
-class Search extends Job implements ShouldQueue
+class Search implements ShouldQueue
 {
-    use InteractsWithQueue, SerializesModels;
+    use InteractsWithQueue, Queueable, SerializesModels;
 
     protected $hash, $host, $port, $name, $getString, $useragent, $fp, $additionalHeaders;
     protected $buffer_length = 8192;
@@ -37,7 +36,7 @@ class Search extends Job implements ShouldQueue
      *
      * @return void
      */
-    public function handle(Request $request)
+    public function handle()
     {
         $this->fp = $this->getFreeSocket();
 

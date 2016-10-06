@@ -6,7 +6,7 @@
 	</head>
 
 	<!-- In Erprobung -->
-	<link href="/css/themeDark.css" rel="stylesheet" />
+	<!-- <link href="/css/themeDark.css" rel="stylesheet" /> -->
 	<body>
 		@if( $spruch !== "" )
 			<blockquote id="spruch">{!! $spruch !!}</blockquote>

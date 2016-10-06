@@ -22,7 +22,7 @@
 	<link type="text/css" rel="stylesheet" href="/css/lightslider.css" />
 
 	<!-- In Erprobung -->
-	<link href="/css/themeDark.css" rel="stylesheet" />
+	<!-- <link href="/css/themeDark.css" rel="stylesheet" /> -->
 </head>
 <body id="resultBody">
 	@if( !isset($suspendheader) )

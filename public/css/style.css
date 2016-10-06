@@ -362,7 +362,7 @@ By Class
 }
 
 .mutelink {
-    color: grey;
+    color: inherit;
 }
 
 .dotlist {

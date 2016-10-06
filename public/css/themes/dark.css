@@ -8,8 +8,7 @@ a, a:link, a:visited {
     text-decoration: none;
 }
 
-
-#foki input:checked + label{
+#foki input:checked + label {
     background-color: #707070;
 }
 
@@ -17,7 +16,7 @@ a, a:link, a:visited {
     background-color: #505050;
     border-color: #505050;
     border-bottom: 3px solid #707070;
-	box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
 }
 
 .navbar li a {
@@ -59,7 +58,7 @@ a, a:link, a:visited {
     color: antiquewhite;
 }
 
-a:link.mutelink, a:visited.mutelink{
+a:link.mutelink, a:visited.mutelink {
     color: antiquewhite;
 }
 
@@ -127,22 +126,26 @@ pre {
     color: antiquewhite;
 }
 
-.form-control::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color:    #antiquewhite;
+.form-control::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: #antiquewhite;
 }
 
-.form-control:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #antiquewhite;
-   opacity:  1;
+.form-control:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #antiquewhite;
+    opacity: 1;
 }
 
-.form-control::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    antiquewhite;
-   opacity:  1;
+.form-control::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: antiquewhite;
+    opacity: 1;
 }
 
-.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color:    #antiquewhite;
+.form-control:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #antiquewhite;
 }
 
 .panel-default {
@@ -166,6 +169,7 @@ pre {
     background-color: #b07534;
     border-color: #68491c;
 }
+
 
 /* Result Page */
 
@@ -196,7 +200,8 @@ pre {
 }
 
 .result > .number {
-    color: burlywood !important; /* Wird normalerweise inline gesetzt */
+    color: burlywood !important;
+    /* Wird normalerweise inline gesetzt */
 }
 
 .result .title {
@@ -294,32 +299,32 @@ a:hover {
     background-color: transparent;
 }
 
+
 /* Aus der theme.css */
 
-body{
-	background-color: #505050;
-	background-attachment: fixed;
+body {
+    background-color: #505050;
+    background-attachment: fixed;
 }
 
-body#resultBody{
-	background-image: inherit;
+body#resultBody {
+    background-image: inherit;
 }
-
 
 input[type=text]:focus, textarea:focus, input[type=email]:focus, input[type=tel]:focus, .form-control:focus {
     outline-color: #909090;
     -webkit-box-shadow: 0px 0px 2px 2px #909090;
-	-moz-box-shadow: 0px 0px 2px 2px #909090;
-	box-shadow: 0px 0px 2px 2px909090;
+    -moz-box-shadow: 0px 0px 2px 2px #909090;
+    box-shadow: 0px 0px 2px 2px909090;
     border: 1px solid #c0c0c0;
 }
 
 #mglogo > a {
-	background-image: linear-gradient(#707070 0%, #707070 250%);
+    background-image: linear-gradient(#707070 0%, #707070 250%);
     background-color: transparent;
     color: antiquewhite;
 }
 
-.logo h1{
-	color: antiquewhite;
+.logo h1 {
+    color: antiquewhite;
 }

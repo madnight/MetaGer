@@ -4,6 +4,9 @@
 		<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="/css/style.css" />
 	</head>
+
+	<!-- In Erprobung -->
+	<!-- <link href="/css/themeDark.css" rel="stylesheet" /> -->
 	<body>
 		@if( $spruch !== "" )
 			<blockquote id="spruch">{!! $spruch !!}</blockquote>

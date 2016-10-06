@@ -27,6 +27,8 @@
 			@endif
 		@endif
 		<link id="theme" href="/css/theme.css.php" rel="stylesheet" />
+		<!-- In Erprobung -->
+		<!-- <link href="/css/themeDark.css" rel="stylesheet" /> -->
 	</head>
 
 	<body>

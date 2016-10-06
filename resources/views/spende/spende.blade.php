@@ -42,7 +42,7 @@
 		<h3 id="lastschrift">{!! trans('spenden.lastschrift.1') !!}</h3>
 		<p>{!! trans('spenden.lastschrift.2') !!}</p>
 		<form role="form" method="POST">
-			{{ csrf_field() }}
+			<input type="hidden" name="dt" value="{{ md5(date('Y') . date('m') . date('d')) }}" />
 			<div class="form-group donation-form-group">
 				<label for="Name">{!! trans('spenden.lastschrift.3') !!}</label>
 				<input type="text" class="form-control" id="Name" required="" name="Name" placeholder="{!! trans('spenden.lastschrift.3.placeholder') !!}">

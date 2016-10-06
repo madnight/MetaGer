@@ -233,7 +233,7 @@ class Result
             }
         }
 
-        /* Der Dublettefilter, der sicher stellt,
+        /* Der Dublettenfilter, der sicher stellt,
          *  dass wir nach Möglichkeit keinen Link doppelt in der Ergebnisliste haben.
          */
         if ($metager->addLink($this->strippedLink)) {

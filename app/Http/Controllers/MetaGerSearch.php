@@ -28,7 +28,7 @@ class MetaGerSearch extends Controller
         $metager->rankAll();
 
         # Ergebnisse der Suchmaschinen kombinieren:
-        $metager->combineResults();
+        $metager->prepareResults();
 
         # Die Ausgabe erstellen:
         return $metager->createView();

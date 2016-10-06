@@ -156,28 +156,18 @@ class MetaGer
         }
     }
 
-    public function combineResults()
+    public function prepareResults()
     {
-        foreach ($this->engines as $engine) {
-            if (isset($engine->next)) {
-                $this->next[] = $engine->next;
-            }
-            if (isset($engine->last)) {
-                $this->last[] = $engine->last;
-            }
-            foreach ($engine->results as $result) {
-                if ($result->valid) {
-                    $this->results[] = $result;
-                }
-            }
-            foreach ($engine->ads as $ad) {
-                $this->ads[] = $ad;
-            }
-            foreach ($engine->products as $product) {
-                $this->products[] = $product;
-            }
-        }
+        $engines = $this->engines;
 
+        // combine
+        $combinedResults = $this->combineResults($engines);
+        // sort
+        //$sortedResults = $this->sortResults($engines);
+        // filter
+        // augment (boost&adgoal)
+        // authorize
+        // misc (WiP)
         uasort($this->results, function ($a, $b) {
             if ($a->getRank() == $b->getRank()) {
                 return 0;
@@ -271,6 +261,30 @@ class MetaGer
             Cache::put(md5(serialize($this->next)), serialize($this->next), 60);
         } else {
             $this->next = [];
+        }
+
+    }
+
+    public function combineResults($engines)
+    {
+        foreach ($engines as $engine) {
+            if (isset($engine->next)) {
+                $this->next[] = $engine->next;
+            }
+            if (isset($engine->last)) {
+                $this->last[] = $engine->last;
+            }
+            foreach ($engine->results as $result) {
+                if ($result->valid) {
+                    $this->results[] = $result;
+                }
+            }
+            foreach ($engine->ads as $ad) {
+                $this->ads[] = $ad;
+            }
+            foreach ($engine->products as $product) {
+                $this->products[] = $product;
+            }
         }
 
     }

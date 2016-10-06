@@ -67,6 +67,12 @@ class MailController extends Controller
         $messageToUser = "";
         $messageType   = ""; # [success|error]
 
+        #Sicherheitsüberprüfung (Wir wurden in letzter Zeit ziemlich mit Mails zugespammt
+        $hash = md5(date('Y') . date('m') . date('d'));
+        if ($request->input('dt') !== $hash) {
+            return redirect(url('spende'));
+        }
+
         # Folgende Felder werden vom Spendenformular als Input übergeben:
         # Name
         # Telefon

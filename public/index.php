@@ -4,7 +4,7 @@
  * Laravel - A PHP Framework For Web Artisans
  *
  * @package  Laravel
- * @author   Taylor Otwell <taylorotwell@gmail.com>
+ * @author   Taylor Otwell <taylor@laravel.com>
  */
 
 # Manchmal passiert es, dass ein Proxy sowohl den HEADER HTTP_FORWARDED, als auch den HEADER "HTTP_X_FORWARDED_FOR" setzt
@@ -13,25 +13,21 @@ if (isset($_SERVER["HTTP_FORWARDED"]) && isset($_SERVER["HTTP_X_FORWARDED_FOR"])
     unset($_SERVER["HTTP_FORWARDED"]);
 }
 
- # Unser erster Schritt wird sein, IP-Adresse und USER-Agent zu anonymisieren, damit 
- # nicht einmal wir selbst noch Zugriff auf die Daten haben:
-if( !isset($_SERVER['HTTP_X_FORWARDED_FOR']) && isset($_SERVER['REMOTE_ADDR']) )
-{
-	$_SERVER['REMOTE_ADDR'] = preg_replace("/(\d+)\.(\d+)\.\d+.\d+/s", "$1.$2.0.0", $_SERVER['REMOTE_ADDR']);
-}elseif( isset($_SERVER['HTTP_X_FORWARDED_FOR']))
-{
-	$_SERVER['HTTP_X_FORWARDED_FOR'] = preg_replace("/(\d+)\.(\d+)\.\d+.\d+/s", "$1.$2.0.0", $_SERVER['HTTP_X_FORWARDED_FOR']);
+# Unser erster Schritt wird sein, IP-Adresse und USER-Agent zu anonymisieren, damit
+# nicht einmal wir selbst noch Zugriff auf die Daten haben:
+if (!isset($_SERVER['HTTP_X_FORWARDED_FOR']) && isset($_SERVER['REMOTE_ADDR'])) {
+    $_SERVER['REMOTE_ADDR'] = preg_replace("/(\d+)\.(\d+)\.\d+.\d+/s", "$1.$2.0.0", $_SERVER['REMOTE_ADDR']);
+} elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $_SERVER['HTTP_X_FORWARDED_FOR'] = preg_replace("/(\d+)\.(\d+)\.\d+.\d+/s", "$1.$2.0.0", $_SERVER['HTTP_X_FORWARDED_FOR']);
 }
-if( isset($_SERVER['HTTP_USER_AGENT']) )
-{
-	$agentPieces = explode(" ", $_SERVER['HTTP_USER_AGENT']);
+if (isset($_SERVER['HTTP_USER_AGENT'])) {
+    $agentPieces = explode(" ", $_SERVER['HTTP_USER_AGENT']);
 
-	for($i = 0; $i < count($agentPieces); $i++)
-	{
-		$agentPieces[$i] = preg_replace("/(\d+\.\d+)/s", "0.0", $agentPieces[$i]);
-		$agentPieces[$i] = preg_replace("/([^\/]*)\/\w+/s", "$1/0.0", $agentPieces[$i]);
-	}
-	$_SERVER['HTTP_USER_AGENT'] = implode(" ", $agentPieces);
+    for ($i = 0; $i < count($agentPieces); $i++) {
+        $agentPieces[$i] = preg_replace("/(\d+\.\d+)/s", "0.0", $agentPieces[$i]);
+        $agentPieces[$i] = preg_replace("/([^\/]*)\/\w+/s", "$1/0.0", $agentPieces[$i]);
+    }
+    $_SERVER['HTTP_USER_AGENT'] = implode(" ", $agentPieces);
 }
 
 /*
@@ -44,9 +40,9 @@ if( isset($_SERVER['HTTP_USER_AGENT']) )
 | into the script here so that we don't have to worry about manual
 | loading any of our classes later on. It feels nice to relax.
 |
-*/
+ */
 
-require __DIR__.'/../bootstrap/autoload.php';
+require __DIR__ . '/../bootstrap/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -58,9 +54,9 @@ require __DIR__.'/../bootstrap/autoload.php';
 | will load up this application so that we can run it and send
 | the responses back to the browser and delight our users.
 |
-*/
+ */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+$app = require_once __DIR__ . '/../bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -72,7 +68,7 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 | the client's browser allowing them to enjoy the creative
 | and wonderful application we have prepared for them.
 |
-*/
+ */
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 

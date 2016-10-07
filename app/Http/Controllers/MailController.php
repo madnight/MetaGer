@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Kontakt;
+use App\Mail\Spende;
+use App\Mail\Sprachdatei;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use LaravelLocalization;
@@ -34,23 +37,12 @@ class MailController extends Controller
         } else {
             # Wir versenden die Mail des Benutzers an uns:
             $message = $request->input('message');
-            $subject = "[Ticket " . date("Y") . date("d") . date("m") . date("H") . date("i") . date("s") . "] MetaGer - Kontaktanfrage";
-            if (Mail::send(['text' => 'kontakt.mail'], ['messageText' => $message], function ($message) use ($replyTo, $subject) {
-                $message->to("office@suma-ev.de", $name = null);
-                $message->from($replyTo, $name = null);
-                $message->replyTo($replyTo, $name = null);
-                $message->subject($subject);
-            })) {
-                # Mail erfolgreich gesendet
-                $messageType   = "success";
-                $returnMessage = 'Ihre Email wurde uns erfolgreich zugestellt. Vielen Dank dafür! Wir werden diese schnellstmöglich bearbeiten und uns dann ggf. wieder bei Ihnen melden.';
-            } else {
-                # Fehler beim senden der Email
-                $messageType   = "error";
-                $returnMessage = 'Beim Senden Ihrer Email ist ein Fehler aufgetreten. Bitte schicken Sie eine Email an: office@suma-ev.de, damit wir uns darum kümmern können.';
-            }
 
-            $messageType = "success";
+            Mail::to("office@suma-ev.de")
+                ->send(new Kontakt($replyTo, $message));
+
+            $returnMessage = 'Ihre Email wurde uns erfolgreich zugestellt. Vielen Dank dafür! Wir werden diese schnellstmöglich bearbeiten und uns dann ggf. wieder bei Ihnen melden.';
+            $messageType   = "success";
         }
 
         return view('kontakt.kontakt')
@@ -67,54 +59,55 @@ class MailController extends Controller
         $messageType   = ""; # [success|error]
 
         #Sicherheitsüberprüfung (Wir wurden in letzter Zeit ziemlich mit Mails zugespammt
-        $hash = md5(date('Y') . date('m') . date('d'));
-        if ($request->input('dt') !== $hash) {
-            return redirect(url('spende'));
-        }
-
-        # Folgende Felder werden vom Spendenformular als Input übergeben:
-        # Name
-        # Telefon
-        # email
-        # Kontonummer ( IBAN )
-        # Bankleitzahl ( BIC )
-        # Nachricht
-        if (!$request->has('Kontonummer') || !$request->has('Bankleitzahl') || !$request->has('Nachricht')) {
-            $messageToUser = "Sie haben eins der folgenden Felder nicht ausgefüllt: IBAN, BIC, Nachricht. Bitte korrigieren Sie Ihre Eingabe und versuchen es erneut.\n";
+        # Wir überprüfen also, ob das Feld für die Kontonummer tatsächlich eine Kontonummer, oder eine IBAN enthält:
+        $iban = $request->input('Kontonummer', '');
+        $iban = preg_replace("/\s/s", "", $iban);
+        # Eine Kontonummer besteht nur aus Zahlen
+        # Eine IBAN besteht aus einem Ländercode (2 Buchstaben), einer 2 stelligen Prüfsumme (2 Ziffern) gefolgt von
+        # einer Kombination aus Buchstaben und Zahlen
+        if (!preg_match("/^\d+$/s", $iban) && !preg_match("/^[a-zA-Z]{2}\d{2}[a-zA-Z0-9]+$/s", $iban)) {
+            $messageToUser = "Die eingegebene IBAN/Kontonummer scheint nicht Korrekt zu sein. Nachricht wurde nicht gesendet";
             $messageType   = "error";
         } else {
-            $message = "\r\nName: " . $request->input('Name', 'Keine Angabe');
-            $message .= "\r\nTelefon: " . $request->input('Telefon', 'Keine Angabe');
-            $message .= "\r\nKontonummer: " . $request->input('Kontonummer');
-            $message .= "\r\nBankleitzahl: " . $request->input('Bankleitzahl');
-            $message .= "\r\nNachricht: " . $request->input('Nachricht');
 
-            $replyTo = $request->input('email', 'anonymous-user@metager.de');
-            if (!filter_var($replyTo, FILTER_VALIDATE_EMAIL)) {
-                $messageToUser .= "Die eingegebene Email-Addresse ($replyTo) scheint nicht korrekt zu sein.";
-            }
+            # Folgende Felder werden vom Spendenformular als Input übergeben:
+            # Name
+            # Telefon
+            # email
+            # Kontonummer ( IBAN )
+            # Bankleitzahl ( BIC )
+            # Nachricht
+            if (!$request->has('Kontonummer') || !$request->has('Bankleitzahl') || !$request->has('Nachricht')) {
+                $messageToUser = "Sie haben eins der folgenden Felder nicht ausgefüllt: IBAN, BIC, Nachricht. Bitte korrigieren Sie Ihre Eingabe und versuchen es erneut.\n";
+                $messageType   = "error";
+            } else {
+                $message = "\r\nName: " . $request->input('Name', 'Keine Angabe');
+                $message .= "\r\nTelefon: " . $request->input('Telefon', 'Keine Angabe');
+                $message .= "\r\nKontonummer: " . $request->input('Kontonummer');
+                $message .= "\r\nBankleitzahl: " . $request->input('Bankleitzahl');
+                $message .= "\r\nNachricht: " . $request->input('Nachricht');
 
-            try {
-                if (Mail::send(['text' => 'kontakt.mail'], ['messageText' => $message], function ($message) use ($replyTo) {
-                    $message->to("office@suma-ev.de", $name = null);
-                    $message->from($replyTo, $name = null);
-                    $message->replyTo($replyTo, $name = null);
-                    $message->subject("MetaGer - Spende");
-                })) {
+                $replyTo = $request->input('email', 'anonymous-user@metager.de');
+                if (!filter_var($replyTo, FILTER_VALIDATE_EMAIL)) {
+                    $messageToUser .= "Die eingegebene Email-Addresse ($replyTo) scheint nicht korrekt zu sein.";
+                }
+
+                try {
+                    Mail::to("office@suma-ev.de")
+                        ->send(new Spende($replyTo, $message));
+
                     $messageType   = "success";
                     $messageToUser = "Herzlichen Dank!! Wir haben Ihre Spendenbenachrichtigung erhalten.";
-                } else {
+                } catch (\Swift_TransportException $e) {
                     $messageType   = "error";
                     $messageToUser = 'Beim Senden Ihrer Spendenbenachrichtigung ist ein Fehler auf unserer Seite aufgetreten. Bitte schicken Sie eine Email an: office@suma-ev.de, damit wir uns darum kümmern können.';
                 }
-            } catch (\Swift_TransportException $e) {
-                $messageType   = "error";
-                $messageToUser = 'Beim Senden Ihrer Spendenbenachrichtigung ist ein Fehler auf unserer Seite aufgetreten. Bitte schicken Sie eine Email an: office@suma-ev.de, damit wir uns darum kümmern können.';
             }
         }
 
         if ($messageType === "error") {
-            return view('spende.danke')
+            $request->flash();
+            return view('spende.spende')
                 ->with('title', 'Kontakt')
                 ->with('css', 'donation.css')
                 ->with($messageType, $messageToUser);
@@ -188,12 +181,8 @@ class MailController extends Controller
         $ex["new"] += $new;
 
         if ($new > 0) {
-            Mail::send(['text' => 'kontakt.mail'], ['messageText' => $message], function ($message) use ($output, $filename) {
-                $message->subject('MetaGer - Sprachdatei');
-                $message->from('noreply@metager.de');
-                $message->to('office@suma-ev.de');
-                $message->attachData($output, basename($filename));
-            });
+            Mail::to("dev@suma-ev.de")
+                ->send(new Sprachdatei($message, $output, basename($filename)));
         }
         $ex = base64_encode(serialize($ex));
         return redirect(url('languages/edit', ['from' => $from, 'to' => $to, 'exclude' => $ex]));

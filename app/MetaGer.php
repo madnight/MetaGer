@@ -648,7 +648,8 @@ class MetaGer
             }
             # Jede eingeschaltete Engine ist für diesen Fokus geeignet
             foreach ($fokiEngNames as $fen) {
-                if (!in_array($fen, $realEngNames)) {
+                # Bei Bildersuchen ist uns egal, ob alle Suchmaschinen aus dem Suchfokus eingeschaltet sind, da wir sie eh als Bildersuche anzeigen müssen
+                if (!in_array($fen, $realEngNames) && $fok !== "bilder") {
                     $isFokus = false;
                 }
             }

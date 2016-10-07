@@ -30,24 +30,14 @@ class Europeana extends Searchengine
         foreach ($results as $result) {
             if (isset($result->edmPreview)) {
                 $title = $result->title[0];
-
                 if (preg_match("/(.+)\?.*/si", $result->guid, $match)) {
                     $link = $match[1];
                 } else {
                     $link = "";
                 }
-
                 $anzeigeLink = $link;
                 $descr       = "";
-
-                /*if (preg_match("/(?:uri=)(.+)/si", urldecode($result->edmPreview[0]), $match)){
-                $image = $match[1];
-                } else {
-                $image = "";
-                }
-                echo $image . "
-                ";*/
-                $image = urldecode($result->edmPreview[0]);
+                $image       = urldecode($result->edmPreview[0]);
                 $this->counter++;
                 $this->results[] = new \App\Models\Result(
                     $this->engine,
@@ -62,5 +52,18 @@ class Europeana extends Searchengine
                 );
             }
         }
+    }
+
+    public function getNext(\App\MetaGer $metager, $result)
+    {
+        $start   = ($metager->getPage()) * 10 + 1;
+        $content = json_decode($result);
+        if ($start > $content->totalResults) {
+            return;
+        }
+        $next = new Europeana(simplexml_load_string($this->engine), $metager);
+        $next->getString .= "&start=" . $start;
+        $next->hash = md5($next->host . $next->getString . $next->port . $next->name);
+        $this->next = $next;
     }
 }

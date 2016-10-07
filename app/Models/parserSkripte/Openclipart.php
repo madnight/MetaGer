@@ -47,4 +47,16 @@ class Openclipart extends Searchengine
             );
         }
     }
+
+    public function getNext(\App\MetaGer $metager, $result)
+    {
+        $content = json_decode($result);
+        if ($content->info->current_page > $content->info->pages) {
+            return;
+        }
+        $next = new Openclipart(simplexml_load_string($this->engine), $metager);
+        $next->getString .= "&page=" . ($metager->getPage() + 1);
+        $next->hash = md5($next->host . $next->getString . $next->port . $next->name);
+        $this->next = $next;
+    }
 }

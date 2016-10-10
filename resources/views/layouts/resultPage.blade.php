@@ -2,12 +2,12 @@
 <html>
 <head>
 	<title>{{ $metager->getQ() }} - MetaGer</title>
-	<!--<link href="/css/bootstrap.css" rel="stylesheet" />
+	<!--<link href="/css/bootstrap.css" rel="stylesheet" />-->
 	<link href="/css/styleResultPage.css" rel="stylesheet" />
 	@if( isset($mobile) && $mobile )
 		<link href="/css/styleResultPageMobile.css" rel="stylesheet" />
 	@endif
-	<link id="theme" href="/css/theme.css.php" rel="stylesheet" />-->
+	<link id="theme" href="/css/theme.css.php" rel="stylesheet" />
 	<link href="/favicon.ico" rel="icon" type="image/x-icon" />
 	<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 	<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport" />

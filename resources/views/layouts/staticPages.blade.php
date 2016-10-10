@@ -15,7 +15,9 @@
 		<meta rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<meta rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 		<link rel="search" type="application/opensearchdescription+xml" title="{{ trans('staticPages.opensearch') }}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
-		<link href="/css/bootstrap.css" rel="stylesheet" />
+		<!--<link href="/css/bootstrap.css" rel="stylesheet" />
+		-->
+		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default') }}.css" />
 		<link href="/css/style.css" rel="stylesheet" />
 		@if (isset($css))
 			@if(is_array($css))
@@ -25,11 +27,6 @@
 			@else
 				<link href="/css/{{ $css }}" rel="stylesheet" />
 			@endif
-		@endif
-		@if( app('request')->input('theme', 'none') != "none" )
-		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'none') }}.css" />
-		@else
-		<link id="theme" href="/css/theme.css.php" rel="stylesheet" />
 		@endif
 	</head>
 

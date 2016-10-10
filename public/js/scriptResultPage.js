@@ -114,7 +114,6 @@ function paginationHandler() {
 }
 
 function imageLoader() {
-    console.log("bilder");
     if (typeof $("#container").masonry == "undefined") {
         return;
     }

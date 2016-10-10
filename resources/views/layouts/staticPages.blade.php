@@ -18,7 +18,7 @@
 		<!--<link href="/css/bootstrap.css" rel="stylesheet" />
 		-->
 		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default') }}.css" />
-		<link href="/css/style.css" rel="stylesheet" />
+		<!--<link href="/css/style.css" rel="stylesheet" />-->
 		@if (isset($css))
 			@if(is_array($css))
 				@foreach($css as $el)

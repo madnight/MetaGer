@@ -46,4 +46,27 @@ class Flickr extends Searchengine
             );
         }
     }
+
+    public function getNext(\App\MetaGer $metager, $result)
+    {
+        $page    = $metager->getPage() + 1;
+        $result  = preg_replace("/\r\n/si", "", $result);
+        $content = simplexml_load_string($result);
+        $results = $content->xpath('//photos')[0];
+        try {
+            $content = simplexml_load_string($result);
+        } catch (\Exception $e) {
+            abort(500, "$result is not a valid xml string");
+        }
+        if (!$content) {
+            return;
+        }
+        if ($page >= intval($results["pages"]->__toString())) {
+            return;
+        }
+        $next = new Flickr(simplexml_load_string($this->engine), $metager);
+        $next->getString .= "&page=" . $page;
+        $next->hash = md5($next->host . $next->getString . $next->port . $next->name);
+        $this->next = $next;
+    }
 }

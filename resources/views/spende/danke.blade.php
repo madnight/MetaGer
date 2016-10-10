@@ -42,10 +42,10 @@
 	</div>
 	<div class="col-lg-6 col-md-12 col-sm-12 others noprint" id="right">
 		<h2>{{ trans('spenden.about.1') }}</h2>
-		<p>{{ trans('spenden.about.2') }}</p>
-		<p>{{ trans('spenden.about.3') }}</p>
-		<p>{{ trans('spenden.about.4') }}</p>
-		<p>{{ trans('spenden.about.5') }}</p>
+		<p>{!! trans('spenden.about.2') !!}</p>
+		<p>{!! trans('spenden.about.3') !!}</p>
+		<p>{!! trans('spenden.about.4') !!}</p>
+		<p>{!! trans('spenden.about.5') !!}</p>
 	</div>
 	<div class="clearfix"></div>
 </div>

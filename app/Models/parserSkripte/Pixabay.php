@@ -47,4 +47,17 @@ class Pixabay extends Searchengine
             );
         }
     }
+
+    public function getNext(\App\MetaGer $metager, $result)
+    {
+        $page    = $metager->getPage() + 1;
+        $content = json_decode($result);
+        if ($page * 20 > $content->total) {
+            return;
+        }
+        $next = new Pixabay(simplexml_load_string($this->engine), $metager);
+        $next->getString .= "&page=" . $page;
+        $next->hash = md5($next->host . $next->getString . $next->port . $next->name);
+        $this->next = $next;
+    }
 }

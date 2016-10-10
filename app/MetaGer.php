@@ -2,7 +2,6 @@
 namespace App;
 
 use App;
-use App\lib\TextLanguageDetect\TextLanguageDetect;
 use Cache;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
@@ -73,10 +72,6 @@ class MetaGer
                 require $path;
             }
         }
-
-        # Spracherkennung starten
-        $this->languageDetect = new TextLanguageDetect();
-        $this->languageDetect->setNameMode("2");
 
         # Cachebarkeit testen
         try {
@@ -653,7 +648,8 @@ class MetaGer
             }
             # Jede eingeschaltete Engine ist für diesen Fokus geeignet
             foreach ($fokiEngNames as $fen) {
-                if (!in_array($fen, $realEngNames)) {
+                # Bei Bildersuchen ist uns egal, ob alle Suchmaschinen aus dem Suchfokus eingeschaltet sind, da wir sie eh als Bildersuche anzeigen müssen
+                if (!in_array($fen, $realEngNames) && $fok !== "bilder") {
                     $isFokus = false;
                 }
             }

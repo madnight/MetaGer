@@ -58,6 +58,3 @@ input[type=text]:focus, textarea:focus, input[type=email]:focus, input[type=tel]
 .lSPrev > span, .lSNext > span {
 	color: <?=$color?>;
 }
-
-
-

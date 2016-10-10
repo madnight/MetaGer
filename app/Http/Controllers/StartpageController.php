@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
-use Response;
 
 class StartpageController extends Controller
 {

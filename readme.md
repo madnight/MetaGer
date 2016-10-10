@@ -10,6 +10,7 @@
   * php7.0-mbstring
   * php7.0-dom
   * php7.0-xml
+  * php7.0-zip
 * sqlite3
 * redis-server
 * Das Perl-Paket: Lingua::Identify (http://search.cpan.org/~ambs/Lingua-Identify-0.56/lib/Lingua/Identify.pm)

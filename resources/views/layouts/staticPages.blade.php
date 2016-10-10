@@ -26,7 +26,11 @@
 				<link href="/css/{{ $css }}" rel="stylesheet" />
 			@endif
 		@endif
+		@if( app('request')->input('theme', 'none') != "none" )
+		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'none') }}.css" />
+		@else
 		<link id="theme" href="/css/theme.css.php" rel="stylesheet" />
+		@endif
 	</head>
 
 	<body>

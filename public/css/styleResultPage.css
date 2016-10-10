@@ -6,6 +6,17 @@
     color: #FFFFFF;
 }
 
+.hostlabel {
+    display: none;
+    position: relative;
+    margin-top: -14px;
+    background-color: #333;
+}
+
+.img:hover .hostlabel {
+    display: block;
+}
+
 .row {
     margin: 10px 15px;
     margin-top: 0;

@@ -3,11 +3,9 @@
 <head>
 	<title>{{ $metager->getQ() }} - MetaGer</title>
 	<!--<link href="/css/bootstrap.css" rel="stylesheet" />-->
-	<link href="/css/styleResultPage.css" rel="stylesheet" />
 	@if( isset($mobile) && $mobile )
 		<link href="/css/styleResultPageMobile.css" rel="stylesheet" />
 	@endif
-	<link id="theme" href="/css/theme.css.php" rel="stylesheet" />
 	<link href="/favicon.ico" rel="icon" type="image/x-icon" />
 	<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 	<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport" />
@@ -16,6 +14,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="search" type="application/opensearchdescription+xml" title="{!! trans('resultPage.opensearch') !!}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
 	<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default') }}.css" />
+	<link href="/css/styleResultPage.css" rel="stylesheet" />
 	<link type="text/css" rel="stylesheet" href="/css/lightslider.css" />
 </head>
 <body id="resultBody">

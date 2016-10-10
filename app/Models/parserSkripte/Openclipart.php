@@ -32,7 +32,7 @@ class Openclipart extends Searchengine
             $link        = $result->detail_link;
             $anzeigeLink = $link;
             $descr       = $result->description;
-            $image       = $result->svg->url;
+            $image       = $result->svg->png_thumb;
             $this->counter++;
             $this->results[] = new \App\Models\Result(
                 $this->engine,

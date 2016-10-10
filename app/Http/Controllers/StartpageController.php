@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
+use Response;
 
 class StartpageController extends Controller
 {

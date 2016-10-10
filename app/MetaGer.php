@@ -392,9 +392,9 @@ class MetaGer
          * Zu Liste hinzufügen
          */
         foreach ($sumas as $suma) {
-            if ($this->sumaIsSelected($suma, $request)
+            if (($this->sumaIsSelected($suma, $request)
                 || ($this->isBildersuche()
-                    && $this->sumaIsAdsuche($suma, $overtureEnabled))
+                    && $this->sumaIsAdsuche($suma, $overtureEnabled)))
                 && (!$this->sumaIsDisabled($suma))) {
                 if ($this->sumaIsOverture($suma)) {
                     $overtureEnabled = true;

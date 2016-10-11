@@ -51,8 +51,6 @@ Route::group(
         Route::get('kontakt', function () {
             return view('kontakt.kontakt')
                 ->with('title', trans('titles.kontakt'))
-                ->with('css', 'kontakt.css')
-                ->with('js', ['openpgp.min.js', 'kontakt.js'])
                 ->with('navbarFocus', 'kontakt');
         });
 

@@ -20,7 +20,7 @@
   <div class="form-group kontakt-form-group">
     <p><span class="bold">{!! trans('kontakt.form.7') !!} <a href="http://openpgpjs.org/.">OpenPGP.js</a> {!! trans('kontakt.form.8') !!}</span>
 <span>{!! trans('kontakt.form.9') !!}</span></p>
-    <button title="" data-original-title="" class="btn btn-default" type="submit">{!! trans('kontakt.form.10') !!}</button></div></form>
+    <button title="" data-original-title="" class="btn btn-default encrypt-btn" type="submit">{!! trans('kontakt.form.10') !!}</button></div></form>
 <h2>{!! trans('kontakt.mail.1') !!}</h2>
 <p>{!! trans('kontakt.mail.2') !!}
 {!! trans('kontakt.mail.3') !!}</p>

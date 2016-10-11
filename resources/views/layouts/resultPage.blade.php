@@ -36,12 +36,6 @@
 		</div>
 	</footer>
 	<img src="{{ action('ImageController@generateImage')}}?site={{ urlencode(url()->current()) }}" class="hidden" />
-	<script src="/js/jquery.js" type="text/javascript"></script>
-	<script src="/js/bootstrap.js" type="text/javascript"></script>
-	<script src="/js/masonry.js" type="text/javascript"></script>
-	<script src="/js/imagesloaded.js" type="text/javascript"></script>
-	<script src="/js/scriptResultPage.js" type="text/javascript"></script>
-	<script src="/js/lightslider.js"></script>
-	<!--[if lte IE 8]><script type="text/javascript" src="/js/html5shiv.min.js"></script><![endif]-->
+	<script type="text/javascript" src="/js/all.js"></script>
 </body>
 </html>

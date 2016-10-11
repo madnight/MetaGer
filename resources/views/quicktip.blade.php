@@ -3,9 +3,7 @@
 		<title>{!! trans('quicktip.title') !!}</title>
 		<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="/css/style.css" />
-		@if( app('request')->input('theme', 'none') != "none" )
-		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'none') }}.css" />
-		@endif
+		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default') }}.css" />
 	</head>
 	<body>
 		@if( $spruch !== "" )

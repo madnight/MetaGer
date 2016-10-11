@@ -810,7 +810,7 @@ class MetaGer
             $this->sprueche = false;
         }
         # Theme
-        $this->theme = preg_replace("/[^[:alnum:][:space:]]/u", '', $request->input('theme', 'none'));
+        $this->theme = preg_replace("/[^[:alnum:][:space:]]/u", '', $request->input('theme', 'default'));
         # Ergebnisse pro Seite:
         $this->resultCount = $request->input('resultCount', '20');
         # Manchmal müssen wir Parameter anpassen um den Sucheinstellungen gerecht zu werden:

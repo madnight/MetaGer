@@ -12,5 +12,5 @@ require('laravel-elixir-vue-2');
  */
 elixir(function(mix) {
     mix.less('default.less', 'public/css/themes/default.css');
-    mix.scripts(['jquery.js', 'bootstrap.js', 'widgets.js', 'editLanguage.js', 'kontakt.js', 'lightslider.js', 'masonry.js', 'openpgp.min.js', 'scriptResultPage.js', 'scriptStartPage.js', 'settings.js', '/vue/app.js', '/vue/bootstrap.js']);
+    mix.scripts(['jquery.js', 'bootstrap.js', 'widgets.js', 'editLanguage.js', 'kontakt.js', 'lightslider.js', 'masonry.js', 'imagesloaded', 'openpgp.min.js', 'scriptResultPage.js', 'scriptStartPage.js', 'settings.js' /*, '/vue/app.js', '/vue/bootstrap.js'*/ ]);
 });

@@ -26,7 +26,7 @@ function tabs() {
     });
 }
 
-function getDocumentReadyForUse(fokus = "") {
+function getDocumentReadyForUse(fokus) {
     clickLog();
     popovers();
     if (fokus === "bilder") imageLoader();

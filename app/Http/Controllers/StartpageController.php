@@ -51,8 +51,7 @@ class StartpageController extends Controller
             ->with('focusPages', $focusPages)
             ->with('browser', $browser)
             ->with('navbarFocus', 'suche')
-            ->with('theme', $theme)
-            ->with('css', 'index.css');
+            ->with('theme', $theme);
     }
 
     public function loadPage($subpage)

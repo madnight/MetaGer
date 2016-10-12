@@ -3,7 +3,7 @@
 		<title>{!! trans('quicktip.title') !!}</title>
 		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default') }}.css" />
 	</head>
-	<body>
+	<body class="quicktips">
 		@if( $spruch !== "" )
 			<blockquote id="spruch">{!! $spruch !!}</blockquote>
 		@endif

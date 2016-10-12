@@ -1,8 +1,6 @@
 <html>
 	<head>
 		<title>{!! trans('quicktip.title') !!}</title>
-		<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="/css/style.css" />
 		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default') }}.css" />
 	</head>
 	<body>

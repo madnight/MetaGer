@@ -3197,26 +3197,26 @@ fieldset[disabled] .btn-success.focus {
 }
 .btn-info {
   color: #fff;
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  background-color: #FB0;
+  border-color: #e6a800;
 }
 .btn-info:focus,
 .btn-info.focus {
   color: #fff;
-  background-color: #31b0d5;
-  border-color: #1b6d85;
+  background-color: #cc9600;
+  border-color: #664b00;
 }
 .btn-info:hover {
   color: #fff;
-  background-color: #31b0d5;
-  border-color: #269abc;
+  background-color: #cc9600;
+  border-color: #a87b00;
 }
 .btn-info:active,
 .btn-info.active,
 .open > .dropdown-toggle.btn-info {
   color: #fff;
-  background-color: #31b0d5;
-  border-color: #269abc;
+  background-color: #cc9600;
+  border-color: #a87b00;
 }
 .btn-info:active:hover,
 .btn-info.active:hover,
@@ -3228,8 +3228,8 @@ fieldset[disabled] .btn-success.focus {
 .btn-info.active.focus,
 .open > .dropdown-toggle.btn-info.focus {
   color: #fff;
-  background-color: #269abc;
-  border-color: #1b6d85;
+  background-color: #a87b00;
+  border-color: #664b00;
 }
 .btn-info:active,
 .btn-info.active,
@@ -3245,11 +3245,11 @@ fieldset[disabled] .btn-info:focus,
 .btn-info.disabled.focus,
 .btn-info[disabled].focus,
 fieldset[disabled] .btn-info.focus {
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  background-color: #FB0;
+  border-color: #e6a800;
 }
 .btn-info .badge {
-  color: #5bc0de;
+  color: #FB0;
   background-color: #fff;
 }
 .btn-warning {
@@ -4843,11 +4843,11 @@ a.label:focus {
   background-color: #449d44;
 }
 .label-info {
-  background-color: #5bc0de;
+  background-color: #FB0;
 }
 .label-info[href]:hover,
 .label-info[href]:focus {
-  background-color: #31b0d5;
+  background-color: #cc9600;
 }
 .label-warning {
   background-color: #f0ad4e;
@@ -5108,7 +5108,7 @@ a.thumbnail.active {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 .progress-bar-info {
-  background-color: #5bc0de;
+  background-color: #FB0;
 }
 .progress-striped .progress-bar-info {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
@@ -6846,15 +6846,6 @@ a:hover {
 }
 #foki li.active span + span {
   display: inline!important;
-}
-/* Hier der Style für unseren Spruch */
-#spruch {
-  padding: 10px;
-  margin-bottom: 0;
-  padding-bottom: 10px;
-  padding-left: 65px;
-  color: green;
-  font-weight: bold;
 }
 #spenden {
   white-space: nowrap;

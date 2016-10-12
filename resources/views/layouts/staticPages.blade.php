@@ -53,6 +53,7 @@
 								<span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/spende/") }}">{{ trans('staticPages.nav2') }}</a></li>
+									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/beitritt/") }}">{{ trans('staticPages.nav23') }}</a></li>
 									<li><a href="https://www.boost-project.com/de/shops?charity_id=1129&amp;tag=bl">{{ trans('staticPages.nav17') }}</a></li>
 								</ul>
 							</li>

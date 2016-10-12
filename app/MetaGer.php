@@ -392,9 +392,9 @@ class MetaGer
          * Zu Liste hinzufügen
          */
         foreach ($sumas as $suma) {
-            if ($this->sumaIsSelected($suma, $request)
+            if (($this->sumaIsSelected($suma, $request)
                 || ($this->isBildersuche()
-                    && $this->sumaIsAdsuche($suma, $overtureEnabled))
+                    && $this->sumaIsAdsuche($suma, $overtureEnabled)))
                 && (!$this->sumaIsDisabled($suma))) {
                 if ($this->sumaIsOverture($suma)) {
                     $overtureEnabled = true;
@@ -648,7 +648,8 @@ class MetaGer
             }
             # Jede eingeschaltete Engine ist für diesen Fokus geeignet
             foreach ($fokiEngNames as $fen) {
-                if (!in_array($fen, $realEngNames)) {
+                # Bei Bildersuchen ist uns egal, ob alle Suchmaschinen aus dem Suchfokus eingeschaltet sind, da wir sie eh als Bildersuche anzeigen müssen
+                if (!in_array($fen, $realEngNames) && $fok !== "bilder") {
                     $isFokus = false;
                 }
             }

@@ -153,8 +153,6 @@ class LanguageController extends Controller
             ->with('to', $to)
             ->with('langTexts', $langTexts)
             ->with('sum', $sum)
-            ->with('css', 'editLanguage.css')
-            ->with('js', ['editLanguage.js'])
             ->with('new', $ex["new"]);
     }
 

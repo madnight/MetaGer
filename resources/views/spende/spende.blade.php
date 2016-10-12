@@ -45,27 +45,27 @@
 			<input type="hidden" name="dt" value="{{ md5(date('Y') . date('m') . date('d')) }}" />
 			<div class="form-group donation-form-group">
 				<label for="Name">{!! trans('spenden.lastschrift.3') !!}</label>
-				<input type="text" class="form-control" id="Name" required="" name="Name" placeholder="{!! trans('spenden.lastschrift.3.placeholder') !!}">
+				<input type="text" class="form-control" id="Name" required="" name="Name" placeholder="{!! trans('spenden.lastschrift.3.placeholder') !!}" value="{{ old('Name') }}" />
 			</div>
 			<div class="form-group donation-form-group">
 				<label for="email">{!! trans('spenden.lastschrift.4') !!}</label>
-				<input type="email" class="form-control" id="email" name="email" placeholder="Email">
+				<input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ old('email') }}" />
 			</div>
 			<div class="form-group donation-form-group">
 				<label for="tel">{!! trans('spenden.lastschrift.5') !!}</label>
-				<input type="tel" class="form-control" id="tel" name="Telefon" placeholder="xxxx-xxxxx">
+				<input type="tel" class="form-control" id="tel" name="Telefon" placeholder="xxxx-xxxxx" value="{{ old('Telefon') }}" />
 			</div>
 			<div class="form-group donation-form-group">
 				<label for="iban">{!! trans('spenden.lastschrift.6') !!}</label>
-				<input type="text" class="form-control" id="iban" required="" name="Kontonummer" placeholder="IBAN">
+				<input type="text" class="form-control" id="iban" required="" name="Kontonummer" placeholder="IBAN" value="{{ old('Kontonummer') }}" />
 			</div>
 			<div class="form-group donation-form-group">
 				<label for="bic">{!! trans('spenden.lastschrift.7') !!}</label>
-				<input type="text" class="form-control" id="bic" required="" name="Bankleitzahl" placeholder="BIC">
+				<input type="text" class="form-control" id="bic" required="" name="Bankleitzahl" placeholder="BIC" value="{{ old('Bankleitzahl') }}" />
 			</div>
 			<div class="form-group donation-form-group">
 				<label for="msg">{!! trans('spenden.lastschrift.8') !!}</label>
-				<textarea class="form-control" id="msg" required="" name="Nachricht" placeholder="{!! trans('spenden.lastschrift.8.placeholder') !!}"></textarea>
+				<textarea class="form-control" id="msg" required="" name="Nachricht" placeholder="{!! trans('spenden.lastschrift.8.placeholder') !!}">{{ old('Nachricht') }}</textarea>
 			</div>
 			<button type="submit" class="btn btn-default">{!! trans('spenden.lastschrift.9') !!}</button>
 		</form>

@@ -32,7 +32,7 @@ class Openclipart extends Searchengine
             $link        = $result->detail_link;
             $anzeigeLink = $link;
             $descr       = $result->description;
-            $image       = $result->svg->url;
+            $image       = $result->svg->png_thumb;
             $this->counter++;
             $this->results[] = new \App\Models\Result(
                 $this->engine,
@@ -46,5 +46,17 @@ class Openclipart extends Searchengine
                 $image
             );
         }
+    }
+
+    public function getNext(\App\MetaGer $metager, $result)
+    {
+        $content = json_decode($result);
+        if ($content->info->current_page > $content->info->pages) {
+            return;
+        }
+        $next = new Openclipart(simplexml_load_string($this->engine), $metager);
+        $next->getString .= "&page=" . ($metager->getPage() + 1);
+        $next->hash = md5($next->host . $next->getString . $next->port . $next->name);
+        $this->next = $next;
     }
 }

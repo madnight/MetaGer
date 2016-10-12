@@ -39,9 +39,9 @@ function encrypt() {
 }
 $(document).ready(function() {
     if (isEnglish()) {
-        $("button[type=submit]").html("encrypt and send");
+        $(".encrypt-btn").html("encrypt and send");
     } else {
-        $("button[type=submit]").html("Verschlüsseln und senden");
+        $(".encrypt-btn").html("Verschlüsseln und senden");
     }
     $(".contact").submit(function() {
         return encrypt(this);

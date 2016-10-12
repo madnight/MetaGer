@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
+use Response;
 
 class StartpageController extends Controller
 {
@@ -50,8 +51,7 @@ class StartpageController extends Controller
             ->with('focusPages', $focusPages)
             ->with('browser', $browser)
             ->with('navbarFocus', 'suche')
-            ->with('theme', $theme)
-            ->with('css', 'index.css');
+            ->with('theme', $theme);
     }
 
     public function loadPage($subpage)

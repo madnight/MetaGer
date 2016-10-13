@@ -13,7 +13,9 @@
   * php7.0-zip
 * sqlite3
 * redis-server
-* Das Perl-Paket: Lingua::Identify (http://search.cpan.org/~ambs/Lingua-Identify-0.56/lib/Lingua/Identify.pm)
+* Die Perl-Pakete
+  * Lingua::Identify (http://search.cpan.org/~ambs/Lingua-Identify-0.56/lib/Lingua/Identify.pm)
+  * JSON (http://search.cpan.org/~makamaka/JSON-2.90/lib/JSON.pm)
 
 ## Offizielle Dokumentation
 

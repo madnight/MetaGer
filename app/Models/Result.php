@@ -189,12 +189,8 @@ class Result
         }
 
         # Eventueller Sprachfilter
-        if ($metager->getLang() !== "all") {
-            $text = $this->titel . " " . $this->descr;
-            $path = app_path() . "/Models/lang.pl";
-            $lang = exec("echo '$text' | $path");
-
-            if ($metager->getLang() !== $lang) {
+        if ($metager->getLang() !== "all" && isset($this->langCode)) {
+            if ($metager->getLang() !== $this->langCode) {
                 return false;
             }
 
@@ -309,5 +305,15 @@ class Result
     public function getRank()
     {
         return $this->rank;
+    }
+
+    public function getLangString()
+    {
+        $string = "";
+
+        $string .= $this->titel;
+        $string .= $this->descr;
+
+        return $string;
     }
 }

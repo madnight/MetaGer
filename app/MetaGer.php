@@ -157,6 +157,10 @@ class MetaGer
 
         // combine
         $combinedResults = $this->combineResults($engines);
+
+        # Wir bestimmen die Sprache eines jeden Suchergebnisses
+        $this->results = $this->addLangCodes($this->results);
+
         // sort
         //$sortedResults = $this->sortResults($engines);
         // filter
@@ -258,6 +262,47 @@ class MetaGer
             $this->next = [];
         }
 
+    }
+
+    private function addLangCodes($results)
+    {
+        # Bei der Spracheinstellung "all" wird nicht gefiltert
+        if ($this->getLang() === "all") {
+            return $results;
+        } else {
+            # Ansonsten müssen wir jedem Result einen Sprachcode hinzufügen
+            $id          = 0;
+            $langStrings = [];
+            foreach ($results as $result) {
+                # Wir geben jedem Ergebnis eine ID um später die Sprachcodes zuordnen zu können
+                $result->id = $id;
+
+                $langStrings["result_" . $id] = utf8_encode($result->getLangString());
+
+                $id++;
+            }
+            # Wir schreiben die Strings in eine temporäre JSON-Datei,
+            # Da das Array unter umständen zu groß ist für eine direkte Übergabe an das Skript
+            $filename = "/tmp/" . getmypid();
+            file_put_contents($filename, json_encode($langStrings));
+            $langDetectorPath = app_path() . "/Models/lang.pl";
+            $lang             = exec("echo '$filename' | $langDetectorPath");
+            $lang             = json_decode($lang, true);
+
+            # Wir haben nun die Sprachcodes der einzelnen Ergebnisse.
+            # Diese müssen wir nur noch korrekt zuordnen, dann sind wir fertig.
+            foreach ($lang as $key => $langCode) {
+                # Prefix vom Key entfernen:
+                $id = intval(str_replace("result_", "", $key));
+                foreach ($this->results as $result) {
+                    if ($result->id === $id) {
+                        $result->langCode = $langCode;
+                        break;
+                    }
+                }
+            }
+            return $results;
+        }
     }
 
     public function combineResults($engines)

@@ -541,12 +541,12 @@ class MetaGer
 
     public function sumaIsAdsuche($suma, $overtureEnabled)
     {
+        $sumaName = $suma["name"]->__toString();
         return
-        $suma["name"]->__toString() === "qualigo"
-        || $suma["name"]->__toString() === "similar_product_ads"
-        || (!$overtureEnabled
-            && $suma["name"]->__toString() === "overtureAds")
-        || $suma["name"]->__toString() == "rlvproduct";
+            $sumaName === "qualigo"
+            || $sumaName === "similar_product_ads"
+            || (!$overtureEnabled && $sumaName === "overtureAds")
+            || $sumaName == "rlvproduct";
     }
 
     public function sumaIsDisabled($suma)
@@ -869,29 +869,36 @@ class MetaGer
 
     public function checkSpecialSearches(Request $request)
     {
-        $this->searchCheckSitesearch($request);
-        $this->searchCheckHostBlacklist();
-        $this->searchCheckDomainBlacklist();
-        $this->searchCheckStopwords();
-        $this->searchCheckPhrase();
+        $query = $this->q;
+        if ($request->has('site')) {
+            $site = $request->input('site');
+        } else {
+            $site = "";
+        }
+        $this->searchCheckSitesearch($query, $site);
+        $this->searchCheckHostBlacklist($query);
+        $this->searchCheckDomainBlacklist($query);
+        $this->searchCheckStopwords($query);
+        $this->searchCheckPhrase($query);
     }
 
-    public function searchCheckSitesearch($request)
+    public function searchCheckSitesearch($query, $site)
     {
-        if (preg_match("/(.*)\bsite:(\S+)(.*)/si", $this->q, $match)) {
+        if (preg_match("/(.*)\bsite:(\S+)(.*)/si", $query, $match)) {
             $this->site = $match[2];
             $this->q    = $match[1] . $match[3];
         }
-        if ($request->has('site')) {
-            $this->site = $request->input('site');
+        if ($site !== "") {
+            $this->site = $site;
         }
     }
 
-    public function searchCheckHostBlacklist()
+    public function searchCheckHostBlacklist($query)
     {
-        while (preg_match("/(.*)(^|\s)-host:(\S+)(.*)/si", $this->q, $match)) {
+        while (preg_match("/(.*)(^|\s)-host:(\S+)(.*)/si", $query, $match)) {
             $this->hostBlacklist[] = $match[3];
-            $this->q               = $match[1] . $match[4];
+            $query                 = $match[1] . $match[4];
+            $this->q               = $query;
         }
         if (sizeof($this->hostBlacklist) > 0) {
             $hostString = "";
@@ -903,11 +910,12 @@ class MetaGer
         }
     }
 
-    public function searchCheckDomainBlacklist()
+    public function searchCheckDomainBlacklist($query)
     {
-        while (preg_match("/(.*)(^|\s)-domain:(\S+)(.*)/si", $this->q, $match)) {
+        while (preg_match("/(.*)(^|\s)-domain:(\S+)(.*)/si", $query, $match)) {
             $this->domainBlacklist[] = $match[3];
-            $this->q                 = $match[1] . $match[4];
+            $query                   = $match[1] . $match[4];
+            $this->q                 = $query;
         }
         if (sizeof($this->domainBlacklist) > 0) {
             $domainString = "";
@@ -919,11 +927,12 @@ class MetaGer
         }
     }
 
-    public function searchCheckStopwords()
+    public function searchCheckStopwords($query)
     {
-        while (preg_match("/(.*)(^|\s)-(\S+)(.*)/si", $this->q, $match)) {
+        while (preg_match("/(.*)(^|\s)-(\S+)(.*)/si", $query, $match)) {
             $this->stopWords[] = $match[3];
-            $this->q           = $match[1] . $match[4];
+            $query             = $match[1] . $match[4];
+            $this->q           = $query;
         }
         if (sizeof($this->stopWords) > 0) {
             $stopwordsString = "";
@@ -935,10 +944,10 @@ class MetaGer
         }
     }
 
-    public function searchCheckPhrase()
+    public function searchCheckPhrase($query)
     {
         $p   = "";
-        $tmp = $this->q;
+        $tmp = $query;
         while (preg_match("/(.*)\"(.+)\"(.*)/si", $tmp, $match)) {
             $tmp             = $match[1] . $match[3];
             $this->phrases[] = strtolower($match[2]);

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sumas> 
+	<suma
+		name="suchmaschine"
+		host="www.suchmaschine.de"
+		skript="/suche/"
+		formData="sprache=de&amp;sortieren=true&amp;&amp;queue=&lt;&lt;QUERY&gt;&gt;"
+		package="suchmaschine"
+		displayName="Meine Suchmaschine"
+		homepage="www.suchmaschine.de/welcome"
+		port="443"
+		inputEncoding="Latin1"
+		userSelectable="1"
+		type="bilder"
+		engineBoost="1.2"
+		additionalHeaders="$#!#$"
+		disabled="0"
+		hasSiteSearch="1"
+		cacheDuration="60"
+	></suma>
+</sumas>

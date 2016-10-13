@@ -12,16 +12,20 @@ class MetaGerPhpTest extends TestCase
      */
     public function test()
     {
-        $metager = new MetaGer();
-        $request = $this->createDummyRequest();
-        $this->fullRunTest($metager, $request);
-        $this->specialSearchTest($metager);
-        $this->createSearchEnginesTest($metager);
-        $this->linkGeneratorTest($metager);
+        $this->fullRunTest();
+        $this->specialSearchTest();
+        $this->createSearchEnginesTest();
+        $this->linkGeneratorTest();
+        #$this->getHostCountTest();
+        $this->addLinkTest();
+        $this->adjustFocusTest();
+        $this->checkCanNotSitesearchTest();
     }
 
-    public function fullRunTest($metager, $request)
+    public function fullRunTest()
     {
+        $metager = new MetaGer();
+        $request = $this->createDummyRequest();
         $metager->parseFormData($request);
         $metager->checkSpecialSearches($request);
         $metager->createSearchEngines($request);
@@ -47,7 +51,7 @@ class MetaGerPhpTest extends TestCase
         #new Request(array $query = array(), array $request = array(), array $attributes = array(), array $cookies = array(), array $files = array(), array $server = array(), $content = null)
 
         $query                = [];
-        $query["eingabe"]     = "garten";
+        $query["eingabe"]     = 'suchwort -blackword -host:blackhost -domain:blackdomain site:wantsite "i want phrase"';
         $query["focus"]       = "angepasst";
         $query["encoding"]    = "utf8";
         $query["lang"]        = "all";
@@ -60,27 +64,35 @@ class MetaGerPhpTest extends TestCase
         return new Request($query);
     }
 
-    public function specialSearchTest($metager)
+    public function specialSearchTest()
     {
-        $metager->searchCheckSitesearch("hund katze site:wolf.de", "");
-        $this->assertEquals("wolf.de", $metager->getSite());
-        $metager->searchCheckHostBlacklist("hund katze -host:wolf.de");
-        $this->assertEquals("wolf.de", $metager->getUserHostBlacklist()[0]);
-        $metager->searchCheckDomainBlacklist("hund katze -domain:wolf.de");
-        $this->assertEquals("wolf.de", $metager->getUserDomainBlacklist()[0]);
-        $metager->searchCheckStopwords("hund katze -wolf");
-        $this->assertEquals("wolf", $metager->getStopWords()[0]);
-        $metager->searchCheckPhrase('hund katze "wolf"');
-        $this->assertEquals("wolf", $metager->getPhrases()[0]);
+        $metager = new MetaGer();
+        $request = new Request(['eingabe' => 'suchwort -blackword -host:blackhost -domain:blackdomain site:wantsite "i want phrase"']);
+        $metager->parseFormData($request);
+        $metager->checkSpecialSearches($request);
+        $this->assertEquals("wantsite", $metager->getSite());
+        $this->assertEquals("blackhost", $metager->getUserHostBlacklist()[0]);
+        $this->assertEquals("blackdomain", $metager->getUserDomainBlacklist()[0]);
+        $this->assertEquals("blackword", $metager->getStopWords()[0]);
+        $this->assertEquals("i want phrase", $metager->getPhrases()[0]);
     }
 
-    public function createSearchEnginesTest($metager)
+    public function createSearchEnginesTest()
     {
-        $this->specialSumaTest($metager);
+        $this->specialSumaTest();
     }
 
-    public function specialSumaTest($metager)
+    public function addLinkTest()
     {
+        $metager = new MetaGer();
+        $link    = "metager.de";
+        $this->assertTrue($metager->addLink($link));
+        $this->assertFalse($metager->addLink($link));
+    }
+
+    public function specialSumaTest()
+    {
+        $metager      = new MetaGer();
         $suma         = new SimpleXMLElement("<suma></suma>");
         $suma["name"] = "qualigo";
         $this->assertTrue($metager->sumaIsAdsuche($suma, false));
@@ -92,18 +104,58 @@ class MetaGerPhpTest extends TestCase
         $this->assertTrue($metager->sumaIsNotAdsuche($suma));
     }
 
-    public function linkGeneratorTest($metager)
+    public function linkGeneratorTest()
     {
-        $this->callbackTester($metager, "generateSearchLink", ["bilder"], "http://localhost/meta/meta.ger3?eingabe=garten&focus=bilder&encoding=utf8&lang=all&time=1000&sprueche=on&resultCount=20&tab=on&onenewspage=on&out=results");
-        $this->callbackTester($metager, "generateQuicktipLink", [], "http://localhost/qt");
-        $this->callbackTester($metager, "generateSiteSearchLink", ["wolf.de"], "http://localhost/meta/meta.ger3?eingabe=garten+site%3Awolf.de&focus=web&encoding=utf8&lang=all&time=1000&sprueche=on&resultCount=20&tab=on&onenewspage=on");
-        $this->callbackTester($metager, "generateRemovedHostLink", ["wolf.de"], "http://localhost/meta/meta.ger3?eingabe=garten+-host%3Awolf.de&focus=angepasst&encoding=utf8&lang=all&time=1000&sprueche=on&resultCount=20&tab=on&onenewspage=on");
-        $this->callbackTester($metager, "generateRemovedDomainLink", ["wolf.de"], "http://localhost/meta/meta.ger3?eingabe=garten+-domain%3Awolf.de&focus=angepasst&encoding=utf8&lang=all&time=1000&sprueche=on&resultCount=20&tab=on&onenewspage=on");
+        $metager = new Metager();
+        $request = new Request(['eingabe' => 'test']);
+        $metager->parseFormData($request);
+        $this->linkCallbackTester($metager, "generateSearchLink", ["news"],
+            '/^.*?eingabe=test&focus=news&out=results$/');
+        $this->linkCallbackTester($metager, "generateQuicktipLink", [],
+            '/\/qt/');
+        $this->linkCallbackTester($metager, "generateSiteSearchLink", ["wolf.de"],
+            '/^.*?eingabe=test\+site%3Awolf.de&focus=web$/');
+        $this->linkCallbackTester($metager, "generateRemovedHostLink", ["wolf.de"],
+            '/^.*?eingabe=test\+-host%3Awolf.de$/');
+        $this->linkCallbackTester($metager, "generateRemovedDomainLink", ["wolf.de"],
+            '/^.*?eingabe=test\+-domain%3Awolf.de$/');
     }
 
-    public function callbackTester($metager, $funcName, $input, $expectedOutput)
+    public function linkCallbackTester($metager, $funcName, $input, $expectedOutput)
     {
         $output = call_user_func_array(array($metager, $funcName), $input);
-        $this->assertEquals($expectedOutput, $output);
+        $this->assertRegExp($expectedOutput, $output);
+    }
+
+    public function getHostCountTest()
+    {
+        $metager = new MetaGer();
+        $before  = $metager->getHostCount("host.de");
+        $metager->addHostCount("host.de");
+        $after = $metager->getHostCount("host.de");
+        $this->assertEquals($before + 1, $after);
+        $before = $after;
+        $metager->addHostCount("host.de");
+        $after = $metager->getHostCount("host.de");
+        $this->assertEquals($before + 1, $after);
+    }
+
+    public function adjustFocusTest()
+    {
+        $metager = new MetaGer();
+        $request = new Request(["focus" => "web"]);
+        $metager->parseFormData($request);
+        $this->assertEquals("web", $metager->getFokus());
+        $sumas                = simplexml_load_file("tests/testSumas.xml")->xpath("suma"); # Eine spezielle test sumas.xml
+        $enabledSearchengines = $sumas;
+        $metager->adjustFocus($sumas, $enabledSearchengines);
+        $this->assertEquals("bilder", $metager->getFokus());
+    }
+
+    public function checkCanNotSitesearchTest()
+    {
+        $metager              = new MetaGer();
+        $enabledSearchengines = simplexml_load_file("tests/testSumas.xml")->xpath("suma"); # Eine spezielle test sumas.xml
+        $this->assertFalse($metager->checkCanNotSitesearch($enabledSearchengines));
     }
 }

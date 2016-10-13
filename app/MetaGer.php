@@ -69,7 +69,7 @@ class MetaGer
         foreach (scandir($dir) as $filename) {
             $path = $dir . $filename;
             if (is_file($path)) {
-                require $path;
+                require_once $path;
             }
         }
 
@@ -608,7 +608,7 @@ class MetaGer
         # Findet für alle Foki die enthaltenen Sumas
         $foki = []; # [fokus][suma] => [suma]
         foreach ($sumas as $suma) {
-            if ((!isset($suma['disabled']) || $suma['disabled'] === "") && (!isset($suma['userSelectable']) || $suma['userSelectable']->__toString() === "1")) {
+            if ((!$this->sumaIsDisabled($suma)) && (!isset($suma['userSelectable']) || $suma['userSelectable']->__toString() === "1")) {
                 if (isset($suma['type'])) {
                     # Wenn foki für diese Suchmaschine angegeben sind
                     $focuses = explode(",", $suma['type']->__toString());
@@ -683,6 +683,7 @@ class MetaGer
                 return false;
             }
         }
+        return false;
     }
 
     public function waitForResults($enginesToLoad, $overtureEnabled, $canBreak)
@@ -869,22 +870,21 @@ class MetaGer
 
     public function checkSpecialSearches(Request $request)
     {
-        $query = $this->q;
         if ($request->has('site')) {
             $site = $request->input('site');
         } else {
             $site = "";
         }
-        $this->searchCheckSitesearch($query, $site);
-        $this->searchCheckHostBlacklist($query);
-        $this->searchCheckDomainBlacklist($query);
-        $this->searchCheckStopwords($query);
-        $this->searchCheckPhrase($query);
+        $this->searchCheckSitesearch($site);
+        $this->searchCheckHostBlacklist();
+        $this->searchCheckDomainBlacklist();
+        $this->searchCheckStopwords();
+        $this->searchCheckPhrase();
     }
 
-    public function searchCheckSitesearch($query, $site)
+    public function searchCheckSitesearch($site)
     {
-        if (preg_match("/(.*)\bsite:(\S+)(.*)/si", $query, $match)) {
+        if (preg_match("/(.*)\bsite:(\S+)(.*)/si", $this->q, $match)) {
             $this->site = $match[2];
             $this->q    = $match[1] . $match[3];
         }
@@ -893,12 +893,11 @@ class MetaGer
         }
     }
 
-    public function searchCheckHostBlacklist($query)
+    public function searchCheckHostBlacklist()
     {
-        while (preg_match("/(.*)(^|\s)-host:(\S+)(.*)/si", $query, $match)) {
+        while (preg_match("/(.*)(^|\s)-host:(\S+)(.*)/si", $this->q, $match)) {
             $this->hostBlacklist[] = $match[3];
-            $query                 = $match[1] . $match[4];
-            $this->q               = $query;
+            $this->q               = $match[1] . $match[4];
         }
         if (sizeof($this->hostBlacklist) > 0) {
             $hostString = "";
@@ -910,12 +909,11 @@ class MetaGer
         }
     }
 
-    public function searchCheckDomainBlacklist($query)
+    public function searchCheckDomainBlacklist()
     {
-        while (preg_match("/(.*)(^|\s)-domain:(\S+)(.*)/si", $query, $match)) {
+        while (preg_match("/(.*)(^|\s)-domain:(\S+)(.*)/si", $this->q, $match)) {
             $this->domainBlacklist[] = $match[3];
-            $query                   = $match[1] . $match[4];
-            $this->q                 = $query;
+            $this->q                 = $match[1] . $match[4];
         }
         if (sizeof($this->domainBlacklist) > 0) {
             $domainString = "";
@@ -927,12 +925,11 @@ class MetaGer
         }
     }
 
-    public function searchCheckStopwords($query)
+    public function searchCheckStopwords()
     {
-        while (preg_match("/(.*)(^|\s)-(\S+)(.*)/si", $query, $match)) {
+        while (preg_match("/(.*)(^|\s)-(\S+)(.*)/si", $this->q, $match)) {
             $this->stopWords[] = $match[3];
-            $query             = $match[1] . $match[4];
-            $this->q           = $query;
+            $this->q           = $match[1] . $match[4];
         }
         if (sizeof($this->stopWords) > 0) {
             $stopwordsString = "";
@@ -944,10 +941,10 @@ class MetaGer
         }
     }
 
-    public function searchCheckPhrase($query)
+    public function searchCheckPhrase()
     {
         $p   = "";
-        $tmp = $query;
+        $tmp = $this->q;
         while (preg_match("/(.*)\"(.+)\"(.*)/si", $tmp, $match)) {
             $tmp             = $match[1] . $match[3];
             $this->phrases[] = strtolower($match[2]);
@@ -1083,7 +1080,6 @@ class MetaGer
             return false;
         } else {
             $this->addedLinks[$hash] = 1;
-
             return true;
         }
     }

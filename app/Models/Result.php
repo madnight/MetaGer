@@ -69,11 +69,9 @@ class Result
      *  + 0.02 * Sourcerank (20 - Position in Ergebnisliste des Suchanbieters)
      *  * Engine-Boost
      */
-    public function rank(\App\MetaGer $metager)
+    public function rank($eingabe)
     {
         $rank = 0;
-
-        $eingabe = $metager->getQ();
 
         # Boost für Source Ranking
         $rank += ($this->sourceRank * 0.02);
@@ -130,7 +128,7 @@ class Result
                 $tmpLink = str_replace(urlencode($char), "", $tmpLink);
             }
         }
-        if (strlen($this->descr) > 80 && strlen($link) > 0) {
+        if (strlen($this->descr) > 0/*80*/ && strlen($link) > 0) {
             return $count / ((strlen($link)) * 60); # ???
         } else {
             return 0;
@@ -249,7 +247,7 @@ class Result
      *  "http://www.foo.bar.de/test?ja=1" -> "foo.bar.de"
      *  gebracht.
      */
-    private function getStrippedHost($link)
+    public function getStrippedHost($link)
     {
         if (strpos($link, "http") !== 0) {
             $link = "http://" . $link;
@@ -265,13 +263,13 @@ class Result
      *  "http://www.foo.bar.de/test?ja=1" -> "foo.bar.de/test"
      *  gebracht.
      */
-    private function getStrippedLink($link)
+    public function getStrippedLink($link)
     {
         if (strpos($link, "http") !== 0) {
             $link = "http://" . $link;
         }
 
-        $host = $this->strippedHost;
+        $host = $this->getStrippedHost($link);
         $path = @parse_url($link, PHP_URL_PATH);
         return $host . $path;
     }
@@ -281,7 +279,7 @@ class Result
      *  "http://www.foo.bar.de/test?ja=1" -> "bar.de"
      *  gebracht.
      */
-    private function getStrippedDomain($link)
+    public function getStrippedDomain($link)
     {
         if (preg_match("/([^\.]*\.[^\.]*)$/si", $link, $match)) {
             return $match[1];
@@ -291,7 +289,7 @@ class Result
     }
 
     # Erstellt aus einem Link einen Proxy-Link für unseren Proxy-Service
-    private function generateProxyLink($link)
+    public function generateProxyLink($link)
     {
         if (!$link) {
             return "";

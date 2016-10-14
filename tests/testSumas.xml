@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sumas> 
 	<suma
-		name="suchmaschine"
+		name="minism"
 		host="www.suchmaschine.de"
 		skript="/suche/"
-		formData="sprache=de&amp;sortieren=true&amp;&amp;queue=&lt;&lt;QUERY&gt;&gt;"
+		formData="sprache=de&amp;sortieren=true&amp;queue=&lt;&lt;QUERY&gt;&gt;&amp;rows=&lt;&lt;COUNT&gt;&gt;&amp;fq=subcollection:&lt;&lt;SUBCOLLECTIONS&gt;&gt;"
 		package="suchmaschine"
 		displayName="Meine Suchmaschine"
 		homepage="www.suchmaschine.de/welcome"

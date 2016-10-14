@@ -393,7 +393,7 @@ class MetaGer
          */
         foreach ($sumas as $suma) {
             if ($this->sumaIsSelected($suma, $request)
-                || ($this->isBildersuche()
+                || (!$this->isBildersuche()
                     && $this->sumaIsAdsuche($suma, $overtureEnabled))
                 && (!$this->sumaIsDisabled($suma))) {
                 if ($this->sumaIsOverture($suma)) {
@@ -536,7 +536,7 @@ class MetaGer
 
     public function isBildersuche()
     {
-        return $this->fokus !== "bilder";
+        return $this->fokus === "bilder";
     }
 
     public function sumaIsAdsuche($suma, $overtureEnabled)
@@ -973,7 +973,7 @@ class MetaGer
     public function rankAll()
     {
         foreach ($this->engines as $engine) {
-            $engine->rank($this);
+            $engine->rank($this->getQ());
         }
     }
 

@@ -228,7 +228,7 @@
           <div class="row">
             <div id="sponsors" class="col-md-6 col-sm12">
               <h2>{{ trans('index.sponsors.head.2') }}</h2>
-              <ul>
+              <ul class="sponsors">
                 <li>
                   {!! trans('index.sponsors.woxikon') !!}</a>
                 </li>

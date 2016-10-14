@@ -3,9 +3,6 @@
 <head>
 	<title>{{ $metager->getQ() }} - MetaGer</title>
 	<!--<link href="/css/bootstrap.css" rel="stylesheet" />-->
-	@if( isset($mobile) && $mobile )
-		<link href="/css/styleResultPageMobile.css" rel="stylesheet" />
-	@endif
 	<link href="/favicon.ico" rel="icon" type="image/x-icon" />
 	<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 	<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport" />
@@ -16,6 +13,9 @@
 	<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default') }}.css" />
 	<link href="/css/styleResultPage.css" rel="stylesheet" />
 	<link type="text/css" rel="stylesheet" href="/css/lightslider.css" />
+	@if( isset($mobile) && $mobile )
+		<link href="/css/styleResultPageMobile.css" rel="stylesheet" />
+	@endif
 </head>
 <body id="resultBody">
 	@if( !isset($suspendheader) )

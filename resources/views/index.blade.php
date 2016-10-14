@@ -228,7 +228,7 @@
           <div class="row">
             <div id="sponsors" class="col-md-6 col-sm12">
               <h2>{{ trans('index.sponsors.head.2') }}</h2>
-              <ul class="sponsors">
+              <ul class="startpage">
                 <li>
                   {!! trans('index.sponsors.woxikon') !!}</a>
                 </li>
@@ -244,7 +244,7 @@
               <h2>
                 <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "about") }}">{{ trans('index.about.title') }}</a>
               </h2>
-              <ul>
+              <ul class="startpage">
                 <li>
                   <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "datenschutz") }}">{{ trans('index.about.1.1') }}</a>{{ trans('index.about.1.2') }}
                 </li>

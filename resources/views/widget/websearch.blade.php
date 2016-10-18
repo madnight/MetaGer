@@ -3,7 +3,6 @@
 @section('title', $title )
 
 @section('content')
-<script type="text/javascript" src="/js/widgets.js"></script>
 <h1>{{ trans('websearch.head.1') }}</h1>
 <p>{{ trans('websearch.head.2') }}</p>
 <h2>{{ trans('websearch.head.3') }}</h2>

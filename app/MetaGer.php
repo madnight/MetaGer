@@ -69,7 +69,7 @@ class MetaGer
         foreach (scandir($dir) as $filename) {
             $path = $dir . $filename;
             if (is_file($path)) {
-                require $path;
+                require_once $path;
             }
         }
 
@@ -157,6 +157,10 @@ class MetaGer
 
         // combine
         $combinedResults = $this->combineResults($engines);
+
+        # Wir bestimmen die Sprache eines jeden Suchergebnisses
+        $this->results = $this->addLangCodes($this->results);
+
         // sort
         //$sortedResults = $this->sortResults($engines);
         // filter
@@ -258,6 +262,47 @@ class MetaGer
             $this->next = [];
         }
 
+    }
+
+    private function addLangCodes($results)
+    {
+        # Bei der Spracheinstellung "all" wird nicht gefiltert
+        if ($this->getLang() === "all") {
+            return $results;
+        } else {
+            # Ansonsten müssen wir jedem Result einen Sprachcode hinzufügen
+            $id          = 0;
+            $langStrings = [];
+            foreach ($results as $result) {
+                # Wir geben jedem Ergebnis eine ID um später die Sprachcodes zuordnen zu können
+                $result->id = $id;
+
+                $langStrings["result_" . $id] = utf8_encode($result->getLangString());
+
+                $id++;
+            }
+            # Wir schreiben die Strings in eine temporäre JSON-Datei,
+            # Da das Array unter umständen zu groß ist für eine direkte Übergabe an das Skript
+            $filename = "/tmp/" . getmypid();
+            file_put_contents($filename, json_encode($langStrings));
+            $langDetectorPath = app_path() . "/Models/lang.pl";
+            $lang             = exec("echo '$filename' | $langDetectorPath");
+            $lang             = json_decode($lang, true);
+
+            # Wir haben nun die Sprachcodes der einzelnen Ergebnisse.
+            # Diese müssen wir nur noch korrekt zuordnen, dann sind wir fertig.
+            foreach ($lang as $key => $langCode) {
+                # Prefix vom Key entfernen:
+                $id = intval(str_replace("result_", "", $key));
+                foreach ($this->results as $result) {
+                    if ($result->id === $id) {
+                        $result->langCode = $langCode;
+                        break;
+                    }
+                }
+            }
+            return $results;
+        }
     }
 
     public function combineResults($engines)
@@ -392,9 +437,9 @@ class MetaGer
          * Zu Liste hinzufügen
          */
         foreach ($sumas as $suma) {
-            if ($this->sumaIsSelected($suma, $request)
+            if (($this->sumaIsSelected($suma, $request)
                 || ($this->isBildersuche()
-                    && $this->sumaIsAdsuche($suma, $overtureEnabled))
+                    && $this->sumaIsAdsuche($suma, $overtureEnabled)))
                 && (!$this->sumaIsDisabled($suma))) {
                 if ($this->sumaIsOverture($suma)) {
                     $overtureEnabled = true;
@@ -541,12 +586,12 @@ class MetaGer
 
     public function sumaIsAdsuche($suma, $overtureEnabled)
     {
+        $sumaName = $suma["name"]->__toString();
         return
-        $suma["name"]->__toString() === "qualigo"
-        || $suma["name"]->__toString() === "similar_product_ads"
-        || (!$overtureEnabled
-            && $suma["name"]->__toString() === "overtureAds")
-        || $suma["name"]->__toString() == "rlvproduct";
+            $sumaName === "qualigo"
+            || $sumaName === "similar_product_ads"
+            || (!$overtureEnabled && $sumaName === "overtureAds")
+            || $sumaName == "rlvproduct";
     }
 
     public function sumaIsDisabled($suma)
@@ -608,7 +653,7 @@ class MetaGer
         # Findet für alle Foki die enthaltenen Sumas
         $foki = []; # [fokus][suma] => [suma]
         foreach ($sumas as $suma) {
-            if ((!isset($suma['disabled']) || $suma['disabled'] === "") && (!isset($suma['userSelectable']) || $suma['userSelectable']->__toString() === "1")) {
+            if ((!$this->sumaIsDisabled($suma)) && (!isset($suma['userSelectable']) || $suma['userSelectable']->__toString() === "1")) {
                 if (isset($suma['type'])) {
                     # Wenn foki für diese Suchmaschine angegeben sind
                     $focuses = explode(",", $suma['type']->__toString());
@@ -683,6 +728,7 @@ class MetaGer
                 return false;
             }
         }
+        return false;
     }
 
     public function waitForResults($enginesToLoad, $overtureEnabled, $canBreak)
@@ -811,7 +857,7 @@ class MetaGer
             $this->sprueche = false;
         }
         # Theme
-        $this->theme = preg_replace("/[^[:alnum:][:space:]]/u", '', $request->input('theme', 'none'));
+        $this->theme = preg_replace("/[^[:alnum:][:space:]]/u", '', $request->input('theme', 'default'));
         # Ergebnisse pro Seite:
         $this->resultCount = $request->input('resultCount', '20');
         # Manchmal müssen wir Parameter anpassen um den Sucheinstellungen gerecht zu werden:
@@ -869,21 +915,26 @@ class MetaGer
 
     public function checkSpecialSearches(Request $request)
     {
-        $this->searchCheckSitesearch($request);
+        if ($request->has('site')) {
+            $site = $request->input('site');
+        } else {
+            $site = "";
+        }
+        $this->searchCheckSitesearch($site);
         $this->searchCheckHostBlacklist();
         $this->searchCheckDomainBlacklist();
         $this->searchCheckStopwords();
         $this->searchCheckPhrase();
     }
 
-    public function searchCheckSitesearch($request)
+    public function searchCheckSitesearch($site)
     {
         if (preg_match("/(.*)\bsite:(\S+)(.*)/si", $this->q, $match)) {
             $this->site = $match[2];
             $this->q    = $match[1] . $match[3];
         }
-        if ($request->has('site')) {
-            $this->site = $request->input('site');
+        if ($site !== "") {
+            $this->site = $site;
         }
     }
 
@@ -1074,7 +1125,6 @@ class MetaGer
             return false;
         } else {
             $this->addedLinks[$hash] = 1;
-
             return true;
         }
     }

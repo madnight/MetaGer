@@ -15,8 +15,10 @@
 		<meta rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<meta rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 		<link rel="search" type="application/opensearchdescription+xml" title="{{ trans('staticPages.opensearch') }}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
-		<link href="/css/bootstrap.css" rel="stylesheet" />
-		<link href="/css/style.css" rel="stylesheet" />
+		<!--<link href="/css/bootstrap.css" rel="stylesheet" />
+		-->
+		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default') }}.css" />
+		<!--<link href="/css/style.css" rel="stylesheet" />-->
 		@if (isset($css))
 			@if(is_array($css))
 				@foreach($css as $el)
@@ -25,11 +27,6 @@
 			@else
 				<link href="/css/{{ $css }}" rel="stylesheet" />
 			@endif
-		@endif
-		@if( app('request')->input('theme', 'none') != "none" )
-		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'none') }}.css" />
-		@else
-		<link id="theme" href="/css/theme.css.php" rel="stylesheet" />
 		@endif
 	</head>
 
@@ -56,6 +53,7 @@
 								<span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/spende/") }}">{{ trans('staticPages.nav2') }}</a></li>
+									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/beitritt/") }}">{{ trans('staticPages.nav23') }}</a></li>
 									<li><a href="https://www.boost-project.com/de/shops?charity_id=1129&amp;tag=bl">{{ trans('staticPages.nav17') }}</a></li>
 								</ul>
 							</li>
@@ -131,15 +129,7 @@
 				</ul>
 			</footer>
 			<img src="{{ action('ImageController@generateImage')}}?site={{ urlencode(url()->current()) }}" class="hidden" />
-			<script type="text/javascript" src="/js/jquery.js"></script>
-			<script type="text/javascript" src="/js/bootstrap.js"></script>
-			<script type="text/javascript" src="/js/scriptStartPage.js"></script>
-			@if (isset($js))
-				@foreach ($js as $script)
-					<script type="text/javascript" src="/js/{{ $script }}"></script>
-				@endforeach
-			@endif
-			<!--[if lte IE 8]><script type="text/javascript" src="/js/html5shiv.min.js"></script><![endif]-->
+			<script type="text/javascript" src="/js/all.js"></script>
 		</div>
 	</body>
 </html>

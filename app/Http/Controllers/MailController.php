@@ -47,7 +47,6 @@ class MailController extends Controller
 
         return view('kontakt.kontakt')
             ->with('title', 'Kontakt')
-            ->with('css', 'kontakt.css')
             ->with('js', ['openpgp.min.js', 'kontakt.js'])
             ->with($messageType, $returnMessage);
     }
@@ -109,7 +108,6 @@ class MailController extends Controller
             $request->flash();
             return view('spende.spende')
                 ->with('title', 'Kontakt')
-                ->with('css', 'donation.css')
                 ->with($messageType, $messageToUser);
         } else {
             $data = ['name' => $request->input('Name', 'Keine Angabe'), 'telefon' => $request->input('Telefon', 'Keine Angabe'), 'kontonummer' => $request->input('Kontonummer'), 'bankleitzahl' => $request->input('Bankleitzahl'), 'email' => $request->input('email', 'anonymous-user@metager.de'), 'nachricht' => $request->input('Nachricht')];

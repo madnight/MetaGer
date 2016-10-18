@@ -1,9 +1,9 @@
 $(document).ready(function() {
     $(".hint").tooltip();
-    $("textarea").each(function() {
+    $(".language-text-area").each(function() {
         auto_grow(this);
     });
-    $("textarea").keyup(function() {
+    $(".language-text-area").keyup(function() {
         auto_grow(this);
     });
 });

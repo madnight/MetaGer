@@ -6672,6 +6672,10 @@ button.close {
     display: none !important;
   }
 }
+#spruch .author {
+  font-size: 14px;
+  color: #888;
+}
 body.quicktips {
   background-color: white;
 }

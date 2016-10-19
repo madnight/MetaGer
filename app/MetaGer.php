@@ -266,6 +266,11 @@ class MetaGer
 
     private function addLangCodes($results)
     {
+        # Wenn es keine Ergebnisse gibt, brauchen wir uns gar nicht erst zu bemühen
+        if (sizeof($results) === 0) {
+            return $results;
+        }
+
         # Bei der Spracheinstellung "all" wird nicht gefiltert
         if ($this->getLang() === "all") {
             return $results;

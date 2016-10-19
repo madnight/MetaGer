@@ -13,6 +13,7 @@
 	<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default') }}.css" />
 	<link href="/css/styleResultPage.css" rel="stylesheet" />
 	<link type="text/css" rel="stylesheet" href="/css/lightslider.css" />
+	<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
 	@if( isset($mobile) && $mobile )
 		<link href="/css/styleResultPageMobile.css" rel="stylesheet" />
 	@endif

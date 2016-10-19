@@ -19,6 +19,7 @@
 		-->
 		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default') }}.css" />
 		<!--<link href="/css/style.css" rel="stylesheet" />-->
+		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
 		@if (isset($css))
 			@if(is_array($css))
 				@foreach($css as $el)

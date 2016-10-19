@@ -5,7 +5,7 @@
 		name="suchmaschine"
 		host="www.suchmaschine.de"
 		skript="/suche/"
-		formData="sprache=de&amp;sortieren=true&amp;&amp;queue=&lt;&lt;QUERY&gt;&gt;"
+		formData="sprache=de&amp;sortieren=true&amp;queue=&lt;&lt;QUERY&gt;&gt;"
 		package="suchmaschine"
 		displayName="Meine Suchmaschine"
 		homepage="www.suchmaschine.de/welcome"

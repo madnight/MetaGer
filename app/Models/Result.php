@@ -249,13 +249,8 @@ class Result
      */
     public function getStrippedHost($link)
     {
-        if (strpos($link, "http") !== 0) {
-            $link = "http://" . $link;
-        }
-
-        $link = @parse_url($link, PHP_URL_HOST);
-        $link = preg_replace("/^www\./si", "", $link);
-        return $link;
+        $match = $this->getUrlElements($link);
+        return $match['host'];
     }
 
     /* Entfernt "http://", "www" und Parameter von einem Link
@@ -265,13 +260,8 @@ class Result
      */
     public function getStrippedLink($link)
     {
-        if (strpos($link, "http") !== 0) {
-            $link = "http://" . $link;
-        }
-
-        $host = $this->getStrippedHost($link);
-        $path = @parse_url($link, PHP_URL_PATH);
-        return $host . $path;
+        $match = $this->getUrlElements($link);
+        return $match['host'] . $match['path'];
     }
 
     /* Liest aus einem Link die Domain.
@@ -281,11 +271,8 @@ class Result
      */
     public function getStrippedDomain($link)
     {
-        if (preg_match("/([^\.]*\.[^\.]*)$/si", $link, $match)) {
-            return $match[1];
-        } else {
-            return $link;
-        }
+        $match = $this->getUrlElements($link);
+        return $match['domain'];
     }
 
     # Erstellt aus einem Link einen Proxy-Link für unseren Proxy-Service
@@ -300,6 +287,37 @@ class Result
         $tmp = preg_replace("#^([\w+.-]+)://#s", "$1/", $tmp);
         return "https://proxy.suma-ev.de/cgi-bin/nph-proxy.cgi/en/I0/" . $tmp;
 
+    }
+
+    /* Liest aus einer URL alle Informationen aus
+     * https://max:muster@www.example.site.page.com:8080/index/indexer/list.html?p1=A&p2=B#ressource
+     * (?:((?:http)|(?:https))(?::\/\/))? - https://                  => [1] = http / https
+     * (?:(\w+):(\w+)@)?                  - username:password@        => [2] = username, [3] = password
+     * (?:(www)(?:\.))?                   - www.                      => [4] = www
+     * ((?:(?:\w+\.)+)?(\w+\.\w+))        - example.site.page.com     => [5] = example.site.page.com, [6] = page.com
+     * (?:(?::)(\d+))?                    - :8080                     => [7] = 8080
+     * ((?:(?:\/\w+)+)(?:\.\w+)?)?        - /index/indexer/list.html  => [8] = /index/indexer/list.html
+     * (\?\w+=\w+(?:&\w+=\w+)*)?          - ?p1=A&p2=B                => [9] = ?p1=A&p2=B
+     * (?:(?:#)(\w+))?                    - #ressource                => [10] = ressource
+     */
+    public function getUrlElements($url)
+    {
+        if (!preg_match("/(?:((?:http)|(?:https))(?::\/\/))?(?:(\w+):(\w+)@)?(?:(www)(?:\.))?((?:(?:\w+\.)+)?(\w+\.\w+))(?:(?::)(\d+))?((?:(?:\/\w+)+)(?:\.\w+)?)?(\?\w+=\w+(?:&\w+=\w+)*)?(?:(?:#)(\w+))?/", $url, $match)) {
+            return;
+        } else {
+            $re = [];
+            if (isset($match[1])) {$re['schema'] = $match[1];};
+            if (isset($match[2])) {$re['username'] = $match[2];};
+            if (isset($match[3])) {$re['password'] = $match[3];};
+            if (isset($match[4])) {$re['web'] = $match[4];};
+            if (isset($match[5])) {$re['host'] = $match[5];};
+            if (isset($match[6])) {$re['domain'] = $match[6];};
+            if (isset($match[7])) {$re['port'] = $match[7];};
+            if (isset($match[8])) {$re['path'] = $match[8];};
+            if (isset($match[9])) {$re['query'] = $match[9];};
+            if (isset($match[10])) {$re['fragment'] = $match[10];};
+            return $re;
+        }
     }
 
     # Getter

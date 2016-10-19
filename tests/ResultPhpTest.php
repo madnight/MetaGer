@@ -84,8 +84,8 @@ class ResultPhpTest extends TestCase
             'foo.bar.de/test');
         $this->equalCallbackTester($result, "getStrippedDomain", ["http://www.foo.bar.de/test?ja=1"],
             'bar.de');
-        $this->equalCallbackTester($result, "generateProxyLink", ["news"],
-            'focus=news');
+        $this->equalCallbackTester($result, "generateProxyLink", ["http://www.foo.bar.de/test?ja=1"],
+            'https://proxy.suma-ev.de/cgi-bin/nph-proxy.cgi/en/I0/http/www.foo.bar.de/test?ja=1');
     }
 
     public function equalCallbackTester($object, $funcName, $input, $expectedInOutput)

@@ -1,10 +1,32 @@
 #!/usr/bin/perl
 
 use Lingua::Identify qw(:language_identification);
+use JSON;
+use warnings;
+use strict;
+binmode STDOUT, ":utf8";
+binmode STDIN, ":utf8";
+use utf8;
 
-$text = <STDIN>;
+chomp(my $filename = <STDIN>);
 
-$a = langof($text);
+# Lets open the given file:
+open(my $fh, "<", $filename)
+	or die "Can't open < $filename: $!";
+my $json = <$fh>;
+close $fh;
 
-print $a;
+# Decode the JSON String
+my $data = decode_json($json);
 
+# Wir durchlaufen den Hash:
+foreach my $key (keys %{$data}){
+	$data->{$key} = langof($data->{$key});
+}
+
+$data = encode_json($data);
+
+# Nur noch die temporäre Datei löschen:
+unlink($filename);
+
+print $data;

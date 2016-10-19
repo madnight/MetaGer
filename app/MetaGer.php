@@ -157,6 +157,10 @@ class MetaGer
 
         // combine
         $combinedResults = $this->combineResults($engines);
+
+        # Wir bestimmen die Sprache eines jeden Suchergebnisses
+        $this->results = $this->addLangCodes($this->results);
+
         // sort
         //$sortedResults = $this->sortResults($engines);
         // filter
@@ -258,6 +262,52 @@ class MetaGer
             $this->next = [];
         }
 
+    }
+
+    private function addLangCodes($results)
+    {
+        # Wenn es keine Ergebnisse gibt, brauchen wir uns gar nicht erst zu bemühen
+        if (sizeof($results) === 0) {
+            return $results;
+        }
+
+        # Bei der Spracheinstellung "all" wird nicht gefiltert
+        if ($this->getLang() === "all") {
+            return $results;
+        } else {
+            # Ansonsten müssen wir jedem Result einen Sprachcode hinzufügen
+            $id          = 0;
+            $langStrings = [];
+            foreach ($results as $result) {
+                # Wir geben jedem Ergebnis eine ID um später die Sprachcodes zuordnen zu können
+                $result->id = $id;
+
+                $langStrings["result_" . $id] = utf8_encode($result->getLangString());
+
+                $id++;
+            }
+            # Wir schreiben die Strings in eine temporäre JSON-Datei,
+            # Da das Array unter umständen zu groß ist für eine direkte Übergabe an das Skript
+            $filename = "/tmp/" . getmypid();
+            file_put_contents($filename, json_encode($langStrings));
+            $langDetectorPath = app_path() . "/Models/lang.pl";
+            $lang             = exec("echo '$filename' | $langDetectorPath");
+            $lang             = json_decode($lang, true);
+
+            # Wir haben nun die Sprachcodes der einzelnen Ergebnisse.
+            # Diese müssen wir nur noch korrekt zuordnen, dann sind wir fertig.
+            foreach ($lang as $key => $langCode) {
+                # Prefix vom Key entfernen:
+                $id = intval(str_replace("result_", "", $key));
+                foreach ($this->results as $result) {
+                    if ($result->id === $id) {
+                        $result->langCode = $langCode;
+                        break;
+                    }
+                }
+            }
+            return $results;
+        }
     }
 
     public function combineResults($engines)
@@ -392,9 +442,9 @@ class MetaGer
          * Zu Liste hinzufügen
          */
         foreach ($sumas as $suma) {
-            if ($this->sumaIsSelected($suma, $request)
+            if (($this->sumaIsSelected($suma, $request)
                 || (!$this->isBildersuche()
-                    && $this->sumaIsAdsuche($suma, $overtureEnabled))
+                    && $this->sumaIsAdsuche($suma, $overtureEnabled)))
                 && (!$this->sumaIsDisabled($suma))) {
                 if ($this->sumaIsOverture($suma)) {
                     $overtureEnabled = true;
@@ -812,7 +862,7 @@ class MetaGer
             $this->sprueche = false;
         }
         # Theme
-        $this->theme = preg_replace("/[^[:alnum:][:space:]]/u", '', $request->input('theme', 'none'));
+        $this->theme = preg_replace("/[^[:alnum:][:space:]]/u", '', $request->input('theme', 'default'));
         # Ergebnisse pro Seite:
         $this->resultCount = $request->input('resultCount', '20');
         # Manchmal müssen wir Parameter anpassen um den Sucheinstellungen gerecht zu werden:

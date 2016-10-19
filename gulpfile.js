@@ -1,7 +1,5 @@
 const elixir = require('laravel-elixir');
-
 require('laravel-elixir-vue-2');
-
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -12,8 +10,7 @@ require('laravel-elixir-vue-2');
  | file for our application, as well as publishing vendor resources.
  |
  */
-
-elixir(mix => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+elixir(function(mix) {
+    mix.less('default.less', 'public/css/themes/default.css');
+    mix.scripts(['lib/jquery.js', 'lib/bootstrap.js', 'widgets.js', 'editLanguage.js', 'kontakt.js', 'lib/lightslider.js', 'lib/masonry.js', 'lib/imagesloaded.js', 'lib/openpgp.min.js', 'scriptResultPage.js', 'scriptStartPage.js', 'settings.js' /*, 'lib/vue/app.js', 'lib/vue/bootstrap.js'*/ ]);
 });

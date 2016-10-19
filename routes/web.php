@@ -51,8 +51,6 @@ Route::group(
         Route::get('kontakt', function () {
             return view('kontakt.kontakt')
                 ->with('title', trans('titles.kontakt'))
-                ->with('css', 'kontakt.css')
-                ->with('js', ['openpgp.min.js', 'kontakt.js'])
                 ->with('navbarFocus', 'kontakt');
         });
 
@@ -66,13 +64,11 @@ Route::group(
         Route::get('spende', function () {
             return view('spende.spende')
                 ->with('title', trans('titles.spende'))
-                ->with('css', 'donation.css')
                 ->with('navbarFocus', 'foerdern');
         });
         Route::get('spende/danke/{data}', ['as' => 'danke', function ($data) {
             return view('spende.danke')
                 ->with('title', trans('titles.spende'))
-                ->with('css', ['donation.css', 'danke.css'])
                 ->with('navbarFocus', 'foerdern')
                 ->with('data', unserialize(base64_decode($data)));
         }]);
@@ -85,7 +81,6 @@ Route::group(
         Route::get('beitritt', function () {
             return view('spende.beitritt')
                 ->with('title', trans('titles.beitritt'))
-                ->with('css', 'beitritt.css')
                 ->with('navbarFocus', 'foerdern');
         });
 
@@ -115,14 +110,12 @@ Route::group(
         Route::get('faq', function () {
             return view('faq')
                 ->with('title', trans('titles.faq'))
-                ->with('css', 'help.css')
                 ->with('navbarFocus', 'hilfe');
         });
 
         Route::get('widget', function () {
             return view('widget.widget')
                 ->with('title', trans('titles.widget'))
-                ->with('css', 'widget.css')
                 ->with('navbarFocus', 'dienste');
         });
 
@@ -131,7 +124,6 @@ Route::group(
         Route::get('websearch', function () {
             return view('widget.websearch')
                 ->with('title', trans('titles.websearch'))
-                ->with('css', 'websearch.css')
                 ->with('navbarFocus', 'dienste');
         });
 

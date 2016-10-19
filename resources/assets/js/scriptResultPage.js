@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    getDocumentReadyForUse();
+    getDocumentReadyForUse($("#foki > li.active > a").attr("aria-controls"));
 });
 
 function tabs() {
@@ -18,17 +18,18 @@ function tabs() {
                 $("#" + fokus + "TabSelector").attr("data-loaded", "1");
                 $("#" + fokus).html(data);
                 $("input[name=focus]").val($("#foki li.active a").attr("aria-controls"));
-                getDocumentReadyForUse();
+                getDocumentReadyForUse(fokus);
             });
+        } else {
+            getDocumentReadyForUse(fokus);
         }
-        getDocumentReadyForUse();
     });
 }
 
-function getDocumentReadyForUse() {
+function getDocumentReadyForUse(fokus) {
     clickLog();
     popovers();
-    imageLoader();
+    if (fokus === "bilder") imageLoader();
     //pagination();
     tabs();
     theme();

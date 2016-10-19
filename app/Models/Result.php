@@ -306,16 +306,16 @@ class Result
             return;
         } else {
             $re = [];
-            if (isset($match[1])) {$re['schema'] = $match[1];};
-            if (isset($match[2])) {$re['username'] = $match[2];};
-            if (isset($match[3])) {$re['password'] = $match[3];};
-            if (isset($match[4])) {$re['web'] = $match[4];};
-            if (isset($match[5])) {$re['host'] = $match[5];};
-            if (isset($match[6])) {$re['domain'] = $match[6];};
-            if (isset($match[7])) {$re['port'] = $match[7];};
-            if (isset($match[8])) {$re['path'] = $match[8];};
-            if (isset($match[9])) {$re['query'] = $match[9];};
-            if (isset($match[10])) {$re['fragment'] = $match[10];};
+            if (isset($match[1])) {$re['schema'] = $match[1];} else { $re['schema'] = "";};
+            if (isset($match[2])) {$re['username'] = $match[2];} else { $re['username'] = "";};
+            if (isset($match[3])) {$re['password'] = $match[3];} else { $re['password'] = "";};
+            if (isset($match[4])) {$re['web'] = $match[4];} else { $re['web'] = "";};
+            if (isset($match[5])) {$re['host'] = $match[5];} else { $re['host'] = "";};
+            if (isset($match[6])) {$re['domain'] = $match[6];} else { $re['domain'] = "";};
+            if (isset($match[7])) {$re['port'] = $match[7];} else { $re['port'] = "";};
+            if (isset($match[8])) {$re['path'] = $match[8];} else { $re['path'] = "";};
+            if (isset($match[9])) {$re['query'] = $match[9];} else { $re['query'] = "";};
+            if (isset($match[10])) {$re['fragment'] = $match[10];} else { $re['fragment'] = "";};
             return $re;
         }
     }

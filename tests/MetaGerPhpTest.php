@@ -5,11 +5,6 @@ use Illuminate\Http\Request;
 
 class MetaGerPhpTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function test()
     {
         $this->fullRunTest();
@@ -78,10 +73,33 @@ class MetaGerPhpTest extends TestCase
         $metager->parseFormData($request);
         $metager->checkSpecialSearches($request);
         $this->assertEquals("wantsite", $metager->getSite());
-        $this->assertEquals("blackhost", $metager->getUserHostBlacklist()[0]);
-        $this->assertEquals("blackdomain", $metager->getUserDomainBlacklist()[0]);
-        $this->assertEquals("blackword", $metager->getStopWords()[0]);
-        $this->assertEquals("i want phrase", $metager->getPhrases()[0]);
+        $this->assertContains("blackhost", $metager->getUserHostBlacklist());
+        $this->assertContains("blackdomain", $metager->getUserDomainBlacklist());
+        $this->assertContains("blackword", $metager->getStopWords());
+        $this->assertContains("i want phrase", $metager->getPhrases());
+
+        $metager = new MetaGer();
+        $request = new Request(['eingabe' => '-site:peter:test -blackword-test -host:blackhost-test.de.nz/test ich suche nach -host:blackhost:blackhost2.cote/t?p=5 "peter ist obst-garten und -bauern"']);
+        $metager->parseFormData($request);
+        $metager->checkSpecialSearches($request);
+        $this->assertEquals("peter:test", $metager->getSite());
+        $this->assertContains("blackhost:blackhost2.cote/t?p=5", $metager->getUserHostBlacklist());
+        $this->assertContains("blackhost-test.de.nz/test", $metager->getUserHostBlacklist());
+        $this->assertContains("blackword-test", $metager->getStopWords());
+        $this->assertNotContains("bauern", $metager->getStopWords());
+        $this->assertContains("peter ist obst-garten und -bauern", $metager->getPhrases());
+
+        $metager = new MetaGer();
+        $request = new Request(['eingabe' => '-host:-domain:test']);
+        $metager->parseFormData($request);
+        $metager->checkSpecialSearches($request);
+        $this->assertContains("-domain:test", $metager->getUserHostBlacklist());
+
+        $metager = new MetaGer();
+        $request = new Request(['eingabe' => '"-host:-domain:test"']);
+        $metager->parseFormData($request);
+        $metager->checkSpecialSearches($request);
+        $this->assertContains("-host:-domain:test", $metager->getPhrases());
     }
 
     public function addLinkTest()
@@ -152,6 +170,15 @@ class MetaGerPhpTest extends TestCase
         $enabledSearchengines = $sumas;
         $metager->adjustFocus($sumas, $enabledSearchengines);
         $this->assertEquals("bilder", $metager->getFokus());
+
+        $metager = new MetaGer();
+        $request = new Request(["focus" => "web"]);
+        $metager->parseFormData($request);
+        $this->assertEquals("web", $metager->getFokus());
+        $sumas                = simplexml_load_file("tests/testSumas2.xml")->xpath("suma"); # Eine spezielle test sumas.xml
+        $enabledSearchengines = array_slice($sumas, 0, 1);
+        $metager->adjustFocus($sumas, $enabledSearchengines);
+        $this->assertEquals("bilder", $metager->getFokus());
     }
 
     public function checkCanNotSitesearchTest()
@@ -159,6 +186,14 @@ class MetaGerPhpTest extends TestCase
         $metager              = new MetaGer();
         $enabledSearchengines = simplexml_load_file("tests/testSumas.xml")->xpath("suma"); # Eine spezielle test sumas.xml
         $this->assertFalse($metager->checkCanNotSitesearch($enabledSearchengines));
+
+        $metager = new MetaGer();
+        $request = $this->createDummyRequest();
+        $metager->parseFormData($request);
+        $metager->checkSpecialSearches($request);
+        $this->assertEquals("wantsite", $metager->getSite());
+        $enabledSearchengines = simplexml_load_file("tests/testSumas2.xml")->xpath("suma"); # Eine spezielle test sumas.xml
+        $this->assertTrue($metager->checkCanNotSitesearch($enabledSearchengines));
     }
 
     public function isBildersucheTest()

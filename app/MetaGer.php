@@ -878,8 +878,8 @@ class MetaGer
         $this->searchCheckSitesearch($site);
         $this->searchCheckHostBlacklist();
         $this->searchCheckDomainBlacklist();
-        $this->searchCheckStopwords();
         $this->searchCheckPhrase();
+        $this->searchCheckStopwords();
     }
 
     public function searchCheckSitesearch($site)

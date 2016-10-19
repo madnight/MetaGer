@@ -13,9 +13,9 @@ abstract class Searchengine
 {
     use DispatchesJobs;
 
-    protected $ch; # Curl Handle zum erhalten der Ergebnisse
-    protected $getString = ""; # Der String für die Get-Anfrage
-    protected $engine; # Die ursprüngliche Engine XML
+    public $ch; # Curl Handle zum erhalten der Ergebnisse
+    public $getString = ""; # Der String für die Get-Anfrage
+    public $engine; # Die ursprüngliche Engine XML
     public $enabled  = true; # true, wenn die Suchmaschine nicht explizit disabled ist
     public $results  = []; # Die geladenen Ergebnisse
     public $ads      = []; # Die geladenen Werbungen
@@ -34,8 +34,8 @@ abstract class Searchengine
     public $hash; # Der Hash-Wert dieser Suchmaschine
 
     public $fp; # Wird für Artefakte benötigt
-    protected $socketNumber = null; # Wird für Artefakte benötigt
-    protected $counter      = 0; # Wird eventuell für Artefakte benötigt
+    public $socketNumber    = null; # Wird für Artefakte benötigt
+    public $counter         = 0; # Wird eventuell für Artefakte benötigt
     public $write_time      = 0; # Wird eventuell für Artefakte benötigt
     public $connection_time = 0; # Wird eventuell für Artefakte benötigt
 
@@ -58,6 +58,8 @@ abstract class Searchengine
         if (!isset($this->cacheDuration)) {
             $this->cacheDuration = 60;
         }
+
+        $this->enabled = true;
 
         # Eine Suchmaschine kann automatisch temporär deaktiviert werden, wenn es Verbindungsprobleme gab:
         if (isset($this->disabled) && strtotime($this->disabled) <= time()) {
@@ -142,6 +144,7 @@ abstract class Searchengine
         $xml = simplexml_load_file($sumaFile);
         unset($xml->xpath("//sumas/suma[@name='" . $this->name . "']")['0']['disabled']);
         $xml->saveXML($sumaFile);
+        $this->enabled = true;
     }
 
     public function closeFp()

@@ -6,11 +6,6 @@ use Illuminate\Http\Request;
 
 class ResultPhpTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function test()
     {
         $this->rankingTest();
@@ -73,6 +68,27 @@ class ResultPhpTest extends TestCase
         $result  = $this->getDummyResult();
         $metager = $this->getDummyMetaGer();
         $this->assertTrue($result->isValid($metager));
+
+        $metager = new MetaGer();
+        $request = new Request(['eingabe' => 'test -host:host.domain.de -domain:domain.de']);
+        $metager->parseFormData($request);
+        $metager->checkSpecialSearches($request);
+
+        $provider    = file_get_contents("tests/testSumas.xml");
+        $titel       = "Titel";
+        $link        = "host.domain.de";
+        $anzeigeLink = "host.domain.de/ergebnis/1?p=2";
+        $descr       = "Beschreibung: i want phrase";
+        $gefVon      = "";
+        $sourceRank  = 1;
+
+        $result = new Result($provider, $titel, $link, $anzeigeLink, $descr, $gefVon, $sourceRank);
+        $this->assertFalse($result->isValid($metager));
+
+        $link = "domain.de/ergebnis/1?p=2";
+
+        $result = new Result($provider, $titel, $link, $anzeigeLink, $descr, $gefVon, $sourceRank);
+        $this->assertFalse($result->isValid($metager));
     }
 
     public function linkGeneratorsTest()
@@ -86,6 +102,15 @@ class ResultPhpTest extends TestCase
             'bar.de');
         $this->equalCallbackTester($result, "generateProxyLink", ["http://www.foo.bar.de/test?ja=1"],
             'https://proxy.suma-ev.de/cgi-bin/nph-proxy.cgi/en/I0/http/www.foo.bar.de/test?ja=1');
+
+        $url = "https://leya:organa@www.han.solo.de/unterseite/document.htm?param1=2&param2=1#siebzehn";
+
+        $this->equalCallbackTester($result, "getStrippedHost", [$url],
+            'han.solo.de');
+        $this->equalCallbackTester($result, "getStrippedDomain", [$url],
+            'solo.de');
+        $this->equalCallbackTester($result, "getStrippedLink", [$url],
+            'han.solo.de/unterseite/document.htm');
     }
 
     public function equalCallbackTester($object, $funcName, $input, $expectedInOutput)

@@ -1199,8 +1199,9 @@ class MetaGer
 
     public function getHostCount($host)
     {
-        if (isset($this->addedHosts[$host])) {
-            return $this->addedHosts[$host];
+        $hash = md5($host);
+        if (isset($this->addedHosts[$hash])) {
+            return $this->addedHosts[$hash];
         } else {
             return 0;
         }

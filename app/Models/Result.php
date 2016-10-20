@@ -287,18 +287,26 @@ class Result
 
     /* Liest aus einer URL alle Informationen aus
      * https://max:muster@www.example.site.page.com:8080/index/indexer/list.html?p1=A&p2=B#ressource
-     * (?:((?:http)|(?:https))(?::\/\/))? - https://                  => [1] = http / https
-     * (?:(\w+):(\w+)@)?                  - username:password@        => [2] = username, [3] = password
-     * (?:(www)(?:\.))?                   - www.                      => [4] = www
-     * ((?:(?:\w+\.)+)?(\w+\.\w+))        - example.site.page.com     => [5] = example.site.page.com, [6] = page.com
-     * (?:(?::)(\d+))?                    - :8080                     => [7] = 8080
-     * ((?:(?:\/\w+)+)(?:\.\w+)?)?        - /index/indexer/list.html  => [8] = /index/indexer/list.html
-     * (\?\w+=\w+(?:&\w+=\w+)*)?          - ?p1=A&p2=B                => [9] = ?p1=A&p2=B
-     * (?:(?:#)(\w+))?                    - #ressource                => [10] = ressource
+     * (?:((?:http)|(?:https))(?::\/\/))?
+     * https://                  => [1] = http / https
+     * (?:([a-z0-9.\-_~]+):([a-z0-9.\-_~]+)@)?
+     * username:password@        => [2] = username, [3] = password
+     * (?:(www)(?:\.))?
+     * www.                      => [4] = www
+     * ((?:(?:[a-z0-9.\-_~]+\.)+)?([a-z0-9.\-_~]+\.[a-z0-9.\-_~]+))
+     * example.site.page.com     => [5] = example.site.page.com, [6] = page.com
+     * (?:(?::)(\d+))?
+     * :8080                     => [7] = 8080
+     * ((?:(?:\/[a-z0-9.\-_~]+)+)(?:\.[a-z0-9.\-_~]+)?)?
+     * /index/indexer/list.html  => [8] = /index/indexer/list.html
+     * (\?[a-z0-9.\-_~]+=[a-z0-9.\-_~]+(?:&[a-z0-9.\-_~]+=[a-z0-9.\-_~]+)*)?
+     * ?p1=A&p2=B                => [9] = ?p1=A&p2=B
+     * (?:(?:#)([a-z0-9.\-_~]+))?
+     * #ressource                => [10] = ressource
      */
     public function getUrlElements($url)
     {
-        if (!preg_match("/(?:((?:http)|(?:https))(?::\/\/))?(?:(\w+):(\w+)@)?(?:(www)(?:\.))?((?:(?:\w+\.)+)?(\w+\.\w+))(?:(?::)(\d+))?((?:(?:\/\w+)+)(?:\.\w+)?)?(\?\w+=\w+(?:&\w+=\w+)*)?(?:(?:#)(\w+))?/", $url, $match)) {
+        if (!preg_match("/(?:((?:http)|(?:https))(?::\/\/))?(?:([a-z0-9.\-_~]+):([a-z0-9.\-_~]+)@)?(?:(www)(?:\.))?((?:(?:[a-z0-9.\-_~]+\.)+)?([a-z0-9.\-_~]+\.[a-z0-9.\-_~]+))(?:(?::)(\d+))?((?:(?:\/[a-z0-9.\-_~]+)+)(?:\.[a-z0-9.\-_~]+)?)?(\?[a-z0-9.\-_~]+=[a-z0-9.\-_~]+(?:&[a-z0-9.\-_~]+=[a-z0-9.\-_~]+)*)?(?:(?:#)([a-z0-9.\-_~]+))?/i", $url, $match)) {
             return;
         } else {
             $re = [];

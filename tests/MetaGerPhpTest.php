@@ -1,6 +1,7 @@
 <?php
 
 use App\MetaGer;
+use App\models\parserSkripte\RlvProduct;
 use Illuminate\Http\Request;
 
 class MetaGerPhpTest extends TestCase
@@ -11,7 +12,7 @@ class MetaGerPhpTest extends TestCase
         $this->specialSearchTest();
         $this->specialSumaTest();
         $this->linkGeneratorTest();
-        #$this->getHostCountTest();
+        $this->getHostCountTest();
         $this->addLinkTest();
         $this->adjustFocusTest();
         $this->checkCanNotSitesearchTest();
@@ -19,9 +20,8 @@ class MetaGerPhpTest extends TestCase
         $this->loadMiniSucherTest();
         $this->getImageProxyLinkTest();
         $this->showQuicktipsTest();
-        # Brauchen Engine Dummy
-        #$this->popAdTest();
-        #$this->productsTest();
+        $this->popAdTest();
+        $this->productsTest();
     }
 
     public function fullRunTest()
@@ -34,36 +34,6 @@ class MetaGerPhpTest extends TestCase
         $metager->rankAll();
         $metager->prepareResults();
         $metager->createView();
-    }
-
-    public function createDummyRequest()
-    {
-        /**
-         * Constructor.
-         *
-         * @param array           $query      The GET parameters
-         * @param array           $request    The POST parameters
-         * @param array           $attributes The request attributes (parameters parsed from the PATH_INFO, ...)
-         * @param array           $cookies    The COOKIE parameters
-         * @param array           $files      The FILES parameters
-         * @param array           $server     The SERVER parameters
-         * @param string|resource $content    The raw body data
-         */
-
-        #new Request(array $query = array(), array $request = array(), array $attributes = array(), array $cookies = array(), array $files = array(), array $server = array(), $content = null)
-
-        $query                = [];
-        $query["eingabe"]     = 'suchwort -blackword -host:blackhost -domain:blackdomain site:wantsite "i want phrase"';
-        $query["focus"]       = "angepasst";
-        $query["encoding"]    = "utf8";
-        $query["lang"]        = "all";
-        $query["time"]        = "1000";
-        $query["sprueche"]    = "on";
-        $query["resultCount"] = "20";
-        $query["tab"]         = "on";
-        $query["onenewspage"] = "on";
-
-        return new Request($query);
     }
 
     public function specialSearchTest()
@@ -112,14 +82,41 @@ class MetaGerPhpTest extends TestCase
 
     public function specialSumaTest()
     {
-        $metager      = new MetaGer();
-        $suma         = new SimpleXMLElement("<suma></suma>");
+        $metager = new MetaGer();
+        $suma    = new SimpleXMLElement("<suma></suma>");
+
         $suma["name"] = "qualigo";
         $this->assertTrue($metager->sumaIsAdsuche($suma, false));
+        $suma["name"] = "similar_product_ads";
+        $this->assertTrue($metager->sumaIsAdsuche($suma, false));
+        $suma["name"] = "rlvproduct";
+        $this->assertTrue($metager->sumaIsAdsuche($suma, false));
+        $suma["name"] = "overtureAds";
+        $this->assertTrue($metager->sumaIsAdsuche($suma, false));
+        $suma["name"] = "overtureAds";
+        $this->assertFalse($metager->sumaIsAdsuche($suma, true));
+        $suma["name"] = "bing";
+        $this->assertFalse($metager->sumaIsAdsuche($suma, false));
+
+        $this->assertFalse($metager->sumaIsDisabled($suma));
+        $suma["disabled"] = "0";
+        $this->assertFalse($metager->sumaIsDisabled($suma));
         $suma["disabled"] = "1";
         $this->assertTrue($metager->sumaIsDisabled($suma));
+
         $suma["name"] = 'overture';
         $this->assertTrue($metager->sumaIsOverture($suma));
+        $suma["name"] = 'overtureAds';
+        $this->assertTrue($metager->sumaIsOverture($suma));
+        $suma["name"] = 'bing';
+        $this->assertFalse($metager->sumaIsOverture($suma));
+
+        $suma["name"] = 'qualigo';
+        $this->assertFalse($metager->sumaIsNotAdsuche($suma));
+        $suma["name"] = 'similar_product_ads';
+        $this->assertFalse($metager->sumaIsNotAdsuche($suma));
+        $suma["name"] = 'overtureAds';
+        $this->assertFalse($metager->sumaIsNotAdsuche($suma));
         $suma["name"] = 'bing';
         $this->assertTrue($metager->sumaIsNotAdsuche($suma));
     }
@@ -141,22 +138,17 @@ class MetaGerPhpTest extends TestCase
             '-domain%3Awolf.de');
     }
 
-    public function containCallbackTester($object, $funcName, $input, $expectedInOutput)
-    {
-        $output = call_user_func_array(array($object, $funcName), $input);
-        $this->assertContains($expectedInOutput, $output);
-    }
-
     public function getHostCountTest()
     {
         $metager = new MetaGer();
-        $before  = $metager->getHostCount("host.de");
-        $metager->addHostCount("host.de");
-        $after = $metager->getHostCount("host.de");
+        $host    = "host.de";
+        $before  = $metager->getHostCount($host);
+        $metager->addHostCount($host);
+        $after = $metager->getHostCount($host);
         $this->assertEquals($before + 1, $after);
         $before = $after;
-        $metager->addHostCount("host.de");
-        $after = $metager->getHostCount("host.de");
+        $metager->addHostCount($host);
+        $after = $metager->getHostCount($host);
         $this->assertEquals($before + 1, $after);
     }
 
@@ -202,6 +194,11 @@ class MetaGerPhpTest extends TestCase
         $request = new Request(["focus" => "bilder"]);
         $metager->parseFormData($request);
         $this->assertTrue($metager->isBildersuche());
+
+        $metager = new MetaGer();
+        $request = new Request(["focus" => "web"]);
+        $metager->parseFormData($request);
+        $this->assertFalse($metager->isBildersuche());
     }
 
     public function loadMiniSucherTest()
@@ -226,23 +223,110 @@ class MetaGerPhpTest extends TestCase
         $request = new Request(["quicktips" => "yo"]);
         $metager->parseFormData($request);
         $this->assertFalse($metager->showQuicktips());
+
+        $metager = new MetaGer();
+        $request = new Request([]);
+        $metager->parseFormData($request);
+        $this->assertTrue($metager->showQuicktips());
     }
 
     public function popAdTest()
     {
         $metager = new MetaGer();
         $this->assertNull($metager->popAd());
-        $engines   = [];
-        $engines[] = factory(app\Models\parserSkripte\Base::class)->make([], null);
-        $metager->combineResults($engines);
-        $ad = $metager->popAd();
-        $this->assertNull($metager->popAd());
+        $engineList = [];
+
+        $engineXml = simplexml_load_file("tests/testSumas.xml")->xpath("suma");
+        $metager   = new MetaGer();
+        $request   = new Request(["focus" => "web"]);
+        $metager->parseFormData($request);
+        $searchengine = new RlvProduct($engineXml[0], $metager);
+        $product      = new \App\Models\Result(
+            $engineXml[0],
+            "Werbetitel",
+            "Link",
+            "Anzeigelink",
+            "Beschreibung",
+            "Gefunden Von",
+            42,
+            false,
+            "image.png",
+            4.2,
+            "Additional Info"
+        );
+        $searchengine->ads[] = $product;
+
+        $enginesList[] = $searchengine;
+        $metager->combineResults($enginesList, $metager);
+        $this->assertEquals("Werbetitel", $metager->popAd()['titel']);
     }
 
     public function productsTest()
     {
         $metager = new MetaGer();
-        $metager->hasProducts();
-        $metager->getProducts();
+        $this->assertFalse($metager->hasProducts());
+        $this->assertEmpty($metager->getProducts());
+        $engineList = [];
+
+        $engineXml = simplexml_load_file("tests/testSumas.xml")->xpath("suma");
+        $metager   = new MetaGer();
+        $request   = new Request(["focus" => "web"]);
+        $metager->parseFormData($request);
+        $searchengine = new RlvProduct($engineXml[0], $metager);
+        $product      = new \App\Models\Result(
+            $engineXml[0],
+            "Produkttitel",
+            "Link",
+            "Anzeigelink",
+            "Beschreibung",
+            "Gefunden Von",
+            42,
+            false,
+            "image.png",
+            4.2,
+            "Additional Info"
+        );
+        $searchengine->products[] = $product;
+
+        $enginesList[] = $searchengine;
+        $metager->combineResults($enginesList, $metager);
+        $this->assertTrue($metager->hasProducts());
+        $this->assertEquals("Produkttitel", $metager->getProducts()[0]['titel']);
+    }
+
+    public function createDummyRequest()
+    {
+        /**
+         * Constructor.
+         *
+         * @param array           $query      The GET parameters
+         * @param array           $request    The POST parameters
+         * @param array           $attributes The request attributes (parameters parsed from the PATH_INFO, ...)
+         * @param array           $cookies    The COOKIE parameters
+         * @param array           $files      The FILES parameters
+         * @param array           $server     The SERVER parameters
+         * @param string|resource $content    The raw body data
+         */
+
+        #new Request(array $query = array(), array $request = array(), array $attributes = array(), array $cookies = array(), array $files = array(), array $server = array(), $content = null)
+
+        $query                = [];
+        $query["eingabe"]     = 'suchwort -blackword -host:blackhost -domain:blackdomain site:wantsite "i want phrase"';
+        $query["focus"]       = "angepasst";
+        $query["encoding"]    = "utf8";
+        $query["lang"]        = "all";
+        $query["time"]        = "1000";
+        $query["sprueche"]    = "on";
+        $query["resultCount"] = "20";
+        $query["tab"]         = "on";
+        $query["onenewspage"] = "on";
+
+        return new Request($query);
+    }
+
+    public function containCallbackTester($object, $funcName, $input, $expectedInOutput)
+    {
+        $output = call_user_func_array(array($object, $funcName), $input);
+        $this->assertContains($expectedInOutput, $output);
     }
 }

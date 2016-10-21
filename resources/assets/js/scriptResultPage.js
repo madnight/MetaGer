@@ -1,5 +1,8 @@
 $(document).ready(function() {
     getDocumentReadyForUse($("#foki > li.active > a").attr("aria-controls"));
+    $('iframe').iFrameResize({
+        'autoResize': false
+    });
 });
 
 function tabs() {

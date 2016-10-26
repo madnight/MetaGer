@@ -1,4 +1,4 @@
-@extends('layouts.staticPages')
+@extends('layouts.indexPage')
 
 @section('title', $title )
 

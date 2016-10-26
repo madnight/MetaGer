@@ -1,3 +1,6 @@
 <?php
 
-return [];
+return [
+    "foki.web"	=>	"Nett",
+    "foki.bilder"	=>	"Biller"
+];

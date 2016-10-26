@@ -83,14 +83,14 @@
 								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('staticPages.nav15') }}
 								<span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank">{{ trans('staticPages.nav24') }}</a></li>
+									<li><a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank" rel="noopener">{{ trans('staticPages.nav24') }}</a></li>
 									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe/") }}">{{ trans('staticPages.nav9') }}</a></li>
 									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/widget/") }}">{{ trans('staticPages.nav10') }}</a></li>
-									<li><a href="https://metager.de/klassik/asso/" target="_blank">{{ trans('staticPages.nav11') }}</a></li>
-									<li><a href="http://code.metager.de/" target="_blank">{{ trans('staticPages.nav12') }}</a></li>
-									<li><a href="https://metager.to/" target="_blank">{{ trans('staticPages.nav13') }}</a></li>
-									<li><a href="http://forum.suma-ev.de/viewtopic.php?f=3&amp;t=43" target="_blank">{{ trans('staticPages.nav14') }}</a></li>
-									<li><a href="https://metager.de/klassik/zitat-suche/" target="_blank">{{ trans('staticPages.nav22') }}</a></li>
+									<li><a href="https://metager.de/klassik/asso/" target="_blank" rel="noopener">{{ trans('staticPages.nav11') }}</a></li>
+									<li><a href="http://code.metager.de/" target="_blank" rel="noopener">{{ trans('staticPages.nav12') }}</a></li>
+									<li><a href="https://metager.to/" target="_blank" rel="noopener">{{ trans('staticPages.nav13') }}</a></li>
+									<li><a href="http://forum.suma-ev.de/viewtopic.php?f=3&amp;t=43" target="_blank" rel="noopener">{{ trans('staticPages.nav14') }}</a></li>
+									<li><a href="https://metager.de/klassik/zitat-suche/" target="_blank" rel="noopener">{{ trans('staticPages.nav22') }}</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
@@ -120,12 +120,12 @@
 			@yield('optionalContent')
 			<footer class="noprint">
 				<ul class="list-inline hidden-xs">
-					<li><a href="https://www.suma-ev.de/" target="_blank">
+					<li><a href="https://www.suma-ev.de/" target="_blank" rel="noopener">
 						<img src="/img/suma_ev_logo-m1-greyscale.png" alt="SUMA-EV Logo"></a></li>
 					<li id="info">
 						<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "kontakt") }}">{{ trans('staticPages.nav5') }}</a> - <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "impressum") }}">{{ trans('staticPages.nav8') }}</a>
-						{{ trans('staticPages.sumaev.1') }}<a href="https://www.suma-ev.de/" target="_blank" >{{ trans('staticPages.sumaev.2') }}</a></li>
-					<li><a href="https://www.uni-hannover.de/" target="_blank">
+						{{ trans('staticPages.sumaev.1') }}<a href="https://www.suma-ev.de/" target="_blank" rel="noopener" >{{ trans('staticPages.sumaev.2') }}</a></li>
+					<li><a href="https://www.uni-hannover.de/" target="_blank" rel="noopener">
 						<img src="/img/luh_metager.png" alt="LUH Logo"></a></li>
 				</ul>
 			</footer>

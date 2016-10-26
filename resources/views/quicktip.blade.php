@@ -9,7 +9,7 @@
 		@endif
 		@foreach( $mqs as $mq)
 			<div class="quicktip">
-				<b class="qtheader"><a href="{{ $mq['URL'] }}" target="_blank">{{ $mq['title'] }}</a></b><br>
+				<b class="qtheader"><a href="{{ $mq['URL'] }}" target="_blank" rel="noopener">{{ $mq['title'] }}</a></b><br>
 				<div>{!! $mq['descr'] !!}</div>
 				@if( isset($mq['gefVon']) )
 					<div class="pull-right">{!! $mq['gefVon'] !!}</div>

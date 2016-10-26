@@ -37,7 +37,7 @@
                 {!! trans('researchandtabs.plugin.1', ['browser' => $browser]) !!}
                 <br />
                 <div style="">
-                    <a href="{{ action('StartpageController@loadStartPage', Request::all()) }}#plugin-modal" target="_blank" type="button" class="btn btn-info" style="">{!! trans('researchandtabs.plugin.2') !!}</a>
+                    <a href="{{ action('StartpageController@loadStartPage', Request::all()) }}#plugin-modal" target="_blank" rel="noopener" type="button" class="btn btn-info" style="">{!! trans('researchandtabs.plugin.2') !!}</a>
                 </div>
         </div>
         @endif

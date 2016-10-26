@@ -28,7 +28,7 @@ class SearchenginePhpTest extends TestCase
             $searchengine->useragent);
         $this->assertEquals(null,
             $searchengine->ip);
-        $this->assertEquals('<a href="www.suchmaschine.de/welcome" target="_blank">Meine Suchmaschine</a>',
+        $this->assertEquals('<a href="www.suchmaschine.de/welcome" target="_blank" rel="noopener">Meine Suchmaschine</a>',
             $searchengine->gefVon);
         #$this->assertEquals('0.68813000 1476867147', $searchengine->startTime);
         $this->assertEquals('/suche/?sprache=de&sortieren=true&queue=&rows=<<COUNT>>&fq=subcollection:<<SUBCOLLECTIONS>>',

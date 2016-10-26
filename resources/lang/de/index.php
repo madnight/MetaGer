@@ -19,9 +19,9 @@ return [
 
     'sponsors.head.1'     => 'Weitere Informationen',
     'sponsors.head.2'     => 'Sponsoren',
-    'sponsors.woxikon'    => '<a href="http://www.woxikon.de/" class="mutelink" target="_blank">Woxikon: Nach Wörtern & Synonymen suchen</a>',
-    'sponsors.gutscheine' => '<a href="http://www.gutschein-magazin.de/" class="mutelink" target="_blank">Aktuelle Gutscheine auf Gutschein-Magazin.de</a>',
-    'sponsors.kredite'    => '<a href="https://www.finanzcheck.de/" class="mutelink" target="_blank">Günstige Kredite auf FINANZCHECK.de vergleichen ',
+    'sponsors.woxikon'    => '<a href="http://www.woxikon.de/" class="mutelink" target="_blank" rel="noopener">Woxikon: Nach Wörtern & Synonymen suchen</a>',
+    'sponsors.gutscheine' => '<a href="http://www.gutschein-magazin.de/" class="mutelink" target="_blank" rel="noopener">Aktuelle Gutscheine auf Gutschein-Magazin.de</a>',
+    'sponsors.kredite'    => '<a href="https://www.finanzcheck.de/" class="mutelink" target="_blank" rel="noopener">Günstige Kredite auf FINANZCHECK.de vergleichen ',
 
     'about.title'         => 'Über uns',
     'about.1.1'           => 'Datenschutz & Privatsphäre',
@@ -54,11 +54,11 @@ return [
     'plugin.chrome.7'     => 'Tragen Sie "https://metager.de" als URL bei "Neue Seite hinzufügen ein"',
     'plugin.chrome.8'     => 'Hinweis: Alle hier sichtbaren Webseiten werden nun beim Start des Browsers geöffnet. Sie können Einträge entfernen, indem Sie mit der Maus drüber fahren und rechts auf das "x" klicken.',
 
-    'plugin.opera.1'      => 'Klicken Sie <a href="/" target="_blank">hier</a> um MetaGer in einem neuen Tab zu öffnen.',
+    'plugin.opera.1'      => 'Klicken Sie <a href="/" target="_blank" rel="noopener">hier</a> um MetaGer in einem neuen Tab zu öffnen.',
     'plugin.opera.2'      => 'Im neuen Tab klicken Sie mit der rechten Maustaste auf das Sucheingabefeld in der Mitte der Seite.',
     'plugin.opera.3'      => 'Wählen Sie im Kontextmenü "Suchmaschine erstellen..."',
     'plugin.opera.4'      => 'Klicken Sie im Popup auf "erstellen"',
-    'plugin.opera.5'      => '(Leider ist es Suchmaschinen nicht mehr möglich im Opera als Standard eingestellt zu werden, aber <a href="https://www.mozilla.org/de/firefox/new/" target="_blank">hier</a> können Sie mit Firefox einen Open-Source Browser installieren, der dies unterstützt.)',
+    'plugin.opera.5'      => '(Leider ist es Suchmaschinen nicht mehr möglich im Opera als Standard eingestellt zu werden, aber <a href="https://www.mozilla.org/de/firefox/new/" target="_blank" rel="noopener">hier</a> können Sie mit Firefox einen Open-Source Browser installieren, der dies unterstützt.)',
     'plugin.opera.6'      => 'MetaGer als Startseite im :browser einrichten',
     'plugin.opera.7'      => 'Klicken Sie im Browser-Menü auf "Bearbeiten"->"Einstellungen"',
     'plugin.opera.8'      => 'Im Bereich "Beim Starten" wählen Sie "Eine bestimmte Seite, oder bestimmte Seiten öffnen
@@ -88,7 +88,7 @@ return [
     'plugin.edge.10'      => 'Im Bereich darunter tragen Sie "https://metager.de" in das Feld "Webadresse eingeben" ein und klicken auf das "+" Symbol',
     'plugin.edge.11'      => 'Entfernen Sie alle Einträge, die beim Start nicht geöffnet werden sollen (z.B. about:start), indem Sie rechts auf das kleine "x" klicken.',
 
-    'plugin.safari.1'     => 'Installieren Sie das Safari-PlugIn <a href="http://www.opensearchforsafari.com/" target="_blank">OpenSearchforSafari</a>.',
+    'plugin.safari.1'     => 'Installieren Sie das Safari-PlugIn <a href="http://www.opensearchforsafari.com/" target="_blank" rel="noopener">OpenSearchforSafari</a>.',
     'plugin.safari.2'     => 'Rufen Sie MetaGer auf und fügen Sie MetaGer mit dem OpenSearch-Knopf(Lupen-Symbol) in der Safari-Men&uuml;leiste hinzu.',
     'plugin.safari.3'     => 'L&ouml;schen Sie (nach Bedarf) die anderen Suchmaschinen aus dem OpenSearch-PlugIn, indem Sie das "X" neben diesen betätigen.',
     'plugin.safari.4'     => 'Sie können nun über den OpenSearch-Knopf(Lupe) mit MetaGer suchen.',

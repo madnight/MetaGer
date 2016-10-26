@@ -128,7 +128,7 @@ class Result
                 $tmpLink = str_replace(urlencode($char), "", $tmpLink);
             }
         }
-        if (strlen($this->descr) > 0/*80*/ && strlen($link) > 0) {
+        if (strlen($this->descr) > 40 && strlen($link) > 0) {
             return $count / ((strlen($link)) * 60); # ???
         } else {
             return 0;

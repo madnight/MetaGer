@@ -12,5 +12,5 @@ return [
     'generated.3' => 'Suche mit MetaGer...',
     'generated.4' => 'Suchen',
     'generated.5' => 'Code',
-    'generated.6' => 'de',
+    'generated.6' => 'all',
 ];

@@ -1,25 +1,27 @@
 <?php
 
 use App\MetaGer;
+use App\models\parserSkripte\RlvProduct;
 use Illuminate\Http\Request;
 
 class MetaGerPhpTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function test()
     {
         $this->fullRunTest();
         $this->specialSearchTest();
-        $this->createSearchEnginesTest();
+        $this->specialSumaTest();
         $this->linkGeneratorTest();
-        #$this->getHostCountTest();
+        $this->getHostCountTest();
         $this->addLinkTest();
         $this->adjustFocusTest();
         $this->checkCanNotSitesearchTest();
+        $this->isBildersucheTest();
+        $this->loadMiniSucherTest();
+        $this->getImageProxyLinkTest();
+        $this->showQuicktipsTest();
+        $this->popAdTest();
+        $this->productsTest();
     }
 
     public function fullRunTest()
@@ -32,6 +34,264 @@ class MetaGerPhpTest extends TestCase
         $metager->rankAll();
         $metager->prepareResults();
         $metager->createView();
+    }
+
+    public function specialSearchTest()
+    {
+        $metager = new MetaGer();
+        $request = new Request(['eingabe' => 'suchwort -blackword -host:blackhost -domain:blackdomain site:wantsite "i want phrase"']);
+        $metager->parseFormData($request);
+        $metager->checkSpecialSearches($request);
+        $this->assertEquals("wantsite", $metager->getSite());
+        $this->assertContains("blackhost", $metager->getUserHostBlacklist());
+        $this->assertContains("blackdomain", $metager->getUserDomainBlacklist());
+        $this->assertContains("blackword", $metager->getStopWords());
+        $this->assertContains("i want phrase", $metager->getPhrases());
+
+        $metager = new MetaGer();
+        $request = new Request(['eingabe' => '-site:peter:test -blackword-test -host:blackhost-test.de.nz/test ich suche nach -host:blackhost:blackhost2.cote/t?p=5 "peter ist obst-garten und -bauern"']);
+        $metager->parseFormData($request);
+        $metager->checkSpecialSearches($request);
+        $this->assertEquals("peter:test", $metager->getSite());
+        $this->assertContains("blackhost:blackhost2.cote/t?p=5", $metager->getUserHostBlacklist());
+        $this->assertContains("blackhost-test.de.nz/test", $metager->getUserHostBlacklist());
+        $this->assertContains("blackword-test", $metager->getStopWords());
+        $this->assertNotContains("bauern", $metager->getStopWords());
+        $this->assertContains("peter ist obst-garten und -bauern", $metager->getPhrases());
+
+        $metager = new MetaGer();
+        $request = new Request(['eingabe' => '-host:-domain:test']);
+        $metager->parseFormData($request);
+        $metager->checkSpecialSearches($request);
+        $this->assertContains("-domain:test", $metager->getUserHostBlacklist());
+
+        $metager = new MetaGer();
+        $request = new Request(['eingabe' => '"-host:-domain:test"']);
+        $metager->parseFormData($request);
+        $metager->checkSpecialSearches($request);
+        $this->assertContains("-host:-domain:test", $metager->getPhrases());
+    }
+
+    public function addLinkTest()
+    {
+        $metager = new MetaGer();
+        $link    = "metager.de";
+        $this->assertTrue($metager->addLink($link));
+        $this->assertFalse($metager->addLink($link));
+    }
+
+    public function specialSumaTest()
+    {
+        $metager = new MetaGer();
+        $suma    = new SimpleXMLElement("<suma></suma>");
+
+        $suma["name"] = "qualigo";
+        $this->assertTrue($metager->sumaIsAdsuche($suma, false));
+        $suma["name"] = "similar_product_ads";
+        $this->assertTrue($metager->sumaIsAdsuche($suma, false));
+        $suma["name"] = "rlvproduct";
+        $this->assertTrue($metager->sumaIsAdsuche($suma, false));
+        $suma["name"] = "overtureAds";
+        $this->assertTrue($metager->sumaIsAdsuche($suma, false));
+        $suma["name"] = "overtureAds";
+        $this->assertFalse($metager->sumaIsAdsuche($suma, true));
+        $suma["name"] = "bing";
+        $this->assertFalse($metager->sumaIsAdsuche($suma, false));
+
+        $this->assertFalse($metager->sumaIsDisabled($suma));
+        $suma["disabled"] = "0";
+        $this->assertFalse($metager->sumaIsDisabled($suma));
+        $suma["disabled"] = "1";
+        $this->assertTrue($metager->sumaIsDisabled($suma));
+
+        $suma["name"] = 'overture';
+        $this->assertTrue($metager->sumaIsOverture($suma));
+        $suma["name"] = 'overtureAds';
+        $this->assertTrue($metager->sumaIsOverture($suma));
+        $suma["name"] = 'bing';
+        $this->assertFalse($metager->sumaIsOverture($suma));
+
+        $suma["name"] = 'qualigo';
+        $this->assertFalse($metager->sumaIsNotAdsuche($suma));
+        $suma["name"] = 'similar_product_ads';
+        $this->assertFalse($metager->sumaIsNotAdsuche($suma));
+        $suma["name"] = 'overtureAds';
+        $this->assertFalse($metager->sumaIsNotAdsuche($suma));
+        $suma["name"] = 'bing';
+        $this->assertTrue($metager->sumaIsNotAdsuche($suma));
+    }
+
+    public function linkGeneratorTest()
+    {
+        $metager = new Metager();
+        $request = new Request(['eingabe' => 'test']);
+        $metager->parseFormData($request);
+        $this->containCallbackTester($metager, "generateSearchLink", ["news"],
+            'focus=news');
+        $this->containCallbackTester($metager, "generateQuicktipLink", [],
+            '/qt');
+        $this->containCallbackTester($metager, "generateSiteSearchLink", ["wolf.de"],
+            'site%3Awolf.de');
+        $this->containCallbackTester($metager, "generateRemovedHostLink", ["wolf.de"],
+            '-host%3Awolf.de');
+        $this->containCallbackTester($metager, "generateRemovedDomainLink", ["wolf.de"],
+            '-domain%3Awolf.de');
+    }
+
+    public function getHostCountTest()
+    {
+        $metager = new MetaGer();
+        $host    = "host.de";
+        $before  = $metager->getHostCount($host);
+        $metager->addHostCount($host);
+        $after = $metager->getHostCount($host);
+        $this->assertEquals($before + 1, $after);
+        $before = $after;
+        $metager->addHostCount($host);
+        $after = $metager->getHostCount($host);
+        $this->assertEquals($before + 1, $after);
+    }
+
+    public function adjustFocusTest()
+    {
+        $metager = new MetaGer();
+        $request = new Request(["focus" => "web"]);
+        $metager->parseFormData($request);
+        $this->assertEquals("web", $metager->getFokus());
+        $sumas                = simplexml_load_file("tests/testSumas.xml")->xpath("suma"); # Eine spezielle test sumas.xml
+        $enabledSearchengines = $sumas;
+        $metager->adjustFocus($sumas, $enabledSearchengines);
+        $this->assertEquals("bilder", $metager->getFokus());
+
+        $metager = new MetaGer();
+        $request = new Request(["focus" => "web"]);
+        $metager->parseFormData($request);
+        $this->assertEquals("web", $metager->getFokus());
+        $sumas                = simplexml_load_file("tests/testSumas2.xml")->xpath("suma"); # Eine spezielle test sumas.xml
+        $enabledSearchengines = array_slice($sumas, 0, 1);
+        $metager->adjustFocus($sumas, $enabledSearchengines);
+        $this->assertEquals("bilder", $metager->getFokus());
+    }
+
+    public function checkCanNotSitesearchTest()
+    {
+        $metager              = new MetaGer();
+        $enabledSearchengines = simplexml_load_file("tests/testSumas.xml")->xpath("suma"); # Eine spezielle test sumas.xml
+        $this->assertFalse($metager->checkCanNotSitesearch($enabledSearchengines));
+
+        $metager = new MetaGer();
+        $request = $this->createDummyRequest();
+        $metager->parseFormData($request);
+        $metager->checkSpecialSearches($request);
+        $this->assertEquals("wantsite", $metager->getSite());
+        $enabledSearchengines = simplexml_load_file("tests/testSumas2.xml")->xpath("suma"); # Eine spezielle test sumas.xml
+        $this->assertTrue($metager->checkCanNotSitesearch($enabledSearchengines));
+    }
+
+    public function isBildersucheTest()
+    {
+        $metager = new MetaGer();
+        $request = new Request(["focus" => "bilder"]);
+        $metager->parseFormData($request);
+        $this->assertTrue($metager->isBildersuche());
+
+        $metager = new MetaGer();
+        $request = new Request(["focus" => "web"]);
+        $metager->parseFormData($request);
+        $this->assertFalse($metager->isBildersuche());
+    }
+
+    public function loadMiniSucherTest()
+    {
+        $metager        = new MetaGer();
+        $sumas          = simplexml_load_file("tests/testSumas.xml");
+        $subcollections = ["minism1", "minism2"];
+        $minisucher     = $metager->loadMiniSucher($sumas, $subcollections);
+        $this->assertContains("rows=10", $minisucher["formData"]->__toString());
+        $this->assertContains("fq=subcollection:%28minism1+OR+minism2%29", $minisucher["formData"]->__toString());
+    }
+
+    public function getImageProxyLinkTest()
+    {
+        $metager = new MetaGer();
+        $this->containCallbackTester($metager, "getImageProxyLink", ["www.bilder.de/bild1.png"], "url=www.bilder.de%2Fbild1.png");
+    }
+
+    public function showQuicktipsTest()
+    {
+        $metager = new MetaGer();
+        $request = new Request(["quicktips" => "yo"]);
+        $metager->parseFormData($request);
+        $this->assertFalse($metager->showQuicktips());
+
+        $metager = new MetaGer();
+        $request = new Request([]);
+        $metager->parseFormData($request);
+        $this->assertTrue($metager->showQuicktips());
+    }
+
+    public function popAdTest()
+    {
+        $metager = new MetaGer();
+        $this->assertNull($metager->popAd());
+        $engineList = [];
+
+        $engineXml = simplexml_load_file("tests/testSumas.xml")->xpath("suma");
+        $metager   = new MetaGer();
+        $request   = new Request(["focus" => "web"]);
+        $metager->parseFormData($request);
+        $searchengine = new RlvProduct($engineXml[0], $metager);
+        $product      = new \App\Models\Result(
+            $engineXml[0],
+            "Werbetitel",
+            "Link",
+            "Anzeigelink",
+            "Beschreibung",
+            "Gefunden Von",
+            42,
+            false,
+            "image.png",
+            4.2,
+            "Additional Info"
+        );
+        $searchengine->ads[] = $product;
+
+        $enginesList[] = $searchengine;
+        $metager->combineResults($enginesList, $metager);
+        $this->assertEquals("Werbetitel", $metager->popAd()['titel']);
+    }
+
+    public function productsTest()
+    {
+        $metager = new MetaGer();
+        $this->assertFalse($metager->hasProducts());
+        $this->assertEmpty($metager->getProducts());
+        $engineList = [];
+
+        $engineXml = simplexml_load_file("tests/testSumas.xml")->xpath("suma");
+        $metager   = new MetaGer();
+        $request   = new Request(["focus" => "web"]);
+        $metager->parseFormData($request);
+        $searchengine = new RlvProduct($engineXml[0], $metager);
+        $product      = new \App\Models\Result(
+            $engineXml[0],
+            "Produkttitel",
+            "Link",
+            "Anzeigelink",
+            "Beschreibung",
+            "Gefunden Von",
+            42,
+            false,
+            "image.png",
+            4.2,
+            "Additional Info"
+        );
+        $searchengine->products[] = $product;
+
+        $enginesList[] = $searchengine;
+        $metager->combineResults($enginesList, $metager);
+        $this->assertTrue($metager->hasProducts());
+        $this->assertEquals("Produkttitel", $metager->getProducts()[0]['titel']);
     }
 
     public function createDummyRequest()
@@ -64,98 +324,9 @@ class MetaGerPhpTest extends TestCase
         return new Request($query);
     }
 
-    public function specialSearchTest()
+    public function containCallbackTester($object, $funcName, $input, $expectedInOutput)
     {
-        $metager = new MetaGer();
-        $request = new Request(['eingabe' => 'suchwort -blackword -host:blackhost -domain:blackdomain site:wantsite "i want phrase"']);
-        $metager->parseFormData($request);
-        $metager->checkSpecialSearches($request);
-        $this->assertEquals("wantsite", $metager->getSite());
-        $this->assertEquals("blackhost", $metager->getUserHostBlacklist()[0]);
-        $this->assertEquals("blackdomain", $metager->getUserDomainBlacklist()[0]);
-        $this->assertEquals("blackword", $metager->getStopWords()[0]);
-        $this->assertEquals("i want phrase", $metager->getPhrases()[0]);
-    }
-
-    public function createSearchEnginesTest()
-    {
-        $this->specialSumaTest();
-    }
-
-    public function addLinkTest()
-    {
-        $metager = new MetaGer();
-        $link    = "metager.de";
-        $this->assertTrue($metager->addLink($link));
-        $this->assertFalse($metager->addLink($link));
-    }
-
-    public function specialSumaTest()
-    {
-        $metager      = new MetaGer();
-        $suma         = new SimpleXMLElement("<suma></suma>");
-        $suma["name"] = "qualigo";
-        $this->assertTrue($metager->sumaIsAdsuche($suma, false));
-        $suma["disabled"] = "1";
-        $this->assertTrue($metager->sumaIsDisabled($suma));
-        $suma["name"] = 'overture';
-        $this->assertTrue($metager->sumaIsOverture($suma));
-        $suma["name"] = 'bing';
-        $this->assertTrue($metager->sumaIsNotAdsuche($suma));
-    }
-
-    public function linkGeneratorTest()
-    {
-        $metager = new Metager();
-        $request = new Request(['eingabe' => 'test']);
-        $metager->parseFormData($request);
-        $this->linkCallbackTester($metager, "generateSearchLink", ["news"],
-            '/^.*?eingabe=test&focus=news&out=results$/');
-        $this->linkCallbackTester($metager, "generateQuicktipLink", [],
-            '/\/qt/');
-        $this->linkCallbackTester($metager, "generateSiteSearchLink", ["wolf.de"],
-            '/^.*?eingabe=test\+site%3Awolf.de&focus=web$/');
-        $this->linkCallbackTester($metager, "generateRemovedHostLink", ["wolf.de"],
-            '/^.*?eingabe=test\+-host%3Awolf.de$/');
-        $this->linkCallbackTester($metager, "generateRemovedDomainLink", ["wolf.de"],
-            '/^.*?eingabe=test\+-domain%3Awolf.de$/');
-    }
-
-    public function linkCallbackTester($metager, $funcName, $input, $expectedOutput)
-    {
-        $output = call_user_func_array(array($metager, $funcName), $input);
-        $this->assertRegExp($expectedOutput, $output);
-    }
-
-    public function getHostCountTest()
-    {
-        $metager = new MetaGer();
-        $before  = $metager->getHostCount("host.de");
-        $metager->addHostCount("host.de");
-        $after = $metager->getHostCount("host.de");
-        $this->assertEquals($before + 1, $after);
-        $before = $after;
-        $metager->addHostCount("host.de");
-        $after = $metager->getHostCount("host.de");
-        $this->assertEquals($before + 1, $after);
-    }
-
-    public function adjustFocusTest()
-    {
-        $metager = new MetaGer();
-        $request = new Request(["focus" => "web"]);
-        $metager->parseFormData($request);
-        $this->assertEquals("web", $metager->getFokus());
-        $sumas                = simplexml_load_file("tests/testSumas.xml")->xpath("suma"); # Eine spezielle test sumas.xml
-        $enabledSearchengines = $sumas;
-        $metager->adjustFocus($sumas, $enabledSearchengines);
-        $this->assertEquals("bilder", $metager->getFokus());
-    }
-
-    public function checkCanNotSitesearchTest()
-    {
-        $metager              = new MetaGer();
-        $enabledSearchengines = simplexml_load_file("tests/testSumas.xml")->xpath("suma"); # Eine spezielle test sumas.xml
-        $this->assertFalse($metager->checkCanNotSitesearch($enabledSearchengines));
+        $output = call_user_func_array(array($object, $funcName), $input);
+        $this->assertContains($expectedInOutput, $output);
     }
 }

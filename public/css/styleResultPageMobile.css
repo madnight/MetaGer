@@ -55,13 +55,15 @@ header nav {
     overflow: hidden;
 }
 
+
+/*
 .result.ad .link > a {
     width: 50%;
     max-width: 15ch;
     overflow: hidden;
-    display: inline-flex;
     text-overflow: ellipsis;
 }
+*/
 
 .result .hoster {
     white-space: nowrap;

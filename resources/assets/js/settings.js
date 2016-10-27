@@ -3,7 +3,9 @@ $(document).ready(function() {
     tickOptions();
     if (localStorage) {
         $("#save").removeClass("hidden");
-        if (localStorage.getItem("pers")) $("#reset").removeClass("hidden");
+        if (localStorage.getItem("pers")) {
+            $("#reset").removeClass("hidden");
+        }
         $("#save").click(function() {
             resetOptions();
             localStorage.setItem("pers", true);
@@ -32,6 +34,7 @@ $(document).ready(function() {
         $(".focusCheckbox").prop("checked", false);
     });
     $("#unten").click(function() {
+        $("#settings-form").append("<input type=\"hidden\" name=\"usage\" value=\"once\">");
         if (isEnglish()) {
             alert("On the following startpage your settings are saved one-time. They will be lost after your first search. Though if you want to save them, you can create a bookmark for the generated startpage.");
         } else {

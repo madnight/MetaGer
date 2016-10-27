@@ -20,7 +20,7 @@
 	@foreach($metager->getResults() as $result)
 		<div class="item">
 			<div class="img">
-				<a href="{{ $result->link }}" target="{{ $metager->getTab() }}"><img src="{{ $metager->getImageProxyLink($result->image) }}" width="150px" alt=""/></a>
+				<a href="{{ $result->link }}" target="{{ $metager->getTab() }}"><img src="{{ $metager->getImageProxyLink($result->image) }}" width="150px" alt="" rel="noopener"/></a>
 				<span class="label label-default hostlabel">{{ strip_tags($result->gefVon) }}</span>
 			</div>
 		</div>

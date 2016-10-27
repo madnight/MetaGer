@@ -54,7 +54,7 @@
 								<label>
 									<input name="param_{{ $name }}" class="focusCheckbox" type="checkbox" />{{ $data['displayName'] }}
 								</label>
-								<a class="glyphicon settings-glyphicon glyphicon-link" target="_blank" href="{{ $data['url'] }}"></a>
+								<a class="glyphicon settings-glyphicon glyphicon-link" target="_blank" rel="noopener" href="{{ $data['url'] }}"></a>
 							</div>
 						</div>
 					@endforeach

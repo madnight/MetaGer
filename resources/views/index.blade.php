@@ -208,7 +208,7 @@
             </fieldset>
             <ul class="list-inline searchform-bonus">
               <li>
-                <a href="https://www.boost-project.com/de/shops?charity_id=1129&amp;tag=bl" target="_blank" id="foerdershops" class="btn btn-default mutelink" title="{{ trans('index.partnertitle') }}">{{ trans('index.conveyor') }}
+                <a href="https://www.boost-project.com/de/shops?charity_id=1129&amp;tag=bl" target="_blank" rel="noopener" id="foerdershops" class="btn btn-default mutelink" title="{{ trans('index.partnertitle') }}">{{ trans('index.conveyor') }}
                 </a>
               </li>
               <li class="hidden-xs seperator">|

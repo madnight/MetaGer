@@ -6,7 +6,7 @@
 			@foreach($products as $product)
 			<li>
 			    <div class="product">
-			      	<a href="{{$product["link"]}}" title="{{$product["titel"]}}" target="_blank">
+			      	<a href="{{$product["link"]}}" title="{{$product["titel"]}}" target="_blank" rel="noopener">
 				      	<div class="price">{!!$product["price"]!!}</div>
 				        <img src="{{ $metager->getImageProxyLink($product["image"]) }}" />
 				        <p class="title">{{$product["titel"]}}</p>

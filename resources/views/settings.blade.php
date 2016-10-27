@@ -3,7 +3,7 @@
 @section('title', $title )
 
 @section('content')
-	<form action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}" method="get">
+	<form id="settings-form" action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}" method="get">
 		<h1>{!! trans('settings.head.1') !!}</h1>
 		<p id="lead">{!! trans('settings.head.2') !!}</p>
 		<h2>{!! trans('settings.allgemein.1') !!}</h2>

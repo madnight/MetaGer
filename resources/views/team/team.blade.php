@@ -6,7 +6,7 @@
 	<h1>Team</h1>
 	<ul class="dotlist">
 		<li>
-			<a href="https://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann" target="_blank">Sander-Beuermann, Wolfgang</a>, Dr.-Ing. - {!! trans('team.role.1') !!} -
+			<a href="https://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann" target="_blank" rel="noopener">Sander-Beuermann, Wolfgang</a>, Dr.-Ing. - {!! trans('team.role.1') !!} -
 			<a href="mailto:wsb@suma-ev.de">wsb@suma-ev.de</a> -
 			<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/team/pubkey-wsb") }}">Public Key</a>
 		</li>

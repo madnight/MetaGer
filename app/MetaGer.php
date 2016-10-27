@@ -443,7 +443,7 @@ class MetaGer
          */
         foreach ($sumas as $suma) {
             if (($this->sumaIsSelected($suma, $request)
-                || ($this->isBildersuche()
+                || (!$this->isBildersuche()
                     && $this->sumaIsAdsuche($suma, $overtureEnabled)))
                 && (!$this->sumaIsDisabled($suma))) {
                 if ($this->sumaIsOverture($suma)) {
@@ -586,7 +586,7 @@ class MetaGer
 
     public function isBildersuche()
     {
-        return $this->fokus !== "bilder";
+        return $this->fokus === "bilder";
     }
 
     public function sumaIsAdsuche($suma, $overtureEnabled)
@@ -928,8 +928,8 @@ class MetaGer
         $this->searchCheckSitesearch($site);
         $this->searchCheckHostBlacklist();
         $this->searchCheckDomainBlacklist();
-        $this->searchCheckStopwords();
         $this->searchCheckPhrase();
+        $this->searchCheckStopwords();
     }
 
     public function searchCheckSitesearch($site)
@@ -1023,7 +1023,7 @@ class MetaGer
     public function rankAll()
     {
         foreach ($this->engines as $engine) {
-            $engine->rank($this);
+            $engine->rank($this->getQ());
         }
     }
 
@@ -1199,8 +1199,9 @@ class MetaGer
 
     public function getHostCount($host)
     {
-        if (isset($this->addedHosts[$host])) {
-            return $this->addedHosts[$host];
+        $hash = md5($host);
+        if (isset($this->addedHosts[$hash])) {
+            return $this->addedHosts[$hash];
         } else {
             return 0;
         }

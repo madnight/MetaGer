@@ -15,5 +15,6 @@ return [
     "sitesearch"	=>	"Sitesearch-Widget - MetaGer",
     "faq"	=>	"FAQ - MetaGer",
     "partnershops"	=>	"Partnershops - MetaGer",
+    "languages"	=>	"translation tool - MetaGer",
     "languages.edit"	=>	"Edit language files - MetaGer"
 ];

@@ -69,11 +69,9 @@ class Result
      *  + 0.02 * Sourcerank (20 - Position in Ergebnisliste des Suchanbieters)
      *  * Engine-Boost
      */
-    public function rank(\App\MetaGer $metager)
+    public function rank($eingabe)
     {
         $rank = 0;
-
-        $eingabe = $metager->getQ();
 
         # Boost für Source Ranking
         $rank += ($this->sourceRank * 0.02);
@@ -130,7 +128,7 @@ class Result
                 $tmpLink = str_replace(urlencode($char), "", $tmpLink);
             }
         }
-        if (strlen($this->descr) > 80 && strlen($link) > 0) {
+        if (strlen($this->descr) > 40 && strlen($link) > 0) {
             return $count / ((strlen($link)) * 60); # ???
         } else {
             return 0;
@@ -245,15 +243,10 @@ class Result
      *  "http://www.foo.bar.de/test?ja=1" -> "foo.bar.de"
      *  gebracht.
      */
-    private function getStrippedHost($link)
+    public function getStrippedHost($link)
     {
-        if (strpos($link, "http") !== 0) {
-            $link = "http://" . $link;
-        }
-
-        $link = @parse_url($link, PHP_URL_HOST);
-        $link = preg_replace("/^www\./si", "", $link);
-        return $link;
+        $match = $this->getUrlElements($link);
+        return $match['host'];
     }
 
     /* Entfernt "http://", "www" und Parameter von einem Link
@@ -261,15 +254,10 @@ class Result
      *  "http://www.foo.bar.de/test?ja=1" -> "foo.bar.de/test"
      *  gebracht.
      */
-    private function getStrippedLink($link)
+    public function getStrippedLink($link)
     {
-        if (strpos($link, "http") !== 0) {
-            $link = "http://" . $link;
-        }
-
-        $host = $this->strippedHost;
-        $path = @parse_url($link, PHP_URL_PATH);
-        return $host . $path;
+        $match = $this->getUrlElements($link);
+        return $match['host'] . $match['path'];
     }
 
     /* Liest aus einem Link die Domain.
@@ -277,17 +265,14 @@ class Result
      *  "http://www.foo.bar.de/test?ja=1" -> "bar.de"
      *  gebracht.
      */
-    private function getStrippedDomain($link)
+    public function getStrippedDomain($link)
     {
-        if (preg_match("/([^\.]*\.[^\.]*)$/si", $link, $match)) {
-            return $match[1];
-        } else {
-            return $link;
-        }
+        $match = $this->getUrlElements($link);
+        return $match['domain'];
     }
 
     # Erstellt aus einem Link einen Proxy-Link für unseren Proxy-Service
-    private function generateProxyLink($link)
+    public function generateProxyLink($link)
     {
         if (!$link) {
             return "";
@@ -298,6 +283,45 @@ class Result
         $tmp = preg_replace("#^([\w+.-]+)://#s", "$1/", $tmp);
         return "https://proxy.suma-ev.de/cgi-bin/nph-proxy.cgi/en/I0/" . $tmp;
 
+    }
+
+    /* Liest aus einer URL alle Informationen aus
+     * https://max:muster@www.example.site.page.com:8080/index/indexer/list.html?p1=A&p2=B#ressource
+     * (?:((?:http)|(?:https))(?::\/\/))?
+     * https://                  => [1] = http / https
+     * (?:([a-z0-9.\-_~]+):([a-z0-9.\-_~]+)@)?
+     * username:password@        => [2] = username, [3] = password
+     * (?:(www)(?:\.))?
+     * www.                      => [4] = www
+     * ((?:(?:[a-z0-9.\-_~]+\.)+)?([a-z0-9.\-_~]+\.[a-z0-9.\-_~]+))
+     * example.site.page.com     => [5] = example.site.page.com, [6] = page.com
+     * (?:(?::)(\d+))?
+     * :8080                     => [7] = 8080
+     * ((?:(?:\/[a-z0-9.\-_~]+)+)(?:\.[a-z0-9.\-_~]+)?)?
+     * /index/indexer/list.html  => [8] = /index/indexer/list.html
+     * (\?[a-z0-9.\-_~]+=[a-z0-9.\-_~]+(?:&[a-z0-9.\-_~]+=[a-z0-9.\-_~]+)*)?
+     * ?p1=A&p2=B                => [9] = ?p1=A&p2=B
+     * (?:(?:#)([a-z0-9.\-_~]+))?
+     * #ressource                => [10] = ressource
+     */
+    public function getUrlElements($url)
+    {
+        if (!preg_match("/(?:((?:http)|(?:https))(?::\/\/))?(?:([a-z0-9.\-_~]+):([a-z0-9.\-_~]+)@)?(?:(www)(?:\.))?((?:(?:[a-z0-9.\-_~]+\.)+)?([a-z0-9.\-_~]+\.[a-z0-9.\-_~]+))(?:(?::)(\d+))?((?:(?:\/[a-z0-9.\-_~]+)+)(?:\.[a-z0-9.\-_~]+)?)?(\?[a-z0-9.\-_~]+=[a-z0-9.\-_~]+(?:&[a-z0-9.\-_~]+=[a-z0-9.\-_~]+)*)?(?:(?:#)([a-z0-9.\-_~]+))?/i", $url, $match)) {
+            return;
+        } else {
+            $re = [];
+            if (isset($match[1])) {$re['schema'] = $match[1];} else { $re['schema'] = "";};
+            if (isset($match[2])) {$re['username'] = $match[2];} else { $re['username'] = "";};
+            if (isset($match[3])) {$re['password'] = $match[3];} else { $re['password'] = "";};
+            if (isset($match[4])) {$re['web'] = $match[4];} else { $re['web'] = "";};
+            if (isset($match[5])) {$re['host'] = $match[5];} else { $re['host'] = "";};
+            if (isset($match[6])) {$re['domain'] = $match[6];} else { $re['domain'] = "";};
+            if (isset($match[7])) {$re['port'] = $match[7];} else { $re['port'] = "";};
+            if (isset($match[8])) {$re['path'] = $match[8];} else { $re['path'] = "";};
+            if (isset($match[9])) {$re['query'] = $match[9];} else { $re['query'] = "";};
+            if (isset($match[10])) {$re['fragment'] = $match[10];} else { $re['fragment'] = "";};
+            return $re;
+        }
     }
 
     # Getter

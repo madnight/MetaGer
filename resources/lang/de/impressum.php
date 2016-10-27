@@ -3,10 +3,10 @@
 return [
     'title'      => 'Impressum',
 
-    'headline.1' => '<a href="http://suma-ev.de/" target="_blank">SUMA-EV - Verein für freien Wissenszugang (e.V.)</a>
-in Kooperation mit der <a href="http://www.uni-hannover.de/" target="_blank">Leibniz Universität Hannover</a>',
+    'headline.1' => '<a href="http://suma-ev.de/" target="_blank" rel="noopener">SUMA-EV - Verein für freien Wissenszugang (e.V.)</a>
+in Kooperation mit der <a href="http://www.uni-hannover.de/" target="_blank" rel="noopener">Leibniz Universität Hannover</a>',
 
-    'info.1'     => 'Wikipedia-Eintrag zum <a href="http://de.wikipedia.org/wiki/Suma_e.V." target="_blank">SUMA-EV</a>',
+    'info.1'     => 'Wikipedia-Eintrag zum <a href="http://de.wikipedia.org/wiki/Suma_e.V." target="_blank" rel="noopener">SUMA-EV</a>',
     'info.2'     => 'SUMA-EV
 Röselerstr. 3
 D-30159 Hannover

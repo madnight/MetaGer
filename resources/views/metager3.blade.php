@@ -35,7 +35,7 @@
 			<div class="result row">
 				<div class="col-sm-1"></div>
 				<div class="col-sm-11">
-					<iframe class="" src="http://148.251.188.34/?q={{ $metager->getQ() }}&controls=off" style="width: 100%; height:0; border:0;"></iframe>
+					<iframe class="" sandbox="allow-same-origin allow-scripts allow-popups allow-forms" src="http://tiles.metager.de/?q={{ $metager->getQ() }}&controls=false&limit=3" style="width: 100%; height:0; border:0; display:inherit;"></iframe>
 				</div>
 			</div>
 			@foreach($metager->getResults() as $result)

@@ -421,7 +421,7 @@ class MetaGer
     public function createSearchEngines(Request $request)
     {
         # Wenn es kein Suchwort gibt
-        if (!$request->has("eingabe")) {
+        if (!$request->has("eingabe") || $this->q === "") {
             return;
         }
 
@@ -925,11 +925,16 @@ class MetaGer
         } else {
             $site = "";
         }
+
         $this->searchCheckSitesearch($site);
         $this->searchCheckHostBlacklist();
         $this->searchCheckDomainBlacklist();
         $this->searchCheckPhrase();
         $this->searchCheckStopwords();
+
+        if ($this->q === "") {
+            $this->warnings[] = trans('metaGer.formdata.noSearch');
+        }
     }
 
     public function searchCheckSitesearch($site)

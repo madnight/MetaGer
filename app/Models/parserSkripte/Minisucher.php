@@ -55,7 +55,7 @@ class Minisucher extends Searchengine
                 }
 
                 if (isset($provider)) {
-                    $gefVon = "<a href=\"https://metager.de\" target=\"_blank\">Minisucher: $provider</a>";
+                    $gefVon = "<a href=\"https://metager.de\" target=\"_blank\" rel=\"noopener\">Minisucher: $provider</a>";
                 } else {
                     $gefVon = $this->gefVon;
                 }

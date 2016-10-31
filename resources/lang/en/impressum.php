@@ -3,9 +3,9 @@
 return [
     'title'      => 'Site Notice',
 
-    'headline.1' => '<a href="http://suma-ev.de/" target="_blank">SUMA-EV - Verein für freien Wissenszugang (e.V.)</a>',
+    'headline.1' => '<a href="http://suma-ev.de/" target="_blank" rel="noopener">SUMA-EV - Verein für freien Wissenszugang (e.V.)</a>',
 
-    'info.1'     => 'Wikipedia-entry for the <a href="http://de.wikipedia.org/wiki/Suma_e.V." target="_blank">SUMA-EV</a>',
+    'info.1'     => 'Wikipedia-entry for the <a href="http://de.wikipedia.org/wiki/Suma_e.V." target="_blank" rel="noopener">SUMA-EV</a>',
     'info.2'     => 'SUMA-EV
 Röselerstr. 3
 D-30159 Hannover

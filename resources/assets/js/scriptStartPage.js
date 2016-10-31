@@ -1,6 +1,8 @@
 $(document).ready(function() {
     // checkPlugin();
-    if (location.href.indexOf("#plugin-modal") > -1) $("#plugin-modal").modal("show");
+    if (location.href.indexOf("#plugin-modal") > -1) {
+        $("#plugin-modal").modal("show");
+    }
     $("button").popover();
     if (localStorage) {
         var theme = localStorage.getItem("theme");
@@ -12,7 +14,7 @@ $(document).ready(function() {
                 $("#theme").attr("href", "/css/theme.css.php?r=" + theme[0] + "&g=" + theme[1] + "&b=" + theme[2] + "&a=" + theme[3]);
             }
         }
-        if (localStorage.getItem("pers")) {
+        if (localStorage.getItem("pers") && !isUseOnce()) {
             setSettings();
         }
     }
@@ -142,3 +144,10 @@ var isEdge = !isIE && !!window.StyleMedia;
 var isChrome = !!window.chrome && !!window.chrome.webstore;
 // Blink engine detection
 var isBlink = (isChrome || isOpera) && !!window.CSS;
+// Prüft, ob der URL-Parameter "usage" auf "once" gesetzt ist.
+function isUseOnce() {
+    var url = document.location.search;
+    var pos = url.indexOf("usage=");
+    if (pos >= 0 && url.substring(pos + 6, pos + 11) == "once") return true;
+    return false;
+}

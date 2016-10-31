@@ -37,20 +37,20 @@
                 {!! trans('researchandtabs.plugin.1', ['browser' => $browser]) !!}
                 <br />
                 <div style="">
-                    <a href="{{ action('StartpageController@loadStartPage', Request::all()) }}#plugin-modal" target="_blank" type="button" class="btn btn-info" style="">{!! trans('researchandtabs.plugin.2') !!}</a>
+                    <a href="{{ action('StartpageController@loadStartPage', Request::all()) }}#plugin-modal" target="_blank" rel="noopener" type="button" class="btn btn-info" style="">{!! trans('researchandtabs.plugin.2') !!}</a>
                 </div>
         </div>
         @endif
         <ul class="nav nav-tabs" id="foki" role="tablist">
         @if( $metager->getFokus() === "web" )
-        <li id="webTabSelector" role="presentation" data-loaded="1" class="active">
+        <li id="webTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
             <a aria-controls="web" data-href="#web" href="#web">
                 <span class='glyphicon glyphicon-globe'></span>
                 <span class="hidden-xs">{{ trans('index.foki.web') }}</span>
             </a>
         </li>
         @else
-            <li data-loaded="0" id="webTabSelector" role="presentation">
+            <li data-loaded="0" id="webTabSelector" class="tab-selector" role="presentation">
                 <a aria-controls="web" data-href="{{ $metager->generateSearchLink('web') }}" href="{{ $metager->generateSearchLink('web') }}">
                     <span class='glyphicon glyphicon-globe'></span>
                     <span class="hidden-xs">{{ trans('index.foki.web') }}</span>
@@ -59,14 +59,14 @@
         @endif
 
         @if( $metager->getFokus() === "bilder" )
-        <li id="bilderTabSelector" role="presentation" data-loaded="1" class="active">
+        <li id="bilderTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
             <a aria-controls="bilder" data-href="#bilder" href="#bilder">
                 <span class='glyphicon glyphicon-picture'></span>
                 <span class="hidden-xs">{{ trans('index.foki.bilder') }}</span>
             </a>
         </li>
         @else
-        <li data-loaded="0" id="bilderTabSelector" role="presentation">
+        <li data-loaded="0" id="bilderTabSelector" class="tab-selector" role="presentation">
             <a aria-controls="bilder" data-href="{{ $metager->generateSearchLink('bilder') }}" href="{{ $metager->generateSearchLink('bilder') }}">
                 <span class='glyphicon glyphicon-picture'></span>
                 <span class="hidden-xs">{{ trans('index.foki.bilder') }}</span>
@@ -75,14 +75,14 @@
         @endif
 
         @if( $metager->getFokus() === "nachrichten" )
-        <li id="nachrichtenTabSelector" role="presentation" data-loaded="1" class="active">
+        <li id="nachrichtenTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
             <a aria-controls="nachrichten" data-href="#nachrichten" href="#nachrichten">
                 <span class='glyphicon glyphicon-bullhorn'></span>
                 <span class="hidden-xs">{{ trans('index.foki.nachrichten') }}</span>
             </a>
         </li>
         @else
-        <li data-loaded="0" id="nachrichtenTabSelector" role="presentation" >
+        <li data-loaded="0" id="nachrichtenTabSelector" class="tab-selector" role="presentation" >
             <a aria-controls="nachrichten" data-href="{{ $metager->generateSearchLink('nachrichten') }}" href="{{ $metager->generateSearchLink('nachrichten') }}">
                 <span class='glyphicon glyphicon-bullhorn'></span>
                 <span class="hidden-xs">{{ trans('index.foki.nachrichten') }}</span>
@@ -91,14 +91,14 @@
         @endif
 
         @if( $metager->getFokus() === "wissenschaft" )
-        <li id="wissenschaftTabSelector" role="presentation" data-loaded="1" class="active">
+        <li id="wissenschaftTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
             <a aria-controls="wissenschaft" data-href="#wissenschaft" href="#wissenschaft">
                 <span class='glyphicon glyphicon-file'></span>
                 <span class="hidden-xs">{{ trans('index.foki.wissenschaft') }}</span>
             </a>
         </li>
         @else
-        <li data-loaded="0" id="wissenschaftTabSelector" role="presentation">
+        <li data-loaded="0" id="wissenschaftTabSelector" class="tab-selector" role="presentation">
             <a aria-controls="wissenschaft" data-href="{{ $metager->generateSearchLink('wissenschaft') }}" href="{{ $metager->generateSearchLink('wissenschaft') }}">
                 <span class='glyphicon glyphicon-file'></span>
                 <span class="hidden-xs">{{ trans('index.foki.wissenschaft') }}</span>
@@ -107,14 +107,14 @@
         @endif
 
         @if( $metager->getFokus() === "produktsuche" )
-        <li id="produktsucheTabSelector" role="presentation" data-loaded="1" class="active">
+        <li id="produktsucheTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
             <a aria-controls="produktsuche" data-href="#produktsuche" href="#produktsuche">
                 <span class='glyphicon glyphicon-shopping-cart'></span>
                 <span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
             </a>
         </li>
         @else
-        <li data-loaded="0" id="produktsucheTabSelector" role="presentation" >
+        <li data-loaded="0" id="produktsucheTabSelector" class="tab-selector" role="presentation" >
             <a aria-controls="produktsuche" data-href="{{ $metager->generateSearchLink('produktsuche') }}" href="{{ $metager->generateSearchLink('produktsuche') }}">
                 <span class='glyphicon glyphicon-shopping-cart'></span>
                 <span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
@@ -123,7 +123,7 @@
         @endif
 
         @if( $metager->getFokus() === "angepasst" )
-        <li id="angepasstTabSelector" role="presentation" data-loaded="1" class="active">
+        <li id="angepasstTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
             <a aria-controls="angepasst" data-href="#angepasst" href="#angepasst">
                 <span class='glyphicon glyphicon-cog'></span>
                 <span class="hidden-xs">{{ trans('index.foki.angepasst') }}</span>

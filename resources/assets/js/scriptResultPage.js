@@ -7,13 +7,13 @@ $(document).ready(function() {
 
 function tabs() {
     //return;
-    $("#foki  a").each(function() {
+    $("#foki > li.tab-selector > a").each(function() {
         $(this).attr("href", "#" + $(this).attr("aria-controls"));
         $(this).attr("role", "tab");
         $(this).attr("data-toggle", "tab");
     });
-    $("#foki a").off();
-    $("#foki a").on("show.bs.tab", function(e) {
+    $("#foki > li.tab-selector > a").off();
+    $("#foki > li.tab-selector > a").on("show.bs.tab", function(e) {
         var fokus = $(this).attr("aria-controls");
         var link = $("#" + fokus + "TabSelector a").attr("data-href");
         if ($("#" + fokus + "TabSelector").attr("data-loaded") != "1") {

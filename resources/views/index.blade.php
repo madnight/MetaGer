@@ -215,7 +215,7 @@
               </li>
               <li id="plug" @unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge' || $browser === 'Safari')
                 class="hidden" @endunless >
-                <a href="#" id="plugin" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}">{{ trans('index.plugin') }}</a>
+                <a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}">{{ trans('index.plugin') }}</a>
               </li>
             </ul>
           </figure>

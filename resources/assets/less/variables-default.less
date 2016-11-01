@@ -9,3 +9,11 @@
 @container-tablet: (720px + @grid-gutter-width);
 @container-desktop: (940px + @grid-gutter-width);
 @container-large-desktop: (1340px + @grid-gutter-width);
+
+//** Global textual link color.
+@link-color:           #2A2ADE;
+//@link-color:            rgb(255, 128, 0);
+//** Link hover color set via `darken()` function.
+@link-hover-color:      darken(@link-color, 15%);
+//** Link hover decoration.
+@link-hover-decoration: underline;

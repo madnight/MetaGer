@@ -3,7 +3,7 @@
 return [
     'headline.1' => 'Kontakt',
     'headline.2' => 'Forum',
-    'headline.3' => 'Bitte stellen Sie technische Fragen zuerst in unserem <a href="http://forum.suma-ev.de/" target="_blank">Forum</a>',
+    'headline.3' => 'Bitte stellen Sie technische Fragen zuerst in unserem <a href="http://forum.suma-ev.de/" target="_blank" rel="noopener">Forum</a>',
     'headline.4' => 'So können auch andere von einer Antwort profitieren.',
 
     'form.1'     => 'Sicheres Kontakformular',

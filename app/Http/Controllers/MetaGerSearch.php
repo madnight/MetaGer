@@ -87,7 +87,7 @@ class MetaGerSearch extends Controller
             $quicktip["title"]  = $decodedResponse[1][0];
             $quicktip["URL"]    = $decodedResponse[3][0];
             $quicktip["descr"]  = $decodedResponse[2][0];
-            $quicktip['gefVon'] = "aus <a href=\"https://de.wikipedia.org\" target=\"_blank\">Wikipedia, der freien Enzyklopädie</a>";
+            $quicktip['gefVon'] = "aus <a href=\"https://de.wikipedia.org\" target=\"_blank\" rel=\"noopener\">Wikipedia, der freien Enzyklopädie</a>";
 
             $quicktips[] = $quicktip;
         }

@@ -3,7 +3,7 @@
 @section('title', $title )
 
 @section('content')
-	<form action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}" method="get">
+	<form id="settings-form" action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}" method="get">
 		<h1>{!! trans('settings.head.1') !!}</h1>
 		<p id="lead">{!! trans('settings.head.2') !!}</p>
 		<h2>{!! trans('settings.allgemein.1') !!}</h2>
@@ -54,7 +54,7 @@
 								<label>
 									<input name="param_{{ $name }}" class="focusCheckbox" type="checkbox" />{{ $data['displayName'] }}
 								</label>
-								<a class="glyphicon settings-glyphicon glyphicon-link" target="_blank" href="{{ $data['url'] }}"></a>
+								<a class="glyphicon settings-glyphicon glyphicon-link" target="_blank" rel="noopener" href="{{ $data['url'] }}"></a>
 							</div>
 						</div>
 					@endforeach

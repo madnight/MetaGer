@@ -7757,3 +7757,8 @@ body > div {
     border: 0;
     margin: 5px 0;
 }
+
+.underline-i-elements i {
+    text-decoration-style: dotted !important;
+    text-decoration: underline;
+}

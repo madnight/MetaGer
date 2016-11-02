@@ -7208,6 +7208,9 @@ nav h1 {
 body > div {
   padding-top: 70px;
 }
+.tab-content {
+  padding-top: 10px;
+}
 .hostlabel a:link,
 .hostlabel a:visited {
   color: #FFFFFF;

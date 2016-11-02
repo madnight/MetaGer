@@ -30,6 +30,52 @@
 <ul class="dotlist">
 	<li>{!! trans('hilfe.grossklein.2') !!}</li>
 </ul>
+<h3>Suche auf Webseite beschränken / Webseiten ausschließen</h3>
+<p>Wenn Sie Ihre Suche nur auf Ergebnisse von einer bestimmten Webseite beschränken möchten, können Sie dies erreichen indem Sie Ihrer Suche site:ihre-seite.de hinzufügen.</p>
+<ul class="dotlist">
+	<li>Beispiel: Sie möchten nur noch Ergebnisse von der deutschen Wikipedia (de.wikipedia.org) erhalten. Ihre Suche lautet also:
+	<div class="well well-sm">meine suche site:de.wikipedia.org</div></li>
+	<li>Beispiel: Sie möchten auch Ergebnisse von Wikipedia in anderen Sprachen (wikipedia.org) erhalten. Ihre Suche lautet also:
+	<div class="well well-sm">meine suche site:wikipedia.org</div></li>
+</ul>
+<p>Manchmal kann es auch passieren, dass Sie Ergebnisse einer bestimmten Webseite nicht mehr sehen möchten. In diesem Fall haben Sie zwei Möglichkeiten: Den Ausschluss eines Hosts und den Ausschluss einer Domain. Dies erreichen Sie, indem Sie -host:unterseite.ihre-seite.de beziehungsweise -domain:ihre-seite.de zu Ihrer Suche hinzufügen.</p>
+<ul class="dotlist">
+	<li>Beispiel: Sie haben genug von den ganzen Wikipedia-Ergebnissen. Nun haben Sie zwei möglichkeiten:</li>
+	<li>Sie schließen alle Ergebnisse von der deutschen Wikipedia, also de.wikipedia.org aus
+	<div class="well well-sm">meine suche -host:de.wikipedia.org</div>
+	Sie erhalten nun weiterhin Ergebnisse von beispielsweise en.wikipedia.org, solange diese zu Ihrer Suche passen</li>
+	<li>Sie schließen generell alle Ergebnisse von wikipedia.org aus
+	<div class="well well-sm">meine suche -domain:wikipedia.org</div></li>
+</ul>
+<div class="result">
+	<div style="float: left">Zusätzlich bieten wir Ihnen die Möglichkeit Hosts beziehungsweise Domains direkt auf der Ergebnisseite auszuschließen. Bei jedem unserer Ergebnisse erscheint dieses kleine Symbol für die Optionen: </div>
+	<div class="link">
+		<div class="options">
+			<a tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="auto bottom" data-container="body" data-html="true" data-title="<span class='glyphicon glyphicon-cog'></span> Optionen" data-original-title="" title=""><span class="glyphicon glyphicon-triangle-bottom"></span></a>
+			<div class="content hidden">
+				<ul class="options-list list-unstyled">
+					<li>
+						<a href="javascript:void(0)" onclick="javascript:document.getElementById('blacklist-tutorial-search').innerHTML = 'meine suche site:wikipedia.org'">
+							Suche auf dieser Domain neu starten
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)" onclick="javascript:document.getElementById('blacklist-tutorial-search').innerHTML = 'meine suche -host:de.wikipedia.org'">
+							de.wikipedia.org ausblenden
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)" onclick="javascript:document.getElementById('blacklist-tutorial-search').innerHTML = 'meine suche -domain:wikipedia.org'">
+							*.wikipedia.org ausblenden
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div style="clear: both">Sie können in den Optionen die Webseite von der das Ergebnis stammt direkt von der Suche ausschließen. Probieren Sie es doch gleuch aus.</div>
+	<div id="blacklist-tutorial-search" class="well well-sm">meine suche</div>
+</div>
 <h2>{!! trans('hilfe.dienste') !!}</h2>
 <h3>{!! trans('hilfe.suchwortassoziator.title') !!}</h3>
 <p>{!! trans('hilfe.suchwortassoziator.1') !!}</p>

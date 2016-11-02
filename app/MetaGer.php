@@ -310,6 +310,25 @@ class MetaGer
         }
     }
 
+    /**
+     * Diese Funktion überprüft, ob wir einen erweiterten Check auf Bots machen müssen.
+     * Z.B.: Wurden wir von einem Bot (dessen Anfragen aus dem Tor-Netzwerk kamen) mit tausenden
+     * Anfragen zu Telefonnummern überschwemmt. Bei diesen werden wir nun eine erweiterte Überprüfung
+     * durchführen.
+     * Für den Anfang werden wir alle Anfragen, die unter diese Kriterien fallen, nur noch beantworten, wenn
+     * JavaScript ausgeführt wird. (Mal schauen ob und wie lange dies ausreicht)
+     */
+    public function doBotProtection($bot)
+    {
+        $hash = md5(date('YmdHi'));
+        if (preg_match("/^\d+$/s", $this->getEingabe()) && $bot !== $hash) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     public function combineResults($engines)
     {
         foreach ($engines as $engine) {

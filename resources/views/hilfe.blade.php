@@ -30,53 +30,38 @@
 <ul class="dotlist">
 	<li>{!! trans('hilfe.grossklein.2') !!}</li>
 </ul>
-<div class="underline-i-elements">
-	<h3>Suche auf Domains beschränken / Domains ausschließen</h3>
-	<p>Die im folgen verwendeten <i>Suchen und Webseiten</i> sind lediglich Beispiele. Sie müssen diese in der Praxis durch ihre eigenen ersetzen.</p>
-	<p>Wenn Sie Ihre Suche nur auf Ergebnisse von einer bestimmten Domain (z.B. wikipedia.org) beschränken möchten, können Sie dies erreichen indem Sie Ihrer Suche site:<i>ihre-domain.de</i> hinzufügen.</p>
-	<ul class="dotlist">
-		<li>Beispiel: Sie möchten nur noch Ergebnisse von der deutschen Wikipedia (de.wikipedia.org) erhalten. Ihre Suche lautet also:
-		<div class="well well-sm"><i>meine suche</i> site:de.wikipedia.org</div></li>
-		<li>Beispiel: Sie möchten auch Ergebnisse von Wikipedia in anderen Sprachen (wikipedia.org) erhalten. Ihre Suche lautet also:
-		<div class="well well-sm"><i>meine suche</i> site:wikipedia.org</div></li>
-	</ul>
-	<p>Manchmal kann es auch passieren, dass Sie Ergebnisse einer bestimmten Domain nicht mehr sehen möchten. In diesem Fall haben Sie zwei Möglichkeiten: Den Ausschluss eines Hosts und den Ausschluss einer Domain. Dies erreichen Sie, indem Sie -host:<i>unterseite.ihre-seite.de</i> beziehungsweise -domain:<i>ihre-seite.de</i> zu Ihrer Suche hinzufügen.</p>
-	<ul class="dotlist">
-		<li>Beispiel: Sie haben genug von den ganzen Wikipedia-Ergebnissen. Nun haben Sie zwei möglichkeiten:</li>
-		<li>Sie schließen alle Ergebnisse von der deutschen Wikipedia-Domain, also de.wikipedia.org, aus
-		<div class="well well-sm"><i>meine suche</i> -host:de.wikipedia.org</div>
-		Sie erhalten nun weiterhin Ergebnisse von beispielsweise en.wikipedia.org, solange diese zu Ihrer Suche passen</li>
-		<li>Sie schließen generell alle Ergebnisse von allen Wikipedia-Domains aus
-		<div class="well well-sm"><i>meine suche</i> -domain:wikipedia.org</div></li>
-	</ul>
-	<div class="result">
-		<div style="float: left">Zusätzlich bieten wir Ihnen die Möglichkeit Hosts beziehungsweise Domains direkt auf der Ergebnisseite auszuschließen. Bei jedem unserer Ergebnisse erscheint dieses kleine Symbol für die Optionen: </div>
-		<div class="link">
-			<div class="options">
-				<a tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="auto bottom" data-container="body" data-html="true" data-title="<span class='glyphicon glyphicon-cog'></span> Optionen" data-original-title="" title=""><span class="glyphicon glyphicon-triangle-bottom"></span></a>
-				<div class="content hidden">
-					<ul class="options-list list-unstyled">
-						<li>
-							<a href="javascript:void(0)" onclick="javascript:document.getElementById('blacklist-tutorial-search').innerHTML = 'meine suche site:wikipedia.org'">
-								Suche auf dieser Domain neu starten
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)" onclick="javascript:document.getElementById('blacklist-tutorial-search').innerHTML = 'meine suche -host:de.wikipedia.org'">
-								de.wikipedia.org ausblenden
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)" onclick="javascript:document.getElementById('blacklist-tutorial-search').innerHTML = 'meine suche -domain:wikipedia.org'">
-								*.wikipedia.org ausblenden
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div style="clear: both">Sie können in den Optionen die Domain von der das Ergebnis stammt direkt von der Suche ausschließen. Probieren Sie es doch gleich aus.</div>
-		<div id="blacklist-tutorial-search" class="well well-sm">meine suche</div>
+<h3>{!! trans('hilfe.domains.title') !!}</h3>
+<p>{!! trans('hilfe.domains.hint') !!}</p>
+<p>{!! trans('hilfe.domains.sitesearch.explanation') !!}</p>
+<ul class="dotlist">
+	<li>{!! trans('hilfe.domains.sitesearch.example.1') !!}
+	<div class="well well-sm">{!! trans('hilfe.domains.sitesearch.example.2') !!}</div></li>
+	<li>{!! trans('hilfe.domains.sitesearch.example.3') !!}
+	<div class="well well-sm">{!! trans('hilfe.domains.sitesearch.example.4') !!}</div></li>
+</ul>
+<p>{!! trans('hilfe.domains.blacklist.explanation') !!}</p>
+<ul class="dotlist">
+	<li>{!! trans('hilfe.domains.blacklist.example.1') !!}</li>
+	<li>{!! trans('hilfe.domains.blacklist.example.2') !!}
+	<div class="well well-sm">{!! trans('hilfe.domains.blacklist.example.3') !!}</div>
+	{!! trans('hilfe.domains.blacklist.example.4') !!}</li>
+	<li>{!! trans('hilfe.domains.blacklist.example.5') !!}
+	<div class="well well-sm">{!! trans('hilfe.domains.blacklist.example.6') !!}</div></li>
+</ul>
+<p>Zusätzlich bieten wir Ihnen die Möglichkeit Hosts beziehungsweise Domains direkt auf der Ergebnisseite auszuschließen. Bei jedem unserer Ergebnisse erscheint dieses kleine Symbol für die Optionen: </p>
+<img src="/img/blacklist-tutorial-searchexample.png">
+<p>Wenn Sie auf dieses Symbol klicken, erscheint folgendes Menü: <p>
+<div class="media">
+	<div class="media-left">
+		<img src="/img/blacklist-tutorial-options.png">
+	</div>
+	<div class="media-body">
+		<p>Mit diesem Menü lassen sich:</p>
+		<ul class="dotlist">
+			<li>Eine neue Suche nur auf der Domain des Ergebnisses (de.wikipedia.de) starten</li>
+			<li>Eine Suche ohne Ergebnisse der Subdomain (de.wikipedia.de) starten</li>
+			<li>Eine Suche ohne Ergebnisse der Top-Level-Domain (wikipedia.de) starten</li>
+		</ul>
 	</div>
 </div>
 <h2>{!! trans('hilfe.dienste') !!}</h2>

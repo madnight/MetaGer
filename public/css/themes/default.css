@@ -1581,7 +1581,7 @@ pre code {
 }
 @media (min-width: 1200px) {
   .container {
-    width: 1370px;
+    width: 1170px;
   }
 }
 .container-fluid {
@@ -7129,13 +7129,13 @@ footer {
 body {
   margin: 0;
 }
-header {
-  position: fixed;
-  background-color: white;
-  z-index: 500;
-  width: 100%;
-  height: 50px;
-}
+/*header {
+    position: fixed;
+    background-color: white;
+    z-index: 500;
+    width: 100%;
+    height: 50px;
+}*/
 address {
   white-space: pre;
 }
@@ -7294,7 +7294,6 @@ nav .input-group {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 60px;
   z-index: 500;
   width: 80%;
   left: 50%;
@@ -7674,16 +7673,6 @@ footer a {
 .lSPrev > span,
 .lSNext > span {
   color: #ff8000;
-}
-@media (min-width: 1200px) {
-  .container {
-    width: 1150px;
-  }
-}
-@media (min-width: 1400px) {
-  .container {
-    width: 1370px;
-  }
 }
 
 /*# sourceMappingURL=default.css.map */

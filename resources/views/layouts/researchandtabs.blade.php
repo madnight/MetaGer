@@ -1,6 +1,16 @@
+        @if( strpos(rtrim(Request::header('REFERER'), '/'), LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") )  === 0 && ( $browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'IE' || $browser === 'Edge') )
+        <div id="searchplugin" class="alert alert-warning alert-dismissible" role="alert" style="">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {!! trans('researchandtabs.plugin.1', ['browser' => $browser]) !!}
+                <br />
+                <div style="">
+                    <a href="{{ action('StartpageController@loadStartPage', Request::all()) }}#plugin-modal" target="_blank" rel="noopener" type="button" class="btn btn-info" style="">{!! trans('researchandtabs.plugin.2') !!}</a>
+                </div>
+        </div>
+        @endif
 <div class="content-wrapper">
         <header id="research">
-            <nav>
+            <nav class="navbar navbar-default">
                 <ul class="list-inline">
                     <li class="hidden-xs hidden-sm pull-left">
                         <div class="logo"><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}"><h1>MetaGer</h1></a>
@@ -30,17 +40,6 @@
                     </li>
                 </ul>
             </nav>
-        </header>
-        @if( strpos(rtrim(Request::header('REFERER'), '/'), LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") )  === 0 && ( $browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'IE' || $browser === 'Edge') )
-        <div id="searchplugin" class="alert alert-warning alert-dismissible" role="alert" style="">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                {!! trans('researchandtabs.plugin.1', ['browser' => $browser]) !!}
-                <br />
-                <div style="">
-                    <a href="{{ action('StartpageController@loadStartPage', Request::all()) }}#plugin-modal" target="_blank" rel="noopener" type="button" class="btn btn-info" style="">{!! trans('researchandtabs.plugin.2') !!}</a>
-                </div>
-        </div>
-        @endif
         <ul class="nav nav-tabs" id="foki" role="tablist">
         @if( $metager->getFokus() === "web" )
         <li id="webTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
@@ -131,7 +130,7 @@
         </li>
         @endif
         </ul>
-
+        </header>
         <div class="tab-content container-fluid">
 
             @if( $metager->getFokus() === "web" )

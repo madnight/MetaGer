@@ -12,12 +12,9 @@
         <header id="research">
             <nav class="navbar navbar-default">
                 <ul class="list-inline">
-                    <li class="hidden-xs hidden-sm pull-left">
-                        <div class="logo"><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}"><h1>MetaGer</h1></a>
-                        </div>
-                    </li>
-                    <li class="visible-xs visible-sm pull-left">
-                        <div class="logo"><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}"><h1>MG</h1></a>
+                    <li class="pull-left">
+                        <div class="logo">
+                            <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}"><h1>M<span class="hidden-xs">eta</span>G<span class="hidden-xs">er</span></h1></a>
                         </div>
                     </li>
                     <li class="pull-right">

@@ -30,7 +30,7 @@ class Fastbot extends Searchengine
                 $link   = substr($link, strpos($link, "href=\"") + 6);
                 $link   = substr($link, 0, strpos($link, "\""));
                 $counter++;
-                $this->gefVon    = "<a href=\"" . $this->homepage . "\" target=\"_blank\">" . $this->displayName . " " . trans('results.redirect') . "</a>";
+                $this->gefVon    = "<a href=\"" . $this->homepage . "\" target=\"_blank\" rel=\"noopener\">" . $this->displayName . " " . trans('results.redirect') . "</a>";
                 $this->results[] = new \App\Models\Result(
                     $this->engine,
                     trim(strip_tags($result[1])),

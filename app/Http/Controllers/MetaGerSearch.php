@@ -15,11 +15,15 @@ class MetaGerSearch extends Controller
         $time = microtime();
         # Mit gelieferte Formulardaten parsen und abspeichern:
         $metager->parseFormData($request);
-        #if($metager->getFokus() !== "bilder" )
-        #{
+
+        # Ein Schutz gegen bestimmte Bot-Angriffe, die uns passiert sind.
+        if ($metager->doBotProtection($request->input('bot', ""))) {
+            return redirect(LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), url("/noaccess", ['redirect' => base64_encode(url()->full())])));
+        }
+
         # Nach Spezialsuchen überprüfen:
         $metager->checkSpecialSearches($request);
-        #}
+
         # Alle Suchmaschinen erstellen
         $metager->createSearchEngines($request);
 
@@ -31,6 +35,14 @@ class MetaGerSearch extends Controller
 
         # Die Ausgabe erstellen:
         return $metager->createView();
+    }
+
+    public function botProtection($redirect)
+    {
+        $hash = md5(date('YmdHi'));
+        return view('botProtection')
+            ->with('hash', $hash)
+            ->with('r', $redirect);
     }
 
     public function quicktips(Request $request)
@@ -87,7 +99,7 @@ class MetaGerSearch extends Controller
             $quicktip["title"]  = $decodedResponse[1][0];
             $quicktip["URL"]    = $decodedResponse[3][0];
             $quicktip["descr"]  = $decodedResponse[2][0];
-            $quicktip['gefVon'] = "aus <a href=\"https://de.wikipedia.org\" target=\"_blank\">Wikipedia, der freien Enzyklopädie</a>";
+            $quicktip['gefVon'] = "aus <a href=\"https://de.wikipedia.org\" target=\"_blank\" rel=\"noopener\">Wikipedia, der freien Enzyklopädie</a>";
 
             $quicktips[] = $quicktip;
         }

@@ -3583,17 +3583,18 @@ $(document).ready(function() {
     $('iframe').iFrameResize({
         'autoResize': false
     });
+    botProtection();
 });
 
 function tabs() {
     //return;
-    $("#foki  a").each(function() {
+    $("#foki > li.tab-selector > a").each(function() {
         $(this).attr("href", "#" + $(this).attr("aria-controls"));
         $(this).attr("role", "tab");
         $(this).attr("data-toggle", "tab");
     });
-    $("#foki a").off();
-    $("#foki a").on("show.bs.tab", function(e) {
+    $("#foki > li.tab-selector > a").off();
+    $("#foki > li.tab-selector > a").on("show.bs.tab", function(e) {
         var fokus = $(this).attr("aria-controls");
         var link = $("#" + fokus + "TabSelector a").attr("data-href");
         if ($("#" + fokus + "TabSelector").attr("data-loaded") != "1") {
@@ -3792,6 +3793,14 @@ function fokiChanger() {
         });
     });
 })(jQuery);
+
+function botProtection() {
+    if ($("meta[name=pqr]").length > 0) {
+        var link = atob($("meta[name=pqr]").attr("content"));
+        var hash = $("meta[name=pq]").attr("content");
+        document.location.href = link + "&bot=" + hash;
+    }
+}
 
 function productWidget() {
     var isMobile = false; //initiate as false

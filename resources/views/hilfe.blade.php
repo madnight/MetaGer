@@ -48,19 +48,19 @@
 	<li>{!! trans('hilfe.domains.blacklist.example.5') !!}
 	<div class="well well-sm">{!! trans('hilfe.domains.blacklist.example.6') !!}</div></li>
 </ul>
-<p>Zusätzlich bieten wir Ihnen die Möglichkeit Hosts beziehungsweise Domains direkt auf der Ergebnisseite auszuschließen. Bei jedem unserer Ergebnisse erscheint dieses kleine Symbol für die Optionen: </p>
+<p>{!! trans('hilfe.domains.showcase.explanation.1') !!}</p>
 <img src="/img/blacklist-tutorial-searchexample.png">
-<p>Wenn Sie auf dieses Symbol klicken, erscheint folgendes Menü: <p>
+<p>{!! trans('hilfe.domains.showcase.explanation.2') !!}<p>
 <div class="media">
 	<div class="media-left">
 		<img src="/img/blacklist-tutorial-options.png">
 	</div>
 	<div class="media-body">
-		<p>Mit diesem Menü lassen sich:</p>
+		<p>{!! trans('hilfe.domains.showcase.menu.1') !!}</p>
 		<ul class="dotlist">
-			<li>Eine neue Suche nur auf der Domain des Ergebnisses (de.wikipedia.de) starten</li>
-			<li>Eine Suche ohne Ergebnisse der Subdomain (de.wikipedia.de) starten</li>
-			<li>Eine Suche ohne Ergebnisse der Top-Level-Domain (wikipedia.de) starten</li>
+			<li>{!! trans('hilfe.domains.showcase.menu.2') !!}</li>
+			<li>{!! trans('hilfe.domains.showcase.menu.3') !!}</li>
+			<li>{!! trans('hilfe.domains.showcase.menu.4') !!}</li>
 		</ul>
 	</div>
 </div>

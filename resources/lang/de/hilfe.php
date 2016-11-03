@@ -70,7 +70,12 @@ return [
     'domains.blacklist.example.5'    => 'Sie schließen generell alle Ergebnisse von allen Wikipedia-Domains aus',
     'domains.blacklist.example.6'    => '<i>meine suche</i> -domain:wikipedia.org',
 
-    'domains.blacklist.hoooo'        => '',
+    'domains.showcase.explanation.1' => 'Zusätzlich bieten wir Ihnen die Möglichkeit Hosts beziehungsweise Domains direkt auf der Ergebnisseite auszuschließen. Bei jedem unserer Ergebnisse erscheint dieses kleine Symbol für die Optionen:',
+    'domains.showcase.explanation.2' => 'Wenn Sie auf dieses Symbol klicken, erscheint folgendes Menü:',
+    'domains.showcase.menu.1'        => 'Mit diesem Menü lassen sich:',
+    'domains.showcase.menu.2'        => 'Eine neue Suche nur auf der Domain des Ergebnisses (de.wikipedia.de) starten',
+    'domains.showcase.menu.3'        => 'Eine Suche ohne Ergebnisse der Subdomain (de.wikipedia.de) starten',
+    'domains.showcase.menu.4'        => 'Eine Suche ohne Ergebnisse der Top-Level-Domain (wikipedia.de) starten',
 
     'dienste'                        => 'Dienste',
 

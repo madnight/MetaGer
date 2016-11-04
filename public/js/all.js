@@ -3581,7 +3581,8 @@ return(65535&d)<<16|65535&c},C=function(a,b,c,d){var e=(65535&a)+(65535&b)+(6553
 $(document).ready(function() {
     getDocumentReadyForUse($("#foki > li.active > a").attr("aria-controls"));
     $('iframe').iFrameResize({
-        'autoResize': false
+        'autoResize': true,
+        'heightCalculationMethod': 'documentElementScroll'
     });
     botProtection();
 });

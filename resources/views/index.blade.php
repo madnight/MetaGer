@@ -149,7 +149,7 @@
               <label id="anpassen-label" for="angepasst">
                 <span class="glyphicon glyphicon-cog"></span>
                 <span class="content">
-                  <a class="mutelink" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/settings") }}">
+                  <a class="mutelink" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "settings") }}">
                   @if ($focus === 'angepasst')
                     {{ trans('index.foki.angepasst') }}
                   @else

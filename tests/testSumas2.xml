@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Eine Test XML mit 2 bilder und 1 web suchmaschine -->
 <sumas> 
 	<suma name="name1" host="www.suchmaschine1.de" skript="/suche1/" formData="sprache=de&amp;sortieren=true&amp;queue=&lt;&lt;QUERY&gt;&gt;&amp;rows=&lt;&lt;COUNT&gt;&gt;&amp;fq=subcollection:&lt;&lt;SUBCOLLECTIONS&gt;&gt;" package="suchmaschine1" displayName="Meine Suchmaschine1" homepage="www.suchmaschine1.de/welcome" port="443" inputEncoding="Latin1" userSelectable="1" type="bilder" engineBoost="1.2" additionalHeaders="$#!#$" hasSiteSearch="0" cacheDuration="60"/>
 	<suma name="name2" host="www.suchmaschine2.de" skript="/suche2/" formData="sprache=de&amp;sortieren=true&amp;queue=&lt;&lt;QUERY&gt;&gt;&amp;rows=&lt;&lt;COUNT&gt;&gt;&amp;fq=subcollection:&lt;&lt;SUBCOLLECTIONS&gt;&gt;" package="suchmaschine2" displayName="Meine Suchmaschine2" homepage="www.suchmaschine2.de/welcome" port="443" inputEncoding="Latin1" userSelectable="1" type="web" engineBoost="1.2" additionalHeaders="$#!#$" hasSiteSearch="0" cacheDuration="60"/>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 class MetaGerPhpTest extends TestCase
 {
+    // Die Testfunktion die PHP Unit aufruft
+    // Ruft alle anderen Untertests auf
     public function test()
     {
         $this->fullRunTest();
@@ -24,6 +26,8 @@ class MetaGerPhpTest extends TestCase
         $this->productsTest();
     }
 
+    // Führt alle Schritte einer normalen MetaGer Suche durch
+    // Es werden keine bestimmten Werte erwartet, nur dass das Programm nicht abstürzt
     public function fullRunTest()
     {
         $metager = new MetaGer();
@@ -36,6 +40,7 @@ class MetaGerPhpTest extends TestCase
         $metager->createView();
     }
 
+    // Testet das erkennen von Spezialsuchen in verschiedenen Sucheingaben
     public function specialSearchTest()
     {
         $metager = new MetaGer();
@@ -72,6 +77,7 @@ class MetaGerPhpTest extends TestCase
         $this->assertContains("-host:-domain:test", $metager->getPhrases());
     }
 
+    // Testet, ob ein Link wirklich nur einmal hinzugefügt werden kann
     public function addLinkTest()
     {
         $metager = new MetaGer();
@@ -80,6 +86,7 @@ class MetaGerPhpTest extends TestCase
         $this->assertFalse($metager->addLink($link));
     }
 
+    // Testet die Funktionen die spezielle Sumas filtern
     public function specialSumaTest()
     {
         $metager = new MetaGer();
@@ -121,6 +128,7 @@ class MetaGerPhpTest extends TestCase
         $this->assertTrue($metager->sumaIsNotAdsuche($suma));
     }
 
+    // Testet die Generatoren für spezielle Links
     public function linkGeneratorTest()
     {
         $metager = new Metager();
@@ -138,6 +146,7 @@ class MetaGerPhpTest extends TestCase
             '-domain%3Awolf.de');
     }
 
+    // Prüft ob der Host Count funktioniert
     public function getHostCountTest()
     {
         $metager = new MetaGer();
@@ -152,6 +161,7 @@ class MetaGerPhpTest extends TestCase
         $this->assertEquals($before + 1, $after);
     }
 
+    // Prüft ob bei passender Einstellung der Sumas der Fokus automatisch umgestellt wird
     public function adjustFocusTest()
     {
         $metager = new MetaGer();
@@ -173,6 +183,7 @@ class MetaGerPhpTest extends TestCase
         $this->assertEquals("bilder", $metager->getFokus());
     }
 
+    // Prüft ob das fehlen einer Suchmaschine mit Seitensuche erkannt wird
     public function checkCanNotSitesearchTest()
     {
         $metager              = new MetaGer();
@@ -188,6 +199,7 @@ class MetaGerPhpTest extends TestCase
         $this->assertTrue($metager->checkCanNotSitesearch($enabledSearchengines));
     }
 
+    // Prüft ob Bildersuchen erkannt werden
     public function isBildersucheTest()
     {
         $metager = new MetaGer();
@@ -201,6 +213,7 @@ class MetaGerPhpTest extends TestCase
         $this->assertFalse($metager->isBildersuche());
     }
 
+    // Prüft ob der Link für Minisucher richtig erstellt wird
     public function loadMiniSucherTest()
     {
         $metager        = new MetaGer();
@@ -211,12 +224,14 @@ class MetaGerPhpTest extends TestCase
         $this->assertContains("fq=subcollection:%28minism1+OR+minism2%29", $minisucher["formData"]->__toString());
     }
 
+    // Prüft ob der Link für den Image Proxy richtig erstellt wird
     public function getImageProxyLinkTest()
     {
         $metager = new MetaGer();
         $this->containCallbackTester($metager, "getImageProxyLink", ["www.bilder.de/bild1.png"], "url=www.bilder.de%2Fbild1.png");
     }
 
+    // Prüft ob sich Quicktips korrekt ein und ausschalten lassen
     public function showQuicktipsTest()
     {
         $metager = new MetaGer();
@@ -230,6 +245,7 @@ class MetaGerPhpTest extends TestCase
         $this->assertTrue($metager->showQuicktips());
     }
 
+    // Prüft ob Werbung der Werbeliste hinzugefügt wird und ob die pop-funktion für die Werbeergebnisse funktioniert
     public function popAdTest()
     {
         $metager = new MetaGer();
@@ -261,6 +277,7 @@ class MetaGerPhpTest extends TestCase
         $this->assertEquals("Werbetitel", $metager->popAd()['titel']);
     }
 
+    // Prüft ob Produktergebnisse der Produktliste hinzugefügt werden
     public function productsTest()
     {
         $metager = new MetaGer();
@@ -294,6 +311,7 @@ class MetaGerPhpTest extends TestCase
         $this->assertEquals("Produkttitel", $metager->getProducts()[0]['titel']);
     }
 
+    // Erstellt eine Suchanfrage zu Testzwecken
     public function createDummyRequest()
     {
         /**
@@ -324,6 +342,14 @@ class MetaGerPhpTest extends TestCase
         return new Request($query);
     }
 
+    /**
+     * Funktion zum vereinfachen von Tests, bei denen die Ausgabe einer Funktion ein bestimmtes Objekt enthalten soll
+     *
+     * @param Object    $object              Das Object von dem aus die Funktion aufgerufen werden soll
+     * @param String    $funcName            Der Name der Funktion
+     * @param array     $input               Die Eingaben für die Funktion
+     * @param mixed     $expectedInOutput    Etwas das im Funktionsergebnis erwartet wird (meist ein String)
+     */
     public function containCallbackTester($object, $funcName, $input, $expectedInOutput)
     {
         $output = call_user_func_array(array($object, $funcName), $input);

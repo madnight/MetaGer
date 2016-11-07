@@ -10,14 +10,13 @@
         @endif
 <div class="content-wrapper">
         <header id="research">
-            <nav class="navbar navbar-default">
-                <ul class="list-inline">
-                    <li class="pull-left">
-                        <div class="logo">
-                            <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}"><h1>M<span class="hidden-xs">eta</span>G<span class="hidden-xs">er</span></h1></a>
-                        </div>
-                    </li>
-                    <li class="pull-right">
+            <nav class="navbar navbar-default navbar-resultpage">
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-3 logo">
+                        <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}"><h1>M<span class="hidden-xs">eta</span>G<span class="hidden-xs">er</span></h1></a>
+                    </div>
+                    <div class="col-xs-9">
                         <form method="{{ Request::method() }}" accept-charset="UTF-8" class="form" id="submitForm">
                             <div class="input-group">
                                 <input autocomplete="off" class="form-control" form="submitForm" id="eingabeTop" name="eingabe" placeholder="Suchbegriffe erweitern/verändern, oder völlig neue Suche:" tabindex="1" type="text" value="{{ $eingabe }}" required />
@@ -34,8 +33,9 @@
                             @endforeach
 
                         </form>
-                    </li>
+                    </div>
                 </ul>
+                </div>
             </nav>
         <ul class="nav nav-tabs" id="foki" role="tablist">
         @if( $metager->getFokus() === "web" )

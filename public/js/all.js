@@ -3581,8 +3581,10 @@ return(65535&d)<<16|65535&c},C=function(a,b,c,d){var e=(65535&a)+(65535&b)+(6553
 $(document).ready(function() {
     getDocumentReadyForUse($("#foki > li.active > a").attr("aria-controls"));
     $('iframe').iFrameResize({
-        'autoResize': false
+        'autoResize': true,
+        'heightCalculationMethod': 'documentElementScroll'
     });
+    botProtection();
 });
 
 function tabs() {
@@ -3792,6 +3794,14 @@ function fokiChanger() {
         });
     });
 })(jQuery);
+
+function botProtection() {
+    if ($("meta[name=pqr]").length > 0) {
+        var link = atob($("meta[name=pqr]").attr("content"));
+        var hash = $("meta[name=pq]").attr("content");
+        document.location.href = link + "&bot=" + hash;
+    }
+}
 
 function productWidget() {
     var isMobile = false; //initiate as false

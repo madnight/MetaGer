@@ -17,7 +17,7 @@ return [
     "faq.5.b"   => "If you observe this it is probably a technical fault. Please email us in that case: <a href=\"mailto:office@suma-ev.de\">office@suma-ev.de</a>",
     "faq.6.h"   => "Inappropriate Content",
     "faq.6.b.1" => "I found results with illegal content.",
-    "faq.6.b.2" => "If some content (found by MetaGer) seems to be illegal, please email us to <a href="mailto:jugendschutz@metager.de" target="_blank" rel="noopener">jugendschutz@metager.de</a>.",
+    "faq.6.b.2" => "If some content (found by MetaGer) seems to be illegal, please email us to <a href=\"mailto:jugendschutz@metager.de\" target=\"_blank\" rel=\"noopener\">jugendschutz@metager.de</a>.",
     "faq.7.h"   => "Is it possible to integrate MetaGer into my own website?",
     "faq.7.b"   => "No problem! We have a <a href=\"/en/widget\" target=_blank>widget</a> that you can use free of charge.",
     "faq.8.h"   => "How can I register my homepage on MetaGer?",

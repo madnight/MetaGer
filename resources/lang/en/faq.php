@@ -1,7 +1,7 @@
 <?php
 
 return [
-    "achtung"   => "Warning! For our website is in constant development there are continuous changes to the structure and functionality of our website. We try to update our help pages as quickly as possible, but can not prevent temporary mistakes.",
+    "achtung"   => "Warning! Structure and functionality of our website are subject to constant development and changes. We try to update our help pages as quickly as possible, but can not prevent temporary mistakes.",
 
     "title"     => "MetaGer - FAQ",
 
@@ -16,8 +16,8 @@ return [
     "faq.5.h"   => "One search engine does not answer anymore",
     "faq.5.b"   => "If you observe this it is probably a technical fault. Please email us in that case: <a href=\"mailto:office@suma-ev.de\">office@suma-ev.de</a>",
     "faq.6.h"   => "Inappropriate Content",
-    "faq.6.b.1" => "> I found results with illegal content.",
-    "faq.6.b.2" => "If you found content through MetaGer, which you think is illegal, you can email us at <a href=\"mailto:jugendschutz@metager.de\" target=\"_blank\" rel=\"noopener\">jugendschutz@metager.de</a>.",
+    "faq.6.b.1" => "I found results with illegal content.",
+    "faq.6.b.2" => "If some content (found by MetaGer) seems to be illegal, please email us to <a href="mailto:jugendschutz@metager.de" target="_blank" rel="noopener">jugendschutz@metager.de</a>.",
     "faq.7.h"   => "Is it possible to integrate MetaGer into my own website?",
     "faq.7.b"   => "No problem! We have a <a href=\"/en/widget\" target=_blank>widget</a> that you can use free of charge.",
     "faq.8.h"   => "How can I register my homepage on MetaGer?",

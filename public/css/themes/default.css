@@ -7242,6 +7242,9 @@ body > div {
   padding: 0px;
   margin: 0px;
 }
+.navbar-resultpage .input-group {
+  margin: 0px 5px;
+}
 /* Logo */
 .logo {
   height: 35px;
@@ -7666,6 +7669,10 @@ footer a {
 .navbar {
   border-bottom: 3px solid #ff8000;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+}
+.navbar.navbar-resultpage {
+  border-bottom: 3px solid #ff8000;
+  box-shadow: none;
 }
 .lSPrev > span,
 .lSNext > span {

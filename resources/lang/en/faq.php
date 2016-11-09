@@ -33,7 +33,7 @@ return [
     "faq.17.b.4" => "2. pick \"Search\".",
     "faq.17.b.5" => "3. If there is an entry \"MetaGer\" in the below list then",
     "faq.17.b.6" => "4. select this entry and",
-    "faq.17.b.7" => "5. click the \"Remove\" on the right side below the list.",
+    "faq.17.b.7" => "5. click \"Remove\" on the right side below the list.",
     "faq.17.b.8" => "6. Open the MetaGer startpage (https://metager.de/en) and",
     "faq.17.b.9" => "7. click \"Add the MetaGer-Plugin\" below the searchfield. Please follow the given advices.",
     "faq.17.b.10" => "Of course, you can use MetaGer without that plugin at any time. Just type \"metager.de\" into your browsers address bar.",

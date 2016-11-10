@@ -7322,7 +7322,7 @@ nav .input-group {
 .content-wrapper {
   width: 80%;
   margin: 0 auto;
-  padding-top: 48px;
+  padding-top: 52px;
   /* padding: 10px; */
   background-color: white;
   box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
@@ -7674,7 +7674,7 @@ footer a {
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
 }
 .navbar.navbar-resultpage {
-  border-bottom: 3px solid #ff8000;
+  border-bottom: 2px solid #ff8000;
   box-shadow: none;
 }
 .lSPrev > span,

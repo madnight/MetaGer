@@ -1,7 +1,7 @@
 <?php
 
 return [
-    "achtung"                  => "Warning! For our website is in constant development there are continuous changes to the structure and functionality of our website. We try to update our help pages as quickly as possible, but can not prevent temporary mistakes.",
+    "achtung"                  => "Warning! Structure and functionality of our website are subject to constant development and changes. We try to update our help pages as quickly as possible, but can not prevent temporary mistakes.",
     "title"                    => "MetaGer Help",
     "einstellungen"            => "Preferences",
     "dienste"                  => "Tools-free of charge",
@@ -38,5 +38,5 @@ return [
     "mehrwortsuche.2"          => "Example: search for Shakespears <div class=\"well well-sm\">to be or not to be</div> will deliver many results, but the exact phrase will only be found using <div class=\"well well-sm\">\"to be or nor to be\"</div>",
     "grossklein.title"         => "Upper case vs. lower case",
     "grossklein.1"             => "Upper case will not be distinguished from lower case",
-    "grossklein.2"             => "Searching for <div class=\"well well-sm\">Shakespeare</div> or <div class=\"well well-sm\">SHAKESPEARE</div> will deliver the same results that <div class=\"well well-sm\">shakespeare</div>",
+    "grossklein.2"             => "Searching for <div class=\"well well-sm\">Shakespeare</div> or <div class=\"well well-sm\">SHAKESPEARE</div> will deliver the same results as <div class=\"well well-sm\">shakespeare</div>",
 ];

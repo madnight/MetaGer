@@ -7205,6 +7205,9 @@ nav h1 {
 body > div {
   padding-top: 70px;
 }
+.nav-tabs > li > a {
+  border-radius: 0;
+}
 .tab-content {
   padding-top: 10px;
 }
@@ -7319,7 +7322,7 @@ nav .input-group {
 .content-wrapper {
   width: 80%;
   margin: 0 auto;
-  padding-top: 60px;
+  padding-top: 48px;
   /* padding: 10px; */
   background-color: white;
   box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);

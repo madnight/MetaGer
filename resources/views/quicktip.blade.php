@@ -9,11 +9,32 @@
 		@endif
 		@foreach( $mqs as $mq)
 			<div class="quicktip">
-				<b class="qtheader"><a href="{{ $mq['URL'] }}" target="_blank" rel="noopener">{{ $mq['title'] }}</a></b><br>
-				<div>{!! $mq['descr'] !!}</div>
-				@if( isset($mq['gefVon']) )
-					<div class="pull-right">{!! $mq['gefVon'] !!}</div>
-				@endif
+				<h2 class="qtheader"><a href="{{ $mq['URL'] }}" target="_blank" rel="noopener">{{ $mq['title'] }}</a></h2>
+				<details>
+					<summary>
+						<div class="media">
+							@if( isset($mq['image']) && isset($mq['image-alt'] ))
+								<div class="media-left">
+									<img class="qt-icon" src="{!! $mq['image'] !!}" alt="{!! $mq['image-alt'] !!}">
+								</div>
+							@endif
+							<div class="media-body">
+								<div>{!! $mq['descr'] !!}</div>
+							</div>
+							@if( isset($mq['details']) )
+								<div class="media-right">
+									<span class="glyphicon glyphicon-info-sign info-details-available" aria-hidden="true"></span>
+								</div>
+							@endif
+						</div>
+					</summary>
+					@if( isset($mq['details']) )
+						{!! $mq['details'] !!}
+					@endif
+				</details>
+						@if( isset($mq['gefVon']) )
+							<div class="pull-right">{!! $mq['gefVon'] !!}</div>
+						@endif
 			</div>
 		@endforeach
 	</body>

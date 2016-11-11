@@ -85,8 +85,44 @@ class MetaGerSearch extends Controller
             fclose($file);
         }
 
-        # Wikipedia Quicktip
         $quicktips = [];
+
+        # Das Wetter
+        try {
+            if (App::isLocale('en')) {
+                $url = "http://api.openweathermap.org/data/2.5/weather?type=like&units=metric&lang=en&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
+            } else {
+                $url = "http://api.openweathermap.org/data/2.5/weather?type=like&units=metric&lang=de&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
+            }
+
+            $result           = json_decode($this->get($url), true);
+            $weather          = [];
+            $weather["title"] = "Wetter in " . $result["name"];
+            $weather["URL"]   = "http://openweathermap.org/city/" . $result["id"];
+
+            $descr   = '<b class="detail-short">' . $result["main"]["temp"] . " °C, " . $result["weather"][0]["description"] . "</b>";
+            $details = '<table  class="table table-condensed"><tr><td>Temperatur</td><td>' . $result["main"]["temp_min"] . " bis " . $result["main"]["temp_max"] . " °C</td></tr>";
+            $details .= "<tr><td>Druck</td><td>" . $result["main"]["pressure"] . " hPa</td></tr>";
+            $details .= "<tr><td>Luftfeuchtigkeit</td><td>" . $result["main"]["humidity"] . " %</td></tr>";
+            $details .= "<tr><td>Wind</td><td>" . $result["wind"]["speed"] . " m/s, " . $result["wind"]["deg"] . "°</td></tr>";
+            $details .= "<tr><td>Bewölkung</td><td>" . $result["clouds"]["all"] . " %</td></tr>";
+            if (isset($result->rain)) {
+                $details .= " | Regen letzte drei Stunden: " . $result["rain"]["3h"] . " h";
+            }
+            $details .= "</table>";
+            $weather["descr"]     = $descr;
+            $weather["details"]   = $details;
+            $weather["gefVon"]    = "von <a href = \"https://openweathermap.org\" target=\"_blank\" rel=\"noopener\">Openweathermap</a>";
+            $requestData          = [];
+            $requestData["url"]   = "http://openweathermap.org/img/w/";
+            $weather["image"]     = action('Pictureproxy@get', $requestData) . $result["weather"][0]["icon"] . ".png";
+            $weather["image-alt"] = $result["weather"][0]["main"];
+            $mquicktips[]         = $weather;
+        } catch (\ErrorException $e) {
+
+        }
+
+        # Wikipedia Quicktip
         if (App::isLocale('en')) {
             $url = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" . urlencode($q) . "&limit=1&namespace=0&format=json";
         } else {

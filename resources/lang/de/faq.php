@@ -23,7 +23,7 @@ return [
     'faq.8.h'    => 'Wo kann ich bei MetaGer meine Homepage/URL/etc. Anmelden ?',
     'faq.8.b'    => 'Gar nicht. MetaGer ist eine MetaSuchmaschine. Sie sucht nicht selber, sondern lässt andere Suchdienste suchen. Wenn Sie Ihre eigenen WWW-Seiten den Suchmaschinen bekannt geben wollen, dann müssen Sie die Suchmaschinen einzeln aufsuchen, bei denen Sie Ihre Seiten anmelden wollen.',
     'faq.9.h'    => 'Wie genau funktioniert das Ranking bei MetaGer?',
-    'faq.9.b'    => 'Dazu machen wir aus nahe liegenden Gründen keine Angaben',
+    'faq.9.b'    => 'Finden Sie es heraus! MetaGer ist Open-Source: <a href=\"https://gitlab.metager3.de/open-source/MetaGer\" target=_blank>our source code</a>',
     'faq.10.h'   => 'Mit meinem XYZ-Browser und dem XYZ-Betriebssystem kann ich MetaGer nicht abfragen. Was tun?',
     'faq.10.b'   => 'Versuchen Sie bitte zuerst, das aktuelle Plugin zu installieren. Zum Installieren einfach auf den Link direkt unter dem Suchfeld klicken. Dort sollte Ihr Browser schon erkannt worden sein. Wenn Sie dann noch Probleme haben sollten, wenden Sie sich bitte an uns: <a href="mailto:office@suma-ev.de" target="_blank" rel="noopener">office@suma-ev.de</a>',
     'faq.11.h'   => 'Wo habt ihr eigentlich all\' die klugen Sprüche eures "Sprücheklopfers" her?',

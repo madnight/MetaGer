@@ -1,5 +1,6 @@
 <?php
 
+
 return [
     "achtung"	=>	"Warning! Structure and functionality of our website are subject to constant development and changes. We try to update our help pages as quickly as possible, but can not prevent temporary mistakes.",
     "title"	=>	"MetaGer - FAQ",
@@ -34,6 +35,8 @@ return [
     "faq.13.b.3"	=>	"You may wish to hide your IP-address generally. We provide a free proxyservice. Click \"tools\" for more exact information:  ",
     "faq.13.b.4"	=>	"Please use the Tor-network or the MetaGer Tor-branch for advanced anonymization. Please click \"Tools\" for further information.",
     "faq.13.b.5"	=>	"Needless to say: we use the https protocoll at any time. All your queries are safe between your personal computer and the MetaGer servers.",
+    "faq.14.h"	=>	"How can one match data to indviduals ?",
+    "faq.14.b"	=>	"1.) This could be done by using cookies. For example  a cookie can be set as a part of making an account. You give your data, a cookie is made out of it and is stored on your PC. Next time using the same service it will know you very well. This kind of data is managed by the webbrowser. It is easy to find and erase all cookies. You should do this routinely. \r\n\r\n2.) The webproviders manage internet connections by assigning IP-addresses to individuals. This is ruled by law and is different in all countries. \r\n\r\n3.) The webbrowser sends a heap of data to a website, like the user agent, exact version numbers, the work invironment, the operating system and so on. Maybe there is a matching of data to individuals possible, too.",
     "faq.15.h"	=>	"How was MetaGer started, what is the story behind MetaGer?",
     "faq.15.b"	=>	"It was started in 1996. Take a look at the historically documented origin story here:  <a href=\"http://blog.suma-ev.de/node/207\" target=\"_blank\" rel=\"noopener\">http://blog.suma-ev.de/node/207</a>.",
     "faq.16.h"	=>	"Is it allowed to hyperlink MetaGer ?",

@@ -3,6 +3,7 @@
 return [
     'heading.1' => 'SUMA-EV Beitrittserklärung',
     'beitritt.1' => 'Hiermit erkläre ich,',
+    'placeholder.1' => 'Name, Vorname',
     'beitritt.2' => 'für die Firma:',
     'beitritt.3' => 'Funktion:',
     'beitritt.4' => 'Adresse:',

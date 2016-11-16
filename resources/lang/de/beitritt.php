@@ -29,7 +29,7 @@ return [
     'abbuchung.6' => 'IBAN (oder Konto-Nummer)',
     'abbuchung.7' => 'BIC (oder Bankleitzahl)',
     'abbuchung.8' => 'Ort, Datum:',
-    'abbuchung.8' => 'Unterschrift nach Ausdrucken des Formulars',
+    'abbuchung.9' => 'Unterschrift nach Ausdrucken des Formulars',
     'anweisung.1' => 'Bitte drucken Sie das Formular nach Ausfüllen aus und unterschreiben an beiden ......... Linien; dann können Sie es',
     'anweisung.2' => 'faxen an 0511 34 00 10 23 (und schicken uns eine kurze EMail dazu, dass Sie das Beitrittsformular gefaxt haben, denn Faxgeräte sind manchmal inkompatibel) oder',
     'anweisung.3' => 'per Post senden an: SUMA-EV, Röselerstr. 3, 30159 Hannover oder',

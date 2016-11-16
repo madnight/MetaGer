@@ -10,6 +10,7 @@
 		@foreach( $mqs as $mq)
 			<div class="quicktip">
 				<h2 class="qtheader"><a href="{{ $mq['URL'] }}" target="_blank" rel="noopener">{{ $mq['title'] }}</a></h2>
+				@if( isset($mq['details']) )
 				<details>
 					<summary>
 						<div class="media">
@@ -19,22 +20,30 @@
 								</div>
 							@endif
 							<div class="media-body">
-								<div>{!! $mq['descr'] !!}</div>
+								<div>{!! $mq['summary'] !!}</div>
 							</div>
-							@if( isset($mq['details']) )
-								<div class="media-right">
-									<span class="glyphicon glyphicon-info-sign info-details-available" aria-hidden="true"></span>
-								</div>
-							@endif
+							<div class="media-right">
+								<span class="glyphicon glyphicon-info-sign info-details-available" aria-hidden="true"></span>
+							</div>
 						</div>
 					</summary>
-					@if( isset($mq['details']) )
 						{!! $mq['details'] !!}
-					@endif
 				</details>
-						@if( isset($mq['gefVon']) )
-							<div class="pull-right">{!! $mq['gefVon'] !!}</div>
+				@else
+					<div class="media">
+						@if( isset($mq['image']) && isset($mq['image-alt'] ))
+							<div class="media-left">
+								<img class="qt-icon" src="{!! $mq['image'] !!}" alt="{!! $mq['image-alt'] !!}">
+							</div>
 						@endif
+						<div class="media-body">
+							<div>{!! $mq['summary'] !!}</div>
+						</div>
+					</div>
+				@endif
+				@if( isset($mq['gefVon']) )
+					<div class="pull-right">{!! $mq['gefVon'] !!}</div>
+				@endif
 			</div>
 		@endforeach
 	</body>

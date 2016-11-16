@@ -31,9 +31,7 @@
 						</div>
 				@if( isset($mq['details']) )
 					</summary>
-					@if( isset($mq['details']) )
 						{!! $mq['details'] !!}
-					@endif
 				</details>
 				@endif
 						@if( isset($mq['gefVon']) )

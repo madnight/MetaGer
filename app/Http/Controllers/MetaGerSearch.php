@@ -75,11 +75,11 @@ class MetaGerSearch extends Controller
                     }
                 }
                 if ($isIn === true) {
-                    $quicktip          = array('QT_Type' => "MQT");
-                    $quicktip["URL"]   = $line[0];
-                    $quicktip["title"] = $line[1];
-                    $quicktip["descr"] = $line[2];
-                    $mquicktips[]      = $quicktip;
+                    $quicktip            = array('QT_Type' => "MQT");
+                    $quicktip["URL"]     = $line[0];
+                    $quicktip["title"]   = $line[1];
+                    $quicktip["summary"] = $line[2];
+                    $mquicktips[]        = $quicktip;
                 }
             }
             fclose($file);
@@ -100,7 +100,7 @@ class MetaGerSearch extends Controller
             $weather["title"] = "Wetter in " . $result["name"];
             $weather["URL"]   = "http://openweathermap.org/city/" . $result["id"];
 
-            $descr   = '<b class="detail-short">' . $result["main"]["temp"] . " °C, " . $result["weather"][0]["description"] . "</b>";
+            $summary = '<b class="detail-short">' . $result["main"]["temp"] . " °C, " . $result["weather"][0]["description"] . "</b>";
             $details = '<table  class="table table-condensed"><tr><td>Temperatur</td><td>' . $result["main"]["temp_min"] . " bis " . $result["main"]["temp_max"] . " °C</td></tr>";
             $details .= "<tr><td>Druck</td><td>" . $result["main"]["pressure"] . " hPa</td></tr>";
             $details .= "<tr><td>Luftfeuchtigkeit</td><td>" . $result["main"]["humidity"] . " %</td></tr>";
@@ -110,7 +110,7 @@ class MetaGerSearch extends Controller
                 $details .= " | Regen letzte drei Stunden: " . $result["rain"]["3h"] . " h";
             }
             $details .= "</table>";
-            $weather["descr"]     = $descr;
+            $weather["summary"]   = $summary;
             $weather["details"]   = $details;
             $weather["gefVon"]    = "von <a href = \"https://openweathermap.org\" target=\"_blank\" rel=\"noopener\">Openweathermap</a>";
             $requestData          = [];
@@ -124,22 +124,27 @@ class MetaGerSearch extends Controller
 
         # Wikipedia Quicktip
         if (App::isLocale('en')) {
-            $url = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" . urlencode($q) . "&limit=1&namespace=0&format=json";
+            $url = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" . urlencode($q) . "&limit=2&namespace=0&format=json&redirects=resolve";
         } else {
-            $url = "https://de.wikipedia.org/w/api.php?action=opensearch&search=" . urlencode($q) . "&limit=1&namespace=0&format=json";
+            $url = "https://de.wikipedia.org/w/api.php?action=opensearch&search=" . urlencode($q) . "&limit=2&namespace=0&format=json&redirects=resolve";
         }
-
         $decodedResponse = json_decode($this->get($url), true);
         if (isset($decodedResponse[1][0]) && isset($decodedResponse[2][0]) && isset($decodedResponse[3][0])) {
-            $quicktip           = [];
-            $quicktip["title"]  = $decodedResponse[1][0];
-            $quicktip["URL"]    = $decodedResponse[3][0];
-            $quicktip["descr"]  = $decodedResponse[2][0];
-            $quicktip['gefVon'] = "aus <a href=\"https://de.wikipedia.org\" target=\"_blank\" rel=\"noopener\">Wikipedia, der freien Enzyklopädie</a>";
-
+            $quicktip     = [];
+            $firstSummary = $decodedResponse[2][0];
+            if ((strpos($firstSummary, 'steht für:') || strpos($firstSummary, 'may refer to:')) && isset($decodedResponse[1][1]) && isset($decodedResponse[2][1]) && isset($decodedResponse[3][1])) {
+                $quicktip["title"]   = $decodedResponse[1][1];
+                $quicktip["URL"]     = $decodedResponse[3][1];
+                $quicktip["summary"] = $decodedResponse[2][1];
+                $quicktip['gefVon']  = trans('metaGerSearch.quicktips.wikipedia.adress');
+            } else {
+                $quicktip["title"]   = $decodedResponse[1][0];
+                $quicktip["URL"]     = $decodedResponse[3][0];
+                $quicktip["summary"] = $decodedResponse[2][0];
+                $quicktip['gefVon']  = trans('metaGerSearch.quicktips.wikipedia.adress');
+            }
             $quicktips[] = $quicktip;
         }
-
         $mquicktips = array_merge($mquicktips, $quicktips);
 
         # Und Natürlich das wussten Sie schon:
@@ -148,20 +153,23 @@ class MetaGerSearch extends Controller
             $tips = file($file);
             $tip  = $tips[array_rand($tips)];
 
-            $mquicktips[] = ['title' => 'Wussten Sie schon?', 'descr' => $tip, 'URL' => '/tips'];
+            $mquicktips[] = ['title' => 'Wussten Sie schon?', 'summary' => $tip, 'URL' => '/tips'];
         }
 
-        # Uns die Werbelinks:
+        # Und die Werbelinks:
         $file = storage_path() . "/app/public/ads.txt";
         if (file_exists($file)) {
             $ads = json_decode(file_get_contents($file), true);
             $ad  = $ads[array_rand($ads)];
-
-            $mquicktips[] = ['title' => $ad['title'], 'descr' => $ad['descr'], 'URL' => $ad['URL']];
+            if (isset($ads['details'])) {
+                $mquicktips[] = ['title' => $ad['title'], 'summary' => $ad['summary'], 'details' => $ad['details'], 'URL' => $ad['URL']];
+            } else {
+                $mquicktips[] = ['title' => $ad['title'], 'summary' => $ad['summary'], 'URL' => $ad['URL']];
+            }
         }
 
-        # Und en Spendenaufruf:
-        $mquicktips[] = ['title' => trans('quicktip.spende.title'), 'descr' => trans('quicktip.spende.descr'), 'URL' => LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "spendenaufruf")];
+        # Und den Spendenaufruf:
+        $mquicktips[] = ['title' => trans('quicktip.spende.title'), 'summary' => trans('quicktip.spende.descr'), 'URL' => LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "spendenaufruf")];
 
         return view('quicktip')
             ->with('spruch', $spruch)

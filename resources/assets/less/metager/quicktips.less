@@ -4,8 +4,12 @@
 	font-weight: bold;
 }
 
-.info-details-available {
+summary {
 	cursor: pointer;
+}
+
+.info-details-available {
+	font-size: 20px;
 }
 
 .detail-short {
@@ -16,4 +20,15 @@
 
 .qt-icon {
 	height: 60px;
+}
+
+summary::-webkit-details-marker { display:none; }
+summary::-moz-details-marker { display:none; }
+summary::-ms-details-marker { display:none; }
+summary::-o-details-marker { display:none; }
+summary::details-marker { display:none; }
+
+.quicktip .media {
+	margin: 0px;
+	margin-top: 5px;
 }

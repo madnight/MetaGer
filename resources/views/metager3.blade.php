@@ -32,12 +32,15 @@
 					@include('layouts.ad', ['ad' => $metager->popAd()])
 				@endfor
 			@endif
+<<<<<<< HEAD
 			<div class="result row">
 				<div class="col-sm-1"></div>
 				<div class="col-sm-11">
 					<iframe class="" src="http://192.168.178.30:8000/metager/{{ $metager->getQ() }}" style="width: 100%; height:0; border:0;"></iframe>
 				</div>
 			</div>
+=======
+>>>>>>> development
 			@foreach($metager->getResults() as $result)
 				@if($result->number % 7 === 0)
 					@include('layouts.ad', ['ad' => $metager->popAd()])

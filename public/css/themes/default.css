@@ -6672,6 +6672,44 @@ button.close {
     display: none !important;
   }
 }
+.qtheader {
+  font-size: 16px;
+  margin: 0px;
+  font-weight: bold;
+}
+summary {
+  cursor: pointer;
+}
+.info-details-available {
+  font-size: 20px;
+}
+.detail-short {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 60px;
+}
+.qt-icon {
+  height: 60px;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+summary::-moz-details-marker {
+  display: none;
+}
+summary::-ms-details-marker {
+  display: none;
+}
+summary::-o-details-marker {
+  display: none;
+}
+summary::details-marker {
+  display: none;
+}
+.quicktip .media {
+  margin: 0px;
+  margin-top: 5px;
+}
 #spruch .author {
   font-size: 14px;
   color: #888;

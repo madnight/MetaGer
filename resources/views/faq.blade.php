@@ -108,10 +108,10 @@
   </div>
   <div class="panel-body">
     <p>{!! trans('faq.faq.13.b.1') !!}</p>
-  <p>{!! trans('faq.faq.13.b.2') !!}</p>
-  <p>{!! trans('faq.faq.13.b.3') !!}</p>
-  <p>{!! trans('faq.faq.13.b.4') !!}</p>
-  <p>{!! trans('faq.faq.13.b.5') !!}</p>
+    <p>{!! trans('faq.faq.13.b.2') !!}</p>
+    <p>{!! trans('faq.faq.13.b.3') !!}</p>
+    <p>{!! trans('faq.faq.13.b.4') !!}</p>
+    <p>{!! trans('faq.faq.13.b.5') !!}</p>
   </div>
 </div>
 <div class="panel panel-default">
@@ -119,7 +119,9 @@
     <h3 class="panel-title">{!! trans('faq.faq.14.h') !!}</h3>
   </div>
   <div class="panel-body">
-    <p>{!! trans('faq.faq.14.b') !!}</p>
+    <p>{!! trans('faq.faq.14.b.1') !!}</p>
+    <p>{!! trans('faq.faq.14.b.2') !!}</p>
+    <p>{!! trans('faq.faq.14.b.3') !!}</p>
   </div>
 </div>
 <div class="panel panel-default">
@@ -136,6 +138,23 @@
   </div>
   <div class="panel-body">
     <p>{!! trans('faq.faq.16.b') !!}</p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{!! trans('faq.faq.17.h') !!}</h3>
+  </div>
+  <div class="panel-body">
+    <p>{!! trans('faq.faq.17.b.1') !!}</p>
+    <p>{!! trans('faq.faq.17.b.2') !!}</p>
+    <p>{!! trans('faq.faq.17.b.3') !!}</p>
+    <p>{!! trans('faq.faq.17.b.4') !!}</p>
+    <p>{!! trans('faq.faq.17.b.5') !!}</p>
+    <p>{!! trans('faq.faq.17.b.6') !!}</p>
+    <p>{!! trans('faq.faq.17.b.7') !!}</p>
+    <p>{!! trans('faq.faq.17.b.8') !!}</p>
+    <p>{!! trans('faq.faq.17.b.9') !!}</p>
+    <p>{!! trans('faq.faq.17.b.10') !!}</p>
   </div>
 </div>
 @endsection

@@ -23,7 +23,7 @@
 							@endif
 						</a>
 						<div class="content hidden">
-							<ul class="options-list list-unstyled">
+							<ul class="options-list list-unstyled small">
 								<li>
 									<a href="{{ $metager->generateSiteSearchLink($result->strippedHost) }}">
 										{!! trans('result.options.1') !!}

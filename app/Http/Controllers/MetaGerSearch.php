@@ -49,7 +49,7 @@ class MetaGerSearch extends Controller
     {
         $q = $request->input('q', '');
 
-        # Zunächst den Spruch
+        # Spruch
         $spruecheFile = storage_path() . "/app/public/sprueche.txt";
         if (file_exists($spruecheFile) && $request->has('sprueche')) {
             $sprueche = file($spruecheFile);
@@ -58,7 +58,7 @@ class MetaGerSearch extends Controller
             $spruch = "";
         }
 
-        # Die manuellen Quicktips:
+        # manuelle Quicktips:
         $file = storage_path() . "/app/public/qtdata.csv";
 
         $mquicktips = [];
@@ -87,7 +87,7 @@ class MetaGerSearch extends Controller
 
         $quicktips = [];
 
-        # Das Wetter
+        # Wetter
         try {
             if (App::isLocale('en')) {
                 $url = "http://api.openweathermap.org/data/2.5/weather?type=like&units=metric&lang=en&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
@@ -132,7 +132,7 @@ class MetaGerSearch extends Controller
         if (isset($decodedResponse[1][0]) && isset($decodedResponse[2][0]) && isset($decodedResponse[3][0])) {
             $quicktip     = [];
             $firstSummary = $decodedResponse[2][0];
-            // Wenn es mehr als 1 Ergebnis gibt
+            // Wenn es mehr als ein Ergebnis gibt
             if (isset($decodedResponse[1][1])) {
                 // Solange noch zusätzliche Seiten vorhanden sind, füge sie der Tabelle hinzu
                 $details = '<table class=table table-condensed>';
@@ -155,7 +155,7 @@ class MetaGerSearch extends Controller
         }
         $mquicktips = array_merge($mquicktips, $quicktips);
 
-        # Und Natürlich das wussten Sie schon:
+        # wussten Sie schon
         $file = storage_path() . "/app/public/tips.txt";
         if (file_exists($file)) {
             $tips = file($file);
@@ -164,7 +164,7 @@ class MetaGerSearch extends Controller
             $mquicktips[] = ['title' => trans('metaGerSearch.quicktips.tips.title'), 'summary' => $tip, 'URL' => '/tips'];
         }
 
-        # Und die Werbelinks:
+        # Werbelinks
         $file = storage_path() . "/app/public/ads.txt";
         if (file_exists($file)) {
             $ads = json_decode(file_get_contents($file), true);
@@ -176,7 +176,7 @@ class MetaGerSearch extends Controller
             }
         }
 
-        # Und den Spendenaufruf:
+        # Spendenaufruf:
         $mquicktips[] = ['title' => trans('quicktip.spende.title'), 'summary' => trans('quicktip.spende.descr'), 'URL' => LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "spendenaufruf")];
 
         return view('quicktip')

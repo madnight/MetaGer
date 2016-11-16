@@ -21,7 +21,7 @@
 							@endif
 							<div class="media-body">
 								<h2 class="qtheader"><a href="{{ $mq['URL'] }}" target="_blank" rel="noopener">{{ $mq['title'] }}</a></h2>
-								<div>{!! $mq['descr'] !!}</div>
+								<div>{!! $mq['summary'] !!}</div>
 							</div>
 							@if( isset($mq['details']) )
 								<div class="media-right">

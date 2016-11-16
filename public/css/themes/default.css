@@ -6672,7 +6672,19 @@ button.close {
     display: none !important;
   }
 }
-details summary::-webkit-details-marker {
+summary::-webkit-details-marker {
+  display: none;
+}
+summary::-moz-details-marker {
+  display: none;
+}
+summary::-ms-details-marker {
+  display: none;
+}
+summary::-o-details-marker {
+  display: none;
+}
+summary::details-marker {
   display: none;
 }
 summary {

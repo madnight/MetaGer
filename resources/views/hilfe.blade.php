@@ -30,6 +30,40 @@
 <ul class="dotlist">
 	<li>{!! trans('hilfe.grossklein.2') !!}</li>
 </ul>
+<h3>{!! trans('hilfe.domains.title') !!}</h3>
+<p>{!! trans('hilfe.domains.hint') !!}</p>
+<p>{!! trans('hilfe.domains.sitesearch.explanation') !!}</p>
+<ul class="dotlist">
+	<li>{!! trans('hilfe.domains.sitesearch.example.1') !!}
+	<div class="well well-sm">{!! trans('hilfe.domains.sitesearch.example.2') !!}</div></li>
+	<li>{!! trans('hilfe.domains.sitesearch.example.3') !!}
+	<div class="well well-sm">{!! trans('hilfe.domains.sitesearch.example.4') !!}</div></li>
+</ul>
+<p>{!! trans('hilfe.domains.blacklist.explanation') !!}</p>
+<ul class="dotlist">
+	<li>{!! trans('hilfe.domains.blacklist.example.1') !!}</li>
+	<li>{!! trans('hilfe.domains.blacklist.example.2') !!}
+	<div class="well well-sm">{!! trans('hilfe.domains.blacklist.example.3') !!}</div>
+	{!! trans('hilfe.domains.blacklist.example.4') !!}</li>
+	<li>{!! trans('hilfe.domains.blacklist.example.5') !!}
+	<div class="well well-sm">{!! trans('hilfe.domains.blacklist.example.6') !!}</div></li>
+</ul>
+<p>{!! trans('hilfe.domains.showcase.explanation.1') !!}</p>
+<img src="/img/blacklist-tutorial-searchexample.png">
+<p>{!! trans('hilfe.domains.showcase.explanation.2') !!}<p>
+<div class="media">
+	<div class="media-left">
+		<img src="/img/blacklist-tutorial-options.png">
+	</div>
+	<div class="media-body">
+		<p>{!! trans('hilfe.domains.showcase.menu.1') !!}</p>
+		<ul class="dotlist">
+			<li>{!! trans('hilfe.domains.showcase.menu.2') !!}</li>
+			<li>{!! trans('hilfe.domains.showcase.menu.3') !!}</li>
+			<li>{!! trans('hilfe.domains.showcase.menu.4') !!}</li>
+		</ul>
+	</div>
+</div>
 <h2>{!! trans('hilfe.dienste') !!}</h2>
 <h3>{!! trans('hilfe.suchwortassoziator.title') !!}</h3>
 <p>{!! trans('hilfe.suchwortassoziator.1') !!}</p>
@@ -43,7 +77,6 @@
 <h2>{!! trans('hilfe.datenschutz.title') !!}</h2>
 <h3>{!! trans('hilfe.datenschutz.1') !!}</h3>
 <p>{!! trans('hilfe.datenschutz.2') !!}</p>
-<p>{!! trans('hilfe.datenschutz.3') !!}</p>
 <h3>{!! trans('hilfe.tor.title') !!}</h3>
 <p>{!! trans('hilfe.tor.1') !!}</p>
 <p>{!! trans('hilfe.tor.2') !!}</p>

@@ -124,18 +124,26 @@ class MetaGerSearch extends Controller
 
         # Wikipedia Quicktip
         if (App::isLocale('en')) {
-            $url = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" . urlencode($q) . "&limit=2&namespace=0&format=json&redirects=resolve";
+            $url = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" . urlencode($q) . "&limit=10&namespace=0&format=json&redirects=resolve";
         } else {
-            $url = "https://de.wikipedia.org/w/api.php?action=opensearch&search=" . urlencode($q) . "&limit=2&namespace=0&format=json&redirects=resolve";
+            $url = "https://de.wikipedia.org/w/api.php?action=opensearch&search=" . urlencode($q) . "&limit=10&namespace=0&format=json&redirects=resolve";
         }
         $decodedResponse = json_decode($this->get($url), true);
         if (isset($decodedResponse[1][0]) && isset($decodedResponse[2][0]) && isset($decodedResponse[3][0])) {
             $quicktip     = [];
             $firstSummary = $decodedResponse[2][0];
-            if ((strpos($firstSummary, 'steht für:') || strpos($firstSummary, 'may refer to:')) && isset($decodedResponse[1][1]) && isset($decodedResponse[2][1]) && isset($decodedResponse[3][1])) {
-                $quicktip["title"]   = $decodedResponse[1][1];
-                $quicktip["URL"]     = $decodedResponse[3][1];
-                $quicktip["summary"] = $decodedResponse[2][1];
+            // Wenn es mehr als 1 Ergebnis gibt
+            if (isset($decodedResponse[1][1])) {
+                // Solange noch zusätzliche Seiten vorhanden sind, füge sie der Tabelle hinzu
+                $details = '<table class=table table-condensed>';
+                for ($i = 1;isset($decodedResponse[1][$i]) && isset($decodedResponse[2][$i]) && isset($decodedResponse[3][$i]); $i++) {
+                    $details .= '<tr><td><a href="' . $decodedResponse[3][$i] . '" target="_blank" rel="noopener">' . $decodedResponse[1][$i] . '</a></td></tr>';
+                }
+                $details .= '</table>';
+                $quicktip["title"]   = $decodedResponse[1][0];
+                $quicktip["URL"]     = $decodedResponse[3][0];
+                $quicktip["summary"] = $decodedResponse[2][0];
+                $quicktip["details"] = $details;
                 $quicktip['gefVon']  = trans('metaGerSearch.quicktips.wikipedia.adress');
             } else {
                 $quicktip["title"]   = $decodedResponse[1][0];
@@ -153,7 +161,7 @@ class MetaGerSearch extends Controller
             $tips = file($file);
             $tip  = $tips[array_rand($tips)];
 
-            $mquicktips[] = ['title' => 'Wussten Sie schon?', 'summary' => $tip, 'URL' => '/tips'];
+            $mquicktips[] = ['title' => trans('metaGerSearch.quicktips.tips.title'), 'summary' => $tip, 'URL' => '/tips'];
         }
 
         # Und die Werbelinks:

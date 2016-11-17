@@ -38,13 +38,13 @@
 			<option value="GET" selected>GET</option>
 			<option value="POST">POST</option>
 		</select>
-		<h2>{!! trans('settings.suchmaschinen.1') !!} <small><a class="allUnchecker">{!! trans('settings.suchmaschinen.2') !!}</a></small></h2>
+		<h2>{!! trans('settings.suchmaschinen.1') !!} <small><button type="button" class="btn btn-link allUnchecker">{!! trans('settings.suchmaschinen.2') !!}</button></small></h2>
 		@foreach( $foki as $fokus => $sumas )
 			<div class="headingGroup {{ $fokus }}">
 				<h3 class="fokus-category">
 					{{ ucfirst($fokus) }}
 					<small>
-						<a class="checker" data-type="{{ $fokus }}">{!! trans('settings.suchmaschinen.3') !!}</a>
+						<button type="button" class="checker btn btn-link" data-type="{{ $fokus }}">{!! trans('settings.suchmaschinen.3') !!}</button>
 					</small>
 				</h3>
 				<div class="row">

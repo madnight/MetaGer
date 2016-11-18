@@ -8,13 +8,14 @@ return [
 
     'allgemein.title'                => 'Allgemeine Einstellungen',
     'allgemein.1'                    => 'Alle Einstellungen zur Suche finden Sie unter dem Suchfokus "anpassen".',
-    'allgemein.2'                    => 'Der Farbtropfen links neben dem Suchfeld ermöglicht Ihnen eine individuelle Farbeinstellung für die Startseite. (So wie Sie es am schönsten finden)',
+    'allgemein.2'                    => 'Der Farbtropfen links neben dem Suchfeld ermöglicht Ihnen eine individuelle Farbeinstellung für die Startseite. (so wie Sie es am schönsten finden).',
     'allgemein.3'                    => 'Ein Plugin für die allermeisten Browser finden Sie <a href="/#plugin-modal" target="_blank" rel="noopener">direkt</a> unter dem Suchfeld, wo die meisten Browser bereits voreingestellt sind.',
 
     'suchfokus.title'                => 'Auswahl des Suchfokus',
-    'suchfokus.1'                    => 'Über dem Suchfeld finden Sie fünf Sucheinstellungen, für die meisten Suchwünsche genügen ( "Web", "Bilder", "Nachrichten", "Wissenschaft" sowie "Produkte" ). Über den Button "anpassen" rechts daneben können Sie persönliche Feineinstellungen dazu vornehmen. Zuletzt entscheiden immer Sie über die Verwendung Ihrer Einstellungen. Sie finden ganz unten unter den Einstellungen drei Buttons: entweder benutzen Sie die Einstellung nur für eine Suche (hierfür können Sie auch ein Lesezeichen setzen), für eine dauerhafte Verwendung, oder Sie können dafür ein Plugin erstellen. MetaGer speichert Ihre Einstellungen dann im sogenannten "Local Storage" (des Browsers), hierfür benötigen Sie Javascript.',
+    'suchfokus.1'                    => 'Über dem Suchfeld finden Sie fünf Sucheinstellungen, die für die meisten Suchwünsche genügen ( "Web", "Bilder", "Nachrichten", "Wissenschaft" sowie "Produkte" ). Über den Button "anpassen" rechts daneben können Sie persönliche Feineinstellungen dazu vornehmen. Zuletzt entscheiden immer Sie über die Verwendung Ihrer Einstellungen. Sie finden ganz unten unter den Einstellungen drei Buttons: entweder benutzen Sie die Einstellung nur für eine Suche (hierfür können Sie auch ein Lesezeichen setzen), für eine dauerhafte Verwendung, oder Sie können dafür ein Plugin erstellen. MetaGer speichert Ihre Einstellungen dann im sogenannten "Local Storage" (des Browsers), hierfür benötigen Sie Javascript.',
 
-    'sucheingabe'                    => 'Sucheingabe',
+    'sucheingabe.title'              => 'Sucheingabe',
+    'sucheingabe.hint'               => 'Die im folgenden verwendeten <i>Suchen und Webseiten</i> sind lediglich Beispiele. Sie müssen diese in der Praxis durch ihre eigenen ersetzen.',
 
     'stopworte.title'                => 'Stoppworte',
     'stopworte.1'                    => 'Wenn Sie unter den MetaGer-Suchergebnissen solche ausschlie&szlig;en wollen, in denen bestimmte Worte (Ausschlussworte / Stopworte) vorkommen, dann erreichen Sie das, indem Sie diese Worte mit einem Minus versehen.',
@@ -29,7 +30,6 @@ return [
     'grossklein.2'                   => 'Beispiel: Die Suche nach <div class="well well-sm">gro&szlig;schreibung</div> liefert genau die gleichen Ergebnisse wie <div class="well well-sm">GROßSCHREIBUNG</div>',
 
     'domains.title'                  => 'Suche auf Domains beschränken / Domains ausschließen',
-    'domains.hint'                   => 'Die im folgenden verwendeten <i>Suchen und Webseiten</i> sind lediglich Beispiele. Sie müssen diese in der Praxis durch ihre eigenen ersetzen.',
 
     'domains.sitesearch.explanation' => 'Wenn Sie Ihre Suche nur auf Ergebnisse von einer bestimmten Domain (z.B. wikipedia.org) beschränken möchten, können Sie dies erreichen indem Sie Ihrer Suche site:<i>ihre-domain.de</i> hinzufügen.',
     'domains.sitesearch.example.1'   => 'Beispiel: Sie möchten nur noch Ergebnisse von der deutschen Wikipedia (de.wikipedia.org) erhalten. Ihre Suche lautet also:',

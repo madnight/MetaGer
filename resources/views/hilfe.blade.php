@@ -14,7 +14,8 @@
 </ul>
 <h3>{!! trans('hilfe.suchfokus.title') !!}</h3>
 <p>{!! trans('hilfe.suchfokus.1') !!}</p>
-<h2>{!! trans('hilfe.sucheingabe') !!}</h2>
+<h2>{!! trans('hilfe.sucheingabe.title') !!}</h2>
+<p>{!! trans('hilfe.sucheingabe.hint') !!}</p>
 <h3>{!! trans('hilfe.stopworte.title') !!}</h3>
 <p>{!! trans('hilfe.stopworte.1') !!}</p>
 <ul class="dotlist">
@@ -31,7 +32,6 @@
 	<li>{!! trans('hilfe.grossklein.2') !!}</li>
 </ul>
 <h3>{!! trans('hilfe.domains.title') !!}</h3>
-<p>{!! trans('hilfe.domains.hint') !!}</p>
 <p>{!! trans('hilfe.domains.sitesearch.explanation') !!}</p>
 <ul class="dotlist">
 	<li>{!! trans('hilfe.domains.sitesearch.example.1') !!}

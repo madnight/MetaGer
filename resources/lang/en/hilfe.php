@@ -29,7 +29,7 @@ return [
     "allgemein.3"              => "Add MetaGer to your browsers search engines by clicking the \"Add the MetaGer Plugin\" button just below the search field.",
     "suchfokus.title"          => "select a search focus / using the \"customize\" button",
     "suchfokus.1"              => "Just pick one of the foci ( \"web\", \"pictures\", \"news\", \"science\" or \"shopping\" ) to start a search with general settings made by us. These should fit most of your needs. You may set exact personally ADV?? adjustments to the foci (some other settings are available too) by clicking \"customize\". At last, make a decision whether your settings should be used once ( it is possible to set a bookmark ) or permanent by clicking either \"one time use\" or \"permanent use\". Your settings are stored in the so called \"local storage\" of your webbrowser (JavaScript is needed for this).",
-    "sucheingabe"              => "search field",
+    "sucheingabe.title"        => "search field",
     "stopworte.title"          => "stopwords",
     "stopworte.1"              => "If you want to exclude words within the search result, you have to put a \"-\" in front of that word",
     "stopworte.2"              => "Example: You search for a new car, but no BMW. Then you search should be <div class=\"well well-sm\">new car -bmw</div>",

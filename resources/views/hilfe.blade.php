@@ -49,4 +49,6 @@
 <p>{!! trans('hilfe.tor.2') !!}</p>
 <h3>{!! trans('hilfe.proxy.title') !!}</h3>
 <p>{!! trans('hilfe.proxy.1') !!}</p>
+<h3>{!! trans('hilfe.infobutton.title') !!}</h3>
+<p>{!! trans('hilfe.infobutton.1') !!}</p>
 @endsection

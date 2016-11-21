@@ -39,10 +39,10 @@
 	<div class="form-group beitritt-form-group">
 		<label class="non-bold" for="betrag">{{ trans('beitritt.beitritt.8') }}</label>
 		<div class="row">
-			<div class="col-xs-2">
+			<div class="pull-left donation-amount-input">
 				<input type="text" class="form-control" name="betrag" />
 			</div>
-			<div class="col-xs-2">
+			<div class="pull-left" style="padding-left: 10px">
 				<p class="help-block"> {{ trans('beitritt.beitritt.9') }}</p>
 			</div>
 		</div>
@@ -54,14 +54,14 @@
 		{{ trans('beitritt.beitritt.11') }}
 	</label>
 	<div class="row">
-		<div class="col-xs-2">
+		<div class="pull-left">
 			<div class="radio">
 				<label>
 					<input type="radio" name="veröffentlichung" checked> {{ trans('beitritt.beitritt.12') }}
 				</label>
 			</div>
 		</div>
-		<div class="col-xs-2">
+		<div class="pull-left" style="padding-left: 10px">
 			<div class="radio">
 				<label>
 					<input type="radio" name="veröffentlichung"> {{ trans('beitritt.beitritt.13') }}
@@ -74,7 +74,6 @@
 		<input type="text" class="form-control" id="ort" placeholder=""/>
 	</div>
 	<br />
-
 	<p class="sign">---------------------------------------------------------
 {{ trans('beitritt.abbuchung.1') }}</p>
 	<h3>{{ trans('beitritt.abbuchung.2') }}</h3>

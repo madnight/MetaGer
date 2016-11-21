@@ -39,4 +39,6 @@ return [
     "grossklein.title"         => "Mayúscula / Minúscula",
     "grossklein.1"             => "Escribir con mayúscula o minúscula no se distingue en la búsqueda, es una búsqueda meramente de los contendidos.",
     "grossklein.2"             => "Ejemplo: la búsqueda <div class=\"well well-sm\">mayúscula minúscula </div> da los mismos resultados como <div class=\"well well-sm\">Mayúscula Minúscula </div>",
+    "infobutton.title"         => "¿Qué representa la \"I\" pequeña?",
+    "infobutton.1"             => "Hacer click en \"I\" e recibe más informaciones por la tema (el tiempo por ejemplo)."
 ];

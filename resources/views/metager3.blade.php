@@ -33,8 +33,8 @@
 				@endfor
 			@endif
 			<div class="result row" id="map">
-				<div class="col-sm-1"></div>
-				<div class="col-sm-11">
+				<div class="number col-sm-1 hidden-xs"></div>
+				<div class="resultInformation col-xs-12 col-sm-11">
 					<iframe class="" src="https://maps.metager.de/metager/{{ $metager->getQ() }}" style="width: 100%; height:0; border:0;"></iframe>
 				</div>
 			</div>

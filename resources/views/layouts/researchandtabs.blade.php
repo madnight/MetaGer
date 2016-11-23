@@ -13,10 +13,10 @@
             <nav class="navbar navbar-default  navbar-fixed-top navbar-resultpage">
                 <div class="container">
                 <div class="row">
-                    <div class="col-xs-3 logo">
+                    <div class="col-xs-3 logo dense-col">
                         <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}"><h1>M<span class="hidden-xs">eta</span>G<span class="hidden-xs">er</span></h1></a>
                     </div>
-                    <div class="col-xs-9">
+                    <div class="col-xs-9 dense-col">
                         <form method="{{ Request::method() }}" accept-charset="UTF-8" class="form" id="submitForm">
                             <div class="input-group">
                                 <input autocomplete="off" class="form-control" form="submitForm" id="eingabeTop" name="eingabe" placeholder="Suchbegriffe erweitern/verändern, oder völlig neue Suche:" tabindex="1" type="text" value="{{ $eingabe }}" required />

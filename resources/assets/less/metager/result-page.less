@@ -32,7 +32,16 @@ border-radius: 0;
 /* Hier der Style für unsere Suchleiste */
 
 .navbar-resultpage {
+    right: initial;
+    left: initial;
     margin-bottom: 0px;
+}
+ 
+@media (max-width: @screen-xs-max) {
+    .navbar-resultpage {
+        right: 0px!important;
+        left: 0px!important;
+    }
 }
 
 .tab-pane .alert {
@@ -135,10 +144,8 @@ nav .input-group {
 }
 
 .content-wrapper {
-    //width: 80%;
-    //margin: 0 auto;
+    padding: 0px;
     padding-top: 52px;
-    /* padding: 10px; */
     background-color: white;
     -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);

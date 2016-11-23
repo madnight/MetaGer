@@ -7249,7 +7249,15 @@ body > div {
 }
 /* Hier der Style für unsere Suchleiste */
 .navbar-resultpage {
+  right: initial;
+  left: initial;
   margin-bottom: 0px;
+}
+@media (max-width: 767px) {
+  .navbar-resultpage {
+    right: 0px!important;
+    left: 0px!important;
+  }
 }
 .tab-pane .alert {
   margin: 10px 0;
@@ -7327,8 +7335,8 @@ nav .input-group {
   color: black;
 }
 .content-wrapper {
+  padding: 0px;
   padding-top: 52px;
-  /* padding: 10px; */
   background-color: white;
   box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
 }

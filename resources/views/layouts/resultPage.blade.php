@@ -21,18 +21,17 @@
 		<div class="tab-content container-fluid">
 			@yield('results')
 		</div>
-
-		<footer>
-			<div class="row">
-				<div class="col-xs-6">
-					<a class="btn btn-default" href="/">{!! trans('resultPage.startseite') !!}</a>
-				</div>
-				<div class="col-xs-6">
-					<a class="btn btn-default" href="/impressum/">{!! trans('resultPage.impressum') !!}</a>
-				</div>
-			</div>
-		</footer>
 	@endif
+	<footer>
+		<div class="row">
+			<div class="col-xs-6">
+				<a class="btn btn-default" href="/">{!! trans('resultPage.startseite') !!}</a>
+			</div>
+			<div class="col-xs-6">
+				<a class="btn btn-default" href="/impressum/">{!! trans('resultPage.impressum') !!}</a>
+			</div>
+		</div>
+	</footer>
 	<img src="{{ action('ImageController@generateImage')}}?site={{ urlencode(url()->current()) }}" class="hidden" />
 	<script type="text/javascript" src="/js/all.js"></script>
 </body>

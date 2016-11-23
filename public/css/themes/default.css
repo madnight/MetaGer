@@ -7259,10 +7259,6 @@ body > div {
   list-style-type: none;
   padding-left: 49px;
 }
-.navbar-resultpage div {
-  padding: 0px;
-  margin: 0px;
-}
 .navbar-resultpage .input-group {
   margin: 0px 5px;
 }
@@ -7312,13 +7308,6 @@ nav .input-group {
 }
 .navbar-resultpage {
   background-color: white;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 500;
-  width: 80%;
-  left: 50%;
-  margin-left: -40%;
 }
 .logo h1 {
   font-family: Liberation Sans, sans-serif;
@@ -7338,8 +7327,6 @@ nav .input-group {
   color: black;
 }
 .content-wrapper {
-  width: 80%;
-  margin: 0 auto;
   padding-top: 52px;
   /* padding: 10px; */
   background-color: white;

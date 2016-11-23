@@ -8,10 +8,10 @@
                 </div>
         </div>
         @endif
-<div class="content-wrapper">
-        <header id="research">
-            <nav class="navbar navbar-default navbar-resultpage">
-                <div class="container-fluid">
+<div class="content-wrapper container">
+        <header id="research" class="row">
+            <nav class="navbar navbar-default  navbar-fixed-top navbar-resultpage">
+                <div class="container">
                 <div class="row">
                     <div class="col-xs-3 logo">
                         <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}"><h1>M<span class="hidden-xs">eta</span>G<span class="hidden-xs">er</span></h1></a>
@@ -128,7 +128,7 @@
         @endif
         </ul>
         </header>
-        <div class="tab-content container-fluid">
+        <main class="tab-content row">
 
             @if( $metager->getFokus() === "web" )
             <div role="tabpanel" class="tab-pane active" id="web">
@@ -213,5 +213,15 @@
                 </div>
             </div>
             @endif
-        </div>
+        </main>
+        <footer>
+            <div class="row">
+                <div class="col-xs-6">
+                    <a class="btn btn-default" href="/">{!! trans('resultPage.startseite') !!}</a>
+                </div>
+                <div class="col-xs-6">
+                    <a class="btn btn-default" href="/impressum/">{!! trans('resultPage.impressum') !!}</a>
+                </div>
+            </div>
+    </footer>
     </div>

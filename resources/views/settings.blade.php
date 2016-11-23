@@ -12,20 +12,23 @@
 			<label><input type="checkbox" name="param_sprueche">{!! trans('settings.allgemein.2') !!}</label>
 		</div>
 		<div class="checkbox settings-checkbox">
-			<label><input type="checkbox" name="param_tab">{!! trans('settings.allgemein.3') !!}</label>
+			<label><input type="checkbox" name="param_maps">{!! trans('settings.allgemein.3') !!}</label>
 		</div>
-		<label class="select-label">{!! trans('settings.allgemein.4') !!}</label>
+		<div class="checkbox settings-checkbox">
+			<label><input type="checkbox" name="param_tab">{!! trans('settings.allgemein.4') !!}</label>
+		</div>
+		<label class="select-label">{!! trans('settings.allgemein.5') !!}</label>
 		<select class="form-control settings-form-control" name="param_lang">
-			<option value="all" @if(App::isLocale('de')) selected @endif >{!! trans('settings.allgemein.5') !!}</option>
-			<option value="de">{!! trans('settings.allgemein.6') !!}</option>
-			<option value="en" @if(App::isLocale('en')) selected @endif>{!! trans('settings.allgemein.6_1') !!}</option></select>
-		<label class="select-label">{!! trans('settings.allgemein.7') !!}</label>
+			<option value="all" @if(App::isLocale('de')) selected @endif >{!! trans('settings.allgemein.6') !!}</option>
+			<option value="de">{!! trans('settings.allgemein.7') !!}</option>
+			<option value="en" @if(App::isLocale('en')) selected @endif>{!! trans('settings.allgemein.8') !!}</option></select>
+		<label class="select-label">{!! trans('settings.allgemein.9') !!}</label>
 		<select class="form-control settings-form-control" name="param_resultCount">
 			<option value="10">10</option>
 			<option value="20" selected>20</option>
 			<option value="50">50</option>
 			<option value="100">100</option>
-			<option value="0">{!! trans('settings.allgemein.8') !!}</option></select>
+			<option value="0">{!! trans('settings.allgemein.10') !!}</option></select>
 		<label class="select-label">{!! trans('settings.zeit.1') !!}:</label>
 		<select class="form-control settings-form-control" name="param_time">
 			<option value="1000" selected>{!! trans('settings.zeit.2') !!}</option>

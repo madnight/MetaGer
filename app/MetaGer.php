@@ -44,6 +44,7 @@ class MetaGer
     protected $mobile;
     protected $resultCount;
     protected $sprueche;
+    protected $maps;
     protected $domainsBlacklisted = [];
     protected $urlsBlacklisted    = [];
     protected $url;
@@ -880,6 +881,12 @@ class MetaGer
         } else {
             $this->sprueche = false;
         }
+        $this->maps = $request->input('maps', 'off');
+        if ($this->maps === "off") {
+            $this->maps = true;
+        } else {
+            $this->maps = false;
+        }
         # Theme
         $this->theme = preg_replace("/[^[:alnum:][:space:]]/u", '', $request->input('theme', 'default'));
         # Ergebnisse pro Seite:
@@ -1304,6 +1311,11 @@ class MetaGer
     public function getSprueche()
     {
         return $this->sprueche;
+    }
+
+    public function getMaps()
+    {
+        return $this->maps;
     }
 
     public function getCategory()

@@ -22,10 +22,10 @@ return [
     'stopworte.2'                    => 'Beispiel: Sie suchen ein neues Auto, aber auf keinen Fall einen BMW. Ihre Eingabe lautet also: <div class="well well-sm">auto neu -bmw</div>',
 
     'mehrwortsuche.title'            => 'Mehrwortsuche',
-    'mehrwortsuche.1'                => 'Wenn Sie bei MetaGer nach mehr als einem Wort suchen, versuchen wir automatisch ihnen Ergebnisse zu liefern, in denen alle Wörter in der eingegebenen Reihenfolge vorkommen.',
+    'mehrwortsuche.1'                => 'Wenn Sie bei MetaGer nach mehr als einem Wort suchen, versuchen wir automatisch Ihnen Ergebnisse zu liefern, in denen alle Wörter vorkommen, oder die diesen möglichst nahe kommen.',
     'mehrwortsuche.2'                => 'Sollte Ihnen das nicht ausreichen, habe Sie 2 Möglichkeiten ihre Suche genauer zu machen:',
-    'mehrwortsuche.3'                => 'Wenn Sie sicher gehen wollen, dass Wörter aus ihrer Suche auch in den Ergebnissen vorkommen, dann können Sie diese in Anführungszeichen setzen.',
-    'mehrwortsuche.4'                => 'Mit einer Phrasensuche können Sie statt nach einzelnen Wörtern auch nach Wortkombinationen suchen. Setzen Sie dazu einfach die Wörter die gemeinsam vorkommen sollen in Anführungszeichen.',
+    'mehrwortsuche.3'                => 'Wenn Sie sicher gehen wollen, dass Wörter aus Ihrer Suche auch in den Ergebnissen vorkommen, dann müssen Sie diese in Anführungszeichen setzen.',
+    'mehrwortsuche.4'                => 'Mit einer Phrasensuche können Sie statt nach einzelnen Wörtern auch nach Wortkombinationen suchen. Setzen Sie dazu einfach diejenigen Wörter, die gemeinsam vorkommen sollen in Anführungszeichen.',
 
     'grossklein.title'               => 'Groß-/ Kleinschreibung',
     'grossklein.1'                   => 'Groß- und Kleinschreibung wird bei der Suche nicht unterschieden, es handelt sich um eine rein inhaltliche Suche.',

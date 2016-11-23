@@ -21,9 +21,11 @@ return [
     'stopworte.1'                    => 'Wenn Sie unter den MetaGer-Suchergebnissen solche ausschlie&szlig;en wollen, in denen bestimmte Worte (Ausschlussworte / Stopworte) vorkommen, dann erreichen Sie das, indem Sie diese Worte mit einem Minus versehen.',
     'stopworte.2'                    => 'Beispiel: Sie suchen ein neues Auto, aber auf keinen Fall einen BMW. Ihre Eingabe lautet also: <div class="well well-sm">auto neu -bmw</div>',
 
-    'mehrwortsuche.title'            => 'Phrasensuche',
-    'mehrwortsuche.1'                => 'Mit einer Phrasensuche können Sie statt nach einzelnen Worten auch nach Wortkombinationen suchen. Setzen Sie dazu einfach die Wörter die gemeinsam vorkommen sollen in Anführungszeichen',
-    'mehrwortsuche.2'                => 'Beispiel: Wenn Sie nach<div class="well well-sm">der runde tisch</div>suchen, finden Sie neben Ergebnissen für eine Volksbewegung auch ganz Andere, die nichts mit dem Thema zu tun haben. Suchen Sie hingegen nach<div class="well well-sm">"der runde tisch"</div>finden Sie fast ausschließlich passende Ergebnisse.',
+    'mehrwortsuche.title'            => 'Mehrwortsuche',
+    'mehrwortsuche.1'                => 'Wenn Sie bei MetaGer nach mehr als einem Wort suchen, versuchen wir automatisch ihnen Ergebnisse zu liefern, in denen alle Wörter in der eingegebenen Reihenfolge vorkommen.',
+    'mehrwortsuche.2'                => 'Sollte Ihnen das nicht ausreichen, habe Sie 2 Möglichkeiten ihre Suche genauer zu machen:',
+    'mehrwortsuche.3'                => 'Wenn Sie sicher gehen wollen, dass Wörter aus ihrer Suche auch in den Ergebnissen vorkommen, dann können Sie diese in Anführungszeichen setzen.',
+    'mehrwortsuche.4'                => 'Mit einer Phrasensuche können Sie statt nach einzelnen Wörtern auch nach Wortkombinationen suchen. Setzen Sie dazu einfach die Wörter die gemeinsam vorkommen sollen in Anführungszeichen.',
 
     'grossklein.title'               => 'Groß-/ Kleinschreibung',
     'grossklein.1'                   => 'Groß- und Kleinschreibung wird bei der Suche nicht unterschieden, es handelt sich um eine rein inhaltliche Suche.',

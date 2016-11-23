@@ -23,8 +23,13 @@
 </ul>
 <h3>{!! trans('hilfe.mehrwortsuche.title') !!}</h3>
 <p>{!! trans('hilfe.mehrwortsuche.1') !!}</p>
+<div class = "well well-sm">der runde tisch</div>
+<p>{!! trans('hilfe.mehrwortsuche.2') !!}</p>
 <ul class="dotlist">
-	<li>{!! trans('hilfe.mehrwortsuche.2') !!}</li>
+	<li>{!! trans('hilfe.mehrwortsuche.3') !!}</li>
+	<div class = "well well-sm">"der" "runde" "tisch"</div>
+	<li>{!! trans('hilfe.mehrwortsuche.4') !!}</li>
+	<div class = "well well-sm">"der runde tisch"</div>
 </ul>
 <h3>{!! trans('hilfe.grossklein.title') !!}</h3>
 <p>{!! trans('hilfe.grossklein.1') !!}</p>

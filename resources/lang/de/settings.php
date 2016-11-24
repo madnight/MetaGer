@@ -5,9 +5,17 @@ return [
     'head.2'          => 'Hier können Sie Ihr MetaGer anpassen: Nach Anklicken Ihrer gewünschten Einstellungen müssen Sie <a href="#unten">unten auf dieser Seite</a> wählen, ob Sie die Einstellungen dauerhaft speichern, oder nur einmalig setzen wollen.',
 
     'allgemein.1'     => 'Allgemein',
-    'allgemein.2'     => 'Sprüche ausblenden',
-    'allgemein.3'     => 'Maps ausblenden',
-    'allgemein.4'     => 'Links im gleichen Tab öffnen',
+
+    'allgemein.2.1'   => 'Sprüche',
+    'allgemein.2.2'   => 'anzeigen',
+    'allgemein.2.3'   => 'nicht anzeigen',
+    'allgemein.3.1'   => 'Maps',
+    'allgemein.3.2'   => 'anzeigen',
+    'allgemein.3.3'   => 'nicht anzeigen',
+    'allgemein.4.1'   => 'Ergebnisse öffnen:',
+    'allgemein.4.2'   => 'In einem neuen Tab',
+    'allgemein.4.3'   => 'Im gleichen Tab',
+
     'allgemein.5'     => 'Sprache auswählen:',
     'allgemein.6'     => 'Alle Sprachen',
     'allgemein.7'     => 'Deutsch',

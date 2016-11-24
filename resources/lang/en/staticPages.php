@@ -1,7 +1,7 @@
 <?php
 
 return [
-    "opensearch"       => "MetaGer: search & find safely while protecting your privacy",
+    "opensearch"       => "MetaGer: privacy protected search & find",
     "nav1"             => "Search",
     "nav2"             => "Donate",
     "nav3"             => "Privacy",

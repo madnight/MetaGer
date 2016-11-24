@@ -7223,6 +7223,12 @@ nav h1 {
 body > div {
   padding-top: 70px;
 }
+#map,
+#map div {
+  display: -webkit-box;
+  display: flex;
+  margin: 0;
+}
 .nav-tabs > li > a {
   border-radius: 0;
 }

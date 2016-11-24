@@ -246,9 +246,13 @@
               </h2>
               <ul class="startpage">
                 <li>
-                  <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "datenschutz") }}">{{ trans('index.about.1.1') }}</a>{{ trans('index.about.1.2') }}
+                  {!! trans('index.about.1.1') !!}
                 </li>
-                <li>{{ trans('index.about.2.1') }}<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "spende") }}">{{ trans('index.about.2.2') }}</a>
+                <li>
+                  {!! trans('index.about.2.1') !!}
+                </li>
+                <li>
+                  @lang('index.about.3.1')
                 </li>
               </ul>
             </div>

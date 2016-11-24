@@ -24,10 +24,9 @@ return [
     'sponsors.kredite'    => '<a href="https://www.finanzcheck.de/" class="mutelink" target="_blank" rel="noopener">Günstige Kredite auf FINANZCHECK.de vergleichen ',
 
     'about.title'         => 'Über uns',
-    'about.1.1'           => 'Datenschutz & Privatsphäre',
-    'about.1.2'           => '  sind bei uns einfach & selbstverständlich.',
-    'about.2.1'           => 'Wir arbeiten nicht gewinnorientiert, wir sind ein ',
-    'about.2.2'           => 'gemeinnütziger Verein. ',
+    'about.1.1'           => '<a href="/datenschutz">Datenschutz & Privatsphäre</a> sind bei uns einfach & selbstverständlich.',
+    'about.2.1'           => 'Wir arbeiten nicht gewinnorientiert, wir sind ein <a href="/spende">gemeinnütziger Verein.</a>',
+    'about.3.1'           => '',
 
     'placeholder'         => 'MetaGer: Sicher suchen & finden, Privatsphäre schützen',
 

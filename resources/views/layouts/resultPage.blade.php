@@ -9,6 +9,7 @@
 	<meta content="{{ getmypid() }}" name="p" />
 	<meta content="{{ $eingabe }}" name="q" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv=”language” content="{!! trans('staticPages.meta.language') !!}" />
 	<link rel="search" type="application/opensearchdescription+xml" title="{!! trans('resultPage.opensearch') !!}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
 	<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default') }}.css" />
 	<link type="text/css" rel="stylesheet" href="/css/lightslider.css" />

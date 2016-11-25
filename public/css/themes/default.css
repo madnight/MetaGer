@@ -6720,7 +6720,7 @@ ul.startpage {
 
 
 
-
+<
 By ID 
 
 
@@ -7019,6 +7019,9 @@ By Class
   margin-right: 3px;
 }
 .mutelink {
+  color: inherit;
+}
+.mutelink:visited {
   color: inherit;
 }
 .dotlist {

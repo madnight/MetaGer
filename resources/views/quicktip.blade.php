@@ -7,8 +7,8 @@
 		<div class="quicktip aufruf-winter">
 						<div class="media">
 							<div class="media-body">
-								<h2 class="qtheader"><a href="/spendenaufruf/" target="_blank" rel="noopener">Winter ist die Zeit der Großzügigkeit</a></h2>
-								<div contenteditable>Helfen Sie mit, MetaGer weiterzuentwickeln und am Laufen zu halten. Ihre Spende sichert unseren Fortbestand:</div>
+								<h2 class="qtheader"><a href="/spendenaufruf/" target="_blank" rel="noopener">Mit Ihnen zusammen:</a></h2>
+								<div>MetaGer als datensichere Alternative weiterentwickeln und betreiben. Mit Ihrer Hilfe können wir Datenschutz und Privatphäre bei der Internetsuche sichern:</div>
 								<a href="/spendenaufruf/" class="btn btn-primary btn-block aufruf-action-btn">Zum Spendenaufruf&hellip;</a>
 							</div>
 						</div>

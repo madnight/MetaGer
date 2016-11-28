@@ -6,6 +6,7 @@
 
 @section('content')
 <h1>MetaGer: die unabhängige, nicht-kommerzielle Internet-Suche</h1>
+<p><a href="#formular">direkt zum Spendenformular</a></p>
 <p>
 In den vergangenen Monaten hat sich MetaGer prächtig weiter entwickelt.
 Daran haben <em>Sie</em>, die MetaGer-Nutzer, einen maßgeblichen Anteil: Ohne
@@ -55,7 +56,7 @@ Damit wir dieses alles "<i>stemmen</i>" können, sind wir auch weiterhin auf
 Ihre Hilfe angewiesen; wir bitten um Spenden für unsere Arbeit:
 </p>
 <div class="" style="margin-top:50px">
-	<h1>Jetzt Spenden</h1>
+	<h1 id="formular">Jetzt Spenden</h1>
 	<div class="col-sm-6">
 		<h2>{{ trans('spenden.bankinfo.1') }}</h2>
 		<p style="white-space:pre;">{{ trans('spenden.bankinfo.2') }}</p>

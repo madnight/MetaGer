@@ -63,7 +63,7 @@
 <h2 id="dienste">{!! trans('hilfe.dienste') !!}</h2>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h3 class="panel-title">{!! trans('hilfe.app.title') !!}</h3>
+		<h3 id="mgapp" class="panel-title">{!! trans('hilfe.app.title') !!}</h3>
 	</div>
 	<div class="panel-body">
 		<p>{!! trans('hilfe.app.1') !!}</p>

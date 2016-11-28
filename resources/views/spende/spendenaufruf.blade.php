@@ -6,7 +6,7 @@
 
 @section('content')
 <h1>MetaGer: die unabhängige, nicht-kommerzielle Internet-Suche</h1>
-<p><a href="#formular">direkt zum Spendenformular</a></p>
+<p><a href="#formular">Direkt zum Spendenformular</a></p>
 <p>
 In den vergangenen Monaten hat sich MetaGer prächtig weiter entwickelt.
 Daran haben <em>Sie</em>, die MetaGer-Nutzer, einen maßgeblichen Anteil: Ohne

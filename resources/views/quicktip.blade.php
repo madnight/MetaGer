@@ -7,9 +7,9 @@
 		<div class="quicktip aufruf-winter">
 						<div class="media">
 							<div class="media-body">
-								<h2 class="qtheader"><a href="/spendenaufruf/" target="_blank">Mit Ihnen zusammen</a></h2>
-								<div>entwickeln und betreiben wir MetaGer. Mit Ihrer Hilfe können wir Datenschutz und Privatphäre bei der Internetsuche sichern:</div>
-								<a href="/spendenaufruf/" class="btn btn-primary btn-block aufruf-action-btn" target="_blank">Zum Spendenaufruf&hellip;</a>
+								<h2 class="qtheader"><a href="/spendenaufruf/" target="_blank">@lang('spendenaufruf.heading')</a></h2>
+								<div>@lang('spendenaufruf.text')</div>
+								<a href="@lang('spendenaufruf.link')" class="btn btn-primary btn-block aufruf-action-btn" target="_blank">@lang('spendenaufruf.button')</a>
 							</div>
 						</div>
 		</div>

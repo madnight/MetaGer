@@ -39,6 +39,6 @@ return [
     "grossklein.title"         => "Upper case vs. lower case",
     "grossklein.1"             => "Upper case will not be distinguished from lower case",
     "grossklein.2"             => "Searching for <div class=\"well well-sm\">Shakespeare</div> or <div class=\"well well-sm\">SHAKESPEARE</div> will deliver the same results as <div class=\"well well-sm\">shakespeare</div>",
-    "infobutton.title"         => "I see a small \"I\" in some spots. What is it?",
-    "infobutton.1"             => "You gain more information on the specific theme by clicking it (i.g. weather data or something)."
+    "infobutton.title"         => "I see a <span class=\"glyphicon glyphicon-info-sign info-details-available\" aria-hidden=\"true\"></span> in some spots. What is it?",
+    "infobutton.1"             => "You gain more information on the specific theme by clicking it (i.g. weather data or something).",
 ];

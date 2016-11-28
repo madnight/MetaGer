@@ -19,7 +19,7 @@ return [
     "sponsors.gutscheine" => "Click results by \"open anonymously\"",
     "sponsors.kredite"    => "and you are fully protected.",
     "about.title"         => "About Us",
-    "about.1.1"           => "We save your <a href=\"/en/datenschutz\">data protection & privacy.</a>",
+    "about.1.1"           => "We save your <a href=\"/en/datenschutz\">privacy & data protection.</a>",
     "about.2.1"           => "We are a <a href=\"/en/spende\">non profit NGO</a>. <a href=\"https://gitlab.metager3.de/open-source/MetaGer\" target=\"_blank\">Our source code is open:</a>",
     "about.3.1"           => "Everyone might check our data protection & privacy features.",
     "placeholder"         => "MetaGer: Privacy Protected Search & Find",

@@ -44,6 +44,8 @@ class MetaGer
     protected $mobile;
     protected $resultCount;
     protected $sprueche;
+    protected $maps;
+    protected $newtab;
     protected $domainsBlacklisted = [];
     protected $urlsBlacklisted    = [];
     protected $url;
@@ -243,6 +245,7 @@ class MetaGer
                 $this->ads       = [];
                 $this->products  = [];
                 $this->validated = true;
+                $this->maps      = false;
             }
         }
 
@@ -874,11 +877,23 @@ class MetaGer
         $this->agent  = new Agent();
         $this->mobile = $this->agent->isMobile();
         # Sprüche
-        $this->sprueche = $request->input('sprueche', 'off');
-        if ($this->sprueche === "off") {
+        $this->sprueche = $request->input('sprueche', 'on');
+        if ($this->sprueche === "on") {
             $this->sprueche = true;
         } else {
             $this->sprueche = false;
+        }
+        $this->maps = $request->input('maps', 'on');
+        if ($this->maps === "on") {
+            $this->maps = true;
+        } else {
+            $this->maps = false;
+        }
+        $this->newtab = $request->input('newtab', 'on');
+        if ($this->newtab === "on") {
+            $this->newtab = "_blank";
+        } else {
+            $this->newtab = "_self";
         }
         # Theme
         $this->theme = preg_replace("/[^[:alnum:][:space:]]/u", '', $request->input('theme', 'default'));
@@ -911,15 +926,6 @@ class MetaGer
         if ($request->has('onenewspageAll') || $request->has('onenewspageGermanyAll')) {
             $this->time  = 5000;
             $this->cache = "cache";
-        }
-        if ($request->has('tab')) {
-            if ($request->input('tab') === "off") {
-                $this->tab = "_blank";
-            } else {
-                $this->tab = "_self";
-            }
-        } else {
-            $this->tab = "_blank";
         }
         if ($request->has('password')) {
             $this->password = $request->input('password');
@@ -1252,9 +1258,9 @@ class MetaGer
         return $this->site;
     }
 
-    public function getTab()
+    public function getNewtab()
     {
-        return $this->tab;
+        return $this->newtab;
     }
 
     public function getResults()
@@ -1304,6 +1310,11 @@ class MetaGer
     public function getSprueche()
     {
         return $this->sprueche;
+    }
+
+    public function getMaps()
+    {
+        return $this->maps;
     }
 
     public function getCategory()

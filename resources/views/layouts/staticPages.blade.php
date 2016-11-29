@@ -108,6 +108,9 @@
 			</nav>
 		</header>
 		<div class="wrapper">
+			<div class="mg-panel container aufruf-winter hidden-xs"><a href="/spendenaufruf"><h1 class="aufruf-winter">Lesen Sie unseren Spendenaufruf!</h1></a>
+				<p class="lead" style="margin-bottom: 5px">Mit Ihrer Hilfe können wir Datenschutz und Privatsphäre bei der Internetsuche sichern.</p>
+			</div>
 			<main class="mg-panel container">
 				@if (isset($success))
 					<div class="alert alert-success" role="alert">{{ $success }}</div>

@@ -9,8 +9,12 @@ summary {
 	cursor: pointer;
 }
 
-.aufruf-winter {
+.quicktip.aufruf-winter {
 	border-left: 3px solid #AB2121 !important;
+}
+
+.aufruf-winter h1 {
+	font-size: 32px;
 }
 
 .aufruf-winter a {
@@ -26,4 +30,10 @@ summary {
 .aufruf-winter .aufruf-action-btn:hover {
 	background-color: #BD0D0D !important;
 	border-color: #953535;
+}
+
+@media(min-width: @screen-lg) {
+	.aufruf-winter.mg-panel {
+		width: 940px;
+	}
 }

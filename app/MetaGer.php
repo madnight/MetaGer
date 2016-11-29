@@ -245,6 +245,7 @@ class MetaGer
                 $this->ads       = [];
                 $this->products  = [];
                 $this->validated = true;
+                $this->maps      = false;
             }
         }
 

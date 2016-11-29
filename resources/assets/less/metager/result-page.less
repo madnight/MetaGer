@@ -37,7 +37,16 @@ border-radius: 0;
 /* Hier der Style für unsere Suchleiste */
 
 .navbar-resultpage {
+    right: initial;
+    left: initial;
     margin-bottom: 0px;
+}
+ 
+@media (max-width: @screen-xs-max) {
+    .navbar-resultpage {
+        right: 0px!important;
+        left: 0px!important;
+    }
 }
 
 .tab-pane .alert {
@@ -50,12 +59,20 @@ border-radius: 0;
     padding-left: 49px;
 }
 
-.navbar-resultpage div {
+.navbar-resultpage .container {
     padding: 0px;
     margin: 0px;
 }
+
+.navbar-resultpage .logo {
+    padding-top: 0px;
+}
 .navbar-resultpage .input-group {
     margin: 0px 5px;
+}
+
+.dense-col {
+    padding: 0px
 }
 
 /* Logo */
@@ -117,14 +134,6 @@ nav .input-group {
 
 .navbar-resultpage {
     background-color: white;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    //height: 60px;
-    z-index: 500;
-    width: 80%;
-    left: 50%;
-    margin-left: -40%;
 }
 
 .logo h1 {
@@ -148,10 +157,8 @@ nav .input-group {
 }
 
 .content-wrapper {
-    width: 80%;
-    margin: 0 auto;
+    padding: 0px;
     padding-top: 52px;
-    /* padding: 10px; */
     background-color: white;
     -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
@@ -543,4 +550,11 @@ footer a {
 
 .product img {
     max-width: 100px;
+}
+
+@media(max-width: @screen-xs-max) {
+    .resultContainer {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }

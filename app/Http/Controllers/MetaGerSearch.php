@@ -177,7 +177,7 @@ class MetaGerSearch extends Controller
         }
 
         # Spendenaufruf:
-        $mquicktips[] = ['title' => trans('quicktip.spende.title'), 'summary' => trans('quicktip.spende.descr'), 'URL' => LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "spendenaufruf")];
+        //$mquicktips[] = ['title' => trans('quicktip.spende.title'), 'summary' => trans('quicktip.spende.descr'), 'URL' => LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "spendenaufruf")];
 
         return view('quicktip')
             ->with('spruch', $spruch)

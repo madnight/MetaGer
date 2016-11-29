@@ -27,6 +27,7 @@ return [
     'nav22'            => 'Zitatsuche',
     'nav23'            => 'Beitrittsformular SUMA-EV',
     'nav24'            => 'MetaGer Quellcode',
+    'nav25'            => 'MetaGer App',
 
     'navigationToggle' => 'Navigation anzeigen',
 

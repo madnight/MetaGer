@@ -227,7 +227,7 @@
 <section id="moreInformation" class="hidden-xs">
           <h1 class="hidden">{{ trans('index.sponsors.head.1') }}</h1>
           <div class="row">
-            <div id="sponsors" class="col-md-6 col-sm12">
+            <div id="sponsors" class="col-sm-6">
               <h2>{{ trans('index.sponsors.head.2') }}</h2>
               <ul class="startpage">
                 <li>
@@ -241,15 +241,19 @@
                 </li>
               </ul>
             </div>
-            <div class="col-md-6 col-sm-12">
+            <div class="col-sm-6">
               <h2>
                 <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "about") }}">{{ trans('index.about.title') }}</a>
               </h2>
               <ul class="startpage">
                 <li>
-                  <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "datenschutz") }}">{{ trans('index.about.1.1') }}</a>{{ trans('index.about.1.2') }}
+                  {!! trans('index.about.1.1') !!}
                 </li>
-                <li>{{ trans('index.about.2.1') }}<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "spende") }}">{{ trans('index.about.2.2') }}</a>
+                <li>
+                  {!! trans('index.about.2.1') !!}
+                </li>
+                <li>
+                  @lang('index.about.3.1')
                 </li>
               </ul>
             </div>

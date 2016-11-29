@@ -226,7 +226,7 @@
 <section id="moreInformation" class="hidden-xs">
           <h1 class="hidden">{{ trans('index.sponsors.head.1') }}</h1>
           <div class="row">
-            <div id="sponsors" class="col-md-6 col-sm12">
+            <div id="sponsors" class="col-sm-6">
               <h2>{{ trans('index.sponsors.head.2') }}</h2>
               <ul class="startpage">
                 <li>
@@ -240,7 +240,7 @@
                 </li>
               </ul>
             </div>
-            <div class="col-md-6 col-sm-12">
+            <div class="col-sm-6">
               <h2>
                 <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "about") }}">{{ trans('index.about.title') }}</a>
               </h2>

@@ -28,8 +28,8 @@
 				<div class="col-sm-6 col-md-4 col-lg-3">
 					<label class="select-label">@lang("settings.allgemein.4.1")</label>
 					<select class="form-control settings-form-control" name="param_newtab">
-						<option value="on">@lang("settings.allgemein.4.2")</option>
-						<option value="off" selected>@lang("settings.allgemein.4.3")</option>
+						<option value="on" selected>@lang("settings.allgemein.4.2")</option>
+						<option value="off">@lang("settings.allgemein.4.3")</option>
 					</select>
 				</div>
 				<div class="col-sm-6 col-md-4 col-lg-3">

@@ -7,7 +7,7 @@
 		<div class="quicktip aufruf-winter">
 						<div class="media">
 							<div class="media-body">
-								<h2 class="qtheader"><a href="/spendenaufruf/" target="_blank">@lang('spendenaufruf.heading')</a></h2>
+								<h2 class="qtheader"><a href="@lang('spendenaufruf.link')" target="_blank">@lang('spendenaufruf.heading')</a></h2>
 								<div>@lang('spendenaufruf.text')</div>
 								<a href="@lang('spendenaufruf.link')" class="btn btn-primary btn-block aufruf-action-btn" target="_blank">@lang('spendenaufruf.button')</a>
 							</div>

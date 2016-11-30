@@ -8,6 +8,7 @@ return [
     "foki.produkte"       => "Shopping",
     "foki.anpassen"       => "customize",
     "foki.angepasst"      => "customized",
+    "foki.maps"           => "MetaGer Maps",
     "design"              => "select personal theme",
     "conveyor"            => "Purchase at affiliate shops",
     "partnertitle"        => "Support MetaGer without any costs to you",

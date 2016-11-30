@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>{!! trans('quicktip.title') !!}</title>
@@ -48,5 +49,7 @@
 						@endif
 			</div>
 		@endforeach
+		<script src="/js/quicktips.js">
+        </script>
 	</body>
 </html>

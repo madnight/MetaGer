@@ -129,7 +129,7 @@
 
         <li id="mapsTabSelector" role="presentation" class="tab-selector">
             <a href="https://maps.metager.de/map/{{ $metager->getQ() }}/-6.781309835595698/44.85855550132342/33.9779675081543/58.25372144666716" target="_blank">
-                <span class='glyphicon glyphicon-tree-conifer'></span>
+                <span class='glyphicon glyphicon-map-marker'></span>
                 <span class="hidden-xs">{{ trans('index.foki.maps') }}</span>
             </a>
         </li>

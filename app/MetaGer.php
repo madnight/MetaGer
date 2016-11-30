@@ -827,6 +827,7 @@ class MetaGer
 
     public function parseFormData(Request $request)
     {
+        $this->request = $request;
         # Sichert, dass der request in UTF-8 formatiert ist
         if ($request->input('encoding', '') !== "utf8") {
             # In früheren Versionen, als es den Encoding Parameter noch nicht gab, wurden die Daten in ISO-8859-1 übertragen
@@ -874,6 +875,11 @@ class MetaGer
         if ($this->lang !== "de" && $this->lang !== "en" && $this->lang !== "all") {
             $this->lang = "all";
         }
+        if ($this->lang !== 'all') {
+            # Warnung hinzufügen, dass die Ergebnisse gefiltert sind.
+            $this->warnings[] = trans('results.filter', ['langName' => LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native'], 'link' => $this->getUnFilteredLink()]);
+        }
+
         $this->agent  = new Agent();
         $this->mobile = $this->agent->isMobile();
         # Sprüche
@@ -940,7 +946,6 @@ class MetaGer
         if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style") {
             $this->out = "html";
         }
-        $this->request = $request;
     }
 
     public function checkSpecialSearches(Request $request)
@@ -1222,6 +1227,13 @@ class MetaGer
         $requestData = $this->request->except(['page', 'out', 'next']);
         $requestData['eingabe'] .= " -domain:$domain";
         $link = action('MetaGerSearch@search', $requestData);
+        return $link;
+    }
+
+    public function getUnFilteredLink()
+    {
+        $requestData = $this->request->except(['lang']);
+        $link        = action('MetaGerSearch@search', $requestData);
         return $link;
     }
 

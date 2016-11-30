@@ -99,7 +99,7 @@ class MetaGerSearch extends Controller
             
             $searchWords = explode(' ', $q);
             $within = false;
-            foreach($q as $word){
+            foreach($searchWords as $word){
                 if(stripos($word, $result["name"]) !== false){
                     $within = true;
                 }

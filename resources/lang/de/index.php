@@ -8,6 +8,7 @@ return [
     'foki.produkte'       => 'Produkte',
     'foki.anpassen'       => 'anpassen',
     'foki.angepasst'      => 'angepasst',
+    'foki.maps'           => 'MetaGer Maps',
 
     'design'              => 'Persönliches Design auswählen',
 

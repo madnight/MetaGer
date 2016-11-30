@@ -883,7 +883,7 @@ class MetaGer
         } else {
             $this->sprueche = false;
         }
-        $this->maps = $request->input('maps', 'on');
+        $this->maps = $request->input('maps', 'off');
         if ($this->maps === "on") {
             $this->maps = true;
         } else {

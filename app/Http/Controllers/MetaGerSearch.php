@@ -90,9 +90,9 @@ class MetaGerSearch extends Controller
         # Wetter
         try {
             if (App::isLocale('en')) {
-                $url = "http://api.openweathermap.org/data/2.5/weather?type=like&units=metric&lang=en&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
+                $url = "http://api.openweathermap.org/data/2.5/weather?type=accurate&units=metric&lang=en&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
             } else {
-                $url = "http://api.openweathermap.org/data/2.5/weather?type=like&units=metric&lang=de&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
+                $url = "http://api.openweathermap.org/data/2.5/weather?type=accurate&units=metric&lang=de&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
             }
 
             $result           = json_decode($this->get($url), true);

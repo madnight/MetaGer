@@ -241,7 +241,7 @@
                 </li>
               </ul>
             </div>
-            <div class="col-sm-6">
+            <div id="about-us" class="col-sm-6">
               <h2>
                 <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "about") }}">{{ trans('index.about.title') }}</a>
               </h2>

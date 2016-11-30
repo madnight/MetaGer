@@ -6709,6 +6709,17 @@ summary {
   background-color: #BD0D0D !important;
   border-color: #953535;
 }
+.aufruf-winter.mg-panel {
+  background-image: url("/img/snowflake.svg");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: 100px 100px;
+}
+@media (max-width: 991px) {
+  .aufruf-winter.mg-panel {
+    background-size: 60px 60px;
+  }
+}
 @media (max-width: 1439px) {
   .aufruf-winter h1 {
     font-size: 27px;

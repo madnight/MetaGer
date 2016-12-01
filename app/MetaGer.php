@@ -44,6 +44,8 @@ class MetaGer
     protected $mobile;
     protected $resultCount;
     protected $sprueche;
+    protected $maps;
+    protected $newtab;
     protected $domainsBlacklisted = [];
     protected $urlsBlacklisted    = [];
     protected $url;
@@ -243,6 +245,7 @@ class MetaGer
                 $this->ads       = [];
                 $this->products  = [];
                 $this->validated = true;
+                $this->maps      = false;
             }
         }
 
@@ -824,6 +827,7 @@ class MetaGer
 
     public function parseFormData(Request $request)
     {
+        $this->request = $request;
         # Sichert, dass der request in UTF-8 formatiert ist
         if ($request->input('encoding', '') !== "utf8") {
             # In früheren Versionen, als es den Encoding Parameter noch nicht gab, wurden die Daten in ISO-8859-1 übertragen
@@ -871,14 +875,31 @@ class MetaGer
         if ($this->lang !== "de" && $this->lang !== "en" && $this->lang !== "all") {
             $this->lang = "all";
         }
+        if ($this->lang !== 'all') {
+            # Warnung hinzufügen, dass die Ergebnisse gefiltert sind.
+            $this->warnings[] = trans('results.filter', ['langName' => LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native'], 'link' => $this->getUnFilteredLink()]);
+        }
+
         $this->agent  = new Agent();
         $this->mobile = $this->agent->isMobile();
         # Sprüche
-        $this->sprueche = $request->input('sprueche', 'off');
-        if ($this->sprueche === "off") {
+        $this->sprueche = $request->input('sprueche', 'on');
+        if ($this->sprueche === "on") {
             $this->sprueche = true;
         } else {
             $this->sprueche = false;
+        }
+        $this->maps = $request->input('maps', 'off');
+        if ($this->maps === "on") {
+            $this->maps = true;
+        } else {
+            $this->maps = false;
+        }
+        $this->newtab = $request->input('newtab', 'on');
+        if ($this->newtab === "on") {
+            $this->newtab = "_blank";
+        } else {
+            $this->newtab = "_self";
         }
         # Theme
         $this->theme = preg_replace("/[^[:alnum:][:space:]]/u", '', $request->input('theme', 'default'));
@@ -912,15 +933,6 @@ class MetaGer
             $this->time  = 5000;
             $this->cache = "cache";
         }
-        if ($request->has('tab')) {
-            if ($request->input('tab') === "off") {
-                $this->tab = "_blank";
-            } else {
-                $this->tab = "_self";
-            }
-        } else {
-            $this->tab = "_blank";
-        }
         if ($request->has('password')) {
             $this->password = $request->input('password');
         }
@@ -934,7 +946,6 @@ class MetaGer
         if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style") {
             $this->out = "html";
         }
-        $this->request = $request;
     }
 
     public function checkSpecialSearches(Request $request)
@@ -1219,6 +1230,13 @@ class MetaGer
         return $link;
     }
 
+    public function getUnFilteredLink()
+    {
+        $requestData = $this->request->except(['lang']);
+        $link        = action('MetaGerSearch@search', $requestData);
+        return $link;
+    }
+
 # Komplexe Getter
 
     public function getHostCount($host)
@@ -1252,9 +1270,9 @@ class MetaGer
         return $this->site;
     }
 
-    public function getTab()
+    public function getNewtab()
     {
-        return $this->tab;
+        return $this->newtab;
     }
 
     public function getResults()
@@ -1304,6 +1322,11 @@ class MetaGer
     public function getSprueche()
     {
         return $this->sprueche;
+    }
+
+    public function getMaps()
+    {
+        return $this->maps;
     }
 
     public function getCategory()

@@ -56,6 +56,9 @@ return [
 
     'dienste'                        => 'Weitere Dienste um die Suche herum',
 
+    'app.title'                      => 'MetaGer App',
+    'app.1'                          => 'Sie können MetaGer auch als App nutzen. Laden Sie sich dazu einfach die <a href="https://play.google.com/store/apps/details?id=de.metager.metagerapp" target="_blank" rel="noopener">MetaGer App</a> auf ihr Android Smartphone.',
+
     'suchwortassoziator.title'       => 'Suchwortassoziator',
     'suchwortassoziator.1'           => 'Als Hilfe für die Erschließung eines Begriffsumfelds haben wir den <a href="https://metager.de/klassik/asso/" target="_blank" rel="noopener">MetaGer-Web-Assoziator</a> entwickelt. Sie finden das Tool auch direkt unter dem Reiter "Dienste". Gibt man in diesen ein Suchwort ein, welches dem zu untersuchenden Fachgebiet irgendwie nahe kommt, dann wird versucht, typische Fachbegriffe dieses Gebietes aus dem WWW zu extrahieren.',
     'suchwortassoziator.2'           => 'Beispiel: Sie möchten mehr über Zeckenbisse und deren Gefahren wissen, aber ihnen fallen die medizinischen Fachbegriffe für Erkrankungen aus diesem Bereich nicht mehr ein. Die Eingabe des Wortes "Zeckenbisse" in den Web-Assoziator liefert dann u.a. die Begriffe "Borreliose" und "fsme".',
@@ -77,4 +80,6 @@ return [
 
     'proxy.title'                    => 'Anonymisierender MetaGer Proxyserver',
     'proxy.1'                        => 'Um ihn zu verwenden, müssen Sie auf der MetaGer-Ergebnisseite nur auf den Link "anonym öffnen" rechts neben dem Ergebnislink klicken. Dann wird Ihre Anfrage an die Zielwebseite über unseren anonymisierenden Proxy-Server geleitet und Ihre persönlichen Daten bleiben weiterhin völlig geschützt. Wichtig: wenn Sie ab dieser Stelle den Links auf den Seiten folgen, bleiben Sie durch den Proxy geschützt. Sie können aber oben im Adressfeld keine neue Adresse ansteuern. In diesem Fall verlieren Sie den Schutz. Ob Sie noch geschützt sind, sehen Sie ebenfalls im Adressfeld. Es zeigt: https://proxy.suma-ev.de/?url=hier steht die eigentlich Adresse.',
+    'infobutton.title'               => 'Was bedeutet das <span class="glyphicon glyphicon-info-sign info-details-available" aria-hidden="true"></span>, das ich an manchen Stellen sehe ?',
+    'infobutton.1'                   => 'Hier können Sie mit einem Klick weitere Informationen ausklappen, zum Beispiel detaillierte Wetterdaten.',
 ];

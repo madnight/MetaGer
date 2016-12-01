@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 
 class SearchenginePhpTest extends TestCase
 {
+    // Die Testfunktion die PHP Unit aufruft
+    // Ruft alle anderen Untertests auf
     public function test()
     {
         $this->constructionTest();
         $this->enablingTest();
     }
 
+    // Prüft ob aus einer XML korrekt das Suchmaschinen-Objekt erstellt wird
     public function constructionTest()
     {
         $engines = simplexml_load_file("tests/testSumas.xml")->xpath("suma");
@@ -71,6 +74,7 @@ class SearchenginePhpTest extends TestCase
             $searchengine->cacheDuration);
     }
 
+    // Prüft ob Suchmaschinen korrekt ein- und ausgeschaltet werden können
     public function enablingTest()
     {
         $engines                = simplexml_load_file("tests/testSumas.xml")->xpath("suma");
@@ -93,7 +97,7 @@ class SearchenginePhpTest extends TestCase
         $this->assertTrue($searchengine->isEnabled());
     }
 
-    /*
+    /* Noch fehlende Funktionen (teils kaum testbar)
     abstract public function loadResults($result);
     private function setStatistic($key, $val)
     protected function getHost()
@@ -111,6 +115,14 @@ class SearchenginePhpTest extends TestCase
     removeCurlHandle($mh)
      */
 
+    /**
+     * Funktion zum vereinfachen von Tests, bei denen die Ausgabe einer Funktion einem Object entsprechen soll
+     *
+     * @param Object    $object              Das Object von dem aus die Funktion aufgerufen werden soll
+     * @param String    $funcName            Der Name der Funktion
+     * @param array     $input               Die Eingaben für die Funktion
+     * @param mixed     $expectedInOutput    Etwas das als Funktionsergebnis erwartet wird (meist ein String)
+     */
     public function equalCallbackTester($object, $funcName, $input, $expectedInOutput)
     {
         $output = call_user_func_array(array($object, $funcName), $input);

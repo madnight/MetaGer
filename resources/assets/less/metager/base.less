@@ -1,0 +1,61 @@
+
+summary::-webkit-details-marker { display:none; }
+summary::-moz-details-marker { display:none; }
+summary::-ms-details-marker { display:none; }
+summary::-o-details-marker { display:none; }
+summary::details-marker { display:none; }
+
+summary {
+	cursor: pointer;
+}
+
+.quicktip.aufruf-winter {
+	border-left: 3px solid #AB2121 !important;
+}
+
+.aufruf-winter h1 {
+	font-size: 32px;
+}
+
+.aufruf-winter a, .aufruf-winter a:visited {
+	color: #AB2121;
+}
+.aufruf-winter .aufruf-action-btn {
+	color: white!important;
+	background-color: #AB2121 !important;
+	border-color: #953535;
+}
+
+.aufruf-winter .aufruf-action-btn:hover {
+	background-color: #BD0D0D !important;
+	border-color: #953535;
+}
+
+.aufruf-winter.mg-panel {
+	background-image: url("/img/snowflake.svg");
+    background-repeat: no-repeat;
+    background-position: right top;
+	background-size: 100px 100px;
+}
+
+@media(max-width: @screen-sm-max) {
+	.aufruf-winter.mg-panel {
+	    background-size: 60px 60px;
+	}
+}
+
+
+@media(max-width: @screen-md-max) {
+	.aufruf-winter h1 {
+		font-size: 27px;
+	}
+	.aufruf-winter .lead {
+		font-size: 18px;
+	}
+}
+
+@media(min-width: @screen-lg) {
+	.aufruf-winter.mg-panel {
+		width: 940px;
+	}
+}

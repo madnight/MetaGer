@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 class ResultPhpTest extends TestCase
 {
+    // Die Testfunktion die PHP Unit aufruft
+    // Ruft alle anderen Untertests auf
     public function test()
     {
         $this->rankingTest();
@@ -13,18 +15,21 @@ class ResultPhpTest extends TestCase
         $this->linkGeneratorsTest();
     }
 
+    // Liefert ein standard Suchergebnis
     public function getDummyResult()
     {
         $provider    = file_get_contents("tests/testSumas.xml");
         $titel       = "Titel";
         $link        = "link.de";
         $anzeigeLink = "link.de/anzeige";
-        $descr       = "Beschreibung: i want phrase";
-        $gefVon      = "";
-        $sourceRank  = 1;
+        $descr       = "Beschreibung: i want phrase
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+        $gefVon     = "";
+        $sourceRank = 1;
         return new Result($provider, $titel, $link, $anzeigeLink, $descr, $gefVon, $sourceRank);
     }
 
+    // Liefert eine standard MetaGer
     public function getDummyMetaGer()
     {
         $metager = new MetaGer();
@@ -34,6 +39,7 @@ class ResultPhpTest extends TestCase
         return $metager;
     }
 
+    // Liefert eine standard Suchanfrage
     public function createDummyRequest()
     {
         $query                = [];
@@ -50,6 +56,7 @@ class ResultPhpTest extends TestCase
         return new Request($query);
     }
 
+    // Testet ob das Ranking nicht übermäßig vom gewünschten Wert abweicht
     public function rankingTest()
     {
         $result = $this->getDummyResult();
@@ -63,6 +70,7 @@ class ResultPhpTest extends TestCase
         $this->assertEquals(0.4, $result->getRank(), "Not within Range of Actual Value", 0.1);
     }
 
+    // Prüft die Valid funktion, die für Ergebnisse auf der Host- oder Domain-Blacklist false zurückgeben soll
     public function isValidTest()
     {
         $result  = $this->getDummyResult();
@@ -91,6 +99,7 @@ class ResultPhpTest extends TestCase
         $this->assertFalse($result->isValid($metager));
     }
 
+    // Prüft die Funktionen die Links umformen oder erzeugen
     public function linkGeneratorsTest()
     {
         $result = $this->getDummyResult();
@@ -113,6 +122,14 @@ class ResultPhpTest extends TestCase
             'han.solo.de/unterseite/document.htm');
     }
 
+    /**
+     * Funktion zum vereinfachen von Tests, bei denen die Ausgabe einer Funktion einem Object entsprechen soll
+     *
+     * @param Object    $object              Das Object von dem aus die Funktion aufgerufen werden soll
+     * @param String    $funcName            Der Name der Funktion
+     * @param array     $input               Die Eingaben für die Funktion
+     * @param mixed     $expectedInOutput    Etwas das als Funktionsergebnis erwartet wird (meist ein String)
+     */
     public function equalCallbackTester($object, $funcName, $input, $expectedInOutput)
     {
         $output = call_user_func_array(array($object, $funcName), $input);

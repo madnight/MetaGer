@@ -5,14 +5,23 @@ return [
     'head.2'          => 'Hier können Sie Ihr MetaGer anpassen: Nach Anklicken Ihrer gewünschten Einstellungen müssen Sie <a href="#unten">unten auf dieser Seite</a> wählen, ob Sie die Einstellungen dauerhaft speichern, oder nur einmalig setzen wollen.',
 
     'allgemein.1'     => 'Allgemein',
-    'allgemein.2'     => 'Sprüche ausblenden',
-    'allgemein.3'     => 'Links im gleichen Tab öffnen',
-    'allgemein.4'     => 'Sprache auswählen:',
-    'allgemein.5'     => 'Alle Sprachen',
-    'allgemein.6'     => 'Deutsch',
-    'allgemein.6_1'   => 'Englisch',
-    'allgemein.7'     => 'Anzahl der Ergebnisse pro Seite:',
-    'allgemein.8'     => 'Alle',
+
+    'allgemein.2.1'   => 'Sprüche',
+    'allgemein.2.2'   => 'anzeigen',
+    'allgemein.2.3'   => 'nicht anzeigen',
+    'allgemein.3.1'   => 'Maps',
+    'allgemein.3.2'   => 'anzeigen',
+    'allgemein.3.3'   => 'nicht anzeigen',
+    'allgemein.4.1'   => 'Ergebnisse öffnen:',
+    'allgemein.4.2'   => 'In einem neuen Tab',
+    'allgemein.4.3'   => 'Im gleichen Tab',
+
+    'allgemein.5'     => 'Sprache auswählen:',
+    'allgemein.6'     => 'Alle Sprachen',
+    'allgemein.7'     => 'Deutsch',
+    'allgemein.8'     => 'Englisch',
+    'allgemein.9'     => 'Anzahl der Ergebnisse pro Seite:',
+    'allgemein.10'    => 'Alle',
 
     'zeit.1'          => 'Maximale Suchzeit',
     'zeit.2'          => '1 Sekunde (Standard)',
@@ -30,5 +39,5 @@ return [
     'speichern.3'     => 'Plugin mit diesen Einstellungen generieren',
     'speichern.4'     => 'Einstellungen zurücksetzen',
 
-    'request'         => 'Mit welcher Methode soll MetaGer abgefragt werden',
+    'request'         => 'Abfragemethode',
 ];

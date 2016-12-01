@@ -1,7 +1,7 @@
 <?php
 
 return [
-    "opensearch"	=>	"MetaGer: search & find safely while protecting your privacy",
+    "opensearch"	=>	"MetaGer: privacy protected search & find",
     "nav1"	=>	"Search",
     "nav2"	=>	"Donate",
     "nav3"	=>	"Privacy",
@@ -24,8 +24,9 @@ return [
     "nav20"	=>	"Help",
     "nav21"	=>	"FAQ",
     "nav22"	=>	"Citation Search",
-    "nav23"	=>	"admitting formular SUMA-EV",
+    "nav23"	=>	"Admitting formular SUMA-EV",
     "nav24"	=>	"MetaGer source code",
+    "nav25"	=>	"MetaGer App",
     "navigationToggle"	=>	"show navigation",
     "sumaev.1"	=>	"MetaGer is developed and run by ",
     "sumaev.2"	=>	"SUMA-EV - Association for Free Access to Knowledge.",
@@ -33,4 +34,3 @@ return [
     "meta.Keywords"	=>	"Internet Search, privacy, searchengine, data protection, Anonproxy, anonymous proxy, search anonymous, image search, anonymous, MetaGer, metager, metager.de, metager.net",
     "meta.language"	=>	"en"
 ];
-

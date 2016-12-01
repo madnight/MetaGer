@@ -28,13 +28,15 @@ class StartpageController extends Controller
         $focusPages = [];
         $theme      = "default";
         foreach ($request->all() as $key => $value) {
-            if ($value === 'on' && $key != 'param_sprueche' && $key != 'param_tab') {
+            if ($value === 'on' && $key != 'param_sprueche' && $key != 'param_tab' && $key !== 'param_maps') {
                 $focusPages[] = str_replace('param_', '', $key);
             }
             if ($key === 'param_theme') {
                 $theme = str_replace('param_', '', $key);
             }
         }
+
+        $maps = $request->input('param_maps', 'on');
 
         $agent   = new Agent();
         $browser = $agent->browser();
@@ -51,7 +53,8 @@ class StartpageController extends Controller
             ->with('focusPages', $focusPages)
             ->with('browser', $browser)
             ->with('navbarFocus', 'suche')
-            ->with('theme', $theme);
+            ->with('theme', $theme)
+            ->with('maps', $maps);
     }
 
     public function loadPage($subpage)

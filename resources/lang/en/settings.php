@@ -2,23 +2,23 @@
 
 return [
     "head.1"          => "Settings",
-    "head.2"          => "Here you can customize your MetaGer: After selecting your desired settings, you have to choose, whether you want to save the settings permanently, or just for once, <a href=\"#unten\">on the bottom of this page.</a>",
+    "head.2"          => "Here you can customize your MetaGer: After selecting your desired settings, you have to choose whether you want to save the settings permanently or just for once, <a href=\"#unten\">on the bottom of this page.</a>",
 
     "allgemein.1"     => "General",
 
-    'quotes.label'    => '',
-    'quotes.on'       => '',
-    'quotes.off'      => '',
+    'quotes.label'    => 'Sayings',
+    'quotes.on'       => 'show',
+    'quotes.off'      => 'hide',
 
-    'maps.label'      => '',
-    'maps.on'         => '',
-    'maps.off'        => '',
+    'maps.label'      => 'Maps',
+    'maps.on'         => 'show',
+    'maps.off'        => 'hide',
 
-    'tab.label'       => '',
-    'tab.new'         => '',
-    'tab.same'        => '',
+    'tab.label'       => 'Show results:',
+    'tab.new'         => 'in a new tab',
+    'tab.same'        => 'in the same tab',
 
-    'language.label'  => '',
+    'language.label'  => 'Select language',
     "language.all"    => "all languages",
     "language.de"     => "german",
     "language.en"     => "english",

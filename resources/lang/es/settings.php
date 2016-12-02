@@ -6,17 +6,17 @@ return [
 
     'allgemein.1'     => 'En general',
 
-    'quotes.label'    => '',
-    'quotes.on'       => '',
-    'quotes.off'      => '',
+    'quotes.label'    => 'Presentar sentencias (solamente alemán)',
+    'quotes.on'       => 'sí',
+    'quotes.off'      => 'no',
 
-    'maps.label'      => '',
-    'maps.on'         => '',
-    'maps.off'        => '',
+    'maps.label'      => 'Presentar mapas',
+    'maps.on'         => 'sí',
+    'maps.off'        => 'no',
 
-    'tab.label'       => '',
-    'tab.new'         => '',
-    'tab.same'        => '',
+    'tab.label'       => 'Abrir resultados',
+    'tab.new'         => 'en un tab nuevo',
+    'tab.same'        => 'en el tab mismo',
 
     'language.label'  => 'Escoge el idioma:',
     'language.all'    => 'Todos los idiomas',
@@ -32,5 +32,5 @@ return [
     'speichern.3'     => 'Crear un plugin con esos especificaciónes',
     'speichern.4'     => 'Reiniciar especificaciónes',
 
-    'request'         => '',
+    'request'         => 'El modo de interrogación',
 ];

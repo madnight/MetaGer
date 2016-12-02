@@ -35,10 +35,16 @@ $(document).ready(function() {
     });
     $("#unten").click(function() {
         $("#settings-form").append("<input type=\"hidden\" name=\"usage\" value=\"once\">");
-        if (isEnglish()) {
-            alert("On the following startpage your settings are saved one-time. They will be lost after your first search. Though if you want to save them, you can create a bookmark for the generated startpage.");
-        } else {
-            alert("Auf der folgenden Startseite sind Ihre Einstellungen nun einmalig gespeichert. Nach Ihrer ersten Suche sind diese wieder verloren. Wenn Sie diese speichern möchten, können Sie sich allerdings ein Lesezeichnen für die generierte Startseite einrichten.");
+        switch (getLanguage()) {
+            case "de":
+                alert("Auf der folgenden Startseite sind Ihre Einstellungen nun einmalig gespeichert. Nach Ihrer ersten Suche sind diese wieder verloren. Wenn Sie diese speichern möchten, können Sie sich allerdings ein Lesezeichnen für die generierte Startseite einrichten.");
+                break;
+            case "en":
+                alert("On the following startpage your settings are saved one-time. They will be lost after your first search. Though if you want to save them, you can create a bookmark for the generated startpage.");
+                break;
+            case "es":
+                // alert(""); TODO
+                break;
         }
     });
     $("#plugin").click(function() {
@@ -84,10 +90,11 @@ function resetOptions() {
     }
 }
 
-function isEnglish() {
-    if (window.location.href.indexOf('/en/') == -1) {
-        return false;
-    } else {
-        return true;
+function getLanguage() {
+    var metaData = document.getElementsByTagName('meta');
+    for (var m in metaData) {
+        if (metaData[m]["httpEquiv"] == "language") {
+            return metaData[m]["content"];
+        }
     }
 }

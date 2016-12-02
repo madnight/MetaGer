@@ -6,7 +6,7 @@
 		<meta charset="utf-8" />
 		<meta name="description" content="{!! trans('staticPages.meta.Description') !!}" />
 		<meta name="keywords" content="{!! trans('staticPages.meta.Keywords') !!}" />
-		<meta http-equiv=”language” content="{!! trans('staticPages.meta.language') !!}" />
+		<meta http-equiv="language" content="{!! trans('staticPages.meta.language') !!}" />
 		<meta name="page-topic" content="Dienstleistung" />
 		<meta name="robots" content="index,follow" />
 		<meta name="revisit-after" content="7 days" />

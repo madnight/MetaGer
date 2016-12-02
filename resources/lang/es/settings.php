@@ -6,22 +6,22 @@ return [
 
     'allgemein.1'     => 'En general',
 
-    'tab.label'       => 'Abrir el links en el Tab mismo.',
+    'quotes.label'    => '',
+    'quotes.on'       => '',
+    'quotes.off'      => '',
+
+    'maps.label'      => '',
+    'maps.on'         => '',
+    'maps.off'        => '',
+
+    'tab.label'       => '',
+    'tab.new'         => '',
+    'tab.same'        => '',
 
     'language.label'  => 'Escoge el idioma:',
     'language.all'    => 'Todos los idiomas',
     'language.de'     => 'Alemán',
     'language.en'     => 'Inglés',
-
-    'allgemein.7'     => 'Resultados en cada página:',
-    'allgemein.8'     => 'Todos',
-
-    'zeit.label'      => 'El tiempo máximo para buscar',
-    'zeit.1'          => '1 segundo (Standard)',
-    'zeit.2'          => '2 segundos',
-    'zeit.3'          => '5 segundos',
-    'zeit.4'          => '10 segundos',
-    'zeit.5'          => '20 segundos',
 
     'suchmaschinen.1' => 'Motores de búsqueda',
     'suchmaschinen.2' => '(seleccionar todos)',
@@ -31,4 +31,6 @@ return [
     'speichern.2'     => 'Gardar especificaciónes perdurable',
     'speichern.3'     => 'Crear un plugin con esos especificaciónes',
     'speichern.4'     => 'Reiniciar especificaciónes',
+
+    'request'         => '',
 ];

@@ -23,13 +23,6 @@ return [
     'language.de'     => 'Deutsch',
     'language.en'     => 'Englisch',
 
-    'zeit.label'      => 'Maximale Suchzeit',
-    'zeit.1'          => '1 Sekunde (Standard)',
-    'zeit.2'          => '2 Sekunden',
-    'zeit.3'          => '5 Sekunden',
-    'zeit.4'          => '10 Sekunden',
-    'zeit.5'          => '20 Sekunden',
-
     'suchmaschinen.1' => 'Suchmaschinen',
     'suchmaschinen.2' => '(alle abwählen)',
     'suchmaschinen.3' => '(alle an-/abwählen)',

@@ -6,16 +6,22 @@ return [
 
     "allgemein.1"     => "General",
 
+    'quotes.label'    => '',
+    'quotes.on'       => '',
+    'quotes.off'      => '',
+
+    'maps.label'      => '',
+    'maps.on'         => '',
+    'maps.off'        => '',
+
+    'tab.label'       => '',
+    'tab.new'         => '',
+    'tab.same'        => '',
+
+    'language.label'  => '',
     "language.all"    => "all languages",
     "language.de"     => "german",
     "language.en"     => "english",
-
-    "zeit.label"      => "maximum search time",
-    "zeit.1"          => "1 second (standard)",
-    "zeit.2"          => "2 seconds",
-    "zeit.3"          => "5 seconds",
-    "zeit.4"          => "10 seconds",
-    "zeit.5"          => "20 seconds",
 
     "suchmaschinen.1" => "search engines",
     "suchmaschinen.2" => "(deselect all)",

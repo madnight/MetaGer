@@ -41,16 +41,6 @@
 					</select>
 				</div>
 				<div class="col-sm-6 col-md-4 col-lg-3">
-					<label class="select-label">{!! trans('settings.zeit.label') !!}:</label>
-					<select class="form-control settings-form-control" name="param_time">
-						<option value="1000" selected>{!! trans('settings.zeit.1') !!}</option>
-						<option value="2000">{!! trans('settings.zeit.2') !!}</option>
-						<option value="5000">{!! trans('settings.zeit.3') !!}</option>
-						<option value="10000">{!! trans('settings.zeit.4') !!}</option>
-						<option value="20000">{!! trans('settings.zeit.5') !!}</option>
-					</select>
-				</div>
-				<div class="col-sm-6 col-md-4 col-lg-3">
 					<label class="select-label">{{ trans('settings.request') }}:</label>
 					<select class="form-control settings-form-control" name="request">
 						<option value="GET" selected>GET</option>

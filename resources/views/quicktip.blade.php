@@ -10,6 +10,7 @@
 							<div class="media-body">
 								<h2 class="qtheader"><a href="@lang('spendenaufruf.link')" target="_blank">@lang('spendenaufruf.heading')</a></h2>
 								<div>@lang('spendenaufruf.text')</div>
+								<br>
 								<a href="@lang('spendenaufruf.link')" class="btn btn-primary btn-block aufruf-action-btn" target="_blank">@lang('spendenaufruf.button')</a>
 							</div>
 						</div>

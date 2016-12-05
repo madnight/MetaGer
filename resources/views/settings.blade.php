@@ -12,52 +12,32 @@
 		<container>
 			<div class="row">
 				<div class="col-sm-6 col-md-4 col-lg-3">
-					<label class="select-label">@lang("settings.allgemein.2.1")</label>
+					<label class="select-label">@lang("settings.quotes.label")</label>
 					<select class="form-control settings-form-control" name="param_sprueche">
-						<option value="on" selected>@lang("settings.allgemein.2.2")</option>
-						<option value="off">@lang("settings.allgemein.2.3")</option>
+						<option value="on" selected>@lang("settings.quotes.on")</option>
+						<option value="off">@lang("settings.quotes.off")</option>
 					</select>
 				</div>
 				<div class="col-sm-6 col-md-4 col-lg-3">
-					<label class="select-label">@lang("settings.allgemein.3.1")</label>
+					<label class="select-label">@lang("settings.maps.label")</label>
 					<select class="form-control settings-form-control" name="param_maps">
-						<option value="on" selected>@lang("settings.allgemein.3.2")</option>
-						<option value="off">@lang("settings.allgemein.3.3")</option>
+						<option value="on" selected>@lang("settings.maps.on")</option>
+						<option value="off">@lang("settings.maps.off")</option>
 					</select>
 				</div>
 				<div class="col-sm-6 col-md-4 col-lg-3">
-					<label class="select-label">@lang("settings.allgemein.4.1")</label>
+					<label class="select-label">@lang("settings.tab.label")</label>
 					<select class="form-control settings-form-control" name="param_newtab">
-						<option value="on" selected>@lang("settings.allgemein.4.2")</option>
-						<option value="off">@lang("settings.allgemein.4.3")</option>
+						<option value="on" selected>@lang("settings.tab.new")</option>
+						<option value="off">@lang("settings.tab.same")</option>
 					</select>
 				</div>
 				<div class="col-sm-6 col-md-4 col-lg-3">
-					<label class="select-label">{!! trans('settings.allgemein.5') !!}</label>
+					<label class="select-label">{!! trans('settings.language.label') !!}</label>
 					<select class="form-control settings-form-control" name="param_lang">
-						<option value="all" @if(App::isLocale('de')) selected @endif >{!! trans('settings.allgemein.6') !!}</option>
-						<option value="de">{!! trans('settings.allgemein.7') !!}</option>
-						<option value="en" @if(App::isLocale('en')) selected @endif>{!! trans('settings.allgemein.8') !!}</option>
-					</select>
-				</div>
-				<div class="col-sm-6 col-md-4 col-lg-3">
-					<label class="select-label">{!! trans('settings.allgemein.9') !!}</label>
-					<select class="form-control settings-form-control" name="param_resultCount">
-						<option value="10">10</option>
-						<option value="20" selected>20</option>
-						<option value="50">50</option>
-						<option value="100">100</option>
-						<option value="0">{!! trans('settings.allgemein.10') !!}</option>
-					</select>
-				</div>
-				<div class="col-sm-6 col-md-4 col-lg-3">
-					<label class="select-label">{!! trans('settings.zeit.1') !!}:</label>
-					<select class="form-control settings-form-control" name="param_time">
-						<option value="1000" selected>{!! trans('settings.zeit.2') !!}</option>
-						<option value="2000">{!! trans('settings.zeit.3') !!}</option>
-						<option value="5000">{!! trans('settings.zeit.4') !!}</option>
-						<option value="10000">{!! trans('settings.zeit.5') !!}</option>
-						<option value="20000">{!! trans('settings.zeit.6') !!}</option>
+						<option value="all" @if(App::isLocale('de')) selected @endif >{!! trans('settings.language.all') !!}</option>
+						<option value="de">{!! trans('settings.language.de') !!}</option>
+						<option value="en" @if(App::isLocale('en')) selected @endif>{!! trans('settings.language.en') !!}</option>
 					</select>
 				</div>
 				<div class="col-sm-6 col-md-4 col-lg-3">

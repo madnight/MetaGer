@@ -1,30 +1,36 @@
+<?php
 
+return [
+    'head.1'          => 'Especificaciónes',
+    'head.2'          => 'Ajusta MetaGer aqui y garda suyo selecciónes perdurable o por una vez.',
 
-<?php return [
-    'head.1'          => 'Especificaciónes',     
-    'head.2'          => 'Ajusta MetaGer aqui y garda suyo selecciónes perdurable o por una vez.',     
-    'allgemein.1'     => 'En general',     
-    'allgemein.2'     => 'Sprüche ausblenden',     
-    'allgemein.3'     => 'Abrir el links en el Tab mismo.',     
-    'allgemein.4'     => 'Escoge el idioma:',     
-    'allgemein.5'     => 'Todos los idiomas',     
-    'allgemein.6'     => 'Alemán',     
-    'allgemein.6_1'   => 'Inglés',     
-    'allgemein.7'     => 'Resultados en cada página:',     
-    'allgemein.8'     => 'Todos',     
-    'zeit.1'          => 'El tiempo máximo para buscar',     
-    'zeit.2'          => '1 segundo (Standard)',     
-    'zeit.3'          => '2 segundos',     
-    'zeit.4'          => '5 segundos',     
-    'zeit.5'          => '10 segundos',     
-    'zeit.6'          => '20 segundos',     
-    'suchmaschinen.1' => 'Motores de búsqueda',     
-    'suchmaschinen.2' => '(seleccionar todos)',     
-    'suchmaschinen.3' => '(seleccionar todos /  ningunos)',     
-    'speichern.1'     => 'Hacer una página inicial por una vez',     
-    'speichern.2'     => 'Gardar especificaciónes perdurable',     
-    'speichern.3'     => 'Crear un plugin con esos especificaciónes',     
-    'speichern.4'     => 'Reiniciar especificaciónes',     
-    'request'         => 'Mit welcher Methode soll MetaGer abgefragt werden',
+    'allgemein.1'     => 'En general',
+
+    'quotes.label'    => 'Presentar sentencias (solamente alemán)',
+    'quotes.on'       => 'sí',
+    'quotes.off'      => 'no',
+
+    'maps.label'      => 'Presentar mapas',
+    'maps.on'         => 'sí',
+    'maps.off'        => 'no',
+
+    'tab.label'       => 'Abrir resultados',
+    'tab.new'         => 'en un tab nuevo',
+    'tab.same'        => 'en el tab mismo',
+
+    'language.label'  => 'Escoge el idioma:',
+    'language.all'    => 'Todos los idiomas',
+    'language.de'     => 'Alemán',
+    'language.en'     => 'Inglés',
+
+    'suchmaschinen.1' => 'Motores de búsqueda',
+    'suchmaschinen.2' => '(seleccionar todos)',
+    'suchmaschinen.3' => '(seleccionar todos /  ningunos)',
+
+    'speichern.1'     => 'Hacer una página inicial por una vez',
+    'speichern.2'     => 'Gardar especificaciónes perdurable',
+    'speichern.3'     => 'Crear un plugin con esos especificaciónes',
+    'speichern.4'     => 'Reiniciar especificaciónes',
+
+    'request'         => 'El modo de interrogación',
 ];
-

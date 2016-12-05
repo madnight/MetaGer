@@ -161,4 +161,18 @@ class StartpageController extends Controller
 
         return $xml->saveXML();
     }
+
+    public function berlin(Request $request)
+    {
+        $link = "";
+        if ($request->has('eingabe')) {
+            $password = getenv('berlin');
+            $password = md5($request->input('eingabe') . " -host:userpage.fu-berlin.de" . $password);
+            $link     = "/meta/meta.ger3?eingabe=" . $request->input('eingabe') . " -host:userpage.fu-berlin.de&focus=web&password=" . $password . "&encoding=utf8&lang=all&site=fu-berlin.de&quicktips=off&out=results-with-style";
+        }
+        return view('berlin')
+            ->with('title', 'Testseite für die FU-Berlin')
+            ->with('link', $link)
+            ->with('password', $password);
+    }
 }

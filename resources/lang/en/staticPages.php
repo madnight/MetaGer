@@ -28,7 +28,7 @@ return [
     "nav24"               => "MetaGer source code",
     "nav25"               => "MetaGer App",
     'spendenaufruf.title' => 'Together with you:',
-    'spendenaufruf.text'  => 'We can save Privacy and Data Protection for the Internet Search!
+    'spendenaufruf.text'  => 'We provide Privacy and Data Protection for the Internet Search!
 <a href="/en/spende" class="aufruf-a-startseite">Our Call for Donations&hellip;</a>',
     "navigationToggle"    => "show navigation",
     "sumaev.1"            => "MetaGer is developed and run by ",

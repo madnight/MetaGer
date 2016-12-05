@@ -238,10 +238,12 @@ class MetaGer
         if (isset($this->password)) {
             # Wir bieten einen bezahlten API-Zugriff an, bei dem dementsprechend die Werbung ausgeblendet wurde:
             # Aktuell ist es nur die Uni-Mainz. Deshalb überprüfen wir auch nur diese.
-            $password = getenv('mainz');
-            $eingabe  = $this->eingabe;
-            $password = md5($eingabe . $password);
-            if ($this->password === $password) {
+            $password       = getenv('mainz');
+            $passwordBerlin = getenv('berlin');
+            $eingabe        = $this->eingabe;
+            $password       = md5($eingabe . $password);
+            $passwordBerlin = md5($eingabe . $passwordBerlin);
+            if ($this->password === $password || $this->password === $passwordBerlin) {
                 $this->ads       = [];
                 $this->products  = [];
                 $this->validated = true;

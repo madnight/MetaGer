@@ -8,7 +8,7 @@ return [
     'foki.produkte'       => 'Produkte',
     'foki.anpassen'       => 'anpassen',
     'foki.angepasst'      => 'angepasst',
-    'foki.maps'           => 'Maps.metager.de',
+    'foki.maps'           => 'Maps.metager.de <span class="badge new-feature">Neu</span>',
 
     'design'              => 'Persönliches Design auswählen',
 

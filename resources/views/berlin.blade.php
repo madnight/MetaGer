@@ -3,11 +3,18 @@
 @section('title', $title )
 
 @section('content')
+<h1>Testseite für die Freie Universität Berlin</h1>
 <p>Diese Webseite dient der Veranschaulichung einer angepassten und werbefreien Suche, welche für die FU-Berlin verwendet werden könnte.</p>
 <p>Über die Suchmaske auf dieser Webseite kann eine angepasste MetaGer-Suche gestartet werden, welche auf der Domain "fu-berlin.de" inklusive aller Subdomains "*.fu-berlin.de" sucht. Ausgeschlossen von der Suche werden hierbei Ergebnisse der Subdomain "userpage.fu-berlin.de".</p>
 
 <form class="metager-searchform" action="" method="get" accept-charset="UTF-8" >
+  <style type="text/css">
+  	.aufruf-winter {
+  	display: none!important;
+  }
+  </style>
   <style type="text/css" scoped>
+
   .metager-searchinput {
   height: 30px;
   padding: 6px 12px;

@@ -164,7 +164,8 @@ class StartpageController extends Controller
 
     public function berlin(Request $request)
     {
-        $link = "";
+        $link     = "";
+        $password = "";
         if ($request->has('eingabe')) {
             $password = getenv('berlin');
             $password = md5($request->input('eingabe') . " -host:userpage.fu-berlin.de" . $password);

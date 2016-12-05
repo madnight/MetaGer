@@ -70,7 +70,7 @@
   	<li><code>quicktips=off</code> - Dies ist die Anweisung, dass die Quicktips, welche in der normalen MetaGer-Suche bei großen Bildschirmen am rechten Rand erscheint, entfernt werden sollen.</li>
   	<li><code>encoding=utf8</code> - Dieser Parameter darf nicht fehlen, falls die Sucheingaben in UTF-8 übertragen werden. Ansonsten kann es passieren, dass z.B. Umlaute nicht korrekt übertragen und verarbeitet werden. Fehlt dieser Parameter, so wird eine Encoding in "ISO-8859-1" vermutet.
   	</ul>
-  	<iframe src="{!!$link!!}" style="width: 100%; border: 0; margin-top: 25px;height: 100vh; overflow:scroll;"></iframe>
+  	<iframe src="{!!$link!!}" style="width: 100%; border: 0; margin-top: 25px;height: 200vh; overflow:scroll;"></iframe>
   @endif
 
 @endsection

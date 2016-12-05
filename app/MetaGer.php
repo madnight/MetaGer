@@ -879,7 +879,9 @@ class MetaGer
         }
         if ($this->lang !== 'all') {
             # Warnung hinzufügen, dass die Ergebnisse gefiltert sind.
-            $this->warnings[] = trans('results.filter', ['langName' => LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native'], 'link' => $this->getUnFilteredLink()]);
+            $this->warnings[] = trans('results.filter', ['langName' => LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native'], 'link' => $this->getUnFilteredLink(), 'filter' => $this->lang]);
+        } else {
+            $this->warnings[] = trans('results.filter.default', ['langName' => LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native']]);
         }
 
         $this->agent  = new Agent();

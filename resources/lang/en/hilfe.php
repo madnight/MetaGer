@@ -33,7 +33,7 @@ return [
     "stopworte.title"	=>	"stopwords",
     "stopworte.1"	=>	"If you want to exclude words within the search result, you have to put a \"-\" in front of that word",
     "stopworte.2"	=>	"Example: You search for a new car, but no BMW. Then you search should be <div class=\"well well-sm\">new car -bmw</div>",
-    "mehrwortsuche.title"      => "searchinf for more than one word",
+    "mehrwortsuche.title"      => "searching for more than one word",
     "mehrwortsuche.1"          => "If you search for more than one word than such results will be show which contain all these words or such who will be as close as possible to it. If you search for an exact phrase you should set your word within quotation marks.",
     "mehrwortsuche.2"          => "Example: search for Shakespears <div class=\"well well-sm\">to be or not to be</div> will deliver many results, but the exact phrase will only be found using <div class=\"well well-sm\">\"to be or nor to be\"</div>",
     "grossklein.title"	=>	"Upper case vs. lower case",

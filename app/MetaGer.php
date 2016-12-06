@@ -893,7 +893,7 @@ class MetaGer
         } else {
             $this->maps = false;
         }
-        $this->newtab = $request->input('newtab', 'on');
+        $this->newtab = $request->input('tab', 'on');
         if ($this->newtab === "on") {
             $this->newtab = "_blank";
         } else {

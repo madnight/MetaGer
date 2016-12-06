@@ -83,6 +83,7 @@
 								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('staticPages.nav15') }}
 								<span class="caret"></span></a>
 								<ul class="dropdown-menu">
+								    <li><a href="https://maps.metager.de" target="_blank">maps.metager.de</a></li>
 									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/widget/") }}">{{ trans('staticPages.nav10') }}</a></li>
 									<li><a href="https://metager.de/klassik/zitat-suche/" target="_blank" rel="noopener">{{ trans('staticPages.nav22') }}</a></li>
 									<li><a href="https://metager.de/klassik/asso/" target="_blank" rel="noopener">{{ trans('staticPages.nav11') }}</a></li>

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>{!! trans('quicktip.title') !!}</title>
-		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default') }}.css" />
+		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default-neu') }}.css" />
 	</head>
 	<body class="quicktips">
 		<div class="quicktip aufruf-winter">

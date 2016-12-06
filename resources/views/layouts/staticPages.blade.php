@@ -89,6 +89,7 @@
 									<li><a href="http://code.metager.de/" target="_blank" rel="noopener">{{ trans('staticPages.nav12') }}</a></li>
 									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe#mgapp") }}">@lang('staticPages.nav25')</a></li>
 									<li><a href="https://metager.to/" target="_blank" rel="noopener">{{ trans('staticPages.nav13') }}</a></li>
+									<li><a href="https://maps.metager.de" target="_blank">Maps.MetaGer.de</a></li>
 									<li><a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank" rel="noopener">{{ trans('staticPages.nav24') }}</a></li>
 									<li><a href="http://forum.suma-ev.de/viewtopic.php?f=3&amp;t=43" target="_blank" rel="noopener">{{ trans('staticPages.nav14') }}</a></li>
 								</ul>

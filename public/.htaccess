@@ -1,11 +1,11 @@
+FileETag None
+<ifModule mod_headers.c>
+    Header unset ETag
+    Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "Mon, 1 Jan 2010 01:00:00 GMT"
+</ifModule>
 <IfModule mod_rewrite.c>
-    FileETag None
-    <ifModule mod_headers.c>
-        Header unset ETag
-        Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
-        Header set Pragma "no-cache"
-        Header set Expires "Mon, 1 Jan 2010 01:00:00 GMT"
-    </ifModule>
     <IfModule mod_negotiation.c>
         Options -MultiViews
     </IfModule>

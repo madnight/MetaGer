@@ -56,7 +56,7 @@
 
 	@if( $metager->showQuicktips() )
 		<div class="hidden-xs col-md-4" id="quicktips">
-			<iframe class="col-mod-4 hidden-xs hidden-sm" src="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/qt") }}?q={{ $metager->getQ() }}&sprueche={{ $metager->getSprueche() }}"></iframe>
+			<iframe class="col-mod-4 hidden-xs hidden-sm" src="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/qt") }}?q={{ $metager->getQ() }}&sprueche={{ $metager->getSprueche() }}&lang={{ Request::input('lang', 'all') }}&unfilteredLink={{ base64_encode($metager->getUnfilteredLink()) }}"></iframe>
 		</div>
 	@endif
 @endsection

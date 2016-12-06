@@ -877,12 +877,6 @@ class MetaGer
         if ($this->lang !== "de" && $this->lang !== "en" && $this->lang !== "all") {
             $this->lang = "all";
         }
-        if ($this->lang !== 'all') {
-            # Warnung hinzufügen, dass die Ergebnisse gefiltert sind.
-            $this->warnings[] = trans('results.filter', ['langName' => LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native'], 'link' => $this->getUnFilteredLink(), 'filter' => $this->lang]);
-        } else {
-            $this->warnings[] = trans('results.filter.default', ['langName' => LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native']]);
-        }
 
         $this->agent  = new Agent();
         $this->mobile = $this->agent->isMobile();
@@ -1236,8 +1230,9 @@ class MetaGer
 
     public function getUnFilteredLink()
     {
-        $requestData = $this->request->except(['lang']);
-        $link        = action('MetaGerSearch@search', $requestData);
+        $requestData         = $this->request->except(['lang']);
+        $requestData['lang'] = "all";
+        $link                = action('MetaGerSearch@search', $requestData);
         return $link;
     }
 

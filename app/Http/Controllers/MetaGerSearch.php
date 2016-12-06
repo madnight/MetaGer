@@ -45,7 +45,7 @@ class MetaGerSearch extends Controller
             ->with('r', $redirect);
     }
 
-    public function quicktips(Request $request)
+    public function quicktips(Request $request, MetaGer $metager)
     {
         $q = $request->input('q', '');
 
@@ -95,20 +95,20 @@ class MetaGerSearch extends Controller
                 $url = "http://api.openweathermap.org/data/2.5/weather?type=accurate&units=metric&lang=de&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
             }
 
-            $result           = json_decode($this->get($url), true);
-            
+            $result = json_decode($this->get($url), true);
+
             $searchWords = explode(' ', $q);
-            $within = false;
-            foreach($searchWords as $word){
-                if(stripos($result["name"], $word) !== false){
+            $within      = false;
+            foreach ($searchWords as $word) {
+                if (stripos($result["name"], $word) !== false) {
                     $within = true;
                 }
             }
-            if($within){
+            if ($within) {
                 $weather          = [];
                 $weather["title"] = "Wetter in " . $result["name"];
                 $weather["URL"]   = "http://openweathermap.org/city/" . $result["id"];
-    
+
                 $summary = '<b class="detail-short">' . $result["main"]["temp"] . " °C, " . $result["weather"][0]["description"] . "</b>";
                 $details = '<table  class="table table-condensed"><tr><td>Temperatur</td><td>' . $result["main"]["temp_min"] . " bis " . $result["main"]["temp_max"] . " °C</td></tr>";
                 $details .= "<tr><td>Druck</td><td>" . $result["main"]["pressure"] . " hPa</td></tr>";

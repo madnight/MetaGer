@@ -50,6 +50,23 @@
 						@endif
 			</div>
 		@endforeach
+		<div class="quicktip">
+			<details>
+				<summary>
+					<div class="media">
+						<div class="media-body">
+							<div>
+								@if( Request::input('lang') === "all")
+									{!! trans('results.filter.default', ['langName' => LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native']]) !!}
+								@else
+									{!! trans('results.filter', ['langName' => LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native'], 'link' => base64_decode(Request::input('unfilteredLink','')), 'filter' => Request::input('lang')]) !!}
+								@endif
+							</div>
+						</div>
+					</div>
+				</summary>
+			</details>
+		</div>
 		<script src="/js/quicktips.js">
         </script>
 	</body>

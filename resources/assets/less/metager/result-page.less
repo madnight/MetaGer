@@ -1,3 +1,18 @@
+#map, #map div{
+    display:flex;
+    margin:0;
+}
+
+.nav-tabs > li > a {
+-webkit-border-radius: 0;
+-moz-border-radius: 0;
+border-radius: 0;
+}
+
+.tab-content {
+    padding-top: 10px;
+}
+
 .hostlabel a:link, .hostlabel a:visited {
     color: #FFFFFF;
 }
@@ -13,25 +28,26 @@
     display: block;
 }
 
-.row {
-    margin: 10px 15px;
-    margin-top: 0;
-}
-
-.nav-tabs > li.active {}
-
-nav-tabs > li.active {
-    border-bottom: 0;
-}
-
 .tab-pane.active {
     -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.55);
     padding: 10px 0;
     padding-top: 0;
 }
 
-
 /* Hier der Style für unsere Suchleiste */
+
+.navbar-resultpage {
+    right: initial;
+    left: initial;
+    margin-bottom: 0px;
+}
+ 
+@media (max-width: @screen-xs-max) {
+    .navbar-resultpage {
+        right: 0px!important;
+        left: 0px!important;
+    }
+}
 
 .tab-pane .alert {
     margin: 10px 0;
@@ -43,6 +59,21 @@ nav-tabs > li.active {
     padding-left: 49px;
 }
 
+.navbar-resultpage .container {
+    padding: 0px;
+    margin: 0px;
+}
+
+.navbar-resultpage .logo {
+    padding-top: 0px;
+}
+.navbar-resultpage .input-group {
+    margin: 0px 5px;
+}
+
+.dense-col {
+    padding: 0px
+}
 
 /* Logo */
 
@@ -81,18 +112,15 @@ nav .input-group {
     padding: 5px 0;
 }
 
-header nav {
-    height: 100%;
-}
 
-header ul {
+/*header ul {
     height: 100%;
     vertical-align: middle;
-}
+}*/
 
 #research nav ul > li {
     width: 20%;
-    height: 45px;
+    //height: 45px;
     vertical-align: middle;
     padding-left: 15px;
     padding-right: 15px;
@@ -104,20 +132,8 @@ header ul {
     padding-right: 15px;
 }
 
-#research nav ul li + li + li {
-    width: 80%;
-}
-
-#research {
+.navbar-resultpage {
     background-color: white;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 45px;
-    z-index: 500;
-    width: 80%;
-    left: 50%;
-    margin-left: -40%;
 }
 
 .logo h1 {
@@ -141,10 +157,8 @@ header ul {
 }
 
 .content-wrapper {
-    width: 80%;
-    margin: 0 auto;
-    padding-top: 60px;
-    /* padding: 10px; */
+    padding: 0px;
+    padding-top: 52px;
     background-color: white;
     -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
@@ -156,7 +170,6 @@ header ul {
 }
 
 body {
-    height: 100%;
     background-image: inherit;
     background-color: rgba(2, 93, 140, .03);
 }
@@ -187,7 +200,7 @@ a:hover {
     background-color: white;
 }
 
-#foki a {
+#foki li a {
     color: grey;
 }
 
@@ -284,9 +297,10 @@ a:hover {
     float: left;
 }
 
+/*
 .result:not(.ad) .link:hover {
     cursor: pointer;
-}
+}*/
 
 .result:not(.ad) .link .options > a {
     color: #333;
@@ -390,15 +404,8 @@ a:hover {
     margin: 5px 0;
 }
 
-.container-fluid {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    background-color: white;
-}
-
 #quicktips iframe {
     width: 100%;
-    height: 1000px;
     background-color: transparent;
     border: 0px none transparent;
     padding: 0px;
@@ -438,13 +445,6 @@ footer {
 
 footer a {
     color: black!important;
-}
-
-
-/* Ein resetter für Floats */
-
-.clearfix {
-    clear: both;
 }
 
 
@@ -548,4 +548,11 @@ footer a {
 
 .product img {
     max-width: 100px;
+}
+
+@media(max-width: @screen-xs-max) {
+    .resultContainer {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }

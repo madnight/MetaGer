@@ -32,7 +32,6 @@ class Sprachdatei extends Mailable
     public function build()
     {
         return $this->from($this->reply)
-            ->cc('carsten@suma-ev.de')
             ->subject($this->subject)
             ->text('kontakt.mail')
             ->with('messageText', $this->message)

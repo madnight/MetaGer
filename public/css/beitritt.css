@@ -1,26 +1,67 @@
 @media print {
     #spendenaufruf {
-        display: none!important;
+        display: none !important;
+    }
+    header {
+        display: none !important;
     }
     footer {
-        display: none!important;
+        display: none !important;
     }
     .wrapper {
-        padding-top: 0!important;
+        padding-top: 0 !important;
     }
     * {
         font-size: 12px!important;
     }
     input[type=text], input[type=email] {
-        padding: 0!important;
-        height: initial!important;
+        margin: 0px !important;
+        padding: 0px !important;
+        /*padding-top: 5px!important;*/
+        height: initial !important;
         border: 0;
     }
-    h1 {
-        margin-top: 0!important;
-        padding-top: 0!important;
+    .beitritt-form-group {
+        margin: 0px !important;
+        padding: 0px !important;
+        margin-bottom: 0px !important;
     }
-    .form-group {
-        margin-bottom: 10px!important;
+    .sign {
+        margin-top: 10px;
+    }
+    .donation-amount-input {
+        padding-top: 5px;
+    }
+    h1 {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+    /* Skalierung für Firefox, absolut für die funktionierenden Browser */
+    input[type=radio] {
+        transform: scale(0.5);
+        -moz-transform: scale(0.5);
+        -ms-transform: scale(0.5);
+        -webkit-transform: scale(0.5);
+        -o-transform: scale(0.5);
+        width: 20px !important;
+        height: 20px !important;
+        margin-top: 0px !important;
+        padding-top: 0px !important;
+    }
+    input::-webkit-input-placeholder {
+        /* WebKit browsers */
+        color: transparent !important;
+    }
+    input:-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        color: transparent !important;
+    }
+    input::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        color: transparent !important;
+    }
+    input:-ms-input-placeholder {
+        /* Internet Explorer 10+ */
+        color: transparent !important;
     }
 }

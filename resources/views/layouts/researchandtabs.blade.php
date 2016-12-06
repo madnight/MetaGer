@@ -1,16 +1,22 @@
-<div class="content-wrapper">
-        <header id="research">
-            <nav>
-                <ul class="list-inline">
-                    <li class="hidden-xs hidden-sm pull-left">
-                        <div class="logo"><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}"><h1>MetaGer</h1></a>
-                        </div>
-                    </li>
-                    <li class="visible-xs visible-sm pull-left">
-                        <div class="logo"><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}"><h1>MG</h1></a>
-                        </div>
-                    </li>
-                    <li class="pull-right">
+        @if( strpos(rtrim(Request::header('REFERER'), '/'), LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") )  === 0 && ( $browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'IE' || $browser === 'Edge') )
+        <div id="searchplugin" class="alert alert-warning alert-dismissible" role="alert" style="">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {!! trans('researchandtabs.plugin.1', ['browser' => $browser]) !!}
+                <br />
+                <div style="">
+                    <a href="{{ action('StartpageController@loadStartPage', Request::all()) }}#plugin-modal" target="_blank" rel="noopener" type="button" class="btn btn-info" style="">{!! trans('researchandtabs.plugin.2') !!}</a>
+                </div>
+        </div>
+        @endif
+<div class="content-wrapper container">
+        <header id="research" class="row">
+            <nav class="navbar navbar-default  navbar-fixed-top navbar-resultpage">
+                <div class="container">
+                <div class="row">
+                    <div class="col-xs-3 logo dense-col">
+                        <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}"><h1>M<span class="hidden-xs">eta</span>G<span class="hidden-xs">er</span></h1></a>
+                    </div>
+                    <div class="col-xs-9 dense-col">
                         <form method="{{ Request::method() }}" accept-charset="UTF-8" class="form" id="submitForm">
                             <div class="input-group">
                                 <input autocomplete="off" class="form-control" form="submitForm" id="eingabeTop" name="eingabe" placeholder="Suchbegriffe erweitern/verändern, oder völlig neue Suche:" tabindex="1" type="text" value="{{ $eingabe }}" required />
@@ -27,20 +33,10 @@
                             @endforeach
 
                         </form>
-                    </li>
+                    </div>
                 </ul>
-            </nav>
-        </header>
-        @if( strpos(rtrim(Request::header('REFERER'), '/'), LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") )  === 0 && ( $browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'IE' || $browser === 'Edge') )
-        <div id="searchplugin" class="alert alert-warning alert-dismissible" role="alert" style="">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                {!! trans('researchandtabs.plugin.1', ['browser' => $browser]) !!}
-                <br />
-                <div style="">
-                    <a href="{{ action('StartpageController@loadStartPage', Request::all()) }}#plugin-modal" target="_blank" rel="noopener" type="button" class="btn btn-info" style="">{!! trans('researchandtabs.plugin.2') !!}</a>
                 </div>
-        </div>
-        @endif
+            </nav>
         <ul class="nav nav-tabs" id="foki" role="tablist">
         @if( $metager->getFokus() === "web" )
         <li id="webTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
@@ -130,9 +126,16 @@
             </a>
         </li>
         @endif
-        </ul>
 
-        <div class="tab-content container-fluid">
+        <li id="mapsTabSelector" role="presentation" class="tab-selector">
+            <a href="https://maps.metager.de/map/{{ $metager->getQ() }}/-6.781309835595698/44.85855550132342/33.9779675081543/58.25372144666716" target="_blank">
+                <span class='glyphicon glyphicon-map-marker'></span>
+                <span class="hidden-xs">{!! trans('index.foki.maps') !!}</span>
+            </a>
+        </li>
+        </ul>
+        </header>
+        <main class="tab-content row">
 
             @if( $metager->getFokus() === "web" )
             <div role="tabpanel" class="tab-pane active" id="web">
@@ -217,5 +220,5 @@
                 </div>
             </div>
             @endif
-        </div>
+        </main>
     </div>

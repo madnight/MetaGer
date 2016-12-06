@@ -28,13 +28,15 @@ class StartpageController extends Controller
         $focusPages = [];
         $theme      = "default";
         foreach ($request->all() as $key => $value) {
-            if ($value === 'on' && $key != 'param_sprueche' && $key != 'param_tab') {
+            if ($value === 'on' && $key != 'param_sprueche' && $key != 'param_tab' && $key !== 'param_maps') {
                 $focusPages[] = str_replace('param_', '', $key);
             }
             if ($key === 'param_theme') {
                 $theme = str_replace('param_', '', $key);
             }
         }
+
+        $maps = $request->input('param_maps', 'on');
 
         $agent   = new Agent();
         $browser = $agent->browser();
@@ -51,7 +53,8 @@ class StartpageController extends Controller
             ->with('focusPages', $focusPages)
             ->with('browser', $browser)
             ->with('navbarFocus', 'suche')
-            ->with('theme', $theme);
+            ->with('theme', $theme)
+            ->with('maps', $maps);
     }
 
     public function loadPage($subpage)
@@ -157,5 +160,20 @@ class StartpageController extends Controller
         die(var_dump($foki));
 
         return $xml->saveXML();
+    }
+
+    public function berlin(Request $request)
+    {
+        $link     = "";
+        $password = "";
+        if ($request->has('eingabe')) {
+            $password = getenv('berlin');
+            $password = md5($request->input('eingabe') . " -host:userpage.fu-berlin.de" . $password);
+            $link     = "/meta/meta.ger3?eingabe=" . $request->input('eingabe') . " -host:userpage.fu-berlin.de&focus=web&password=" . $password . "&encoding=utf8&lang=all&site=fu-berlin.de&quicktips=off&out=results-with-style";
+        }
+        return view('berlin')
+            ->with('title', 'Testseite für die FU-Berlin')
+            ->with('link', $link)
+            ->with('password', $password);
     }
 }

@@ -33,7 +33,7 @@
 
 	<body>
 		<header>
-			<nav class="navbar navbar-default">
+			<nav class="navbar navbar-default navbar-fixed-top">
 				<div class="container-fluid">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
@@ -83,18 +83,18 @@
 								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('staticPages.nav15') }}
 								<span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank" rel="noopener">{{ trans('staticPages.nav24') }}</a></li>
-									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe/") }}">{{ trans('staticPages.nav9') }}</a></li>
 									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/widget/") }}">{{ trans('staticPages.nav10') }}</a></li>
+									<li><a href="https://metager.de/klassik/zitat-suche/" target="_blank" rel="noopener">{{ trans('staticPages.nav22') }}</a></li>
 									<li><a href="https://metager.de/klassik/asso/" target="_blank" rel="noopener">{{ trans('staticPages.nav11') }}</a></li>
 									<li><a href="http://code.metager.de/" target="_blank" rel="noopener">{{ trans('staticPages.nav12') }}</a></li>
+									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe#mgapp") }}">@lang('staticPages.nav25')</a></li>
 									<li><a href="https://metager.to/" target="_blank" rel="noopener">{{ trans('staticPages.nav13') }}</a></li>
+									<li><a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank" rel="noopener">{{ trans('staticPages.nav24') }}</a></li>
 									<li><a href="http://forum.suma-ev.de/viewtopic.php?f=3&amp;t=43" target="_blank" rel="noopener">{{ trans('staticPages.nav14') }}</a></li>
-									<li><a href="https://metager.de/klassik/zitat-suche/" target="_blank" rel="noopener">{{ trans('staticPages.nav22') }}</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navigationSprache">{{ trans('staticPages.nav19') }}
+								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navigationSprache">{{ trans('staticPages.nav19') }} ({{ LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native'] }})
 								<span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
@@ -108,6 +108,9 @@
 			</nav>
 		</header>
 		<div class="wrapper">
+			<div class="mg-panel container aufruf-winter hidden-xs"><a href="/spendenaufruf"><h1 class="aufruf-winter"> @lang('staticPages.spendenaufruf.title')</h1></a>
+				<p class="lead" style="margin-bottom: 5px">{!! trans('staticPages.spendenaufruf.text') !!}</p>
+			</div>
 			<main class="mg-panel container">
 				@if (isset($success))
 					<div class="alert alert-success" role="alert">{{ $success }}</div>

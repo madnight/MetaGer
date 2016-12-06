@@ -1,6 +1,6 @@
 @import "./bootstrap/bootstrap.less";
 @import "./metager/metager.less";
-@import "./bootstrap/variables.less";
+
 @import "./variables-default.less";
 
 /*input[type=text]:focus, textarea:focus, input[type=email]:focus, input[type=tel]:focus {
@@ -39,17 +39,11 @@
     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
 }
 
-.lSPrev > span, .lSNext > span {
-    color: rgb(255, 128, 0);
+.navbar.navbar-resultpage {
+    border-bottom: 2px solid rgb(255, 128, 0);
+    box-shadow: none;
 }
 
-@media(min-width: 1200px) {
-    .container {
-        width: 1150px;
-    }
-}
-@media(min-width: 1400px) {
-    .container {
-        width: 1370px;
-    }
+.lSPrev > span, .lSNext > span {
+    color: rgb(255, 128, 0);
 }

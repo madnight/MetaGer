@@ -5,53 +5,58 @@
 @section('navbarFocus.donate', 'class="dropdown active"')
 
 @section('content')
-<h1>MetaGer sagt: <i>Danke!</i></a></h1>
+<h1>MetaGer: die unabhängige, nicht-kommerzielle Internet-Suche</h1>
+<p><a href="#formular">Direkt zum Spendenformular</a></p>
 <p>
-Liebe hilfsbereite Menschen und metager-ische Freunde, wir hätten uns nie
-vorstellen können, dass es um MetaGer so eine wundervolle Community gibt:
-Die Spendenbereitsschaft ist oberhalb dessen, was wir uns bisher vorstellen
-konnten.  Sogar aus Übersee haben uns Spenden und Hilfsangebote erreicht.
+In den vergangenen Monaten hat sich MetaGer prächtig weiter entwickelt.
+Daran haben <em>Sie</em>, die MetaGer-Nutzer, einen maßgeblichen Anteil: Ohne
+<em>Ihre</em> Hilfe gäbe es die unabhängige, nicht-kommerzielle MetaGer-Suche
+schon lange nicht mehr.
 <p>
-Wir danken ganz herzlich allen, die für MetaGer gespendet haben! Wir haben
-uns vorher nicht vorstellen können, dass die Resonanz auf unseren
-Spendenaufruf so toll ist.  SIE haben es damit auch möglich gemacht, dass
-wir MetaGer jetzt international als freie Software in der Open-Source
-Community implementieren konnten.  MetaGer gibt es nun in Englisch und
-demnächst dank der Hilfe eines engagierten Auslandsdeutschen auch in
-Spanisch.  SIE alle haben damit den Betrieb und die Weiterentwicklung von
-MetaGer für die nächste Zeit gesichert.
-<p>
-Wenn Sie darüber hinaus an MetaGer mitarbeiten und auch programmieren
-möchten: Sie finden den Einstieg dazu und den Quellcode unter
-<a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank" rel="noopener">https://gitlab.metager3.de/open-source/MetaGer</a> (Hintergrundinfo dazu im
-Heise-Ticker unter <a href="http://heise.de/-3295586" target="_blank" rel="noopener">http://heise.de/-3295586</a>) - wir freuen uns auf die
-Zusammenarbeit mit Ihnen!
-<p>
-Am 18. Juli 2016 um 15.26 Uhr hatte der SUMA-EV als Betreiber von metager.de
-den Spendenaufruf auf der MetaGer-Website gestartet.  Keine zwei Minuten
-später gingen die ersten Spenden ein.  Und das ging dann so weiter -
-es ist unglaublich toll zu erleben, wie unsere Nutzer die unabhängige und
-nicht-kommerzielle Internet-Suche mit MetaGer unterstützen!  Sowohl mit
-Spenden als auch mit motivierenden Worten.
-<p>
-Wir DANKEN! Und wir haben den Spendenaufruf am 8.9.2016 beendet. Die Finanzierung
-unserer freien und unabhängigen Internetsuche ist nun für die nächste Zeit
-gesichert.
-<p>
-<b>Wir wissen jetzt, dass wir uns auf unsere User verlassen können. Das
-ist ein tolles Gefühl!</b>
-<p>
-P.S.: Wir haben auch allen, die dies zu erkennen gegeben haben, auf Wunsch
-Spendenbescheinigungen gesandt.  Bei einigen Spendern war das nicht möglich,
-weil keine Adresse angegeben war.  Wir können auch nicht ausschließen, dass
-wir evtl. jemanden übersehen haben.  In diesem wie in jenem Fall melden Sie
-sich bitte noch einmal.
-<p>
-Herzliche Grüße,
-das MetaGer-Team im SUMA-EV
+Für das kommende Jahr haben wir uns nun allerhand vorgenommen:
+<ul>
+	<li><p>Unsere englische Version <a href="https://metager.net" target="_blank">https://metager.net</a> muss im englischen Sprachraum
+  expandieren: In Großbritannien ist ein Gesetz (das "<i lang="en-UK">Investigatory Powers
+  Bill</i>") beschlossen, welches <q cite="https://netzpolitik.org//2016/analyse-london-segnet-haertestes-ueberwachungsgesetz-einer-demokratie-ab/">alle bisherigen Eingriffe in Grundrechte in
+  den Schatten</q> stellt - der Orwellsche Überwachungsstaat mit extremer
+  Vorratsdatenspeicherung ist Realität geworden
+  (<a href="https://netzpolitik.org//2016/analyse-london-segnet-haertestes-ueberwachungsgesetz-einer-demokratie-ab/">https://netzpolitik.org//2016/analyse-london-segnet-haertestes-ueberwachungsgesetz-einer-demokratie-ab/</a>).
+  Dagegen bietet MetaGer optimale Schutzmöglichkeiten mit unserem
+  anonymisierenden Proxy, der durch den Klick auf "anonym öffnen" genutzt
+  wird und durch unseren Zugang über das TOR-Netzwerk.  Dieses Wissen müssen
+  wir jetzt im englischen Sprachraum propagieren. Und auch hierzulande
+  steht eine <a href="https://digitalcourage.de/themen/vorratsdatenspeicherung" target="_blank">Neuauflage der Vorratsdatenspeicherung</a> vor der Tür.</p></li>
+  <li><p>Neben der Suche nach Texten und Bildern ist die Suche nach räumlicher,
+  geographischer Information eine der häufigst genutzen Internetdienste.
+  Gerade hierbei sind die Standortaufzeichnungen der globalen
+  Suchmaschinenanbieter ein Überwachungsinstrument erster Güte.  Um dagegen
+  eine Alternative zu bieten, entwickeln wir <a href="https://maps.metager.de" target="_blank">maps.metager.de</a>. Sie
+  können es jetzt bereits nutzen: eine erste Version mit Deutschland-Karten
+  ist online.  Aber das ist bei weitem noch nicht alles, was wir damit
+  vorhaben: Routenplaner, Karten außerhalb Deutschlands usw.  Hiermit wollen
+  wir gegen diese Überwachung der geographischem Nutzerdaten eine
+  Alternative schaffen.</p></li>
+  <li><p>Im August 2016 haben wir den MetaGer-Quellcode öffentlich gemacht (Sie
+  finden diesen unter <a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank">https://gitlab.metager3.de/open-source/MetaGer</a>).  Damit
+  ist zum einen öffentlich kontrollierbar, wie wir Datenschutz und
+  Privatsphäre im Detail in die Realität umsetzen.  Zum anderen kann jede/r
+  MetaGer mit weiterentwickeln und programmieren.  Denn gegen die gewaltige
+  Macht der globalen IT-Konzerne haben nur offene Systeme eine Chance, an
+  denen <em>viele</em> mitmachen!  Hier erwarten wir im kommenden Jahr neue Ideen und
+  Features für MetaGer.  Die von uns ausgelobten <a href="https://suma-awards.de" target="_blank">SUMA Awards</a> belohnen solche
+  Programmierungen mit insgesamt 2.500,-EUR.</p></li>
+  <li><p>Daneben steht wie immer das "<i>Tagesgeschäft</i>" mit vielen Nutzeranfragen.
+  Unser Ziel ist es, dass <em>jede/r</em> die/der uns etwas fragt, eine vernünftige
+  Antwort bekommt.  Auch das unterscheidet uns von den globalen
+  Suchmaschinenanbietern: Bei MetaGer findet jeder einzelne Mensch
+  Beachtung.</p></li>
+</ul>
+<p class="lead">
+Damit wir dieses alles "<i>stemmen</i>" können, sind wir auch weiterhin auf
+Ihre Hilfe angewiesen; wir bitten um Spenden für unsere Arbeit:
 </p>
 <div class="" style="margin-top:50px">
-	<h1>Weiter spenden:</h1>
+	<h1 id="formular">Jetzt Spenden</h1>
 	<div class="col-sm-6">
 		<h2>{{ trans('spenden.bankinfo.1') }}</h2>
 		<p style="white-space:pre;">{{ trans('spenden.bankinfo.2') }}</p>

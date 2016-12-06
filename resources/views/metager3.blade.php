@@ -32,6 +32,14 @@
 					@include('layouts.ad', ['ad' => $metager->popAd()])
 				@endfor
 			@endif
+			@if($metager->getMaps())
+			<div class="result row" id="map">
+				<div class="number col-sm-1 hidden-xs"></div>
+				<div class="resultInformation col-xs-12 col-sm-11">
+					<iframe class="" src="https://maps.metager.de/metager/{{ $metager->getQ() }}" style="width: 100%; height:0; border:0;"></iframe>
+				</div>
+			</div>
+			@endif
 			@foreach($metager->getResults() as $result)
 				@if($result->number % 7 === 0)
 					@include('layouts.ad', ['ad' => $metager->popAd()])
@@ -48,7 +56,7 @@
 
 	@if( $metager->showQuicktips() )
 		<div class="hidden-xs col-md-4" id="quicktips">
-			<iframe class="col-mod-4 hidden-xs hidden-sm" src="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/qt") }}?q={{ $metager->getQ() }}&sprueche={{ $metager->getSprueche() }}"></iframe>
+			<iframe class="col-mod-4 hidden-xs hidden-sm" src="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/qt") }}?q={{ $metager->getQ() }}&sprueche={{ $metager->getSprueche() }}&lang={{ Request::input('lang', 'all') }}&unfilteredLink={{ base64_encode($metager->getUnfilteredLink()) }}"></iframe>
 		</div>
 	@endif
 @endsection

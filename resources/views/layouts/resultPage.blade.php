@@ -12,7 +12,7 @@
 	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
 	<meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE" />
 	<link rel="search" type="application/opensearchdescription+xml" title="{!! trans('resultPage.opensearch') !!}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
-	<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default') }}.css" />
+	<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default-neu') }}.css" />
 	<link type="text/css" rel="stylesheet" href="/css/lightslider.css" />
 	<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
 </head>

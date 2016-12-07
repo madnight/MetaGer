@@ -108,8 +108,11 @@
 
 <h2 id="dienste">{!! trans('hilfe.dienste') !!}</h2>
 <div class="panel panel-default">
+	<!-- Ja, ganz richtig gesehen, hier wird der Anker um 100 Pixel nach oben geschoben, um dann den Inhalt um 100 nach unten zu schieben. Deshalb können wir keine schönen Sachen haben. -->
+	<div id="mg-app" style="margin-top: -100px"></div>
+	<div style="margin-top: 100px"></div>
 	<div class="panel-heading">
-		<h3 id="mgapp" class="panel-title">{!! trans('hilfe.app.title') !!}</h3>
+		<h3 class="panel-title">{!! trans('hilfe.app.title') !!}</h3>
 	</div>
 	<div class="panel-body">
 		<p>{!! trans('hilfe.app.1') !!}</p>

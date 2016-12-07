@@ -54,7 +54,7 @@
 		@foreach( $foki as $fokus => $sumas )
 			<div class="headingGroup {{ $fokus }}">
 				<h3 class="fokus-category">
-					{{ ucfirst($fokus) }}
+					@lang("settings.foki." . $fokus)
 					<small>
 						<button type="button" class="checker btn btn-link" data-type="{{ $fokus }}">{!! trans('settings.suchmaschinen.3') !!}</button>
 					</small>

@@ -2,7 +2,8 @@
 <html>
 	<head>
 		<title>{!! trans('quicktip.title') !!}</title>
-		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default-neu') }}.css" />
+		<!--<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default-neu') }}.css" />-->
+		<link type="text/css" rel="stylesheet" href="{{ elixir('css/themes/default.css') }}" />
 	</head>
 	<body class="quicktips">
 		<div class="quicktip aufruf-winter">
@@ -67,7 +68,7 @@
 				</summary>
 			</details>
 		</div>
-		<script src="/js/quicktips.js">
+		<script src="{{ elixir('js/quicktips.js') }}">
         </script>
 	</body>
 </html>

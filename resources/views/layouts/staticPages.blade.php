@@ -19,8 +19,9 @@
 		<link rel="search" type="application/opensearchdescription+xml" title="{{ trans('staticPages.opensearch') }}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
 		<!--<link href="/css/bootstrap.css" rel="stylesheet" />
 		-->
-		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default-neu') }}.css" />
+		<!--<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default-neu') }}.css" />-->
 		<!--<link href="/css/style.css" rel="stylesheet" />-->
+		<link type="text/css" rel="stylesheet" href="{{ elixir('css/themes/default.css') }}" />
 		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
 		@if (isset($css))
 			@if(is_array($css))
@@ -89,7 +90,7 @@
 									<li><a href="https://metager.de/klassik/zitat-suche/" target="_blank" rel="noopener">{{ trans('staticPages.nav22') }}</a></li>
 									<li><a href="https://metager.de/klassik/asso/" target="_blank" rel="noopener">{{ trans('staticPages.nav11') }}</a></li>
 									<li><a href="http://code.metager.de/" target="_blank" rel="noopener">{{ trans('staticPages.nav12') }}</a></li>
-									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe#mgapp") }}">@lang('staticPages.nav25')</a></li>
+									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe#mg-app") }}">@lang('staticPages.nav25')</a></li>
 									<li><a href="https://metager.to/" target="_blank" rel="noopener">{{ trans('staticPages.nav13') }}</a></li>
 									<li><a href="https://maps.metager.de" target="_blank">Maps.MetaGer.de</a></li>
 									<li><a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank" rel="noopener">{{ trans('staticPages.nav24') }}</a></li>
@@ -136,7 +137,7 @@
 				</ul>
 			</footer>
 			<img src="{{ action('ImageController@generateImage')}}?site={{ urlencode(url()->current()) }}" class="hidden" />
-			<script type="text/javascript" src="/js/all.js"></script>
+			<script type="text/javascript" src="{{ elixir('js/all.js') }}"></script>
 		</div>
 	</body>
 </html>

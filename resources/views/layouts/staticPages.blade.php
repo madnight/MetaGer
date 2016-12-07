@@ -89,7 +89,7 @@
 									<li><a href="https://metager.de/klassik/zitat-suche/" target="_blank" rel="noopener">{{ trans('staticPages.nav22') }}</a></li>
 									<li><a href="https://metager.de/klassik/asso/" target="_blank" rel="noopener">{{ trans('staticPages.nav11') }}</a></li>
 									<li><a href="http://code.metager.de/" target="_blank" rel="noopener">{{ trans('staticPages.nav12') }}</a></li>
-									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe#mgapp") }}">@lang('staticPages.nav25')</a></li>
+									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe#mg-app") }}">@lang('staticPages.nav25')</a></li>
 									<li><a href="https://metager.to/" target="_blank" rel="noopener">{{ trans('staticPages.nav13') }}</a></li>
 									<li><a href="https://maps.metager.de" target="_blank">Maps.MetaGer.de</a></li>
 									<li><a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank" rel="noopener">{{ trans('staticPages.nav24') }}</a></li>

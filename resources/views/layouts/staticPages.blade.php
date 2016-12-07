@@ -19,8 +19,9 @@
 		<link rel="search" type="application/opensearchdescription+xml" title="{{ trans('staticPages.opensearch') }}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
 		<!--<link href="/css/bootstrap.css" rel="stylesheet" />
 		-->
-		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default-neu') }}.css" />
+		<!--<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default-neu') }}.css" />-->
 		<!--<link href="/css/style.css" rel="stylesheet" />-->
+		<link type="text/css" rel="stylesheet" href="{{ elixir('css/themes/default.css') }}" />
 		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
 		@if (isset($css))
 			@if(is_array($css))
@@ -136,7 +137,7 @@
 				</ul>
 			</footer>
 			<img src="{{ action('ImageController@generateImage')}}?site={{ urlencode(url()->current()) }}" class="hidden" />
-			<script type="text/javascript" src="/js/all.js"></script>
+			<script type="text/javascript" src="{{ elixir('js/all.js') }}"></script>
 		</div>
 	</body>
 </html>

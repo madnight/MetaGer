@@ -29,10 +29,16 @@ function encrypt() {
             return true;
         }
     } else {
-        if (isEnglish()) {
-            window.alert("Error: Your browser is not supported. Please install an up to date browser like Mozilla Firefox.");
-        } else {
-            window.alert("Fehler: Ihr Browser wird nicht unterstützt. Bitte installieren Sie einen aktuellen Broweser wie z.B. Mozilla Firefox.");
+        switch (getLanguage()) {
+            case "de":
+                alert("Fehler: Ihr Browser wird nicht unterstützt. Bitte installieren Sie einen aktuellen Browser wie z.B. Mozilla Firefox.");
+                break;
+            case "en":
+                alert("Error: Your browser is not supported. Please install an up to date browser like Mozilla Firefox.");
+                break;
+            case "es":
+                // alert(""); TODO
+                break;
         }
         return false;
     }

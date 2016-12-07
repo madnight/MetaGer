@@ -49,10 +49,16 @@ $(document).ready(function() {
     });
     $("#plugin").click(function() {
         $("form").attr('action', $("#save").attr("data-href") + '#plugin-modal');
-        if (isEnglish()) {
-            alert("Your browser plugin with personal settings was generated. Please follow the instructions on the following page to install it. Notice that beforehand you might have to delete a former MetaGer plugin.");
-        } else {
-            alert("Ihr Browserplugin mit den persönlichen Sucheinstellungen wurde generiert. Folgen Sie bitte der Anleitung auf der folgenden Seite um es zu installieren. Beachten Sie: Zuvor sollten Sie ein eventuell bereits installiertes MetaGer-Plugin entfernen.");
+        switch (getLanguage()) {
+            case "de":
+                alert("Ihr Browserplugin mit den persönlichen Sucheinstellungen wurde generiert. Folgen Sie bitte der Anleitung auf der folgenden Seite um es zu installieren. Beachten Sie: Zuvor sollten Sie ein eventuell bereits installiertes MetaGer-Plugin entfernen.");
+                break;
+            case "en":
+                alert("Your browser plugin with personal settings was generated. Please follow the instructions on the following page to install it. Notice that beforehand you might have to delete a former MetaGer plugin.");
+                break;
+            case "es":
+                // alert(""); TODO
+                break;
         }
     });
 });

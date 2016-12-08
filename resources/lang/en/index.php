@@ -16,7 +16,7 @@ return [
     "plugintitle"         => "add MetaGer to your browser",
     "sponsors.head.1"     => "Further Information",
     "sponsors.head.2"     => "Protect Yourself",
-    "sponsors.woxikon"    => "Use MetaGer against Snooper's:",
+    "sponsors.woxikon"    => "Use MetaGer against Snoopers:",
     "sponsors.gutscheine" => "Click results by \"open anonymously\"",
     "sponsors.kredite"    => "and you are fully protected.",
     "about.title"         => "About Us",

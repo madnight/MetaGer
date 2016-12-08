@@ -142,6 +142,8 @@
 </div>
 <div class="panel panel-default">
   <div class="panel-heading">
+    <div id="mg-plugin" style="margin-top: -50"></div>
+    <div style="margin-top: 50"></div>
     <h3 class="panel-title">{!! trans('faq.faq.17.h') !!}</h3>
   </div>
   <div class="panel-body">

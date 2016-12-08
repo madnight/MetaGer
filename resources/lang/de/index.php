@@ -92,4 +92,7 @@ return [
     'plugin.safari.2'     => 'Rufen Sie MetaGer auf und fügen Sie MetaGer mit dem OpenSearch-Knopf(Lupen-Symbol) in der Safari-Men&uuml;leiste hinzu.',
     'plugin.safari.3'     => 'L&ouml;schen Sie (nach Bedarf) die anderen Suchmaschinen aus dem OpenSearch-PlugIn, indem Sie das "X" neben diesen betätigen.',
     'plugin.safari.4'     => 'Sie können nun über den OpenSearch-Knopf(Lupe) mit MetaGer suchen.',
+
+    'plugin.faq.1'        => 'Siehe auch: ',
+    'plugin.faq.2'        => 'Metager FAQ - Plugin',
 ];

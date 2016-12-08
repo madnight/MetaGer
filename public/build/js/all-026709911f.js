@@ -3587,7 +3587,7 @@ return(65535&d)<<16|65535&c},C=function(a,b,c,d){var e=(65535&a)+(65535&b)+(6553
 $(document).ready(function() {
     getDocumentReadyForUse($("#foki > li.active > a").attr("aria-controls"));
     $('iframe').iFrameResize({
-        'autoResize': true,
+        'autoResize': false,
         'heightCalculationMethod': 'documentElementScroll'
     });
     botProtection();
@@ -3596,9 +3596,11 @@ $(document).ready(function() {
 function tabs() {
     //return;
     $("#foki > li.tab-selector > a").each(function() {
-        $(this).attr("href", "#" + $(this).attr("aria-controls"));
-        $(this).attr("role", "tab");
-        $(this).attr("data-toggle", "tab");
+        if($(this).attr("target") != "_blank") {
+            $(this).attr("href", "#" + $(this).attr("aria-controls"));
+            $(this).attr("role", "tab");
+            $(this).attr("data-toggle", "tab");
+        }
     });
     $("#foki > li.tab-selector > a").off();
     $("#foki > li.tab-selector > a").on("show.bs.tab", function(e) {

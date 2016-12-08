@@ -2403,21 +2403,28 @@ function encrypt() {
     }
 }
 $(document).ready(function() {
-    if (isEnglish()) {
-        $(".encrypt-btn").html("encrypt and send");
-    } else {
-        $(".encrypt-btn").html("Verschlüsseln und senden");
+    switch (getLanguage()) {
+        case "de":
+            $(".encrypt-btn").html("Verschlüsseln und senden");
+            break;
+        case "en":
+            $(".encrypt-btn").html("encrypt and send");
+            break;
+        case "es":
+            // $(".encrypt-btn").html(""); TODO
+            break;
     }
     $(".contact").submit(function() {
         return encrypt(this);
     });
 });
 
-function isEnglish() {
-    if (window.location.href.indexOf('/en/') == -1) {
-        return false;
-    } else {
-        return true;
+function getLanguage() {
+    var metaData = document.getElementsByTagName('meta');
+    for (var m in metaData) {
+        if (metaData[m]["httpEquiv"] == "language") {
+            return metaData[m]["content"];
+        }
     }
 }
 (function ($, undefined) {

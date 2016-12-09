@@ -1,7 +1,7 @@
 <?php
 
 return [
-    "index"          => "MetaGer: Search and Find Savely, Protect Privacy",
+    "index"          => "MetaGer: Privacy Protected Search & Find",
     "impressum"      => "Site Notice - MetaGer",
     "about"          => "About Us - MetaGer",
     "team"           => "Team - MetaGer",

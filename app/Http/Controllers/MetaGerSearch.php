@@ -45,7 +45,7 @@ class MetaGerSearch extends Controller
             ->with('r', $redirect);
     }
 
-    public function quicktips(Request $request)
+    public function quicktips(Request $request, MetaGer $metager)
     {
         $q = $request->input('q', '');
 
@@ -90,34 +90,44 @@ class MetaGerSearch extends Controller
         # Wetter
         try {
             if (App::isLocale('en')) {
-                $url = "http://api.openweathermap.org/data/2.5/weather?type=like&units=metric&lang=en&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
+                $url = "http://api.openweathermap.org/data/2.5/weather?type=accurate&units=metric&lang=en&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
             } else {
-                $url = "http://api.openweathermap.org/data/2.5/weather?type=like&units=metric&lang=de&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
+                $url = "http://api.openweathermap.org/data/2.5/weather?type=accurate&units=metric&lang=de&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
             }
 
-            $result           = json_decode($this->get($url), true);
-            $weather          = [];
-            $weather["title"] = "Wetter in " . $result["name"];
-            $weather["URL"]   = "http://openweathermap.org/city/" . $result["id"];
+            $result = json_decode($this->get($url), true);
 
-            $summary = '<b class="detail-short">' . $result["main"]["temp"] . " °C, " . $result["weather"][0]["description"] . "</b>";
-            $details = '<table  class="table table-condensed"><tr><td>Temperatur</td><td>' . $result["main"]["temp_min"] . " bis " . $result["main"]["temp_max"] . " °C</td></tr>";
-            $details .= "<tr><td>Druck</td><td>" . $result["main"]["pressure"] . " hPa</td></tr>";
-            $details .= "<tr><td>Luftfeuchtigkeit</td><td>" . $result["main"]["humidity"] . " %</td></tr>";
-            $details .= "<tr><td>Wind</td><td>" . $result["wind"]["speed"] . " m/s, " . $result["wind"]["deg"] . "°</td></tr>";
-            $details .= "<tr><td>Bewölkung</td><td>" . $result["clouds"]["all"] . " %</td></tr>";
-            if (isset($result->rain)) {
-                $details .= " | Regen letzte drei Stunden: " . $result["rain"]["3h"] . " h";
+            $searchWords = explode(' ', $q);
+            $within      = false;
+            foreach ($searchWords as $word) {
+                if (stripos($result["name"], $word) !== false) {
+                    $within = true;
+                }
             }
-            $details .= "</table>";
-            $weather["summary"]   = $summary;
-            $weather["details"]   = $details;
-            $weather["gefVon"]    = "von <a href = \"https://openweathermap.org\" target=\"_blank\" rel=\"noopener\">Openweathermap</a>";
-            $requestData          = [];
-            $requestData["url"]   = "http://openweathermap.org/img/w/";
-            $weather["image"]     = action('Pictureproxy@get', $requestData) . $result["weather"][0]["icon"] . ".png";
-            $weather["image-alt"] = $result["weather"][0]["main"];
-            $mquicktips[]         = $weather;
+            if ($within) {
+                $weather          = [];
+                $weather["title"] = "Wetter in " . $result["name"];
+                $weather["URL"]   = "http://openweathermap.org/city/" . $result["id"];
+
+                $summary = '<b class="detail-short">' . $result["main"]["temp"] . " °C, " . $result["weather"][0]["description"] . "</b>";
+                $details = '<table  class="table table-condensed"><tr><td>Temperatur</td><td>' . $result["main"]["temp_min"] . " bis " . $result["main"]["temp_max"] . " °C</td></tr>";
+                $details .= "<tr><td>Druck</td><td>" . $result["main"]["pressure"] . " hPa</td></tr>";
+                $details .= "<tr><td>Luftfeuchtigkeit</td><td>" . $result["main"]["humidity"] . " %</td></tr>";
+                $details .= "<tr><td>Wind</td><td>" . $result["wind"]["speed"] . " m/s, " . $result["wind"]["deg"] . "°</td></tr>";
+                $details .= "<tr><td>Bewölkung</td><td>" . $result["clouds"]["all"] . " %</td></tr>";
+                if (isset($result->rain)) {
+                    $details .= " | Regen letzte drei Stunden: " . $result["rain"]["3h"] . " h";
+                }
+                $details .= "</table>";
+                $weather["summary"]   = $summary;
+                $weather["details"]   = $details;
+                $weather["gefVon"]    = "von <a href = \"https://openweathermap.org\" target=\"_blank\" rel=\"noopener\">Openweathermap</a>";
+                $requestData          = [];
+                $requestData["url"]   = "http://openweathermap.org/img/w/";
+                $weather["image"]     = action('Pictureproxy@get', $requestData) . $result["weather"][0]["icon"] . ".png";
+                $weather["image-alt"] = $result["weather"][0]["main"];
+                $mquicktips[]         = $weather;
+            }
         } catch (\ErrorException $e) {
 
         }
@@ -177,7 +187,7 @@ class MetaGerSearch extends Controller
         }
 
         # Spendenaufruf:
-        $mquicktips[] = ['title' => trans('quicktip.spende.title'), 'summary' => trans('quicktip.spende.descr'), 'URL' => LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "spendenaufruf")];
+        //$mquicktips[] = ['title' => trans('quicktip.spende.title'), 'summary' => trans('quicktip.spende.descr'), 'URL' => LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "spendenaufruf")];
 
         return view('quicktip')
             ->with('spruch', $spruch)

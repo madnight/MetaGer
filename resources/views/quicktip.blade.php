@@ -1,9 +1,21 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>{!! trans('quicktip.title') !!}</title>
-		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default') }}.css" />
+		<!--<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default-neu') }}.css" />-->
+		<link type="text/css" rel="stylesheet" href="{{ elixir('css/themes/default.css') }}" />
 	</head>
 	<body class="quicktips">
+		<div class="quicktip aufruf-winter">
+						<div class="media">
+							<div class="media-body">
+								<h2 class="qtheader"><a href="@lang('spendenaufruf.link')" target="_blank">@lang('spendenaufruf.heading')</a></h2>
+								<div>@lang('spendenaufruf.text')</div>
+								<br>
+								<a href="@lang('spendenaufruf.link')" class="btn btn-primary btn-block aufruf-action-btn" target="_blank">@lang('spendenaufruf.button')</a>
+							</div>
+						</div>
+		</div>
 		@if( $spruch !== "" )
 			<blockquote id="spruch">{!! $spruch !!}</blockquote>
 		@endif
@@ -39,5 +51,24 @@
 						@endif
 			</div>
 		@endforeach
+		<div class="quicktip">
+			<details>
+				<summary>
+					<div class="media">
+						<div class="media-body">
+							<div>
+								@if( Request::input('lang') === "all")
+									{!! trans('results.filter.default', ['langName' => LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native']]) !!}
+								@else
+									{!! trans('results.filter', ['langName' => LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native'], 'link' => base64_decode(Request::input('unfilteredLink','')), 'filter' => Request::input('lang')]) !!}
+								@endif
+							</div>
+						</div>
+					</div>
+				</summary>
+			</details>
+		</div>
+		<script src="{{ elixir('js/quicktips.js') }}">
+        </script>
 	</body>
 </html>

@@ -208,7 +208,6 @@ class Result
             if (strpos($text, $phrase) === false) {
                 return false;
             }
-
         }
 
         /* Der Host-Filter der sicherstellt,

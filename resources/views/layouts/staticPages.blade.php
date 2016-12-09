@@ -14,11 +14,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 		<meta rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<meta rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
+		<meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE" />
 		<link rel="search" type="application/opensearchdescription+xml" title="{{ trans('staticPages.opensearch') }}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
 		<!--<link href="/css/bootstrap.css" rel="stylesheet" />
 		-->
-		<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default') }}.css" />
+		<!--<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default-neu') }}.css" />-->
 		<!--<link href="/css/style.css" rel="stylesheet" />-->
+		<link type="text/css" rel="stylesheet" href="{{ elixir('css/themes/default.css') }}" />
 		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
 		@if (isset($css))
 			@if(is_array($css))
@@ -33,7 +36,7 @@
 
 	<body>
 		<header>
-			<nav class="navbar navbar-default">
+			<nav class="navbar navbar-default navbar-fixed-top">
 				<div class="container-fluid">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
@@ -83,18 +86,19 @@
 								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('staticPages.nav15') }}
 								<span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank" rel="noopener">{{ trans('staticPages.nav24') }}</a></li>
-									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe/") }}">{{ trans('staticPages.nav9') }}</a></li>
 									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/widget/") }}">{{ trans('staticPages.nav10') }}</a></li>
+									<li><a href="https://metager.de/klassik/zitat-suche/" target="_blank" rel="noopener">{{ trans('staticPages.nav22') }}</a></li>
 									<li><a href="https://metager.de/klassik/asso/" target="_blank" rel="noopener">{{ trans('staticPages.nav11') }}</a></li>
 									<li><a href="http://code.metager.de/" target="_blank" rel="noopener">{{ trans('staticPages.nav12') }}</a></li>
+									<li><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe#mg-app") }}">@lang('staticPages.nav25')</a></li>
 									<li><a href="https://metager.to/" target="_blank" rel="noopener">{{ trans('staticPages.nav13') }}</a></li>
+									<li><a href="https://maps.metager.de" target="_blank">Maps.MetaGer.de</a></li>
+									<li><a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank" rel="noopener">{{ trans('staticPages.nav24') }}</a></li>
 									<li><a href="http://forum.suma-ev.de/viewtopic.php?f=3&amp;t=43" target="_blank" rel="noopener">{{ trans('staticPages.nav14') }}</a></li>
-									<li><a href="https://metager.de/klassik/zitat-suche/" target="_blank" rel="noopener">{{ trans('staticPages.nav22') }}</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navigationSprache">{{ trans('staticPages.nav19') }}
+								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navigationSprache">{{ trans('staticPages.nav19') }} ({{ LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native'] }})
 								<span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
@@ -108,6 +112,9 @@
 			</nav>
 		</header>
 		<div class="wrapper">
+			<div class="mg-panel container aufruf-winter hidden-xs"><a href="/spendenaufruf"><h1 class="aufruf-winter"> @lang('staticPages.spendenaufruf.title')</h1></a>
+				<p class="lead" style="margin-bottom: 5px">{!! trans('staticPages.spendenaufruf.text') !!}</p>
+			</div>
 			<main class="mg-panel container">
 				@if (isset($success))
 					<div class="alert alert-success" role="alert">{{ $success }}</div>
@@ -130,7 +137,7 @@
 				</ul>
 			</footer>
 			<img src="{{ action('ImageController@generateImage')}}?site={{ urlencode(url()->current()) }}" class="hidden" />
-			<script type="text/javascript" src="/js/all.js"></script>
+			<script type="text/javascript" src="{{ elixir('js/all.js') }}"></script>
 		</div>
 	</body>
 </html>

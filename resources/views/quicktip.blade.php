@@ -6,6 +6,7 @@
 		<link type="text/css" rel="stylesheet" href="{{ elixir('css/themes/default.css') }}" />
 	</head>
 	<body class="quicktips">
+		@if(App::isLocale("de"))
 		<div class="quicktip aufruf-winter">
 						<div class="media">
 							<div class="media-body">
@@ -16,6 +17,7 @@
 							</div>
 						</div>
 		</div>
+		@endif
 		@if( $spruch !== "" )
 			<blockquote id="spruch">{!! $spruch !!}</blockquote>
 		@endif

@@ -22,7 +22,7 @@ return [
     "faq.8.h"	=>	"How can I register my homepage on MetaGer?",
     "faq.8.b"	=>	"You can't. MetaGer is a metasearch engine. If you want to propagate your website, you have to register at all the other search engines for that purpose.",
     "faq.9.h"	=>	"How does the MetaGer ranking work?",
-    "faq.9.b"	=>	"You can check <a href=\"https://gitlab.metager3.de/open-source/MetaGer\" target=_blank>our source code</a> to find out.",
+    "faq.9.b"	=>	"You can check <a href="https://gitlab.metager3.de/open-source/MetaGer" target=_blank>our source code</a> to find out.",
     "faq.10.h"	=>	"I can't use MetaGer with my browser X and operating system Y. I need help!",
     "faq.10.b"	=>	"Please try first to install the newest available plugin. Just use the link below the searchfield, it has an automatic browserdetection. If it is still not working, please let us know: <a href=\"mailto:office@suma-ev.de\" target=\"_blank\" rel=\"noopener\">office@suma-ev.de</a>",
     "faq.11.h"	=>	"Where did you get all these nice sayings?",

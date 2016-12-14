@@ -78,7 +78,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
         $this->assertTrue($result->isValid($metager));
 
         $metager = new MetaGer();
-        $request = new Request(['eingabe' => 'test -host:host.domain.de -domain:domain.de']);
+        $request = new Request(['eingabe' => 'test -site:host.domain.de -site:*.domain.de']);
         $metager->parseFormData($request);
         $metager->checkSpecialSearches($request);
 

@@ -19,13 +19,12 @@ class Europeana extends Searchengine
         try {
             $content = json_decode($result);
         } catch (\Exception $e) {
-            abort(500, "$result is not a valid json string");
+            Log::error("Results from $this->name are not a valid json string");
+            return;
         }
-
         if (!$content) {
             return;
         }
-
         $results = $content->items;
         foreach ($results as $result) {
             if (isset($result->edmPreview)) {
@@ -56,8 +55,16 @@ class Europeana extends Searchengine
 
     public function getNext(\App\MetaGer $metager, $result)
     {
-        $start   = ($metager->getPage()) * 10 + 1;
-        $content = json_decode($result);
+        $start = ($metager->getPage()) * 10 + 1;
+        try {
+            $content = json_decode($result);
+        } catch (\Exception $e) {
+            Log::error("Results from $this->name are not a valid json string");
+            return;
+        }
+        if (!$content) {
+            return;
+        }
         if ($start > $content->totalResults) {
             return;
         }

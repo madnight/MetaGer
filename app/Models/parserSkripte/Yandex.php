@@ -19,12 +19,13 @@ class Yandex extends Searchengine
         try {
             $content = simplexml_load_string($result);
         } catch (\Exception $e) {
-            abort(500, "$result is not a valid xml string");
+            Log::error("Results from $this->name are not a valid json string");
+            return;
         }
-
         if (!$content) {
             return;
         }
+
         $results = $content;
         try {
             $results = $results->xpath("//yandexsearch/response/results/grouping/group");
@@ -56,13 +57,17 @@ class Yandex extends Searchengine
     {
         # Wir müssen herausfinden, ob es überhaupt noch weitere Ergebnisse von Yandex gibt:
         try {
-            $content     = simplexml_load_string($result);
-            $resultCount = intval($content->xpath('//yandexsearch/response/results/grouping/found[@priority="all"]')[0]->__toString());
-            $pageLast    = $content->xpath('//yandexsearch/response/results/grouping/page')[0];
-            $pageLast    = intval($pageLast["last"]->__toString());
+            $content = simplexml_load_string($result);
         } catch (\Exception $e) {
+            Log::error("Results from $this->name are not a valid json string");
             return;
         }
+        if (!$content) {
+            return;
+        }
+        $resultCount = intval($content->xpath('//yandexsearch/response/results/grouping/found[@priority="all"]')[0]->__toString());
+        $pageLast    = $content->xpath('//yandexsearch/response/results/grouping/page')[0];
+        $pageLast    = intval($pageLast["last"]->__toString());
 
         if (count($this->results) <= 0 || $pageLast >= $resultCount) {
             return;

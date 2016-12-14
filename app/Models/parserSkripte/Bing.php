@@ -16,9 +16,7 @@ class Bing extends Searchengine
 
     public function loadResults($result)
     {
-
-        try
-        {
+        try {
             $crawler = new Crawler($result);
             $crawler->filter('ol#b_results > li.b_algo')->each(function (Crawler $node, $i) {
                 $title       = $node->filter('li h2 > a')->text();

@@ -49,7 +49,6 @@ class Allesklar extends Searchengine
             } catch (\InvalidArgumentException $e) {
 
             }
-
         });
     }
 

@@ -43,20 +43,14 @@ class MetaGerPhpTest extends TestCase
     // Testet das erkennen von Spezialsuchen in verschiedenen Sucheingaben
     public function specialSearchTest()
     {
-        $metager = new MetaGer();
-        $request = new Request(['eingabe' => 'suchwort -blackword -host:blackhost -domain:blackdomain site:wantsite "i want phrase"']);
-        $metager->parseFormData($request);
-        $metager->checkSpecialSearches($request);
+        $metager = $this->createSpecialSearchMetager('suchwort -blackword -host:blackhost -domain:blackdomain site:wantsite "i want phrase"');
         $this->assertEquals("wantsite", $metager->getSite());
         $this->assertContains("blackhost", $metager->getUserHostBlacklist());
         $this->assertContains("blackdomain", $metager->getUserDomainBlacklist());
         $this->assertContains("blackword", $metager->getStopWords());
         $this->assertContains("i want phrase", $metager->getPhrases());
 
-        $metager = new MetaGer();
-        $request = new Request(['eingabe' => '-site:peter:test -blackword-test -host:blackhost-test.de.nz/test ich suche nach -host:blackhost:blackhost2.cote/t?p=5 "peter ist obst-garten und -bauern"']);
-        $metager->parseFormData($request);
-        $metager->checkSpecialSearches($request);
+        $metager = $this->createSpecialSearchMetager('site:peter:test -blackword-test -host:blackhost-test.de.nz/test ich suche nach -host:blackhost:blackhost2.cote/t?p=5 "peter ist obst-garten und -bauern"');
         $this->assertEquals("peter:test", $metager->getSite());
         $this->assertContains("blackhost:blackhost2.cote/t?p=5", $metager->getUserHostBlacklist());
         $this->assertContains("blackhost-test.de.nz/test", $metager->getUserHostBlacklist());
@@ -64,17 +58,24 @@ class MetaGerPhpTest extends TestCase
         $this->assertNotContains("bauern", $metager->getStopWords());
         $this->assertContains("peter ist obst-garten und -bauern", $metager->getPhrases());
 
-        $metager = new MetaGer();
-        $request = new Request(['eingabe' => '-host:-domain:test']);
-        $metager->parseFormData($request);
-        $metager->checkSpecialSearches($request);
+        $metager = $this->createSpecialSearchMetager('-host:-domain:test');
         $this->assertContains("-domain:test", $metager->getUserHostBlacklist());
 
+        $metager = $this->createSpecialSearchMetager('"-host:-domain:test"');
+        $this->assertContains("-host:-domain:test", $metager->getPhrases());
+
+        $metager = $this->createSpecialSearchMetager('site:wikipedia.de site:test.de tomate');
+        $this->assertEquals("tomate", $metager->getQ());
+        $this->assertEquals("test.de", $metager->getSite());
+    }
+
+    public function createSpecialSearchMetager($eingabe)
+    {
         $metager = new MetaGer();
-        $request = new Request(['eingabe' => '"-host:-domain:test"']);
+        $request = new Request(['eingabe' => $eingabe]);
         $metager->parseFormData($request);
         $metager->checkSpecialSearches($request);
-        $this->assertContains("-host:-domain:test", $metager->getPhrases());
+        return $metager;
     }
 
     // Testet, ob ein Link wirklich nur einmal hinzugefügt werden kann

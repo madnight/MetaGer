@@ -959,15 +959,12 @@ class MetaGer
         $this->searchCheckDomainBlacklist();
         $this->searchCheckPhrase();
         $this->searchCheckStopwords();
-
-        if ($this->q === "") {
-            $this->warnings[] = trans('metaGer.formdata.noSearch');
-        }
+        $this->searchCheckNoSearch();
     }
 
     public function searchCheckSitesearch($site)
     {
-        if (preg_match("/(.*)\bsite:(\S+)(.*)/si", $this->q, $match)) {
+        while (preg_match("/(^|.+\s)site:(\S+)(?:\s(.+)|$)/si", $this->q, $match)) {
             $this->site = $match[2];
             $this->q    = $match[1] . $match[3];
         }
@@ -1038,6 +1035,13 @@ class MetaGer
         $p = rtrim($p, ", ");
         if (sizeof($this->phrases) > 0) {
             $this->warnings[] = trans('metaGer.formdata.phrase', ['phrase' => $p]);
+        }
+    }
+
+    public function searchCheckNoSearch()
+    {
+        if ($this->q === "") {
+            $this->warnings[] = trans('metaGer.formdata.noSearch');
         }
     }
 

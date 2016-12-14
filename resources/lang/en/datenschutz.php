@@ -18,7 +18,7 @@ anyone at <a href="https://gitlab.metager3.de/open-source/MetaGer">https://gitla
 
     'policy.5'  => 'We do not set cookies or use tracking-pixels or similar technology, to "track" our users (tracking = following a users digital movement on the internet).',
     'policy.6'  => 'Data transmission is only done encrypted via the https protocol.',
-    'policy.7'  => 'We offer access via the anonymous TOR network, the <a href="http://forum.suma-ev.de/viewtopic.php?f=3&amp;t=43&amp;sid=c994b628153235dfef098ba6fea3d60e" target="_blank" rel="noopener">MetaGer hidden service</a>.',
+    'policy.7'  => 'We offer access via the anonymous TOR network, the <a href="http://forum.suma-ev.de/viewtopic.php?f=3&t=1029&sid=eae857f3102365f76636508ca030dc56" target="_blank" rel="noopener">MetaGer hidden service</a>.',
 
     'policy.9'  => 'Since access via the TOR-network seems complicated to many users and often slow, we offer a proxy server, to visit the result pages anonymously: By clicking on the link "open anonymously" your personal information will be protected on this click and even on all following clicks.',
     'policy.10' => 'We show as few advertisements as possible, clearly marking them, and financially rely on our users, their <a href="/en/spende/">Donations</a> and membership fees for <a href="http://suma-ev.de/en/" target="_blank" rel="noopener">SUMA-EV</a>.',

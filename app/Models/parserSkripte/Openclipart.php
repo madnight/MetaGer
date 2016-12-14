@@ -44,7 +44,7 @@ class Openclipart extends Searchengine
                 );
             }
         } catch (\Exception $e) {
-            Log::error("Results from $this->name are not a valid json string");
+            Log::error("A problem occurred parsing results from $this->name");
             return;
         }
     }
@@ -65,7 +65,7 @@ class Openclipart extends Searchengine
             $next->hash = md5($next->host . $next->getString . $next->port . $next->name);
             $this->next = $next;
         } catch (\Exception $e) {
-            Log::error("Results from $this->name are not a valid json string");
+            Log::error("A problem occurred parsing results from $this->name");
             return;
         }
     }

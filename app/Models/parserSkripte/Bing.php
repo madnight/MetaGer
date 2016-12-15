@@ -35,7 +35,8 @@ class Bing extends Searchengine
                     $this->counter
                 );
             });
-        } catch (\ErrorException $e) {
+        } catch (\Exception $e) {
+            Log::error("A problem occurred parsing results from $this->name");
             return;
         }
 

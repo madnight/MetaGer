@@ -3,6 +3,7 @@
 namespace app\Models\parserSkripte;
 
 use App\Models\Searchengine;
+use Log;
 
 class Pixabay extends Searchengine
 {
@@ -19,7 +20,8 @@ class Pixabay extends Searchengine
         try {
             $content = json_decode($result);
         } catch (\Exception $e) {
-            abort(500, "$result is not a valid json string");
+            Log::error("Results from $this->name are not a valid json string");
+            return;
         }
 
         if (!$content) {
@@ -50,8 +52,16 @@ class Pixabay extends Searchengine
 
     public function getNext(\App\MetaGer $metager, $result)
     {
-        $page    = $metager->getPage() + 1;
-        $content = json_decode($result);
+        $page = $metager->getPage() + 1;
+        try {
+            $content = json_decode($result);
+        } catch (\Exception $e) {
+            Log::error("Results from $this->name are not a valid json string");
+            return;
+        }
+        if (!$content) {
+            return;
+        }
         if ($page * 20 > $content->total) {
             return;
         }

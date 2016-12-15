@@ -3,6 +3,7 @@
 namespace app\Models\parserSkripte;
 
 use App\Models\Searchengine;
+use Log;
 
 class Flickr extends Searchengine
 {
@@ -19,9 +20,9 @@ class Flickr extends Searchengine
         try {
             $content = simplexml_load_string($result);
         } catch (\Exception $e) {
-            abort(500, "$result is not a valid xml string");
+            Log::error("Results from $this->name are not a valid json string");
+            return;
         }
-
         if (!$content) {
             return;
         }
@@ -56,7 +57,8 @@ class Flickr extends Searchengine
         try {
             $content = simplexml_load_string($result);
         } catch (\Exception $e) {
-            abort(500, "$result is not a valid xml string");
+            Log::error("Results from $this->name are not a valid json string");
+            return;
         }
         if (!$content) {
             return;

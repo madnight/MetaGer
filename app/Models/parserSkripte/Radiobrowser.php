@@ -3,6 +3,7 @@
 namespace app\Models\parserSkripte;
 
 use App\Models\Searchengine;
+use Log;
 
 class Radiobrowser extends Searchengine
 {
@@ -19,13 +20,12 @@ class Radiobrowser extends Searchengine
         try {
             $content = json_decode($result);
         } catch (\Exception $e) {
-            abort(500, "$result is not a valid json string");
+            Log::error("Results from $this->name are not a valid json string");
+            return;
         }
-
         if (!$content) {
             return;
         }
-
         foreach ($content as $result) {
             $title       = $result->name;
             $link        = $result->homepage;

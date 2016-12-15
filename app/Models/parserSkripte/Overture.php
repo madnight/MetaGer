@@ -3,6 +3,7 @@
 namespace app\Models\parserSkripte;
 
 use App\Models\Searchengine;
+use Log;
 
 class Overture extends Searchengine
 {
@@ -19,9 +20,9 @@ class Overture extends Searchengine
         try {
             $content = simplexml_load_string($result);
         } catch (\Exception $e) {
-            abort(500, "$result is not a valid xml string");
+            Log::error("Results from $this->name are not a valid json string");
+            return;
         }
-
         if (!$content) {
             return;
         }
@@ -70,7 +71,11 @@ class Overture extends Searchengine
         try {
             $content = simplexml_load_string($result);
         } catch (\Exception $e) {
-            abort(500, "$result is not a valid xml string");
+            Log::error("Results from $this->name are not a valid json string");
+            return;
+        }
+        if (!$content) {
+            return;
         }
         $nextArgs = $content->xpath('//Results/NextArgs');
         if (isset($nextArgs[0])) {

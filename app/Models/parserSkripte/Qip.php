@@ -18,29 +18,30 @@ class Qip extends Searchengine
         $result = preg_replace("/\r\n/si", "", $result);
         try {
             $content = simplexml_load_string($result);
-        } catch (\Exception $e) {
-            abort(500, "$result is not a valid xml string");
-        }
+            if (!$content) {
+                return;
+            }
 
-        if (!$content) {
+            $results = $content->xpath('//channel/item');
+            foreach ($results as $result) {
+                $title       = $result->{"title"}->__toString();
+                $link        = $result->{"link"}->__toString();
+                $anzeigeLink = $link;
+                $descr       = $result->{"description"}->__toString();
+                $this->counter++;
+                $this->results[] = new \App\Models\Result(
+                    $this->engine,
+                    $title,
+                    $link,
+                    $anzeigeLink,
+                    $descr,
+                    $this->gefVon,
+                    $this->counter
+                );
+            }
+        } catch (\Exception $e) {
+            Log::error("A problem occurred parsing results from $this->name");
             return;
-        }
-        $results = $content->xpath('//channel/item');
-        foreach ($results as $result) {
-            $title       = $result->{"title"}->__toString();
-            $link        = $result->{"link"}->__toString();
-            $anzeigeLink = $link;
-            $descr       = $result->{"description"}->__toString();
-            $this->counter++;
-            $this->results[] = new \App\Models\Result(
-                $this->engine,
-                $title,
-                $link,
-                $anzeigeLink,
-                $descr,
-                $this->gefVon,
-                $this->counter
-            );
         }
     }
 }

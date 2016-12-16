@@ -16,9 +16,7 @@ class Bing extends Searchengine
 
     public function loadResults($result)
     {
-
-        try
-        {
+        try {
             $crawler = new Crawler($result);
             $crawler->filter('ol#b_results > li.b_algo')->each(function (Crawler $node, $i) {
                 $title       = $node->filter('li h2 > a')->text();
@@ -37,7 +35,8 @@ class Bing extends Searchengine
                     $this->counter
                 );
             });
-        } catch (\ErrorException $e) {
+        } catch (\Exception $e) {
+            Log::error("A problem occurred parsing results from $this->name");
             return;
         }
 

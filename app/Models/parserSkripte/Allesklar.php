@@ -46,10 +46,10 @@ class Allesklar extends Searchengine
                     $this->gefVon,
                     $this->counter
                 );
-            } catch (\InvalidArgumentException $e) {
-
+            } catch (\Exception $e) {
+                Log::error("A problem occurred parsing results from $this->name");
+                return;
             }
-
         });
     }
 

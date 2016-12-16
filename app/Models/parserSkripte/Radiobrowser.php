@@ -3,6 +3,7 @@
 namespace app\Models\parserSkripte;
 
 use App\Models\Searchengine;
+use Log;
 
 class Radiobrowser extends Searchengine
 {
@@ -18,45 +19,45 @@ class Radiobrowser extends Searchengine
         $result = preg_replace("/\r\n/si", "", $result);
         try {
             $content = json_decode($result);
+            if (!$content) {
+                return;
+            }
+
+            foreach ($content as $result) {
+                $title       = $result->name;
+                $link        = $result->homepage;
+                $anzeigeLink = $link;
+                $descr       = "";
+                if ($result->tags != "") {
+                    $descr .= "Tags: " . $result->tags;
+                }
+                if ($result->tags != "") {
+                    if ($descr != "") {
+                        $descr .= " - ";
+                    }
+                    $descr .= "Country: " . $result->country;
+                }
+                if ($result->tags != "") {
+                    if ($descr != "") {
+                        $descr .= " - ";
+                    }
+                    $descr .= "Language: " . $result->language;
+                }
+                $this->counter++;
+                $this->results[] = new \App\Models\Result(
+                    $this->engine,
+                    $title,
+                    $link,
+                    $anzeigeLink,
+                    $descr,
+                    $this->gefVon,
+                    $this->counter,
+                    false
+                );
+            }
         } catch (\Exception $e) {
-            abort(500, "$result is not a valid json string");
-        }
-
-        if (!$content) {
+            Log::error("A problem occurred parsing results from $this->name");
             return;
-        }
-
-        foreach ($content as $result) {
-            $title       = $result->name;
-            $link        = $result->homepage;
-            $anzeigeLink = $link;
-            $descr       = "";
-            if ($result->tags != "") {
-                $descr .= "Tags: " . $result->tags;
-            }
-            if ($result->tags != "") {
-                if ($descr != "") {
-                    $descr .= " - ";
-                }
-                $descr .= "Country: " . $result->country;
-            }
-            if ($result->tags != "") {
-                if ($descr != "") {
-                    $descr .= " - ";
-                }
-                $descr .= "Language: " . $result->language;
-            }
-            $this->counter++;
-            $this->results[] = new \App\Models\Result(
-                $this->engine,
-                $title,
-                $link,
-                $anzeigeLink,
-                $descr,
-                $this->gefVon,
-                $this->counter,
-                false
-            );
         }
     }
 }

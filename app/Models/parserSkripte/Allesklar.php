@@ -3,6 +3,7 @@
 namespace App\Models\parserSkripte;
 
 use App\Models\Searchengine;
+use Log;
 use Symfony\Component\DomCrawler\Crawler;
 
 class Allesklar extends Searchengine

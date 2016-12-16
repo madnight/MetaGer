@@ -854,10 +854,7 @@ class MetaGer
         }
         # Sucheingabe
         $this->eingabe = trim($request->input('eingabe', ''));
-        if (strlen($this->eingabe) === 0) {
-            $this->warnings[] = trans('metaGer.formdata.noSearch');
-        }
-        $this->q = $this->eingabe;
+        $this->q       = strtolower($this->eingabe);
         # IP
         $this->ip = $request->ip();
         # Language
@@ -959,15 +956,13 @@ class MetaGer
         $this->searchCheckDomainBlacklist();
         $this->searchCheckPhrase();
         $this->searchCheckStopwords();
-
-        if ($this->q === "") {
-            $this->warnings[] = trans('metaGer.formdata.noSearch');
-        }
+        $this->searchCheckNoSearch();
     }
 
     public function searchCheckSitesearch($site)
     {
-        if (preg_match("/(.*)\bsite:(\S+)(.*)/si", $this->q, $match)) {
+        // matches '[... ]site:test.de[ ...]'
+        while (preg_match("/(^|.+\s)site:(\S+)(?:\s(.+)|($))/si", $this->q, $match)) {
             $this->site = $match[2];
             $this->q    = $match[1] . $match[3];
         }
@@ -978,9 +973,10 @@ class MetaGer
 
     public function searchCheckHostBlacklist()
     {
-        while (preg_match("/(.*)(^|\s)-host:(\S+)(.*)/si", $this->q, $match)) {
-            $this->hostBlacklist[] = $match[3];
-            $this->q               = $match[1] . $match[4];
+        // matches '[... ]-site:test.de[ ...]'
+        while (preg_match("/(^|.+\s)-site:([^\s\*]\S*)(?:\s(.+)|($))/si", $this->q, $match)) {
+            $this->hostBlacklist[] = $match[2];
+            $this->q               = $match[1] . $match[3];
         }
         if (sizeof($this->hostBlacklist) > 0) {
             $hostString = "";
@@ -994,9 +990,10 @@ class MetaGer
 
     public function searchCheckDomainBlacklist()
     {
-        while (preg_match("/(.*)(^|\s)-domain:(\S+)(.*)/si", $this->q, $match)) {
-            $this->domainBlacklist[] = $match[3];
-            $this->q                 = $match[1] . $match[4];
+        // matches '[... ]-site:*.test.de[ ...]'
+        while (preg_match("/(^|.+\s)-site:\*\.(\S+)(?:\s(.+)|($))/si", $this->q, $match)) {
+            $this->domainBlacklist[] = $match[2];
+            $this->q                 = $match[1] . $match[3];
         }
         if (sizeof($this->domainBlacklist) > 0) {
             $domainString = "";
@@ -1010,9 +1007,10 @@ class MetaGer
 
     public function searchCheckStopwords()
     {
-        while (preg_match("/(.*)(^|\s)-(\S+)(.*)/si", $this->q, $match)) {
-            $this->stopWords[] = $match[3];
-            $this->q           = $match[1] . $match[4];
+        // matches '[... ]-test[ ...]'
+        while (preg_match("/(^|.+\s)-(\S+)(?:\s(.+)|($))/si", $this->q, $match)) {
+            $this->stopWords[] = $match[2];
+            $this->q           = $match[1] . $match[3];
         }
         if (sizeof($this->stopWords) > 0) {
             $stopwordsString = "";
@@ -1028,7 +1026,8 @@ class MetaGer
     {
         $p   = "";
         $tmp = $this->q;
-        while (preg_match("/(.*)\"(.+)\"(.*)/si", $tmp, $match)) {
+        // matches '[... ]"test satz"[ ...]'
+        while (preg_match("/(^|.+\s)\"(.+)\"(?:\s(.+)|($))/si", $tmp, $match)) {
             $tmp             = $match[1] . $match[3];
             $this->phrases[] = strtolower($match[2]);
         }
@@ -1038,6 +1037,13 @@ class MetaGer
         $p = rtrim($p, ", ");
         if (sizeof($this->phrases) > 0) {
             $this->warnings[] = trans('metaGer.formdata.phrase', ['phrase' => $p]);
+        }
+    }
+
+    public function searchCheckNoSearch()
+    {
+        if ($this->q === "") {
+            $this->warnings[] = trans('metaGer.formdata.noSearch');
         }
     }
 
@@ -1214,7 +1220,7 @@ class MetaGer
     {
         $host        = urlencode($host);
         $requestData = $this->request->except(['page', 'out', 'next']);
-        $requestData['eingabe'] .= " -host:$host";
+        $requestData['eingabe'] .= " -site:$host";
         $link = action('MetaGerSearch@search', $requestData);
         return $link;
     }
@@ -1223,7 +1229,7 @@ class MetaGer
     {
         $domain      = urlencode($domain);
         $requestData = $this->request->except(['page', 'out', 'next']);
-        $requestData['eingabe'] .= " -domain:$domain";
+        $requestData['eingabe'] .= " -site:*.$domain";
         $link = action('MetaGerSearch@search', $requestData);
         return $link;
     }

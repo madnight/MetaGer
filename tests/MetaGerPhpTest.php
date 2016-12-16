@@ -43,20 +43,14 @@ class MetaGerPhpTest extends TestCase
     // Testet das erkennen von Spezialsuchen in verschiedenen Sucheingaben
     public function specialSearchTest()
     {
-        $metager = new MetaGer();
-        $request = new Request(['eingabe' => 'suchwort -blackword -host:blackhost -domain:blackdomain site:wantsite "i want phrase"']);
-        $metager->parseFormData($request);
-        $metager->checkSpecialSearches($request);
+        $metager = $this->createSpecialSearchMetager('suchwort -blackword -site:blackhost -site:*.blackdomain site:wantsite "i want phrase"');
         $this->assertEquals("wantsite", $metager->getSite());
         $this->assertContains("blackhost", $metager->getUserHostBlacklist());
         $this->assertContains("blackdomain", $metager->getUserDomainBlacklist());
         $this->assertContains("blackword", $metager->getStopWords());
         $this->assertContains("i want phrase", $metager->getPhrases());
 
-        $metager = new MetaGer();
-        $request = new Request(['eingabe' => '-site:peter:test -blackword-test -host:blackhost-test.de.nz/test ich suche nach -host:blackhost:blackhost2.cote/t?p=5 "peter ist obst-garten und -bauern"']);
-        $metager->parseFormData($request);
-        $metager->checkSpecialSearches($request);
+        $metager = $this->createSpecialSearchMetager('site:peter:test -blackword-test -site:blackhost-test.de.nz/test ich suche nach -site:blackhost:blackhost2.cote/t?p=5 "peter ist obst-garten und -bauern"');
         $this->assertEquals("peter:test", $metager->getSite());
         $this->assertContains("blackhost:blackhost2.cote/t?p=5", $metager->getUserHostBlacklist());
         $this->assertContains("blackhost-test.de.nz/test", $metager->getUserHostBlacklist());
@@ -64,17 +58,28 @@ class MetaGerPhpTest extends TestCase
         $this->assertNotContains("bauern", $metager->getStopWords());
         $this->assertContains("peter ist obst-garten und -bauern", $metager->getPhrases());
 
-        $metager = new MetaGer();
-        $request = new Request(['eingabe' => '-host:-domain:test']);
-        $metager->parseFormData($request);
-        $metager->checkSpecialSearches($request);
-        $this->assertContains("-domain:test", $metager->getUserHostBlacklist());
+        $metager = $this->createSpecialSearchMetager('-site:-site:*.test');
+        $this->assertContains("-site:*.test", $metager->getUserHostBlacklist());
 
+        $metager = $this->createSpecialSearchMetager('"-site:-site:*.test"');
+        $this->assertContains("-site:-site:*.test", $metager->getPhrases());
+
+        $metager = $this->createSpecialSearchMetager('site:wikipedia.de apfel site:test.de tomate');
+        $this->assertEquals("apfel tomate", $metager->getQ());
+        $this->assertEquals("test.de", $metager->getSite());
+
+        $metager = $this->createSpecialSearchMetager('site:wikipedia.de');
+        $this->assertEquals("", $metager->getQ());
+        $this->assertEquals("wikipedia.de", $metager->getSite());
+    }
+
+    public function createSpecialSearchMetager($eingabe)
+    {
         $metager = new MetaGer();
-        $request = new Request(['eingabe' => '"-host:-domain:test"']);
+        $request = new Request(['eingabe' => $eingabe]);
         $metager->parseFormData($request);
         $metager->checkSpecialSearches($request);
-        $this->assertContains("-host:-domain:test", $metager->getPhrases());
+        return $metager;
     }
 
     // Testet, ob ein Link wirklich nur einmal hinzugefügt werden kann
@@ -141,9 +146,9 @@ class MetaGerPhpTest extends TestCase
         $this->containCallbackTester($metager, "generateSiteSearchLink", ["wolf.de"],
             'site%3Awolf.de');
         $this->containCallbackTester($metager, "generateRemovedHostLink", ["wolf.de"],
-            '-host%3Awolf.de');
+            '-site%3Awolf.de');
         $this->containCallbackTester($metager, "generateRemovedDomainLink", ["wolf.de"],
-            '-domain%3Awolf.de');
+            '-site%3A%2A.wolf.de');
     }
 
     // Prüft ob der Host Count funktioniert
@@ -329,7 +334,7 @@ class MetaGerPhpTest extends TestCase
         #new Request(array $query = array(), array $request = array(), array $attributes = array(), array $cookies = array(), array $files = array(), array $server = array(), $content = null)
 
         $query                = [];
-        $query["eingabe"]     = 'suchwort -blackword -host:blackhost -domain:blackdomain site:wantsite "i want phrase"';
+        $query["eingabe"]     = 'suchwort -blackword -site:blackhost -site:*.blackdomain site:wantsite "i want phrase"';
         $query["focus"]       = "angepasst";
         $query["encoding"]    = "utf8";
         $query["lang"]        = "all";

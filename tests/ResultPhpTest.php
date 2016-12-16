@@ -78,7 +78,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
         $this->assertTrue($result->isValid($metager));
 
         $metager = new MetaGer();
-        $request = new Request(['eingabe' => 'test -host:host.domain.de -domain:domain.de']);
+        $request = new Request(['eingabe' => 'test -site:host.domain.de -site:*.domain.de']);
         $metager->parseFormData($request);
         $metager->checkSpecialSearches($request);
 
@@ -99,7 +99,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
         $this->assertFalse($result->isValid($metager));
     }
 
-    // Prüft die Funktionen die Links umformen oder erzeugen
+    // Prüft die Funktionen, die Links umformen oder erzeugen
     public function linkGeneratorsTest()
     {
         $result = $this->getDummyResult();
@@ -120,6 +120,13 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
             'solo.de');
         $this->equalCallbackTester($result, "getStrippedLink", [$url],
             'han.solo.de/unterseite/document.htm');
+
+        $url = "http://www.foo.bar.han.solo.de/test?ja=1";
+
+        $this->equalCallbackTester($result, "getStrippedHost", [$url],
+            'foo.bar.han.solo.de');
+        $this->equalCallbackTester($result, "getStrippedDomain", [$url],
+            'solo.de');
     }
 
     /**

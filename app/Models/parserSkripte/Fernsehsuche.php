@@ -18,37 +18,37 @@ class Fernsehsuche extends Searchengine
         $result = preg_replace("/\r\n/si", "", $result);
         try {
             $content = json_decode($result);
-        } catch (\Exception $e) {
-            abort(500, "$result is not a valid xml string");
-        }
-
-        if (!$content) {
-            return;
-        }
-
-        $results = $content->response->docs;
-        foreach ($results as $result) {
-            try {
-                $title       = $result->show . " : " . $result->title;
-                $link        = urldecode($result->url);
-                $anzeigeLink = $link;
-                $descr       = $result->description;
-                $image       = "http://api-resources.fernsehsuche.de" . $result->thumbnail;
-                $this->counter++;
-                $this->results[] = new \App\Models\Result(
-                    $this->engine,
-                    $title,
-                    $link,
-                    $anzeigeLink,
-                    $descr,
-                    $this->gefVon,
-                    $this->counter,
-                    false,
-                    $image
-                );
-            } catch (\ErrorException $e) {
-
+            if (!$content) {
+                return;
             }
+
+            $results = $content->response->docs;
+            foreach ($results as $result) {
+                try {
+                    $title       = $result->show . " : " . $result->title;
+                    $link        = urldecode($result->url);
+                    $anzeigeLink = $link;
+                    $descr       = $result->description;
+                    $image       = "http://api-resources.fernsehsuche.de" . $result->thumbnail;
+                    $this->counter++;
+                    $this->results[] = new \App\Models\Result(
+                        $this->engine,
+                        $title,
+                        $link,
+                        $anzeigeLink,
+                        $descr,
+                        $this->gefVon,
+                        $this->counter,
+                        false,
+                        $image
+                    );
+                } catch (\ErrorException $e) {
+
+                }
+            }
+        } catch (\Exception $e) {
+            Log::error("A problem occurred parsing results from $this->name");
+            return;
         }
     }
 }

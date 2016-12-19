@@ -15,20 +15,6 @@ class BASE extends Searchengine
 
     public function loadResults($result)
     {
-
-        $title       = "";
-        $link        = "";
-        $anzeigeLink = $link;
-        $descr       = "";
-
-        /*$this->counter++;
-    $this->results[] = new \App\Models\Result(
-    $title,
-    $link,
-    $anzeigeLink,
-    $descr,
-    $this->gefVon,
-    $this->counter
-    );*/
+        return;
     }
 }

@@ -24,13 +24,15 @@ class Mg_produkt2 extends Searchengine
             }
 
             $results = $content->xpath('//response/result[@name="response"]/doc');
+
             foreach ($results as $result) {
+
                 $result      = simplexml_load_string($result->saveXML());
                 $title       = $result->xpath('/doc/arr[@name="artikelName"]')[0]->{"str"}->__toString();
                 $link        = $result->xpath('/doc/arr[@name="artikelDeeplink"]')[0]->{"str"}->__toString();
                 $anzeigeLink = parse_url($link);
                 parse_str($anzeigeLink['query'], $query);
-                $anzeigeLink = $query['diurl'];
+                $anzeigeLink = $query['url'];
                 $descr       = $result->xpath('/doc/arr[@name="artikelBeschreibung"]')[0]->{"str"}->__toString();
                 $image       = $result->xpath('/doc/arr[@name="artikelImageurl"]')[0]->{"str"}->__toString();
                 $this->counter++;

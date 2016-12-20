@@ -1,9 +1,6 @@
 $(document).ready(function() {
     getDocumentReadyForUse($("#foki > li.active > a").attr("aria-controls"));
-    $('iframe').iFrameResize({
-        'autoResize': false,
-        'heightCalculationMethod': 'documentElementScroll'
-    });
+    $('iframe').iFrameResize();
     botProtection();
 });
 

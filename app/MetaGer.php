@@ -140,6 +140,9 @@ class MetaGer
                         ->with('suspendheader', "yes")
                         ->with('browser', (new Agent())->browser());
                     break;
+                case 'result-count':
+                    return sizeof($viewResults);
+                    break;
                 default:
                     return view('metager3')
                         ->with('eingabe', $this->eingabe)
@@ -938,7 +941,7 @@ class MetaGer
         }
         $this->out = $request->input('out', "html");
         # Standard output format html
-        if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style") {
+        if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style" && $this->out !== "result-count") {
             $this->out = "html";
         }
     }

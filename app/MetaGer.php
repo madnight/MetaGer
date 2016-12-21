@@ -950,8 +950,12 @@ class MetaGer
         # Ist dieser Parameter gesetzt, so soll überprüft werden, wie viele Ergebnisse wir liefern.
         # Wenn wir gecachte Ergebnisse zurück liefern würden, wäre das nicht sonderlich klug, da es dann keine Aussagekraft hätte
         # ob MetaGer funktioniert (bzw. die Fetcher laufen)
+        # Auch ein Log sollte nicht geschrieben werden, da es am Ende ziemlich viele Logs werden könnten.
         if ($this->out === "result-count") {
-            $this->canCache = false;
+            $this->canCache  = false;
+            $this->shouldLog = false;
+        } else {
+            $this->shouldLog = true;
         }
     }
 
@@ -1130,34 +1134,36 @@ class MetaGer
 
     public function createLogs()
     {
-        $redis = Redis::connection('redisLogs');
-        try
-        {
-            $logEntry = "";
-            $logEntry .= "[" . date(DATE_RFC822, mktime(date("H"), date("i"), date("s"), date("m"), date("d"), date("Y"))) . "]";
-            $logEntry .= " pid=" . getmypid();
-            $logEntry .= " ref=" . $this->request->header('Referer');
-            $useragent = $this->request->header('User-Agent');
-            $useragent = str_replace("(", " ", $useragent);
-            $useragent = str_replace(")", " ", $useragent);
-            $useragent = str_replace(" ", "", $useragent);
-            $logEntry .= " time=" . round((microtime(true) - $this->starttime), 2) . " serv=" . $this->fokus;
-            $logEntry .= " search=" . $this->eingabe;
+        if ($this->shouldLog) {
+            $redis = Redis::connection('redisLogs');
+            try
+            {
+                $logEntry = "";
+                $logEntry .= "[" . date(DATE_RFC822, mktime(date("H"), date("i"), date("s"), date("m"), date("d"), date("Y"))) . "]";
+                $logEntry .= " pid=" . getmypid();
+                $logEntry .= " ref=" . $this->request->header('Referer');
+                $useragent = $this->request->header('User-Agent');
+                $useragent = str_replace("(", " ", $useragent);
+                $useragent = str_replace(")", " ", $useragent);
+                $useragent = str_replace(" ", "", $useragent);
+                $logEntry .= " time=" . round((microtime(true) - $this->starttime), 2) . " serv=" . $this->fokus;
+                $logEntry .= " search=" . $this->eingabe;
 
-            # 2 Arten von Logs in einem wird die Anzahl der Abfragen an eine Suchmaschine gespeichert und in der anderen
-            # die Anzahl, wie häufig diese Ergebnisse geliefert hat.
-            $enginesToLoad = $this->enginesToLoad;
-            $redis->pipeline(function ($pipe) use ($enginesToLoad, $logEntry) {
-                $pipe->rpush('logs.search', $logEntry);
-                foreach ($this->enginesToLoad as $name => $answered) {
-                    $pipe->incr('logs.engines.requests.' . $name);
-                    if ($answered) {
-                        $pipe->incr('logs.engines.answered.' . $name);
+                # 2 Arten von Logs in einem wird die Anzahl der Abfragen an eine Suchmaschine gespeichert und in der anderen
+                # die Anzahl, wie häufig diese Ergebnisse geliefert hat.
+                $enginesToLoad = $this->enginesToLoad;
+                $redis->pipeline(function ($pipe) use ($enginesToLoad, $logEntry) {
+                    $pipe->rpush('logs.search', $logEntry);
+                    foreach ($this->enginesToLoad as $name => $answered) {
+                        $pipe->incr('logs.engines.requests.' . $name);
+                        if ($answered) {
+                            $pipe->incr('logs.engines.answered.' . $name);
+                        }
                     }
-                }
-            });
-        } catch (\Exception $e) {
-            return;
+                });
+            } catch (\Exception $e) {
+                return;
+            }
         }
     }
 

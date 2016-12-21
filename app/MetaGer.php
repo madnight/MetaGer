@@ -140,6 +140,10 @@ class MetaGer
                         ->with('suspendheader', "yes")
                         ->with('browser', (new Agent())->browser());
                     break;
+                case 'result-count':
+                    # Wir geben die Ergebniszahl und die benötigte Zeit zurück:
+                    return sizeof($viewResults) . ";" . round((microtime(true) - $this->starttime), 2);
+                    break;
                 default:
                     return view('metager3')
                         ->with('eingabe', $this->eingabe)
@@ -938,8 +942,16 @@ class MetaGer
         }
         $this->out = $request->input('out', "html");
         # Standard output format html
-        if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style") {
+        if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style" && $this->out !== "result-count") {
             $this->out = "html";
+        }
+        # Wir schalten den Cache aus, wenn die Ergebniszahl überprüft werden soll
+        #   => out=result-count
+        # Ist dieser Parameter gesetzt, so soll überprüft werden, wie viele Ergebnisse wir liefern.
+        # Wenn wir gecachte Ergebnisse zurück liefern würden, wäre das nicht sonderlich klug, da es dann keine Aussagekraft hätte
+        # ob MetaGer funktioniert (bzw. die Fetcher laufen)
+        if ($this->out === "result-count") {
+            $this->canCache = false;
         }
     }
 

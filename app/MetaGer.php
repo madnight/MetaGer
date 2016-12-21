@@ -141,7 +141,8 @@ class MetaGer
                         ->with('browser', (new Agent())->browser());
                     break;
                 case 'result-count':
-                    return sizeof($viewResults);
+                    # Wir geben die Ergebniszahl und die benötigte Zeit zurück:
+                    return sizeof($viewResults) . ";" . round((microtime(true) - $this->starttime), 2);
                     break;
                 default:
                     return view('metager3')

@@ -17,7 +17,7 @@ my $json = <$fh>;
 close $fh;
 
 # Decode the JSON String
-my $data = decode_json($json);
+my $data = JSON->new->utf8->decode($json);
 
 # Wir durchlaufen den Hash:
 foreach my $key (keys %{$data}){

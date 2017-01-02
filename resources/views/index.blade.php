@@ -181,7 +181,7 @@
                       </span>
                     </button>
                   </div>
-                  <input type="text" name="eingabe" required="" autofocus="" class="form-control" placeholder="{{ trans('index.placeholder') }}">
+                  <input type="text" name="eingabe" required="" autofocus="" autocomplete="{{$autocomplete}}" class="form-control" placeholder="{{ trans('index.placeholder') }}">
                   <input type="hidden" name="encoding" value="utf8">
                   @if ($focus === 'angepasst') <input type="hidden" name="lang" value={{ $lang }} >
                   <input type="hidden" name="resultCount" value={{ $resultCount }} >

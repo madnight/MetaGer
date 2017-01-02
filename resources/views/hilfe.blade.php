@@ -187,4 +187,14 @@
 		<p>{!! trans('hilfe.infobutton.1') !!}</p>
 	</div>
 </div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">{!! trans('hilfe.maps.title') !!}</h3>
+	</div>
+	<div class="panel-body">
+		<p>{!! trans('hilfe.maps.1') !!}</p>
+		<p>{!! trans('hilfe.maps.2') !!}</p>
+		<p>{!! trans('hilfe.maps.3') !!}</p>
+	</div>
+</div>
 @endsection

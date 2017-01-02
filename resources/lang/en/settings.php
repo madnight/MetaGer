@@ -25,6 +25,9 @@ return [
     "speichern.3"	=>	"Generate plugin with these settings",
     "speichern.4"	=>	"Reset saved settings",
     "request"	=>	"Which method should query MetaGer (GET, POST)?",
+    "autocomplete"	=>	"autocomplete (search input)",
+    "autocomplete.on"	=>	"on",
+    "autocomplete.off"	=>	"off",
     "foki.web"	=>	"Web",
     "foki.andere"	=>	"Others",
     "foki.produktsuche"	=>	"Shopping",
@@ -32,3 +35,4 @@ return [
     "foki.nachrichten"	=>	"News",
     "foki.bilder"	=>	"Pictures"
 ];
+

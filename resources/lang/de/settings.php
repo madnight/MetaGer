@@ -34,6 +34,10 @@ return [
 
     'request'           => 'Abfragemethode',
 
+    'autocomplete'      => 'Auto-Vervollständigung (Sucheingabe)',
+    'autocomplete.on'   => 'ein',
+    'autocomplete.off'  => 'aus',
+
     "foki.web"          => "Web",
     "foki.andere"       => "Andere",
     "foki.produktsuche" => "Produktsuche",

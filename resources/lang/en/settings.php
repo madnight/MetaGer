@@ -24,7 +24,7 @@ return [
     "speichern.2"	=>	"Save settings permanently",
     "speichern.3"	=>	"Generate plugin with these settings",
     "speichern.4"	=>	"Reset saved settings",
-    "request"	=>	"Which method should query MetaGer (GET, POST)?",
+    "request"	=>	"Query method",
     "autocomplete"	=>	"autocomplete (search input)",
     "autocomplete.on"	=>	"on",
     "autocomplete.off"	=>	"off",

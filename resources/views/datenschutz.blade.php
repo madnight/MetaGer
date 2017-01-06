@@ -18,6 +18,7 @@
 	<li>{!! trans('datenschutz.policy.10') !!}</li>
 	<li>{!! trans('datenschutz.policy.13') !!}</li>
 	<li>{!! trans('datenschutz.policy.17') !!}</li>
+	<li>{!! trans('datenschutz.policy.17.1') !!}</li>
 	<li>{!! trans('datenschutz.policy.18') !!}</li>
 </ul>
 <h2>{!! trans('datenschutz.twitter') !!}</h2>

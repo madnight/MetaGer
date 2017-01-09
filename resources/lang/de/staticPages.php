@@ -28,9 +28,6 @@ return [
     'nav23'               => 'Beitrittsformular SUMA-EV',
     'nav24'               => 'MetaGer Quellcode',
     'nav25'               => 'MetaGer App',
-    'spendenaufruf.title' => 'Mit Ihnen zusammen:',
-    'spendenaufruf.text'  => 'Datenschutz und Privatsphäre bei der
-  Internetsuche sichern! <a href="/spendenaufruf" class="aufruf-a-startseite">Unser Spendenaufruf&hellip;</a>',
 
     'navigationToggle'    => 'Navigation anzeigen',
 

@@ -1,3 +1,4 @@
+
 <?php
 
 return [
@@ -8,5 +9,6 @@ return [
     "list.3"	=>	" <a href=\"https://de.wikipedia.org/wiki/MetaGer\" target=\"_blank\" rel=\"noopener\">MetaGer</a> en primer plano es un <a href=\"https://de.wikipedia.org/wiki/Metasuchmaschine\" target=\"_blank\" rel=\"noopener\">META-buscador:</a> Consultamos hasta 50 buscadores, podemos ofrecer diversidad en los resultados de búsquedas.",
     "list.4"	=>	"No preferimos en nuestros resultados <a href=\"https://de.wikipedia.org/wiki/Filterblase\" target=\"_blank\" rel=\"noopener\"> lo mas clickeado:</a> wird:Nuestros resultados no tienen mainstream, sino diversidad.",
     "list.5"	=>	"<a href=\"http://blog.suma-ev.de/node/207\" target=\"_blank\" rel=\"noopener\">MetaGer esta desde hace 20 años en el internet:</a> Nuestra experiencia es su ventaja - nosotros sabemos que estamos haciendo.",
+    "list.5.1"	=>	"Llevamos nuestros servidores con electricidad verde.",
     "list.6"	=>	"Pero tampoco estamos sin errores: Si encuentra algo raro: ¡Por favor <a href=\"/kontakt/\" target=\"_blank\" rel=\"noopener\">contáctenos!</a>. Tomamos serios todos sus observaciones: Ustedes son lo más importante para nosotros."
 ];

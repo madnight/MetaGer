@@ -3593,10 +3593,7 @@ return(65535&d)<<16|65535&c},C=function(a,b,c,d){var e=(65535&a)+(65535&b)+(6553
 
 $(document).ready(function() {
     getDocumentReadyForUse($("#foki > li.active > a").attr("aria-controls"));
-    $('iframe').iFrameResize({
-        'autoResize': false,
-        'heightCalculationMethod': 'documentElementScroll'
-    });
+    $('iframe').iFrameResize();
     botProtection();
 });
 
@@ -3959,12 +3956,25 @@ function setSettings() {
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
         var value = localStorage.getItem(key);
-        if (key.startsWith("param_") && !key.endsWith("lang")) {
+        if (key.startsWith("param_") && !key.endsWith("lang") && !key.endsWith('autocomplete')) {
             key = key.substring(key.indexOf("param_") + 6);
             $("#searchForm").append("<input type=\"hidden\" name=\"" + key + "\" value=\"" + value + "\">");
         }
         $("#foki input[type=radio]#angepasst").attr("checked", true);
     }
+
+    if( localStorage.getItem("param_lang") !== null ) {
+        var value = localStorage.getItem("param_lang");
+        // Change the value of the lang input field to the given parameter
+        $("input[name=lang]").val(value);
+    }
+
+    if( localStorage.getItem("param_autocomplete") !== null ) {
+        var value = localStorage.getItem("param_autocomplete");
+        // Change the value of the lang input field to the given parameter
+        $("input[name=eingabe]").attr("autocomplete", value);
+    }
+
     if ($("fieldset#foki.mobile").length) {
         $("fieldset.mobile input#bilder").val("angepasst");
         $("fieldset.mobile input#bilder").prop("checked", true);
@@ -3973,7 +3983,6 @@ function setSettings() {
         $("fieldset.mobile label#anpassen-label").attr("for", "angepasst");
         $("fieldset.mobile label#anpassen-label span.glyphicon").attr("class", "glyphicon glyphicon-cog");
         $("fieldset.mobile label#anpassen-label span.content").html("angepasst");
-        console.log("test");
     }
 }
 //Polyfill for form attribute

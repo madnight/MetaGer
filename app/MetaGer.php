@@ -140,6 +140,10 @@ class MetaGer
                         ->with('suspendheader', "yes")
                         ->with('browser', (new Agent())->browser());
                     break;
+                case 'result-count':
+                    # Wir geben die Ergebniszahl und die benötigte Zeit zurück:
+                    return sizeof($viewResults) . ";" . round((microtime(true) - $this->starttime), 2);
+                    break;
                 default:
                     return view('metager3')
                         ->with('eingabe', $this->eingabe)
@@ -287,7 +291,7 @@ class MetaGer
                 # Wir geben jedem Ergebnis eine ID um später die Sprachcodes zuordnen zu können
                 $result->id = $id;
 
-                $langStrings["result_" . $id] = utf8_encode($result->getLangString());
+                $langStrings["result_" . $id] = $result->getLangString();
 
                 $id++;
             }
@@ -854,10 +858,7 @@ class MetaGer
         }
         # Sucheingabe
         $this->eingabe = trim($request->input('eingabe', ''));
-        if (strlen($this->eingabe) === 0) {
-            $this->warnings[] = trans('metaGer.formdata.noSearch');
-        }
-        $this->q = $this->eingabe;
+        $this->q       = strtolower($this->eingabe);
         # IP
         $this->ip = $request->ip();
         # Language
@@ -941,8 +942,20 @@ class MetaGer
         }
         $this->out = $request->input('out', "html");
         # Standard output format html
-        if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style") {
+        if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style" && $this->out !== "result-count") {
             $this->out = "html";
+        }
+        # Wir schalten den Cache aus, wenn die Ergebniszahl überprüft werden soll
+        #   => out=result-count
+        # Ist dieser Parameter gesetzt, so soll überprüft werden, wie viele Ergebnisse wir liefern.
+        # Wenn wir gecachte Ergebnisse zurück liefern würden, wäre das nicht sonderlich klug, da es dann keine Aussagekraft hätte
+        # ob MetaGer funktioniert (bzw. die Fetcher laufen)
+        # Auch ein Log sollte nicht geschrieben werden, da es am Ende ziemlich viele Logs werden könnten.
+        if ($this->out === "result-count") {
+            $this->canCache  = false;
+            $this->shouldLog = false;
+        } else {
+            $this->shouldLog = true;
         }
     }
 
@@ -959,15 +972,13 @@ class MetaGer
         $this->searchCheckDomainBlacklist();
         $this->searchCheckPhrase();
         $this->searchCheckStopwords();
-
-        if ($this->q === "") {
-            $this->warnings[] = trans('metaGer.formdata.noSearch');
-        }
+        $this->searchCheckNoSearch();
     }
 
     public function searchCheckSitesearch($site)
     {
-        if (preg_match("/(.*)\bsite:(\S+)(.*)/si", $this->q, $match)) {
+        // matches '[... ]site:test.de[ ...]'
+        while (preg_match("/(^|.+\s)site:(\S+)(?:\s(.+)|($))/si", $this->q, $match)) {
             $this->site = $match[2];
             $this->q    = $match[1] . $match[3];
         }
@@ -978,9 +989,10 @@ class MetaGer
 
     public function searchCheckHostBlacklist()
     {
-        while (preg_match("/(.*)(^|\s)-host:(\S+)(.*)/si", $this->q, $match)) {
-            $this->hostBlacklist[] = $match[3];
-            $this->q               = $match[1] . $match[4];
+        // matches '[... ]-site:test.de[ ...]'
+        while (preg_match("/(^|.+\s)-site:([^\s\*]\S*)(?:\s(.+)|($))/si", $this->q, $match)) {
+            $this->hostBlacklist[] = $match[2];
+            $this->q               = $match[1] . $match[3];
         }
         if (sizeof($this->hostBlacklist) > 0) {
             $hostString = "";
@@ -994,9 +1006,10 @@ class MetaGer
 
     public function searchCheckDomainBlacklist()
     {
-        while (preg_match("/(.*)(^|\s)-domain:(\S+)(.*)/si", $this->q, $match)) {
-            $this->domainBlacklist[] = $match[3];
-            $this->q                 = $match[1] . $match[4];
+        // matches '[... ]-site:*.test.de[ ...]'
+        while (preg_match("/(^|.+\s)-site:\*\.(\S+)(?:\s(.+)|($))/si", $this->q, $match)) {
+            $this->domainBlacklist[] = $match[2];
+            $this->q                 = $match[1] . $match[3];
         }
         if (sizeof($this->domainBlacklist) > 0) {
             $domainString = "";
@@ -1010,9 +1023,10 @@ class MetaGer
 
     public function searchCheckStopwords()
     {
-        while (preg_match("/(.*)(^|\s)-(\S+)(.*)/si", $this->q, $match)) {
-            $this->stopWords[] = $match[3];
-            $this->q           = $match[1] . $match[4];
+        // matches '[... ]-test[ ...]'
+        while (preg_match("/(^|.+\s)-(\S+)(?:\s(.+)|($))/si", $this->q, $match)) {
+            $this->stopWords[] = $match[2];
+            $this->q           = $match[1] . $match[3];
         }
         if (sizeof($this->stopWords) > 0) {
             $stopwordsString = "";
@@ -1028,7 +1042,8 @@ class MetaGer
     {
         $p   = "";
         $tmp = $this->q;
-        while (preg_match("/(.*)\"(.+)\"(.*)/si", $tmp, $match)) {
+        // matches '[... ]"test satz"[ ...]'
+        while (preg_match("/(^|.+\s)\"(.+)\"(?:\s(.+)|($))/si", $tmp, $match)) {
             $tmp             = $match[1] . $match[3];
             $this->phrases[] = strtolower($match[2]);
         }
@@ -1038,6 +1053,13 @@ class MetaGer
         $p = rtrim($p, ", ");
         if (sizeof($this->phrases) > 0) {
             $this->warnings[] = trans('metaGer.formdata.phrase', ['phrase' => $p]);
+        }
+    }
+
+    public function searchCheckNoSearch()
+    {
+        if ($this->q === "") {
+            $this->warnings[] = trans('metaGer.formdata.noSearch');
         }
     }
 
@@ -1112,34 +1134,36 @@ class MetaGer
 
     public function createLogs()
     {
-        $redis = Redis::connection('redisLogs');
-        try
-        {
-            $logEntry = "";
-            $logEntry .= "[" . date(DATE_RFC822, mktime(date("H"), date("i"), date("s"), date("m"), date("d"), date("Y"))) . "]";
-            $logEntry .= " pid=" . getmypid();
-            $logEntry .= " ref=" . $this->request->header('Referer');
-            $useragent = $this->request->header('User-Agent');
-            $useragent = str_replace("(", " ", $useragent);
-            $useragent = str_replace(")", " ", $useragent);
-            $useragent = str_replace(" ", "", $useragent);
-            $logEntry .= " time=" . round((microtime(true) - $this->starttime), 2) . " serv=" . $this->fokus;
-            $logEntry .= " search=" . $this->eingabe;
+        if ($this->shouldLog) {
+            $redis = Redis::connection('redisLogs');
+            try
+            {
+                $logEntry = "";
+                $logEntry .= "[" . date(DATE_RFC822, mktime(date("H"), date("i"), date("s"), date("m"), date("d"), date("Y"))) . "]";
+                $logEntry .= " pid=" . getmypid();
+                $logEntry .= " ref=" . $this->request->header('Referer');
+                $useragent = $this->request->header('User-Agent');
+                $useragent = str_replace("(", " ", $useragent);
+                $useragent = str_replace(")", " ", $useragent);
+                $useragent = str_replace(" ", "", $useragent);
+                $logEntry .= " time=" . round((microtime(true) - $this->starttime), 2) . " serv=" . $this->fokus;
+                $logEntry .= " search=" . $this->eingabe;
 
-            # 2 Arten von Logs in einem wird die Anzahl der Abfragen an eine Suchmaschine gespeichert und in der anderen
-            # die Anzahl, wie häufig diese Ergebnisse geliefert hat.
-            $enginesToLoad = $this->enginesToLoad;
-            $redis->pipeline(function ($pipe) use ($enginesToLoad, $logEntry) {
-                $pipe->rpush('logs.search', $logEntry);
-                foreach ($this->enginesToLoad as $name => $answered) {
-                    $pipe->incr('logs.engines.requests.' . $name);
-                    if ($answered) {
-                        $pipe->incr('logs.engines.answered.' . $name);
+                # 2 Arten von Logs in einem wird die Anzahl der Abfragen an eine Suchmaschine gespeichert und in der anderen
+                # die Anzahl, wie häufig diese Ergebnisse geliefert hat.
+                $enginesToLoad = $this->enginesToLoad;
+                $redis->pipeline(function ($pipe) use ($enginesToLoad, $logEntry) {
+                    $pipe->rpush('logs.search', $logEntry);
+                    foreach ($this->enginesToLoad as $name => $answered) {
+                        $pipe->incr('logs.engines.requests.' . $name);
+                        if ($answered) {
+                            $pipe->incr('logs.engines.answered.' . $name);
+                        }
                     }
-                }
-            });
-        } catch (\Exception $e) {
-            return;
+                });
+            } catch (\Exception $e) {
+                return;
+            }
         }
     }
 
@@ -1214,7 +1238,7 @@ class MetaGer
     {
         $host        = urlencode($host);
         $requestData = $this->request->except(['page', 'out', 'next']);
-        $requestData['eingabe'] .= " -host:$host";
+        $requestData['eingabe'] .= " -site:$host";
         $link = action('MetaGerSearch@search', $requestData);
         return $link;
     }
@@ -1223,7 +1247,7 @@ class MetaGer
     {
         $domain      = urlencode($domain);
         $requestData = $this->request->except(['page', 'out', 'next']);
-        $requestData['eingabe'] .= " -domain:$domain";
+        $requestData['eingabe'] .= " -site:*.$domain";
         $link = action('MetaGerSearch@search', $requestData);
         return $link;
     }

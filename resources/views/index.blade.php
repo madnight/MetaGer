@@ -183,7 +183,7 @@
                       </span>
                     </button>
                   </div>
-                  <input type="text" name="eingabe" required="" autofocus="" class="form-control" placeholder="{{ trans('index.placeholder') }}">
+                  <input type="text" name="eingabe" required="" autofocus="" autocomplete="{{$autocomplete}}" class="form-control" placeholder="{{ trans('index.placeholder') }}">
                   <input type="hidden" name="encoding" value="utf8">
                   @if ($focus === 'angepasst') <input type="hidden" name="lang" value={{ $lang }} >
                   <input type="hidden" name="resultCount" value={{ $resultCount }} >
@@ -233,7 +233,7 @@
               <h2>{{ trans('index.sponsors.head.2') }}</h2>
               <ul class="startpage">
                 <li>
-                  {!! trans('index.sponsors.woxikon') !!}</a>
+                  {!! trans('index.sponsors.woxikon') !!}
                 </li>
                 <li>
                   {!! trans('index.sponsors.gutscheine') !!}

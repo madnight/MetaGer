@@ -27,14 +27,14 @@ Für das kommende Jahr haben wir uns nun allerhand vorgenommen:
   wir jetzt im englischen Sprachraum propagieren. Und auch hierzulande
   steht eine <a href="https://digitalcourage.de/themen/vorratsdatenspeicherung" target="_blank">Neuauflage der Vorratsdatenspeicherung</a> vor der Tür.</p></li>
   <li><p>Neben der Suche nach Texten und Bildern ist die Suche nach räumlicher,
-  geographischer Information eine der häufigst genutzen Internetdienste.
+  geographischer Information eine der häufigst genutzten Internetdienste.
   Gerade hierbei sind die Standortaufzeichnungen der globalen
   Suchmaschinenanbieter ein Überwachungsinstrument erster Güte.  Um dagegen
   eine Alternative zu bieten, entwickeln wir <a href="https://maps.metager.de" target="_blank">maps.metager.de</a>. Sie
   können es jetzt bereits nutzen: eine erste Version mit Deutschland-Karten
   ist online.  Aber das ist bei weitem noch nicht alles, was wir damit
   vorhaben: Routenplaner, Karten außerhalb Deutschlands usw.  Hiermit wollen
-  wir gegen diese Überwachung der geographischem Nutzerdaten eine
+  wir gegen diese Überwachung der geographischen Nutzerdaten eine
   Alternative schaffen.</p></li>
   <li><p>Im August 2016 haben wir den MetaGer-Quellcode öffentlich gemacht (Sie
   finden diesen unter <a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank">https://gitlab.metager3.de/open-source/MetaGer</a>).  Damit

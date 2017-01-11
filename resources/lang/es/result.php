@@ -1,3 +1,5 @@
+<?php
+
 return [
     "options.1"	=>	"Empezar una nueva búsqueda en este dominio",
     "options.2"	=>	"ocultar :host",

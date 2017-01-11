@@ -23,7 +23,7 @@ class BASE extends Searchengine
                 return;
             }
 
-            $results = $content->xpath('//response/result');
+            $results = $content->xpath('//response/result/doc');
             foreach ($results as $result) {
                 // searches for the fitting values of name as in
                 // <str name = "dctitle">Digitisation of library collections</str>

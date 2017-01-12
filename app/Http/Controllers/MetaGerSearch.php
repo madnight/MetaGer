@@ -166,19 +166,21 @@ class MetaGerSearch extends Controller
         $mquicktips = array_merge($mquicktips, $quicktips);
 
         # Dict.cc Quicktip
-        $url             = "http://www.dict.cc/metager.php?s=" . urlencode($q);
-        $decodedResponse = json_decode($this->get($url), true);
-        if ($decodedResponse["headline"] != "" && $decodedResponse["link"] != "") {
-            $quicktip            = [];
-            $quicktip["title"]   = $decodedResponse["headline"];
-            $quicktip["URL"]     = $decodedResponse["link"];
-            $quicktip["summary"] = implode(", ", $decodedResponse["translations"]);
-            $quicktip['gefVon']  = trans('metaGerSearch.quicktips.dictcc.adress');
+        if (count(explode(' ', $q)) < 3) {
+            $url             = "http://www.dict.cc/metager.php?s=" . urlencode($q);
+            $decodedResponse = json_decode($this->get($url), true);
+            if ($decodedResponse["headline"] != "" && $decodedResponse["link"] != "") {
+                $quicktip            = [];
+                $quicktip["title"]   = $decodedResponse["headline"];
+                $quicktip["URL"]     = $decodedResponse["link"];
+                $quicktip["summary"] = implode(", ", $decodedResponse["translations"]);
+                $quicktip['gefVon']  = trans('metaGerSearch.quicktips.dictcc.adress');
 
-            if (App::isLocale('de')) {
-                array_unshift($mquicktips, $quicktip);
-            } else {
-                $mquicktips[] = $quicktip;
+                if (App::isLocale('de')) {
+                    array_unshift($mquicktips, $quicktip);
+                } else {
+                    $mquicktips[] = $quicktip;
+                }
             }
         }
 

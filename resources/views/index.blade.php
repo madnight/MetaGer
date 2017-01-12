@@ -128,6 +128,8 @@
                 <li>{!! trans('index.plugin.vivaldi.10') !!}</li>
               </ol>
             @endif
+            <hr>
+            <p>@lang('index.plugin.faq.1')<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/faq#mg-plugin") }}">@lang('index.plugin.faq.2')</a></p>
           </div>
         </div>
       </div>

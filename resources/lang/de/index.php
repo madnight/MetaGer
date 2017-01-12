@@ -37,6 +37,7 @@ return [
     'plugin.head.4'       => 'MetaGer zum Internet Explorer hinzufügen',
     'plugin.head.5'       => 'MetaGer zum Microsoft Edge hinzufügen',
     'plugin.head.6'       => 'MetaGer zum Safari hinzufügen',
+    'plugin.head.6'       => 'MetaGer zum Vivaldi hinzufügen',
     'plugin.head.info'    => '(aktuelle Sucheinstellungen werden übernommen)',
 
     'plugin.firefox.1'    => 'Klicken Sie in Ihrem Browser oben rechts im Suchfeld auf die Lupe mit dem kleinen "+" und dann auf "MetaGer hinzufügen" (siehe Bild)',
@@ -77,7 +78,7 @@ return [
     'plugin.IE.11'        => 'Klicken Sie auf "OK"',
 
     'plugin.edge.1'       => 'Klicken Sie in Ihrem Browser oben rechts auf Extras (',
-    'plugin.edge.2'       => ') und wählen sie "Einstellungen"',
+    'plugin.edge.2'       => ') und wählen Sie "Einstellungen"',
     'plugin.edge.3'       => 'Scrollen Sie nach unten und klicken auf "Erweiterte Einstellungen anzeigen"',
     'plugin.edge.4'       => 'Scrollen Sie erneut nach unten bis zum Punkt "In Adressleiste suchen mit" und klicken Sie auf "Ändern"',
     'plugin.edge.5'       => 'Wählen Sie "MetaGer: Sicher suchen & finden..." und klicken Sie auf "Als Standard"',
@@ -95,4 +96,12 @@ return [
 
     'plugin.faq.1'        => 'Siehe auch: ',
     'plugin.faq.2'        => 'Metager FAQ - Plugin',
+    'plugin.vivaldi.3'    => 'Wählen Sie "Neue Suche hinzufügen".',
+    'plugin.vivaldi.4'    => 'Tragen Sie im Feld URL "https://metager.de/meta/meta.ger3?eingabe=%s" ein.',
+    'plugin.vivaldi.5'    => 'Tragen Sie als Beschreibung "MetaGer" und als Kürzel "mg" ein.',
+    'plugin.vivaldi.6'    => 'Wenn Sie MetaGer als Standardsuchmaschine verwenden möchten, setzen Sie ein Häkchen bei "Als Standard setzen".',
+    'plugin.vivaldi.7'    => 'Klicken Sie auf "Hinzufügen".',
+    'plugin.vivaldi.8'    => 'MetaGer als Startseite im :browser einrichten',
+    'plugin.vivaldi.9'    => 'Klicken Sie in Ihrem Browser oben links auf das rote Vivaldi Logo und wählen Sie zuerst "Werkzeuge", dann im Untermenü "Einstellungen".',
+    'plugin.vivaldi.10'   => 'Tragen Sie im Feld "Startseite" "https://metager.de" ein.',
 ];

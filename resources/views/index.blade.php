@@ -23,6 +23,8 @@
                 {{ trans('index.plugin.head.5') }}
               @elseif ($browser === 'Safari')
                 {{ trans('index.plugin.head.6') }}
+              @elseif ($browser === 'Vivaldi')
+                {{ trans('index.plugin.head.6') }}
               @else
                 $(".seperator").addClass("hidden");
               @endif
@@ -73,7 +75,7 @@
               </ol>
             @elseif ($browser === 'IE')
               <ol>
-                <li>{!! trans('index.plugin.IE.1') !!}
+                <li>{!! trans('index.plugin.IE.1') !!}</li>
                 <li>{!! trans('index.plugin.IE.4') !!} (<span class="glyphicon glyphicon-cog"></span>)</li>
                 <li>{!! trans('index.plugin.IE.5') !!}</li>
                 <li>{!! trans('index.plugin.IE.6') !!}</li>
@@ -103,12 +105,28 @@
                 <li>{!! trans('index.plugin.edge.11') !!}</li>
               </ol>
             @elseif ($browser === 'Safari')
-                <ol>
-                  <li>{!! trans('index.plugin.safari.1') !!}</li>
-                  <li>{!! trans('index.plugin.safari.2') !!}</li>
-                  <li>{!! trans('index.plugin.safari.3') !!}</li>
-                  <li>{!! trans('index.plugin.safari.4') !!}</li>
-                </ol>
+              <ol>
+                <li>{!! trans('index.plugin.safari.1') !!}</li>
+                <li>{!! trans('index.plugin.safari.2') !!}</li>
+                <li>{!! trans('index.plugin.safari.3') !!}</li>
+                <li>{!! trans('index.plugin.safari.4') !!}</li>
+              </ol>
+            @elseif ($browser === 'Vivaldi')
+              <ol>
+                <li>{!! trans('index.plugin.vivaldi.1') !!}</li>
+                <li>{!! trans('index.plugin.vivaldi.2') !!}</li>
+                <li>{!! trans('index.plugin.vivaldi.3') !!}</li>
+                <li>{!! trans('index.plugin.vivaldi.4') !!}</li>
+                <li>{!! trans('index.plugin.vivaldi.5') !!}</li>
+                <li>{!! trans('index.plugin.vivaldi.6') !!}</li>
+                <li>{!! trans('index.plugin.vivaldi.7') !!}</li>
+              </ol>
+              <hr />
+              <h4>{!! trans('index.plugin.vivaldi.8', ['browser' => $browser]) !!}</h4>
+              <ol>
+                <li>{!! trans('index.plugin.vivaldi.9') !!}</li>
+                <li>{!! trans('index.plugin.vivaldi.10') !!}</li>
+              </ol>
             @endif
             <hr>
             <p>@lang('index.plugin.faq.1')<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/faq#mg-plugin") }}">@lang('index.plugin.faq.2')</a></p>
@@ -216,7 +234,7 @@
               </li>
               <li class="hidden-xs seperator">|
               </li>
-              <li id="plug" @unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge' || $browser === 'Safari')
+              <li id="plug" @unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge' || $browser === 'Safari' || $browser === 'Vivaldi')
                 class="hidden" @endunless >
                 <a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}">{{ trans('index.plugin') }}</a>
               </li>

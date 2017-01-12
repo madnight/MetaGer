@@ -90,18 +90,48 @@
 		<p>{!! trans('hilfe.domains.showcase.explanation.1') !!}</p>
 		<img src="/img/blacklist-tutorial-searchexample.png">
 		<p>{!! trans('hilfe.domains.showcase.explanation.2') !!}<p>
-		<div class="media">
-			<div class="media-left">
-				<img src="/img/blacklist-tutorial-options.png">
+		<div id="result_option_showcase" style="margin-top: -300px"></div>
+		<div style="margin-top: 315px; margin-bottom: 10px;">
+			<div class="popover fade bottom in" role="tooltip" style="top: auto; left: auto; display: block; position: relative">
+				<div class="arrow" style="left: 50%;"></div>
+				<h3 class="popover-title"><span class="glyphicon glyphicon-cog"></span> Optionen</h3>
+				<div class="popover-content">
+					<ul class="options-list list-unstyled small">
+						<li>
+							<a href="javascript:setDummySearch('wikipedia site:de.wikipedia.org')">
+								Suche auf dieser Domain neu starten
+							</a>
+						</li>
+						<li>
+							<a href="javascript:setDummySearch('wikipedia -site:de.wikipedia.org')">
+								de.wikipedia.org ausblenden
+							</a>
+						</li>
+						<li>
+							<a href="javascript:setDummySearch('wikipedia -site:*.wikipedia.org')">
+								*.wikipedia.org ausblenden
+							</a>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<div class="media-body">
-				<p>{!! trans('hilfe.domains.showcase.menu.1') !!}</p>
-				<ul class="dotlist">
-					<li>{!! trans('hilfe.domains.showcase.menu.2') !!}</li>
-					<li>{!! trans('hilfe.domains.showcase.menu.3') !!}</li>
-					<li>{!! trans('hilfe.domains.showcase.menu.4') !!}</li>
-				</ul>
-			</div>
+		</div>
+		<script type="text/javascript">
+			function setDummySearch(value) {
+				document.getElementById("dummy_search").innerHTML = value
+			}
+		</script>
+		<div>
+			<p>{!! trans('hilfe.domains.showcase.menu.1') !!}</p>
+			<ul class="dotlist">
+				<li>{!! trans('hilfe.domains.showcase.menu.2') !!}</li>
+				<li>{!! trans('hilfe.domains.showcase.menu.3') !!}</li>
+				<li>{!! trans('hilfe.domains.showcase.menu.4') !!}</li>
+			</ul>
+			<p>{!! trans('hilfe.domains.showcase.menu.5') !!}</p>
+		</div>
+		<div>
+			<div class="well well-sm"><i>meine suche</i> <span id="dummy_search"></span></div>
 		</div>
 	</div>
 </div>

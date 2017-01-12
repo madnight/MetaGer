@@ -44,6 +44,7 @@ return [
     "domains.showcase.menu.2"        => "Eine neue Suche nur auf der Domain des Ergebnisses (de.wikipedia.de) starten",
     "domains.showcase.menu.3"        => "Eine Suche ohne Ergebnisse der Subdomain (de.wikipedia.de) starten",
     "domains.showcase.menu.4"        => "Eine Suche ohne Ergebnisse der Top-Level-Domain (wikipedia.de) starten",
+    "domains.showcase.menu.5"        => "Probieren Sie es doch gleich einmal aus, indem Sie die Optionen anklicken.",
     "dienste"                        => "Weitere Dienste um die Suche herum",
     "app.title"                      => "Android-App",
     "app.1"                          => "Sie können MetaGer auch als App nutzen. Laden Sie sich dazu einfach die <a href=\"https://play.google.com/store/apps/details?id=de.metager.metagerapp\" target=\"_blank\" rel=\"noopener\">MetaGer App</a> auf ihr Android Smartphone.",
@@ -73,5 +74,5 @@ return [
     "maps.1"                         => "Metager bietet eine Kartenfunktion. Sobald Sie nach einem Begriff gesucht haben, sehen Sie oben rechts einen neuen Suchfokus \"maps.MetaGer.de\". Beim Klick darauf gelangen Sie zur Karte (momentan nur deutschlandweit). Sie können die Funktion unter \"Anpassen\" auch dauerhaft anschalten. Sollten Sie speichern, so erhalten Sie ab diesem Moment einen Kartenausschnitt in der Ergebnisliste.",
     "maps.2"                         => "Die Karte zeigt nach dem Aufrufen die auch in der Spalte rechts wieder gegebenen von MetaGer gefundenen Punkte (POIs). Beim Zoomen passt sich die Liste an den Kartenausschnitt an. Wenn Sie die Maus über eine Markierung in der Karte oder in der Liste halten, wird das jeweilige Gegenstück hervorgehoben. Klicken Sie auf \"Details\", um genauere Informationen zu diesem Punkt aus der Nominatim-Datenbank zu erhalten.",
     "maps.3"                         => "Die Karten sind mit Ausnahme der drei letzten Zoomstufen vorgerendert und damit schnell verfügbar. Die Zoomstufe steuern Sie mit dem Mausrad oder mit den Plus-Minus-Buttons oben links in der Karte.",
-    "sucheingabe"	                 =>	"Sucheingabe",
+    "sucheingabe"                    => "Sucheingabe",
 ];

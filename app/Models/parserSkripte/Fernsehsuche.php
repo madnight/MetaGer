@@ -47,7 +47,8 @@ class Fernsehsuche extends Searchengine
                 }
             }
         } catch (\Exception $e) {
-            Log::error("A problem occurred parsing results from $this->name");
+            Log::error("A problem occurred parsing results from $this->name:");
+            Log::error($e->getMessage());
             return;
         }
     }

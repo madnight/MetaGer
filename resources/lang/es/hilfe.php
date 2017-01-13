@@ -18,6 +18,7 @@ return [
     "mehrwortsuche.title"	=>	"Búsqueda con varias palabras",
     "mehrwortsuche.1"	=>	"En una búsqueda con varias palabras, por defecto se busca estos documentos donde hay la mayor apariencia de las palabras o donde hay palabras similares. La búsqueda de varias palabras muestra casi lo mismo con o sin comillas. Si busca una cita larga recomendamos usar comillas.",
     "mehrwortsuche.2"	=>	"Ejemplo: la búsqueda <div class=\"well well-sm\">\"la otra cara de la verdad\"</div> da bastante resultados, pero interesante (y más preciso) es la búsqueda <div class=\"well well-sm\">Donna Leon \"la otra cara de la verdad\"</div> ",
+    "mehrwortsuche.3"	=>	"Sí queréis resultados exactos con las palabras habéis insertado tenéis usar comillas.",
     "grossklein.title"	=>	"Mayúscula / Minúscula",
     "grossklein.1"	=>	"Escribir con mayúscula o minúscula no se distingue en la búsqueda, es una búsqueda meramente de los contendidos.",
     "grossklein.2"	=>	"Ejemplo: la búsqueda <div class=\"well well-sm\">mayúscula minúscula </div> da los mismos resultados como <div class=\"well well-sm\">Mayúscula Minúscula </div>",
@@ -57,6 +58,7 @@ return [
     "datenschutz.title"	=>	"Anonimato y seguridad de data",
     "datenschutz.1"	=>	"Cookies, ID de sesiones y direcciones IP",
     "datenschutz.2"	=>	"Nada de todo esto guardamos o procesamos de alguna manera en MetaGer. Considerando este tema extremadamente importante, hemos desarrollado una posibilidad también para usted para lograr un máximo de seguridad: El MetaGer-TOR-Hidden-Service y nuestro servidor proxy.",
+    "datenschutz.3"	=>	"Puede encontrar información más preciso bajo del titulo \"Servicios\".",
     "tor.title"	=>	"Tor-Hidden-Service",
     "tor.1"	=>	"Desde hace años MetaGer anonimiza las direcciones IP de los usuarios. Pese a esto las direcciones IP están visible en el servidor de MetaGer: Si MetaGer algun día sera comprometido, el atacante pudiera leer los IP's y guardarlos. Para mantener el estándar más alto de seguridad tenemos una presencia en el Tor-Network: el MetaGer-TOR-hidden-Service accesible desde: <a href=\"/tor/\" target=\"_blank\" rel=\"noopener\">https://metager.de/tor/</a>. Para usarlo necesita un navegador especial, que puede descargar en <a href=\"https://www.torproject.org/\" target=\"_blank\" rel=\"noopener\">https://www.torproject.org/</a> (Ver detalles: <a href=\"http://forum.suma-ev.de/viewtopic.php?f=3&t=43\" target=\"_blank\" rel=\"noopener\">http://forum.suma-ev.de/viewtopic.php?f=3&t=43</a>).",
     "tor.2"	=>	"MetaGer es accesible en el navegador especial de TOR (Tor-Browser) bajo esta URL: http://b7cxf4dkdsko6ah2.onion .",
@@ -64,6 +66,9 @@ return [
     "proxy.1"	=>	"Para usarlo, hacer click en \"abrir anónimo\" en la página de resultados de MeatGer, al lado derecha del link de resultado. Su consulta a la página meta sera redireccionado anonimizado sobre nuestros servidor proxy y sus datos personales están protegidos en adelante. Importante: si desde allí usted hace click en links y sigue a otra páginas sigue protegido por nuestro proxy. Pero usted no debe en la barra de direcciones introducir una nueva dirección de un sitio web. En este caso pierde la protección. Si aun esta protegido se puede ver también en la barra de direcciones (URL). La barra muestra https://proxy.suma-ev.de/?url=aquí la URL del sitio que esta visitando.",
     "infobutton.title"	=>	"¿Qué representa la <span class=\"glyphicon glyphicon-info-sign info-details-available\" aria-hidden=\"true\"></span>?",
     "infobutton.1"	=>	"Hacer click en \"I\" e recibe más informaciones por la tema (el tiempo por ejemplo).",
-    "datenschutz.3"	=>	"Puede encontrar información más preciso bajo del titulo \"Servicios\".",
+    "maps.title"	=>	"MetaGer mapas",
+    "maps.1"	=>	"MetaGer ofrece mapas. Para usarla, hacer click en el foco \"maps.MetaGer.de\" en la página de resultados de MetaGer. Usáis el foco \"adaptar\" para encender mapas perdurable.",
+    "maps.2"	=>	"Hacer click en \"Details\" para recibir informaciónes de la base de datos \"Nominatim\".",
+    "maps.3"	=>	"Usáis \"+ / -\" o rueda del ratón para ajustar el zoom.",
     "sucheingabe"	=>	"Búsqueda"
 ];

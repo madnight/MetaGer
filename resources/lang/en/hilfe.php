@@ -59,6 +59,7 @@ return [
     "datenschutz.title"	=>	"Privacy",
     "datenschutz.1"	=>	"Cookies, Session-IDs, IP addresses",
     "datenschutz.2"	=>	"We don&apos;t store or work with any personal information. We provide further privacy security services as follows:",
+    "datenschutz.3"	=>	"For more details see \"Tools\" above.",
     "tor.title"	=>	"Tor Hidden Service",
     "tor.1"	=>	"MetaGer provides the highest reachable security level for your privacy (anonymised IP addresses, servers under german privacy protection law). For further security needs or fear of compromised servers you may use the MetaGer-Tor branch. Please download the specialized webbrowser from <a href=\"https://www.torproject.org/\" target=\"_blank\" rel=\"noopener\">https://www.torproject.org/</a>. You will find help there, too.",
     "tor.2"	=>	"MetaGer Tor address: http://b7cxf4dkdsko6ah2.onion/tor/",
@@ -66,6 +67,9 @@ return [
     "proxy.1"	=>	"Looking at the MetaGer result page, you will find a link \"open anonymously\" marked by a small lock at the right of every single result. Use this link to hide behind the MetaGer proxy server. The provided protection is limited to the website you reached from our result page. Protection persists while you see https://proxy.suma-ev.de/?url=...in your webbrowser‘s address field.",
     "infobutton.title"	=>	"I see a <span class=\"glyphicon glyphicon-info-sign info-details-available\" aria-hidden=\"true\"></span> in some spots. What is it?",
     "infobutton.1"	=>	"You gain more information on the specific theme by clicking it (e.g. weather data or something).",
-    "datenschutz.3"	=>	"For more details see \"Tools\" above.",
+    "maps.title"	=>	"MetaGer maps",
+    "maps.1"	=>	"MetaGer provides a map function: On a result page you see a new focus on the upper right, called \"maps.MetaGer.de\". You receive a map according to your search by click (only Germany for the moment). Use the \"customize\" page for toggling maps function \"show/hide\", you will get a durably embedded small map on the result page, then.",
+    "maps.2"	=>	"After loading the map shows POIs according to the MetaGer results. You see them in the right column too. Mouseover a POI highlights its counterpart. Click \"Details\" to get further information (Nominatim data base) to this POI.",
+    "maps.3"	=>	"The maps are rendered before (except for the last three ones) and fast available. Affect the zoom level by mouse-wheel or the \"+ / -\" buttons in the upper left corner of the map.",
     "sucheingabe"	=>	"Enter search words"
 ];

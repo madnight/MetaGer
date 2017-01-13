@@ -44,7 +44,8 @@ class Pixabay extends Searchengine
                 );
             }
         } catch (\Exception $e) {
-            Log::error("A problem occurred parsing results from $this->name");
+            Log::error("A problem occurred parsing results from $this->name:");
+            Log::error($e->getMessage());
             return;
         }
     }
@@ -75,7 +76,8 @@ class Pixabay extends Searchengine
             $next->hash = md5($next->host . $next->getString . $next->port . $next->name);
             $this->next = $next;
         } catch (\Exception $e) {
-            Log::error("A problem occurred parsing results from $this->name");
+            Log::error("A problem occurred parsing results from $this->name:");
+            Log::error($e->getMessage());
             return;
         }
     }

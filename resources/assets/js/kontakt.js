@@ -29,29 +29,42 @@ function encrypt() {
             return true;
         }
     } else {
-        if (isEnglish()) {
-            window.alert("Error: Your browser is not supported. Please install an up to date browser like Mozilla Firefox.");
-        } else {
-            window.alert("Fehler: Ihr Browser wird nicht unterstützt. Bitte installieren Sie einen aktuellen Broweser wie z.B. Mozilla Firefox.");
+        switch (getLanguage()) {
+            case "de":
+                alert("Fehler: Ihr Browser wird nicht unterstützt. Bitte installieren Sie einen aktuellen Browser wie z.B. Mozilla Firefox.");
+                break;
+            case "en":
+                alert("Error: Your browser is not supported. Please install an up to date browser like Mozilla Firefox.");
+                break;
+            case "es":
+                // alert(""); TODO
+                break;
         }
         return false;
     }
 }
 $(document).ready(function() {
-    if (isEnglish()) {
-        $(".encrypt-btn").html("encrypt and send");
-    } else {
-        $(".encrypt-btn").html("Verschlüsseln und senden");
+    switch (getLanguage()) {
+        case "de":
+            $(".encrypt-btn").html("Verschlüsseln und senden");
+            break;
+        case "en":
+            $(".encrypt-btn").html("encrypt and send");
+            break;
+        case "es":
+            // $(".encrypt-btn").html(""); TODO
+            break;
     }
     $(".contact").submit(function() {
         return encrypt(this);
     });
 });
 
-function isEnglish() {
-    if (window.location.href.indexOf('/en/') == -1) {
-        return false;
-    } else {
-        return true;
+function getLanguage() {
+    var metaData = document.getElementsByTagName('meta');
+    for (var m in metaData) {
+        if (metaData[m]["httpEquiv"] == "language") {
+            return metaData[m]["content"];
+        }
     }
 }

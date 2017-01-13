@@ -291,7 +291,7 @@ class MetaGer
                 # Wir geben jedem Ergebnis eine ID um später die Sprachcodes zuordnen zu können
                 $result->id = $id;
 
-                $langStrings["result_" . $id] = $result->getLangString();
+                $langStrings["result_" . $id] = utf8_encode($result->getLangString());
 
                 $id++;
             }

@@ -96,6 +96,8 @@ return [
 
     'plugin.faq.1'        => 'Siehe auch: ',
     'plugin.faq.2'        => 'Metager FAQ - Plugin',
+    'plugin.vivaldi.1'    => 'Klicken Sie in Ihrem Browser oben links auf das rote Vivaldi Logo und wählen Sie zuerst "Werkzeuge", dann im Untermenü "Einstellungen".".',
+    'plugin.vivaldi.2'    => 'In dem dann erscheinenden Menu wählen Sie bitte "Suche".',
     'plugin.vivaldi.3'    => 'Wählen Sie "Neue Suche hinzufügen".',
     'plugin.vivaldi.4'    => 'Tragen Sie im Feld URL "https://metager.de/meta/meta.ger3?eingabe=%s" ein.',
     'plugin.vivaldi.5'    => 'Tragen Sie als Beschreibung "MetaGer" und als Kürzel "mg" ein.',

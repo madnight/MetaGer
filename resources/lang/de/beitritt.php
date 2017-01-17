@@ -13,7 +13,7 @@ return [
     'beitritt.5'    => 'E-Mail-Adresse:',
     'beitritt.6'    => 'Web-Adresse:',
     'beitritt.7'    => 'Telefon:',
-    'placeholder.7' => 'Festnetz und ggf. Handy',
+    'placeholder.7' => 'Festnetz und ggf. Mobil',
     'beitritt.8'    => 'dass ich dem "SUMA-EV - Verein für freien Wissenszugang" beitreten will. Ich habe die Satzung zur Kenntnis genommen und stimme mit den Zielen des Vereins überein. Der Mindestbeitrag für Einzelmitglieder und Privatpersonen beträgt 5,-EUR pro Monat, Schüler und Studenten die Hälfte; für Firmen, Institutionen und Einrichtungen 5,- EUR pro Monat und Mitarbeiter, bei Firmen ab 20 Mitarbeitern pauschal 100,- EUR pro Monat, bei Firmen ab 200 Mitarbeitern pauschal 200,- EUR pro Monat. Als Mitgliedsbeitrag wähle ich: ',
     'beitritt.9'    => 'EUR pro Monat.',
     'beitritt.10'   => 'Der Beitrag wird jährlich zum 01. August im voraus abgebucht, bzw. ab Eintrittsdatum anteilig für das erste Jahr.',

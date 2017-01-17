@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{!! trans('staticPages.meta.language') !!}">
 	<head>
 		<title>{!! trans('quicktip.title') !!}</title>
 		<!--<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default-neu') }}.css" />-->

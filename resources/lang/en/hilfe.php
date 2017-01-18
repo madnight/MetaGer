@@ -42,6 +42,7 @@ return [
     "domains.showcase.menu.2"	=>	"To start a new search with just the domain of the result (de.wikipedia.de)",
     "domains.showcase.menu.3"	=>	"To start a search without the results of that subdomain (de.wikipedia.de)",
     "domains.showcase.menu.4"	=>	"To start a search without results of the top level domain (wikipedia.de)",
+    "domains.showcase.menu.5"	=>	"Click \"Options\" to try it now.",
     "dienste"	=>	"Tools-free of charge",
     "app.title"	=>	"Android-App",
     "app.1"	=>	"You can use MetaGer within an app, too. To do so just download the <a href=\"https://play.google.com/store/apps/details?id=de.metager.metagerapp\" target=\"_blank\" rel=\"noopener\">MetaGer App</a> on your Android smartphone.",

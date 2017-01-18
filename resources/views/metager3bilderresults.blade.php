@@ -1,21 +1,21 @@
 @if( sizeof($errors) > 0 )
-		<div class="alert alert-danger">
-			<ul>
-				@foreach($errors as $error)
+	<div class="alert alert-danger">
+		<ul>
+			@foreach($errors as $error)
 				<li>{!! $error !!}</li>
-				@endforeach
-			</ul>
-		</div>
-	@endif
-	@if( sizeof($warnings) > 0)
-		<div class="alert alert-warning">
-			<ul>
-				@foreach($warnings as $warning)
-					<li>{!! $warning !!}</li>
-				@endforeach
-			</ul>
-		</div>
-	@endif
+			@endforeach
+		</ul>
+	</div>
+@endif
+@if( sizeof($warnings) > 0)
+	<div class="alert alert-warning">
+		<ul>
+			@foreach($warnings as $warning)
+				<li>{!! $warning !!}</li>
+			@endforeach
+		</ul>
+	</div>
+@endif
 <div id="container">
 	@foreach($metager->getResults() as $result)
 		<div class="item">
@@ -27,8 +27,8 @@
 	@endforeach
 </div>
 <nav aria-label="...">
-		<ul class="pager">
-		    <li @if($metager->getPage() === 1) class="disabled" @endif><a href="@if($metager->getPage() === 1) # @else javascript:history.back() @endif">{{ trans('results.zurueck') }}</a></li>
-			<li @if($metager->nextSearchLink() === "#") class="disabled" @endif><a href="{{ $metager->nextSearchLink() }}">{{ trans('results.weiter') }}</a></li>
-		</ul>
-	</nav>
+	<ul class="pager">
+		<li @if($metager->getPage() === 1) class="disabled" @endif><a href="@if($metager->getPage() === 1) # @else javascript:history.back() @endif">{{ trans('results.zurueck') }}</a></li>
+		<li @if($metager->nextSearchLink() === "#") class="disabled" @endif><a href="{{ $metager->nextSearchLink() }}">{{ trans('results.weiter') }}</a></li>
+	</ul>
+</nav>

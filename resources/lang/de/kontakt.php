@@ -9,16 +9,12 @@ return [
     'form.1'     => 'Sicheres Kontakformular',
     'form.2'     => 'Über dieses Formular können Sie uns verschlüsselt kontaktieren.
 Alternativ können Sie uns natürlich auch per <a href="mailto:office@suma-ev.de">email</a> erreichen.',
-
     'form.3'     => 'Beachten Sie: Aufgrund der Vielzahl der Anfragen sind wir personell nicht immer in der Lage, alles zeitnah zu beantworten.',
     'form.4'     => 'Wenn Sie keine email-Adresse angeben, können wir Ihnen nicht antworten.',
     'form.5'     => 'Ihre e-mail-Adresse (optional)',
     'form.6'     => 'Ihre Nachricht',
-    'form.7'     => 'Ihre Nachricht wird vor dem Absenden mit',
-    'form.8'     => 'verschlüsselt.
-Dafür wird Javascript benötigt.',
-    'form.9'     => 'Falls Sie Javascript deaktiviert haben, wird Ihre Eingabe unverschlüsselt gesendet.',
-    'form.10'    => 'Verschlüsseln und senden',
+    'form.7'     => '<strong>Ihre Nachricht wird vor dem Absenden mit <a href="http://openpgpjs.org/.">OpenPGP.js</a> verschlüsselt. Dafür wird Javascript benötigt.</strong> Falls Sie Javascript deaktiviert haben, wird Ihre Eingabe unverschlüsselt gesendet.',
+    'form.8'     => 'Verschlüsseln und senden',
 
     'mail.1'     => 'Per Email',
     'mail.2'     => 'Sie können uns auch direkt eine email an die folgende Adresse schicken: <a href="mailto:office@suma-ev.de">office@suma-ev.de</a>',

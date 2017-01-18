@@ -127,10 +127,12 @@ Route::group(
                 ->with('navbarFocus', 'dienste');
         });
 
-        Route::get('admin', 'AdminInterface@index');
-        Route::get('admin/count', 'AdminInterface@count');
-        Route::get('admin/check', 'AdminInterface@check');
-        Route::get('admin/engines', 'AdminInterface@engines');
+        Route::group(['middleware' => ['referer.check'], 'prefix' => 'admin'], function () {
+            Route::get('/', 'AdminInterface@index');
+            Route::get('count', 'AdminInterface@count');
+            Route::get('check', 'AdminInterface@check');
+            Route::get('engines', 'AdminInterface@engines');
+        });
 
         Route::get('settings', 'StartpageController@loadSettings');
 

@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="{!! trans('staticPages.meta.language') !!}">
 	<head>
-		<title>@yield('title')</title>
-		<!-- TradeDoubler site verification 2866738 -->
 		<meta charset="utf-8" />
+		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+		<title>@yield('title')</title>
 		<meta name="description" content="{!! trans('staticPages.meta.Description') !!}" />
 		<meta name="keywords" content="{!! trans('staticPages.meta.Keywords') !!}" />
-		<meta http-equiv="language" content="{!! trans('staticPages.meta.language') !!}" />
 		<meta name="page-topic" content="Dienstleistung" />
 		<meta name="robots" content="index,follow" />
 		<meta name="revisit-after" content="7 days" />
@@ -17,10 +16,6 @@
 		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
 		<meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE" />
 		<link rel="search" type="application/opensearchdescription+xml" title="{{ trans('staticPages.opensearch') }}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
-		<!--<link href="/css/bootstrap.css" rel="stylesheet" />
-		-->
-		<!--<link type="text/css" rel="stylesheet" href="/css/themes/{{ app('request')->input('theme', 'default-neu') }}.css" />-->
-		<!--<link href="/css/style.css" rel="stylesheet" />-->
 		<link type="text/css" rel="stylesheet" href="{{ elixir('css/themes/default.css') }}" />
 		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
 		@if (isset($css))

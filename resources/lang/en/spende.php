@@ -13,10 +13,10 @@ GLS Gemeinschaftsbank, Bochum',
 please specify your full adress and (if available)
 your E-Mail adress on the money transfer form.',
 
-    'logos.1'                   => 'Comfortably with Paypal<br>Via Paypal by credit card too (without PayPal registration),',
-    'logos.2'                   => 'or Bitcoins',
+    'paypal.1'                  => 'Comfortably with Paypal<br>Via Paypal by credit card too (without PayPal registration),',
 
-    'bitcoins'                  => 'Our Bitcoin adress:',
+    'bitcoins.1'                => 'or Bitcoins',
+    'bitcoins.2'                => 'Our Bitcoin adress:',
 
     'lastschrift.1'             => 'Donate by wire transfer',
     'lastschrift.2'             => 'Enter your account data along with the desired amount. We will debit your bank account accordingly.',

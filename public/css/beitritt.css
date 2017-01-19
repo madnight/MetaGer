@@ -1,4 +1,12 @@
 @media print {
+    .container {
+        width: auto !important;
+        margin: 0px;
+        padding: 0px;
+    }
+    hr {
+        display: none !important;
+    }
     #spendenaufruf {
         display: none !important;
     }
@@ -17,7 +25,6 @@
     input[type=text], input[type=email] {
         margin: 0px !important;
         padding: 0px !important;
-        /*padding-top: 5px!important;*/
         height: initial !important;
         border: 0;
     }
@@ -36,7 +43,7 @@
         margin-top: 0 !important;
         padding-top: 0 !important;
     }
-    /* Skalierung für Firefox, absolut für die funktionierenden Browser */
+    /* Skalierung für Firefox, absolut für die anderen Browser */
     input[type=radio] {
         transform: scale(0.5);
         -moz-transform: scale(0.5);
@@ -63,5 +70,8 @@
     input:-ms-input-placeholder {
         /* Internet Explorer 10+ */
         color: transparent !important;
+    }
+    .pagebreak {
+        page-break-before: always;
     }
 }

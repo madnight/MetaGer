@@ -1,16 +1,16 @@
 @extends('layouts.resultPage')
 
 @section('results')
-@if( sizeof($errors) > 0 )
+	@if(sizeof($errors) > 0)
 		<div class="alert alert-danger">
 			<ul>
 				@foreach($errors as $error)
-				<li>{!! $error !!}</li>
+					<li>{!! $error !!}</li>
 				@endforeach
 			</ul>
 		</div>
 	@endif
-	@if( sizeof($warnings) > 0)
+	@if(sizeof($warnings) > 0)
 		<div class="alert alert-warning">
 			<ul>
 				@foreach($warnings as $warning)
@@ -31,7 +31,7 @@
 	</div>
 	<nav aria-label="...">
 		<ul class="pager">
-		    <li @if($metager->getPage() === 1) class="disabled" @endif><a href="@if($metager->getPage() === 1) # @else javascript:history.back() @endif">{{ trans('results.zurueck') }}</a></li>
+			<li @if($metager->getPage() === 1) class="disabled" @endif><a href="@if($metager->getPage() === 1) # @else javascript:history.back() @endif">{{ trans('results.zurueck') }}</a></li>
 			<li @if($metager->nextSearchLink() === "#") class="disabled" @endif><a href="{{ $metager->nextSearchLink() }}">{{ trans('results.weiter') }}</a></li>
 		</ul>
 	</nav>

@@ -8,7 +8,6 @@
 		<p id="lead">{!! trans('settings.head.2') !!}</p>
 		<h2>{!! trans('settings.allgemein.1') !!}</h2>
 		<input type="hidden" name="focus" value="angepasst">
-
 		<container>
 			<div class="row">
 				<div class="col-sm-6 col-md-4 col-lg-3">
@@ -56,7 +55,6 @@
 				</div>
 			</div>
 		</container>
-
 		<h2>{!! trans('settings.suchmaschinen.1') !!} <small><button type="button" class="btn btn-link allUnchecker">{!! trans('settings.suchmaschinen.2') !!}</button></small></h2>
 		@foreach( $foki as $fokus => $sumas )
 			<div class="headingGroup {{ $fokus }}">

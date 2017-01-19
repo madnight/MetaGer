@@ -103,7 +103,7 @@
 		<p>{{ trans('beitritt.abbuchung.9') }}</p>
 	</form>
 	<hr>
-	<p>{{ trans('beitritt.anweisung.1') }}</p>
+<p class="pagebreak">{{ trans('beitritt.anweisung.1') }}</p>
 	<ul class="dotlist">
 		<li>{{ trans('beitritt.anweisung.2') }}</li>
 		<li>{{ trans('beitritt.anweisung.3') }}</li>

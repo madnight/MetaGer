@@ -20,4 +20,16 @@
 		cacheDuration="60"
 	></suma>
 	-->
+	<suma
+		name="BASE"
+		host="baseapi.ub.uni-bielefeld.de"
+		skript="/cgi-bin/BaseHttpSearchInterface.fcgi"
+		formData="func=PerformSearch&amp;query=&lt;&lt;QUERY&gt;&gt;"
+		package="BASE"
+		displayName="BASE"
+		homepage="http://www.base-search.net/"
+		port="80"
+		userSelectable="1"
+		type="web,wissenschaft"
+	></suma>
 </sumas>

@@ -12,10 +12,11 @@ BIC: GENODEM1GLS
 GLS Gemeinschaftsbank, Bochum',
     'bankinfo.3'                => 'Falls Sie eine Spendenbescheinigung wünschen, geben Sie auf dem Überweisungsformular bitte Ihre vollständige Adresse, und (sofern vorhanden) auch Ihre E-Mail Adresse an.',
 
-    'logos.1'                   => 'Bequem mit Paypal,<br>dort auch per Kreditkarte ohne Registrierung,',
-    'logos.2'                   => 'oder per Bitcoin, <br>sicher und pseudonym.',
+    'paypal.1'                  => 'Bequem mit Paypal,<br>dort auch per Kreditkarte ohne Registrierung,',
+    'paypal.2'                  => 'Spenden Sie mit PayPal - schnell, kostenlos und sicher!" type="image',
 
-    'bitcoins'                  => 'Unsere Bitcoin-Adresse:',
+    'bitcoins.1'                => 'oder per Bitcoin, <br>sicher und pseudonym.',
+    'bitcoins.2'                => 'Unsere Bitcoin-Adresse:',
 
     'lastschrift.1'             => 'Spenden mittels elektronischem Lastschriftverfahren:',
     'lastschrift.2'             => 'Tragen Sie hier Ihre Kontodaten sowie den gewünschten Betrag ein. Wir buchen dann entsprechend von Ihrem Konto ab.',
@@ -40,9 +41,11 @@ Das können Sie mit einer Spende auf dieser Seite tun. Oder, wenn Sie freie Such
     'about.3'                   => 'Wenn Sie 50,-EUR oder mehr spenden, oder Mitglied im  <a href="http://suma-ev.de/" target="_blank" rel="noopener">SUMA-EV</a> werden, dann können Sie, wenn Sie wollen, auf unserer <a href="http://suma-ev.de/suma-links/index.html#sponsors" target="_blank" rel="noopener">Mitglieder- und Sponsorenseite</a> namentlich mit Link auf Ihre Homepage (sofern vorhanden) genannt werden (wenn Sie dies wünschen, vermerken Sie es bitte in Ihrer Mitteilung) <a href="https://metager.de/klassik/spenden1.html" target="_blank" rel="noopener">Oder werden Sie SUMA-EV Förderer!</a>',
     'about.4'                   => '<a href="http://suma-ev.de/unterstuetzung/index.html" target="_blank" rel="noopener">JEDE Form Ihrer Unterstützung</a> hilft mit, dass freie Suchmaschinen und freier Wissenszugang im Internet eine Chance haben. Zum freien Wissenszugang gehört es auch, dass Ihre Daten weder überwacht, noch Ihre Internet-Adressen und Verbindungsdaten gespeichert werden. Bei uns wird Ihre Internet-Adresse bereits während der Suche anonymisiert, sie wird nicht gespeichert und nicht an Dritte weitergegeben. Freie Internet-Suche ohne Überwachung: <a href="https://metager.de/" target="_blank" rel="noopener">MetaGer.de!</a>',
     'about.5'                   => 'Eine weitere Möglichkeit, MetaGer zu fördern, besteht darin, dass Sie Ihren nächsten Online-Einkauf bei MetaGer-Fördershops machen. Damit wir auf diesem Weg unterstützt werden können, haben wir uns in das Netzwerk zur Förderung gemeinnützig anerkannter Organisationen eingebracht, das Projekt <a href="https://www.boost-project.com/de" target="_blank" rel="noopener">www.boost-project.com</a> Unter dem Dach dieses Projektes sind ca. 400 Online-Shops (von Amazon bis Zooplus) vereint, die sich bereit erklärt haben, von allen Verkäufen etwa 6% an das Projekt zu spenden. Statt wie bisher direkt zum Online-Shop zu surfen, gehen Sie zunächst auf <a href="https://metager.de/" target="_blank" rel="noopener">MetaGer.de!</a> und klicken dort unterhalb der Suchwort-Eingabebox auf <a href="https://www.boost-project.com/de/shops?charity_id=1129&amp;tag=bl" target="_blank" rel="noopener">Machen Sie Ihre Einkäufe bei MetaGer-Fördershops - klicken Sie hier!</a> Dieser Klick führt Sie in die Shop-Auswahl des Boost-Projektes. Dort suchen Sie sich Ihren Shop aus und machen wie gewohnt Ihren Einkauf. Das ist alles. Wenn genug Menschen dies tun, dann brauchen wir keine Werbung mehr. Nur zwei Mausklicks für Sie - für alle eine Chance für den freien Wissenszugang in der digitalen Welt.',
+
     'danke.title'               => 'Herzlichen Dank!! Wir haben Ihre Spendenbenachrichtigung für MetaGer an SUMA-EV erhalten.',
     'danke.nachricht'           => 'Falls Sie Kontaktdaten angegeben haben, erhalten Sie demnächst auch eine persönliche Nachricht.',
     'danke.kontrolle'           => 'Folgende Nachricht hat uns erreicht:',
+
     'telefonnummer'             => 'Telefonnummer',
     'iban'                      => 'IBAN/Kontonummer',
     'bic'                       => 'BIC/Bankleitzahl',

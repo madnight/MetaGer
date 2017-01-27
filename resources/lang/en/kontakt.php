@@ -13,11 +13,8 @@ return [
     'form.4'     => 'If you do not enter an email-adress, we can not answer you.',
     'form.5'     => 'Your e-mail-adress (optional)',
     'form.6'     => 'Your message',
-    'form.7'     => 'Before dispatch, your messgae is encrypted with',
-    'form.8'     => '.
-We use Javascript for this.',
-    'form.9'     => 'If you have Javascript disabled, your message will be send unencrypted.',
-    'form.10'    => 'Encrypt and send',
+    'form.7'     => '<strong>Before dispatch, your messgae is encrypted with <a href="http://openpgpjs.org/.">OpenPGP.js</a>. We use Javascript for this.</strong> If you have Javascript disabled, your message will be send unencrypted.',
+    'form.8'     => 'Encrypt and send',
 
     'mail.1'     => 'By Email',
     'mail.2'     => 'You can also email us directly at: <a href="mailto:office@suma-ev.de">office@suma-ev.de</a>',

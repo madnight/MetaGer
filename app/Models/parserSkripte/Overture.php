@@ -80,17 +80,24 @@ class Overture extends Searchengine
             return;
         }
 
-        # Auslesen der Argumente für die nächste Suchseite:
-        $result = preg_replace("/\r\n/si", "", $result);
-        try {
-            $content = simplexml_load_string($result);
-        } catch (\Exception $e) {
-            Log::error("Results from $this->name are not a valid json string");
-            return;
-        }
         if (!$content) {
             return;
         }
+
+        // Yahoo liefert, wenn es keine weiteren Ergebnisse hat immer wieder die gleichen Ergebnisse
+        // Wir müssen also überprüfen, ob wir am Ende der Ergebnisse sind
+        $resultCount = $content->xpath('//Results/ResultSet[@id="inktomi"]/MetaData/TotalHits');
+        $results     = $content->xpath('//Results/ResultSet[@id="inktomi"]/Listing');
+        if (isset($resultCount[0]) && sizeof($results) > 0) {
+            $resultCount      = intval($resultCount[0]->__toString());
+            $lastResultOnPage = intval($results[sizeof($results) - 1]["rank"]);
+            if ($resultCount <= $lastResultOnPage) {
+                return;
+            }
+        } else {
+            return;
+        }
+
         $nextArgs = $content->xpath('//Results/NextArgs');
         if (isset($nextArgs[0])) {
             $nextArgs = $nextArgs[0]->__toString();

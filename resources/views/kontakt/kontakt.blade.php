@@ -3,28 +3,30 @@
 @section('title', $title )
 
 @section('content')
-<h1>{!! trans('kontakt.headline.1') !!}</h1>
-<h2>{!! trans('kontakt.headline.2') !!}</h2>
-<p><span class="bold">{!! trans('kontakt.headline.3') !!}</span>
-<span>{!! trans('kontakt.headline.4') !!}</span></p>
-<h2>{!! trans('kontakt.form.1') !!}</h2>
-<p>{!! trans('kontakt.form.2') !!}</p>
-<p>{!! trans('kontakt.form.3') !!}</p>
-<p class="bold">{!! trans('kontakt.form.4') !!}</p>
-<form class="contact" name="contact" method="post" action="{{ LaravelLocalization::getLocalizedURL() }}">
-  {{ csrf_field() }}
-  <div class="form-group kontakt-form-group">
-    <input class="form-control" name="email" placeholder="{!! trans('kontakt.form.5') !!}" type="text"></div>
-  <div class="form-group kontakt-form-group">
-    <textarea class="form-control" id="message" name="message" placeholder="{!! trans('kontakt.form.6') !!}"></textarea></div>
-  <div class="form-group kontakt-form-group">
-    <p><span class="bold">{!! trans('kontakt.form.7') !!} <a href="http://openpgpjs.org/.">OpenPGP.js</a> {!! trans('kontakt.form.8') !!}</span>
-<span>{!! trans('kontakt.form.9') !!}</span></p>
-    <button title="" data-original-title="" class="btn btn-default encrypt-btn" type="submit">{!! trans('kontakt.form.10') !!}</button></div></form>
-<h2>{!! trans('kontakt.mail.1') !!}</h2>
-<p>{!! trans('kontakt.mail.2') !!}
-{!! trans('kontakt.mail.3') !!}</p>
-<textarea id="pubkey" style="width:50%" rows="8" readonly>-----BEGIN PGP PUBLIC KEY BLOCK-----
+	<h1>{!! trans('kontakt.headline.1') !!}</h1>
+	<h2>{!! trans('kontakt.headline.2') !!}</h2>
+	<p><span class="bold">{!! trans('kontakt.headline.3') !!}</span>
+	<span>{!! trans('kontakt.headline.4') !!}</span></p>
+	<h2>{!! trans('kontakt.form.1') !!}</h2>
+	<p>{!! trans('kontakt.form.2') !!}</p>
+	<p>{!! trans('kontakt.form.3') !!}</p>
+	<p class="bold">{!! trans('kontakt.form.4') !!}</p>
+	<form class="contact" name="contact" method="post" action="{{ LaravelLocalization::getLocalizedURL() }}">
+		{{ csrf_field() }}
+		<div class="form-group kontakt-form-group">
+			<input class="form-control" name="email" placeholder="{!! trans('kontakt.form.5') !!}" type="text"></div>
+			<div class="form-group kontakt-form-group">
+				<textarea class="form-control" id="message" name="message" placeholder="{!! trans('kontakt.form.6') !!}"></textarea>
+			</div>
+			<div class="form-group kontakt-form-group">
+			<p>{!! trans('kontakt.form.7') !!}</p>
+			<button title="" data-original-title="" class="btn btn-default encrypt-btn" type="submit">{!! trans('kontakt.form.8') !!}</button>
+		</div>
+	</form>
+	<h2>{!! trans('kontakt.mail.1') !!}</h2>
+	<p>{!! trans('kontakt.mail.2') !!}</p>
+	<p>{!! trans('kontakt.mail.3') !!}</p>
+	<textarea id="pubkey" style="width:50%" rows="8" readonly>-----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: GnuPG v1
 
 mQINBFV/1W0BEACsd2knka1L5f5iN7KRbjT/hsWCL6LRmS2lMCIkM2QPnjFHj6pB

@@ -330,7 +330,17 @@ class MetaGer
     public function doBotProtection($bot)
     {
         $hash = md5(date('YmdHi'));
-        if ((preg_match("/^\d+$/s", $this->getEingabe()) || strpos($this->request->input('focus'), "%3bamp") !== FALSE ) && $bot !== $hash) {
+
+        $shouldCheck = false;
+
+        foreach ($this->request->all() as $key => $value) {
+            if (strpos($key, "amp;") !== false) {
+                $shouldCheck = true;
+                break;
+            }
+        }
+
+        if ((preg_match("/^\d+$/s", $this->getEingabe()) || $shouldCheck) && $bot !== $hash) {
             return true;
         } else {
             return false;

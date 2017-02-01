@@ -89,11 +89,7 @@ class MetaGerSearch extends Controller
 
         # Wetter
         try {
-            if (App::isLocale('en')) {
-                $url = "http://api.openweathermap.org/data/2.5/weather?type=accurate&units=metric&lang=en&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
-            } else {
-                $url = "http://api.openweathermap.org/data/2.5/weather?type=accurate&units=metric&lang=de&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
-            }
+            $url = "http://api.openweathermap.org/data/2.5/weather?type=accurate&units=metric&lang=" . APP::getLocale() . "&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
 
             $result = json_decode($this->get($url), true);
 
@@ -133,11 +129,7 @@ class MetaGerSearch extends Controller
         }
 
         # Wikipedia Quicktip
-        if (App::isLocale('en')) {
-            $url = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" . urlencode($q) . "&limit=10&namespace=0&format=json&redirects=resolve";
-        } else {
-            $url = "https://de.wikipedia.org/w/api.php?action=opensearch&search=" . urlencode($q) . "&limit=10&namespace=0&format=json&redirects=resolve";
-        }
+        $url             = "https://" . APP::getLocale() . ".wikipedia.org/w/api.php?action=opensearch&search=" . urlencode($q) . "&limit=10&namespace=0&format=json&redirects=resolve";
         $decodedResponse = json_decode($this->get($url), true);
         if (isset($decodedResponse[1][0]) && isset($decodedResponse[2][0]) && isset($decodedResponse[3][0])) {
             $quicktip     = [];

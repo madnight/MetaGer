@@ -871,6 +871,10 @@ class MetaGer
         $this->q       = strtolower($this->eingabe);
         # IP
         $this->ip = $request->ip();
+        # Unser erster Schritt wird sein, IP-Adresse und USER-Agent zu anonymisieren, damit
+        # nicht einmal wir selbst noch Zugriff auf die Daten haben:
+        $this->ip = preg_replace("/(\d+)\.(\d+)\.\d+.\d+/s", "$1.$2.0.0", $this->ip);
+
         # Language
         if (isset($_SERVER['HTTP_LANGUAGE'])) {
             $this->language = $_SERVER['HTTP_LANGUAGE'];
@@ -1153,12 +1157,9 @@ class MetaGer
             {
                 $logEntry = "";
                 $logEntry .= "[" . date(DATE_RFC822, mktime(date("H"), date("i"), date("s"), date("m"), date("d"), date("Y"))) . "]";
+                $logEntry .= " ip=" . $this->request->ip();
                 $logEntry .= " pid=" . getmypid();
                 $logEntry .= " ref=" . $this->request->header('Referer');
-                $useragent = $this->request->header('User-Agent');
-                $useragent = str_replace("(", " ", $useragent);
-                $useragent = str_replace(")", " ", $useragent);
-                $useragent = str_replace(" ", "", $useragent);
                 $logEntry .= " time=" . round((microtime(true) - $this->starttime), 2) . " serv=" . $this->fokus;
                 $logEntry .= " search=" . $this->eingabe;
 

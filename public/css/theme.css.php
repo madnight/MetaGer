@@ -55,6 +55,11 @@ input[type=text]:focus, textarea:focus, input[type=email]:focus, input[type=tel]
 	box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
 }
 
+.navbar.navbar-resultpage {
+    border-bottom: 2px solid <?=$color?>;
+    box-shadow: none;
+}
+
 .lSPrev > span, .lSNext > span {
 	color: <?=$color?>;
 }

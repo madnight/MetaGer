@@ -121,7 +121,7 @@
 				<li id="angepasstTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
 					<a aria-controls="angepasst" data-href="#angepasst" href="#angepasst">
 						<span class='glyphicon glyphicon-cog'></span>
-						<span class="hidden-xs">{{ trans('index.foki.angepasst') }}</span>
+						<span class="hidden-xs">{!! trans('index.foki.eigene') !!}</span>
 					</a>
 				</li>
 			@endif

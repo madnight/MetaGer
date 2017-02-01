@@ -3909,7 +3909,6 @@ function productWidget() {
     $(".lightSliderContainer").removeClass("hidden");
 }
 $(document).ready(function() {
-    // checkPlugin();
     if (location.href.indexOf("#plugin-modal") > -1) {
         $("#plugin-modal").modal("show");
     }
@@ -3947,34 +3946,38 @@ $(document).ready(function() {
             window.location = "./settings/";
         });
     }
-    $("#anpassen-label").click(function() {
-        window.location = "./settings/";
+    $("#reset-settings-btn").click(function() {
+        resetOptions();
+        document.location.href = $("#reset-settings-btn").attr("data-href");
     });
 });
 
 function setSettings() {
+    if (localStorage.length > 0) {
+        $("#foki input[type=radio]#angepasst").attr("checked", true);
+        $("#foki label#anpassen-label").removeClass("hide");
+        $("#foki button#reset-settings-btn").removeClass("hide");
+    }
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
         var value = localStorage.getItem(key);
-        if (key.startsWith("param_") && !key.endsWith("lang") && !key.endsWith('autocomplete')) {
-            key = key.substring(key.indexOf("param_") + 6);
+        if (key.startsWith("engine_")) {
+            key = key.substring(key.indexOf("engine_") + 7);
             $("#searchForm").append("<input type=\"hidden\" name=\"" + key + "\" value=\"" + value + "\">");
         }
-        $("#foki input[type=radio]#angepasst").attr("checked", true);
+        if (key.startsWith("meta_") && !key.endsWith("lang") && !key.endsWith('autocomplete')) {
+            key = key.substring(key.indexOf("meta_") + 5);
+            $("#searchForm").append("<input type=\"hidden\" name=\"" + key + "\" value=\"" + value + "\">");
+        }
     }
-
-    if( localStorage.getItem("param_lang") !== null ) {
-        var value = localStorage.getItem("param_lang");
-        // Change the value of the lang input field to the given parameter
+    if (localStorage.getItem("meta_lang") !== null) {
+        var value = localStorage.getItem("meta_lang");
         $("input[name=lang]").val(value);
     }
-
-    if( localStorage.getItem("param_autocomplete") !== null ) {
-        var value = localStorage.getItem("param_autocomplete");
-        // Change the value of the lang input field to the given parameter
+    if (localStorage.getItem("meta_autocomplete") !== null) {
+        var value = localStorage.getItem("meta_autocomplete");
         $("input[name=eingabe]").attr("autocomplete", value);
     }
-
     if ($("fieldset#foki.mobile").length) {
         $("fieldset.mobile input#bilder").val("angepasst");
         $("fieldset.mobile input#bilder").prop("checked", true);
@@ -3985,7 +3988,7 @@ function setSettings() {
         $("fieldset.mobile label#anpassen-label span.content").html("angepasst");
     }
 }
-//Polyfill for form attribute
+// Polyfill for form attribute
 (function($) {
     /**
      * polyfill for html5 form attr
@@ -3999,7 +4002,6 @@ function setSettings() {
     }
     /**
      * Append a field to a form
-     *
      */
     $.fn.appendField = function(data) {
         // for form only
@@ -4017,7 +4019,6 @@ function setSettings() {
     };
     /**
      * Find all input fields with form attribute point to jQuery object
-     * 
      */
     $('form[id]').submit(function(e) {
         var $form = $(this);
@@ -4073,9 +4074,37 @@ function isUseOnce() {
     if (pos >= 0 && url.substring(pos + 6, pos + 11) == "once") return true;
     return false;
 }
+
+function resetOptions() {
+    localStorage.removeItem("pers");
+    var keys = [];
+    for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i)
+        keys.push(key);
+    }
+    for (var i = 0; i < keys.length; i++) {
+        var key = keys[i];
+        if (key.startsWith("engine_" || key.startsWith("focus"))) {
+            localStorage.removeItem(key);
+        }
+    }
+}
 $(document).ready(function() {
-    // Wenn LocalStorage verfügbar ist, geben wir die Möglichkeit die Einstellungen dort zu speichern
     tickOptions();
+    // Wenn LocalStorage verfügbar ist, geben wir die Möglichkeit die Einstellungen dort zu speichern
+    // Checker listener
+    $(".checker").click(function() {
+        var selector = "." + $(this).attr("data-type");
+        if ($(selector + " input:checked").length) {
+            $(selector + " input").prop("checked", false);
+        } else {
+            $(selector + " input").prop("checked", true);
+        }
+    });
+    $(".allUnchecker").click(function() {
+        $(".focusCheckbox").prop("checked", false);
+    });
+    // Button listener
     if (localStorage) {
         $("#save").removeClass("hidden");
         if (localStorage.getItem("pers")) {
@@ -4097,18 +4126,7 @@ $(document).ready(function() {
             document.location.href = $("#save").attr("data-href");
         });
     }
-    $(".checker").click(function() {
-        var selector = "." + $(this).attr("data-type");
-        if ($(selector + " input:checked").length) {
-            $(selector + " input").prop("checked", false);
-        } else {
-            $(selector + " input").prop("checked", true);
-        }
-    });
-    $(".allUnchecker").click(function() {
-        $(".focusCheckbox").prop("checked", false);
-    });
-    $("#unten").click(function() {
+    $("#save-once").click(function() {
         $("#settings-form").append("<input type=\"hidden\" name=\"usage\" value=\"once\">");
         switch (getLanguage()) {
             case "de":
@@ -4143,12 +4161,12 @@ function tickOptions() {
         for (var i = 0; i < localStorage.length; i++) {
             var key = localStorage.key(i);
             var value = localStorage.getItem(key);
-            if (key.startsWith("param_")) {
+            if (key.startsWith("engine_")) {
                 if ($("input[name=" + key + "]").length) {
                     $("input[name=" + key + "]").attr("checked", "");
-                } else {
-                    $("select[name=" + key + "] > option[value=" + value + "]").attr("selected", true);
                 }
+            } else if (key.startsWith("meta_")) {
+                $("select[name=" + key + "] > option[value=" + value + "]").attr("selected", true);
             }
         }
     } else {
@@ -4165,7 +4183,7 @@ function resetOptions() {
     }
     for (var i = 0; i < keys.length; i++) {
         var key = keys[i];
-        if (key.startsWith("param_" || key.startsWith("focus"))) {
+        if (key.startsWith("engine_" || key.startsWith("focus"))) {
             localStorage.removeItem(key);
         }
     }

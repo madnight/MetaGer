@@ -9,7 +9,7 @@ return [
 
     'policy.1'  => 'Unsere Vorgehensweise/Policy:',
     'policy.2'  => 'Wir speichern weder Ihre IP-Adresse, noch den
-<a href="http://www.heise.de/security/meldung/Fingerprinting-Viele-Browser-sind-ohne-Cookies-identifizierbar-1982976.html" target="_blank" rel="noopener">"Fingerabdruck" Ihres Browsers</a> (der Sie mit hoher Wahrscheinlichkeit ebenfalls eindeutig identifizieren könnte).',
+<a href="http://www.heise.de/security/meldung/Fingerprinting-Viele-Browser-sind-ohne-Cookies-identifizierbar-1982976.html" target="_blank" rel="noopener">"Fingerabdruck" Ihres Browsers</a> (Ausnahme: Kurzfristige Speicherung gegen Hacking- und Bot-Attacken).',
 
     'policy.5'  => 'Wir setzen keine Cookies oder benutzen Tracking-Pixel oder ähnliche Technologien, um unsere Nutzer zu "tracken" (tracken = Verfolgen der Bewegungen im Internet).',
     'policy.6'  => 'Die Datenübertragung von MetaGer erfolgt ausschlie&szlig;lich automatisch verschlüsselt über das https-Protokoll.',

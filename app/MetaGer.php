@@ -1156,7 +1156,7 @@ class MetaGer
             try
             {
                 $logEntry = "";
-                $logEntry .= "[" . date(DATE_RFC822, mktime(date("H"), date("i"), date("s"), date("m"), date("d"), date("Y"))) . "]";
+                $logEntry .= "[" . date("D M d H:i:s") . "]";
                 $logEntry .= " ip=" . $this->request->ip();
                 $logEntry .= " pid=" . getmypid();
                 $logEntry .= " ref=" . $this->request->header('Referer');

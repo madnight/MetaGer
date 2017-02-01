@@ -30,7 +30,7 @@ return [
     "faq.12.b"    => "This is provided by your webbrowser. Try to customize the history settings.",
     "faq.13.h"    => "What is about the privacy and how long / what do you store?",
     "faq.13.b.1"  => "The protection of private data is our general principle. Everything we do is subordinated to this principle. Therefore we do not work with Cookies, Session IDs or anything else. More exact information:  <a href=\"/datenschutz/\" target=\"_blank\" rel=\"noopener\">https://metager.de/en/datenschutz/</a>",
-    "faq.13.b.2"  => "Besides: we do not store and we do not even know your IP-address. We use serversided anonymization for the communication with the prompted search services. We think that searchengines work well without storing IP-addresses. What do we do additionally?",
+    "faq.13.b.2"  => "Besides: we do not store and we do not even know your IP-address (For the purpose of securing our servers against Hacking- and Bot-Attacks, we need to store these information for a short period of time. It will be then automatically deleted afterwards). We use serversided anonymization for the communication with the prompted search services. We think that searchengines work well without storing IP-addresses. What do we do additionally?",
     "faq.13.b.3"  => "You may wish to hide your IP-address generally. We provide a free proxyservice. Click \"Tools\" for more exact information:  ",
     "faq.13.b.4"  => "Please use the Tor-network or the MetaGer Tor-branch for advanced anonymization. Please click \"Tools\" for further information.",
     "faq.13.b.5"  => "Needless to say: we use the https protocoll at any time. All your queries are safe between your personal computer and the MetaGer servers.",

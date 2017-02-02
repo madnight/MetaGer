@@ -3947,35 +3947,34 @@ $(document).ready(function() {
         });
     }
     $("#reset-settings-btn").click(function() {
-        resetOptions();
+        softResetOptions();
         document.location.href = $("#reset-settings-btn").attr("data-href");
     });
 });
 
 function setSettings() {
-    if (localStorage.length > 0) {
+    if (canCustomSearch()) {
         $("#foki input[type=radio]#angepasst").attr("checked", true);
         $("#foki label#anpassen-label").removeClass("hide");
         $("#foki button#reset-settings-btn").removeClass("hide");
+        $("#searchForm").append("<input type=\"hidden\" name=\"canCustomSearch\" value=\"true\">");
     }
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
         var value = localStorage.getItem(key);
-        if (key.startsWith("engine_")) {
-            key = key.substring(key.indexOf("engine_") + 7);
-            $("#searchForm").append("<input type=\"hidden\" name=\"" + key + "\" value=\"" + value + "\">");
-        }
-        if (key.startsWith("meta_") && !key.endsWith("lang") && !key.endsWith('autocomplete')) {
-            key = key.substring(key.indexOf("meta_") + 5);
+        if (key.startsWith("param_") && !key.endsWith("lang") && !key.endsWith('autocomplete')) {
+            key = key.substring(key.indexOf("param_") + 6);
             $("#searchForm").append("<input type=\"hidden\" name=\"" + key + "\" value=\"" + value + "\">");
         }
     }
-    if (localStorage.getItem("meta_lang") !== null) {
-        var value = localStorage.getItem("meta_lang");
+    if (localStorage.getItem("param_lang") !== null) {
+        var value = localStorage.getItem("param_lang");
+        // Change the value of the lang input field to the given parameter
         $("input[name=lang]").val(value);
     }
-    if (localStorage.getItem("meta_autocomplete") !== null) {
-        var value = localStorage.getItem("meta_autocomplete");
+    if (localStorage.getItem("param_autocomplete") !== null) {
+        var value = localStorage.getItem("param_autocomplete");
+        // Change the value of the lang input field to the given parameter
         $("input[name=eingabe]").attr("autocomplete", value);
     }
     if ($("fieldset#foki.mobile").length) {
@@ -4075,8 +4074,30 @@ function isUseOnce() {
     return false;
 }
 
-function resetOptions() {
-    localStorage.removeItem("pers");
+function softResetOptions() {
+    // localStorage.removeItem("pers");
+    localStorage.removeItem("focus");
+    var keys = [];
+    for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i)
+        keys.push(key);
+    }
+    var metaParams = ["param_sprueche", "param_maps", "param_newtab", "param_lang", "param_autocomplete"];
+    for (var i = 0; i < keys.length; i++) {
+        var key = keys[i];
+        if (key.startsWith("param_" || key.startsWith("focus"))) {
+            if (metaParams.indexOf(key) === -1) {
+                localStorage.removeItem(key);
+            }
+        }
+    }
+}
+
+function canCustomSearch() {
+    if (localStorage.key("focus") === "angepasst") {
+        return true;
+    }
+    var metaParams = ["param_sprueche", "param_maps", "param_newtab", "param_lang", "param_autocomplete"];
     var keys = [];
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i)
@@ -4084,12 +4105,16 @@ function resetOptions() {
     }
     for (var i = 0; i < keys.length; i++) {
         var key = keys[i];
-        if (key.startsWith("engine_" || key.startsWith("focus"))) {
-            localStorage.removeItem(key);
+        if (key.startsWith("param_")) {
+            if (metaParams.indexOf(key) === -1) {
+                return true;
+            }
         }
     }
+    return false;
 }
 $(document).ready(function() {
+    pageCanJS(); // Einige Inhalte der Seite sollen mit Javascript anders aussehen
     tickOptions();
     // Wenn LocalStorage verfügbar ist, geben wir die Möglichkeit die Einstellungen dort zu speichern
     // Checker listener
@@ -4161,16 +4186,16 @@ function tickOptions() {
         for (var i = 0; i < localStorage.length; i++) {
             var key = localStorage.key(i);
             var value = localStorage.getItem(key);
-            if (key.startsWith("engine_")) {
+            if (key.startsWith("param_")) {
                 if ($("input[name=" + key + "]").length) {
                     $("input[name=" + key + "]").attr("checked", "");
+                } else {
+                    $("select[name=" + key + "] > option[value=" + value + "]").attr("selected", true);
                 }
-            } else if (key.startsWith("meta_")) {
-                $("select[name=" + key + "] > option[value=" + value + "]").attr("selected", true);
             }
         }
     } else {
-        $("div.web input").attr("checked", true);
+        // $("div.web input").attr("checked", true);
     }
 }
 
@@ -4181,10 +4206,13 @@ function resetOptions() {
         var key = localStorage.key(i)
         keys.push(key);
     }
+    var metaParams = ["param_sprueche", "param_maps", "param_newtab", "param_lang", "param_autocomplete"];
     for (var i = 0; i < keys.length; i++) {
         var key = keys[i];
-        if (key.startsWith("engine_" || key.startsWith("focus"))) {
-            localStorage.removeItem(key);
+        if (key.startsWith("param_" || key.startsWith("focus"))) {
+            if (metaParams.indexOf(key) === -1) {
+                localStorage.removeItem(key);
+            }
         }
     }
 }
@@ -4196,6 +4224,11 @@ function getLanguage() {
             return metaData[m]["content"];
         }
     }
+}
+
+function pageCanJS() {
+    $("#collapse-engines-div").removeClass("in");
+    $("#collapse-engines-btn").removeClass("hide");
 }
 /*! iFrame Resizer (iframeSizer.min.js ) - v3.5.5 - 2016-06-16
  *  Desc: Force cross domain iframes to size to content.

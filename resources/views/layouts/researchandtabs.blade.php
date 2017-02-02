@@ -109,7 +109,7 @@
 					</a>
 				</li>
 			@else
-				<li data-loaded="0" id="produktsucheTabSelector" class="tab-selector" role="presentation" >
+				<li data-loaded="0" id="produktsucheTabSelector" class="tab-selector" role="presentation">
 					<a aria-controls="produktsuche" data-href="{{ $metager->generateSearchLink('produktsuche') }}" href="{{ $metager->generateSearchLink('produktsuche') }}">
 						<span class='glyphicon glyphicon-shopping-cart'></span>
 						<span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
@@ -117,11 +117,18 @@
 				</li>
 			@endif
 
-			@if( $metager->getFokus() === "angepasst" )
+			@if( $metager->getFokus() === "angepasst")
 				<li id="angepasstTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
 					<a aria-controls="angepasst" data-href="#angepasst" href="#angepasst">
-						<span class='glyphicon glyphicon-cog'></span>
+						<span class='glyphicon glyphicon-star'></span>
 						<span class="hidden-xs">{!! trans('index.foki.eigene') !!}</span>
+					</a>
+				</li>
+			@elseif( $metager->canCustomSearch() )
+				<li data-loaded="0" id="angepasstTabSelector" class="tab-selector" role="presentation">
+					<a aria-controls="angepasst" data-href="{{ $metager->generateSearchLink('angepasst') }}" href="{{ $metager->generateSearchLink('angepasst') }}">
+						<span class='glyphicon glyphicon-star'></span>
+						<span class="hidden-xs">{{ trans('index.foki.eigene') }}</span>
 					</a>
 				</li>
 			@endif
@@ -195,7 +202,7 @@
 		@if( $metager->getFokus() === "produktsuche" )
 			<div role="tabpanel" class="tab-pane active" id="produktsuche">
 				<div class="row">
-						@yield('results')
+					@yield('results')
 				</div>
 			 </div>
 		@else
@@ -206,10 +213,16 @@
 			</div>
 		@endif
 
-		@if( $metager->getFokus() === "angepasst" )
+		@if( $metager->getFokus() === "angepasst")
 			<div role="tabpanel" class="tab-pane active" id="angepasst">
 				<div class="row">
-						@yield('results')
+					@yield('results')
+				</div>
+			</div>
+		@elseif( $metager->canCustomSearch() )
+			<div role="tabpanel" class="tab-pane" id="angepasst">
+				<div class="loader">
+					<img src="/img/ajax-loader.gif" alt="" />
 				</div>
 			</div>
 		@endif

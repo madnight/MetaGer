@@ -21,21 +21,15 @@ class StartpageController extends Controller
         $focusPages = [];
         $theme      = "default";
         foreach ($request->all() as $key => $value) {
-            if ($value === 'on'
-                && $key !== 'meta_sprueche'
-                && $key !== 'meta_maps'
-                && $key !== 'meta_newtab'
-                && $key !== 'meta_lang'
-                && $key !== 'request'
-                && $key !== 'meta_autocomplete') {
-                $focusPages[] = str_replace('meta_', '', $key);
+            if ($value === 'on' && $key != 'param_sprueche' && $key != 'param_tab' && $key !== 'param_maps' && $key !== 'param_autocomplete') {
+                $focusPages[] = str_replace('param_', '', $key);
             }
-            if ($key === 'meta_theme') {
-                $theme = str_replace('meta_', '', $key);
+            if ($key === 'param_theme') {
+                $theme = str_replace('param_', '', $key);
             }
         }
 
-        $maps = $request->input('meta_maps', 'on');
+        $maps = $request->input('param_maps', 'on');
 
         $agent   = new Agent();
         $browser = $agent->browser();
@@ -44,17 +38,17 @@ class StartpageController extends Controller
             ->with('title', trans('titles.index'))
             ->with('homeIcon')
             ->with('focus', $request->input('focus', 'web'))
-            ->with('lang', $request->input('meta_lang', 'all'))
-            ->with('resultCount', $request->input('meta_resultCount', '20'))
-            ->with('time', $request->input('meta_time', '1000'))
-            ->with('sprueche', $request->input('meta_sprueche', 'off'))
-            ->with('tab', $request->input('meta_tab', 'off'))
+            ->with('lang', $request->input('param_lang', 'all'))
+            ->with('resultCount', $request->input('param_resultCount', '20'))
+            ->with('time', $request->input('param_time', '1000'))
+            ->with('sprueche', $request->input('param_sprueche', 'off'))
+            ->with('tab', $request->input('param_tab', 'off'))
             ->with('focusPages', $focusPages)
             ->with('browser', $browser)
             ->with('navbarFocus', 'suche')
             ->with('theme', $theme)
             ->with('maps', $maps)
-            ->with('autocomplete', $request->input('meta_autocomplete', 'on'));
+            ->with('autocomplete', $request->input('param_autocomplete', 'on'));
     }
 
     public function loadPage($subpage)

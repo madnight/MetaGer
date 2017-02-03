@@ -279,8 +279,13 @@ class Result
 
         $tmp = $link;
         $tmp = preg_replace("/\r?\n$/s", "", $tmp);
+        $tmp = str_replace("=", "=3d", $tmp);
+        $tmp = str_replace("?", "=3f", $tmp);
+        $tmp = str_replace("%", "=25", $tmp);
+        $tmp = str_replace("&", "=26", $tmp);
+        $tmp = str_replace(";", "=3b", $tmp);
         $tmp = preg_replace("#^([\w+.-]+)://#s", "$1/", $tmp);
-        return "https://proxy.suma-ev.de/cgi-bin/nph-proxy.cgi/en/I0/" . $tmp;
+        return "https://proxy.suma-ev.de/mger/en/w0/" . $tmp;
 
     }
 

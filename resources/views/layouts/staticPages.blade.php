@@ -62,41 +62,37 @@
 								</ul>
 							</li>
 							@if(LaravelLocalization::getCurrentLocale() === "de")
-							<li @if (isset($navbarFocus) && $navbarFocus === 'gutscheine') class="dropdown active" @else class="dropdown" @endif >
-								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('staticPages.gutscheineToggle') }}
+							<li id="gutscheine"@if (isset($navbarFocus) && $navbarFocus === 'gutscheine') class="dropdown active" @else class="dropdown" @endif >
+								<a class="dropdown-toggle" href="https://metager.de/gutscheine/" data-role="button" aria-expanded="false">{{ trans('staticPages.gutscheineToggle') }}
 								<span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li>
-										<a href="https://metager.de/gutscheine" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.1') }}</a>
+										<a href="https://metager.de/gutscheine/congstar/"  >{{ trans('staticPages.gutscheine.2') }}</a>
+									</li>
+									<li>
+										<a href="https://metager.de/gutscheine/check24/"  >{{ trans('staticPages.gutscheine.3') }}</a>
+									</li>
+									<li>
+										<a href="https://metager.de/gutscheine/handyflash/"  >{{ trans('staticPages.gutscheine.4') }}</a>
+									</li>
+									<li>
+										<a href="https://metager.de/gutscheine/groupon/"  >{{ trans('staticPages.gutscheine.5') }}</a>
+									</li>
+									<li>
+										<a href="https://metager.de/gutscheine/medion/"  >{{ trans('staticPages.gutscheine.6') }}</a>
+									</li>
+									<li>
+										<a href="https://metager.de/gutscheine/navabi/"  >{{ trans('staticPages.gutscheine.7') }}</a>
+									</li>
+									<li>
+										<a href="https://metager.de/gutscheine/netcologne/"  >{{ trans('staticPages.gutscheine.8') }}</a>
+									</li>
+									<li>
+										<a href="https://metager.de/gutscheine/teufel/"  >{{ trans('staticPages.gutscheine.9') }}</a>
 									</li>
 									<li role="separator" class="divider"></li>
 									<li>
-										<a href="https://metager.de/gutscheine/congstar/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.2') }}</a>
-									</li>
-									<li>
-										<a href="https://metager.de/gutscheine/check24/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.3') }}</a>
-									</li>
-									<li>
-										<a href="https://metager.de/gutscheine/handyflash/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.4') }}</a>
-									</li>
-									<li>
-										<a href="https://metager.de/gutscheine/groupon/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.5') }}</a>
-									</li>
-									<li>
-										<a href="https://metager.de/gutscheine/medion/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.6') }}</a>
-									</li>
-									<li>
-										<a href="https://metager.de/gutscheine/navabi/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.7') }}</a>
-									</li>
-									<li>
-										<a href="https://metager.de/gutscheine/netcologne/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.8') }}</a>
-									</li>
-									<li>
-										<a href="https://metager.de/gutscheine/teufel/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.9') }}</a>
-									</li>
-									<li role="separator" class="divider"></li>
-									<li>
-										<a href="https://metager.de/gutscheine/alle-gutscheine/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.10') }}</a>
+										<a href="https://metager.de/gutscheine/alle-gutscheine/"  >{{ trans('staticPages.gutscheine.10') }}</a>
 									</li>
 								</ul>
 							</li>
@@ -145,28 +141,28 @@
 										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/widget/") }}">{{ trans('staticPages.nav10') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/klassik/zitat-suche/" target="_blank" rel="noopener">{{ trans('staticPages.nav22') }}</a>
+										<a href="https://metager.de/klassik/zitat-suche/"  >{{ trans('staticPages.nav22') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/klassik/asso/" target="_blank" rel="noopener">{{ trans('staticPages.nav11') }}</a>
+										<a href="https://metager.de/klassik/asso/"  >{{ trans('staticPages.nav11') }}</a>
 									</li>
 									<li>
-										<a href="http://code.metager.de/" target="_blank" rel="noopener">{{ trans('staticPages.nav12') }}</a>
+										<a href="http://code.metager.de/"  >{{ trans('staticPages.nav12') }}</a>
 									</li>
 									<li>
 										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe#mg-app") }}">@lang('staticPages.nav25')</a>
 									</li>
 									<li>
-										<a href="https://metager.to/" target="_blank" rel="noopener">{{ trans('staticPages.nav13') }}</a>
+										<a href="https://metager.to/"  >{{ trans('staticPages.nav13') }}</a>
 									</li>
 									<li>
 										<a href="https://maps.metager.de" target="_blank">Maps.MetaGer.de</a>
 									</li>
 									<li>
-										<a href="https://gitlab.metager3.de/open-source/MetaGer" target="_blank" rel="noopener">{{ trans('staticPages.nav24') }}</a>
+										<a href="https://gitlab.metager3.de/open-source/MetaGer"  >{{ trans('staticPages.nav24') }}</a>
 									</li>
 									<li>
-										<a href="http://forum.suma-ev.de/viewtopic.php?f=3&amp;t=43" target="_blank" rel="noopener">{{ trans('staticPages.nav14') }}</a>
+										<a href="http://forum.suma-ev.de/viewtopic.php?f=3&amp;t=43"  >{{ trans('staticPages.nav14') }}</a>
 									</li>
 								</ul>
 							</li>
@@ -200,15 +196,15 @@
 			<footer class="noprint">
 				<ul class="list-inline hidden-xs">
 					<li>
-						<a href="https://www.suma-ev.de/" target="_blank" rel="noopener">
+						<a href="https://www.suma-ev.de/"  >
 						<img src="/img/suma_ev_logo-m1-greyscale.png" alt="SUMA-EV Logo"></a>
 					</li>
 					<li id="info">
 						<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "kontakt") }}">{{ trans('staticPages.nav5') }}</a> - <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "impressum") }}">{{ trans('staticPages.nav8') }}</a>
-						{{ trans('staticPages.sumaev.1') }}<a href="https://www.suma-ev.de/" target="_blank" rel="noopener" >{{ trans('staticPages.sumaev.2') }}</a>
+						{{ trans('staticPages.sumaev.1') }}<a href="https://www.suma-ev.de/"   >{{ trans('staticPages.sumaev.2') }}</a>
 					</li>
 					<li>
-						<a href="https://www.uni-hannover.de/" target="_blank" rel="noopener">
+						<a href="https://www.uni-hannover.de/"  >
 						<img src="/img/luh_metager.png" alt="LUH Logo"></a>
 					</li>
 				</ul>

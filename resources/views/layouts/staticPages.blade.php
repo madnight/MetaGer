@@ -63,8 +63,8 @@
 							</li>
 							@if(LaravelLocalization::getCurrentLocale() === "de")
 							<li id="gutscheine"@if (isset($navbarFocus) && $navbarFocus === 'gutscheine') class="dropdown active" @else class="dropdown" @endif >
-								<a class="dropdown-toggle" href="https://metager.de/gutscheine/" data-role="button" aria-expanded="false">{{ trans('staticPages.gutscheineToggle') }}
-								<span class="caret"></span></a>
+								<span class="dropdown-toggle" data-role="button" aria-expanded="false">... durch {!! trans('staticPages.gutscheineToggle') !!}
+								<span class="caret"></span></span>
 								<ul class="dropdown-menu">
 									<li>
 										<a href="https://metager.de/gutscheine/congstar/"  >{{ trans('staticPages.gutscheine.2') }}</a>

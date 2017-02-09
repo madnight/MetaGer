@@ -6786,6 +6786,19 @@ li#gutscheine.dropdown:hover ul.dropdown-menu {
   display: block;
   margin-top: 0px;
 }
+li#gutscheine > span {
+  padding-top: 15px!important;
+  padding-bottom: 15px!important;
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  color: #777;
+  line-height: 20px;
+}
+li#gutscheine > span a {
+  text-decoration: none;
+  color: #777;
+}
 /* 
 
 

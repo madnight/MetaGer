@@ -67,36 +67,36 @@
 								<span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li>
-										<a href="https://metager.de/gutscheine">{{ trans('staticPages.gutscheine.1') }}</a>
+										<a href="https://metager.de/gutscheine" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.1') }}</a>
 									</li>
 									<li role="separator" class="divider"></li>
 									<li>
-										<a href="https://metager.de/gutscheine/congstar/">{{ trans('staticPages.gutscheine.2') }}</a>
+										<a href="https://metager.de/gutscheine/congstar/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.2') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/gutscheine/check24/">{{ trans('staticPages.gutscheine.3') }}</a>
+										<a href="https://metager.de/gutscheine/check24/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.3') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/gutscheine/handyflash/">{{ trans('staticPages.gutscheine.4') }}</a>
+										<a href="https://metager.de/gutscheine/handyflash/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.4') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/gutscheine/groupon/">{{ trans('staticPages.gutscheine.5') }}</a>
+										<a href="https://metager.de/gutscheine/groupon/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.5') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/gutscheine/medion/">{{ trans('staticPages.gutscheine.6') }}</a>
+										<a href="https://metager.de/gutscheine/medion/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.6') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/gutscheine/navabi/">{{ trans('staticPages.gutscheine.7') }}</a>
+										<a href="https://metager.de/gutscheine/navabi/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.7') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/gutscheine/netcologne/">{{ trans('staticPages.gutscheine.8') }}</a>
+										<a href="https://metager.de/gutscheine/netcologne/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.8') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/gutscheine/teufel/">{{ trans('staticPages.gutscheine.9') }}</a>
+										<a href="https://metager.de/gutscheine/teufel/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.9') }}</a>
 									</li>
 									<li role="separator" class="divider"></li>
 									<li>
-										<a href="https://metager.de/gutscheine/alle-gutscheine/">{{ trans('staticPages.gutscheine.10') }}</a>
+										<a href="https://metager.de/gutscheine/alle-gutscheine/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.10') }}</a>
 									</li>
 								</ul>
 							</li>

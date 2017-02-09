@@ -28,7 +28,17 @@ return [
     'nav23'               => 'Beitrittsformular SUMA-EV',
     'nav24'               => 'MetaGer Quellcode',
     'nav25'               => 'MetaGer App',
-
+    'gutscheineToggle'	  => '... durch Gutscheine',
+    'gutscheine.1'	  => 'Gutscheine',
+    'gutscheine.2'	  => 'Congstar Gutscheine',
+    'gutscheine.3'	  => 'Check 24 Gutscheine',
+    'gutscheine.4'	  => 'Handyflash Gutscheine',
+    'gutscheine.5'	  => 'Groupon Gutscheine',
+    'gutscheine.6'	  => 'Medion Gutscheine',
+    'gutscheine.7'	  => 'Navabi Gutscheine',
+    'gutscheine.8'	  => 'Netcologne Gutscheine',
+    'gutscheine.9'	  => 'Teufel Gutscheine',
+    'gutscheine.10'	  => 'Alle Gutscheine',
     'navigationToggle'    => 'Navigation anzeigen',
 
     'sumaev.1'            => 'MetaGer wird entwickelt und betrieben vom ',

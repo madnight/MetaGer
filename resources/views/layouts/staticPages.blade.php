@@ -61,6 +61,46 @@
 									</li>
 								</ul>
 							</li>
+							@if(LaravelLocalization::getCurrentLocale() === "de")
+							<li @if (isset($navbarFocus) && $navbarFocus === 'gutscheine') class="dropdown active" @else class="dropdown" @endif >
+								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('staticPages.gutscheineToggle') }}
+								<span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="https://metager.de/gutscheine" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.1') }}</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a href="https://metager.de/gutscheine/congstar/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.2') }}</a>
+									</li>
+									<li>
+										<a href="https://metager.de/gutscheine/check24/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.3') }}</a>
+									</li>
+									<li>
+										<a href="https://metager.de/gutscheine/handyflash/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.4') }}</a>
+									</li>
+									<li>
+										<a href="https://metager.de/gutscheine/groupon/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.5') }}</a>
+									</li>
+									<li>
+										<a href="https://metager.de/gutscheine/medion/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.6') }}</a>
+									</li>
+									<li>
+										<a href="https://metager.de/gutscheine/navabi/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.7') }}</a>
+									</li>
+									<li>
+										<a href="https://metager.de/gutscheine/netcologne/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.8') }}</a>
+									</li>
+									<li>
+										<a href="https://metager.de/gutscheine/teufel/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.9') }}</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a href="https://metager.de/gutscheine/alle-gutscheine/" target="_blank" rel="noopener">{{ trans('staticPages.gutscheine.10') }}</a>
+									</li>
+								</ul>
+							</li>
+							@endif
 							<li @if (isset($navbarFocus) && $navbarFocus === 'datenschutz') class="active" @endif >
 								<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/datenschutz/") }}" id="navigationPrivacy">{{ trans('staticPages.nav3') }}</a>
 							</li>

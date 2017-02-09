@@ -6751,7 +6751,7 @@ ul.startpage {
 
 
 
-<
+
 By ID 
 
 
@@ -6781,6 +6781,10 @@ By ID
   border-left: 3px solid #070;
   font-size: 16px;
   font-family: Georgia, "Times New Roman", Palatino, Times, serif;
+}
+li#gutscheine.dropdown:hover ul.dropdown-menu {
+  display: block;
+  margin-top: 0px;
 }
 /* 
 

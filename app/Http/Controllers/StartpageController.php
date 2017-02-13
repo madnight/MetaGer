@@ -28,7 +28,7 @@ class StartpageController extends Controller
         $focusPages = [];
         $theme      = "default";
         foreach ($request->all() as $key => $value) {
-            if ($value === 'on' && $key != 'param_sprueche' && $key != 'param_tab' && $key !== 'param_maps' && $key !== 'param_autocomplete') {
+            if ($value === 'on' && $key != 'param_sprueche' && $key != 'param_newtab' && $key !== 'param_maps' && $key !== 'param_autocomplete') {
                 $focusPages[] = str_replace('param_', '', $key);
             }
             if ($key === 'param_theme') {
@@ -49,7 +49,7 @@ class StartpageController extends Controller
             ->with('resultCount', $request->input('param_resultCount', '20'))
             ->with('time', $request->input('param_time', '1000'))
             ->with('sprueche', $request->input('param_sprueche', 'off'))
-            ->with('tab', $request->input('param_tab', 'off'))
+            ->with('tab', $request->input('param_newtab', 'on'))
             ->with('focusPages', $focusPages)
             ->with('browser', $browser)
             ->with('navbarFocus', 'suche')

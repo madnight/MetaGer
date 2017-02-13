@@ -203,7 +203,7 @@
 						<input type="hidden" name="resultCount" value={{ $resultCount }} >
 						<input type="hidden" name="time" value={{ $time }} >
 						<input type="hidden" name="sprueche" value={{ $sprueche }} >
-						<input type="hidden" name="tab" value={{ $tab }} >
+						<input type="hidden" name="newtab" value={{ $newtab }} >
 						<input type="hidden" name="maps" value={{ $maps }} >
 						@foreach ($focusPages as $fp)
 							<input type="hidden" name={{ $fp }} value="on">

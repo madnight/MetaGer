@@ -284,7 +284,7 @@ class Result
         $tmp = str_replace("%", "=25", $tmp);
         $tmp = str_replace("&", "=26", $tmp);
         $tmp = str_replace(";", "=3b", $tmp);
-        $tmp = str_replace("//", "=2f", $tmp);
+        $tmp = str_replace("//", "/=2f", $tmp);
         $tmp = preg_replace("#^([\w+.-]+)://#s", "$1/", $tmp);
         return "https://proxy.suma-ev.de/mger/nph-proxy.cgi/en/w0/" . $tmp;
 

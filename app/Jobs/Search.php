@@ -89,7 +89,9 @@ class Search implements ShouldQueue
                 }
 
                 $bodySize = strlen($body);
-            } else {
+            } elseif (isset($headers["connection"]) && strtolower($headers["connection"]) === "close") {
+                $body = $this->readUntilClose();
+            }else {
                 exit;
             }
         } else {
@@ -102,6 +104,20 @@ class Search implements ShouldQueue
         }
         Redis::hset('search.' . $this->hash, $this->name, $body);
         Redis::expire('search.' . $this->hash, 5);
+    }
+    
+    private function readUntilClose()
+    {
+        $data = '';
+        stream_set_blocking($this->fp, 1);
+        while (!feof($this->fp)) {
+            $data .= fgets($this->fp, 8192);
+        }
+        # Bei dieser Funktion unterstützt der Host kein Keep-Alive:
+        # Wir beenden die Verbindung:
+        fclose($this->fp);
+        Redis::del($this->host . "." . $this->socketNumber);
+        return $data;
     }
 
     private function readBody($length)
@@ -228,7 +244,7 @@ class Search implements ShouldQueue
         $time   = microtime(true);
         while (true) {
             $timeElapsed = microtime(true) - $time;
-            if ($timeElapsed > 0.5) {
+            if ($timeElapsed > 1.0) {
                 # Irgendwas ist mit unserem Socket passiert. Wir brauchen einen neuen:
                 if ($this->fp && is_resource($this->fp)) {
                     fclose($this->fp);
@@ -238,7 +254,7 @@ class Search implements ShouldQueue
                 $this->fp = $this->getFreeSocket();
                 $sent     = 0;
                 $string   = $out;
-                break;
+                continue;
             }
             try {
                 $tmp = fwrite($this->fp, $string);
@@ -304,7 +320,8 @@ class Search implements ShouldQueue
                     if ($this->fp && is_resource($this->fp)) {
                         fclose($fp);
                     }
-
+                    $this->socketNumber = null;
+                    Redis::del($this->host . ".$counter");
                     continue;
                 }
                 break;

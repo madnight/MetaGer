@@ -87,7 +87,45 @@ class Result
             $rank *= floatval($this->engineBoost);
         }
 
+        # Runter Ranken von Yandex Ergebnissen mit zu viel kyrillischen Texten
+        if (stripos($this->gefVon, "yandex") !== false) {
+            $rank -= $this->calcYandexBoost($eingabe);
+        }
+
         $this->rank = $rank;
+    }
+
+    # Berechnet, ob dieses Suchergebnis einen Malus erhalten soll, oder nicht
+    # Übergeben werden alle Yandex Ergebnisse
+    # Wenn die Suchworte kein kyrillisches Zeichen enthalten, wird das Ergebnis schlechter bewertet,
+    # falls es selbst zu viele kyrillische Zeichen enthält
+    private function calcYandexBoost($tmpEingabe)
+    {
+        $maxRatio = 0.1; # Gibt den Prozentsatz von Kyrillischen Zeichen in Titel und Beschreibung an, ab dem das Ergebnis runter gerankt werden soll
+        if (preg_match('/[А-Яа-яЁё]/u', $tmpEingabe) === 1) {
+            # Das Suchwort enthält kyrillische Zeichen, also dürfen es auch die Ergebnisse
+            return 0;
+        } else {
+            # Wir überprüfen das Verhältnis von Kyrillischen Zeichen im Titel
+            if (preg_match_all('/[А-Яа-яЁё]/u', $this->titel, $matches)) {
+                $count     = sizeof($matches[0]);
+                $titleSize = strlen($this->titel);
+                $percKyr   = $count / $titleSize;
+                if ($percKyr > $maxRatio) {
+                    return 5;
+                }
+            }
+            # Wir überprüfen das Verhältnis von Kyrillischen Zeichen in der Beschreibung
+            if (preg_match_all('/[А-Яа-яЁё]/u', $this->descr, $matches)) {
+                $count     = sizeof($matches[0]);
+                $descrSize = strlen($this->descr);
+                $percKyr   = $count / $descrSize;
+                if ($percKyr > $maxRatio) {
+                    return 5;
+                }
+            }
+        }
+        return 0;
     }
 
     # Berechnet den Ranking-Boost durch ??? URL

@@ -7499,9 +7499,6 @@ a:hover {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.result.ad .title {
-  color: green;
-}
 .result .link {
   font-size: 13px;
   margin: 0;
@@ -7514,28 +7511,28 @@ a:hover {
   text-overflow: ellipsis;
   float: left;
 }
-.result:not(.ad) .link > div {
+.result .link > div {
   white-space: nowrap;
 }
-.result:not(.ad) .link > span {
+.result .link > span {
   white-space: nowrap;
   margin: 0 5px;
 }
-.result:not(.ad) .link .options {
+.result .link .options {
   color: #333;
   float: left;
 }
 /*
-.result:not(.ad) .link:hover {
+.result .link:hover {
     cursor: pointer;
 }*/
-.result:not(.ad) .link .options > a {
+.result .link .options > a {
   color: #333;
   display: block;
   padding-left: 5px;
   padding-right: 5px;
 }
-.result:not(.ad) .link .options > a > span {
+.result .link .options > a > span {
   font-size: 10px;
 }
 .result .description {
@@ -7559,20 +7556,19 @@ a:hover {
   max-height: 200px;
 }
 .result.ad .description {
-  color: green;
   max-width: 115ch;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.result:not(.ad) .hoster {
+.result .hoster {
   font-size: 13px;
   margin: 0;
   color: #777;
   margin-right: 10px;
   white-space: nowrap;
 }
-.result:not(.ad) .hoster a {
+.result .hoster a {
   color: #333;
 }
 .result .result-image > img {
@@ -7632,10 +7628,6 @@ a:hover {
 }
 #container {
   margin: 10px auto;
-}
-/* Hier der Style für die Werbeboxen */
-.result.ad .hoster {
-  color: green;
 }
 /* Style für den Footer */
 footer {

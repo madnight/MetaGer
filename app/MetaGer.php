@@ -889,19 +889,27 @@ class MetaGer
         } else {
             $this->sprueche = false;
         }
-        $this->maps = $request->input('maps', 'on');
+        # Maps
+        $this->maps = $request->input('maps', 'off');
         if ($this->maps === "on") {
             $this->maps = true;
         } else {
             $this->maps = false;
         }
+        # Neuer tab
         $this->newtab = $request->input('tab', 'on');
         if ($this->newtab === "on") {
             $this->newtab = "_blank";
         } else {
             $this->newtab = "_self";
         }
-        $this->canCustomSearch = $request->input('canCustomSearch', 'false') === 'true';
+        # Custom Search
+        $this->canCustomSearch = $request->input('canCustomSearch', 'false');
+        if ($this->maps === "true") {
+            $this->maps = true;
+        } else {
+            $this->maps = false;
+        }
         # Theme
         $this->theme = preg_replace("/[^[:alnum:][:space:]]/u", '', $request->input('theme', 'default'));
         # Ergebnisse pro Seite:

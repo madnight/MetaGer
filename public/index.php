@@ -13,13 +13,6 @@ if (isset($_SERVER["HTTP_FORWARDED"]) && isset($_SERVER["HTTP_X_FORWARDED_FOR"])
     unset($_SERVER["HTTP_FORWARDED"]);
 }
 
-# Unser erster Schritt wird sein, IP-Adresse und USER-Agent zu anonymisieren, damit
-# nicht einmal wir selbst noch Zugriff auf die Daten haben:
-if (!isset($_SERVER['HTTP_X_FORWARDED_FOR']) && isset($_SERVER['REMOTE_ADDR'])) {
-    $_SERVER['REMOTE_ADDR'] = preg_replace("/(\d+)\.(\d+)\.\d+.\d+/s", "$1.$2.0.0", $_SERVER['REMOTE_ADDR']);
-} elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-    $_SERVER['HTTP_X_FORWARDED_FOR'] = preg_replace("/(\d+)\.(\d+)\.\d+.\d+/s", "$1.$2.0.0", $_SERVER['HTTP_X_FORWARDED_FOR']);
-}
 if (isset($_SERVER['HTTP_USER_AGENT'])) {
     $agentPieces = explode(" ", $_SERVER['HTTP_USER_AGENT']);
 

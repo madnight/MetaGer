@@ -14,7 +14,7 @@
 	<p>Für das kommende Jahr haben wir uns nun allerhand vorgenommen:</p>
 	<ul>
 		<li>
-			<p>Unsere englische Version <a href="https://metager.net" target="_blank">https://metager.net</a> muss im englischen Sprachraum expandieren: In Großbritannien ist ein Gesetz (das "<i lang="en-UK">Investigatory Powers Bill</i>") beschlossen, welches <q cite="https://netzpolitik.org//2016/analyse-london-segnet-haertestes-ueberwachungsgesetz-einer-demokratie-ab/">alle bisherigen Eingriffe in Grundrechte in den Schatten</q> stellt - der Orwellsche Überwachungsstaat mit extremer Vorratsdatenspeicherung ist Realität geworden (<a href="https://netzpolitik.org//2016/analyse-london-segnet-haertestes-ueberwachungsgesetz-einer-demokratie-ab/">https://netzpolitik.org//2016/analyse-london-segnet-haertestes-ueberwachungsgesetz-einer-demokratie-ab/</a>). Dagegen bietet MetaGer optimale Schutzmöglichkeiten mit unserem anonymisierenden Proxy, der durch den Klick auf "anonym öffnen" genutzt wird und durch unseren Zugang über das TOR-Netzwerk.  Dieses Wissen müssen wir jetzt im englischen Sprachraum propagieren. Und auch hierzulande steht eine <a href="https://digitalcourage.de/themen/vorratsdatenspeicherung" target="_blank">Neuauflage der Vorratsdatenspeicherung</a> vor der Tür.</p>
+			<p>Unsere englische Version <a href="https://metager.net" target="_blank">https://metager.net</a> muss im englischen Sprachraum expandieren: In Großbritannien ist ein Gesetz (das "<i lang="en-UK">Investigatory Powers Bill</i>") beschlossen, welches <q cite="https://netzpolitik.org//2016/analyse-london-segnet-haertestes-ueberwachungsgesetz-einer-demokratie-ab/">alle bisherigen Eingriffe in Grundrechte in den Schatten</q> stellt - der Orwellsche Überwachungsstaat mit extremer Vorratsdatenspeicherung ist Realität geworden (<a href="https://netzpolitik.org//2016/analyse-london-segnet-haertestes-ueberwachungsgesetz-einer-demokratie-ab/">https://netzpolitik.org//2016/analyse-london-segnet-haertestes-ueberwachungsgesetz-einer-demokratie-ab/</a>). Dagegen bietet MetaGer optimale Schutzmöglichkeiten mit unserem anonymisierenden Proxy, der durch den Klick auf "anonym öffnen" genutzt wird und durch unseren Zugang über das TOR-Netzwerk.  Dieses Wissen müssen wir jetzt im englischen Sprachraum <a href="http://suma-ev.de/en/press/Give-no-Chance-to-Search-Engine-Snoopers-MetaGer.Net.html" target="_blank">propagieren</a>. Und auch hierzulande steht eine <a href="https://digitalcourage.de/themen/vorratsdatenspeicherung" target="_blank">Neuauflage der Vorratsdatenspeicherung</a> vor der Tür.</p>
 		</li>
 		<li>
 			<p>Neben der Suche nach Texten und Bildern ist die Suche nach räumlicher, geographischer Information eine der häufigst genutzten Internetdienste. Gerade hierbei sind die Standortaufzeichnungen der globalen Suchmaschinenanbieter ein Überwachungsinstrument erster Güte. Um dagegen eine Alternative zu bieten, entwickeln wir <a href="https://maps.metager.de" target="_blank">maps.metager.de</a>. Sie können es jetzt bereits nutzen: eine erste Version mit Deutschland-Karten ist online.  Aber das ist bei weitem noch nicht alles, was wir damit vorhaben: Routenplaner, Karten außerhalb Deutschlands usw.  Hiermit wollen wir gegen diese Überwachung der geographischen Nutzerdaten eine Alternative schaffen.</p>
@@ -31,14 +31,14 @@
 	<div class="" style="margin-top:50px">
 		<h1 id="formular">Jetzt Spenden</h1>
 		<div class="col-sm-6">
-			<h2>{{ trans('spenden.bankinfo.1') }}</h2>
-			<p style="white-space:pre;">{{ trans('spenden.bankinfo.2') }}</p>
-			<p class="text-muted">{{ trans('spenden.bankinfo.3') }}</p>
+			<h2>{{ trans('spende.bankinfo.1') }}</h2>
+			<p style="white-space:pre;">{{ trans('spende.bankinfo.2') }}</p>
+			<p class="text-muted">{{ trans('spende.bankinfo.3') }}</p>
 		</div>
 		<div class="col-sm-6">
 			<div class="">
 				<div class="col-md-6">
-					<h2>{!! trans('spenden.logos.1') !!}</h2>
+					<h2>{!! trans('spende.paypal.1') !!}</h2>
 					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 						<input name="cmd" value="_xclick" type="hidden">
 						<input name="business" value="wsb@suma-ev.de" type="hidden">
@@ -57,7 +57,7 @@
 					</form>
 				</div>
 				<div class="col-md-6">
-					<h2>{!! trans('spenden.logos.2') !!}</h2>
+					<h2>{!! trans('spende.bitcoins.1') !!}</h2>
 					<a href="bitcoin:174SDRNZqM2WNobHhCDqD1VXbnZYFXNf8V"><img src="/img/WeAcceptBitcoin.png" style="width:120px" alt="Bitcoin"></a>
 				</div>
 			</div>
@@ -65,37 +65,37 @@
 		<div class="clearfix"></div>
 		<hr>
 		<div class="col-md-6">
-			<h2 id="lastschrift">{{ trans('spenden.lastschrift.1') }}</h2>
-			<p>{{ trans('spenden.lastschrift.2') }}</p>
+			<h2 id="lastschrift">{{ trans('spende.lastschrift.1') }}</h2>
+			<p>{{ trans('spende.lastschrift.2') }}</p>
 			<form role="form" method="POST" action="{{ action('MailController@donation') }}">
 				<input type="hidden" name="dt" value="{{ md5(date('Y') . date('m') . date('d')) }}" />
 				<div class="form-group" style="text-align:left;">
-					<label for="Name">{{ trans('spenden.lastschrift.3') }}</label>
-					<input type="text" class="form-control" id="Name" required="" name="Name" placeholder="{{ trans('spenden.lastschrift.3.placeholder') }}">
+					<label for="Name">{{ trans('spende.lastschrift.3') }}</label>
+					<input type="text" class="form-control" id="Name" required="" name="Name" placeholder="{{ trans('spende.lastschrift.3.placeholder') }}">
 				</div>
 				<div class="form-group" style="text-align:left;">
-					<label for="email">{{ trans('spenden.lastschrift.4') }}</label>
+					<label for="email">{{ trans('spende.lastschrift.4') }}</label>
 					<input type="email" class="form-control" id="email" name="email" placeholder="Email">
 				</div>
 				<div class="form-group" style="text-align:left;">
-					<label for="tel">{{ trans('spenden.lastschrift.5') }}</label>
+					<label for="tel">{{ trans('spende.lastschrift.5') }}</label>
 					<input type="tel" class="form-control" id="tel" name="Telefon" placeholder="xxxx-xxxxx">
 				</div>
 				<div class="form-group" style="text-align:left;">
-					<label for="iban">{{ trans('spenden.lastschrift.6') }}</label>
+					<label for="iban">{{ trans('spende.lastschrift.6') }}</label>
 					<input type="text" class="form-control" id="iban" required="" name="Kontonummer" placeholder="IBAN">
 				</div>
 				<div class="form-group" style="text-align:left;">
-					<label for="bic">{{ trans('spenden.lastschrift.7') }}</label>
+					<label for="bic">{{ trans('spende.lastschrift.7') }}</label>
 					<input type="text" class="form-control" id="bic" required="" name="Bankleitzahl" placeholder="BIC">
 				</div>
 				<div class="form-group" style="text-align:left;">
-					<label for="msg">{{ trans('spenden.lastschrift.8') }}</label>
-					<textarea class="form-control" id="msg" required="" name="Nachricht" placeholder="{{ trans('spenden.lastschrift.8.placeholder') }}"></textarea>
+					<label for="msg">{{ trans('spende.lastschrift.8') }}</label>
+					<textarea class="form-control" id="msg" required="" name="Nachricht" placeholder="{{ trans('spende.lastschrift.8.placeholder') }}"></textarea>
 				</div>
-				<button type="submit" class="btn btn-default">{{ trans('spenden.lastschrift.9') }}</button>
+				<button type="submit" class="btn btn-default">{{ trans('spende.lastschrift.9') }}</button>
 			</form>
-			<p>{{ trans('spenden.lastschrift.10') }}</p>
+			<p>{{ trans('spende.lastschrift.10') }}</p>
 		</div>
 		<div class="col-md-6">
 			<h2 id="mails">Aus den EMails vorheriger Spender:</h2>

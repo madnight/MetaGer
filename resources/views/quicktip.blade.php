@@ -61,21 +61,17 @@
 			</div>
 		@endforeach
 		<div class="quicktip">
-			<details>
-				<summary>
-					<div class="media">
-						<div class="media-body">
-							<div>
-								@if( Request::input('lang') === "all")
-									{!! trans('results.filter.default', ['langName' => LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native']]) !!}
-								@else
-									{!! trans('results.filter', ['langName' => LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native'], 'link' => base64_decode(Request::input('unfilteredLink','')), 'filter' => Request::input('lang')]) !!}
-								@endif
-							</div>
-						</div>
+			<div class="media">
+				<div class="media-body">
+					<div>
+						@if( Request::input('lang') === "all")
+							{!! trans('results.filter.default', ['langName' => LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native']]) !!}
+						@else
+							{!! trans('results.filter', ['langName' => LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native'], 'link' => base64_decode(Request::input('unfilteredLink','')), 'filter' => Request::input('lang')]) !!}
+						@endif
 					</div>
-				</summary>
-			</details>
+				</div>
+			</div>
 		</div>
 		<script src="{{ elixir('js/quicktips.js') }}"></script>
 	</body>

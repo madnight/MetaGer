@@ -331,7 +331,17 @@ class MetaGer
     public function doBotProtection($bot)
     {
         $hash = md5(date('YmdHi'));
-        if (preg_match("/^\d+$/s", $this->getEingabe()) && $bot !== $hash) {
+
+        $shouldCheck = false;
+
+        foreach ($this->request->all() as $key => $value) {
+            if (strpos($key, "amp;") !== false) {
+                $shouldCheck = true;
+                break;
+            }
+        }
+
+        if ((preg_match("/^\d+$/s", $this->getEingabe()) || $shouldCheck) && $bot !== $hash) {
             return true;
         } else {
             return false;
@@ -862,6 +872,10 @@ class MetaGer
         $this->q       = strtolower($this->eingabe);
         # IP
         $this->ip = $request->ip();
+        # Unser erster Schritt wird sein, IP-Adresse und USER-Agent zu anonymisieren, damit
+        # nicht einmal wir selbst noch Zugriff auf die Daten haben:
+        $this->ip = preg_replace("/(\d+)\.(\d+)\.\d+.\d+/s", "$1.$2.0.0", $this->ip);
+
         # Language
         if (isset($_SERVER['HTTP_LANGUAGE'])) {
             $this->language = $_SERVER['HTTP_LANGUAGE'];
@@ -896,8 +910,12 @@ class MetaGer
         } else {
             $this->maps = false;
         }
+<<<<<<< HEAD
         # Neuer tab
         $this->newtab = $request->input('tab', 'on');
+=======
+        $this->newtab = $request->input('newtab', 'on');
+>>>>>>> development
         if ($this->newtab === "on") {
             $this->newtab = "_blank";
         } else {
@@ -1076,7 +1094,10 @@ class MetaGer
     public function nextSearchLink()
     {
         if (isset($this->next) && isset($this->next['engines']) && count($this->next['engines']) > 0) {
-            $requestData         = $this->request->except(['page', 'out']);
+            $requestData = $this->request->except(['page', 'out']);
+            if ($this->request->input('out', '') !== "results" && $this->request->input('out', '') !== '') {
+                $requestData["out"] = $this->request->input('out');
+            }
             $requestData['next'] = md5(serialize($this->next));
             $link                = action('MetaGerSearch@search', $requestData);
         } else {
@@ -1149,14 +1170,24 @@ class MetaGer
             try
             {
                 $logEntry = "";
-                $logEntry .= "[" . date(DATE_RFC822, mktime(date("H"), date("i"), date("s"), date("m"), date("d"), date("Y"))) . "]";
+                $logEntry .= "[" . date("D M d H:i:s") . "]";
+                /*
+                Someone might wonder now why we are saving the IP-Adress to the log file here:
+                It's because we were targets of heavy Bot attacks which created so many Search-Request to our Servers that
+                not only our servers but the ones from some of our search engines too collapsed.
+                At that point we could'nt prevent the Bot from accessing our server because we would need it's IP-Adress to do so.
+
+                That's why we need to save the IP-Adress to our Log-Files temporarily. The logrotate process that shifts our Log-Files will then
+                automatically remove the IP-Adresses from the Log-File after a few hours.
+                This method gives us just enough time to prevent malicious Software from bringing our servers down and at the same time having not a single
+                IP-Adress older than one day stored on our servers. (Except the ones who got banned in that short period of course) ;-)
+                 */
+                $logEntry .= " ip=" . $this->request->ip();
                 $logEntry .= " pid=" . getmypid();
                 $logEntry .= " ref=" . $this->request->header('Referer');
-                $useragent = $this->request->header('User-Agent');
-                $useragent = str_replace("(", " ", $useragent);
-                $useragent = str_replace(")", " ", $useragent);
-                $useragent = str_replace(" ", "", $useragent);
                 $logEntry .= " time=" . round((microtime(true) - $this->starttime), 2) . " serv=" . $this->fokus;
+                $logEntry .= " interface=" . LaravelLocalization::getCurrentLocale();
+                $logEntry .= " sprachfilter=" . $this->lang;
                 $logEntry .= " search=" . $this->eingabe;
 
                 # 2 Arten von Logs in einem wird die Anzahl der Abfragen an eine Suchmaschine gespeichert und in der anderen

@@ -6890,7 +6890,7 @@ Mixed
 }
 #foki input + label:hover {
   cursor: pointer;
-  background-color: #f6f6f6;
+  background-color: #e3e3e3;
 }
 #color-chooser a {
   display: block;

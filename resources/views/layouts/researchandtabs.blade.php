@@ -109,13 +109,8 @@
 					</a>
 				</li>
 			@else
-<<<<<<< HEAD
-				<li data-loaded="0" id="produktsucheTabSelector" class="tab-selector" role="presentation">
-					<a aria-controls="produktsuche" data-href="{{ $metager->generateSearchLink('produktsuche') }}" href="{{ $metager->generateSearchLink('produktsuche') }}">
-=======
 				<li data-loaded="0" id="produktsucheTabSelector" class="tab-selector" role="presentation" >
 					<a aria-controls="produktsuche" data-href="{!! $metager->generateSearchLink('produktsuche') !!}" href="{!! $metager->generateSearchLink('produktsuche') !!}">
->>>>>>> development
 						<span class='glyphicon glyphicon-shopping-cart'></span>
 						<span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
 					</a>

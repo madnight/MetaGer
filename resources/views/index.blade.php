@@ -193,50 +193,21 @@
 						&lt;li &gt;&lt;a id="black" data-rgba="238,238,238,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
 						&lt;li &gt;&lt;a id="blackHard" data-rgba="50,50,50,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
 						&lt;/ul&gt;'>
-<<<<<<< HEAD
 						<span class="glyphicon glyphicon-tint"></span>
 					</button>
-=======
-							<span class="glyphicon glyphicon-tint"></span>
-						</button>
-					</div>
-					<input type="text" name="eingabe" required="" autofocus="" autocomplete="{{$autocomplete}}" class="form-control" placeholder="{{ trans('index.placeholder') }}">
-					<input type="hidden" name="encoding" value="utf8">
-					@if ($focus === 'angepasst') <input type="hidden" name="lang" value={{ $lang }} >
-						<input type="hidden" name="resultCount" value={{ $resultCount }} >
-						<input type="hidden" name="time" value={{ $time }} >
-						<input type="hidden" name="sprueche" value={{ $sprueche }} >
-						<input type="hidden" name="newtab" value={{ $newtab }} >
-						<input type="hidden" name="maps" value={{ $maps }} >
-						@foreach ($focusPages as $fp)
-							<input type="hidden" name={{ $fp }} value="on">
-						@endforeach
-						<input type="hidden" name="theme" value={{ $theme }}>
-					@elseif( !App::isLocale('de') )
-						<input type="hidden" name="lang" value="{{ App::getLocale() }}">
-					@else
-						<input type="hidden" name="lang" value="all">
-					@endif
-					<div class="input-group-addon">
-						<button type="submit">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</div>
->>>>>>> development
 				</div>
 				<input type="text" name="eingabe" required="" autofocus="" autocomplete="{{$autocomplete}}" class="form-control" placeholder="{{ trans('index.placeholder') }}">
 				<input type="hidden" name="encoding" value="utf8">
-				@if ($focus === 'angepasst')
-					<input type="hidden" name="lang" value={{ $lang }} >
+				@if ($focus === 'angepasst') <input type="hidden" name="lang" value={{ $lang }} >
 					<input type="hidden" name="resultCount" value={{ $resultCount }} >
 					<input type="hidden" name="time" value={{ $time }} >
 					<input type="hidden" name="sprueche" value={{ $sprueche }} >
-					<input type="hidden" name="tab" value={{ $tab }} >
+					<input type="hidden" name="newtab" value={{ $newtab }} >
 					<input type="hidden" name="maps" value={{ $maps }} >
-					<input type="hidden" name="theme" value={{ $theme }}>
 					@foreach ($focusPages as $fp)
 						<input type="hidden" name={{ $fp }} value="on">
 					@endforeach
+					<input type="hidden" name="theme" value={{ $theme }}>
 				@elseif( !App::isLocale('de') )
 					<input type="hidden" name="lang" value="{{ App::getLocale() }}">
 				@else

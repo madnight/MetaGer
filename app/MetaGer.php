@@ -910,12 +910,7 @@ class MetaGer
         } else {
             $this->maps = false;
         }
-<<<<<<< HEAD
-        # Neuer tab
-        $this->newtab = $request->input('tab', 'on');
-=======
         $this->newtab = $request->input('newtab', 'on');
->>>>>>> development
         if ($this->newtab === "on") {
             $this->newtab = "_blank";
         } else {
@@ -923,10 +918,10 @@ class MetaGer
         }
         # Custom Search
         $this->canCustomSearch = $request->input('canCustomSearch', 'false');
-        if ($this->maps === "true") {
-            $this->maps = true;
+        if ($this->canCustomSearch === "true") {
+            $this->canCustomSearch = true;
         } else {
-            $this->maps = false;
+            $this->canCustomSearch = false;
         }
         # Theme
         $this->theme = preg_replace("/[^[:alnum:][:space:]]/u", '', $request->input('theme', 'default'));
@@ -1242,7 +1237,7 @@ class MetaGer
         }
     }
 
-# Generators
+    # Generators
 
     public function generateSearchLink($fokus, $results = true)
     {

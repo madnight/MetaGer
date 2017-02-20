@@ -6,7 +6,7 @@ return [
     "foki.nachrichten"    => "Noticias",
     "foki.wissenschaft"   => "Ciencia",
     "foki.produkte"       => "Productos",
-    "foki.maps"           => "Maps.metager.de <span class=\"badge new-feature\">Nuevo</span>",
+    "foki.maps"           => "Maps.metager.de",
     "design"              => "Escoger un diseño personalizado",
     "conveyor"            => "Comprar en tiendas que apoyan MetaGer ",
     "partnertitle"        => "Apoyar MetaGer, sin costos para usted",

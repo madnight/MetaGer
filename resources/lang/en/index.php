@@ -9,7 +9,7 @@ return [
     "foki.eigene"	=>	"Custom Search",
     "foki.eigene.entfernen"	=>	"Remove",
     "foki.angepasst"	=>	"(<a id=\"reset-link\" href=\":startpage\">remove</a>) customized search options",
-    "foki.maps"	=>	"maps.metager.de <span class=\"badge new-feature\">New</span>",
+    "foki.maps"	=>	"maps.metager.de>",
     "design"	=>	"select personal theme",
     "conveyor"	=>	"Purchase at affiliate shops",
     "partnertitle"	=>	"Support MetaGer without any costs to you",

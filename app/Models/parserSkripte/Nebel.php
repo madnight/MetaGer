@@ -22,10 +22,10 @@ class Nebel extends Searchengine
                 continue;
             }
 
-            $title       = $res[2];
+            $title       = $res[1];
             $link        = $res[0];
             $anzeigeLink = $link;
-            $descr       = $res[1];
+            $descr       = $res[2];
 
             $this->counter++;
             $this->results[] = new \App\Models\Result(

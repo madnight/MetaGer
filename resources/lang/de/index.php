@@ -9,7 +9,7 @@ return [
     'foki.eigene'           => 'Eigene Suche',
     'foki.eigene.entfernen' => 'entfernen',
     'foki.angepasst'        => 'Suchoptionen angepasst (<a id="reset-link" href=":startpage">entfernen</a>)',
-    'foki.maps'             => 'Maps.metager.de <span class="badge new-feature">Neu</span>',
+    'foki.maps'             => 'Maps.metager.de',
 
     'design'                => 'Persönliches Design auswählen',
 

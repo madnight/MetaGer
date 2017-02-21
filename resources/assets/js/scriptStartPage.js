@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    // checkPlugin();
     if (location.href.indexOf("#plugin-modal") > -1) {
         $("#plugin-modal").modal("show");
     }
@@ -36,19 +37,12 @@ $(document).ready(function() {
             window.location = "./settings/";
         });
     }
-    $("#reset-settings-btn").click(function() {
-        softResetOptions();
-        document.location.href = $("#reset-settings-btn").attr("data-href");
+    $("#anpassen-label").click(function() {
+        window.location = "./settings/";
     });
 });
 
 function setSettings() {
-    if (canCustomSearch()) {
-        $("#foki input[type=radio]#angepasst").attr("checked", true);
-        $("#foki label#anpassen-label").removeClass("hide");
-        $("#foki button#reset-settings-btn").removeClass("hide");
-        $("#searchForm").append("<input type=\"hidden\" name=\"canCustomSearch\" value=\"true\">");
-    }
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
         var value = localStorage.getItem(key);
@@ -56,17 +50,21 @@ function setSettings() {
             key = key.substring(key.indexOf("param_") + 6);
             $("#searchForm").append("<input type=\"hidden\" name=\"" + key + "\" value=\"" + value + "\">");
         }
+        $("#foki input[type=radio]#angepasst").attr("checked", true);
     }
-    if (localStorage.getItem("param_lang") !== null) {
+
+    if( localStorage.getItem("param_lang") !== null ) {
         var value = localStorage.getItem("param_lang");
         // Change the value of the lang input field to the given parameter
         $("input[name=lang]").val(value);
     }
-    if (localStorage.getItem("param_autocomplete") !== null) {
+
+    if( localStorage.getItem("param_autocomplete") !== null ) {
         var value = localStorage.getItem("param_autocomplete");
         // Change the value of the lang input field to the given parameter
         $("input[name=eingabe]").attr("autocomplete", value);
     }
+
     if ($("fieldset#foki.mobile").length) {
         $("fieldset.mobile input#bilder").val("angepasst");
         $("fieldset.mobile input#bilder").prop("checked", true);
@@ -77,7 +75,7 @@ function setSettings() {
         $("fieldset.mobile label#anpassen-label span.content").html("angepasst");
     }
 }
-// Polyfill for form attribute
+//Polyfill for form attribute
 (function($) {
     /**
      * polyfill for html5 form attr
@@ -91,6 +89,7 @@ function setSettings() {
     }
     /**
      * Append a field to a form
+     *
      */
     $.fn.appendField = function(data) {
         // for form only
@@ -108,6 +107,7 @@ function setSettings() {
     };
     /**
      * Find all input fields with form attribute point to jQuery object
+     * 
      */
     $('form[id]').submit(function(e) {
         var $form = $(this);
@@ -161,45 +161,5 @@ function isUseOnce() {
     var url = document.location.search;
     var pos = url.indexOf("usage=");
     if (pos >= 0 && url.substring(pos + 6, pos + 11) == "once") return true;
-    return false;
-}
-
-function softResetOptions() {
-    // localStorage.removeItem("pers");
-    localStorage.removeItem("focus");
-    var keys = [];
-    for (var i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i)
-        keys.push(key);
-    }
-    var metaParams = ["param_sprueche", "param_maps", "param_newtab", "param_lang", "param_autocomplete"];
-    for (var i = 0; i < keys.length; i++) {
-        var key = keys[i];
-        if (key.startsWith("param_" || key.startsWith("focus"))) {
-            if (metaParams.indexOf(key) === -1) {
-                localStorage.removeItem(key);
-            }
-        }
-    }
-}
-
-function canCustomSearch() {
-    if (localStorage.key("focus") === "angepasst") {
-        return true;
-    }
-    var metaParams = ["param_sprueche", "param_maps", "param_newtab", "param_lang", "param_autocomplete"];
-    var keys = [];
-    for (var i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i)
-        keys.push(key);
-    }
-    for (var i = 0; i < keys.length; i++) {
-        var key = keys[i];
-        if (key.startsWith("param_")) {
-            if (metaParams.indexOf(key) === -1) {
-                return true;
-            }
-        }
-    }
     return false;
 }

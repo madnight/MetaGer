@@ -55,42 +55,32 @@
 				</div>
 			</div>
 		</container>
-		<hr>
-		<div class="center-block hide" id="collapse-engines-btn">
-			<button class="btn btn-default center-block" type="button" data-toggle="collapse" data-target="#collapse-engines-div" aria-expanded="false" aria-controls="collapse-engines-div">
-				<span class="glyphicon glyphicon-chevron-down"></span>
-				Suchmaschinen
-				<span class="glyphicon glyphicon-chevron-down"></span>
-			</button>
-		</div>
-		<div class="collapse in" id="collapse-engines-div">
-			<h2>{!! trans('settings.suchmaschinen.1') !!} <small><button type="button" class="btn btn-link allUnchecker">{!! trans('settings.suchmaschinen.2') !!}</button></small></h2>
-			@foreach( $foki as $fokus => $sumas )
-				<div class="headingGroup {{ $fokus }}">
-					<h3 class="fokus-category">
-						@lang("settings.foki." . $fokus)
-						<small>
-							<button type="button" class="checker btn btn-link" data-type="{{ $fokus }}">{!! trans('settings.suchmaschinen.3') !!}</button>
-						</small>
-					</h3>
-					<div class="row">
-						@foreach( $sumas as $name => $data )
-							<div class="col-sm-6 col-md-4 col-lg-3">
-								<div class="checkbox settings-checkbox">
-									<label>
-										<input name="param_{{ $name }}" class="focusCheckbox" type="checkbox" />{{ $data['displayName'] }}
-									</label>
-									<a class="glyphicon settings-glyphicon glyphicon-link" target="_blank" rel="noopener" href="{{ $data['url'] }}"></a>
-								</div>
+		<h2>{!! trans('settings.suchmaschinen.1') !!} <small><button type="button" class="btn btn-link allUnchecker">{!! trans('settings.suchmaschinen.2') !!}</button></small></h2>
+		@foreach( $foki as $fokus => $sumas )
+			<div class="headingGroup {{ $fokus }}">
+				<h3 class="fokus-category">
+					@lang("settings.foki." . $fokus)
+					<small>
+						<button type="button" class="checker btn btn-link" data-type="{{ $fokus }}">{!! trans('settings.suchmaschinen.3') !!}</button>
+					</small>
+				</h3>
+				<div class="row">
+					@foreach( $sumas as $name => $data )
+						<div class="col-sm-6 col-md-4 col-lg-3">
+							<div class="checkbox settings-checkbox">
+								<label>
+									<input name="param_{{ $name }}" class="focusCheckbox" type="checkbox" />{{ $data['displayName'] }}
+								</label>
+								<a class="glyphicon settings-glyphicon glyphicon-link" target="_blank" rel="noopener" href="{{ $data['url'] }}"></a>
 							</div>
-						@endforeach
-					</div>
+						</div>
+					@endforeach
 				</div>
-			@endforeach
-		</div>
-		<input id="save-once" type="submit" class="btn btn-primary settings-btn" value="{!! trans('settings.speichern.1') !!}">
-		<input id="save" type="button" class="btn btn-primary settings-btn hidden" value="{!! trans('settings.speichern.2') !!}" data-href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}">
+			</div>
+		@endforeach
+		<input id="unten" type="submit" class="btn btn-primary settings-btn" value="{!! trans('settings.speichern.1') !!}">
+		<input type="button" class="btn btn-primary settings-btn hidden" id="save" data-href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}" value="{!! trans('settings.speichern.2') !!}">
 		<input id="plugin" type="submit" class="btn btn-primary settings-btn" value="{!! trans('settings.speichern.3') !!}">
-		<input id="reset" type="button" class="btn btn-danger settings-btn hidden" value="{!! trans('settings.speichern.4') !!}">
+		<input type="button" class="btn btn-danger settings-btn hidden" id="reset" value="{!! trans('settings.speichern.4') !!}">
 	</form>
 @endsection

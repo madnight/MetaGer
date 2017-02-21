@@ -35,7 +35,6 @@ class MetaGer
     protected $addedHosts      = [];
     protected $startCount      = 0;
     protected $canCache        = false;
-    protected $canCustomSearch = false;
     # Daten über die Abfrage
     protected $ip;
     protected $language;
@@ -905,7 +904,6 @@ class MetaGer
         } else {
             $this->sprueche = false;
         }
-        # Maps
         $this->maps = $request->input('maps', 'off');
         if ($this->maps === "on") {
             $this->maps = true;
@@ -917,13 +915,6 @@ class MetaGer
             $this->newtab = "_blank";
         } else {
             $this->newtab = "_self";
-        }
-        # Custom Search
-        $this->canCustomSearch = $request->input('canCustomSearch', 'false');
-        if ($this->canCustomSearch === "true") {
-            $this->canCustomSearch = true;
-        } else {
-            $this->canCustomSearch = false;
         }
         # Theme
         $this->theme = preg_replace("/[^[:alnum:][:space:]]/u", '', $request->input('theme', 'default'));
@@ -1239,7 +1230,7 @@ class MetaGer
         }
     }
 
-    # Generators
+# Generators
 
     public function generateSearchLink($fokus, $results = true)
     {
@@ -1299,11 +1290,6 @@ class MetaGer
     }
 
 # Komplexe Getter
-
-    public function canCustomSearch()
-    {
-        return $this->canCustomSearch;
-    }
 
     public function getHostCount($host)
     {

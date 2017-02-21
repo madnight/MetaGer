@@ -1,20 +1,6 @@
 $(document).ready(function() {
-    pageCanJS(); // Einige Inhalte der Seite sollen mit Javascript anders aussehen
-    tickOptions();
     // Wenn LocalStorage verfügbar ist, geben wir die Möglichkeit die Einstellungen dort zu speichern
-    // Checker listener
-    $(".checker").click(function() {
-        var selector = "." + $(this).attr("data-type");
-        if ($(selector + " input:checked").length) {
-            $(selector + " input").prop("checked", false);
-        } else {
-            $(selector + " input").prop("checked", true);
-        }
-    });
-    $(".allUnchecker").click(function() {
-        $(".focusCheckbox").prop("checked", false);
-    });
-    // Button listener
+    tickOptions();
     if (localStorage) {
         $("#save").removeClass("hidden");
         if (localStorage.getItem("pers")) {
@@ -36,7 +22,18 @@ $(document).ready(function() {
             document.location.href = $("#save").attr("data-href");
         });
     }
-    $("#save-once").click(function() {
+    $(".checker").click(function() {
+        var selector = "." + $(this).attr("data-type");
+        if ($(selector + " input:checked").length) {
+            $(selector + " input").prop("checked", false);
+        } else {
+            $(selector + " input").prop("checked", true);
+        }
+    });
+    $(".allUnchecker").click(function() {
+        $(".focusCheckbox").prop("checked", false);
+    });
+    $("#unten").click(function() {
         $("#settings-form").append("<input type=\"hidden\" name=\"usage\" value=\"once\">");
         switch (getLanguage()) {
             case "de":
@@ -80,7 +77,7 @@ function tickOptions() {
             }
         }
     } else {
-        // $("div.web input").attr("checked", true);
+        $("div.web input").attr("checked", true);
     }
 }
 
@@ -91,13 +88,10 @@ function resetOptions() {
         var key = localStorage.key(i)
         keys.push(key);
     }
-    var metaParams = ["param_sprueche", "param_maps", "param_newtab", "param_lang", "param_autocomplete"];
     for (var i = 0; i < keys.length; i++) {
         var key = keys[i];
         if (key.startsWith("param_" || key.startsWith("focus"))) {
-            if (metaParams.indexOf(key) === -1) {
-                localStorage.removeItem(key);
-            }
+            localStorage.removeItem(key);
         }
     }
 }
@@ -109,9 +103,4 @@ function getLanguage() {
             return metaData[m]["content"];
         }
     }
-}
-
-function pageCanJS() {
-    $("#collapse-engines-div").removeClass("in");
-    $("#collapse-engines-btn").removeClass("hide");
 }

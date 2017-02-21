@@ -9,6 +9,7 @@ return [
     "foki.anpassen"	=>	"ajustar",
     "foki.angepasst"	=>	"ajustado",
     "foki.maps"	=>	"Maps.metager.de <span class=\"badge new-feature\">Nuevo</span>",
+    "foki.maps"	=>	"Maps.metager.de",
     "design"	=>	"Escoger un diseño personalizado",
     "conveyor"	=>	"Comprar en tiendas que apoyan MetaGer ",
     "partnertitle"	=>	"Apoyar MetaGer, sin costos para usted",

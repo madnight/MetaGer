@@ -44,8 +44,7 @@ class Yandex extends Searchengine
                 );
             }
         } catch (\Exception $e) {
-            Log::error("A problem occurred parsing results from $this->name:");
-            Log::error($e->getMessage());
+            Log::error("A problem occurred parsing results from $this->name:\n" . $e->getMessage() . "\n" . $result);
             return;
         }
     }
@@ -58,8 +57,11 @@ class Yandex extends Searchengine
             if (!$content) {
                 return;
             }
-
-            $resultCount = intval($content->xpath('//yandexsearch/response/results/grouping/found[@priority="all"]')[0]->__toString());
+            $resultCount = $content->xpath('//yandexsearch/response/results/grouping/found[@priority="all"]');
+            if(!$resultCount || sizeof($resultCount) <= 0){
+                return;
+            }
+            $resultCount = intval($resultCount[0]->__toString());
             $pageLast    = $content->xpath('//yandexsearch/response/results/grouping/page')[0];
             $pageLast    = intval($pageLast["last"]->__toString());
             if (count($this->results) <= 0 || $pageLast >= $resultCount) {

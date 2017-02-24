@@ -4,7 +4,7 @@ return [
     'foki.web'            => 'Web',
     'foki.bilder'         => 'Bilder',
     'foki.nachrichten'    => 'Nachrichten',
-    'foki.wissenschaft'   => 'Wissenschaft',
+    'foki.wissenschaft'   => 'Wissenschaft/Politik',
     'foki.produkte'       => 'Produkte',
     'foki.anpassen'       => 'anpassen',
     'foki.angepasst'      => 'angepasst',

@@ -41,7 +41,7 @@ return [
     "foki.web"          => "Web",
     "foki.andere"       => "Andere",
     "foki.produktsuche" => "Produktsuche",
-    "foki.wissenschaft" => "Wissenschaft",
+    "foki.wissenschaft" => "Wissenschaft/Politik",
     "foki.nachrichten"  => "Nachrichten",
     "foki.bilder"       => "Bilder",
 ];

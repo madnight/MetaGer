@@ -69,8 +69,7 @@ class Yandex extends Searchengine
             $next->getString .= "&page=" . ($metager->getPage() + 1);
             $next->hash = md5($next->host . $next->getString . $next->port . $next->name);
         } catch (\Exception $e) {
-            Log::error("A problem occurred parsing results from $this->name:");
-            Log::error($e->getMessage());
+            Log::error("A problem occurred parsing results from $this->name:\n" . $e->getMessage() . "\n" . $result);
             return;
         }
     }

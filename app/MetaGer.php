@@ -508,8 +508,11 @@ class MetaGer
         foreach ($enginesToSearchIn as $engine) {
             if (isset($engine['minismCollection'])) {
                 $subcollections[] = $engine['minismCollection']->__toString();
+            } else {
+                $tmp[] = $engine;
             }
         }
+        $enabledSearchengines = $tmp;
         if (sizeof($subcollections) > 0) {
             $enabledSearchengines[] = $this->loadMiniSucher($xml, $subcollections);
         }

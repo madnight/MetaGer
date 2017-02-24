@@ -501,25 +501,27 @@ class MetaGer
         // Es gibt den Schalter "minism=on" Dieser soll bewirken, dass alle Minisucher angeschaltet werden.
         // Wenn also "minism=on" ist, dann durchsuchen wir statt den tatsächlich angeschalteten Suchmaschinen,
         // alle Suchmaschinen nach "minismCollection"
-        $enginesToSearchIn = $enabledSearchengines;
         if ($request->input("minism", "off") === "on") {
-            $enginesToSearchIn = $sumas;
-        }
-        foreach ($enginesToSearchIn as $engine) {
-            if (isset($engine['minismCollection'])) {
-                $subcollections[] = $engine['minismCollection']->__toString();
-            } else {
-                $tmp[] = $engine;
+            // Wir laden alle Minisucher
+            foreach ($sumas as $engine) {
+                if (isset($engine["minismCollection"])) {
+                    $subcollections[] = $engine["minismCollection"]->__toString();
+                }
+            }
+        } else {
+            // Wir schalten eine Teilmenge, oder aber gar keine an
+            foreach ($enabledSearchengines as $engine) {
+                if (isset($engine['minismCollection'])) {
+                    $subcollections[] = $engine['minismCollection']->__toString();
+                }
             }
         }
-        $enabledSearchengines = $tmp;
         if (sizeof($subcollections) > 0) {
             $enabledSearchengines[] = $this->loadMiniSucher($xml, $subcollections);
         }
         if ($sumaCount <= 0) {
             $this->errors[] = trans('metaGer.settings.noneSelected');
         }
-
         $engines = [];
 
         # Wenn eine Sitesearch durchgeführt werden soll, überprüfen wir ob überhaupt eine der Suchmaschinen eine Sitesearch unterstützt

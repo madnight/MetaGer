@@ -169,8 +169,8 @@
 			</label>
 			<button type="button" id="reset-settings-btn" class="@if ($focus !== 'angepasst') hide @endif btn btn-link" data-href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}"><span>({{ trans('index.foki.eigene.entfernen') }})</span></button>
 		</fieldset>
-		<div class="pull-right">
-			<a class="mutelink" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "settings") }}"><div type="button" class="btn btn-default">
+		<div class="hidden-xs">
+			<a class="mutelink pull-right" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "settings") }}"><div type="button" class="btn btn-default">
 				<span class="glyphicon glyphicon-cog"></span>
 			</div></a>
 		</div>
@@ -220,6 +220,11 @@
 				</div>
 			</div>
 		</form>
+		<div class="visible-xs">
+			<a class="mutelink btn btn-default" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "settings") }}">
+				<span class="glyphicon glyphicon-cog"></span>
+			</a>
+		</div>
 	</fieldset>
 	<ul class="list-inline searchform-bonus">
 		<li><a href="https://www.boost-project.com/de/shops?charity_id=1129&amp;tag=bl" target="_blank" rel="noopener" id="foerdershops" class="btn btn-default mutelink" title="{{ trans('index.partnertitle') }}">{{ trans('index.conveyor') }}</a></li>

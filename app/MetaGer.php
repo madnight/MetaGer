@@ -868,7 +868,7 @@ class MetaGer
         }
         # Sucheingabe
         $this->eingabe = trim($request->input('eingabe', ''));
-        $this->q       = strtolower($this->eingabe);
+        $this->q       = mb_strtolower($this->eingabe, "UTF-8");
         # IP
         $this->ip = $request->ip();
         # Unser erster Schritt wird sein, IP-Adresse und USER-Agent zu anonymisieren, damit

@@ -240,6 +240,7 @@ class Result
             }
         }
 
+        /*
         # Phrasensuche:
         $text = strtolower($this->titel) . " " . strtolower($this->descr);
         foreach ($metager->getPhrases() as $phrase) {
@@ -247,7 +248,7 @@ class Result
                 return false;
             }
         }
-
+        */
         /* Der Host-Filter der sicherstellt,
          *  dass von jedem Host maximal 3 Links angezeigt werden.
          *  Diese Überprüfung führen wir unter bestimmten Bedingungen nicht durch.

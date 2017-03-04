@@ -498,25 +498,40 @@ class MetaGer
         $subcollections = [];
 
         $tmp = [];
-        foreach ($enabledSearchengines as $engine) {
-            if (isset($engine['minismCollection'])) {
-                $subcollections[] = $engine['minismCollection']->__toString();
-            } else {
-                $tmp[] = $engine;
+        // Es gibt den Schalter "minism=on" Dieser soll bewirken, dass alle Minisucher angeschaltet werden.
+        // Wenn also "minism=on" ist, dann durchsuchen wir statt den tatsächlich angeschalteten Suchmaschinen,
+        // alle Suchmaschinen nach "minismCollection"
+        if ($request->input("minism", "off") === "on") {
+            // Wir laden alle Minisucher
+            foreach ($sumas as $engine) {
+                if (isset($engine["minismCollection"])) {
+                    $subcollections[] = $engine["minismCollection"]->__toString();
+                }
             }
-
+            # Nur noch alle eventuell angeschalteten Minisucher deaktivieren
+            foreach ($enabledSearchengines as $index => $engine) {
+                if (!isset($engine["minismCollection"])) {
+                    $tmp[] = $engine;
+                }
+            }
+        } else {
+            // Wir schalten eine Teilmenge, oder aber gar keine an
+            foreach ($enabledSearchengines as $engine) {
+                if (isset($engine['minismCollection'])) {
+                    $subcollections[] = $engine['minismCollection']->__toString();
+                } else {
+                    $tmp[] = $engine;
+                }
+            }
         }
         $enabledSearchengines = $tmp;
         if (sizeof($subcollections) > 0) {
             $enabledSearchengines[] = $this->loadMiniSucher($xml, $subcollections);
         }
-
         if ($sumaCount <= 0) {
             $this->errors[] = trans('metaGer.settings.noneSelected');
         }
-
         $engines = [];
-
         # Wenn eine Sitesearch durchgeführt werden soll, überprüfen wir ob überhaupt eine der Suchmaschinen eine Sitesearch unterstützt
         $siteSearchFailed = $this->checkCanNotSitesearch($enabledSearchengines);
 
@@ -590,6 +605,9 @@ class MetaGer
                 continue;
             }
 
+            if (!isset($engine["package"])) {
+                die(var_dump($engine));
+            }
             # Setze Pfad zu Parser
             $path = "App\Models\parserSkripte\\" . ucfirst($engine["package"]->__toString());
 
@@ -908,7 +926,7 @@ class MetaGer
         } else {
             $this->maps = false;
         }
-        $this->newtab = $request->input('tab', 'on');
+        $this->newtab = $request->input('newtab', 'on');
         if ($this->newtab === "on") {
             $this->newtab = "_blank";
         } else {

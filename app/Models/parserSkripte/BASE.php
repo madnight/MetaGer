@@ -55,8 +55,7 @@ class BASE extends Searchengine
                 }
             }
         } catch (\Exception $e) {
-            Log::error("A problem occurred parsing results from $this->name:");
-            Log::error($e->getMessage());
+            Log::error("A problem occurred parsing results from $this->name:\n" . $e->getMessage() . "\n" . $result);
             return;
         }
     }

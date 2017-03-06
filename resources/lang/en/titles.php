@@ -1,3 +1,5 @@
+<?php
+
 return [
     "index"	=>	"MetaGer: Privacy Protected Search & Find",
     "impressum"	=>	"Site Notice - MetaGer",

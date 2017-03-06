@@ -172,13 +172,19 @@ Route::group(
             });
 
             Route::get('maps', function () {
-                $filePath     = "https://dominik-pfennig.de/owncloud/index.php/s/2mr98oMetirBgrt/download?path=%2F&files=app-release.apk";
+                $filePath     = env('maps_app');
                 $fileContents = file_get_contents($filePath);
                 return response($fileContents, 200)
                     ->header('Cache-Control', 'public')
                     ->header('Content-Type', 'application/vnd.android.package-archive')
                     ->header('Content-Transfer-Encoding', 'Binary')
                     ->header("Content-Disposition", "attachment; filename=app-release.apk");
+            });
+            Route::get('maps/version', function () {
+                $filePath     = env('maps_version');
+                $fileContents = file_get_contents($filePath);
+                return response($fileContents, 200)
+                    ->header('Content-Type', 'text/plain');
             });
         });
     });

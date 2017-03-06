@@ -13,12 +13,12 @@
 	<h2>{{ trans('app.head.3') }}</h2>
 	<p>{!! trans('app.maps.1') !!}</p>
 	<p>{{ trans('app.maps.2') }}</p>
+	<p><a href="{!! url('app/maps') !!}">{{ trans('app.metager.manuell') }}</a></p>
 	<p>{{ trans('app.maps.3') }}</p>
 	<ul>
 		<li>{!! trans('app.maps.list.1') !!}</li>
 		<li>{!! trans('app.maps.list.2') !!}</li>
 	</ul>
-	<p><a href="{!! url('app/maps') !!}">{{ trans('app.metager.manuell') }}</a></p>
 	<h2>{{ trans('app.head.4') }}</h2>
 	<p>{{ trans('app.installation.1') }}</p>
 	<p>{{ trans('app.installation.2') }}</p>

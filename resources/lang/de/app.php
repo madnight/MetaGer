@@ -9,7 +9,7 @@ return [
     'metager.playstore' => 'Google Playstore',
     'metager.manuell'   => 'Manuelle Installation',
     'head.3'            => 'MetaGer Maps App',
-    'maps.1'            => 'Diese App bietet eine native Integration von <a href="https://maps.metager.de" target="_blank">MetaGer Maps</a> (powered by <a href="https://www.openstreetmap.de/" target="_blank">Openstreetmap</a>) auf ihr Android Mobilgerät',
+    'maps.1'            => 'Diese App bietet eine native Integration von <a href="https://maps.metager.de" target="_blank">MetaGer Maps</a> (powered by <a href="https://www.openstreetmap.de/" target="_blank">Openstreetmap</a>) auf ihrem Android Mobilgerät',
     'maps.2'            => 'Dadurch läuft der Karten- und Navigationsdienst auch auf Ihrem Smartphone optimal. Die App steigert die Performance im Vergleich zur Verwendung im mobilen Browser und bietet einige weitere Vorteile. Probiere es aus.',
     'maps.3'            => 'Diese Android App ist noch nicht im Google Playstore verfügbar (folgt demnächst). Die App fragt nach dem ersten Start nach folgenden Berechtigungen:',
     'maps.list.1'       => 'Zugriff auf Positionsdaten	=> Falls GPS an ihrem Mobiltelefon aktiviert ist, können wir dadurch Ihre Suchergebnisse verbessern. Außerdem schalten Sie damit die Funktion Schritt-für-Schritt Navigation frei. <b>Selbstverständlich werden diese Daten nirgendwo gespeichert und erst recht nicht an dritte weiter gegeben!</b>',

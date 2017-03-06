@@ -150,7 +150,7 @@
 										<a href="http://code.metager.de/"  >{{ trans('staticPages.nav12') }}</a>
 									</li>
 									<li>
-										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe#mg-app") }}">@lang('staticPages.nav25')</a>
+										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/app/") }}">@lang('staticPages.nav25')</a>
 									</li>
 									<li>
 										<a href="https://metager.to/"  >{{ trans('staticPages.nav13') }}</a>

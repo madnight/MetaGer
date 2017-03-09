@@ -141,7 +141,7 @@
 										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/widget/") }}">{{ trans('staticPages.nav10') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/klassik/zitat-suche/"  >{{ trans('staticPages.nav22') }}</a>
+										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/zitat-suche/") }}"  >{{ trans('staticPages.nav22') }}</a>
 									</li>
 									<li>
 										<a href="https://metager.de/klassik/asso/"  >{{ trans('staticPages.nav11') }}</a>

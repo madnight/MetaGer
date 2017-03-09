@@ -18,7 +18,7 @@
 	<hr />
 	<h3>Ergebnisse für die Suche "{{$q}}":</h3>
 	@foreach($results as $author => $quotes)
-	<b>{{$author}}:</b>
+	<b><a href="{{ action('MetaGerSearch@search', ['eingabe' => $author, 'focus' => 'web', 'encoding' => 'utf8', 'lang' => 'all']) }}" target="_blank">{{$author}}</a>:</b>
 	<ul class="list-unstyled">
 		@foreach($quotes as $quote)
 		<li><quote>"{{ $quote }}"</quote></li>

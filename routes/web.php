@@ -127,6 +127,8 @@ Route::group(
                 ->with('navbarFocus', 'dienste');
         });
 
+        Route::get('zitat-suche', 'ZitatController@zitatSuche');
+
         Route::group(['middleware' => ['referer.check'], 'prefix' => 'admin'], function () {
             Route::get('/', 'AdminInterface@index');
             Route::get('count', 'AdminInterface@count');

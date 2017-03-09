@@ -32,8 +32,8 @@ class ZitatController extends Controller
                 if ($valid) {
                     # This Result is valid. We'll add it Sorted by author
                     if (preg_match("/^\"([^\"]+)\"\s(.*)$/", $zitat, $matches)) {
-                        $quote  = $matches[1];
-                        $author = $matches[2];
+                        $quote  = trim($matches[1]);
+                        $author = trim($matches[2]);
 
                         if (isset($validResults[$author])) {
                             $validResults[$author][] = $quote;

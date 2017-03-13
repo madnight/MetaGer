@@ -50,7 +50,7 @@ input[type=text]:focus, textarea:focus, input[type=email]:focus, input[type=tel]
 	color: <?=$color?>;
 }
 
-.navbar {
+.navbar, #navbar-static-pages {
 	border-bottom: 3px solid <?=$color?>;
 	box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
 }

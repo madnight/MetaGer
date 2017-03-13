@@ -140,6 +140,13 @@ class MetaGer
                         ->with('suspendheader', "yes")
                         ->with('browser', (new Agent())->browser());
                     break;
+                case 'rss20':
+                    return view('metager3resultsrss20')
+                        ->with('results', $viewResults)
+                        ->with('eingabe', $this->eingabe)
+                        ->with('metager', $this)
+                        ->with('resultcount', sizeof($viewResults));
+                    break;
                 case 'result-count':
                     # Wir geben die Ergebniszahl und die benötigte Zeit zurück:
                     return sizeof($viewResults) . ";" . round((microtime(true) - $this->starttime), 2);
@@ -974,7 +981,7 @@ class MetaGer
         }
         $this->out = $request->input('out', "html");
         # Standard output format html
-        if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style" && $this->out !== "result-count") {
+        if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style" && $this->out !== "result-count" && $this->out !== "rss20") {
             $this->out = "html";
         }
         # Wir schalten den Cache aus, wenn die Ergebniszahl überprüft werden soll

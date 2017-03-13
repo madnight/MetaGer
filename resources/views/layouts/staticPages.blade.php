@@ -30,157 +30,162 @@
 	</head>
 	<body>
 		<header>
-			<nav class="navbar navbar-default navbar-fixed-top">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-							<span class="sr-only">{{ trans('staticPages.navigationToggle') }}</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						@yield('homeIcon')
-					</div>
-					<div class="collapse navbar-collapse" id="navbar-collapse">
-						<ul class="nav navbar-nav navbar-right">
-							<li @if ( !isset($navbarFocus) || $navbarFocus === 'suche') class="active" @endif >
-								<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}" id="navigationSuche">{{ trans('staticPages.nav1') }}</a>
-							</li>
-							<li @if (isset($navbarFocus) && $navbarFocus === 'foerdern') class="dropdown active" @else class="dropdown" @endif >
-								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('staticPages.nav16') }}
+			@yield('homeIcon')
+		<nav id="navbar-static-pages" class="navbar-resultpage">
+
+
+			<ul id="metager-static-nav-list" class="list-inline pull-right">
+				<li id="toggle-nav-hide" class="hidden">
+					<a class="metager-navbar-toggle pull-right" href="#" data-original-title="" title="">
+									<span class="sr-only">Navigation anzeigen</span>
+									<span class="glyphicon glyphicon-menu-hamburger"></span>
+					</a>
+					<div class="clearfix"></div>
+				</li>
+				<li id="toggle-nav-show">
+					<a class="metager-navbar-toggle pull-right" href="#metager-static-nav-list" data-original-title="" title="">
+									<span class="sr-only">Navigation anzeigen</span>
+									<span class="glyphicon glyphicon-menu-hamburger"></span>
+					</a>
+					<div class="clearfix"></div>
+				</li>
+				<li @if ( !isset($navbarFocus) || $navbarFocus === 'suche') class="active" @endif >
+					<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}"  tabindex="200" id="navigationSuche">{{ trans('staticPages.nav1') }}</a>
+				</li>
+				<li @if (isset($navbarFocus) && $navbarFocus === 'foerdern') class="metager-dropdown active" @else class="metager-dropdown" @endif >
+					<a class="metager-dropdown-toggle" role="button" aria-expanded="false" tabindex="201">{{ trans('staticPages.nav16') }}
 								<span class="caret"></span></a>
-								<ul class="dropdown-menu">
+								<ul class="metager-dropdown-menu">
 									<li>
-										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/spende/") }}">{{ trans('staticPages.nav2') }}</a>
+										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/spende/") }}" tabindex="202">{{ trans('staticPages.nav2') }}</a>
 									</li>
 									<li>
-										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/beitritt/") }}">{{ trans('staticPages.nav23') }}</a>
+										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/beitritt/") }}" tabindex="203">{{ trans('staticPages.nav23') }}</a>
 									</li>
 									<li>
-										<a href="https://www.boost-project.com/de/shops?charity_id=1129&amp;tag=bl">{{ trans('staticPages.nav17') }}</a>
+										<a href="https://www.boost-project.com/de/shops?charity_id=1129&amp;tag=bl" tabindex="204">{{ trans('staticPages.nav17') }}</a>
 									</li>
 								</ul>
 							</li>
 							@if(LaravelLocalization::getCurrentLocale() === "de")
-							<li id="gutscheine"@if (isset($navbarFocus) && $navbarFocus === 'gutscheine') class="dropdown active" @else class="dropdown" @endif >
-								<span class="dropdown-toggle" data-role="button" aria-expanded="false">... durch {!! trans('staticPages.gutscheineToggle') !!}
-								<span class="caret"></span></span>
-								<ul class="dropdown-menu">
+							<li id="gutscheine"@if (isset($navbarFocus) && $navbarFocus === 'gutscheine') class="metager-dropdown active" @else class="metager-dropdown" @endif >
+								{!! trans('staticPages.gutscheineToggle') !!}
+								<a class="metager-dropdown-toggle" data-role="button" aria-expanded="false" tabindex="205"><span class="caret"></span></span>
+								<ul class="metager-dropdown-menu">
 									<li>
-										<a href="https://metager.de/gutscheine/congstar/"  >{{ trans('staticPages.gutscheine.2') }}</a>
+										<a href="https://metager.de/gutscheine/congstar/" tabindex="206" >{{ trans('staticPages.gutscheine.2') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/gutscheine/check24/"  >{{ trans('staticPages.gutscheine.3') }}</a>
+										<a href="https://metager.de/gutscheine/check24/" tabindex="207" >{{ trans('staticPages.gutscheine.3') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/gutscheine/handyflash/"  >{{ trans('staticPages.gutscheine.4') }}</a>
+										<a href="https://metager.de/gutscheine/handyflash/" tabindex="208" >{{ trans('staticPages.gutscheine.4') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/gutscheine/groupon/"  >{{ trans('staticPages.gutscheine.5') }}</a>
+										<a href="https://metager.de/gutscheine/groupon/" tabindex="209" >{{ trans('staticPages.gutscheine.5') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/gutscheine/medion/"  >{{ trans('staticPages.gutscheine.6') }}</a>
+										<a href="https://metager.de/gutscheine/medion/" tabindex="210" >{{ trans('staticPages.gutscheine.6') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/gutscheine/navabi/"  >{{ trans('staticPages.gutscheine.7') }}</a>
+										<a href="https://metager.de/gutscheine/navabi/" tabindex="211" >{{ trans('staticPages.gutscheine.7') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/gutscheine/netcologne/"  >{{ trans('staticPages.gutscheine.8') }}</a>
+										<a href="https://metager.de/gutscheine/netcologne/" tabindex="212" >{{ trans('staticPages.gutscheine.8') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/gutscheine/teufel/"  >{{ trans('staticPages.gutscheine.9') }}</a>
+										<a href="https://metager.de/gutscheine/teufel/" tabindex="213" >{{ trans('staticPages.gutscheine.9') }}</a>
 									</li>
 									<li role="separator" class="divider"></li>
 									<li>
-										<a href="https://metager.de/gutscheine/alle-gutscheine/"  >{{ trans('staticPages.gutscheine.10') }}</a>
+										<a href="https://metager.de/gutscheine/alle-gutscheine/" tabindex="214" >{{ trans('staticPages.gutscheine.10') }}</a>
 									</li>
 								</ul>
 							</li>
 							@endif
 							<li @if (isset($navbarFocus) && $navbarFocus === 'datenschutz') class="active" @endif >
-								<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/datenschutz/") }}" id="navigationPrivacy">{{ trans('staticPages.nav3') }}</a>
+								<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/datenschutz/") }}" id="navigationPrivacy" tabindex="215">{{ trans('staticPages.nav3') }}</a>
 							</li>
-							<li @if (isset($navbarFocus) && $navbarFocus === 'hilfe') class="dropdown active" @else class="dropdown" @endif >
-								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navigationHilfe">{{ trans('staticPages.nav20') }}
+							<li @if (isset($navbarFocus) && $navbarFocus === 'hilfe') class="metager-dropdown active" @else class="metager-dropdown" @endif >
+								<a class="metager-dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" id="navigationHilfe" tabindex="216">{{ trans('staticPages.nav20') }}
 								<span class="caret"></span></a>
-								<ul class="dropdown-menu">
+								<ul class="metager-dropdown-menu">
 									<li>
-										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe/") }}">{{ trans('staticPages.nav20') }}</a>
+										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/hilfe/") }}" tabindex="217">{{ trans('staticPages.nav20') }}</a>
 									</li>
 									<li>
-										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/faq/") }}">{{ trans('staticPages.nav21') }}</a>
+										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/faq/") }}" tabindex="218">{{ trans('staticPages.nav21') }}</a>
 									</li>
 								</ul>
 							</li>
-							<li @if (isset($navbarFocus) && $navbarFocus === 'kontakt') class="dropdown active" @else class="dropdown" @endif >
-								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navigationKontakt">{{ trans('staticPages.nav18') }}
+							<li @if (isset($navbarFocus) && $navbarFocus === 'kontakt') class="metager-dropdown active" @else class="metager-dropdown" @endif >
+								<a class="metager-dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" id="navigationKontakt" tabindex="219">{{ trans('staticPages.nav18') }}
 								<span class="caret"></span></a>
-								<ul class="dropdown-menu">
+								<ul class="metager-dropdown-menu">
 									<li>
-										<a href="http://forum.suma-ev.de/">{{ trans('staticPages.nav4') }}</a>
+										<a href="http://forum.suma-ev.de/" tabindex="220">{{ trans('staticPages.nav4') }}</a>
 									</li>
 									<li>
-										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/kontakt/") }}">{{ trans('staticPages.nav5') }}</a>
+										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/kontakt/") }}" tabindex="221">{{ trans('staticPages.nav5') }}</a>
 									</li>
 									<li>
-										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/team/") }}">{{ trans('staticPages.nav6') }}</a>
+										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/team/") }}" tabindex="222">{{ trans('staticPages.nav6') }}</a>
 									</li>
 									<li>
-										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/about/") }}">{{ trans('staticPages.nav7') }}</a>
+										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/about/") }}" tabindex="223">{{ trans('staticPages.nav7') }}</a>
 									</li>
 									<li>
-										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/impressum/") }}">{{ trans('staticPages.nav8') }}</a>
+										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/impressum/") }}" tabindex="224">{{ trans('staticPages.nav8') }}</a>
 									</li>
 								</ul>
 							</li>
-							<li @if (isset($navbarFocus) && $navbarFocus === 'dienste') class="dropdown active" @else class="dropdown" @endif >
-								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('staticPages.nav15') }}
+							<li @if (isset($navbarFocus) && $navbarFocus === 'dienste') class="metager-dropdown active" @else class="metager-dropdown" @endif >
+								<a class="metager-dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" tabindex="225">{{ trans('staticPages.nav15') }}
 								<span class="caret"></span></a>
-								<ul class="dropdown-menu">
+								<ul class="metager-dropdown-menu">
 									<li>
-										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/widget/") }}">{{ trans('staticPages.nav10') }}</a>
+										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/widget/") }}" tabindex="226">{{ trans('staticPages.nav10') }}</a>
 									</li>
 									<li>
-										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/zitat-suche/") }}"  >{{ trans('staticPages.nav22') }}</a>
+										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/zitat-suche/") }}" tabindex="227">{{ trans('staticPages.nav22') }}</a>
 									</li>
 									<li>
-										<a href="https://metager.de/klassik/asso/"  >{{ trans('staticPages.nav11') }}</a>
+										<a href="https://metager.de/klassik/asso/" tabindex="228">{{ trans('staticPages.nav11') }}</a>
 									</li>
 									<li>
-										<a href="http://code.metager.de/"  >{{ trans('staticPages.nav12') }}</a>
+										<a href="http://code.metager.de/" tabindex="229">{{ trans('staticPages.nav12') }}</a>
 									</li>
 									<li>
-										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/app/") }}">@lang('staticPages.nav25')</a>
+										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/app/") }}" tabindex="230">@lang('staticPages.nav25')</a>
 									</li>
 									<li>
-										<a href="https://metager.to/"  >{{ trans('staticPages.nav13') }}</a>
+										<a href="https://metager.to/" tabindex="231">{{ trans('staticPages.nav13') }}</a>
 									</li>
 									<li>
-										<a href="https://maps.metager.de" target="_blank">Maps.MetaGer.de</a>
+										<a href="https://maps.metager.de" target="_blank" tabindex="232">Maps.MetaGer.de</a>
 									</li>
 									<li>
-										<a href="https://gitlab.metager3.de/open-source/MetaGer"  >{{ trans('staticPages.nav24') }}</a>
+										<a href="https://gitlab.metager3.de/open-source/MetaGer" tabindex="233">{{ trans('staticPages.nav24') }}</a>
 									</li>
 									<li>
-										<a href="http://forum.suma-ev.de/viewtopic.php?f=3&amp;t=43"  >{{ trans('staticPages.nav14') }}</a>
+										<a href="http://forum.suma-ev.de/viewtopic.php?f=3&amp;t=43" tabindex="234">{{ trans('staticPages.nav14') }}</a>
 									</li>
 								</ul>
 							</li>
-							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navigationSprache">{{ trans('staticPages.nav19') }} ({{ LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native'] }})
+							<li class="metager-dropdown">
+								<a class="metager-dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" id="navigationSprache" tabindex="235">{{ trans('staticPages.nav19') }} ({{ LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native'] }})
 								<span class="caret"></span></a>
-								<ul class="dropdown-menu">
+								<ul class="metager-dropdown-menu">
 									@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
 										<li>
-											<a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">{{{ $properties['native'] }}}</a>
+											<a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}" tabindex="{{235 + $loop->index}}">{{{ $properties['native'] }}}</a>
 										</li>
 									@endforeach
 								</ul>
 							</li>
-						</ul>
-					</div>
-				</div>
-			</nav>
+			</ul>
+		</nav>
+
 		</header>
 		<div class="wrapper">
 			<main class="mg-panel container">

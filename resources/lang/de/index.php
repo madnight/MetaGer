@@ -37,7 +37,7 @@ return [
     'plugin.head.4'       => 'MetaGer zum Internet Explorer hinzufügen',
     'plugin.head.5'       => 'MetaGer zum Microsoft Edge hinzufügen',
     'plugin.head.6'       => 'MetaGer zum Safari hinzufügen',
-    'plugin.head.6'       => 'MetaGer zum Vivaldi hinzufügen',
+    'plugin.head.7'       => 'MetaGer zum Vivaldi hinzufügen',
     'plugin.head.info'    => '(aktuelle Sucheinstellungen werden übernommen)',
 
     'plugin.firefox.1'    => 'Klicken Sie in Ihrem Browser oben rechts im Suchfeld auf die Lupe mit dem kleinen "+" und dann auf "MetaGer hinzufügen" (siehe Bild)',

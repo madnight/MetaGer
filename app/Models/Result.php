@@ -225,8 +225,8 @@ class Result
         }
 
         # Eventueller Sprachfilter
-        if ($metager->getLang() !== "all" && isset($this->langCode)) {
-            if ($metager->getLang() !== $this->langCode) {
+        if ($metager->getLang() !== "all") {
+            if (!isset($this->langCode) || $this->langCode === NULL || $metager->getLang() !== $this->langCode) {
                 return false;
             }
 

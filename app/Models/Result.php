@@ -315,7 +315,15 @@ class Result
         if (!$link) {
             return "";
         }
+        
+        # Link to our new Proxy software:
+        $pw = md5(env('PROXY_PASSWORD') . $link);
 
+        $proxyUrl = base64_encode(str_rot13($link));
+        $proxyUrl = urlencode(str_replace("/", "<<SLASH>>", $proxyUrl));
+        
+        return "https://proxy.suma-ev.de/" . $pw . "/" . $proxyUrl;
+/*
         $tmp = $link;
         $tmp = preg_replace("/\r?\n$/s", "", $tmp);
         $tmp = str_replace("=", "=3d", $tmp);
@@ -326,7 +334,7 @@ class Result
         $tmp = preg_replace("#^([\w+.-]+)://#s", "$1/", $tmp);
         $tmp = str_replace("//", "/=2f", $tmp);
         return "https://proxy.suma-ev.de/mger/nph-proxy.cgi/en/w0/" . $tmp;
-
+*/
     }
 
     /* Liest aus einer URL alle Informationen aus

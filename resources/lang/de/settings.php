@@ -2,7 +2,7 @@
 
 return [
     'head.1'            => 'Einstellungen',
-    'head.2'            => 'Hier können Sie Ihr MetaGer anpassen: Nach Anklicken Ihrer gewünschten Einstellungen müssen Sie <a href="#save-once">unten auf dieser Seite</a> wählen, ob Sie die Einstellungen dauerhaft speichern, oder nur einmalig setzen wollen.',
+    'head.2'            => 'Hier können Sie Ihr MetaGer anpassen: Nach Anklicken Ihrer gewünschten Einstellungen müssen Sie <a href="#save-once">unten auf dieser Seite</a> wählen, ob Sie die Einstellungen dauerhaft speichern, oder nur einmalig setzen wollen. Nutzen Sie die allgemeinen Einstellungen um Ihre Ergebnisseite anzupassen oder stellen Sie sich Ihre eigene Auswahl an Suchmaschinen zusammen.',
 
     'allgemein.1'       => 'Allgemein',
 

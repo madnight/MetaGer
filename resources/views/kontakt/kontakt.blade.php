@@ -92,4 +92,6 @@ geiG3j1J/CaDBZqPBaBflK0UWR5nxCsoOk7i5f3isUeXSVLTnA+K9HkQ6D/Gt5vx
 <h2>{!! trans('kontakt.letter.1') !!}</h2>
 <p>{!! trans('kontakt.letter.2') !!}</p>
 <address>{!! trans('kontakt.letter.3') !!}</address>
+<script type="text/javascript" src="{{ elixir('js/lib.js') }}"></script>
+<script type="text/javascript" src="{{ elixir('js/kontakt.js') }}"></script>
 @endsection

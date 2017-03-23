@@ -34,6 +34,8 @@ class StartpageController extends Controller
         $agent   = new Agent();
         $browser = $agent->browser();
 
+        $foki = $this->loadFoki();
+
         return view('index')
             ->with('title', trans('titles.index'))
             ->with('homeIcon')
@@ -48,7 +50,8 @@ class StartpageController extends Controller
             ->with('navbarFocus', 'suche')
             ->with('theme', $theme)
             ->with('maps', $maps)
-            ->with('autocomplete', $request->input('param_autocomplete', 'on'));
+            ->with('autocomplete', $request->input('param_autocomplete', 'on'))
+            ->with('foki', $foki);
     }
 
     public function loadPage($subpage)
@@ -118,6 +121,35 @@ class StartpageController extends Controller
 
     public function loadSettings(Request $request)
     {
+        $foki = $this->loadFoki();
+
+        return view('settings')
+            ->with('foki', $foki)
+            ->with('title', 'Einstellungen')
+            ->with('js', ['settings.js'])
+            ->with('navbarFocus', 'suche');
+        die(var_dump($foki));
+
+        return $xml->saveXML();
+    }
+
+    public function berlin(Request $request)
+    {
+        $link     = "";
+        $password = "";
+        if ($request->has('eingabe')) {
+            $password = getenv('berlin');
+            $password = md5($request->input('eingabe') . " -host:userpage.fu-berlin.de" . $password);
+            $link     = "/meta/meta.ger3?eingabe=" . $request->input('eingabe') . " -host:userpage.fu-berlin.de&focus=web&password=" . $password . "&encoding=utf8&lang=all&site=fu-berlin.de&quicktips=off&out=results-with-style";
+        }
+        return view('berlin')
+            ->with('title', 'Testseite für die FU-Berlin')
+            ->with('link', $link)
+            ->with('password', $password);
+    }
+
+    private function loadFoki()
+    {
         $sumaFile = "";
         if (App::isLocale('en')) {
             $sumaFile = config_path() . "/sumas.xml";
@@ -146,28 +178,6 @@ class StartpageController extends Controller
             }
         }
 
-        return view('settings')
-            ->with('foki', $foki)
-            ->with('title', 'Einstellungen')
-            ->with('js', ['settings.js'])
-            ->with('navbarFocus', 'suche');
-        die(var_dump($foki));
-
-        return $xml->saveXML();
-    }
-
-    public function berlin(Request $request)
-    {
-        $link     = "";
-        $password = "";
-        if ($request->has('eingabe')) {
-            $password = getenv('berlin');
-            $password = md5($request->input('eingabe') . " -host:userpage.fu-berlin.de" . $password);
-            $link     = "/meta/meta.ger3?eingabe=" . $request->input('eingabe') . " -host:userpage.fu-berlin.de&focus=web&password=" . $password . "&encoding=utf8&lang=all&site=fu-berlin.de&quicktips=off&out=results-with-style";
-        }
-        return view('berlin')
-            ->with('title', 'Testseite für die FU-Berlin')
-            ->with('link', $link)
-            ->with('password', $password);
+        return $foki;
     }
 }

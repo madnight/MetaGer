@@ -17,6 +17,11 @@ $(document).ready(function() {
             setSettings();
         }
     }
+    setActionListeners();
+    loadInitialCustomFocuses()
+});
+
+function setActionListeners() {
     $("button").on("shown.bs.popover", function() {
         $("#color-chooser a").click(function() {
             var theme = $(this).attr("data-rgba");
@@ -27,20 +32,25 @@ $(document).ready(function() {
         });
     });
     $("#mobileFoki").change(function() {
-        var fokus = $("#mobileFoki > option:selected").val();
-        if (fokus == "angepasst") window.location = "./settings/";
-        else window.location = "./?focus=" + fokus; //$("#mobileFoki > option:selected").val());
+        var focus = $("#mobileFoki > option:selected").val();
+        if (focus == "angepasst") {
+            window.location = "./settings/";
+        } else {
+            window.location = "./?focus=" + focus;
+            //$("#mobileFoki > option:selected").val());
+        }
     });
     if ($("fieldset#foki.mobile").length) {
         $("fieldset#foki.mobile label#anpassen-label").click(function() {
             window.location = "./settings/";
         });
     }
-    $("#reset-settings-btn").click(function() {
-        softResetOptions();
-        document.location.href = $("#reset-settings-btn").attr("data-href");
+    $("#addFocusBtn").click(function() {
+        showFocusCreateDialog("")
     });
-});
+    $("#save-focus-btn").click(saveFocus);
+    $("#delete-focus-btn").click(deleteFocus);
+}
 
 function setSettings() {
     if (canCustomSearch()) {
@@ -184,7 +194,7 @@ function softResetOptions() {
 }
 
 function canCustomSearch() {
-    if (localStorage.key("focus") === "angepasst") {
+    if (localStorage.key("focus") === "eigene") {
         return true;
     }
     var metaParams = ["param_sprueche", "param_maps", "param_newtab", "param_lang", "param_autocomplete"];
@@ -202,4 +212,154 @@ function canCustomSearch() {
         }
     }
     return false;
+}
+
+function loadInitialCustomFocuses() {
+    for (var key in localStorage) {
+        if (key.startsWith("focus_")) {
+            var focus = loadFocusById(key);
+            addFocus(focus.name);
+        }
+    }
+}
+
+function showFocusCreateDialog(id = "") {
+    document.getElementById("original-id").value = id;
+    $("#create-focus-modal").modal("show");
+    var storedFocus = loadFocusById(id);
+    var focus = {};
+    // Try to load a focus for the given id
+    $("#focus-name").val("");
+    uncheckAll()
+    if (storedFocus !== null) {
+        try {
+            focus = JSON.parse(localStorage.getItem(id));
+            $("#focus-name").val(focus.name);
+            for (var key in focus) {
+                if (key.startsWith("engine_")) {
+                    $(".focusCheckbox[name=" + key + "]").prop('checked', true);
+                }
+            }
+        } catch (ex) {
+            console.error(ex);
+        }
+    }
+}
+
+function showFocusEditDialog(id) {
+    showFocusCreateDialog(id);
+}
+
+function saveFocus() {
+    var focus = {};
+    var name = document.getElementById("focus-name").value;
+    var id = getIdFromName(name);
+    var oldId = document.getElementById("original-id").value;
+    $("input[type=checkbox]:checked").each(function(el) {
+        focus[$(this).attr("name")] = $(this).val();
+    });
+    focus["name"] = name;
+    if (localStorage.getItem(id) === null) {
+        addFocus(name);
+    }
+    if (oldId !== "") {
+        localStorage.removeItem(oldId);
+        removeFocusById(oldId);
+    }
+    localStorage.setItem(id, JSON.stringify(focus));
+    $("#create-focus-modal").modal("hide");
+}
+
+function deleteFocus() {
+    var oldId = document.getElementById("original-id").value;
+    localStorage.removeItem(oldId);
+    removeFocusById(oldId);
+    $("#create-focus-modal").modal("hide");
+}
+/*
+<input id="NAME" class="hide" type="radio" name="focus" value="NAME" form="searchForm" checked required>
+<label id="NAME-label" for="NAME">
+    <span class="glyphicon glyphicon-star"></span>
+    <span class="content">NAME</span>
+    <button class="btn btn-default">
+        <span class="glyphicon glyphicon-pencil"></span>
+    </button>
+</label>
+*/
+function addFocus(name) {
+    var id = getIdFromName(name);
+    var foki = document.getElementById("foki");
+    // create <div> to wrap all Elements
+    var wrapper = document.createElement("div");
+    wrapper.classList.add("focus");
+    // create <input>
+    var newFocus = document.createElement("input");
+    newFocus.id = id;
+    newFocus.classList.add("focus-radio");
+    newFocus.classList.add("custom-focus");
+    newFocus.classList.add("hide");
+    newFocus.type = "radio";
+    newFocus.name = "focus";
+    newFocus.value = name;
+    newFocus.setAttribute("Form", "searchForm");
+    newFocus.checked = true;
+    newFocus.required = true;
+    // create <label>
+    var newFocusLabel = document.createElement("label");
+    newFocusLabel.id = id + "-label";
+    newFocusLabel.classList.add("focus-label");
+    newFocusLabel.classList.add("custom-focus-label");
+    newFocusLabel.htmlFor = id;
+    // create glyphicon
+    var newFocusGlyphicon = document.createElement("span");
+    newFocusGlyphicon.classList.add("glyphicon");
+    newFocusGlyphicon.classList.add("glyphicon-star");
+    // create content
+    var newFocusContent = document.createElement("span");
+    newFocusGlyphicon.classList.add("content");
+    newFocusContent.textContent = name;
+    // create edit button
+    var newFocusEditLink = document.createElement("a");
+    newFocusEditLink.classList.add("focus-edit");
+    newFocusEditLink.classList.add("custom-focus-edit");
+    newFocusEditLink.classList.add("mutelink");
+    newFocusEditLink.href = "#";
+    newFocusEditLink.onclick = function() {
+        showFocusEditDialog(id);
+    }
+    var newFocusEditLinkGlyphicon = document.createElement("span");
+    newFocusEditLinkGlyphicon.classList.add("glyphicon");
+    newFocusEditLinkGlyphicon.classList.add("glyphicon-pencil");
+    // add new elements
+    var addFocusBtn = document.getElementById("addFocusBtn");
+    foki.insertBefore(wrapper, addFocusBtn);
+    wrapper.appendChild(newFocus);
+    wrapper.appendChild(newFocusLabel);
+    newFocusLabel.appendChild(newFocusGlyphicon);
+    newFocusLabel.appendChild(newFocusContent);
+    wrapper.appendChild(newFocusEditLink);
+    newFocusEditLink.appendChild(newFocusEditLinkGlyphicon);
+}
+
+function removeFocus(name) {
+    removeFocusById(getIdFromName(name));
+}
+
+function removeFocusById(id) {
+    var focusRadio = document.getElementById(id);
+    var focus = focusRadio.parentNode;
+    var parent = focus.parentNode;
+    parent.removeChild(focus);
+}
+
+function getIdFromName(name) {
+    return "focus_" + name.split(" ").join("_").toLowerCase();
+}
+
+function loadFocusById(id) {
+    return JSON.parse(localStorage.getItem(id));
+}
+
+function uncheckAll() {
+    $(".focusCheckbox").prop("checked", false);
 }

@@ -6870,28 +6870,6 @@ Mixed
 #sponsors h2 {
   font-size: 1.5em;
 }
-#foki label > span {
-  margin-right: 5px;
-}
-#foki label span {
-  background-color: transparent;
-}
-#foki input {
-  visibility: hidden;
-}
-#foki input:checked + label {
-  font-weight: bold;
-  background-color: #e3e3e3;
-}
-#foki input + label {
-  border-radius: 4px;
-  padding: 7px 20px;
-  font-weight: normal;
-}
-#foki input + label:hover {
-  cursor: pointer;
-  background-color: #e3e3e3;
-}
 #color-chooser a {
   display: block;
   width: 50px;
@@ -7744,6 +7722,59 @@ footer a {
 }
 #anpassen-label a {
   color: #333;
+}
+.focus {
+  margin: 0px;
+}
+.focus ~ .focus {
+  margin-left: 10px;
+}
+#foki input + .custom-focus-label {
+  border-radius: 7px 0px 0px 7px;
+}
+#foki input + .custom-focus-label + .custom-focus-edit {
+  margin-left: 5px;
+  display: inline-block;
+  border-radius: 0px 7px 7px 0px;
+}
+#foki {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+#foki label > span {
+  margin-right: 5px;
+}
+#foki label span {
+  background-color: transparent;
+}
+#foki input {
+  visibility: hidden;
+}
+.focus-radio:checked + .focus-label,
+.focus-radio:checked + .focus-label + .focus-edit {
+  background-color: #e3e3e3;
+}
+.focus-label,
+.focus-edit {
+  margin: 0px;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: normal;
+}
+.focus:hover .focus-label,
+.focus:hover .focus-edit {
+  cursor: pointer;
+  background-color: #e3e3e3;
+}
+#addFocusBtn {
+  margin-left: 10px;
+}
+#settings-btn {
+  margin-left: auto;
+}
+#settings-btn > * {
+  vertical-align: middle;
 }
 /*input[type=text]:focus, textarea:focus, input[type=email]:focus, input[type=tel]:focus {
     outline-color: rgb(255, 128, 0);

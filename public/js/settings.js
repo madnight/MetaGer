@@ -11,9 +11,7 @@ $(document).ready(function() {
             $(selector + " input").prop("checked", true);
         }
     });
-    $(".allUnchecker").click(function() {
-        $(".focusCheckbox").prop("checked", false);
-    });
+    $(".allUnchecker").click(uncheckAll);
     // Button listener
     if (localStorage) {
         $("#save").removeClass("hidden");
@@ -64,6 +62,9 @@ $(document).ready(function() {
                 break;
         }
     });
+    uncheckAll();
+    $(".checker, .allUnchecker").removeClass("hide");
+    $("#settings-focus").val("angepasst");
 });
 
 function tickOptions() {
@@ -114,4 +115,8 @@ function getLanguage() {
 function pageCanJS() {
     $("#collapse-engines-div").removeClass("in");
     $("#collapse-engines-btn").removeClass("hide");
+}
+
+function uncheckAll() {
+    $(".focusCheckbox").prop("checked", false);
 }

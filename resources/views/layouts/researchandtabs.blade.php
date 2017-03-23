@@ -118,14 +118,14 @@
 			@endif
 
 			@if( $metager->getFokus() === "angepasst")
-				<li id="angepasstTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
+				<li id="angepasstTabSelector" class="tab-selector active" role="presentation" data-loaded="1">
 					<a aria-controls="angepasst" data-href="#angepasst" href="#angepasst">
 						<span class='glyphicon glyphicon-star'></span>
 						<span class="hidden-xs">{!! trans('index.foki.eigene') !!}</span>
 					</a>
 				</li>
 			@elseif( $metager->canCustomSearch() )
-				<li data-loaded="0" id="angepasstTabSelector" class="tab-selector" role="presentation">
+				<li id="angepasstTabSelector" class="tab-selector" role="presentation" data-loaded="0">
 					<a aria-controls="angepasst" data-href="{{ $metager->generateSearchLink('angepasst') }}" href="{{ $metager->generateSearchLink('angepasst') }}">
 						<span class='glyphicon glyphicon-star'></span>
 						<span class="hidden-xs">{{ trans('index.foki.eigene') }}</span>

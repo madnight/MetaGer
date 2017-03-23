@@ -15,6 +15,13 @@ class StartpageController extends Controller
      * @param  int  $id
      * @return Response
      */
+    /* public function loadStartPage($locale = "de")
+    {
+    \App::setLocale($locale);
+    return view('index', [
+    'title' => 'MetaGer: Sicher suchen & finden, Privatsphäre schützen',
+    'homeIcon']);
+    } */
 
     public function loadStartPage(Request $request)
     {

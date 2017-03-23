@@ -117,20 +117,14 @@
 				</li>
 			@endif
 
-			@if( $metager->getFokus() === "angepasst")
+			@if( $metager->getFokus() === "angepasst" )
 				<li id="angepasstTabSelector" class="tab-selector active" role="presentation" data-loaded="1">
 					<a aria-controls="angepasst" data-href="#angepasst" href="#angepasst">
-						<span class='glyphicon glyphicon-star'></span>
-						<span class="hidden-xs">{!! trans('index.foki.eigene') !!}</span>
+						<span class='glyphicon glyphicon-cog'></span>
+						<span class="hidden-xs">{{ trans('index.foki.angepasst') }}</span>
 					</a>
 				</li>
-			@elseif( $metager->canCustomSearch() )
 				<li id="angepasstTabSelector" class="tab-selector" role="presentation" data-loaded="0">
-					<a aria-controls="angepasst" data-href="{{ $metager->generateSearchLink('angepasst') }}" href="{{ $metager->generateSearchLink('angepasst') }}">
-						<span class='glyphicon glyphicon-star'></span>
-						<span class="hidden-xs">{{ trans('index.foki.eigene') }}</span>
-					</a>
-				</li>
 			@endif
 
 			<li id="mapsTabSelector" role="presentation" class="tab-selector">
@@ -202,7 +196,7 @@
 		@if( $metager->getFokus() === "produktsuche" )
 			<div role="tabpanel" class="tab-pane active" id="produktsuche">
 				<div class="row">
-					@yield('results')
+						@yield('results')
 				</div>
 			 </div>
 		@else
@@ -213,16 +207,10 @@
 			</div>
 		@endif
 
-		@if( $metager->getFokus() === "angepasst")
+		@if( $metager->getFokus() === "angepasst" )
 			<div role="tabpanel" class="tab-pane active" id="angepasst">
 				<div class="row">
-					@yield('results')
-				</div>
-			</div>
-		@elseif( $metager->canCustomSearch() )
-			<div role="tabpanel" class="tab-pane" id="angepasst">
-				<div class="loader">
-					<img src="/img/ajax-loader.gif" alt="" />
+						@yield('results')
 				</div>
 			</div>
 		@endif

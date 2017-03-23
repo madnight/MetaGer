@@ -18,4 +18,5 @@ return [
     'partnershops'   => 'Partnershops - MetaGer',
     'languages'      => 'Übersetzungstool - MetaGer',
     'languages.edit' => 'Sprachdateien bearbeiten - MetaGer',
+    'app'            => 'Apps - MetaGer',
 ];

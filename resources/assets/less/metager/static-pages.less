@@ -28,6 +28,17 @@ By ID
 
 */
 
+#gutscheine > a {
+    display: inline-block;
+}
+
+#gutscheine > a:first-child{
+    padding-right: 0;
+}
+#gutscheine > a:first-child + a{
+    padding-left: 0;
+}
+
 #color-chooser {
     padding: 0;
 }
@@ -54,24 +65,135 @@ By ID
     font-family: Georgia, "Times New Roman", Palatino, Times, serif;
 }
 
-li#gutscheine.dropdown:hover ul.dropdown-menu{
-	display: block;
-	margin-top:0px
+nav.navbar-resultpage {
+    position: absolute;
+    width: 100%;
 }
 
-li#gutscheine > span {
-	padding-top: 15px!important;
-	padding-bottom: 15px!important;
-	position: relative;
-	display: block;
-	padding: 10px 15px;
-	color: #777;
-	line-height: 20px;
+nav.navbar-resultpage > ul > li {
+    padding-left: 0;
+    padding-right: 0;
 }
 
-li#gutscheine > span a {
-	text-decoration: none;
-	color: #777;
+#navbar-static-pages{
+    z-index: 4;
+}
+
+nav.navbar-resultpage > ul > li > a:not(.metager-navbar-toggle) {
+    display: block;
+    padding: 10px;
+    color:#777;
+}
+
+nav.navbar-resultpage > ul > li.active > a, a.metager-dropdown-toggle:hover, a.metager-dropdown-toggle:focus {
+    background-color: #e7e7e7;
+}
+
+nav.navbar-resultpage > ul.list-inline {
+    margin-bottom:0;
+}
+
+ul.metager-dropdown-menu {
+    list-style-type: none;
+    padding-left: 0;
+    position: absolute;
+    top: 100%;
+    left: auto;
+    z-index: 1000;
+    float: left;
+    min-width: 160px;
+    margin: 2px 0 0;
+    margin-top: 0;
+    list-style: none;
+    font-size: 14px;
+    text-align: left;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 1s ease;
+}
+
+.metager-dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333333;
+    white-space: nowrap;
+}
+
+.metager-dropdown-menu > li > a:hover {
+    text-decoration: none;
+    color: #262626;
+    background-color: #f5f5f5;
+}
+
+a.metager-dropdown-toggle:hover + ul.metager-dropdown-menu, a.metager-dropdown-toggle:focus + ul.metager-dropdown-menu, ul.metager-dropdown-menu:hover, #gutscheine > a:first-child:hover + a + ul.metager-dropdown-menu {
+    max-height: 1000px;
+    padding: 5px 0;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.metager-navbar-toggle {
+    color: #777;
+    background-color: white;
+    padding: 5px 10px;
+    margin: 5px 8px 5px 0;
+    border-radius: 7px;
+    border: 1px solid #ddd;
+    display: block;
+    width: 36px;
+    height: 30px;
+}
+
+.metager-navbar-toggle:visited {
+    color: #777;
+}
+
+.metager-navbar-toggle:hover {
+    background-color: #ddd;
+}
+
+#toggle-nav-hide .metager-navbar-toggle {
+    background-color: #ddd;
+}
+
+@media (max-width: 979px){
+    #metager-static-nav-list {
+        width: 100%;
+        max-height: 40px;
+        overflow:hidden;
+        transition: max-height 1s ease;
+    }
+    #metager-static-nav-list:target {
+        max-height: 1000px;
+    }
+    #metager-static-nav-list > li{
+        display: initial;
+    }
+    ul.metager-dropdown-menu {
+        position: inherit;
+        width: 100%;
+        border-radius: 0;
+        box-shadow: initial;
+    }
+    ul#metager-static-nav-list:target #toggle-nav-show {
+        display: none;
+    }
+    ul#metager-static-nav-list:target #toggle-nav-hide {
+        display: initial!important;
+    }
+}
+
+@media (min-width: 980px){
+    .metager-navbar-toggle{
+        display: none;
+    }
+    
 }
 
 
@@ -488,10 +610,20 @@ a.content.hidden-xs {
 a.navbar-brand {
     line-height: 100%!important;
     padding: 0;
+    position: absolute;
+    z-index: 5;
+    left: 10px;
 }
 
 nav .navbar-brand > div.logo {
     height: 100%;
+}
+
+.logo {
+    height: 30px!important;
+}
+.logo > h1 {
+    font-size: 30px;
 }
 
 .dotlist li {

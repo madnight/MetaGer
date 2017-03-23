@@ -127,6 +127,8 @@ Route::group(
                 ->with('navbarFocus', 'dienste');
         });
 
+        Route::get('zitat-suche', 'ZitatController@zitatSuche');
+
         Route::group(['middleware' => ['referer.check'], 'prefix' => 'admin'], function () {
             Route::get('/', 'AdminInterface@index');
             Route::get('count', 'AdminInterface@count');
@@ -159,4 +161,32 @@ Route::group(
         Route::get('languages/edit/{from}/{to}/{exclude?}', 'LanguageController@createEditPage');
         Route::post('languages/edit/{from}/{to}/{exclude?}', 'MailController@sendLanguageFile');
         Route::get('berlin', 'StartpageController@berlin');
+
+        Route::group(['prefix' => 'app'], function () {
+            Route::get('/', function () {
+                return view('app')
+                    ->with('title', trans('titles.app'))
+                    ->with('navbarFocus', 'dienste');
+            });
+            Route::get('metager', function () {
+                $filePath = storage_path() . "/app/public/MetaGer-release.apk";
+                return response()->download($filePath, "MetaGer-release.apk");
+            });
+
+            Route::get('maps', function () {
+                $filePath     = env('maps_app');
+                $fileContents = file_get_contents($filePath);
+                return response($fileContents, 200)
+                    ->header('Cache-Control', 'public')
+                    ->header('Content-Type', 'application/vnd.android.package-archive')
+                    ->header('Content-Transfer-Encoding', 'Binary')
+                    ->header("Content-Disposition", "attachment; filename=app-release.apk");
+            });
+            Route::get('maps/version', function () {
+                $filePath     = env('maps_version');
+                $fileContents = file_get_contents($filePath);
+                return response($fileContents, 200)
+                    ->header('Content-Type', 'text/plain');
+            });
+        });
     });

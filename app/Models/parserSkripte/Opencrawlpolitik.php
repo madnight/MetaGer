@@ -4,7 +4,7 @@ namespace app\Models\parserSkripte;
 
 use App\Models\Searchengine;
 
-class Opencrawltauchen extends Searchengine
+class Opencrawlpolitik extends Searchengine
 {
     public $results = [];
 
@@ -32,7 +32,7 @@ class Opencrawltauchen extends Searchengine
                 $title       = $result->{"title"}->__toString();
                 $link        = $result->{"link"}->__toString();
                 $anzeigeLink = $link;
-                $descr       = strip_tags($result->{"description"}->__toString());
+                $descr       = strip_tags(htmlspecialchars_decode($result->{"description"}->__toString()));
                 $this->counter++;
                 $this->results[] = new \App\Models\Result(
                     $this->engine,

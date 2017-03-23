@@ -35,7 +35,6 @@ class MetaGer
     protected $addedHosts      = [];
     protected $startCount      = 0;
     protected $canCache        = false;
-    protected $canCustomSearch = false;
     # Daten über die Abfrage
     protected $ip;
     protected $language;
@@ -140,6 +139,13 @@ class MetaGer
                         ->with('metager', $this)
                         ->with('suspendheader', "yes")
                         ->with('browser', (new Agent())->browser());
+                    break;
+                case 'rss20':
+                    return view('metager3resultsrss20')
+                        ->with('results', $viewResults)
+                        ->with('eingabe', $this->eingabe)
+                        ->with('metager', $this)
+                        ->with('resultcount', sizeof($viewResults));
                     break;
                 case 'result-count':
                     # Wir geben die Ergebniszahl und die benötigte Zeit zurück:
@@ -499,25 +505,40 @@ class MetaGer
         $subcollections = [];
 
         $tmp = [];
-        foreach ($enabledSearchengines as $engine) {
-            if (isset($engine['minismCollection'])) {
-                $subcollections[] = $engine['minismCollection']->__toString();
-            } else {
-                $tmp[] = $engine;
+        // Es gibt den Schalter "minism=on" Dieser soll bewirken, dass alle Minisucher angeschaltet werden.
+        // Wenn also "minism=on" ist, dann durchsuchen wir statt den tatsächlich angeschalteten Suchmaschinen,
+        // alle Suchmaschinen nach "minismCollection"
+        if ($request->input("minism", "off") === "on") {
+            // Wir laden alle Minisucher
+            foreach ($sumas as $engine) {
+                if (isset($engine["minismCollection"])) {
+                    $subcollections[] = $engine["minismCollection"]->__toString();
+                }
             }
-
+            # Nur noch alle eventuell angeschalteten Minisucher deaktivieren
+            foreach ($enabledSearchengines as $index => $engine) {
+                if (!isset($engine["minismCollection"])) {
+                    $tmp[] = $engine;
+                }
+            }
+        } else {
+            // Wir schalten eine Teilmenge, oder aber gar keine an
+            foreach ($enabledSearchengines as $engine) {
+                if (isset($engine['minismCollection'])) {
+                    $subcollections[] = $engine['minismCollection']->__toString();
+                } else {
+                    $tmp[] = $engine;
+                }
+            }
         }
         $enabledSearchengines = $tmp;
         if (sizeof($subcollections) > 0) {
             $enabledSearchengines[] = $this->loadMiniSucher($xml, $subcollections);
         }
-
         if ($sumaCount <= 0) {
             $this->errors[] = trans('metaGer.settings.noneSelected');
         }
-
         $engines = [];
-
         # Wenn eine Sitesearch durchgeführt werden soll, überprüfen wir ob überhaupt eine der Suchmaschinen eine Sitesearch unterstützt
         $siteSearchFailed = $this->checkCanNotSitesearch($enabledSearchengines);
 
@@ -592,6 +613,9 @@ class MetaGer
                 continue;
             }
 
+            if (!isset($engine["package"])) {
+                die(var_dump($engine));
+            }
             # Setze Pfad zu Parser
             $path = "App\Models\parserSkripte\\" . ucfirst($engine["package"]->__toString());
 
@@ -870,7 +894,7 @@ class MetaGer
         }
         # Sucheingabe
         $this->eingabe = trim($request->input('eingabe', ''));
-        $this->q       = strtolower($this->eingabe);
+        $this->q       = mb_strtolower($this->eingabe, "UTF-8");
         # IP
         $this->ip = $request->ip();
         # Unser erster Schritt wird sein, IP-Adresse und USER-Agent zu anonymisieren, damit
@@ -904,7 +928,6 @@ class MetaGer
         } else {
             $this->sprueche = false;
         }
-        # Maps
         $this->maps = $request->input('maps', 'off');
         if ($this->maps === "on") {
             $this->maps = true;
@@ -916,13 +939,6 @@ class MetaGer
             $this->newtab = "_blank";
         } else {
             $this->newtab = "_self";
-        }
-        # Custom Search
-        $this->canCustomSearch = $request->input('canCustomSearch', 'false');
-        if ($this->canCustomSearch === "true") {
-            $this->canCustomSearch = true;
-        } else {
-            $this->canCustomSearch = false;
         }
         # Theme
         $this->theme = preg_replace("/[^[:alnum:][:space:]]/u", '', $request->input('theme', 'default'));
@@ -966,7 +982,7 @@ class MetaGer
         }
         $this->out = $request->input('out', "html");
         # Standard output format html
-        if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style" && $this->out !== "result-count") {
+        if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style" && $this->out !== "result-count" && $this->out !== "rss20") {
             $this->out = "html";
         }
         # Wir schalten den Cache aus, wenn die Ergebniszahl überprüft werden soll
@@ -1238,7 +1254,7 @@ class MetaGer
         }
     }
 
-    # Generators
+# Generators
 
     public function generateSearchLink($fokus, $results = true)
     {
@@ -1298,11 +1314,6 @@ class MetaGer
     }
 
 # Komplexe Getter
-
-    public function canCustomSearch()
-    {
-        return $this->canCustomSearch;
-    }
 
     public function getHostCount($host)
     {

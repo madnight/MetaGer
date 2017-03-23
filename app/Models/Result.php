@@ -11,7 +11,8 @@ class Result
     public $titel; # Der Groß Angezeigte Name für das Suchergebnis
     public $link; # Der Link auf die Ergebnisseite
     public $anzeigeLink; # Der tatsächlich angezeigte Link (rein optisch)
-    public $descr; # Die Beschreibung des Suchergebnisses
+    public $descr; # Die eventuell gekürzte Beschreibung des Suchergebnisses
+    public $longDescr; # Die ungekürzte Beschreibung des Suchergebnisses
     public $gefVon; # Das bei Suchergebnissen angezeigte von ... mitsamt Verlinkung
     public $sourceRank; # Das Ranking für dieses Suchergebnis von der Seite, die es geliefert hat (implizit durch Ergebnisreihenfolge: 20 - Position in Ergebnisliste)
     public $partnershop; # Ist das Ergebnis von einem Partnershop? (bool)
@@ -35,6 +36,7 @@ class Result
         $this->anzeigeLink = trim($anzeigeLink);
         $this->descr       = strip_tags(trim($descr), '<p>');
         $this->descr       = preg_replace("/\n+/si", " ", $this->descr);
+        $this->longDescr   = $this->descr;
         if (strlen($this->descr) > 250) {
             $this->descr = wordwrap($this->descr, 250);
             $this->descr = substr($this->descr, 0, strpos($this->descr, "\n"));
@@ -225,8 +227,8 @@ class Result
         }
 
         # Eventueller Sprachfilter
-        if ($metager->getLang() !== "all" && isset($this->langCode)) {
-            if ($metager->getLang() !== $this->langCode) {
+        if ($metager->getLang() !== "all") {
+            if (!isset($this->langCode) || $this->langCode === null || $metager->getLang() !== $this->langCode) {
                 return false;
             }
 
@@ -240,14 +242,15 @@ class Result
             }
         }
 
+        /*
         # Phrasensuche:
         $text = strtolower($this->titel) . " " . strtolower($this->descr);
         foreach ($metager->getPhrases() as $phrase) {
-            if (strpos($text, $phrase) === false) {
-                return false;
-            }
+        if (strpos($text, $phrase) === false) {
+        return false;
         }
-
+        }
+         */
         /* Der Host-Filter der sicherstellt,
          *  dass von jedem Host maximal 3 Links angezeigt werden.
          *  Diese Überprüfung führen wir unter bestimmten Bedingungen nicht durch.
@@ -315,17 +318,25 @@ class Result
             return "";
         }
 
-        $tmp = $link;
-        $tmp = preg_replace("/\r?\n$/s", "", $tmp);
-        $tmp = str_replace("=", "=3d", $tmp);
-        $tmp = str_replace("?", "=3f", $tmp);
-        $tmp = str_replace("%", "=25", $tmp);
-        $tmp = str_replace("&", "=26", $tmp);
-        $tmp = str_replace(";", "=3b", $tmp);
-        $tmp = preg_replace("#^([\w+.-]+)://#s", "$1/", $tmp);
-        $tmp = str_replace("//", "/=2f", $tmp);
-        return "https://proxy.suma-ev.de/mger/nph-proxy.cgi/en/w0/" . $tmp;
+        # Link to our new Proxy software:
+        $pw = md5(env('PROXY_PASSWORD') . $link);
 
+        $proxyUrl = base64_encode(str_rot13($link));
+        $proxyUrl = urlencode(str_replace("/", "<<SLASH>>", $proxyUrl));
+
+        return "https://proxy.suma-ev.de/" . $pw . "/" . $proxyUrl;
+/*
+$tmp = $link;
+$tmp = preg_replace("/\r?\n$/s", "", $tmp);
+$tmp = str_replace("=", "=3d", $tmp);
+$tmp = str_replace("?", "=3f", $tmp);
+$tmp = str_replace("%", "=25", $tmp);
+$tmp = str_replace("&", "=26", $tmp);
+$tmp = str_replace(";", "=3b", $tmp);
+$tmp = preg_replace("#^([\w+.-]+)://#s", "$1/", $tmp);
+$tmp = str_replace("//", "/=2f", $tmp);
+return "https://proxy.suma-ev.de/mger/nph-proxy.cgi/en/w0/" . $tmp;
+ */
     }
 
     /* Liest aus einer URL alle Informationen aus

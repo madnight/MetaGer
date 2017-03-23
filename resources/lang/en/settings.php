@@ -2,7 +2,7 @@
 
 return [
     "head.1"            => "Settings",
-    "head.2"            => "Here you can customize your MetaGer: After selecting your desired settings, you have to choose whether you want to save the settings permanently or just for once, <a href=\"#save-once\">on the bottom of this page.</a>",
+    "head.2"            => "Here you can customize your MetaGer: After selecting your desired settings, you have to choose whether you want to save the settings permanently or just for once, <a href=\"#unten\">on the bottom of this page.</a>",
     "allgemein.1"       => "General",
     "quotes.label"      => "Sayings",
     "quotes.on"         => "show",
@@ -32,6 +32,6 @@ return [
     "foki.andere"       => "Others",
     "foki.produktsuche" => "Shopping",
     "foki.wissenschaft" => "Science",
-    "foki.nachrichten"  => "News",
+    "foki.nachrichten"  => "News/Politics",
     "foki.bilder"       => "Pictures",
 ];

@@ -3,7 +3,7 @@
 return [
     'foki.web'                       => 'Web',
     'foki.bilder'                    => 'Bilder',
-    'foki.nachrichten'               => 'Nachrichten',
+    'foki.nachrichten'               => 'News/Politik',
     'foki.wissenschaft'              => 'Wissenschaft',
     'foki.produkte'                  => 'Produkte',
     'foki.eigene'                    => 'Eigene Suche',
@@ -28,7 +28,7 @@ return [
 
     'sponsors.head.1'                => 'Weitere Informationen',
     'sponsors.head.2'                => 'Sponsoren',
-    'sponsors.woxikon'               => '<a href="http://www.suchmaschinenoptimierung.jetzt" class="mutelink" target="_blank" rel="noopener">www.suchmaschinenoptimierung.jetzt</a>',
+    'sponsors.woxikon'               => '<a href="http://www.suchmaschinenoptimierung.jetzt" class="mutelink" target="_blank" rel="noopener">Suchmaschinenoptimierung</a>',
     'sponsors.gutscheine'            => '<a href="http://www.gutschein-magazin.de/" class="mutelink" target="_blank" rel="noopener">Aktuelle Gutscheine auf Gutschein-Magazin.de</a>',
     'sponsors.kredite'               => '<a href="https://www.finanzcheck.de/" class="mutelink" target="_blank" rel="noopener">Günstige Kredite auf FINANZCHECK.de vergleichen</a>',
 
@@ -45,7 +45,7 @@ return [
     'plugin.head.4'                  => 'MetaGer zum Internet Explorer hinzufügen',
     'plugin.head.5'                  => 'MetaGer zum Microsoft Edge hinzufügen',
     'plugin.head.6'                  => 'MetaGer zum Safari hinzufügen',
-    'plugin.head.6'                  => 'MetaGer zum Vivaldi hinzufügen',
+    'plugin.head.7'                  => 'MetaGer zum Vivaldi hinzufügen',
     'plugin.head.info'               => '(aktuelle Sucheinstellungen werden übernommen)',
 
     'plugin.firefox.1'               => 'Klicken Sie in Ihrem Browser oben rechts im Suchfeld auf die Lupe mit dem kleinen "+" und dann auf "MetaGer hinzufügen" (siehe Bild)',

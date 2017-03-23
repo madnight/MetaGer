@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>{{ $metager->getQ() }} - MetaGer</title>
+		<title>{{ $eingabe }} - MetaGer</title>
 		<link href="/favicon.ico" rel="icon" type="image/x-icon" />
 		<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport" />

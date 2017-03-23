@@ -14,7 +14,7 @@
        <link>{!! htmlspecialchars($result->link, ENT_XML1, 'UTF-8'); !!}</link>
        <mg:anzeigeLink>{!! htmlspecialchars($result->anzeigeLink, ENT_XML1, 'UTF-8'); !!}</mg:anzeigeLink>
        <description>
-          {!! htmlspecialchars($result->descr, ENT_XML1, 'UTF-8'); !!}
+          {!! htmlspecialchars($result->longDescr, ENT_XML1, 'UTF-8'); !!}
        </description>
      </item>
   @endforeach

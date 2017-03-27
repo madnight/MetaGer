@@ -48,7 +48,8 @@ class MetaGerSearch extends Controller
     public function quicktips(Request $request, MetaGer $metager)
     {
         $q = $request->input('q', '');
-
+        $mquicktips = [];
+        
         if(APP::getLocale() === "de"){
             # Spruch
             $spruecheFile = storage_path() . "/app/public/sprueche.txt";
@@ -62,7 +63,7 @@ class MetaGerSearch extends Controller
             # manuelle Quicktips:
             $file = storage_path() . "/app/public/qtdata.csv";
     
-            $mquicktips = [];
+            
             if (file_exists($file) && $q !== '') {
                 $file = fopen($file, 'r');
                 while (($line = fgetcsv($file)) !== false) {

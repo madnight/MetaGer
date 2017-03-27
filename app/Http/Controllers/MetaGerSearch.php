@@ -49,7 +49,7 @@ class MetaGerSearch extends Controller
     {
         $q = $request->input('q', '');
         $mquicktips = [];
-        
+        $spruch = "";
         if(APP::getLocale() === "de"){
             # Spruch
             $spruecheFile = storage_path() . "/app/public/sprueche.txt";

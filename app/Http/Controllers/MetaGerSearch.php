@@ -49,6 +49,7 @@ class MetaGerSearch extends Controller
     {
         $q = $request->input('q', '');
         $mquicktips = [];
+        $quicktips = [];
         $spruch = "";
         if(APP::getLocale() === "de"){
             # Spruch
@@ -86,8 +87,6 @@ class MetaGerSearch extends Controller
                 }
                 fclose($file);
             }
-    
-            $quicktips = [];
     
             # Wetter
             try {

@@ -69,7 +69,7 @@ class MetaGerSearch extends Controller
                 }
                 if ($dummyQuery !== "") {
                     $dummyQuery .= $placeholder;
-                    $url = "https://api.duckduckgo.com/?format=json&no_redirect=1&q=" . urlencode($dummyQuery);
+                    $url = "https://api.duckduckgo.com/?format=json&no_redirect=1&t=MetaGerDE&q=" . urlencode($dummyQuery);
 
                     $result = json_decode($this->get($url), true);
 

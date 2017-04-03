@@ -13,7 +13,7 @@ GLS Gemeinschaftsbank, Bochum',
     'bankinfo.3'                => 'Falls Sie eine Spendenbescheinigung wünschen, geben Sie auf dem Überweisungsformular bitte Ihre vollständige Adresse, und (sofern vorhanden) auch Ihre E-Mail Adresse an.',
 
     'paypal.1'                  => 'Bequem mit Paypal,<br>dort auch per Kreditkarte ohne Registrierung,',
-    'paypal.2'                  => 'Spenden Sie mit PayPal - schnell, kostenlos und sicher!" type="image',
+    'paypal.2'                  => 'Spenden Sie mit PayPal - schnell, kostenlos und sicher!',
 
     'bitcoins.1'                => 'oder per Bitcoin, <br>sicher und pseudonym.',
     'bitcoins.2'                => 'Unsere Bitcoin-Adresse:',

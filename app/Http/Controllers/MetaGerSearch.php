@@ -47,11 +47,45 @@ class MetaGerSearch extends Controller
 
     public function quicktips(Request $request, MetaGer $metager)
     {
-        $q = $request->input('q', '');
+        $q          = $request->input('q', '');
         $mquicktips = [];
-        $quicktips = [];
-        $spruch = "";
-        if(APP::getLocale() === "de"){
+        $quicktips  = [];
+        $spruch     = "";
+
+        if (APP::getLocale() === "de") {
+
+            # DuckDuckGo-!bangs
+            try {
+                $placeholder = "0X0plchldr0X0";
+                $searchWords = explode(" ", $q);
+                $dummyQuery  = "";
+                $realQuery   = "";
+                foreach ($searchWords as $index => $word) {
+                    if ($word[0] === "!") {
+                        $dummyQuery .= $word . " ";
+                    } else {
+                        $realQuery .= $word;
+                    }
+                }
+                if ($dummyQuery !== "") {
+                    $dummyQuery .= $placeholder;
+                    $url = "https://api.duckduckgo.com/?format=json&no_redirect=1&t=MetaGerDE&q=" . urlencode($dummyQuery);
+
+                    $result = json_decode($this->get($url), true);
+
+                    if (isset($result["Redirect"])) {
+                        $bang            = [];
+                        $bang["title"]   = "!bang-Weiterleitung";
+                        $bang["URL"]     = str_replace($placeholder, urlencode(trim($realQuery)), $result["Redirect"]);
+                        $bang["summary"] = '<a href="' . $bang["URL"] . '" target=_blank class="btn btn-primary" style="margin-top:5px;color: #fff">Weitersuchen auf ' . parse_url($bang["URL"], PHP_URL_HOST) . '&hellip;</a>';
+                        $bang["gefVon"]  = "von <a href = \"https://api.duckduckgo.com/\" target=\"_blank\" rel=\"noopener\">DuckDuckGo</a>";
+                        $mquicktips[]    = $bang;
+                    }
+
+                }
+            } catch (\ErrorException $e) {
+            }
+
             # Spruch
             $spruecheFile = storage_path() . "/app/public/sprueche.txt";
             if (file_exists($spruecheFile) && $request->has('sprueche')) {
@@ -60,11 +94,10 @@ class MetaGerSearch extends Controller
             } else {
                 $spruch = "";
             }
-    
+
             # manuelle Quicktips:
             $file = storage_path() . "/app/public/qtdata.csv";
-    
-            
+
             if (file_exists($file) && $q !== '') {
                 $file = fopen($file, 'r');
                 while (($line = fgetcsv($file)) !== false) {
@@ -87,13 +120,13 @@ class MetaGerSearch extends Controller
                 }
                 fclose($file);
             }
-    
+
             # Wetter
             try {
                 $url = "http://api.openweathermap.org/data/2.5/weather?type=accurate&units=metric&lang=" . APP::getLocale() . "&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
-    
+
                 $result = json_decode($this->get($url), true);
-    
+
                 $searchWords = explode(' ', $q);
                 $within      = false;
                 foreach ($searchWords as $word) {
@@ -105,7 +138,7 @@ class MetaGerSearch extends Controller
                     $weather          = [];
                     $weather["title"] = "Wetter in " . $result["name"];
                     $weather["URL"]   = "http://openweathermap.org/city/" . $result["id"];
-    
+
                     $summary = '<b class="detail-short">' . $result["main"]["temp"] . " °C, " . $result["weather"][0]["description"] . "</b>";
                     $details = '<table  class="table table-condensed"><tr><td>Temperatur</td><td>' . $result["main"]["temp_min"] . " bis " . $result["main"]["temp_max"] . " °C</td></tr>";
                     $details .= "<tr><td>Druck</td><td>" . $result["main"]["pressure"] . " hPa</td></tr>";
@@ -126,7 +159,7 @@ class MetaGerSearch extends Controller
                     $mquicktips[]         = $weather;
                 }
             } catch (\ErrorException $e) {
-    
+
             }
         }
 
@@ -159,7 +192,7 @@ class MetaGerSearch extends Controller
         }
         $mquicktips = array_merge($mquicktips, $quicktips);
 
-        if(APP::getLocale() === "de"){
+        if (APP::getLocale() === "de") {
             # Dict.cc Quicktip
             if (count(explode(' ', $q)) < 3) {
                 $url             = "http://www.dict.cc/metager.php?s=" . urlencode($q);
@@ -170,7 +203,7 @@ class MetaGerSearch extends Controller
                     $quicktip["URL"]     = $decodedResponse["link"];
                     $quicktip["summary"] = implode(", ", $decodedResponse["translations"]);
                     $quicktip['gefVon']  = trans('metaGerSearch.quicktips.dictcc.adress');
-    
+
                     if (App::isLocale('de')) {
                         array_unshift($mquicktips, $quicktip);
                     } else {
@@ -178,16 +211,16 @@ class MetaGerSearch extends Controller
                     }
                 }
             }
-    
+
             # wussten Sie schon
             $file = storage_path() . "/app/public/tips.txt";
             if (file_exists($file)) {
                 $tips = file($file);
                 $tip  = $tips[array_rand($tips)];
-    
+
                 $mquicktips[] = ['title' => trans('metaGerSearch.quicktips.tips.title'), 'summary' => $tip, 'URL' => '/tips'];
             }
-    
+
             # Werbelinks
             $file = storage_path() . "/app/public/ads.txt";
             if (file_exists($file)) {

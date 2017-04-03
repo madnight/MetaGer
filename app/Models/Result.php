@@ -61,9 +61,9 @@ class Result
         $this->strippedDomain        = $this->getStrippedDomain($this->strippedHost);
         $this->strippedLink          = $this->getStrippedLink($this->anzeigeLink);
         $this->rank                  = 0;
-        $this->partnershop           = $additionalInformation["partnershop"] ?? false;
-        $this->image                 = $additionalInformation["image"] ?? "";
-        $this->price                 = $additionalInformation["price"] ?? 0;
+        $this->partnershop           = isset($additionalInformation["partnershop"]) ? $additionalInformation["partnershop"] : false;
+        $this->image                 = isset($additionalInformation["image"]) ? $additionalInformation["image"] :  "";
+        $this->price                 = isset($additionalInformation["price"]) ? $additionalInformation["price"] :  0;
         $this->additionalInformation = $additionalInformation;
     }
 

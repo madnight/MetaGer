@@ -44,8 +44,7 @@ class Mg_produkt2 extends Searchengine
                     $descr,
                     $this->gefVon,
                     $this->counter,
-                    false,
-                    $image
+                    ['image' => $image]
                 );
             }
         } catch (\Exception $e) {

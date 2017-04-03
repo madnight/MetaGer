@@ -38,8 +38,7 @@ class Dailymotion extends Searchengine
                     $descr,
                     $this->gefVon,
                     $this->counter,
-                    false,
-                    $image
+                    ['partnershop' => false]
                 );
             }
         } catch (\Exception $e) {

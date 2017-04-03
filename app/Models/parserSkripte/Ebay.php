@@ -52,9 +52,9 @@ class Ebay extends Searchengine
                     $descr,
                     $this->gefVon,
                     $this->counter,
-                    false,
-                    $image,
-                    $price
+                    ['partnershop' => false,
+                        'price'        => $price,
+                        'image'        => $image]
                 );
                 $count++;
             }

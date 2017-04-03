@@ -51,8 +51,7 @@ class Radiobrowser extends Searchengine
                     $anzeigeLink,
                     $descr,
                     $this->gefVon,
-                    $this->counter,
-                    false
+                    $this->counter
                 );
             }
         } catch (\Exception $e) {

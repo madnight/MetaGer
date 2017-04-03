@@ -44,9 +44,9 @@ class Fairmondo extends Searchengine
                 $descr,
                 $this->gefVon,
                 $this->counter,
-                false,
-                $image,
-                $price
+                [
+                    'price' => $price,
+                    'image' => $image]
             );
         }
     }

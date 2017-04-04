@@ -52,40 +52,39 @@ class MetaGerSearch extends Controller
         $quicktips  = [];
         $spruch     = "";
 
-        if (APP::getLocale() === "de") {
-
-            # DuckDuckGo-!bangs
-            try {
-                $placeholder = "0X0plchldr0X0";
-                $searchWords = explode(" ", $q);
-                $dummyQuery  = "";
-                $realQuery   = "";
-                foreach ($searchWords as $index => $word) {
-                    if ($word[0] === "!") {
-                        $dummyQuery .= $word . " ";
-                    } else {
-                        $realQuery .= $word;
-                    }
+        # DuckDuckGo-!bangs
+        try {
+            $placeholder = "0X0plchldr0X0";
+            $searchWords = explode(" ", $q);
+            $dummyQuery  = "";
+            $realQuery   = "";
+            foreach ($searchWords as $index => $word) {
+                if ($word[0] === "!") {
+                    $dummyQuery .= $word . " ";
+                } else {
+                    $realQuery .= $word;
                 }
-                if ($dummyQuery !== "") {
-                    $dummyQuery .= $placeholder;
-                    $url = "https://api.duckduckgo.com/?format=json&no_redirect=1&t=MetaGerDE&q=" . urlencode($dummyQuery);
-
-                    $result = json_decode($this->get($url), true);
-
-                    if (isset($result["Redirect"])) {
-                        $bang            = [];
-                        $bang["title"]   = "!bang-Weiterleitung";
-                        $bang["URL"]     = str_replace($placeholder, urlencode(trim($realQuery)), $result["Redirect"]);
-                        $bang["summary"] = '<a href="' . $bang["URL"] . '" target=_blank class="btn btn-primary" style="margin-top:5px;color: #fff">Weitersuchen auf ' . parse_url($bang["URL"], PHP_URL_HOST) . '&hellip;</a>';
-                        $bang["gefVon"]  = "von <a href = \"https://api.duckduckgo.com/\" target=\"_blank\" rel=\"noopener\">DuckDuckGo</a>";
-                        $mquicktips[]    = $bang;
-                    }
-
-                }
-            } catch (\ErrorException $e) {
             }
+            if ($dummyQuery !== "") {
+                $dummyQuery .= $placeholder;
+                $url = "https://api.duckduckgo.com/?format=json&no_redirect=1&t=MetaGerDE&q=" . urlencode($dummyQuery);
 
+                $result = json_decode($this->get($url), true);
+
+                if (isset($result["Redirect"])) {
+                    $bang            = [];
+                    $bang["title"]   = trans('metaGerSearch.quicktips.bang.title');
+                    $bang["URL"]     = str_replace($placeholder, urlencode(trim($realQuery)), $result["Redirect"]);
+                    $bang["summary"] = '<a href="' . $bang["URL"] . '" target=_blank class="btn btn-primary" style="margin-top:5px;color: #fff">' . trans('metaGerSearch.quicktips.bang.buttonlabel') . " " . parse_url($bang["URL"], PHP_URL_HOST) . '&hellip;</a>';
+                    $bang["gefVon"]  = trans('metaGerSearch.quicktips.bang.from') . " <a href = \"https://api.duckduckgo.com/\" target=\"_blank\" rel=\"noopener\">DuckDuckGo</a>";
+                    $mquicktips[]    = $bang;
+                }
+
+            }
+        } catch (\ErrorException $e) {
+        }
+
+        if (APP::getLocale() === "de") {
             # Spruch
             $spruecheFile = storage_path() . "/app/public/sprueche.txt";
             if (file_exists($spruecheFile) && $request->has('sprueche')) {

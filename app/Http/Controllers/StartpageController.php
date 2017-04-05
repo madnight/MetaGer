@@ -36,29 +36,23 @@ class StartpageController extends Controller
             }
         }
 
-        $maps = $request->input('param_maps', 'on');
-
-        $agent   = new Agent();
-        $browser = $agent->browser();
-
-        $foki = $this->loadFoki();
-
         return view('index')
             ->with('title', trans('titles.index'))
             ->with('homeIcon')
+            ->with('focusPages', $focusPages)
+            ->with('browser', (new Agent())->browser())
+            ->with('navbarFocus', 'suche')
+            ->with('theme', $theme)
+            ->with('autocomplete', $request->input('param_autocomplete', 'on'))
+            ->with('foki', $this->loadFoki())
+
             ->with('focus', $request->input('focus', 'web'))
             ->with('lang', $request->input('param_lang', 'all'))
             ->with('resultCount', $request->input('param_resultCount', '20'))
             ->with('time', $request->input('param_time', '1000'))
             ->with('sprueche', $request->input('param_sprueche', 'off'))
             ->with('newtab', $request->input('param_newtab', 'on'))
-            ->with('focusPages', $focusPages)
-            ->with('browser', $browser)
-            ->with('navbarFocus', 'suche')
-            ->with('theme', $theme)
-            ->with('maps', $maps)
-            ->with('autocomplete', $request->input('param_autocomplete', 'on'))
-            ->with('foki', $foki);
+            ->with('maps', $maps = $request->input('param_maps', 'on'));
     }
 
     public function loadPage($subpage)

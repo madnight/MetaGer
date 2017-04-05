@@ -7,7 +7,6 @@
 		<h1>{!! trans('settings.head.1') !!}</h1>
 		<p id="lead">{!! trans('settings.head.2') !!}</p>
 		<h2>{!! trans('settings.allgemein.1') !!}</h2>
-		<input id="settings-focus" type="hidden" name="focus" value="eigene">
 		<container>
 			<div class="row">
 				<div class="col-sm-6 col-md-4 col-lg-3">
@@ -56,7 +55,7 @@
 			</div>
 		</container>
 		<div id="settingsButtons">
-			<a id="settings-abort-btn" class="btn btn-danger mutelink" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}">@lang('settings.abort')</a>
+			<a id="settings-abort-btn" class="btn btn-danger mutelink" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}">@lang('settings.abort') <span class="glyphicon glyphicon-remove"></span></a>
 			<input id="unten" class="btn btn-primary settings-btn" type="submit" value="{!! trans('settings.speichern.1') !!}">
 			<input id="save" class="btn btn-primary settings-btn hidden" type="button" data-href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}" value="{!! trans('settings.speichern.2') !!}">
 			<input id="plugin" class="btn btn-primary settings-btn" type="submit" value="{!! trans('settings.speichern.3') !!}">

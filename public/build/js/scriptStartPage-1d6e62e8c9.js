@@ -212,21 +212,49 @@ function showFocusEditDialog(id) {
 }
 
 function saveFocus() {
-    var focus = {};
     var name = document.getElementById("focus-name").value;
-    var id = getIdFromName(name);
-    var oldId = document.getElementById("original-id").value;
-    $("input[type=checkbox]:checked").each(function(el) {
-        focus[$(this).attr("name")] = $(this).val();
-    });
-    focus["name"] = name;
-    if (oldId !== "") {
-        localStorage.removeItem(oldId);
-        removeFocusById(oldId);
+    if (isValidName(name) && atLeastOneChecked()) {
+        var id = getIdFromName(name);
+        var overwrite = true;
+        if (alreadyInUse(name)) {
+            overwrite = confirm("Name bereits genutzt\nüberschreiben?");
+            if (overwrite) {
+                localStorage.removeItem(id);
+                removeFocusById(id);
+            }
+        }
+        if (overwrite) {
+            var oldId = document.getElementById("original-id").value;
+            var focus = {};
+            $("input[type=checkbox]:checked").each(function(el) {
+                focus[$(this).attr("name")] = $(this).val();
+            });
+            focus["name"] = name;
+            if (oldId !== "") {
+                localStorage.removeItem(oldId);
+                removeFocusById(oldId);
+            }
+            localStorage.setItem(id, JSON.stringify(focus));
+            addFocus(name);
+            $("#create-focus-modal").modal("hide");
+        }
+    } else {
+        alert("Bitte gültigen Namen eingeben:\n* Keine Sonderzeichen\n* Mindestens 1 Buchstabe\n* Mindestens 1 Suchmaschine auswählen");
     }
-    localStorage.setItem(id, JSON.stringify(focus));
-    addFocus(name);
-    $("#create-focus-modal").modal("hide");
+}
+
+function isValidName(name) {
+    // no Characters other then a-z, A-Z, 0-9, ä, ö, ü, ß, -, _ allowed
+    // at least 1 character
+    return /^[a-zA-Z0-9äöüß\-_ ]*$/.test(name);
+}
+
+function atLeastOneChecked() {
+    return $("input[type=checkbox]:checked").length > 0;
+}
+
+function alreadyInUse(name) {
+    return localStorage.hasOwnProperty(getIdFromName(name));
 }
 
 function deleteFocus() {
@@ -312,7 +340,12 @@ function removeFocusById(id) {
 }
 
 function getIdFromName(name) {
-    return "focus_" + name.split(" ").join("_").toLowerCase();
+    name = name.toLowerCase();
+    name = name.split(" ").join("_");
+    name = name.split("ä").join("ae");
+    name = name.split("ö").join("oe");
+    name = name.split("ü").join("ue");
+    return "focus_" + name;
 }
 
 function loadFocusById(id) {

@@ -153,13 +153,13 @@
 					{{--
 					<h2>{!! trans('settings.suchmaschinen.1') !!} <small><button type="button" class="btn btn-link allUnchecker hide">{!! trans('settings.suchmaschinen.2') !!}</button></small></h2>
 					--}}
-					@foreach( $foki as $focus => $sumas )
-						<div class="headingGroup {{ $focus }}">
+					@foreach( $foki as $fokus => $sumas )
+						<div class="headingGroup {{ $fokus }}">
 							<h3 class="focus-category">
-								@lang("settings.foki." . $focus)
+								@lang("settings.foki." . $fokus)
 								{{--
 								<small>
-									<button type="button" class="checker btn btn-link hide" data-type="{{ $focus }}">{!! trans('settings.suchmaschinen.3') !!}</button>
+									<button type="button" class="checker btn btn-link hide" data-type="{{ $fokus }}">{!! trans('settings.suchmaschinen.3') !!}</button>
 								</small>
 								--}}
 							</h3>
@@ -168,7 +168,7 @@
 									<div class="col-sm-6 col-md-4 col-lg-3">
 										<div class="checkbox settings-checkbox">
 											<label>
-												<input type="checkbox" name="engine_{{ $name }}" class="focusCheckbox"  @if ($focus == 'web') checked @endif >{{ $data['displayName'] }}
+												<input type="checkbox" name="engine_{{ $name }}" class="focusCheckbox"  @if ($fokus == 'web') checked @endif >{{ $data['displayName'] }}
 												<a class="glyphicon settings-glyphicon glyphicon-link" target="_blank" rel="noopener" href="{{ $data['url'] }}"></a>
 											</label>
 										</div>
@@ -178,12 +178,14 @@
 						</div>
 					@endforeach
 					<div class="clearfix">
-						<button id="save-focus-btn" class="btn btn-primary pull-right">
-							@lang('index.focus-creator.save')
-						</button>
-						<button id="delete-focus-btn" type="button" class="btn btn-danger pull-right">
-							@lang('index.focus-creator.delete')
-						</button>
+						<div class="pull-right">
+							<button id="delete-focus-btn" type="button" class="btn btn-danger">
+								@lang('index.focus-creator.delete')
+							</button>
+							<button id="save-focus-btn" class="btn btn-primary">
+								@lang('index.focus-creator.save')
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -257,22 +259,16 @@
 					</div>
 					<input type="text" name="eingabe" required="" autofocus="" autocomplete="{{$autocomplete}}" class="form-control" placeholder="{{ trans('index.placeholder') }}">
 					<input type="hidden" name="encoding" value="utf8">
-					@if ($focus === 'angepasst')
-						<input type="hidden" name="lang" value={{ $lang }} >
-						<input type="hidden" name="resultCount" value={{ $resultCount }} >
-						<input type="hidden" name="time" value={{ $time }} >
-						<input type="hidden" name="sprueche" value={{ $sprueche }} >
-						<input type="hidden" name="newtab" value={{ $newtab }} >
-						<input type="hidden" name="maps" value={{ $maps }} >
-						@foreach ($focusPages as $fp)
-							<input type="hidden" name={{ $fp }} value="on">
-						@endforeach
-						<input type="hidden" name="theme" value={{ $theme }}>
-					@elseif( !App::isLocale('de') )
-						<input type="hidden" name="lang" value="{{ App::getLocale() }}">
-					@else
-						<input type="hidden" name="lang" value="all">
-					@endif
+					<input type="hidden" name="lang" value={{ $lang }} >
+					<input type="hidden" name="resultCount" value={{ $resultCount }} >
+					<input type="hidden" name="time" value={{ $time }} >
+					<input type="hidden" name="sprueche" value={{ $sprueche }} >
+					<input type="hidden" name="newtab" value={{ $newtab }} >
+					<input type="hidden" name="maps" value={{ $maps }} >
+					@foreach ($focusPages as $fp)
+						<input type="hidden" name={{ $fp }} value="on">
+					@endforeach
+					<input type="hidden" name="theme" value={{ $theme }}>
 					<div class="input-group-addon">
 						<button type="submit">
 							<span class="glyphicon glyphicon-search"></span>

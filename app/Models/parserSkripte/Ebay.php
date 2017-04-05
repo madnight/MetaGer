@@ -3,6 +3,7 @@
 namespace app\Models\parserSkripte;
 
 use App\Models\Searchengine;
+use Log;
 
 class Ebay extends Searchengine
 {
@@ -52,9 +53,9 @@ class Ebay extends Searchengine
                     $descr,
                     $this->gefVon,
                     $this->counter,
-                    false,
-                    $image,
-                    $price
+                    ['partnershop' => false,
+                        'price'        => $price,
+                        'image'        => $image]
                 );
                 $count++;
             }

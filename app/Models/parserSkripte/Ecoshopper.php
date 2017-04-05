@@ -51,8 +51,8 @@ class Ecoshopper extends Searchengine
                     $descr,
                     $this->gefVon,
                     $this->counter,
-                    false,
-                    $image
+                    ['partnershop' => false,
+                        'image'        => $image]
                 );
             }
         } catch (\Exception $e) {

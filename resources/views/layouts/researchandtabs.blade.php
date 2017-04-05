@@ -117,6 +117,16 @@
 				</li>
 			@endif
 
+			{{-- Fix for older Versions --}}
+			@if( $metager->getFokus() === "angepasst" )
+				<li id="angepasstTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
+					<a aria-controls="angepasst" data-href="#angepasst" href="#angepasst">
+						<span class='glyphicon glyphicon-cog'></span>
+						<span class="hidden-xs">{{ trans('index.foki.angepasst') }}</span>
+					</a>
+				</li>
+			@endif
+
 			<li id="mapsTabSelector" role="presentation" class="tab-selector">
 				<a href="https://maps.metager.de/map/{{ $metager->getQ() }}/-6.781309835595698/44.85855550132342/33.9779675081543/58.25372144666716" target="_blank">
 					<span class='glyphicon glyphicon-map-marker'></span>
@@ -193,6 +203,14 @@
 			<div role="tabpanel" class="tab-pane" id="produktsuche">
 				<div class="loader">
 					<img src="/img/ajax-loader.gif" alt="" />
+				</div>
+			</div>
+		@endif
+
+		@if( $metager->getFokus() === "angepasst" )
+			<div role="tabpanel" class="tab-pane active" id="angepasst">
+				<div class="row">
+					@yield('results')
 				</div>
 			</div>
 		@endif

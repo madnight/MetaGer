@@ -229,6 +229,16 @@
 				<span class="content">{{ trans('index.foki.produkte') }}</span>
 			</label>
 		</div>
+		{{-- Fix for older Versions --}}
+		@if ($focus === 'angepasst')
+			<div class="focus">
+				<input id="angepasst" class="focus-radio hide" type="radio" name="focus" value="angepasst" form="searchForm" checked required="">
+				<label id="anpassen-label" class="focus-label" for="angepasst">
+					<span class="glyphicon glyphicon-cog"></span>
+					<span class="content">{{ trans('index.foki.angepasst') }}</span>
+				</label>
+			</div>
+		@endif
 		<button id="addFocusBtn" class="btn btn-default hide">
 			<span class="glyphicon glyphicon-plus"></span>
 		</button>

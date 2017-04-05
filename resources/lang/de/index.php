@@ -6,6 +6,7 @@ return [
     'foki.nachrichten'               => 'News/Politik',
     'foki.wissenschaft'              => 'Wissenschaft',
     'foki.produkte'                  => 'Produkte',
+    'foki.angepasst'                 => 'Angepasst',
     'foki.eigene'                    => 'Eigene Suche',
     'foki.eigene.entfernen'          => 'Eigene Suche entfernen',
     'foki.angepasst.entfernen'       => 'Einstellungen zurücksetzen',

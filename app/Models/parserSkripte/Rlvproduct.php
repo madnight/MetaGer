@@ -31,10 +31,10 @@ class RlvProduct extends Searchengine
                 "",
                 $result["shopTitle"],
                 $counter,
-                $partnershop = false,
-                $image,
-                $result["price"],
-                ['shipping' => $result["distribution"]]
+                ['partnershop' => false,
+                    'price'        => $result["price"],
+                    'image'        => $image,
+                    'shipping'     => $result["distribution"]]
             );
         }
     }

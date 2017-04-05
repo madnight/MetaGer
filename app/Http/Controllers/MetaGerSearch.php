@@ -47,85 +47,119 @@ class MetaGerSearch extends Controller
 
     public function quicktips(Request $request, MetaGer $metager)
     {
-        $q = $request->input('q', '');
-
-        # Spruch
-        $spruecheFile = storage_path() . "/app/public/sprueche.txt";
-        if (file_exists($spruecheFile) && $request->has('sprueche')) {
-            $sprueche = file($spruecheFile);
-            $spruch   = $sprueche[array_rand($sprueche)];
-        } else {
-            $spruch = "";
-        }
-
-        # manuelle Quicktips:
-        $file = storage_path() . "/app/public/qtdata.csv";
-
+        $q          = $request->input('q', '');
         $mquicktips = [];
-        if (file_exists($file) && $q !== '') {
-            $file = fopen($file, 'r');
-            while (($line = fgetcsv($file)) !== false) {
-                $words = array_slice($line, 3);
-                $isIn  = false;
-                foreach ($words as $word) {
-                    $word = strtolower($word);
-                    if (strpos($q, $word) !== false) {
-                        $isIn = true;
-                        break;
-                    }
-                }
-                if ($isIn === true) {
-                    $quicktip            = array('QT_Type' => "MQT");
-                    $quicktip["URL"]     = $line[0];
-                    $quicktip["title"]   = $line[1];
-                    $quicktip["summary"] = $line[2];
-                    $mquicktips[]        = $quicktip;
-                }
-            }
-            fclose($file);
-        }
+        $quicktips  = [];
+        $spruch     = "";
 
-        $quicktips = [];
-
-        # Wetter
+        # DuckDuckGo-!bangs
         try {
-            $url = "http://api.openweathermap.org/data/2.5/weather?type=accurate&units=metric&lang=" . APP::getLocale() . "&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
-
-            $result = json_decode($this->get($url), true);
-
-            $searchWords = explode(' ', $q);
-            $within      = false;
-            foreach ($searchWords as $word) {
-                if (stripos($result["name"], $word) !== false) {
-                    $within = true;
+            $placeholder = "0X0plchldr0X0";
+            $searchWords = explode(" ", $q);
+            $dummyQuery  = "";
+            $realQuery   = "";
+            foreach ($searchWords as $index => $word) {
+                if ($word[0] === "!") {
+                    $dummyQuery .= $word . " ";
+                } else {
+                    $realQuery .= $word;
                 }
             }
-            if ($within) {
-                $weather          = [];
-                $weather["title"] = "Wetter in " . $result["name"];
-                $weather["URL"]   = "http://openweathermap.org/city/" . $result["id"];
+            if ($dummyQuery !== "") {
+                $dummyQuery .= $placeholder;
+                $url = "https://api.duckduckgo.com/?format=json&no_redirect=1&t=MetaGerDE&q=" . urlencode($dummyQuery);
 
-                $summary = '<b class="detail-short">' . $result["main"]["temp"] . " °C, " . $result["weather"][0]["description"] . "</b>";
-                $details = '<table  class="table table-condensed"><tr><td>Temperatur</td><td>' . $result["main"]["temp_min"] . " bis " . $result["main"]["temp_max"] . " °C</td></tr>";
-                $details .= "<tr><td>Druck</td><td>" . $result["main"]["pressure"] . " hPa</td></tr>";
-                $details .= "<tr><td>Luftfeuchtigkeit</td><td>" . $result["main"]["humidity"] . " %</td></tr>";
-                $details .= "<tr><td>Wind</td><td>" . $result["wind"]["speed"] . " m/s, " . $result["wind"]["deg"] . "°</td></tr>";
-                $details .= "<tr><td>Bewölkung</td><td>" . $result["clouds"]["all"] . " %</td></tr>";
-                if (isset($result->rain)) {
-                    $details .= " | Regen letzte drei Stunden: " . $result["rain"]["3h"] . " h";
+                $result = json_decode($this->get($url), true);
+
+                if (isset($result["Redirect"])) {
+                    $bang            = [];
+                    $bang["title"]   = trans('metaGerSearch.quicktips.bang.title');
+                    $bang["URL"]     = str_replace($placeholder, urlencode(trim($realQuery)), $result["Redirect"]);
+                    $bang["summary"] = '<a href="' . $bang["URL"] . '" target=_blank class="btn btn-primary" style="margin-top:5px;color: #fff">' . trans('metaGerSearch.quicktips.bang.buttonlabel') . " " . parse_url($bang["URL"], PHP_URL_HOST) . '&hellip;</a>';
+                    $bang["gefVon"]  = trans('metaGerSearch.quicktips.bang.from') . " <a href = \"https://api.duckduckgo.com/\" target=\"_blank\" rel=\"noopener\">DuckDuckGo</a>";
+                    $mquicktips[]    = $bang;
                 }
-                $details .= "</table>";
-                $weather["summary"]   = $summary;
-                $weather["details"]   = $details;
-                $weather["gefVon"]    = "von <a href = \"https://openweathermap.org\" target=\"_blank\" rel=\"noopener\">Openweathermap</a>";
-                $requestData          = [];
-                $requestData["url"]   = "http://openweathermap.org/img/w/";
-                $weather["image"]     = action('Pictureproxy@get', $requestData) . $result["weather"][0]["icon"] . ".png";
-                $weather["image-alt"] = $result["weather"][0]["main"];
-                $mquicktips[]         = $weather;
+
             }
         } catch (\ErrorException $e) {
+        }
 
+        if (APP::getLocale() === "de") {
+            # Spruch
+            $spruecheFile = storage_path() . "/app/public/sprueche.txt";
+            if (file_exists($spruecheFile) && $request->has('sprueche')) {
+                $sprueche = file($spruecheFile);
+                $spruch   = $sprueche[array_rand($sprueche)];
+            } else {
+                $spruch = "";
+            }
+
+            # manuelle Quicktips:
+            $file = storage_path() . "/app/public/qtdata.csv";
+
+            if (file_exists($file) && $q !== '') {
+                $file = fopen($file, 'r');
+                while (($line = fgetcsv($file)) !== false) {
+                    $words = array_slice($line, 3);
+                    $isIn  = false;
+                    foreach ($words as $word) {
+                        $word = strtolower($word);
+                        if (strpos($q, $word) !== false) {
+                            $isIn = true;
+                            break;
+                        }
+                    }
+                    if ($isIn === true) {
+                        $quicktip            = array('QT_Type' => "MQT");
+                        $quicktip["URL"]     = $line[0];
+                        $quicktip["title"]   = $line[1];
+                        $quicktip["summary"] = $line[2];
+                        $mquicktips[]        = $quicktip;
+                    }
+                }
+                fclose($file);
+            }
+
+            # Wetter
+            try {
+                $url = "http://api.openweathermap.org/data/2.5/weather?type=accurate&units=metric&lang=" . APP::getLocale() . "&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
+
+                $result = json_decode($this->get($url), true);
+
+                $searchWords = explode(' ', $q);
+                $within      = false;
+                foreach ($searchWords as $word) {
+                    if (stripos($result["name"], $word) !== false) {
+                        $within = true;
+                    }
+                }
+                if ($within) {
+                    $weather          = [];
+                    $weather["title"] = "Wetter in " . $result["name"];
+                    $weather["URL"]   = "http://openweathermap.org/city/" . $result["id"];
+
+                    $summary = '<b class="detail-short">' . $result["main"]["temp"] . " °C, " . $result["weather"][0]["description"] . "</b>";
+                    $details = '<table  class="table table-condensed"><tr><td>Temperatur</td><td>' . $result["main"]["temp_min"] . " bis " . $result["main"]["temp_max"] . " °C</td></tr>";
+                    $details .= "<tr><td>Druck</td><td>" . $result["main"]["pressure"] . " hPa</td></tr>";
+                    $details .= "<tr><td>Luftfeuchtigkeit</td><td>" . $result["main"]["humidity"] . " %</td></tr>";
+                    $details .= "<tr><td>Wind</td><td>" . $result["wind"]["speed"] . " m/s, " . $result["wind"]["deg"] . "°</td></tr>";
+                    $details .= "<tr><td>Bewölkung</td><td>" . $result["clouds"]["all"] . " %</td></tr>";
+                    if (isset($result->rain)) {
+                        $details .= " | Regen letzte drei Stunden: " . $result["rain"]["3h"] . " h";
+                    }
+                    $details .= "</table>";
+                    $weather["summary"]   = $summary;
+                    $weather["details"]   = $details;
+                    $weather["gefVon"]    = "von <a href = \"https://openweathermap.org\" target=\"_blank\" rel=\"noopener\">Openweathermap</a>";
+                    $requestData          = [];
+                    $requestData["url"]   = "http://openweathermap.org/img/w/";
+                    $weather["image"]     = action('Pictureproxy@get', $requestData) . $result["weather"][0]["icon"] . ".png";
+                    $weather["image-alt"] = $result["weather"][0]["main"];
+                    $mquicktips[]         = $weather;
+                }
+            } catch (\ErrorException $e) {
+
+            }
         }
 
         # Wikipedia Quicktip
@@ -157,48 +191,47 @@ class MetaGerSearch extends Controller
         }
         $mquicktips = array_merge($mquicktips, $quicktips);
 
-        # Dict.cc Quicktip
-        if (count(explode(' ', $q)) < 3) {
-            $url             = "http://www.dict.cc/metager.php?s=" . urlencode($q);
-            $decodedResponse = json_decode($this->get($url), true);
-            if ($decodedResponse["headline"] != "" && $decodedResponse["link"] != "") {
-                $quicktip            = [];
-                $quicktip["title"]   = $decodedResponse["headline"];
-                $quicktip["URL"]     = $decodedResponse["link"];
-                $quicktip["summary"] = implode(", ", $decodedResponse["translations"]);
-                $quicktip['gefVon']  = trans('metaGerSearch.quicktips.dictcc.adress');
+        if (APP::getLocale() === "de") {
+            # Dict.cc Quicktip
+            if (count(explode(' ', $q)) < 3) {
+                $url             = "http://www.dict.cc/metager.php?s=" . urlencode($q);
+                $decodedResponse = json_decode($this->get($url), true);
+                if ($decodedResponse["headline"] != "" && $decodedResponse["link"] != "") {
+                    $quicktip            = [];
+                    $quicktip["title"]   = $decodedResponse["headline"];
+                    $quicktip["URL"]     = $decodedResponse["link"];
+                    $quicktip["summary"] = implode(", ", $decodedResponse["translations"]);
+                    $quicktip['gefVon']  = trans('metaGerSearch.quicktips.dictcc.adress');
 
-                if (App::isLocale('de')) {
-                    array_unshift($mquicktips, $quicktip);
+                    if (App::isLocale('de')) {
+                        array_unshift($mquicktips, $quicktip);
+                    } else {
+                        $mquicktips[] = $quicktip;
+                    }
+                }
+            }
+
+            # wussten Sie schon
+            $file = storage_path() . "/app/public/tips.txt";
+            if (file_exists($file)) {
+                $tips = file($file);
+                $tip  = $tips[array_rand($tips)];
+
+                $mquicktips[] = ['title' => trans('metaGerSearch.quicktips.tips.title'), 'summary' => $tip, 'URL' => '/tips'];
+            }
+
+            # Werbelinks
+            $file = storage_path() . "/app/public/ads.txt";
+            if (file_exists($file)) {
+                $ads = json_decode(file_get_contents($file), true);
+                $ad  = $ads[array_rand($ads)];
+                if (isset($ads['details'])) {
+                    $mquicktips[] = ['title' => $ad['title'], 'summary' => $ad['summary'], 'details' => $ad['details'], 'URL' => $ad['URL']];
                 } else {
-                    $mquicktips[] = $quicktip;
+                    $mquicktips[] = ['title' => $ad['title'], 'summary' => $ad['summary'], 'URL' => $ad['URL']];
                 }
             }
         }
-
-        # wussten Sie schon
-        $file = storage_path() . "/app/public/tips.txt";
-        if (file_exists($file)) {
-            $tips = file($file);
-            $tip  = $tips[array_rand($tips)];
-
-            $mquicktips[] = ['title' => trans('metaGerSearch.quicktips.tips.title'), 'summary' => $tip, 'URL' => '/tips'];
-        }
-
-        # Werbelinks
-        $file = storage_path() . "/app/public/ads.txt";
-        if (file_exists($file)) {
-            $ads = json_decode(file_get_contents($file), true);
-            $ad  = $ads[array_rand($ads)];
-            if (isset($ads['details'])) {
-                $mquicktips[] = ['title' => $ad['title'], 'summary' => $ad['summary'], 'details' => $ad['details'], 'URL' => $ad['URL']];
-            } else {
-                $mquicktips[] = ['title' => $ad['title'], 'summary' => $ad['summary'], 'URL' => $ad['URL']];
-            }
-        }
-
-        # Spendenaufruf:
-        //$mquicktips[] = ['title' => trans('quicktip.spende.title'), 'summary' => trans('quicktip.spende.descr'), 'URL' => LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "spendenaufruf")];
 
         return view('quicktip')
             ->with('spruch', $spruch)

@@ -39,8 +39,7 @@ class Fernsehsuche extends Searchengine
                         $descr,
                         $this->gefVon,
                         $this->counter,
-                        false,
-                        $image
+                        ['image' => $image]
                     );
                 } catch (\ErrorException $e) {
 

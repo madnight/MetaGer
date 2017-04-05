@@ -28,7 +28,8 @@ class Result
     public $rank; # Das Ranking für das Ergebnis
 
     # Erstellt ein neues Ergebnis
-    public function __construct($provider, $titel, $link, $anzeigeLink, $descr, $gefVon, $sourceRank, $partnershop = false, $image = "", $price = 0, $additionalInformation = [])
+    #public function __construct($provider, $titel, $link, $anzeigeLink, $descr, $gefVon, $sourceRank, $partnershop = false, $image = "", $price = 0, $additionalInformation = [])
+    public function __construct($provider, $titel, $link, $anzeigeLink, $descr, $gefVon, $sourceRank, $additionalInformation = [])
     {
         $provider          = simplexml_load_string($provider);
         $this->titel       = strip_tags(trim($titel));
@@ -60,9 +61,9 @@ class Result
         $this->strippedDomain        = $this->getStrippedDomain($this->strippedHost);
         $this->strippedLink          = $this->getStrippedLink($this->anzeigeLink);
         $this->rank                  = 0;
-        $this->partnershop           = $partnershop;
-        $this->image                 = $image;
-        $this->price                 = $price;
+        $this->partnershop           = isset($additionalInformation["partnershop"]) ? $additionalInformation["partnershop"] : false;
+        $this->image                 = isset($additionalInformation["image"]) ? $additionalInformation["image"] :  "";
+        $this->price                 = isset($additionalInformation["price"]) ? $additionalInformation["price"] :  0;
         $this->additionalInformation = $additionalInformation;
     }
 

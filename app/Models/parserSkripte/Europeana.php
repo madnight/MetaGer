@@ -44,8 +44,7 @@ class Europeana extends Searchengine
                         $descr,
                         $this->gefVon,
                         $this->counter,
-                        false,
-                        $image
+                        ['image' => $image]
                     );
                 }
             }

@@ -13,6 +13,7 @@
 	<h2>{{ trans('app.head.3') }}</h2>
 	<p>{!! trans('app.maps.1') !!}</p>
 	<p>{{ trans('app.maps.2') }}</p>
+	<p><a href="https://play.google.com/store/apps/details?id=de.suma_ev.dominik.metagermaps">{{ trans('app.maps.playstore') }}</a></p>
 	<p><a href="{!! url('app/maps') !!}">{{ trans('app.metager.manuell') }}</a></p>
 	<p>{{ trans('app.maps.3') }}</p>
 	<ul>

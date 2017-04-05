@@ -39,8 +39,7 @@ class Flickr extends Searchengine
                     $descr,
                     $this->gefVon,
                     $this->counter,
-                    false,
-                    $image
+                    ['image' => $image]
                 );
             }
         } catch (\Exception $e) {

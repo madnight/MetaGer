@@ -7,9 +7,6 @@ return [
     'foki.wissenschaft'              => 'Wissenschaft',
     'foki.produkte'                  => 'Produkte',
     'foki.angepasst'                 => 'Angepasst',
-    'foki.eigene'                    => 'Eigene Suche',
-    'foki.eigene.entfernen'          => 'Eigene Suche entfernen',
-    'foki.angepasst.entfernen'       => 'Einstellungen zurücksetzen',
     'foki.maps'                      => 'Maps.metager.de <span class="badge new-feature">Neu</span>',
 
     'design'                         => 'Persönliches Design auswählen',

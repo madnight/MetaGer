@@ -174,7 +174,9 @@ function isUseOnce() {
         return false;
     }
 }
-
+/**
+ * Loads all the custom focuses stored in local storage
+ */
 function loadInitialCustomFocuses() {
     for (var key in localStorage) {
         if (key.startsWith("focus_")) {
@@ -183,7 +185,10 @@ function loadInitialCustomFocuses() {
         }
     }
 }
-
+/**
+ * Shows the focus create dialog
+ * If an id is given it will try to load a focus for the given id
+ */
 function showFocusCreateDialog(id = "") {
     document.getElementById("original-id").value = id;
     $("#create-focus-modal").modal("show");
@@ -206,11 +211,16 @@ function showFocusCreateDialog(id = "") {
         }
     }
 }
-
+/**
+ * Shows the focus create dialog for a given id
+ */
 function showFocusEditDialog(id) {
     showFocusCreateDialog(id);
 }
-
+/**
+ * Save the current Focus
+ * Listens for save button
+ */
 function saveFocus() {
     var name = document.getElementById("focus-name").value;
     if (isValidName(name) && atLeastOneChecked()) {
@@ -242,37 +252,48 @@ function saveFocus() {
         alert("Bitte gültigen Namen eingeben:\n* Keine Sonderzeichen\n* Mindestens 1 Buchstabe\n* Mindestens 1 Suchmaschine auswählen");
     }
 }
-
-function isValidName(name) {
-    // no Characters other then a-z, A-Z, 0-9, ä, ö, ü, ß, -, _ allowed
-    // at least 1 character
-    return /^[a-zA-Z0-9äöüß\-_ ]*$/.test(name);
-}
-
-function atLeastOneChecked() {
-    return $("input[type=checkbox]:checked").length > 0;
-}
-
-function alreadyInUse(name) {
-    return localStorage.hasOwnProperty(getIdFromName(name));
-}
-
+/**
+ * Delete current Focus
+ * Listens for delete button
+ */
 function deleteFocus() {
     var oldId = document.getElementById("original-id").value;
     localStorage.removeItem(oldId);
     removeFocusById(oldId);
     $("#create-focus-modal").modal("hide");
 }
-/*
-<input id="NAME" class="hide" type="radio" name="focus" value="NAME" form="searchForm" checked required>
-<label id="NAME-label" for="NAME">
-    <span class="glyphicon glyphicon-star"></span>
-    <span class="content">NAME</span>
-    <button class="btn btn-default">
-        <span class="glyphicon glyphicon-pencil"></span>
-    </button>
-</label>
-*/
+/**
+ * Is the name valid (in terms of characters)?
+ */
+function isValidName(name) {
+    // no Characters other then a-z, A-Z, 0-9, ä, ö, ü, ß, -, _ allowed
+    // at least 1 character
+    return /^[a-zA-Z0-9äöüß\-_ ]*$/.test(name);
+}
+/**
+ * Is at least one focus selected?
+ */
+function atLeastOneChecked() {
+    return $("input[type=checkbox]:checked").length > 0;
+}
+/**
+ * Is there already a focus with this name?
+ */
+function alreadyInUse(name) {
+    return localStorage.hasOwnProperty(getIdFromName(name));
+}
+/**
+ * Adds a focus html-element to the focus selection
+ * 
+ * <input id="NAME" class="hide" type="radio" name="focus" value="NAME" form="searchForm" checked required>
+ * <label id="NAME-label" for="NAME">
+ *     <span class="glyphicon glyphicon-star"></span>
+ *     <span class="content">NAME</span>
+ *     <button class="btn btn-default">
+ *         <span class="glyphicon glyphicon-pencil"></span>
+ *     </button>
+ * </label>
+ */
 function addFocus(name) {
     var id = getIdFromName(name);
     var foki = document.getElementById("foki");
@@ -327,18 +348,25 @@ function addFocus(name) {
     wrapper.appendChild(newFocusEditLink);
     newFocusEditLink.appendChild(newFocusEditLinkGlyphicon);
 }
-
+/**
+ * Remove the focuses html-elements
+ */
 function removeFocus(name) {
     removeFocusById(getIdFromName(name));
 }
-
+/**
+ * Remove the focuses html-elements
+ */
 function removeFocusById(id) {
     var focusRadio = document.getElementById(id);
     var focus = focusRadio.parentNode;
     var parent = focus.parentNode;
     parent.removeChild(focus);
 }
-
+/**
+ * Turns a name into an id
+ * Converts special characters and spaces
+ */
 function getIdFromName(name) {
     name = name.toLowerCase();
     name = name.split(" ").join("_");
@@ -347,15 +375,21 @@ function getIdFromName(name) {
     name = name.split("ü").join("ue");
     return "focus_" + name;
 }
-
+/**
+ * Loads the focus object for the given id from local storage
+ */
 function loadFocusById(id) {
     return JSON.parse(localStorage.getItem(id));
 }
-
+/**
+ * Unchecks all focuses from the focus creator dialog
+ */
 function uncheckAll() {
     $(".focusCheckbox").prop("checked", false);
 }
-
+/**
+ * Resets all settings
+ */
 function resetOptions() {
     localStorage.removeItem("pers");
     var keys = [];

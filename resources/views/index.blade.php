@@ -227,7 +227,7 @@
 				<span class="content">{{ trans('index.foki.produkte') }}</span>
 			</label>
 		</div>
-		<button id="addFocusBtn" class="btn btn-default">
+		<button id="addFocusBtn" class="btn btn-default hide">
 			<span class="glyphicon glyphicon-plus"></span>
 		</button>
 		<a id="settings-btn" class="mutelink btn btn-default" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "settings") }}">
@@ -257,8 +257,8 @@
 					</div>
 					<input type="text" name="eingabe" required="" autofocus="" autocomplete="{{$autocomplete}}" class="form-control" placeholder="{{ trans('index.placeholder') }}">
 					<input type="hidden" name="encoding" value="utf8">
-				@if ($focus === 'angepasst')
-					<input type="hidden" name="lang" value={{ $lang }} >
+					@if ($focus === 'angepasst')
+						<input type="hidden" name="lang" value={{ $lang }} >
 						<input type="hidden" name="resultCount" value={{ $resultCount }} >
 						<input type="hidden" name="time" value={{ $time }} >
 						<input type="hidden" name="sprueche" value={{ $sprueche }} >
@@ -287,7 +287,8 @@
 		</div>
 		</fieldset>
 		<ul class="list-inline searchform-bonus">
-			<li><a href="https://www.boost-project.com/de/shops?charity_id=1129&amp;tag=bl" target="_blank" rel="noopener" id="foerdershops" class="btn btn-default mutelink" title="{{ trans('index.partnertitle') }}">{{ trans('index.conveyor') }}</a></li>
+			<li>
+				<a href="https://www.boost-project.com/de/shops?charity_id=1129&amp;tag=bl" target="_blank" rel="noopener" id="foerdershops" class="btn btn-default mutelink" title="{{ trans('index.partnertitle') }}">{{ trans('index.conveyor') }}</a></li>
 			<li class="hidden-xs seperator">|</li>
 			<li id="plug"
 			@unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge' || $browser === 'Safari' || $browser === 'Vivaldi')

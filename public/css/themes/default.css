@@ -7189,9 +7189,6 @@ By Class
 .bold {
   font-weight: bold;
 }
-.settings-btn {
-  margin-top: 25px;
-}
 .fokus-category {
   font-size: 20px;
 }
@@ -7897,6 +7894,19 @@ footer a {
 }
 #settings-btn > * {
   vertical-align: middle;
+}
+#settingsButtons {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+#settingsButtons a,
+#settingsButtons input {
+  margin-top: 25px;
+}
+#settings-abort-btn {
+  color: white;
+  margin-right: auto;
 }
 /*input[type=text]:focus, textarea:focus, input[type=email]:focus, input[type=tel]:focus {
     outline-color: rgb(255, 128, 0);

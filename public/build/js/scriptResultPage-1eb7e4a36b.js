@@ -1,10 +1,11 @@
 $(document).ready(function() {
-    getDocumentReadyForUse($("#foki > li.active > a").attr("aria-controls"));
-    $('iframe').iFrameResize();
+    createCustomFocuses();
+    var focus = $("#foki > li.active > a").attr("aria-controls");
+    var custom = $("#foki > li.active").hasClass("custom-focus-tab-selector");
+    getDocumentReadyForUse(focus, custom);
 });
 
 function tabs() {
-    //return;
     $("#foki > li.tab-selector > a").each(function() {
         if ($(this).attr("target") != "_blank") {
             $(this).attr("href", "#" + $(this).attr("aria-controls"));
@@ -29,16 +30,19 @@ function tabs() {
     });
 }
 
-function getDocumentReadyForUse(fokus) {
+function getDocumentReadyForUse(fokus, custom = false) {
     clickLog();
     popovers();
     if (fokus === "bilder") imageLoader();
+    if (custom) initialLoadContent(fokus);
     //pagination();
     tabs();
     theme();
     fokiChanger();
     pluginInfo();
     productWidget();
+    $('iframe:not(.resized)').iFrameResize();
+    $('iframe').addClass("resized");
 }
 
 function pluginInfo() {
@@ -305,4 +309,172 @@ function productWidget() {
         });
     }
     $(".lightSliderContainer").removeClass("hidden");
+}
+
+function createCustomFocuses() {
+    for (var key in localStorage) {
+        if (key.startsWith("focus_")) {
+            var focus = loadFocusById(key);
+            var active = false;
+            if (getActiveFocusId() === getIdFromName(focus.name)) {
+                active = true;
+            }
+            addFocus(focus, active);
+            addTab(focus, active);
+        }
+    }
+}
+/*
+@if( $metager->getFokus() === "produktsuche" )
+    <li id="produktsucheTabSelector" class="active tab-selector" role="presentation" data-loaded="1">
+        <a aria-controls="produktsuche" data-href="#produktsuche" href="#produktsuche">
+            <span class='glyphicon glyphicon-shopping-cart'></span>
+            <span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
+        </a>
+    </li>
+@else
+    <li id="produktsucheTabSelector" class="tab-selector" role="presentation" data-loaded="0">
+        <a aria-controls="produktsuche" data-href="{!! $metager->generateSearchLink('produktsuche') !!}" href="{!! $metager->generateSearchLink('produktsuche', false) !!}">
+            <span class='glyphicon glyphicon-shopping-cart'></span>
+            <span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
+        </a>
+    </li>
+@endif
+*/
+function addFocus(focus, active = false) {
+    var id = getIdFromName(focus.name);
+    var foki = document.getElementById("foki");
+    // create <input>
+    var focusElement = document.createElement("li");
+    focusElement.id = id + "TabSelector";
+    focusElement.classList.add("tab-selector");
+    focusElement.classList.add("custom-focus-tab-selector");
+    if (active) {
+        focusElement.classList.add("active");
+        focusElement.setAttribute("data-loaded", "1");
+    } else {
+        focusElement.setAttribute("data-loaded", "0");
+    }
+    focusElement.setAttribute("role", "presentation");
+    // create <a>
+    var focusElementLink = document.createElement("a");
+    focusElementLink.setAttribute("aria-controls", id);
+    var searchLink = generateSearchLinkForFocus(focus)
+    focusElementLink.setAttribute("data-href", searchLink);
+    focusElementLink.setAttribute("href", searchLink);
+    // create <span> glyphicon
+    var focusElementIcon = document.createElement("span");
+    focusElementIcon.classList.add("glyphicon");
+    focusElementIcon.classList.add("glyphicon-cog");
+    // create <span> focusname
+    var focusElementName = document.createElement("span");
+    focusElementName.classList.add("hidden-xs");
+    focusElementName.innerHTML = focus.name;
+    // add new elements
+    var mapsTabSelector = document.getElementById("mapsTabSelector");
+    foki.insertBefore(focusElement, mapsTabSelector);
+    focusElement.appendChild(focusElementLink);
+    focusElementLink.appendChild(focusElementIcon);
+    focusElementLink.appendChild(focusElementName);
+}
+/*
+@if( $metager->getFokus() === "produktsuche" )
+    <div role="tabpanel" class="tab-pane active" id="produktsuche">
+        <div class="row">
+                @yield('results')
+        </div>
+     </div>
+@else
+    <div role="tabpanel" class="tab-pane" id="produktsuche">
+        <div class="loader">
+            <img src="/img/ajax-loader.gif" alt="" />
+        </div>
+    </div>
+@endif
+*/
+function addTab(focus, active = false) {
+    var id = getIdFromName(focus.name);
+    // create tab div
+    var tabPane = document.createElement("div");
+    tabPane.id = id;
+    tabPane.classList.add("tab-pane");
+    if (active) {
+        tabPane.classList.add("active");
+    }
+    tabPane.setAttribute("role", "tabpanel");
+    // create row div
+    var row = document.createElement("div");
+    row.classList.add("loader");
+    // create loader image
+    var img = document.createElement("img");
+    img.setAttribute("src", "/img/ajax-loader.gif");
+    img.setAttribute("alt", "");
+    row.appendChild(img);
+    // add new elements
+    var tabs = document.getElementById("main-content-tabs");
+    tabs.appendChild(tabPane)
+    tabPane.appendChild(row);
+}
+
+function getIdFromName(name) {
+    return "focus_" + name.split(" ").join("_").toLowerCase();
+}
+
+function loadFocusById(id) {
+    return JSON.parse(localStorage.getItem(id));
+}
+
+function getActiveFocusId() {
+    var search = window.location.search;
+    var from = search.indexOf("focus=") + "focus=".length;
+    var to = search.substring(from).indexOf("&") + from;
+    if (to <= 0) {
+        to = search.substring(from).length;
+    }
+    id = search.substring(from, to);
+    return id;
+}
+// TODO catch error if link is http://localhost:8000/meta/meta.ger3?
+function generateSearchLinkForFocus(focus) {
+    var link = document.location.href;
+    // remove old engine settings
+    // not yet tested
+    /*
+    while (link.indexOf("engine_") !== -1) {
+        var from = search.indexOf("engine_");
+        var to = search.substring(from).indexOf("&") + from;
+        if (to === 0) {
+            to = search.substring(from).length;
+        }
+        link = link.substring(0, from) + link.substring(to);
+    }
+    */
+    // add new engine settings
+    for (var key in focus) {
+        if (key.startsWith("engine_")) {
+            var focusName = key.substring("engine_".length);
+            link += "&" + focusName + "=" + focus[key];
+        }
+    }
+    link += "&out=results";
+    link = replaceFocusInUrl(link);
+    return link;
+}
+
+function replaceFocusInUrl(url) {
+    var from = url.indexOf("focus=");
+    var to = url.substring(from).indexOf("&") + from;
+    if (to === 0) {
+        to = url.substring(from).length;
+    }
+    url = url.substring(0, from) + url.substring(to);
+    return url + "&focus=angepasst";
+}
+
+function initialLoadContent(fokus) {
+    var link = $("#" + fokus + "TabSelector a").attr("data-href");
+    $.get(link, function(data) {
+        $("#" + fokus).html(data);
+        getDocumentReadyForUse(fokus);
+    });
 }

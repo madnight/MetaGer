@@ -1,14 +1,9 @@
 $(document).ready(function() {
     // Wenn LocalStorage verfügbar ist, geben wir die Möglichkeit die Einstellungen dort zu speichern
     tickOptions();
-    $(".allUnchecker").click(uncheckAll);
     if (localStorage) {
         $("#save").removeClass("hidden");
-        if (localStorage.getItem("pers")) {
-            $("#reset").removeClass("hidden");
-        }
         $("#save").click(function() {
-            resetOptions();
             localStorage.setItem("pers", true);
             $("input[type=checkbox]:checked, input[type=hidden]").each(function(el) {
                 localStorage.setItem($(this).attr("name"), $(this).val());
@@ -16,10 +11,6 @@ $(document).ready(function() {
             $("select").each(function(el) {
                 localStorage.setItem($(this).attr("name"), $(this).val());
             });
-            document.location.href = $("#save").attr("data-href");
-        });
-        $("#reset").click(function() {
-            resetOptions();
             document.location.href = $("#save").attr("data-href");
         });
     }
@@ -30,9 +21,6 @@ $(document).ready(function() {
         } else {
             $(selector + " input").prop("checked", true);
         }
-    });
-    $(".allUnchecker").click(function() {
-        $(".focusCheckbox").prop("checked", false);
     });
     $("#unten").click(function() {
         $("#settings-form").append("<input type=\"hidden\" name=\"usage\" value=\"once\">");
@@ -62,8 +50,6 @@ $(document).ready(function() {
                 break;
         }
     });
-    uncheckAll();
-    $(".checker, .allUnchecker").removeClass("hide");
     $("#settings-focus").val("angepasst");
 });
 
@@ -85,21 +71,6 @@ function tickOptions() {
     }
 }
 
-function resetOptions() {
-    localStorage.removeItem("pers");
-    var keys = [];
-    for (var i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i)
-        keys.push(key);
-    }
-    for (var i = 0; i < keys.length; i++) {
-        var key = keys[i];
-        if (key.startsWith("param_" || key.startsWith("focus"))) {
-            localStorage.removeItem(key);
-        }
-    }
-}
-
 function getLanguage() {
     var metaData = document.getElementsByTagName('meta');
     for (var m in metaData) {
@@ -108,7 +79,3 @@ function getLanguage() {
         }
     }
 }
-}
-
-function uncheckAll() {
-    $(".focusCheckbox").prop("checked", false);

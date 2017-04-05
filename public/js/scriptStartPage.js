@@ -3,6 +3,7 @@ $(document).ready(function() {
     if (location.href.indexOf("#plugin-modal") > -1) {
         $("#plugin-modal").modal("show");
     }
+    $('#addFocusBtn').removeClass('hide');
     $("button").popover();
     if (localStorage) {
         var theme = localStorage.getItem("theme");
@@ -219,14 +220,12 @@ function saveFocus() {
         focus[$(this).attr("name")] = $(this).val();
     });
     focus["name"] = name;
-    if (localStorage.getItem(id) === null) {
-        addFocus(name);
-    }
     if (oldId !== "") {
         localStorage.removeItem(oldId);
         removeFocusById(oldId);
     }
     localStorage.setItem(id, JSON.stringify(focus));
+    addFocus(name);
     $("#create-focus-modal").modal("hide");
 }
 
@@ -260,7 +259,7 @@ function addFocus(name) {
     newFocus.classList.add("hide");
     newFocus.type = "radio";
     newFocus.name = "focus";
-    newFocus.value = name;
+    newFocus.value = id;
     newFocus.setAttribute("Form", "searchForm");
     newFocus.checked = true;
     newFocus.required = true;
@@ -322,4 +321,19 @@ function loadFocusById(id) {
 
 function uncheckAll() {
     $(".focusCheckbox").prop("checked", false);
+}
+
+function resetOptions() {
+    localStorage.removeItem("pers");
+    var keys = [];
+    for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i)
+        keys.push(key);
+    }
+    for (var i = 0; i < keys.length; i++) {
+        var key = keys[i];
+        if (key.startsWith("param_" || key.startsWith("focus"))) {
+            localStorage.removeItem(key);
+        }
+    }
 }

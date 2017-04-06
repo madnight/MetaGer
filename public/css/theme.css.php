@@ -25,7 +25,7 @@ input[type=text]:focus, textarea:focus, input[type=email]:focus, input[type=tel]
     -webkit-box-shadow: 0px 0px 2px 2px <?=$colorRGBA?>;
 	-moz-box-shadow: 0px 0px 2px 2px <?=$colorRGBA?>;
 	box-shadow: 0px 0px 2px 2px <?=$colorRGBA?>;
-    // border-color: <?=$colorRGBA?>;
+    border: 1px solid <?=$colorRGBA?>;
 }
 #mglogo > a {
 	background-image: linear-gradient(<?=$color?> 0%, <?=$color?> 250%);

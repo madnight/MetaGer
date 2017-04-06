@@ -14,7 +14,6 @@
 	</head>
 	<body>
 		<h1 class="hidden">Your Access to this site has been denied. Please contact <a href="mailto:office@suma-ev.de">office@suma-ev.de</a> if this is not correct</h1>
-		<script type="text/javascript" src="{{ elixir('js/lib.js') }}"></script>
-		<script type="text/javascript" src="{{ elixir('js/scriptResultPage.js') }}"></script>
+		<script type="text/javascript" src="/js/all.js"></script>
 	</body>
 </html>

@@ -192,12 +192,6 @@
 				@if (isset($success))
 					<div class="alert alert-success" role="alert">{{ $success }}</div>
 				@endif
-				@if (isset($info))
-					<div class="alert alert-info" role="alert">{{ $info }}</div>
-				@endif
-				@if (isset($warning))
-					<div class="alert alert-warning" role="alert">{{ $warning }}</div>
-				@endif
 				@if (isset($error))
 					<div class="alert alert-danger" role="alert">{{ $error }}</div>
 				@endif
@@ -212,7 +206,7 @@
 					</li>
 					<li id="info">
 						<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "kontakt") }}">{{ trans('staticPages.nav5') }}</a> - <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "impressum") }}">{{ trans('staticPages.nav8') }}</a>
-						{{ trans('staticPages.sumaev.1') }}<a href="https://www.suma-ev.de/">{{ trans('staticPages.sumaev.2') }}</a>
+						{{ trans('staticPages.sumaev.1') }}<a href="https://www.suma-ev.de/"   >{{ trans('staticPages.sumaev.2') }}</a>
 					</li>
 					<li>
 						<a href="https://www.uni-hannover.de/"  >
@@ -221,6 +215,7 @@
 				</ul>
 			</footer>
 			<img src="{{ action('ImageController@generateImage')}}?site={{ urlencode(url()->current()) }}" class="hidden" />
+			<script type="text/javascript" src="{{ elixir('js/all.js') }}"></script>
 		</div>
 	</body>
 </html>

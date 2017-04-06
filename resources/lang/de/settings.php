@@ -2,7 +2,7 @@
 
 return [
     'head.1'            => 'Einstellungen',
-    'head.2'            => 'Hier können Sie Ihr MetaGer anpassen: Nach Anklicken Ihrer gewünschten Einstellungen müssen Sie wählen, ob Sie die Einstellungen dauerhaft speichern, oder nur einmalig setzen wollen.',
+    'head.2'            => 'Hier können Sie Ihr MetaGer anpassen: Nach Anklicken Ihrer gewünschten Einstellungen müssen Sie <a href="#unten">unten auf dieser Seite</a> wählen, ob Sie die Einstellungen dauerhaft speichern, oder nur einmalig setzen wollen.',
 
     'allgemein.1'       => 'Allgemein',
 
@@ -26,8 +26,6 @@ return [
     'suchmaschinen.1'   => 'Suchmaschinen',
     'suchmaschinen.2'   => '(alle abwählen)',
     'suchmaschinen.3'   => '(alle an-/abwählen)',
-
-    'abort'             => 'abbrechen',
 
     'speichern.1'       => 'Startseite für einmalige Nutzung generieren',
     'speichern.2'       => 'Einstellungen dauerhaft speichern',

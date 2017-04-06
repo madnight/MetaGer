@@ -36,23 +36,26 @@ class StartpageController extends Controller
             }
         }
 
+        $maps = $request->input('param_maps', 'on');
+
+        $agent   = new Agent();
+        $browser = $agent->browser();
+
         return view('index')
             ->with('title', trans('titles.index'))
             ->with('homeIcon')
-            ->with('focusPages', $focusPages)
-            ->with('browser', (new Agent())->browser())
-            ->with('navbarFocus', 'suche')
-            ->with('theme', $theme)
-            ->with('autocomplete', $request->input('param_autocomplete', 'on'))
-            ->with('foki', $this->loadFoki())
-
             ->with('focus', $request->input('focus', 'web'))
             ->with('lang', $request->input('param_lang', 'all'))
             ->with('resultCount', $request->input('param_resultCount', '20'))
             ->with('time', $request->input('param_time', '1000'))
             ->with('sprueche', $request->input('param_sprueche', 'off'))
             ->with('newtab', $request->input('param_newtab', 'on'))
-            ->with('maps', $maps = $request->input('param_maps', 'on'));
+            ->with('focusPages', $focusPages)
+            ->with('browser', $browser)
+            ->with('navbarFocus', 'suche')
+            ->with('theme', $theme)
+            ->with('maps', $maps)
+            ->with('autocomplete', $request->input('param_autocomplete', 'on'));
     }
 
     public function loadPage($subpage)
@@ -122,35 +125,6 @@ class StartpageController extends Controller
 
     public function loadSettings(Request $request)
     {
-        $foki = $this->loadFoki();
-
-        return view('settings')
-            ->with('foki', $foki)
-            ->with('title', 'Einstellungen')
-            ->with('js', ['settings.js'])
-            ->with('navbarFocus', 'suche');
-        die(var_dump($foki));
-
-        return $xml->saveXML();
-    }
-
-    public function berlin(Request $request)
-    {
-        $link     = "";
-        $password = "";
-        if ($request->has('eingabe')) {
-            $password = getenv('berlin');
-            $password = md5($request->input('eingabe') . " -host:userpage.fu-berlin.de" . $password);
-            $link     = "/meta/meta.ger3?eingabe=" . $request->input('eingabe') . " -host:userpage.fu-berlin.de&focus=web&password=" . $password . "&encoding=utf8&lang=all&site=fu-berlin.de&quicktips=off&out=results-with-style";
-        }
-        return view('berlin')
-            ->with('title', 'Testseite für die FU-Berlin')
-            ->with('link', $link)
-            ->with('password', $password);
-    }
-
-    private function loadFoki()
-    {
         $sumaFile = "";
         if (App::isLocale('en')) {
             $sumaFile = config_path() . "/sumas.xml";
@@ -179,6 +153,28 @@ class StartpageController extends Controller
             }
         }
 
-        return $foki;
+        return view('settings')
+            ->with('foki', $foki)
+            ->with('title', 'Einstellungen')
+            ->with('js', ['settings.js'])
+            ->with('navbarFocus', 'suche');
+        die(var_dump($foki));
+
+        return $xml->saveXML();
+    }
+
+    public function berlin(Request $request)
+    {
+        $link     = "";
+        $password = "";
+        if ($request->has('eingabe')) {
+            $password = getenv('berlin');
+            $password = md5($request->input('eingabe') . " -host:userpage.fu-berlin.de" . $password);
+            $link     = "/meta/meta.ger3?eingabe=" . $request->input('eingabe') . " -host:userpage.fu-berlin.de&focus=web&password=" . $password . "&encoding=utf8&lang=all&site=fu-berlin.de&quicktips=off&out=results-with-style";
+        }
+        return view('berlin')
+            ->with('title', 'Testseite für die FU-Berlin')
+            ->with('link', $link)
+            ->with('password', $password);
     }
 }

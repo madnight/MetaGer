@@ -556,8 +556,7 @@ class MetaGer
             $engine->startSearch($this);
         }
 
-        // Derzeit deaktiviert, da es die eigene Suche gibt
-        // $this->adjustFocus($sumas, $enabledSearchengines);
+        $this->adjustFocus($sumas, $enabledSearchengines);
 
         /* Wir warten auf die Antwort der Suchmaschinen
          * Die Verbindung steht zu diesem Zeitpunkt und auch unsere Requests wurden schon gesendet.

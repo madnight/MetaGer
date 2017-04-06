@@ -40,7 +40,6 @@
 			</div>
 		</footer>
 		<img src="{{ action('ImageController@generateImage')}}?site={{ urlencode(url()->current()) }}" class="hidden" />
-		<script type="text/javascript" src="{{ elixir('js/lib.js') }}"></script>
-		<script type="text/javascript" src="{{ elixir('js/scriptResultPage.js') }}"></script>
+		<script type="text/javascript" src="{{ elixir('js/all.js') }}"></script>
 	</body>
 </html>

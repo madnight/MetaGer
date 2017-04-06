@@ -124,6 +124,7 @@ class MailController extends Controller
         # Wir erstellen nun zunächst den Inhalt der Datei:
         $data = [];
         $new  = 0;
+        $emailAddress = "";
         foreach ($request->all() as $key => $value) {
 
             if ($key === "filename" || $value === "") {
@@ -135,6 +136,10 @@ class MailController extends Controller
                 $key = substr($key, strpos($key, "_new_") + 5);
             }
             $key = trim($key);
+            if($key === "email") {
+                $emailAddress = $value;
+                continue;
+            }
             if (!strpos($key, "#")) {
                 $data[$key] = $value;
             } else {
@@ -179,8 +184,14 @@ class MailController extends Controller
         $ex["new"] += $new;
 
         if ($new > 0) {
-            Mail::to("dev@suma-ev.de")
+            if($emailAddress !== "") { 
+                Mail::to("dev@suma-ev.de")
+                ->send(new Sprachdatei($message, $output, basename($filename), $emailAddress));
+            }
+            else {
+                Mail::to("dev@suma-ev.de")
                 ->send(new Sprachdatei($message, $output, basename($filename)));
+            }
         }
         $ex = base64_encode(serialize($ex));
         return redirect(url('languages/edit', ['from' => $from, 'to' => $to, 'exclude' => $ex]));

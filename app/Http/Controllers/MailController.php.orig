@@ -120,7 +120,10 @@ class MailController extends Controller
     public function sendLanguageFile(Request $request, $from, $to, $exclude = "", $email ="")
     {
         $filename = $request->input('filename');
+<<<<<<< HEAD
  
+=======
+>>>>>>> c2954d4edaed584e2ef44e346adc259a9b896171
         # Wir erstellen nun zunächst den Inhalt der Datei:
         $data = [];
         $new  = 0;
@@ -187,11 +190,11 @@ class MailController extends Controller
 
         if ($new > 0) {
             if($emailAddress !== "") { 
-                Mail::to("dev@suma-ev.de")
+                Mail::to("aria@suma-ev.de")
                 ->send(new Sprachdatei($message, $output, basename($filename), $emailAddress));
             }
             else {
-                Mail::to("dev@suma-ev.de")
+                Mail::to("aria@suma-ev.de")
                 ->send(new Sprachdatei($message, $output, basename($filename)));
             }
         }

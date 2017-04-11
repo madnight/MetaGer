@@ -56,6 +56,6 @@
 	<p>{!! trans('languages.hinweis.2') !!}</p>
 	<p>{!! trans('languages.hinweis.3') !!}</p>
 	<p><b>E-Mail-Adresse für Rückfragen</b> (optional):</p>
-	<p><input type="email" name="email" form="submit" value="{{$email}}" placeholder="name@provider.com"/></p>
+	<p><input type="email" name="email" form="submit" value="{{$email}}"/></p>
 	<button class="btn btn-success" type="submit" form="submit">Daten übermitteln</button>
 @endsection

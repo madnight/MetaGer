@@ -310,7 +310,9 @@ function productWidget() {
     }
     $(".lightSliderContainer").removeClass("hidden");
 }
-
+/**
+ * Creates focus tab and tab selector for every stored focus in local storage
+ */
 function createCustomFocuses() {
     for (var key in localStorage) {
         if (key.startsWith("focus_")) {
@@ -324,23 +326,25 @@ function createCustomFocuses() {
         }
     }
 }
-/*
-@if( $metager->getFokus() === "produktsuche" )
-    <li id="produktsucheTabSelector" class="active tab-selector" role="presentation" data-loaded="1">
-        <a aria-controls="produktsuche" data-href="#produktsuche" href="#produktsuche">
-            <span class='glyphicon glyphicon-shopping-cart'></span>
-            <span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
-        </a>
-    </li>
-@else
-    <li id="produktsucheTabSelector" class="tab-selector" role="presentation" data-loaded="0">
-        <a aria-controls="produktsuche" data-href="{!! $metager->generateSearchLink('produktsuche') !!}" href="{!! $metager->generateSearchLink('produktsuche', false) !!}">
-            <span class='glyphicon glyphicon-shopping-cart'></span>
-            <span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
-        </a>
-    </li>
-@endif
-*/
+/**
+ * Adds a focuses tab selector to the tab selector section
+ * 
+ * @if( $metager->getFokus() === "produktsuche" )
+ *     <li id="produktsucheTabSelector" class="active tab-selector" role="presentation" data-loaded="1">
+ *        <a aria-controls="produktsuche" data-href="#produktsuche" href="#produktsuche">
+ *             <span class='glyphicon glyphicon-shopping-cart'></span>
+ *             <span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
+ *         </a>
+ *     </li>
+ * @else
+ *     <li id="produktsucheTabSelector" class="tab-selector" role="presentation" data-loaded="0">
+ *         <a aria-controls="produktsuche" data-href="{!! $metager->generateSearchLink('produktsuche') !!}" href="{!! $metager->generateSearchLink('produktsuche', false) !!}">
+ *             <span class='glyphicon glyphicon-shopping-cart'></span>
+ *             <span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
+ *         </a>
+ *     </li>
+ * @endif
+ */
 function addFocus(focus, active = false) {
     var id = getIdFromName(focus.name);
     var foki = document.getElementById("foki");
@@ -377,21 +381,23 @@ function addFocus(focus, active = false) {
     focusElementLink.appendChild(focusElementIcon);
     focusElementLink.appendChild(focusElementName);
 }
-/*
-@if( $metager->getFokus() === "produktsuche" )
-    <div role="tabpanel" class="tab-pane active" id="produktsuche">
-        <div class="row">
-                @yield('results')
-        </div>
-     </div>
-@else
-    <div role="tabpanel" class="tab-pane" id="produktsuche">
-        <div class="loader">
-            <img src="/img/ajax-loader.gif" alt="" />
-        </div>
-    </div>
-@endif
-*/
+/**
+ * Adds a focuses tab to the tab section
+ * 
+ * @if( $metager->getFokus() === "produktsuche" )
+ *     <div role="tabpanel" class="tab-pane active" id="produktsuche">
+ *         <div class="row">
+ *                 @yield('results')
+ *         </div>
+ *      </div>
+ * @else
+ *     <div role="tabpanel" class="tab-pane" id="produktsuche">
+ *         <div class="loader">
+ *             <img src="/img/ajax-loader.gif" alt="" />
+ *         </div>
+ *     </div>
+ * @endif
+ */
 function addTab(focus, active = false) {
     var id = getIdFromName(focus.name);
     // create tab div
@@ -415,15 +421,22 @@ function addTab(focus, active = false) {
     tabs.appendChild(tabPane)
     tabPane.appendChild(row);
 }
-
+/**
+ * Turns a name into an id
+ * Converts special characters and spaces
+ */
 function getIdFromName(name) {
     return "focus_" + name.split(" ").join("_").toLowerCase();
 }
-
+/**
+ * Loads the focus object for the given id from local storage
+ */
 function loadFocusById(id) {
     return JSON.parse(localStorage.getItem(id));
 }
-
+/**
+ * Gets the id of the currently active focus
+ */
 function getActiveFocusId() {
     var search = window.location.search;
     var from = search.indexOf("focus=") + "focus=".length;
@@ -434,11 +447,14 @@ function getActiveFocusId() {
     id = search.substring(from, to);
     return id;
 }
+/**
+ * Turns the link of the current page into a search link for the given focus
+ */
 // TODO catch error if link is http://localhost:8000/meta/meta.ger3?
 function generateSearchLinkForFocus(focus) {
     var link = document.location.href;
     // remove old engine settings
-    // not yet tested
+    // not yet tested, only for compability problems with old versions of bookmarks and plugins
     /*
     while (link.indexOf("engine_") !== -1) {
         var from = search.indexOf("engine_");
@@ -460,7 +476,9 @@ function generateSearchLinkForFocus(focus) {
     link = replaceFocusInUrl(link);
     return link;
 }
-
+/**
+ * Replaces the focus in a given url with the "angepasst" focus
+ */
 function replaceFocusInUrl(url) {
     var from = url.indexOf("focus=");
     var to = url.substring(from).indexOf("&") + from;
@@ -470,7 +488,9 @@ function replaceFocusInUrl(url) {
     url = url.substring(0, from) + url.substring(to);
     return url + "&focus=angepasst";
 }
-
+/**
+ * Loads the content for a given fokus
+ */
 function initialLoadContent(fokus) {
     var link = $("#" + fokus + "TabSelector a").attr("data-href");
     $.get(link, function(data) {

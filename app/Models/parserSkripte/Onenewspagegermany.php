@@ -27,15 +27,22 @@ class Onenewspagegermany extends Searchengine
                 if (sizeof($result) < 3) {
                     continue;
                 }
+                $title                 = $result[0];
+                $link                  = $result[2];
+                $anzeigeLink           = $link;
+                $descr                 = $result[1];
+                $additionalInformation = sizeof($result) > 3 ? ['date' => intval($result[3])] : [];
+
                 $counter++;
                 $this->results[] = new Result(
                     $this->engine,
-                    trim(strip_tags($result[0])),
-                    $result[2],
-                    $result[2],
-                    $result[1],
+                    $title,
+                    $link,
+                    $anzeigeLink,
+                    $descr,
                     $this->gefVon,
-                    $counter
+                    $this->counter,
+                    $additionalInformation
                 );
             }
 

@@ -14,6 +14,7 @@ return [
 
     'conveyor'            => 'Einkaufen bei MetaGer-Fördershops',
     'partnertitle'        => 'MetaGer unterstützen, ohne Mehrkosten für Sie',
+    'mapstitle'           => 'Der MetaGer Kartenservice',
 
     'plugin'              => 'MetaGer-Plugin hinzufügen',
     'plugintitle'         => 'MetaGer zu Ihrem Browser hinzufügen',

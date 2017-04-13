@@ -181,6 +181,9 @@ class MetaGer
         // authorize
         // misc (WiP)
         if ($this->fokus == "nachrichten") {
+            $this->results = array_filter($this->results, function ($v, $k) {
+                return !is_null($v->getRank());
+            }, ARRAY_FILTER_USE_BOTH);
             uasort($this->results, function ($a, $b) {
                 $datea = $a->getDate();
                 $dateb = $b->getDate();

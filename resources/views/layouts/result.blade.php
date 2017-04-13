@@ -75,7 +75,11 @@
 				{!! $result->descr !!}
 			</div>
 		@else
+			@if( $metager->getFokus() == "nachrichten" )
+			<div class="description">{{ date("Y-m-d H:i:s", $result->additionalInformation["date"]) }} {{ $result->descr }}</div>
+			@else
 			<div class="description">{{ $result->descr }}</div>
+			@endif
 		@endif
 	</div>
 </div>

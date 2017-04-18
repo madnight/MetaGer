@@ -46,7 +46,7 @@
 				</li>
 			@else
 				<li data-loaded="0" id="webTabSelector" class="tab-selector" role="presentation">
-					<a aria-controls="web" data-href="{!! $metager->generateSearchLink('web') !!}" href="{!! $metager->generateSearchLink('web') !!}">
+					<a aria-controls="web" data-href="{!! $metager->generateSearchLink('web') !!}" href="{!! $metager->generateSearchLink('web', false) !!}">
 						<span class='glyphicon glyphicon-globe'></span>
 						<span class="hidden-xs">{{ trans('index.foki.web') }}</span>
 					</a>
@@ -62,7 +62,7 @@
 				</li>
 			@else
 				<li data-loaded="0" id="bilderTabSelector" class="tab-selector" role="presentation">
-					<a aria-controls="bilder" data-href="{!! $metager->generateSearchLink('bilder') !!}" href="{!! $metager->generateSearchLink('bilder') !!}">
+					<a aria-controls="bilder" data-href="{!! $metager->generateSearchLink('bilder') !!}" href="{!! $metager->generateSearchLink('bilder', false) !!}">
 						<span class='glyphicon glyphicon-picture'></span>
 						<span class="hidden-xs">{{ trans('index.foki.bilder') }}</span>
 					</a>
@@ -78,7 +78,7 @@
 				</li>
 			@else
 				<li data-loaded="0" id="nachrichtenTabSelector" class="tab-selector" role="presentation" >
-					<a aria-controls="nachrichten" data-href="{!! $metager->generateSearchLink('nachrichten') !!}" href="{!! $metager->generateSearchLink('nachrichten') !!}">
+					<a aria-controls="nachrichten" data-href="{!! $metager->generateSearchLink('nachrichten') !!}" href="{!! $metager->generateSearchLink('nachrichten', false) !!}">
 						<span class='glyphicon glyphicon-bullhorn'></span>
 						<span class="hidden-xs">{{ trans('index.foki.nachrichten') }}</span>
 					</a>
@@ -94,7 +94,7 @@
 				</li>
 			@else
 				<li data-loaded="0" id="wissenschaftTabSelector" class="tab-selector" role="presentation">
-					<a aria-controls="wissenschaft" data-href="{!! $metager->generateSearchLink('wissenschaft') !!}" href="{!! $metager->generateSearchLink('wissenschaft') !!}">
+					<a aria-controls="wissenschaft" data-href="{!! $metager->generateSearchLink('wissenschaft') !!}" href="{!! $metager->generateSearchLink('wissenschaft', false) !!}">
 						<span class='glyphicon glyphicon-file'></span>
 						<span class="hidden-xs">{{ trans('index.foki.wissenschaft') }}</span>
 					</a>
@@ -110,13 +110,14 @@
 				</li>
 			@else
 				<li data-loaded="0" id="produktsucheTabSelector" class="tab-selector" role="presentation" >
-					<a aria-controls="produktsuche" data-href="{!! $metager->generateSearchLink('produktsuche') !!}" href="{!! $metager->generateSearchLink('produktsuche') !!}">
+					<a aria-controls="produktsuche" data-href="{!! $metager->generateSearchLink('produktsuche') !!}" href="{!! $metager->generateSearchLink('produktsuche', false) !!}">
 						<span class='glyphicon glyphicon-shopping-cart'></span>
 						<span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
 					</a>
 				</li>
 			@endif
 
+			{{-- Fix for older Versions --}}
 			@if( $metager->getFokus() === "angepasst" )
 				<li id="angepasstTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
 					<a aria-controls="angepasst" data-href="#angepasst" href="#angepasst">
@@ -134,7 +135,7 @@
 			</li>
 		</ul>
 	</header>
-	<main class="tab-content row">
+	<main id="main-content-tabs" class="tab-content row">
 
 		@if( $metager->getFokus() === "web" )
 			<div role="tabpanel" class="tab-pane active" id="web">
@@ -209,7 +210,7 @@
 		@if( $metager->getFokus() === "angepasst" )
 			<div role="tabpanel" class="tab-pane active" id="angepasst">
 				<div class="row">
-						@yield('results')
+					@yield('results')
 				</div>
 			</div>
 		@endif

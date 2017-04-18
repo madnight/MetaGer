@@ -3,11 +3,7 @@ $(document).ready(function() {
     tickOptions();
     if (localStorage) {
         $("#save").removeClass("hidden");
-        if (localStorage.getItem("pers")) {
-            $("#reset").removeClass("hidden");
-        }
         $("#save").click(function() {
-            resetOptions();
             localStorage.setItem("pers", true);
             $("input[type=checkbox]:checked, input[type=hidden]").each(function(el) {
                 localStorage.setItem($(this).attr("name"), $(this).val());
@@ -15,10 +11,6 @@ $(document).ready(function() {
             $("select").each(function(el) {
                 localStorage.setItem($(this).attr("name"), $(this).val());
             });
-            document.location.href = $("#save").attr("data-href");
-        });
-        $("#reset").click(function() {
-            resetOptions();
             document.location.href = $("#save").attr("data-href");
         });
     }
@@ -29,9 +21,6 @@ $(document).ready(function() {
         } else {
             $(selector + " input").prop("checked", true);
         }
-    });
-    $(".allUnchecker").click(function() {
-        $(".focusCheckbox").prop("checked", false);
     });
     $("#unten").click(function() {
         $("#settings-form").append("<input type=\"hidden\" name=\"usage\" value=\"once\">");
@@ -61,6 +50,7 @@ $(document).ready(function() {
                 break;
         }
     });
+    $("#settings-focus").val("angepasst");
 });
 
 function tickOptions() {
@@ -78,21 +68,6 @@ function tickOptions() {
         }
     } else {
         $("div.web input").attr("checked", true);
-    }
-}
-
-function resetOptions() {
-    localStorage.removeItem("pers");
-    var keys = [];
-    for (var i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i)
-        keys.push(key);
-    }
-    for (var i = 0; i < keys.length; i++) {
-        var key = keys[i];
-        if (key.startsWith("param_" || key.startsWith("focus"))) {
-            localStorage.removeItem(key);
-        }
     }
 }
 

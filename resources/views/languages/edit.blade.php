@@ -3,7 +3,6 @@
 @section('title', $title )
 
 @section('content')
-	<script type="text/javascript" src="/js/all.js"></script>
 	<h1>{{ trans('languages.header') }}</h1>
 	<p>{{ trans('languages.beschreibung.1') }}</p>
 	<p>{{ trans('languages.beschreibung.2') }}</p>
@@ -58,4 +57,6 @@
 	<p><b>E-Mail-Adresse für Rückfragen</b> (optional):</p>
 	<p><input type="email" name="email" form="submit" value="{{$email}}"/></p>
 	<button class="btn btn-success" type="submit" form="submit">Daten übermitteln</button>
+	<script type="text/javascript" src="{{ elixir('js/lib.js') }}"></script>
+	<script type="text/javascript" src="{{ elixir('js/editLanguage.js') }}"></script>
 @endsection

@@ -3615,6 +3615,7 @@ function tabs() {
                 $("#" + fokus + "TabSelector").attr("data-loaded", "1");
                 $("#" + fokus).html(data);
                 $("input[name=focus]").val($("#foki li.active a").attr("aria-controls"));
+                $('iframe').iFrameResize();
                 getDocumentReadyForUse(fokus);
             });
         } else {

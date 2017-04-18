@@ -309,7 +309,7 @@ class Search implements ShouldQueue
 
                 try
                 {
-                    $fp = pfsockopen($this->getHost() . ":" . $this->port . "/$counter", $this->port, $errstr, $errno, 1);
+                    $fp = pfsockopen($this->getHost(), $this->port, $errstr, $errno, 1);
                 } catch (\ErrorException $e) {
                     break;
                 }

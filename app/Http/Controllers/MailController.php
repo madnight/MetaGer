@@ -117,16 +117,21 @@ class MailController extends Controller
 
     }
 
-    public function sendLanguageFile(Request $request, $from, $to, $exclude = "")
+    public function sendLanguageFile(Request $request, $from, $to, $exclude = "", $email ="")
     {
         $filename = $request->input('filename');
-
+ 
         # Wir erstellen nun zunächst den Inhalt der Datei:
         $data = [];
         $new  = 0;
+        $emailAddress = "";
         foreach ($request->all() as $key => $value) {
 
             if ($key === "filename" || $value === "") {
+                continue;
+            }
+            if($key === "email") {
+                $emailAddress = $value;
                 continue;
             }
             $key = base64_decode($key);
@@ -153,11 +158,13 @@ class MailController extends Controller
         $output = preg_replace("/\{/si", "[", $output);
         $output = preg_replace("/\}/si", "]", $output);
         $output = preg_replace("/\": ([\"\[])/si", "\"\t=>\t$1", $output);
-
+        
         $output = "<?php\n\nreturn $output;\n";
 
         $message = "Moin moin,\n\nein Benutzer hat eine Sprachdatei aktualisiert.\nSollten die Texte so in Ordnung sein, ersetzt, oder erstellt die Datei aus dem Anhang in folgendem Pfad:\n$filename\n\nFolgend zusätzlich der Inhalt der Datei:\n\n$output";
-
+       // echo $request->old('email');
+        //echo $request->input('email','test');
+       // die("");
         # Wir haben nun eine Mail an uns geschickt, welche die entsprechende Datei beinhaltet.
         # Nun müssen wir den Nutzer eigentlich nur noch zurück leiten und die Letzte bearbeitete Datei ausschließen:
         $ex = [];
@@ -179,10 +186,17 @@ class MailController extends Controller
         $ex["new"] += $new;
 
         if ($new > 0) {
-            Mail::to("dev@suma-ev.de")
+            if($emailAddress !== "") { 
+                Mail::to("dev@suma-ev.de")
+                ->send(new Sprachdatei($message, $output, basename($filename), $emailAddress));
+            }
+            else {
+                Mail::to("dev@suma-ev.de")
                 ->send(new Sprachdatei($message, $output, basename($filename)));
+            }
         }
         $ex = base64_encode(serialize($ex));
-        return redirect(url('languages/edit', ['from' => $from, 'to' => $to, 'exclude' => $ex]));
+
+        return redirect(url('languages/edit', ['from' => $from, 'to' => $to, 'exclude' => $ex, 'email' => $emailAddress]));
     }
 }

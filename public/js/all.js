@@ -3615,6 +3615,10 @@ function tabs() {
                 $("#" + fokus + "TabSelector").attr("data-loaded", "1");
                 $("#" + fokus).html(data);
                 $("input[name=focus]").val($("#foki li.active a").attr("aria-controls"));
+<<<<<<< HEAD
+=======
+                $('iframe').iFrameResize();
+>>>>>>> development
                 getDocumentReadyForUse(fokus);
             });
         } else {

@@ -49,7 +49,7 @@ class LanguageController extends Controller
             ->with('deComplete', $deComplete);
     }
 
-    public function createEditPage($from, $to, $exclude = "")
+    public function createEditPage($from, $to, $exclude = "", $email = "")
     {
         $languageFilePath = resource_path() . "/lang/";
         $files            = scandir($languageFilePath);
@@ -153,7 +153,8 @@ class LanguageController extends Controller
             ->with('to', $to)
             ->with('langTexts', $langTexts)
             ->with('sum', $sum)
-            ->with('new', $ex["new"]);
+            ->with('new', $ex["new"])
+            ->with('email', $email);
     }
 
     private function htmlEscape($t, $to)

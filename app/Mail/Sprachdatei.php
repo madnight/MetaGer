@@ -15,10 +15,10 @@ class Sprachdatei extends Mailable
      *
      * @return void
      */
-    public function __construct($message, $fileContent, $filename)
+    public function __construct($message, $fileContent, $filename, $replyAddress = "noreply@metager.de")
     {
         $this->subject     = "MetaGer - Sprachdatei";
-        $this->reply       = "noreply@metager.de";
+        $this->reply       = $replyAddress;
         $this->message     = $message;
         $this->fileContent = $fileContent;
         $this->filename    = $filename;

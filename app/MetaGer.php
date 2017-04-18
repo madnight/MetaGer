@@ -180,13 +180,24 @@ class MetaGer
         // augment (boost&adgoal)
         // authorize
         // misc (WiP)
-        uasort($this->results, function ($a, $b) {
-            if ($a->getRank() == $b->getRank()) {
-                return 0;
-            }
+        if ($this->fokus == "nachrichten") {
+            $this->results = array_filter($this->results, function ($v, $k) {
+                return !is_null($v->getRank());
+            }, ARRAY_FILTER_USE_BOTH);
+            uasort($this->results, function ($a, $b) {
+                $datea = $a->getDate();
+                $dateb = $b->getDate();
+                return $dateb - $datea;
+            });
+        } else {
+            uasort($this->results, function ($a, $b) {
+                if ($a->getRank() == $b->getRank()) {
+                    return 0;
+                }
 
-            return ($a->getRank() < $b->getRank()) ? 1 : -1;
-        });
+                return ($a->getRank() < $b->getRank()) ? 1 : -1;
+            });
+        }
 
         # Validate Results
         $newResults = [];

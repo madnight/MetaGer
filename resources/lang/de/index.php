@@ -34,7 +34,7 @@ return [
     'about.title'                    => 'Über uns',
     'about.1.1'                      => '<a href="/datenschutz">Datenschutz & Privatsphäre</a> sind bei uns einfach & selbstverständlich.',
     'about.2.1'                      => 'Wir arbeiten nicht gewinnorientiert, wir sind ein <a href="/spende">gemeinnütziger Verein.</a>',
-    'about.3.1'                      => '',
+    'about.3.1'                      => ' ',
 
     'placeholder'                    => 'MetaGer: Sicher suchen & finden, Privatsphäre schützen',
 

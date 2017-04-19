@@ -7225,7 +7225,7 @@ Mixed
   border-left: 3px solid #FF4000;
   color: #FF4000;
 }
-.settings-checkbox .settings-icon {
+.settings-checkbox .settings-glyphicon {
   margin-left: 5px;
   font-size: 12px;
 }
@@ -7238,7 +7238,7 @@ Mixed
 footer ul.list-inline {
   width: 100%;
 }
-i.fa {
+span.glyphicon {
   background-color: transparent;
 }
 a.content.hidden-xs {

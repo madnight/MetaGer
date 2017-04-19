@@ -7238,7 +7238,7 @@ Mixed
 footer ul.list-inline {
   width: 100%;
 }
-i.fa {
+span.glyphicon {
   background-color: transparent;
 }
 a.content.hidden-xs {

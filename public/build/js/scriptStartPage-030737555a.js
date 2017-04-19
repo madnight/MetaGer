@@ -79,7 +79,7 @@ function setSettings() {
         $("fieldset.mobile input#bilder").attr("id", "angepasst");
         $("fieldset.mobile label#bilder-label").attr("id", "anpassen-label");
         $("fieldset.mobile label#anpassen-label").attr("for", "angepasst");
-        $("fieldset.mobile label#anpassen-label span.glyphicon").attr("class", "glyphicon glyphicon-cog");
+        $("fieldset.mobile label#anpassen-label a.fa").attr("class", "fa fa-cog");
         $("fieldset.mobile label#anpassen-label span.content").html("angepasst");
     }
 }
@@ -287,10 +287,10 @@ function alreadyInUse(name) {
  * 
  * <input id="NAME" class="hide" type="radio" name="focus" value="NAME" form="searchForm" checked required>
  * <label id="NAME-label" for="NAME">
- *     <span class="glyphicon glyphicon-star"></span>
+ *     <i class="fa fa-star" aria-hidden="true"></i>
  *     <span class="content">NAME</span>
  *     <button class="btn btn-default">
- *         <span class="glyphicon glyphicon-pencil"></span>
+ *         <i class="fa fa-pencil" aria-hidden="true"></i>
  *     </button>
  * </label>
  */
@@ -318,14 +318,15 @@ function addFocus(name) {
     newFocusLabel.classList.add("focus-label");
     newFocusLabel.classList.add("custom-focus-label");
     newFocusLabel.htmlFor = id;
-    // create glyphicon
-    var newFocusGlyphicon = document.createElement("span");
-    newFocusGlyphicon.classList.add("glyphicon");
-    newFocusGlyphicon.classList.add("glyphicon-star");
+    // create <i> icon
+    var newFocusIcon = document.createElement("i");
+    newFocusGIcon.classList.add("fa");
+    newFocusIcon.classList.add("fa-star");
+    newFocusIcon.setAttribute("aria-hidden", "true");
     // create content
     var newFocusContent = document.createElement("span");
-    newFocusGlyphicon.classList.add("content");
-    newFocusContent.textContent = name;
+    newFocusIcon.classList.add("content");
+    newFocusContent.textContent = " " + name;
     // create edit button
     var newFocusEditLink = document.createElement("a");
     newFocusEditLink.classList.add("focus-edit");
@@ -335,18 +336,19 @@ function addFocus(name) {
     newFocusEditLink.onclick = function() {
         showFocusEditDialog(id);
     }
-    var newFocusEditLinkGlyphicon = document.createElement("span");
-    newFocusEditLinkGlyphicon.classList.add("glyphicon");
-    newFocusEditLinkGlyphicon.classList.add("glyphicon-pencil");
+    var newFocusEditLinkIcon = document.createElement("i");
+    newFocusEditLinkIcon.classList.add("fa");
+    newFocusEditLinkIcon.classList.add("fa-pencil");
+    newFocusEditLinkIcon.setAttribute("aria-hidden", "true");
     // add new elements
     var addFocusBtn = document.getElementById("addFocusBtn");
     foki.insertBefore(wrapper, addFocusBtn);
     wrapper.appendChild(newFocus);
     wrapper.appendChild(newFocusLabel);
-    newFocusLabel.appendChild(newFocusGlyphicon);
+    newFocusLabel.appendChild(newFocusIcon);
     newFocusLabel.appendChild(newFocusContent);
     wrapper.appendChild(newFocusEditLink);
-    newFocusEditLink.appendChild(newFocusEditLinkGlyphicon);
+    newFocusEditLink.appendChild(newFocusEditLinkIcon);
 }
 /**
  * Remove the focuses html-elements

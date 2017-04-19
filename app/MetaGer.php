@@ -8,7 +8,7 @@ use Jenssegers\Agent\Agent;
 use LaravelLocalization;
 use Log;
 use Predis\Connection\ConnectionException;
-use Redis;
+use Illuminate\Support\Facades\Redis;
 
 class MetaGer
 {

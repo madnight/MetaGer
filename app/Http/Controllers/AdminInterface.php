@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Redis;
+use Illuminate\Support\Facades\Redis;
 
 class AdminInterface extends Controller
 {

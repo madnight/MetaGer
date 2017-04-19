@@ -7,7 +7,7 @@ use App\MetaGer;
 use Cache;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
-use Redis;
+use Illuminate\Support\Facades\Redis;
 
 abstract class Searchengine
 {

@@ -1,13 +1,13 @@
 $(document).ready(function() {
-    createCustomFocuses();
-    var focus = $("#foki > li.active > a").attr("aria-controls");
-    var custom = $("#foki > li.active").hasClass("custom-focus-tab-selector");
-    getDocumentReadyForUse(focus, custom);
+    getDocumentReadyForUse($("#foki > li.active > a").attr("aria-controls"));
+    $('iframe').iFrameResize();
+    botProtection();
 });
 
 function tabs() {
+    //return;
     $("#foki > li.tab-selector > a").each(function() {
-        if ($(this).attr("target") != "_blank") {
+        if($(this).attr("target") != "_blank") {
             $(this).attr("href", "#" + $(this).attr("aria-controls"));
             $(this).attr("role", "tab");
             $(this).attr("data-toggle", "tab");
@@ -30,19 +30,16 @@ function tabs() {
     });
 }
 
-function getDocumentReadyForUse(fokus, custom = false) {
+function getDocumentReadyForUse(fokus) {
     clickLog();
     popovers();
     if (fokus === "bilder") imageLoader();
-    if (custom) initialLoadContent(fokus);
     //pagination();
     tabs();
     theme();
     fokiChanger();
     pluginInfo();
     productWidget();
-    $('iframe:not(.resized)').iFrameResize();
-    $('iframe').addClass("resized");
 }
 
 function pluginInfo() {
@@ -90,7 +87,7 @@ function popovers() {
         $(this).popover("destroy");
         $(this).popover({
             //html          :   true,
-            //title         :   "<i class="fa fa-cog" aria-hidden="true"></i> Optionen",
+            //title         :   "<span class='glyphicon glyphicon-cog'></span> Optionen",
             content: $(this).parent().find(".content").html()
         });
     });
@@ -217,6 +214,14 @@ function fokiChanger() {
     });
 })(jQuery);
 
+function botProtection() {
+    if ($("meta[name=pqr]").length > 0) {
+        var link = atob($("meta[name=pqr]").attr("content"));
+        var hash = $("meta[name=pq]").attr("content");
+        document.location.href = link + "&bot=" + hash;
+    }
+}
+
 function productWidget() {
     var isMobile = false; //initiate as false
     // device detection
@@ -229,8 +234,8 @@ function productWidget() {
             easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
             speed: 600,
             pager: false,
-            prevHtml: '<i class="fa fa-chevron-left" aria-hidden="true"></i></span><span class="sr-only">Previous</span>',
-            nextHtml: '<i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span>',
+            prevHtml: '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><span class="sr-only">Previous</span>',
+            nextHtml: '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span><span class="sr-only">Next</span>',
             responsive: [{
                 breakpoint: 1400,
                 settings: {
@@ -273,8 +278,8 @@ function productWidget() {
             pager: false,
             enableTouch: false,
             enableDrag: false,
-            prevHtml: '<a class="fa fa-chevron-left" aria-hidden="true"></a><span class="sr-only">Previous</span>',
-            nextHtml: '<a class="fa fa-chevron-right" aria-hidden="true"></a><span class="sr-only">Next</span>',
+            prevHtml: '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><span class="sr-only">Previous</span>',
+            nextHtml: '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span><span class="sr-only">Next</span>',
             responsive: [{
                 breakpoint: 1400,
                 settings: {
@@ -309,193 +314,4 @@ function productWidget() {
         });
     }
     $(".lightSliderContainer").removeClass("hidden");
-}
-/**
- * Creates focus tab and tab selector for every stored focus in local storage
- */
-function createCustomFocuses() {
-    for (var key in localStorage) {
-        if (key.startsWith("focus_")) {
-            var focus = loadFocusById(key);
-            var active = false;
-            if (getActiveFocusId() === getIdFromName(focus.name)) {
-                active = true;
-            }
-            addFocus(focus, active);
-            addTab(focus, active);
-        }
-    }
-}
-/**
- * Adds a focuses tab selector to the tab selector section
- * 
- * @if( $metager->getFokus() === "produktsuche" )
- *     <li id="produktsucheTabSelector" class="active tab-selector" role="presentation" data-loaded="1">
- *        <a aria-controls="produktsuche" data-href="#produktsuche" href="#produktsuche">
- *             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
- *             <span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
- *         </a>
- *     </li>
- * @else
- *     <li id="produktsucheTabSelector" class="tab-selector" role="presentation" data-loaded="0">
- *         <a aria-controls="produktsuche" data-href="{!! $metager->generateSearchLink('produktsuche') !!}" href="{!! $metager->generateSearchLink('produktsuche', false) !!}">
- *             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
- *             <span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
- *         </a>
- *     </li>
- * @endif
- */
-function addFocus(focus, active = false) {
-    var id = getIdFromName(focus.name);
-    var foki = document.getElementById("foki");
-    // create <input>
-    var focusElement = document.createElement("li");
-    focusElement.id = id + "TabSelector";
-    focusElement.classList.add("tab-selector");
-    focusElement.classList.add("custom-focus-tab-selector");
-    if (active) {
-        focusElement.classList.add("active");
-        focusElement.setAttribute("data-loaded", "1");
-    } else {
-        focusElement.setAttribute("data-loaded", "0");
-    }
-    focusElement.setAttribute("role", "presentation");
-    // create <a>
-    var focusElementLink = document.createElement("a");
-    focusElementLink.setAttribute("aria-controls", id);
-    var searchLink = generateSearchLinkForFocus(focus)
-    focusElementLink.setAttribute("data-href", searchLink);
-    focusElementLink.setAttribute("href", searchLink);
-    // create <a> icon
-    var focusElementIcon = document.createElement("a");
-    focusElementIcon.classList.add("fa");
-    focusElementIcon.classList.add("fa-cog");
-    focusElementIcon.setAttribute("aria-hidden", "true");
-    // create <span> focusname
-    var focusElementName = document.createElement("span");
-    focusElementName.classList.add("hidden-xs");
-    focusElementName.innerHTML = focus.name;
-    // add new elements
-    var mapsTabSelector = document.getElementById("mapsTabSelector");
-    foki.insertBefore(focusElement, mapsTabSelector);
-    focusElement.appendChild(focusElementLink);
-    focusElementLink.appendChild(focusElementIcon);
-    focusElementLink.appendChild(focusElementName);
-}
-/**
- * Adds a focuses tab to the tab section
- * 
- * @if( $metager->getFokus() === "produktsuche" )
- *     <div role="tabpanel" class="tab-pane active" id="produktsuche">
- *         <div class="row">
- *                 @yield('results')
- *         </div>
- *      </div>
- * @else
- *     <div role="tabpanel" class="tab-pane" id="produktsuche">
- *         <div class="loader">
- *             <img src="/img/ajax-loader.gif" alt="" />
- *         </div>
- *     </div>
- * @endif
- */
-function addTab(focus, active = false) {
-    var id = getIdFromName(focus.name);
-    // create tab div
-    var tabPane = document.createElement("div");
-    tabPane.id = id;
-    tabPane.classList.add("tab-pane");
-    if (active) {
-        tabPane.classList.add("active");
-    }
-    tabPane.setAttribute("role", "tabpanel");
-    // create row div
-    var row = document.createElement("div");
-    row.classList.add("loader");
-    // create loader image
-    var img = document.createElement("img");
-    img.setAttribute("src", "/img/ajax-loader.gif");
-    img.setAttribute("alt", "");
-    row.appendChild(img);
-    // add new elements
-    var tabs = document.getElementById("main-content-tabs");
-    tabs.appendChild(tabPane)
-    tabPane.appendChild(row);
-}
-/**
- * Turns a name into an id
- * Converts special characters and spaces
- */
-function getIdFromName(name) {
-    return "focus_" + name.split(" ").join("_").toLowerCase();
-}
-/**
- * Loads the focus object for the given id from local storage
- */
-function loadFocusById(id) {
-    return JSON.parse(localStorage.getItem(id));
-}
-/**
- * Gets the id of the currently active focus
- */
-function getActiveFocusId() {
-    var search = window.location.search;
-    var from = search.indexOf("focus=") + "focus=".length;
-    var to = search.substring(from).indexOf("&") + from;
-    if (to <= 0) {
-        to = search.substring(from).length;
-    }
-    id = search.substring(from, to);
-    return id;
-}
-/**
- * Turns the link of the current page into a search link for the given focus
- */
-// TODO catch error if link is http://localhost:8000/meta/meta.ger3?
-function generateSearchLinkForFocus(focus) {
-    var link = document.location.href;
-    // remove old engine settings
-    // not yet tested, only for compability problems with old versions of bookmarks and plugins
-    /*
-    while (link.indexOf("engine_") !== -1) {
-        var from = search.indexOf("engine_");
-        var to = search.substring(from).indexOf("&") + from;
-        if (to === 0) {
-            to = search.substring(from).length;
-        }
-        link = link.substring(0, from) + link.substring(to);
-    }
-    */
-    // add new engine settings
-    for (var key in focus) {
-        if (key.startsWith("engine_")) {
-            var focusName = key.substring("engine_".length);
-            link += "&" + focusName + "=" + focus[key];
-        }
-    }
-    link += "&out=results";
-    link = replaceFocusInUrl(link);
-    return link;
-}
-/**
- * Replaces the focus in a given url with the "angepasst" focus
- */
-function replaceFocusInUrl(url) {
-    var from = url.indexOf("focus=");
-    var to = url.substring(from).indexOf("&") + from;
-    if (to === 0) {
-        to = url.substring(from).length;
-    }
-    url = url.substring(0, from) + url.substring(to);
-    return url + "&focus=angepasst";
-}
-/**
- * Loads the content for a given fokus
- */
-function initialLoadContent(fokus) {
-    var link = $("#" + fokus + "TabSelector a").attr("data-href");
-    $.get(link, function(data) {
-        $("#" + fokus).html(data);
-        getDocumentReadyForUse(fokus);
-    });
 }

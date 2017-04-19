@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Redis;
+use Illuminate\Support\Facades\Redis;
 
 class Search implements ShouldQueue
 {
@@ -309,7 +309,7 @@ class Search implements ShouldQueue
 
                 try
                 {
-                    $fp = pfsockopen($this->getHost() . ":" . $this->port . "/$counter", $this->port, $errstr, $errno, 1);
+                    $fp = pfsockopen($this->getHost(), $this->port, $errstr, $errno, 1);
                 } catch (\ErrorException $e) {
                     break;
                 }

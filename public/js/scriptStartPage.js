@@ -224,9 +224,10 @@ function showFocusEditDialog(id) {
 function saveFocus() {
     var name = document.getElementById("focus-name").value;
     if (isValidName(name) && atLeastOneChecked()) {
+        var oldId = document.getElementById("original-id").value;
         var id = getIdFromName(name);
         var overwrite = true;
-        if (alreadyInUse(name)) {
+        if (alreadyInUse(name) && oldId !== id) {
             overwrite = confirm("Name bereits genutzt\nüberschreiben?");
             if (overwrite) {
                 localStorage.removeItem(id);
@@ -234,7 +235,6 @@ function saveFocus() {
             }
         }
         if (overwrite) {
-            var oldId = document.getElementById("original-id").value;
             var focus = {};
             $("input[type=checkbox]:checked").each(function(el) {
                 focus[$(this).attr("name")] = $(this).val();

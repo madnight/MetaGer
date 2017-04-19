@@ -1,19 +1,3 @@
-$(document).ready(function() {
-    switch (getLanguage()) {
-        case "de":
-            $(".encrypt-btn").html("Verschlüsseln und senden");
-            break;
-        case "en":
-            $(".encrypt-btn").html("encrypt and send");
-            break;
-        case "es":
-            // $(".encrypt-btn").html(""); TODO
-            break;
-    }
-    $(".contact").submit(function() {
-        return encrypt(this);
-    });
-});
 //based on https://github.com/encrypt-to/secure.contactform.php
 /* The MIT License (MIT)
 Copyright (c) 2013 Jan Wiegelmann
@@ -59,6 +43,22 @@ function encrypt() {
         return false;
     }
 }
+$(document).ready(function() {
+    switch (getLanguage()) {
+        case "de":
+            $(".encrypt-btn").html("Verschlüsseln und senden");
+            break;
+        case "en":
+            $(".encrypt-btn").html("encrypt and send");
+            break;
+        case "es":
+            // $(".encrypt-btn").html(""); TODO
+            break;
+    }
+    $(".contact").submit(function() {
+        return encrypt(this);
+    });
+});
 
 function getLanguage() {
     var metaData = document.getElementsByTagName('meta');

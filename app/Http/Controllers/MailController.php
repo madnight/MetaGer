@@ -117,14 +117,27 @@ class MailController extends Controller
 
     }
 
+    #Ueberprueft ob ein bereits vorhandener Eintrag bearbeitet worden ist
+    public function isEdited($k, $v, $filename)
+    {
+        $temp = include resource_path()."/".$filename;
+
+        foreach ($temp as $key => $value) {
+            if($k === $key && $v !== $value) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function sendLanguageFile(Request $request, $from, $to, $exclude = "", $email ="")
     {
         $filename = $request->input('filename');
- 
         # Wir erstellen nun zunächst den Inhalt der Datei:
         $data = [];
         $new  = 0;
         $emailAddress = "";
+        $editedKeys = "";
         foreach ($request->all() as $key => $value) {
 
             if ($key === "filename" || $value === "") {
@@ -138,7 +151,14 @@ class MailController extends Controller
             if (strpos($key, "_new_") === 0 && $value !== "") {
                 $new++;
                 $key = substr($key, strpos($key, "_new_") + 5);
+                $editedKeys = $editedKeys."\n".$key;
+
             }
+            else if ($this->isEdited($key, $value, $filename)) {
+                $new++;
+                $editedKeys = $editedKeys."\n".$key;
+            }
+
             $key = trim($key);
             if (!strpos($key, "#")) {
                 $data[$key] = $value;
@@ -151,7 +171,6 @@ class MailController extends Controller
                 $ref = &$ref[$key];
                 $ref = $value;
             }
-
         }
 
         $output = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -161,10 +180,8 @@ class MailController extends Controller
         
         $output = "<?php\n\nreturn $output;\n";
 
-        $message = "Moin moin,\n\nein Benutzer hat eine Sprachdatei aktualisiert.\nSollten die Texte so in Ordnung sein, ersetzt, oder erstellt die Datei aus dem Anhang in folgendem Pfad:\n$filename\n\nFolgend zusätzlich der Inhalt der Datei:\n\n$output";
-       // echo $request->old('email');
-        //echo $request->input('email','test');
-       // die("");
+        $message = "Moin moin,\n\nein Benutzer hat eine Sprachdatei aktualisiert.\nBearbeitet wurden die Einträge: $editedKeys\n\nSollten die Texte so in Ordnung sein, ersetzt, oder erstellt die Datei aus dem Anhang in folgendem Pfad:\n$filename\n\nFolgend zusätzlich der Inhalt der Datei:\n\n$output";
+
         # Wir haben nun eine Mail an uns geschickt, welche die entsprechende Datei beinhaltet.
         # Nun müssen wir den Nutzer eigentlich nur noch zurück leiten und die Letzte bearbeitete Datei ausschließen:
         $ex = [];
@@ -187,11 +204,11 @@ class MailController extends Controller
 
         if ($new > 0) {
             if($emailAddress !== "") { 
-                Mail::to("dev@suma-ev.de")
+                Mail::to("aria@suma-ev.de")
                 ->send(new Sprachdatei($message, $output, basename($filename), $emailAddress));
             }
             else {
-                Mail::to("dev@suma-ev.de")
+                Mail::to("aria@suma-ev.de")
                 ->send(new Sprachdatei($message, $output, basename($filename)));
             }
         }

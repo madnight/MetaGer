@@ -38,7 +38,7 @@
 						<td class="name language-name">{{preg_replace("/(\s*).*#(.*)$/si", "$1$2", $name)}}</td>
 						<td>
 							@if(isset($langValues[$to]))
-								<textarea class="language-text-area" type="text" rows="1" cols="50" form="submit" name="{{ base64_encode($name) }}" readonly >{{$langValues[$to]}}</textarea>
+								<textarea class="language-text-area" type="text" rows="1" cols="50" form="submit" name="{{ base64_encode($name) }}">{{$langValues[$to]}}</textarea>
 							@else
 								<textarea class="language-text-area" rows="1" cols="50" form="submit" name="{{base64_encode("_new_" . $name)}}"></textarea>
 							@endif

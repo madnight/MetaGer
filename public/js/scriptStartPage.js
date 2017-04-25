@@ -258,6 +258,9 @@ function saveFocus() {
  */
 function deleteFocus() {
     var oldId = document.getElementById("original-id").value;
+    if ($('#' + oldId).prop('checked')) {
+        setFocusToDefault()
+    }
     localStorage.removeItem(oldId);
     removeFocusById(oldId);
     $("#create-focus-modal").modal("hide");
@@ -403,4 +406,12 @@ function resetOptions() {
             localStorage.removeItem(key);
         }
     }
+}
+
+function setFocusToDefault() {
+    setFocus('web')
+}
+
+function setFocus(focusID) {
+    $('#' + focusID).prop('checked', true)
 }

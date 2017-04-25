@@ -1,9 +1,14 @@
 $(document).ready(function() {
+    activateJSOnlyContent()
     createCustomFocuses();
     var focus = $("#foki > li.active > a").attr("aria-controls");
     var custom = $("#foki > li.active").hasClass("custom-focus-tab-selector");
     getDocumentReadyForUse(focus, custom);
 });
+
+function activateJSOnlyContent() {
+    $('#searchplugin').removeClass('hide')
+}
 
 function tabs() {
     $("#foki > li.tab-selector > a").each(function() {

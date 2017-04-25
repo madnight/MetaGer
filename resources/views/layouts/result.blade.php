@@ -16,7 +16,7 @@
 							{{ $result->anzeigeLink }}
 						</a>
 					</div>
-					<div class="options">
+					<div class="options hide">
 						<a tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="auto bottom" data-container="body" data-html="true" data-title="<span class='glyphicon glyphicon-cog'></span> Optionen">
 							@if(strlen($metager->getSite()) === 0)
 								<span class="glyphicon glyphicon-triangle-bottom"></span>

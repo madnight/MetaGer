@@ -8,6 +8,7 @@ $(document).ready(function() {
 
 function activateJSOnlyContent() {
     $('#searchplugin').removeClass('hide')
+    $('.options').removeClass('hide')
 }
 
 function tabs() {

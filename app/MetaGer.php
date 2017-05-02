@@ -882,7 +882,7 @@ class MetaGer
     {
         $this->request = $request;
         # Sichert, dass der request in UTF-8 formatiert ist
-        if ($request->input('encoding', '') !== "utf8") {
+        if ($request->input('encoding', 'utf8') !== "utf8") {
             # In früheren Versionen, als es den Encoding Parameter noch nicht gab, wurden die Daten in ISO-8859-1 übertragen
             $input = $request->all();
             foreach ($input as $key => $value) {

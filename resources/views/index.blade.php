@@ -147,9 +147,21 @@
 					<p class="text-muted">@lang("index.focus-creator.description")</p>
 				</div>
 				<div class="modal-body">
-					<label for="focus-name">@lang('index.focus-creator.focusname')</label>
-					<input id="focus-name" type="text" name="focus-name" placeholder="@lang('index.focus-creator.name-placeholder')">
-					<input id="original-id" type="hidden" name="original-id" value="">
+					<div class="clearfix">
+						<div class="pull-left">
+							<label for="focus-name">@lang('index.focus-creator.focusname')</label>
+							<input id="focus-name" type="text" name="focus-name" placeholder="@lang('index.focus-creator.name-placeholder')">
+							<input id="original-id" type="hidden" name="original-id" value="">
+						</div>
+						<div class="pull-right">
+							<button class="delete-focus-btn btn btn-danger">
+								@lang('index.focus-creator.delete')
+							</button>
+							<button class="save-focus-btn btn btn-primary">
+								@lang('index.focus-creator.save')
+							</button>
+						</div>
+					</div>
 					{{--
 					<h2>{!! trans('settings.suchmaschinen.1') !!} <small><button type="button" class="btn btn-link allUnchecker hide">{!! trans('settings.suchmaschinen.2') !!}</button></small></h2>
 					--}}
@@ -179,10 +191,10 @@
 					@endforeach
 					<div class="clearfix">
 						<div class="pull-right">
-							<button id="delete-focus-btn" type="button" class="btn btn-danger">
+							<button class="delete-focus-btn btn btn-danger">
 								@lang('index.focus-creator.delete')
 							</button>
-							<button id="save-focus-btn" class="btn btn-primary">
+							<button class="save-focus-btn btn btn-primary">
 								@lang('index.focus-creator.save')
 							</button>
 						</div>

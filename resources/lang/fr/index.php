@@ -6,7 +6,6 @@ return [
     "foki.nachrichten"	=>	"News/Politique",
     "foki.wissenschaft"	=>	"Sciènces",
     "foki.produkte"	    =>	"Produits",
-    "foki.anpassen"	    =>	"ajuster",
     "foki.angepasst"	=>	"ajusté(e)",
     "foki.maps"     	=>	"Maps.metager.de <span class=\"badge new-feature\">Nouveau</span>",
     "design"	        =>	"Choisir un design personnel",

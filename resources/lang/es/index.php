@@ -6,7 +6,6 @@ return [
     "foki.nachrichten"    => "Informativos/Política",
     "foki.wissenschaft"   => "Ciencia",
     "foki.produkte"       => "Productos",
-    "foki.anpassen"       => "ajustar",
     "foki.angepasst"      => "ajustado",
     "foki.maps"           => "Maps.metager.de <span class=\"badge new-feature\">Nuevo</span>",
     "foki.maps"           => "Maps.metager.de",

@@ -1,76 +1,72 @@
 @foki-edge-rounding: 7px;
-
 #about-us a:visited {
     color: @link-color;
 }
 
 #anpassen-label a {
-	color: #333;
+    color: #333;
 }
 
 .focus {
-	margin: 0px;
+    margin: 0px;
 }
 
-.focus ~ .focus {
-	margin-left: 10px;
-}
-
-#foki input + .custom-focus-label {
-	border-radius: @foki-edge-rounding 0px 0px @foki-edge-rounding;
-}
-
-#foki input + .custom-focus-label + .custom-focus-edit {
-	margin-left: 5px;
-	display: inline-block;
-	border-radius: 0px @foki-edge-rounding @foki-edge-rounding 0px;
+.focus~.focus {
+    margin-left: 10px;
 }
 
 #foki {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-#foki label > span {
-    margin-right: 5px;
-}
-
-#foki label span {
-    background-color: transparent;
-}
-
-#foki input {
-    visibility: hidden;
-}
-
-.focus-radio:checked {
-	& + .focus-label, & + .focus-label + .focus-edit {
-	    background-color: #e3e3e3;
+    display: flex;
+    flex-wrap: wrap;
+    input+.custom-focus-label {
+        border-radius: @foki-edge-rounding 0px 0px @foki-edge-rounding;
+    }
+    input+.custom-focus-label+.custom-focus-edit {
+        margin-left: 5px;
+        display: inline-block;
+        border-radius: 0px @foki-edge-rounding @foki-edge-rounding 0px;
+    }
+    label>span {
+        margin-right: 5px;
+    }
+    label span {
+        background-color: transparent;
+    }
+    input {
+        visibility: hidden;
     }
 }
 
-.focus-label, .focus-edit {
-	margin: 0px;
+.focus-radio:checked {
+    &+.focus-label,
+    &+.focus-label+.focus-edit {
+        background-color: #e3e3e3;
+    }
+}
+
+.focus-label,
+.focus-edit {
+    margin: 0px;
     border-radius: 7px;
     padding: 7px;
     font-weight: normal;
 }
 
 .focus:hover {
-	.focus-label, .focus-edit {
-	    cursor: pointer;
-	    background-color: #e3e3e3;
-	}
+    .focus-label,
+    .focus-edit {
+        cursor: pointer;
+        background-color: #e3e3e3;
+    }
 }
 
 #addFocusBtn {
-	margin-left: 10px;
-
+    margin-left: 10px;
 }
 
 #settings-btn {
-	margin-left: auto;
-	&  > * {
-		vertical-align: middle;
-	}
+    margin-left: auto;
+    &>* {
+        vertical-align: middle;
+    }
 }

@@ -7553,8 +7553,11 @@ a:hover {
   color: black;
   background-color: white;
 }
-#foki li.active span + span {
+#foki li.active i + span {
   display: inline!important;
+}
+#foki li a i + span {
+  margin-left: 5px;
 }
 #spenden {
   white-space: nowrap;
@@ -7850,6 +7853,11 @@ footer a {
 .focus ~ .focus {
   margin-left: 10px;
 }
+#foki {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+}
 #foki input + .custom-focus-label {
   border-radius: 7px 0px 0px 7px;
 }
@@ -7857,11 +7865,6 @@ footer a {
   margin-left: 5px;
   display: inline-block;
   border-radius: 0px 7px 7px 0px;
-}
-#foki {
-  display: -webkit-box;
-  display: flex;
-  flex-wrap: wrap;
 }
 #foki label > span {
   margin-right: 5px;

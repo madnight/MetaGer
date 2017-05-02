@@ -222,6 +222,10 @@ a:hover {
     display: inline!important;
 }
 
+#foki li a i + span {
+    margin-left: 5px;
+}
+
 
 /* Hier der Style für unseren Spruch */
 

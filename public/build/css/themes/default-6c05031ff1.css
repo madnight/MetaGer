@@ -7019,7 +7019,7 @@ Mixed
 li#info {
   white-space: pre-line;
 }
-main fieldset#foki {
+main div#foki {
   margin: 5px 0;
   text-align: center;
 }
@@ -7352,9 +7352,6 @@ footer li {
 }
 footer img {
   max-width: 100%;
-}
-main ul li:not(.lslide) {
-  margin: 0 10px;
 }
 .searchform-bonus {
   list-style-type: none;
@@ -7842,11 +7839,21 @@ footer a {
 #anpassen-label a {
   color: #333;
 }
-.focus {
-  margin: 0px;
+#foki {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  justify-content: center;
 }
-.focus ~ .focus {
-  margin-left: 10px;
+#foki * {
+  margin: 0px 5px;
+}
+#foki * ~ * {
+  margin-left: 5px;
+}
+#foki input {
+  visibility: hidden;
 }
 #foki input + .custom-focus-label {
   border-radius: 7px 0px 0px 7px;
@@ -7856,19 +7863,17 @@ footer a {
   display: inline-block;
   border-radius: 0px 7px 7px 0px;
 }
-#foki {
-  display: -webkit-box;
-  display: flex;
-  flex-wrap: wrap;
-}
 #foki label > span {
   margin-right: 5px;
 }
 #foki label span {
   background-color: transparent;
 }
-#foki input {
-  visibility: hidden;
+.focus {
+  margin: 0px;
+}
+.focus ~ .focus {
+  margin-left: 10px;
 }
 .focus-radio:checked + .focus-label,
 .focus-radio:checked + .focus-label + .focus-edit {
@@ -7895,14 +7900,16 @@ footer a {
 #settings-btn > * {
   vertical-align: middle;
 }
+.searchform-bonus li {
+  margin: 5px;
+}
 #settingsButtons {
   display: -webkit-box;
   display: flex;
   flex-wrap: wrap;
 }
-#settingsButtons a,
-#settingsButtons input {
-  margin-top: 25px;
+#settingsButtons * {
+  margin-top: 10px;
 }
 #settings-abort-btn {
   color: white;

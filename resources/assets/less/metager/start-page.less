@@ -8,39 +8,50 @@
 	color: #333;
 }
 
+#foki {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	* {
+		margin: 0px 5px;
+	}
+
+	* ~ * {
+		margin-left: 5px;
+	}
+
+	input {
+	    visibility: hidden;
+
+		& + .custom-focus-label {
+			border-radius: @foki-edge-rounding 0px 0px @foki-edge-rounding;
+		}
+
+		& + .custom-focus-label + .custom-focus-edit {
+			margin-left: 5px;
+			display: inline-block;
+			border-radius: 0px @foki-edge-rounding @foki-edge-rounding 0px;
+		}
+	}
+
+	label {
+		& > span {
+		    margin-right: 5px;
+		}
+
+		& span {
+		    background-color: transparent;
+		}
+	}
+}
+
 .focus {
 	margin: 0px;
 }
 
 .focus ~ .focus {
 	margin-left: 10px;
-}
-
-#foki input + .custom-focus-label {
-	border-radius: @foki-edge-rounding 0px 0px @foki-edge-rounding;
-}
-
-#foki input + .custom-focus-label + .custom-focus-edit {
-	margin-left: 5px;
-	display: inline-block;
-	border-radius: 0px @foki-edge-rounding @foki-edge-rounding 0px;
-}
-
-#foki {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-#foki label > span {
-    margin-right: 5px;
-}
-
-#foki label span {
-    background-color: transparent;
-}
-
-#foki input {
-    visibility: hidden;
 }
 
 .focus-radio:checked {
@@ -72,5 +83,11 @@
 	margin-left: auto;
 	&  > * {
 		vertical-align: middle;
+	}
+}
+
+.searchform-bonus {
+	li {
+		margin: 5px;
 	}
 }

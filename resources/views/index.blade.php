@@ -239,12 +239,16 @@
 				</label>
 			</div>
 		@endif
-		<button id="addFocusBtn" class="btn btn-default hide">
-			<span class="glyphicon glyphicon-plus"></span>
-		</button>
-		<a id="settings-btn" class="mutelink btn btn-default" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "settings") }}">
-			<span class="glyphicon glyphicon-cog"></span>
-		</a>
+		<div>
+			<button id="addFocusBtn" class="btn btn-default hide">
+				<span class="glyphicon glyphicon-plus"></span>
+			</button>
+		</div>
+		<div>
+			<a id="settings-btn" class="mutelink btn btn-default" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "settings") }}">
+				<span class="glyphicon glyphicon-cog"></span>
+			</a>
+		</div>
 	</div>
 		<fieldset>
 			<form id="searchForm" @if(Request::has('request') && Request::input('request') === "POST") method="POST" @elseif(Request::has('request') && Request::input('request') === "GET") method="GET" @else method="GET" @endif action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/meta/meta.ger3") }}" accept-charset="UTF-8">
@@ -286,11 +290,6 @@
 					</div>
 				</div>
 			</form>
-		<div class="visible-xs">
-			<a class="mutelink btn btn-default" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "settings") }}">
-				<span class="glyphicon glyphicon-cog"></span>
-			</a>
-		</div>
 		</fieldset>
 		<ul class="list-inline searchform-bonus">
 			<li><a href="https://www.boost-project.com/de/shops?charity_id=1129&amp;tag=bl" target="_blank" rel="noopener" id="foerdershops" class="btn btn-default mutelink" title="{{ trans('index.partnertitle') }}">{{ trans('index.conveyor') }}</a></li>
@@ -299,9 +298,7 @@
 			@unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge' || $browser === 'Safari' || $browser === 'Vivaldi')
 				class="hidden"
 			@endunless
-			>
-				<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><span class="glyphicon glyphicon-log-in"></span> {{ trans('index.plugin') }}</a>
-			</li>
+			><a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><span class="glyphicon glyphicon-log-in"></span> {{ trans('index.plugin') }}</a></li>
 		</ul>
 	<script src="{{ elixir('js/lib.js') }}"></script>
 	<script src="{{ elixir('js/scriptStartPage.js') }}"></script>

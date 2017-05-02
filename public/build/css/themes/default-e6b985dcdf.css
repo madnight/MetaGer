@@ -7482,8 +7482,8 @@ nav .input-group {
 #research nav ul > li {
   width: 20%;
   vertical-align: middle;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 #research nav ul > li.visible-xs {
   width: 10%;
@@ -7543,7 +7543,6 @@ a:hover {
 }
 #foki li a {
   color: grey;
-  padding: 5px 5px;
 }
 #foki li.active a {
   color: black;

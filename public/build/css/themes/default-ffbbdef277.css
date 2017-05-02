@@ -7543,7 +7543,6 @@ a:hover {
 }
 #foki li a {
   color: grey;
-  padding: 5px 5px;
 }
 #foki li.active a {
   color: black;

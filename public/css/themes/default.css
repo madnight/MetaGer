@@ -7235,9 +7235,6 @@ Mixed
 .wikiqtextract p {
   margin-bottom: 0;
 }
-footer ul.list-inline {
-  width: 100%;
-}
 i.fa {
   background-color: transparent;
 }
@@ -7304,11 +7301,6 @@ section {
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.55);
   -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.55);
 }
-footer {
-  margin-top: 8%;
-  bottom: 0;
-  width: 100%;
-}
 body {
   margin: 0;
 }
@@ -7347,6 +7339,14 @@ label a {
 label a:hover {
   text-decoration: none;
   color: inherit;
+}
+footer {
+  margin: 30px 0px;
+  bottom: 0;
+  width: 100%;
+}
+footer ul.list-inline {
+  width: 100%;
 }
 footer li {
   width: 33%;

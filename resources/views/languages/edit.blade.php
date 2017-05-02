@@ -54,7 +54,7 @@
 	<p>{{ trans('languages.hinweis.1') }}</p>
 	<p>{!! trans('languages.hinweis.2') !!}</p>
 	<p>{!! trans('languages.hinweis.3') !!}</p>
-	<p><b>E-Mail-Adresse für Rückfragen</b> (optional):</p>
+	<p>{!! trans('languages.email') !!}</p>
 	<p><input type="email" name="email" form="submit" value="{{$email}}"/></p>
 	<button class="btn btn-success" type="submit" form="submit">Daten übermitteln</button>
 	<script type="text/javascript" src="{{ elixir('js/lib.js') }}"></script>

@@ -157,6 +157,106 @@ class LanguageController extends Controller
             ->with('email', $email);
     }
 
+    public function createSynopticEditPage(Request $request) 
+    {
+        $languageFilePath = resource_path() . "/lang/";
+        $files            = scandir($languageFilePath);
+        $dirs             = [];
+        foreach ($files as $file) {
+            if (is_dir($languageFilePath . $file) && $file !== "." && $file !== "..") {
+                $dirs[$file] = $file;
+            }
+
+        }
+
+        $texts = [];
+        $langTexts = [];
+        $sum       = [];
+        $filePath  = [];
+        foreach ($dirs as $dir) {
+            # Wir überprüfen nun für jede Datei die Anzahl der vorhandenen Übersetzungen
+            $di              = new RecursiveDirectoryIterator($languageFilePath . $dir);
+            $langTexts[$dir] = 0;
+            foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
+                if (!$this->endsWith($filename, ".")) {
+                    $tmp = include $filename;
+                    foreach ($tmp as $key => $value) {
+                        $sum                                    = array_merge($sum, $this->getValues([$key => $value], basename($filename)));
+                        $texts[basename($filename)][$key][$dir] = $value;
+                        $langTexts[$dir] += count($this->getValues([$key => $value]));
+                    }
+                    //$filePath[basename($filename)] = preg_replace("/lang\/.*?\//si", "lang/$to/", substr($filename, strpos($filename, "lang")));
+
+                }
+
+            }
+        }
+        die(var_dump($texts));
+        return view('languages.synoptic');
+       /* $langs = [];
+        $fn    = "";
+        $t     = [];
+        $ex    = ['files' => [], 'new' => 0];
+        if ($exclude !== "") {
+            try {
+                $ex = unserialize(base64_decode($exclude));
+            } catch (\ErrorException $e) {
+                $ex = ['files' => [], 'new' => 0];
+            }
+        }
+        foreach ($texts as $filename => $text) {
+            $has = false;
+            foreach ($ex['files'] as $file) {
+                if ($file === $filename) {
+                    $has = true;
+                }
+            }
+            if ($has) {
+                continue;
+            }
+            while ($this->hasToMuchDimensions($text)) {
+                $text = $this->deMultidimensionalizeArray($text);
+            }
+            # Hier können wir später die bereits bearbeiteten Dateien ausschließen.
+            foreach ($text as $textname => $languages) {
+
+                if ($languages === "") {
+                    continue;
+                }
+
+                $complete = true;
+                foreach ($languages as $lang => $value) {
+                    if ($lang !== $to) {
+                        $langs = array_add($langs, $lang, $lang);
+                    }
+                    if (!isset($languages[$to]) && isset($languages[$lang])) {
+                        $complete = false;
+                    }
+
+                }
+                if (!isset($languages[$to])) {
+                    $fn = $filePath[$filename];
+                    $t  = $text;
+                    break;
+                }
+            }
+
+        }
+
+        $t = $this->htmlEscape($t, $to);
+        $t = $this->createHints($t, $to);
+
+        return view('languages.synoptic')
+            ->with('texts', $t)
+            ->with('filename', $fn)
+            ->with('title', trans('titles.languages.edit'))
+            ->with('langs', $langs)
+            ->with('langTexts', $langTexts)
+            ->with('sum', $sum)
+            ->with('new', $ex["new"])*/
+
+    }
+
     private function htmlEscape($t, $to)
     {
         foreach ($t as $key => $langTexts) {

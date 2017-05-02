@@ -205,7 +205,7 @@
 	</div>
 	<h1 id="mglogo"><a class="hidden-xs" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}">MetaGer</a></h1>
 	<!-- Create the focus selection and options -->
-	<div id="foki">
+	<div id="foki" class="startpage-foki">
 		<div class="focus">
 			<input id="web" class="focus-radio hide" type="radio" name="focus" value="web" form="searchForm" @if ($focus === 'web') checked @endif required="">
 			<label id="web-label" class="focus-label" for="web">

@@ -7414,7 +7414,6 @@ body > div {
   display: block;
 }
 .tab-pane.active {
-  -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.55);
   padding: 10px 0;
   padding-top: 0;
 }
@@ -7543,18 +7542,26 @@ a:hover {
   color: red;
 }
 /* Hier der Style für unsere Tabliste */
-#foki {
+.resultpage-foki,
+.foki {
   background-color: white;
 }
-#foki li a {
+.resultpage-foki li,
+.foki li {
+  margin: 0px 10px;
+}
+.resultpage-foki li a,
+.foki li a {
   color: grey;
   padding: 5px 5px;
 }
-#foki li.active a {
+.resultpage-foki li.active a,
+.foki li.active a {
   color: black;
   background-color: white;
 }
-#foki li.active span + span {
+.resultpage-foki li.active span + span,
+.foki li.active span + span {
   display: inline!important;
 }
 #spenden {
@@ -7845,34 +7852,42 @@ footer a {
 #anpassen-label a {
   color: #333;
 }
-#foki {
+.startpage-foki,
+.foki {
   display: -webkit-box;
   display: flex;
   flex-wrap: wrap;
   -webkit-box-pack: center;
   justify-content: center;
 }
-#foki * {
+.startpage-foki *,
+.foki * {
   margin: 0px 5px;
 }
-#foki * ~ * {
+.startpage-foki * ~ *,
+.foki * ~ * {
   margin-left: 5px;
 }
-#foki input {
+.startpage-foki input,
+.foki input {
   visibility: hidden;
 }
-#foki input + .custom-focus-label {
+.startpage-foki input + .custom-focus-label,
+.foki input + .custom-focus-label {
   border-radius: 7px 0px 0px 7px;
 }
-#foki input + .custom-focus-label + .custom-focus-edit {
+.startpage-foki input + .custom-focus-label + .custom-focus-edit,
+.foki input + .custom-focus-label + .custom-focus-edit {
   margin-left: 5px;
   display: inline-block;
   border-radius: 0px 7px 7px 0px;
 }
-#foki label > span {
+.startpage-foki label > span,
+.foki label > span {
   margin-right: 5px;
 }
-#foki label span {
+.startpage-foki label span,
+.foki label span {
   background-color: transparent;
 }
 .focus {

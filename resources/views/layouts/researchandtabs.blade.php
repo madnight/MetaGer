@@ -35,7 +35,7 @@
 				</div>
 			</div>
 		</nav>
-		<ul class="nav nav-tabs" id="foki" role="tablist">
+		<ul id="foki" class=" resultpage-foki nav nav-tabs" role="tablist">
 
 			@if( $metager->getFokus() === "web" )
 				<li id="webTabSelector" role="presentation" data-loaded="1" class="active tab-selector">

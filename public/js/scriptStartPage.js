@@ -320,7 +320,7 @@ function addFocus(name) {
     newFocusLabel.htmlFor = id;
     // create <i> icon
     var newFocusIcon = document.createElement("i");
-    newFocusGIcon.classList.add("fa");
+    newFocusIcon.classList.add("fa");
     newFocusIcon.classList.add("fa-star");
     newFocusIcon.setAttribute("aria-hidden", "true");
     // create content

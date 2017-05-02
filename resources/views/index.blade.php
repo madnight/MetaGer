@@ -153,7 +153,7 @@
 							<input id="focus-name" type="text" name="focus-name" placeholder="@lang('index.focus-creator.name-placeholder')">
 							<input id="original-id" type="hidden" name="original-id" value="">
 						</div>
-						<div class="pull-right">
+						<div class="settings-modal-buttons pull-right">
 							<button class="delete-focus-btn btn btn-danger">
 								@lang('index.focus-creator.delete')
 							</button>
@@ -190,7 +190,7 @@
 						</div>
 					@endforeach
 					<div class="clearfix">
-						<div class="pull-right">
+						<div class="settings-modal-buttons pull-right">
 							<button class="delete-focus-btn btn btn-danger">
 								@lang('index.focus-creator.delete')
 							</button>
@@ -251,7 +251,7 @@
 				</label>
 			</div>
 		@endif
-		<div>
+		<div id="addFocusBtnDiv">
 			<button id="addFocusBtn" class="btn btn-default hide">
 			<i class="fa fa-plus" aria-hidden="true"></i>
 			</button>
@@ -302,7 +302,6 @@
 					</div>
 				</div>
 			</form>
-				<i class="fa fa-cog" aria-hidden="true"></i>
 		</fieldset>
 		<ul class="list-inline searchform-bonus">
 			<li><a href="https://www.boost-project.com/de/shops?charity_id=1129&amp;tag=bl" target="_blank" rel="noopener" id="foerdershops" class="btn btn-default mutelink" title="{{ trans('index.partnertitle') }}"><i class="fa fa-shopping-bag" aria-hidden="true"></i> {{ trans('index.conveyor') }}</a></li>
@@ -312,7 +311,7 @@
 				class="hidden"
 			@endunless
 			><a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><span class="glyphicon glyphicon-log-in"></span> {{ trans('index.plugin') }}</a></li>
-				<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a>
+			<li><a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a></li>
 		</ul>
 	<script src="{{ elixir('js/lib.js') }}"></script>
 	<script src="{{ elixir('js/scriptStartPage.js') }}"></script>

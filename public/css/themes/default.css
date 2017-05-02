@@ -7105,6 +7105,12 @@ By Class
   background-color: white;
   box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
 }
+@media (max-width: 768px) {
+  .mg-panel {
+    margin: 0px;
+    box-shadow: none;
+  }
+}
 .input-group-addon {
   padding: 0;
 }
@@ -7228,9 +7234,6 @@ Mixed
 .settings-checkbox .settings-icon {
   margin-left: 5px;
   font-size: 12px;
-}
-.settings-btn + .settings-btn {
-  margin-left: 10px;
 }
 .wikiqtextract p {
   margin-bottom: 0;
@@ -7906,6 +7909,12 @@ footer a {
 .searchform-bonus li {
   margin: 5px;
 }
+.settings-modal-buttons {
+  padding: 5px;
+}
+.settings-modal-buttons button {
+  margin: 5px;
+}
 #settingsButtons {
   display: -webkit-box;
   display: flex;
@@ -7918,6 +7927,9 @@ footer a {
 #settings-abort-btn {
   color: white;
   margin-right: auto;
+}
+.settings-btn {
+  margin: 5px;
 }
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome

@@ -38,13 +38,32 @@ class Search implements ShouldQueue
      */
     public function handle()
     {
-        $this->fp = $this->getFreeSocket();
-
-        if ($this->fp) {
-            if ($this->writeRequest()) {
-                $this->readAnswer();
-            }
+        $url = "";
+        if($this->port === "443"){
+            $url = "https://";
+        }else{
+            $url = "http://";
         }
+        $url .= $this->host . $this->getString;
+
+
+        $ch = curl_init($url);
+        curl_setopt_array($ch, array(
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_URL => $url,
+                CURLOPT_USERAGENT => $this->useragent,
+                CURLOPT_FOLLOWLOCATION => TRUE,
+                CURLOPT_CONNECTTIMEOUT => 10,
+                CURLOPT_MAXCONNECTS => 50,
+                CURLOPT_LOW_SPEED_LIMIT => 500,
+                CURLOPT_LOW_SPEED_TIME => 5,
+                CURLOPT_TIMEOUT => 10
+        ));
+
+        $result = curl_exec($ch);
+
+        curl_close($ch);
+        Redis::hset('search.' . $this->hash, $this->name, $result);
     }
 
     private function readAnswer()

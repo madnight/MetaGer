@@ -38,14 +38,14 @@
 				<li id="toggle-nav-hide" class="hidden">
 					<a class="metager-navbar-toggle pull-right" href="#" data-original-title="" title="">
 									<span class="sr-only">Navigation anzeigen</span>
-									<span class="glyphicon glyphicon-menu-hamburger"></span>
+									<i class="fa fa-bars" aria-hidden="true"></i>
 					</a>
 					<div class="clearfix"></div>
 				</li>
 				<li id="toggle-nav-show">
 					<a class="metager-navbar-toggle pull-right" href="#metager-static-nav-list" data-original-title="" title="">
 									<span class="sr-only">Navigation anzeigen</span>
-									<span class="glyphicon glyphicon-menu-hamburger"></span>
+									<i class="fa fa-bars" aria-hidden="true"></i>
 					</a>
 					<div class="clearfix"></div>
 				</li>

@@ -431,6 +431,10 @@ By Class
     -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+    @media (max-width: 768px) {
+        margin: 0px;
+        box-shadow: none;
+    }
 }
 
 .input-group-addon {
@@ -583,10 +587,6 @@ Mixed
     font-size: 12px;
 }
 
-.settings-btn + .settings-btn {
-    margin-left: 10px;
-}
-
 .wikiqtextract p {
     margin-bottom: 0;
 }
@@ -737,10 +737,6 @@ footer li {
 
 footer img {
     max-width: 100%;
-}
-
-main ul li:not(.lslide) {
-    margin: 0 10px;
 }
 
 .searchform-bonus {

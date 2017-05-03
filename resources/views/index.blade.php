@@ -153,7 +153,7 @@
 							<input id="focus-name" type="text" name="focus-name" placeholder="@lang('index.focus-creator.name-placeholder')">
 							<input id="original-id" type="hidden" name="original-id" value="">
 						</div>
-						<div class="pull-right">
+						<div class="settings-modal-buttons pull-right">
 							<button class="delete-focus-btn btn btn-danger">
 								@lang('index.focus-creator.delete')
 							</button>
@@ -190,7 +190,7 @@
 						</div>
 					@endforeach
 					<div class="clearfix">
-						<div class="pull-right">
+						<div class="settings-modal-buttons pull-right">
 							<button class="delete-focus-btn btn btn-danger">
 								@lang('index.focus-creator.delete')
 							</button>
@@ -205,7 +205,7 @@
 	</div>
 	<h1 id="mglogo"><a class="hidden-xs" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}">MetaGer</a></h1>
 	<!-- Create the focus selection and options -->
-	<div id="foki">
+	<div id="foki" class="startpage-foki">
 		<div class="focus">
 			<input id="web" class="focus-radio hide" type="radio" name="focus" value="web" form="searchForm" @if ($focus === 'web') checked @endif required="">
 			<label id="web-label" class="focus-label" for="web">
@@ -251,12 +251,16 @@
 				</label>
 			</div>
 		@endif
-		<button id="addFocusBtn" class="btn btn-default hide">
+		<div id="addFocusBtnDiv">
+			<button id="addFocusBtn" class="btn btn-default hide">
 			<i class="fa fa-plus" aria-hidden="true"></i>
-		</button>
-		<a id="settings-btn" class="mutelink btn btn-default" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "settings") }}">
+			</button>
+		</div>
+		<div>
+			<a id="settings-btn" class="mutelink btn btn-default" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "settings") }}">
 			<i class="fa fa-cog" aria-hidden="true"></i>
-		</a>
+			</a>
+		</div>
 	</div>
 		<fieldset>
 			<form id="searchForm" @if(Request::has('request') && Request::input('request') === "POST") method="POST" @elseif(Request::has('request') && Request::input('request') === "GET") method="GET" @else method="GET" @endif action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/meta/meta.ger3") }}" accept-charset="UTF-8">
@@ -298,11 +302,6 @@
 					</div>
 				</div>
 			</form>
-		<div class="visible-xs">
-			<a class="mutelink btn btn-default" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "settings") }}">
-				<i class="fa fa-cog" aria-hidden="true"></i>
-			</a>
-		</div>
 		</fieldset>
 		<ul class="list-inline searchform-bonus">
 			<li><a href="https://www.boost-project.com/de/shops?charity_id=1129&amp;tag=bl" target="_blank" rel="noopener" id="foerdershops" class="btn btn-default mutelink" title="{{ trans('index.partnertitle') }}"><i class="fa fa-shopping-bag" aria-hidden="true"></i> {{ trans('index.conveyor') }}</a></li>
@@ -311,9 +310,8 @@
 			@unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge' || $browser === 'Safari' || $browser === 'Vivaldi')
 				class="hidden"
 			@endunless
-			>
-				<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a>
-			</li>
+			><a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><span class="glyphicon glyphicon-log-in"></span> {{ trans('index.plugin') }}</a></li>
+			<li><a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a></li>
 		</ul>
 	<script src="{{ elixir('js/lib.js') }}"></script>
 	<script src="{{ elixir('js/scriptStartPage.js') }}"></script>

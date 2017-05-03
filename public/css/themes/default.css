@@ -7105,6 +7105,12 @@ By Class
   background-color: white;
   box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
 }
+@media (max-width: 768px) {
+  .mg-panel {
+    margin: 0px;
+    box-shadow: none;
+  }
+}
 .input-group-addon {
   padding: 0;
 }
@@ -7229,9 +7235,6 @@ Mixed
   margin-left: 5px;
   font-size: 12px;
 }
-.settings-btn + .settings-btn {
-  margin-left: 10px;
-}
 .wikiqtextract p {
   margin-bottom: 0;
 }
@@ -7355,9 +7358,6 @@ footer li {
 footer img {
   max-width: 100%;
 }
-main ul li:not(.lslide) {
-  margin: 0 10px;
-}
 .searchform-bonus {
   list-style-type: none;
   text-align: center;
@@ -7414,7 +7414,6 @@ body > div {
   display: block;
 }
 .tab-pane.active {
-  -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.55);
   padding: 10px 0;
   padding-top: 0;
 }
@@ -7543,17 +7542,26 @@ a:hover {
   color: red;
 }
 /* Hier der Style für unsere Tabliste */
-#foki {
+.resultpage-foki,
+.foki {
   background-color: white;
 }
-#foki li a {
-  color: grey;
+.resultpage-foki li,
+.foki li {
+  margin: 0px 10px;
 }
-#foki li.active a {
+.resultpage-foki li a,
+.foki li a {
+  color: grey;
+  padding: 5px 5px;
+}
+.resultpage-foki li.active a,
+.foki li.active a {
   color: black;
   background-color: white;
 }
-#foki li.active span + span {
+.resultpage-foki li.active span + span,
+.foki li.active span + span {
   display: inline!important;
 }
 #spenden {
@@ -7844,33 +7852,49 @@ footer a {
 #anpassen-label a {
   color: #333;
 }
+.startpage-foki,
+.foki {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+.startpage-foki *,
+.foki * {
+  margin: 0px 5px;
+}
+.startpage-foki * ~ *,
+.foki * ~ * {
+  margin-left: 5px;
+}
+.startpage-foki input,
+.foki input {
+  visibility: hidden;
+}
+.startpage-foki input + .custom-focus-label,
+.foki input + .custom-focus-label {
+  border-radius: 7px 0px 0px 7px;
+}
+.startpage-foki input + .custom-focus-label + .custom-focus-edit,
+.foki input + .custom-focus-label + .custom-focus-edit {
+  margin-left: 5px;
+  display: inline-block;
+  border-radius: 0px 7px 7px 0px;
+}
+.startpage-foki label > span,
+.foki label > span {
+  margin-right: 5px;
+}
+.startpage-foki label span,
+.foki label span {
+  background-color: transparent;
+}
 .focus {
   margin: 0px;
 }
 .focus ~ .focus {
   margin-left: 10px;
-}
-#foki input + .custom-focus-label {
-  border-radius: 7px 0px 0px 7px;
-}
-#foki input + .custom-focus-label + .custom-focus-edit {
-  margin-left: 5px;
-  display: inline-block;
-  border-radius: 0px 7px 7px 0px;
-}
-#foki {
-  display: -webkit-box;
-  display: flex;
-  flex-wrap: wrap;
-}
-#foki label > span {
-  margin-right: 5px;
-}
-#foki label span {
-  background-color: transparent;
-}
-#foki input {
-  visibility: hidden;
 }
 .focus-radio:checked + .focus-label,
 .focus-radio:checked + .focus-label + .focus-edit {
@@ -7897,6 +7921,15 @@ footer a {
 #settings-btn > * {
   vertical-align: middle;
 }
+.searchform-bonus li {
+  margin: 5px;
+}
+.settings-modal-buttons {
+  padding: 5px;
+}
+.settings-modal-buttons button {
+  margin: 5px;
+}
 #settingsButtons {
   display: -webkit-box;
   display: flex;
@@ -7909,6 +7942,9 @@ footer a {
 #settings-abort-btn {
   color: white;
   margin-right: auto;
+}
+.settings-btn {
+  margin: 5px;
 }
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome

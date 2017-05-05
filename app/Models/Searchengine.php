@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Jobs\Search;
+use App\Jobs\Searcher;
 use App\MetaGer;
 use Cache;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -105,17 +105,41 @@ abstract class Searchengine
     # Prüft, ob die Suche bereits gecached ist, ansonsted wird sie als Job dispatched
     public function startSearch(\App\MetaGer $metager)
     {
-        if ($this->canCache && Cache::has($this->hash)) {
+        if ($this->canCache && Cache::has($this->hash) && 0 == 1) {
             $this->cached = true;
             $this->retrieveResults($metager);
         } else {
-            /* Die Anfragen an die Suchmaschinen werden nun von der Laravel-Queue bearbeitet:
-             *  Hinweis: solange in der .env der QUEUE_DRIVER auf "sync" gestellt ist, werden die Abfragen
-             *  nacheinander abgeschickt.
-             *  Sollen diese Parallel verarbeitet werden, muss ein anderer QUEUE_DRIVER verwendet werden.
-             *  siehe auch: https://laravel.com/docs/5.2/queues
-             */
-            $this->dispatch(new Search($this->resultHash, $this->host, $this->port, $this->name, $this->getString, $this->useragent, $this->additionalHeaders));
+            // We will push the confirmation of the submission to the Result Hash
+            Redis::hset('search.' . $this->resultHash, $this->name, "waiting");
+            // We need to submit a action that one of our workers can understand
+            // The missions are submitted to a redis queue in the following string format
+            // <ResultHash>;<URL to fetch>
+            // With <ResultHash> being the Hash Value where the fetcher will store the result.
+            // and <URL to fetch> being the full URL to the searchengine
+            $url = "";
+            if($this->port === "443"){
+                $url = "https://";
+            }else{
+                $url = "http://";
+            }
+            $url .= $this->host . $this->getString;
+            $mission = $this->resultHash . ";" . $url;
+            // Submit this mission to the corresponding Redis Queue
+            // Since each Searcher is dedicated to one specific search engine
+            // each Searcher has it's own queue lying under the redis key <name>.queue
+            Redis::rpush($this->name . ".queue", $mission);
+
+            // If there is no Searcher process for this engine running at this time, we start one
+            if(Redis::get($this->name) === NULL){
+                Log::info("Starting Searcher");
+                /* Die Anfragen an die Suchmaschinen werden nun von der Laravel-Queue bearbeitet:
+                 *  Hinweis: solange in der .env der QUEUE_DRIVER auf "sync" gestellt ist, werden die Abfragen
+                 *  nacheinander abgeschickt.
+                 *  Sollen diese Parallel verarbeitet werden, muss ein anderer QUEUE_DRIVER verwendet werden.
+                 *  siehe auch: https://laravel.com/docs/5.2/queues
+                 */
+                $this->dispatch(new Searcher($this->name));
+            }
         }
     }
 
@@ -172,11 +196,11 @@ abstract class Searchengine
         }
 
         $body = "";
-        if ($this->canCache && $this->cacheDuration > 0 && Cache::has($this->hash)) {
+        if ($this->canCache && $this->cacheDuration > 0 && Cache::has($this->hash) && 0 === 1) {
             $body = Cache::get($this->hash);
         } elseif (Redis::hexists('search.' . $this->resultHash, $this->name)) {
             $body = Redis::hget('search.' . $this->resultHash, $this->name);
-            if ($this->canCache && $this->cacheDuration > 0) {
+            if ($this->canCache && $this->cacheDuration > 0 && 0 === 1) {
                 Cache::put($this->hash, $body, $this->cacheDuration);
             }
 

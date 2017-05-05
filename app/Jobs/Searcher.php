@@ -46,6 +46,7 @@ class Searcher implements ShouldQueue
         // This Searches is freshly called so we need to initialize the curl handle $ch
         $this->ch = $this->initCurlHandle();
         $this->counter = 0;                 // Counts the number of answered jobs
+        $lastJob = microtime(true);
         while(true){
             // Update the expire
             Redis::expire($this->name, 5);
@@ -59,15 +60,14 @@ class Searcher implements ShouldQueue
             // The mission can be empty when blpop hit the timeout
             if(empty($mission)){
                 // In that case it should be safe to simply exit this job
-                break;
+                if(((microtime(true) - $lastJob) ) > 300)
+                    break;
+                else
+                    continue;
             }else{
                 $mission = $mission[1];
                 $this->counter++;
-                // A running Searcher checks whether more of it are needed to properly work on the
-                // Queue without delay
-                if(getenv("QUEUE_DRIVER") !== "sync" && intval(Redis::llen($this->name . ".queue")) > 1){
-                    $this->dispatch(new Searcher($this->name));
-                }
+                $lastJob = microtime(true);
             }
 
             // The mission is a String which can be divided to retrieve two informations:

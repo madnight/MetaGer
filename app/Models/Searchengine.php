@@ -166,10 +166,10 @@ abstract class Searchengine
     }
 
     # Ruft die Ranking-Funktion aller Ergebnisse auf.
-    public function rank($eingabe)
+    public function rank($eingabe, $phrases = [])
     {
         foreach ($this->results as $result) {
-            $result->rank($eingabe);
+            $result->rank($eingabe, $phrases);
         }
     }
 

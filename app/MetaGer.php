@@ -1098,7 +1098,7 @@ class MetaGer
         // matches '[... ]"test satz"[ ...]'
         while (preg_match("/(^|.+\s)\"(.+)\"(?:\s(.+)|($))/si", $tmp, $match)) {
             $tmp             = $match[1] . $match[3];
-            $this->phrases[] = strtolower($match[2]);
+            $this->phrases[] = $match[2];
         }
         foreach ($this->phrases as $phrase) {
             $p .= "\"$phrase\", ";
@@ -1133,8 +1133,16 @@ class MetaGer
 
     public function rankAll()
     {
-        foreach ($this->engines as $engine) {
-            $engine->rank($this->getQ());
+        $phraseSearch = sizeof($this->getPhrases()) > 0 ? true : false;
+
+        if($phraseSearch) {
+            foreach ($this->engines as $engine) {
+                $engine->rank($this->getQ(), $this->getPhrases());
+            }
+        } else {
+            foreach ($this->engines as $engine) {
+                $engine->rank($this->getQ());
+            }
         }
     }
 

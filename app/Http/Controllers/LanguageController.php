@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\LanguageFile;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
@@ -92,6 +93,7 @@ class LanguageController extends Controller
 
             }
         }
+        die();
         $langs = [];
         $fn    = "";
         $t     = [];
@@ -103,6 +105,7 @@ class LanguageController extends Controller
                 $ex = ['files' => [], 'new' => 0];
             }
         }
+
         foreach ($texts as $filename => $text) {
             $has = false;
             foreach ($ex['files'] as $file) {
@@ -157,43 +160,60 @@ class LanguageController extends Controller
             ->with('email', $email);
     }
 
-    public function createSynopticEditPage(Request $request) 
+    public function createSynopticEditPage(Request $request, $exclude = "") 
     {
         $languageFilePath = resource_path() . "/lang/";
-        $files            = scandir($languageFilePath);
-        $dirs             = [];
-        foreach ($files as $file) {
-            if (is_dir($languageFilePath . $file) && $file !== "." && $file !== "..") {
-                $dirs[$file] = $file;
+        $languageFolders  = scandir($languageFilePath); #relativer Pfad
+        $languageFiles    = [];
+        #Zusammensetzen zu absolutem Pfad
+        foreach ($languageFolders as $folder) {
+            if (is_dir($languageFilePath . $folder) && $folder !== "." && $folder !== "..") {
+                $languageFiles[$folder] = new LanguageFile($languageFilePath.$folder);
             }
-
         }
 
+
+        foreach ($languageFiles as $folderName => $languageFile) {
+            
+        }
+
+        /*
         $texts = [];
         $langTexts = [];
         $sum       = [];
         $filePath  = [];
+
+
         foreach ($dirs as $dir) {
             # Wir überprüfen nun für jede Datei die Anzahl der vorhandenen Übersetzungen
             $di              = new RecursiveDirectoryIterator($languageFilePath . $dir);
             $langTexts[$dir] = 0;
             foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
+                //var_dump($filename." - ".$file."<br>");
                 if (!$this->endsWith($filename, ".")) {
                     $tmp = include $filename;
                     foreach ($tmp as $key => $value) {
+                        var_dump($key." - ".$value."<br>");
                         $sum                                    = array_merge($sum, $this->getValues([$key => $value], basename($filename)));
                         $texts[basename($filename)][$key][$dir] = $value;
                         $langTexts[$dir] += count($this->getValues([$key => $value]));
                     }
                     //$filePath[basename($filename)] = preg_replace("/lang\/.*?\//si", "lang/$to/", substr($filename, strpos($filename, "lang")));
-
                 }
+            }
+        }*/
+        die();
 
+       /* foreach($texts as $a => $text) {
+            foreach($text as $b => $k) {
+                foreach($k as $c => $d) {
+                    die(var_dump($a." - ".$b." - ".$c." - ".$d));
+                }
             }
         }
-        die(var_dump($texts));
-        return view('languages.synoptic');
-       /* $langs = [];
+        */
+        /*
+        $langs = [];
         $fn    = "";
         $t     = [];
         $ex    = ['files' => [], 'new' => 0];
@@ -204,6 +224,7 @@ class LanguageController extends Controller
                 $ex = ['files' => [], 'new' => 0];
             }
         }
+
         foreach ($texts as $filename => $text) {
             $has = false;
             foreach ($ex['files'] as $file) {
@@ -245,16 +266,9 @@ class LanguageController extends Controller
 
         $t = $this->htmlEscape($t, $to);
         $t = $this->createHints($t, $to);
+    */
 
-        return view('languages.synoptic')
-            ->with('texts', $t)
-            ->with('filename', $fn)
-            ->with('title', trans('titles.languages.edit'))
-            ->with('langs', $langs)
-            ->with('langTexts', $langTexts)
-            ->with('sum', $sum)
-            ->with('new', $ex["new"])*/
-
+        return view('languages.synoptic');
     }
 
     private function htmlEscape($t, $to)

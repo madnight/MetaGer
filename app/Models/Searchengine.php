@@ -129,15 +129,37 @@ abstract class Searchengine
             // each Searcher has it's own queue lying under the redis key <name>.queue
             Redis::rpush($this->name . ".queue", $mission);
 
-            // If there is no Searcher process for this engine running at this time, we start one
-            if(Redis::get($this->name) === NULL){
-                Log::info("Starting Searcher");
-                /* Die Anfragen an die Suchmaschinen werden nun von der Laravel-Queue bearbeitet:
-                 *  Hinweis: solange in der .env der QUEUE_DRIVER auf "sync" gestellt ist, werden die Abfragen
-                 *  nacheinander abgeschickt.
-                 *  Sollen diese Parallel verarbeitet werden, muss ein anderer QUEUE_DRIVER verwendet werden.
-                 *  siehe auch: https://laravel.com/docs/5.2/queues
-                 */
+            /**
+            * We have Searcher processes running for MetaGer
+            * Each Searcher is dedicated to one specific Searchengine and fetches it's results.
+            * We can have multiple Searchers for each engine, if needed.
+            * At this point we need to decide, whether we need to start a new Searcher process or
+            * if we have enough of them running.
+            * The information for that is provided through the redis system. Each running searcher 
+            * gives information how long it has waited to be given the last fetcher job.
+            * The longer this time value is, the less frequent the search engine is used and the less
+            * searcher of that type we need.
+            * But if it's too low, i.e. 100ms, then the searcher is near to it's full workload and needs assistence.
+            **/
+            $needSearcher = false;
+            $searcherData = Redis::hgetall($this->name . ".stats");
+
+            // We now have an array of statistical data from the searchers
+            // Each searcher has one entry in it.
+            // So if it's empty, then we have currently no searcher running and 
+            // of course need to spawn a new one.
+            if(sizeof($searcherData) === 0){
+                $needSearcher = true;
+            }else{
+                // There we go:
+                // There's at least one Fetcher running for this search engine.
+                // Now we have to check if the current count is enough to fetch all the
+                // searches or if it needs help.
+                // Let's hardcode a minimum of 100ms between every search job.
+                die(var_dump($searcherData));
+            }
+            
+            if($needSearcher){
                 $this->dispatch(new Searcher($this->name));
             }
         }

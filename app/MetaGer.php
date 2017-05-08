@@ -1098,7 +1098,7 @@ class MetaGer
         // matches '[... ]"test satz"[ ...]'
         while (preg_match("/(^|.+\s)\"(.+)\"(?:\s(.+)|($))/si", $tmp, $match)) {
             $tmp             = $match[1] . $match[3];
-            $this->phrases[] = $match[2];
+            $this->phrases[] = strtolower($match[2]);
         }
         foreach ($this->phrases as $phrase) {
             $p .= "\"$phrase\", ";

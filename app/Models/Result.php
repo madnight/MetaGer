@@ -144,7 +144,7 @@ class Result
                 $containsPhrase = false;
             }
         }
-        return $containsPhrase ? 1 : 0;
+        return $containsPhrase ? 0.1 : 0;
     }
 
     # Berechnet den Ranking-Boost durch ??? URL

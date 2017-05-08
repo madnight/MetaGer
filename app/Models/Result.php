@@ -96,6 +96,7 @@ class Result
             $rank -= $this->calcYandexBoost($eingabe);
         }
 
+        # Boost für Vorkommen der Suchwörter in der Beschreibung bei Phrasensuchen
         if(!empty($phrases)) {
             $rank += $this->calcPhraseSearchBoost($phrases);
         }
@@ -136,6 +137,7 @@ class Result
         return 0;
     }
 
+    # Berechnet den Ranking-Boost bei Phrasensuchen
     private function calcPhraseSearchBoost($phrases) {
 
         $containsPhrase = true;

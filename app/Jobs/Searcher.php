@@ -97,7 +97,7 @@ class Searcher implements ShouldQueue
             } 
         }
         // When we reach this point, time has come for this Searcher to retire
-        $this->exit();
+        $this->shutdown();
     }
 
     private function retrieveUrl($url){
@@ -116,7 +116,7 @@ class Searcher implements ShouldQueue
         $this->lastTime = microtime(true);
     }
 
-    private function exit(){
+    private function shutdown(){
         Redis::hdel($this->name . ".stats", $this->pid);
         if(sizeof(Redis::hgetall($this->name . ".stats")) === 0){
             Redis::del($this->name);

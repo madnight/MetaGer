@@ -33,7 +33,6 @@ class Searcher implements ShouldQueue
         $this->name = $name;
         $this->pid = getmypid();
         // Submit this worker to the Redis System
-        Redis::set($this->name, "running");
         Redis::expire($this->name, 5);
     }
 
@@ -51,6 +50,7 @@ class Searcher implements ShouldQueue
         while(true){
             // Update the expire
             Redis::expire($this->name, 5);
+            Redis::expire($this->name . ".stats", 5);
             // One Searcher can handle a ton of requests to the same server
             // Each search to the server of this Searcher will be submitted to a queue
             // stored in redis which has the same name as this searchengine appended by a ".queue"
@@ -65,7 +65,6 @@ class Searcher implements ShouldQueue
                 $mission = $mission[1];
                 $this->counter++;#
                 $poptime = microtime(true) - $time;
-                $time = microtime(true);
             }
 
             // The mission is a String which can be divided to retrieve two informations:
@@ -80,6 +79,16 @@ class Searcher implements ShouldQueue
             $result = $this->retrieveUrl($url);
 
             $this->storeResult($result, $poptime, $hashValue);
+
+            if($this->counter === 3){
+                Redis::set($this->name, "running");
+            }
+
+            // Reset the time of the last Job so we can calculate
+            // the time we have spend waiting for a new job
+            // We submit that calculation to the Redis systemin the method
+            // storeResult()
+            $time = microtime(true);
 
             // In sync mode every Searcher may only retrieve one result because it would block
             // the execution of the remaining code otherwise:

@@ -156,10 +156,19 @@ abstract class Searchengine
                 // Now we have to check if the current count is enough to fetch all the
                 // searches or if it needs help.
                 // Let's hardcode a minimum of 100ms between every search job.
-                die(var_dump($searcherData));
+                // First calculate the median of all Times
+                $median = 0;
+                foreach($searcherData as $pid => $data){
+                    $data = explode(";", $data);
+                    $median += floatval($data[1]);
+                }
+                $median /= sizeof($searcherData);
+                if($median < 100){
+                    $needSearcher = true;
+                }
             }
-            
-            if($needSearcher){
+            if($needSearcher && Redis::get($this->name) !== "locked"){
+                Redis::set($this->name, "locked");
                 $this->dispatch(new Searcher($this->name));
             }
         }

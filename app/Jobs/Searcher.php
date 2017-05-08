@@ -12,9 +12,9 @@ use Log;
 
 class Searcher implements ShouldQueue
 {
-    use InteractsWithQueue, Queueable, SerializesModels, DispatchesJobs;
+    use InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $name, $ch;
+    protected $name, $ch, $pid, $counter, $lastTime;
     protected $MAX_REQUESTS = 500;
 
     /**
@@ -31,6 +31,7 @@ class Searcher implements ShouldQueue
     public function __construct($name)
     {
         $this->name = $name;
+        $this->pid = getmypid();
         // Submit this worker to the Redis System
         Redis::set($this->name, "running");
         Redis::expire($this->name, 5);
@@ -46,7 +47,7 @@ class Searcher implements ShouldQueue
         // This Searches is freshly called so we need to initialize the curl handle $ch
         $this->ch = $this->initCurlHandle();
         $this->counter = 0;                 // Counts the number of answered jobs
-        $lastJob = microtime(true);
+        $time = microtime(true);
         while(true){
             // Update the expire
             Redis::expire($this->name, 5);
@@ -59,15 +60,12 @@ class Searcher implements ShouldQueue
 
             // The mission can be empty when blpop hit the timeout
             if(empty($mission)){
-                // In that case it should be safe to simply exit this job
-                if(((microtime(true) - $lastJob) ) > 300)
-                    break;
-                else
-                    continue;
+                continue;
             }else{
                 $mission = $mission[1];
-                $this->counter++;
-                $lastJob = microtime(true);
+                $this->counter++;#
+                $poptime = microtime(true) - $time;
+                $time = microtime(true);
             }
 
             // The mission is a String which can be divided to retrieve two informations:
@@ -81,18 +79,16 @@ class Searcher implements ShouldQueue
 
             $result = $this->retrieveUrl($url);
 
-            $this->storeResult($result, $hashValue);
+            $this->storeResult($result, $poptime, $hashValue);
 
             // In sync mode every Searcher may only retrieve one result because it would block
             // the execution of the remaining code otherwise:
             if(getenv("QUEUE_DRIVER") === "sync" || $this->counter > $this->MAX_REQUESTS){
-                if(getenv("QUEUE_DRIVER") === "sync") Redis::del($this->name);
                 break;
             } 
         }
         // When we reach this point, time has come for this Searcher to retire
-        // We should close our curl handle before we do so
-        curl_close($this->ch);
+        $this->exit();
     }
 
     private function retrieveUrl($url){
@@ -104,8 +100,20 @@ class Searcher implements ShouldQueue
         return $result;
     }
 
-    private function storeResult($result, $hashValue){
+    private function storeResult($result, $poptime, $hashValue){
         Redis::hset('search.' . $hashValue, $this->name, $result);
+        $connectionInfo = base64_encode(json_encode(curl_getinfo($this->ch), true));
+        Redis::hset($this->name . ".stats", $this->pid, $connectionInfo . ";" . $poptime);
+        $this->lastTime = microtime(true);
+    }
+
+    private function exit(){
+        Redis::hdel($this->name . ".stats", $this->pid);
+        if(sizeof(Redis::hgetall($this->name . ".stats")) === 0){
+            Redis::del($this->name);
+        }
+        // We should close our curl handle before we do so
+        curl_close($this->ch);
     }
 
     private function initCurlHandle(){

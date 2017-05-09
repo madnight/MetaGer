@@ -509,6 +509,7 @@ class MetaGer
                     $sumaCount += 1;
                 }
                 $enabledSearchengines[] = $suma;
+                break;
             }
         }
 
@@ -563,35 +564,42 @@ class MetaGer
         }
 
         # Wir starten alle Suchen
+        $success = true;
         foreach ($engines as $engine) {
-            $engine->startSearch($this);
-        }
-
-        // Derzeit deaktiviert, da es die eigene Suche gibt
-        // $this->adjustFocus($sumas, $enabledSearchengines);
-
-        /* Wir warten auf die Antwort der Suchmaschinen
-         * Die Verbindung steht zu diesem Zeitpunkt und auch unsere Requests wurden schon gesendet.
-         * Wir zählen die Suchmaschinen, die durch den Cache beantwortet wurden:
-         * $enginesToLoad zählt einerseits die Suchmaschinen auf die wir warten und andererseits
-         * welche Suchmaschinen nicht rechtzeitig geantwortet haben.
-         */
-
-        $enginesToLoad = [];
-        $canBreak      = false;
-        foreach ($engines as $engine) {
-            if ($engine->cached) {
-                if ($overtureEnabled && ($engine->name === "overture" || $engine->name === "overtureAds")) {
-                    $canBreak = true;
-                }
-            } else {
-                $enginesToLoad[$engine->name] = false;
+            if(!$engine->startSearch($this)){
+                $success = false;
             }
         }
+        if($success){
+            // Derzeit deaktiviert, da es die eigene Suche gibt
+            // $this->adjustFocus($sumas, $enabledSearchengines);
 
-        $this->waitForResults($enginesToLoad, $overtureEnabled, $canBreak);
+            /* Wir warten auf die Antwort der Suchmaschinen
+             * Die Verbindung steht zu diesem Zeitpunkt und auch unsere Requests wurden schon gesendet.
+             * Wir zählen die Suchmaschinen, die durch den Cache beantwortet wurden:
+             * $enginesToLoad zählt einerseits die Suchmaschinen auf die wir warten und andererseits
+             * welche Suchmaschinen nicht rechtzeitig geantwortet haben.
+             */
 
-        $this->retrieveResults($engines);
+            $enginesToLoad = [];
+            $canBreak      = false;
+            foreach ($engines as $engine) {
+                if ($engine->cached) {
+                    if ($overtureEnabled && ($engine->name === "overture" || $engine->name === "overtureAds")) {
+                        $canBreak = true;
+                    }
+                } else {
+                    $enginesToLoad[$engine->name] = false;
+                }
+            }
+
+            $this->waitForResults($enginesToLoad, $overtureEnabled, $canBreak);
+
+            $this->retrieveResults($engines);
+        }else{
+            Log::error('Fehler beim Verbindungsaufbau zum lokalen Redis Server!');
+            $this->errors[] = trans('metager.redis.error');
+        }
     }
 
     # Spezielle Suchen und Sumas
@@ -815,9 +823,13 @@ class MetaGer
     {
 
         $timeStart     = microtime(true);
-        $results = null;
+        $results = array();
         while (true) {
-            $results = Redis::hgetall('search.' . $this->getHashCode());
+            try{
+                    $results = Redis::hgetall('search.' . $this->getHashCode());
+            }catch(ConnectionException $e){
+                break;
+            }
 
             $ready = true;
             // When every 

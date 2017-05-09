@@ -367,7 +367,7 @@ function addFocus(focus, active = false) {
     focusElementLink.setAttribute("data-href", searchLink);
     focusElementLink.setAttribute("href", searchLink);
     // create <a> icon
-    var focusElementIcon = document.createElement("a");
+    var focusElementIcon = document.createElement("i");
     focusElementIcon.classList.add("fa");
     focusElementIcon.classList.add("fa-cog");
     focusElementIcon.setAttribute("aria-hidden", "true");

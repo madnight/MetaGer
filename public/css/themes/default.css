@@ -7548,12 +7548,13 @@ a:hover {
 }
 .resultpage-foki li,
 .foki li {
-  margin: 0px 10px;
+  margin: 0px;
+  margin-bottom: -1px;
 }
 .resultpage-foki li a,
 .foki li a {
   color: grey;
-  padding: 5px 5px;
+  padding: 15px 10px;
 }
 .resultpage-foki li.active a,
 .foki li.active a {

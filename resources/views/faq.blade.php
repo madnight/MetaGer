@@ -161,12 +161,4 @@
 			<p>{!! trans('faq.faq.17.b.10') !!}</p>
 		</div>
 	</div>
-	<div id="bangs" class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title">{!! trans('faq.faq.18.h') !!}</h3>
-		</div>
-		<div class="panel-body">
-			<p>{!! trans('faq.faq.18.b') !!}</p>
-		</div>
-	</div>
 @endsection

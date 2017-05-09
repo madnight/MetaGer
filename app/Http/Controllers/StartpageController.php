@@ -45,14 +45,13 @@ class StartpageController extends Controller
             ->with('theme', $theme)
             ->with('autocomplete', $request->input('param_autocomplete', 'on'))
             ->with('foki', $this->loadFoki())
-
             ->with('focus', $request->input('focus', 'web'))
             ->with('lang', $request->input('param_lang', 'all'))
             ->with('resultCount', $request->input('param_resultCount', '20'))
-            ->with('time', $request->input('param_time', '1000'))
-            ->with('sprueche', $request->input('param_sprueche', 'off'))
+            ->with('time', $request->input('param_time', '1500'))
+            ->with('sprueche', $request->input('param_sprueche', 'on'))
             ->with('newtab', $request->input('param_newtab', 'on'))
-            ->with('maps', $maps = $request->input('param_maps', 'on'));
+            ->with('maps', $maps = $request->input('param_maps', 'off'));
     }
 
     public function loadPage($subpage)

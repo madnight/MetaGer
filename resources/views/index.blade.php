@@ -310,8 +310,7 @@
 			@unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge' || $browser === 'Safari' || $browser === 'Vivaldi')
 				class="hidden"
 			@endunless
-			><a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><span class="glyphicon glyphicon-log-in"></span> {{ trans('index.plugin') }}</a></li>
-			<li><a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a></li>
+			<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a></li>
 		</ul>
 	<script src="{{ elixir('js/lib.js') }}"></script>
 	<script src="{{ elixir('js/scriptStartPage.js') }}"></script>

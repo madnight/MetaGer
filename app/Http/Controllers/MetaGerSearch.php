@@ -11,6 +11,14 @@ class MetaGerSearch extends Controller
 {
     public function search(Request $request, MetaGer $metager)
     {
+        $focus = $request->input("focus", "web");
+        if ($focus !== "angepasst" && startsWith($focus, "focus_")) {
+            $metager->parseFormData($request);
+            if ($metager->doBotProtection($request->input('bot', ""))) {
+                return redirect(LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), url("/noaccess", ['redirect' => base64_encode(url()->full())])));
+            }
+            return $metager->createView();
+        }
         #die($request->header('User-Agent'));
         $time = microtime();
         # Mit gelieferte Formulardaten parsen und abspeichern:
@@ -254,5 +262,11 @@ class MetaGerSearch extends Controller
     public function get($url)
     {
         return file_get_contents($url);
+    }
+
+    private function startsWith($haystack, $needle)
+    {
+        $length = strlen($needle);
+        return (substr($haystack, 0, $length) === $needle);
     }
 }

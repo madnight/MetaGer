@@ -4,40 +4,85 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use Response;
 
 class AdminInterface extends Controller
 {
     public function index(Request $request)
     {
-        $time = $request->input('time', 60);
+        $localFetcher = file_get_contents(action("AdminInterface@getFetcherStatus"));
+        die(var_dump($localFetcher));
+    }
 
-        # Zunächst einmal die Redis-Verbindung:
-        $redis = Redis::connection('redisLogs');
+    public function getFetcherStatus()
+    {
+        // Let's get the stats for this server.
+        // First we need to check, which Fetcher could be available by parsing the sumas.xml
+        $names = $this->getSearchEngineNames();
 
-        # Dann lesen wir alle Server aus:
-        $member        = $redis->smembers('logs.worker');
-        $today         = strtotime(date(DATE_RFC822, mktime(0, 0, 0, date("m"), date("d"), date("Y"))));
-        $beginningTime = strtotime(date(DATE_RFC822, mktime(date("H"), date("i") - $time, date("s"), date("m"), date("d"), date("Y")))) - $today;
-
-        # Jetzt besorgen wir uns die Daten für jeden Server:
-        $data = [];
-        foreach ($member as $mem) {
-            $tmp = $redis->hgetall('logs.worker.' . $mem);
-            ksort($tmp, SORT_NUMERIC);
-            $tmp2 = [];
-            foreach ($tmp as $el => $value) {
-                if ($el >= $beginningTime) {
-                    $data[$mem][$el] = $value;
+        // Now we gonna check which stats we can find
+        $stati = array();
+        foreach($names as $name){
+            $stats = Redis::hgetall($name . ".stats");
+            if(sizeof($stats) > 0){
+                $fetcherStatus = Redis::get($name);
+                $stati[$name]["status"] = $fetcherStatus;
+                foreach($stats as $pid => $value){
+                    if(strstr($value, ";")){
+                        $value = explode(";", $value);
+                        $connection = json_decode(base64_decode($value[0]), true);
+                        foreach($connection as $key => $val){
+                            if(strstr($key, "_time"))
+                                $stati[$name]["fetcher"][$pid]["connection"][$key] = $val;
+                        }
+                        $stati[$name]["fetcher"][$pid]["poptime"] = $value[1];
+                    }
                 }
-
             }
         }
-        #$data = [ 5 => "majm", 2 => "mngsn", 7 => "akljsd"];
-        #arsort($data);
+
+        // So now we can generate Median Times for every Fetcher
+        foreach($stati as $engineName => $engineStats){
+            $connection = array();
+            $poptime = 0;
+            foreach($engineStats["fetcher"] as $pid => $stats){
+                foreach($stats["connection"] as $key => $value){
+                    if(!isset($connection[$key])){
+                        $connection[$key] = $value;
+                    }else{
+                        $connection[$key] += $value;
+                    }
+                }
+                $poptime += floatval($stats["poptime"]);
+            }
+            foreach($connection as $key => $value){
+                $connection[$key] /= sizeof($engineStats["fetcher"]);
+            }
+            $poptime /= sizeof($engineStats["fetcher"]);
+
+            $stati[$engineName]["median-connection"] = $connection;
+            $stati[$engineName]["median-poptime"] = $poptime;
+        }
+
         return view('admin.admin')
-            ->with('data', $data)
-            ->with('title', "Admin-Interface-MetaGer")
-            ->with('time', $time);
+            ->with('title', 'Fetcher Status')
+            ->with('stati', $stati);
+        $stati = json_encode($stati);
+        $response = Response::make($stati, 200);
+        $response->header("Content-Type", "application/json");
+        return $response;
+    }
+
+    private function getSearchEngineNames(){
+        $url = config_path() . "/sumas.xml";
+        $xml = simplexml_load_file($url);
+        $sumas = $xml->xpath("suma");
+
+        $names = array();
+        foreach($sumas as $suma){
+            $names[] = $suma["name"]->__toString();
+        }
+        return $names;
     }
 
     public function count()

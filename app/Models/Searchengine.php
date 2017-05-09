@@ -163,7 +163,7 @@ abstract class Searchengine
                     $median += floatval($data[1]);
                 }
                 $median /= sizeof($searcherData);
-                if($median < 100){
+                if($median < .1){
                     $needSearcher = true;
                 }
             }

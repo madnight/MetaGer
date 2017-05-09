@@ -60,7 +60,7 @@ class Searcher implements ShouldQueue
 
             // The mission can be empty when blpop hit the timeout
             if(empty($mission)){
-                break;
+                continue;
             }else{
                 $mission = $mission[1];
                 $this->counter++;#

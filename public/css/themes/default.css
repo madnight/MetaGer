@@ -7238,9 +7238,6 @@ Mixed
 .wikiqtextract p {
   margin-bottom: 0;
 }
-footer ul.list-inline {
-  width: 100%;
-}
 i.fa {
   background-color: transparent;
 }
@@ -7307,11 +7304,6 @@ section {
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.55);
   -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.55);
 }
-footer {
-  margin-top: 8%;
-  bottom: 0;
-  width: 100%;
-}
 body {
   margin: 0;
 }
@@ -7351,13 +7343,6 @@ label a:hover {
   text-decoration: none;
   color: inherit;
 }
-footer li {
-  width: 33%;
-  text-align: center;
-}
-footer img {
-  max-width: 100%;
-}
 .searchform-bonus {
   list-style-type: none;
   text-align: center;
@@ -7387,6 +7372,21 @@ nav h1 {
 }
 body > div {
   padding-top: 70px;
+}
+footer {
+  margin: 30px 0px;
+  bottom: 0;
+  width: 100%;
+}
+footer ul.list-inline {
+  width: 100%;
+}
+footer li {
+  width: 33%;
+  text-align: center;
+}
+footer img {
+  max-width: 100%;
 }
 #map,
 #map div {
@@ -7865,14 +7865,6 @@ footer a {
   -webkit-box-pack: center;
   justify-content: center;
 }
-.startpage-foki *,
-.foki * {
-  margin: 0px 5px;
-}
-.startpage-foki * ~ *,
-.foki * ~ * {
-  margin-left: 5px;
-}
 .startpage-foki input,
 .foki input {
   visibility: hidden;
@@ -7886,10 +7878,6 @@ footer a {
   margin-left: 5px;
   display: inline-block;
   border-radius: 0px 7px 7px 0px;
-}
-.startpage-foki label > span,
-.foki label > span {
-  margin-right: 5px;
 }
 .startpage-foki label span,
 .foki label span {
@@ -7917,13 +7905,13 @@ footer a {
   cursor: pointer;
   background-color: #e3e3e3;
 }
-#addFocusBtn {
+#addFocusBtnDiv {
   margin-left: 10px;
 }
-#settings-btn {
-  margin-left: auto;
+#settingsBtnDiv {
+  margin-left: 10px;
 }
-#settings-btn > * {
+#settingsBtnDiv > * {
   vertical-align: middle;
 }
 .searchform-bonus li {

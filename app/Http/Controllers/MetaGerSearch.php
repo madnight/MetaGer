@@ -12,7 +12,7 @@ class MetaGerSearch extends Controller
     public function search(Request $request, MetaGer $metager)
     {
         $focus = $request->input("focus", "web");
-        if ($focus !== "angepasst" && startsWith($focus, "focus_")) {
+        if ($focus !== "angepasst" && $this->startsWith($focus, "focus_")) {
             $metager->parseFormData($request);
             if ($metager->doBotProtection($request->input('bot', ""))) {
                 return redirect(LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), url("/noaccess", ['redirect' => base64_encode(url()->full())])));

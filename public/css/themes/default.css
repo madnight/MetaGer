@@ -7548,20 +7548,25 @@ a:hover {
 }
 .resultpage-foki li,
 .foki li {
-  margin: 0px 10px;
+  margin: 0px;
+  margin-bottom: -1px;
 }
 .resultpage-foki li a,
 .foki li a {
   color: grey;
-  padding: 5px 5px;
+  padding: 8px 12px;
 }
 .resultpage-foki li.active a,
 .foki li.active a {
   color: black;
   background-color: white;
 }
-.resultpage-foki li.active span + span,
-.foki li.active span + span {
+.resultpage-foki li span,
+.foki li span {
+  margin-left: 3px;
+}
+.resultpage-foki li.active span,
+.foki li.active span {
   display: inline!important;
 }
 #spenden {

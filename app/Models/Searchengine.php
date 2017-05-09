@@ -8,7 +8,6 @@ use Cache;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
 use Illuminate\Support\Facades\Redis;
-use Predis\Connection\ConnectionException;
 
 abstract class Searchengine
 {
@@ -110,73 +109,67 @@ abstract class Searchengine
             $this->cached = true;
             $this->retrieveResults($metager);
         } else {
-            try{
-                // We will push the confirmation of the submission to the Result Hash
-                Redis::hset('search.' . $this->resultHash, $this->name, "waiting");
+            // We will push the confirmation of the submission to the Result Hash
+            Redis::hset('search.' . $this->resultHash, $this->name, "waiting");
+            // We need to submit a action that one of our workers can understand
+            // The missions are submitted to a redis queue in the following string format
+            // <ResultHash>;<URL to fetch>
+            // With <ResultHash> being the Hash Value where the fetcher will store the result.
+            // and <URL to fetch> being the full URL to the searchengine
+            $url = "";
+            if($this->port === "443"){
+                $url = "https://";
+            }else{
+                $url = "http://";
+            }
+            $url .= $this->host . $this->getString;
+            $mission = $this->resultHash . ";" . $url;
+            // Submit this mission to the corresponding Redis Queue
+            // Since each Searcher is dedicated to one specific search engine
+            // each Searcher has it's own queue lying under the redis key <name>.queue
+            Redis::rpush($this->name . ".queue", $mission);
 
-                // We need to submit a action that one of our workers can understand
-                // The missions are submitted to a redis queue in the following string format
-                // <ResultHash>;<URL to fetch>
-                // With <ResultHash> being the Hash Value where the fetcher will store the result.
-                // and <URL to fetch> being the full URL to the searchengine
-                $url = "";
-                if($this->port === "443"){
-                    $url = "https://";
-                }else{
-                    $url = "http://";
+            /**
+            * We have Searcher processes running for MetaGer
+            * Each Searcher is dedicated to one specific Searchengine and fetches it's results.
+            * We can have multiple Searchers for each engine, if needed.
+            * At this point we need to decide, whether we need to start a new Searcher process or
+            * if we have enough of them running.
+            * The information for that is provided through the redis system. Each running searcher 
+            * gives information how long it has waited to be given the last fetcher job.
+            * The longer this time value is, the less frequent the search engine is used and the less
+            * searcher of that type we need.
+            * But if it's too low, i.e. 100ms, then the searcher is near to it's full workload and needs assistence.
+            **/
+            $needSearcher = false;
+            $searcherData = Redis::hgetall($this->name . ".stats");
+
+            // We now have an array of statistical data from the searchers
+            // Each searcher has one entry in it.
+            // So if it's empty, then we have currently no searcher running and 
+            // of course need to spawn a new one.
+            if(sizeof($searcherData) === 0){
+                $needSearcher = true;
+            }else{
+                // There we go:
+                // There's at least one Fetcher running for this search engine.
+                // Now we have to check if the current count is enough to fetch all the
+                // searches or if it needs help.
+                // Let's hardcode a minimum of 100ms between every search job.
+                // First calculate the median of all Times
+                $median = 0;
+                foreach($searcherData as $pid => $data){
+                    $data = explode(";", $data);
+                    $median += floatval($data[1]);
                 }
-                $url .= $this->host . $this->getString;
-                $mission = $this->resultHash . ";" . $url;
-                // Submit this mission to the corresponding Redis Queue
-                // Since each Searcher is dedicated to one specific search engine
-                // each Searcher has it's own queue lying under the redis key <name>.queue
-                Redis::rpush($this->name . ".queue", $mission);
-
-                /**
-                * We have Searcher processes running for MetaGer
-                * Each Searcher is dedicated to one specific Searchengine and fetches it's results.
-                * We can have multiple Searchers for each engine, if needed.
-                * At this point we need to decide, whether we need to start a new Searcher process or
-                * if we have enough of them running.
-                * The information for that is provided through the redis system. Each running searcher 
-                * gives information how long it has waited to be given the last fetcher job.
-                * The longer this time value is, the less frequent the search engine is used and the less
-                * searcher of that type we need.
-                * But if it's too low, i.e. 100ms, then the searcher is near to it's full workload and needs assistence.
-                **/
-                $needSearcher = false;
-                $searcherData = Redis::hgetall($this->name . ".stats");
-
-                // We now have an array of statistical data from the searchers
-                // Each searcher has one entry in it.
-                // So if it's empty, then we have currently no searcher running and 
-                // of course need to spawn a new one.
-                if(sizeof($searcherData) === 0){
+                $median /= sizeof($searcherData);
+                if($median < 100){
                     $needSearcher = true;
-                }else{
-                    // There we go:
-                    // There's at least one Fetcher running for this search engine.
-                    // Now we have to check if the current count is enough to fetch all the
-                    // searches or if it needs help.
-                    // Let's hardcode a minimum of 100ms between every search job.
-                    // First calculate the median of all Times
-                    $median = 0;
-                    foreach($searcherData as $pid => $data){
-                        $data = explode(";", $data);
-                        $median += floatval($data[1]);
-                    }
-                    $median /= sizeof($searcherData);
-                    if($median < .1){ // Median is given as a float in seconds
-                        $needSearcher = true;
-                    }
                 }
-                if($needSearcher && Redis::get($this->name) !== "locked"){
-                    Redis::set($this->name, "locked");
-                    $this->dispatch(new Searcher($this->name));
-                }
-                return true;
-            }catch(ConnectionException $e){
-                return false;
+            }
+            if($needSearcher && Redis::get($this->name) !== "locked"){
+                Redis::set($this->name, "locked");
+                $this->dispatch(new Searcher($this->name));
             }
         }
     }
@@ -229,33 +222,28 @@ abstract class Searchengine
     # Fragt die Ergebnisse von Redis ab und lädt Sie
     public function retrieveResults(MetaGer $metager)
     {
-        try{
-            if ($this->loaded) {
-                return true;
-            }
-
-            $body = "";
-            if ($this->canCache && $this->cacheDuration > 0 && Cache::has($this->hash) && 0 === 1) {
-                $body = Cache::get($this->hash);
-            } elseif (Redis::hexists('search.' . $this->resultHash, $this->name)) {
-                $body = Redis::hget('search.' . $this->resultHash, $this->name);
-                if ($this->canCache && $this->cacheDuration > 0 && 0 === 1) {
-                    Cache::put($this->hash, $body, $this->cacheDuration);
-                }
-
-            }
-            if ($body !== "") {
-                $this->loadResults($body);
-                $this->getNext($metager, $body);
-                $this->loaded = true;
-                Redis::hdel('search.' . $this->hash, $this->name);
-                return true;
-            } else {
-                return false;
-            }
-        }catch(ConnectionException $e){
-            $this->loaded = true;
+        if ($this->loaded) {
             return true;
+        }
+
+        $body = "";
+        if ($this->canCache && $this->cacheDuration > 0 && Cache::has($this->hash) && 0 === 1) {
+            $body = Cache::get($this->hash);
+        } elseif (Redis::hexists('search.' . $this->resultHash, $this->name)) {
+            $body = Redis::hget('search.' . $this->resultHash, $this->name);
+            if ($this->canCache && $this->cacheDuration > 0 && 0 === 1) {
+                Cache::put($this->hash, $body, $this->cacheDuration);
+            }
+
+        }
+        if ($body !== "") {
+            $this->loadResults($body);
+            $this->getNext($metager, $body);
+            $this->loaded = true;
+            Redis::hdel('search.' . $this->hash, $this->name);
+            return true;
+        } else {
+            return false;
         }
     }
 

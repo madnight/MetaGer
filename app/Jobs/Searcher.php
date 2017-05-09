@@ -8,7 +8,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Facades\Redis;
-use Predis\Connection\ConnectionException;
 use Log;
 
 class Searcher implements ShouldQueue
@@ -106,12 +105,6 @@ class Searcher implements ShouldQueue
         curl_setopt($this->ch, CURLOPT_URL, $url);
 
         $result = curl_exec($this->ch);
-
-        if(!empty(curl_error($this->ch))){
-            // Es gab einen Fehler beim Abruf des Ergebnisses
-            // diesen sollten wir protokollieren
-            Log::error("Fehler in der Searcher Klasse, beim Abruf des Ergebnisses: \n" . curl_error($this->ch));
-        }
 
         return $result;
     }

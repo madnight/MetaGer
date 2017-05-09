@@ -198,20 +198,25 @@ a:hover {
 
 /* Hier der Style für unsere Tabliste */
 
-.resultpage-foki, .foki {
+.resultpage-foki,
+.foki {
     background-color: white;
     li {
-        margin: 0px 10px;
+        margin: 0px;
+        margin-bottom: -1px;
     }
     li a {
         color: grey;
-        padding: 5px 5px;
+        padding: 8px 12px;
     }
     li.active a {
         color: black;
         background-color: white;
     }
-    li.active span+span {
+    li span {
+        margin-left: 3px;
+    }
+    li.active span {
         display: inline!important;
     }
 }

@@ -1133,16 +1133,8 @@ class MetaGer
 
     public function rankAll()
     {
-        $phraseSearch = sizeof($this->getPhrases()) > 0 ? true : false;
-
-        if($phraseSearch) {
-            foreach ($this->engines as $engine) {
-                $engine->rank($this->getQ(), $this->getPhrases());
-            }
-        } else {
-            foreach ($this->engines as $engine) {
-                $engine->rank($this->getQ());
-            }
+        foreach ($this->engines as $engine) {
+            $engine->rank($this->getQ(), $this->getPhrases());
         }
     }
 

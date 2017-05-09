@@ -256,7 +256,7 @@
 			<i class="fa fa-plus" aria-hidden="true"></i>
 			</button>
 		</div>
-		<div>
+		<div id="settingsBtnDiv">
 			<a id="settings-btn" class="mutelink btn btn-default" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "settings") }}">
 			<i class="fa fa-cog" aria-hidden="true"></i>
 			</a>

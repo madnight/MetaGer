@@ -11,12 +11,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    * {
-        margin: 0px 5px;
-    }
-    *~* {
-        margin-left: 5px;
-    }
     input {
         visibility: hidden;
         &+.custom-focus-label {
@@ -29,9 +23,6 @@
         }
     }
     label {
-        &>span {
-            margin-right: 5px;
-        }
         & span {
             background-color: transparent;
         }
@@ -69,12 +60,12 @@
     }
 }
 
-#addFocusBtn {
+#addFocusBtnDiv {
     margin-left: 10px;
 }
 
-#settings-btn {
-    margin-left: auto;
+#settingsBtnDiv {
+    margin-left: 10px;
     &>* {
         vertical-align: middle;
     }

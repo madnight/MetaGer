@@ -135,6 +135,14 @@
 			</div>
 		</div>
 	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">{!! trans('hilfe.bang.title') !!}</h3>
+		</div>
+		<div class="panel-body">
+			<p>{!! trans('hilfe.bang.1') !!}</p>
+		</div>
+	</div>
 	<h2 id="dienste">{!! trans('hilfe.dienste') !!}</h2>
 	<div class="panel panel-default">
 		<div id="mg-app" style="margin-top: -100px"></div>

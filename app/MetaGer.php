@@ -509,7 +509,6 @@ class MetaGer
                     $sumaCount += 1;
                 }
                 $enabledSearchengines[] = $suma;
-                break;
             }
         }
 

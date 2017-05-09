@@ -1145,7 +1145,7 @@ class MetaGer
     public function rankAll()
     {
         foreach ($this->engines as $engine) {
-            $engine->rank($this->getQ());
+            $engine->rank($this->getQ(), $this->getPhrases());
         }
     }
 

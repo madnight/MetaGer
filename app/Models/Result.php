@@ -72,8 +72,9 @@ class Result
      *  + 0.02 * Sourcerank (20 - Position in Ergebnisliste des Suchanbieters)
      *  * Engine-Boost
      */
-    public function rank($eingabe)
-    {
+    public function rank($eingabe, $phrases = [])
+    { 
+
         $rank = 0;
 
         # Boost für Source Ranking
@@ -93,6 +94,11 @@ class Result
         # Runter Ranken von Yandex Ergebnissen mit zu viel kyrillischen Texten
         if (stripos($this->gefVon, "yandex") !== false) {
             $rank -= $this->calcYandexBoost($eingabe);
+        }
+
+        # Boost für Vorkommen der Suchwörter in der Beschreibung bei Phrasensuchen
+        if(!empty($phrases)) {
+            $rank += $this->calcPhraseSearchBoost($phrases);
         }
 
         $this->rank = $rank;
@@ -129,6 +135,18 @@ class Result
             }
         }
         return 0;
+    }
+
+    # Berechnet den Ranking-Boost bei Phrasensuchen
+    private function calcPhraseSearchBoost($phrases) {
+
+        $containsPhrase = true;
+        foreach($phrases as $phrase) {
+            if(strstr($this->longDescr, $phrase) == false) {
+                $containsPhrase = false;
+            }
+        }
+        return $containsPhrase ? 0.1 : 0;
     }
 
     # Berechnet den Ranking-Boost durch ??? URL

@@ -133,7 +133,6 @@ class Searcher implements ShouldQueue
                 $totalTime += $time;
             }
             $totalTime /= sizeof($vals);
-            die(var_dump($totalTime));
             return $totalTime;
         }
     }

@@ -119,8 +119,10 @@ class Searcher implements ShouldQueue
         }
     }
     private function updateStats($poptime){
-        $connectionInfo = base64_encode(json_encode($this->connectionInfo));
-        Redis::hset($this->name . ".stats", $this->pid, $connectionInfo . ";" . $poptime);
+        if($this->connectionInfo !== NULL){
+            $connectionInfo = base64_encode(json_encode($this->connectionInfo));
+            Redis::hset($this->name . ".stats", $this->pid, $connectionInfo . ";" . $poptime);
+        }
     }
 
     private function getFetchTime(){

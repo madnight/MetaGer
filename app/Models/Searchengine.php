@@ -155,6 +155,7 @@ abstract class Searchengine
             // of course need to spawn a new one.
             if(sizeof($searcherData) === 0){
                 $needSearcher = true;
+                Log::info("Request new Searcher beacause none is running");
             }else{
                 // There we go:
                 // There's at least one Fetcher running for this search engine.
@@ -170,6 +171,7 @@ abstract class Searchengine
                 $median /= sizeof($searcherData);
                 if($median < .1){
                     $needSearcher = true;
+                    Log::info("Requesting new Searcher because: $median \n" . print_r($searcherData, true));
                 }
             }
             if($needSearcher && Redis::get($this->name) !== "locked"){

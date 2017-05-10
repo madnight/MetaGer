@@ -122,7 +122,11 @@ abstract class Searchengine
             }else{
                 $url = "http://";
             }
-            $url .= $this->host . $this->getString;
+            $url .= $this->host;
+            if($this->port !== 80 && $this->port !== 443){
+                $url .= ":" . $this->port;
+            }
+            $url .= $this->getString;
             $url = base64_encode($url);
             $mission = $this->resultHash . ";" . $url . ";" . $metager->getTime();
             // Submit this mission to the corresponding Redis Queue

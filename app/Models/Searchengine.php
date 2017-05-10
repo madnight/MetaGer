@@ -123,7 +123,8 @@ abstract class Searchengine
                 $url = "http://";
             }
             $url .= $this->host . $this->getString;
-            $mission = $this->resultHash . ";" . $url;
+            $url = base64_encode($url);
+            $mission = $this->resultHash . ";" . $url . ";" . $metager->getTime();
             // Submit this mission to the corresponding Redis Queue
             // Since each Searcher is dedicated to one specific search engine
             // each Searcher has it's own queue lying under the redis key <name>.queue

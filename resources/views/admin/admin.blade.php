@@ -3,6 +3,8 @@
 @section('title', $title )
 
 @section('content')
+<h1>https://metager3.de</h1>
+<p>Es laufen insgesamt <code>{{$fetcherCount}}/50</code> Fetcher.</p>
 <table class="table table-bordered">
 	<thead>
 		<th>Name</th>

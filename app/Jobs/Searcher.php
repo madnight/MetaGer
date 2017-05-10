@@ -61,6 +61,8 @@ class Searcher implements ShouldQueue
             // without killing this searcher directly.
             $mission = Redis::blpop($this->name . ".queue", 4);
             $this->counter++;
+            $this->updateStats(microtime(true) - $time);
+            $this->switchToRunning();
             // The mission can be empty when blpop hit the timeout
             if(empty($mission)){
                 continue;
@@ -83,28 +85,6 @@ class Searcher implements ShouldQueue
 
                 $this->storeResult($result, $poptime, $hashValue);
 
-                /**
-                * When a Searcher is initially started the redis value for $this->name is set to "locked"
-                * which effectively will prevent new Searchers of this type to be started. (Value is checked by the MetaGer process which starts the Searchers)
-                * This is done so the MetaGer processes won't start hundreds of Searchers parallely when under high work load.
-                * It will force that Searchers can only be started one after the other.
-                * When a new Searcher has served a minimum of three requests we have enough data to decide whether we need even more Searchers.
-                * To do so we will then set the redis value for $this->name to "running".
-                * There is a case where we don't want new Searchers to be started even if we would need to do so to serve every Request:
-                *   When a search engine needs more time to produce search results than the timeout of the MetaGer process, we won't even bother of spawning
-                *   more and more Searchers because they would just block free worker processes from serving the important engines which will give results in time.
-                **/
-                if($this->counter === 3 || $this->recheck){
-                    # If the MetaGer process waits longer for the results than this Fetcher will probably need to fetch
-                    # Or if this engine is in the array of important engines which we will always try to serve
-                    if($timeout >= $medianFetchTime || in_array($this->name, $this->importantEngines)){
-                        Redis::set($this->name, "running");
-                        $this->recheck = false;
-                    }else{
-                        $this->recheck = true;
-                    }
-                }
-
                 // Reset the time of the last Job so we can calculate
                 // the time we have spend waiting for a new job
                 // We submit that calculation to the Redis systemin the method
@@ -119,6 +99,30 @@ class Searcher implements ShouldQueue
         }
         // When we reach this point, time has come for this Searcher to retire
         $this->shutdown();
+    }
+
+    private function switchToRunning(){
+        /**
+        * When a Searcher is initially started the redis value for $this->name is set to "locked"
+        * which effectively will prevent new Searchers of this type to be started. (Value is checked by the MetaGer process which starts the Searchers)
+        * This is done so the MetaGer processes won't start hundreds of Searchers parallely when under high work load.
+        * It will force that Searchers can only be started one after the other.
+        * When a new Searcher has served a minimum of three requests we have enough data to decide whether we need even more Searchers.
+        * To do so we will then set the redis value for $this->name to "running".
+        * There is a case where we don't want new Searchers to be started even if we would need to do so to serve every Request:
+        *   When a search engine needs more time to produce search results than the timeout of the MetaGer process, we won't even bother of spawning
+        *   more and more Searchers because they would just block free worker processes from serving the important engines which will give results in time.
+        **/
+        if($this->counter === 3){
+            # If the MetaGer process waits longer for the results than this Fetcher will probably need to fetch
+            # Or if this engine is in the array of important engines which we will always try to serve
+            Redis::set($this->name, "running");
+            $this->recheck = false;
+        }
+    }
+    private function updateStats($poptime){
+        $connectionInfo = base64_encode(json_encode(curl_getinfo($this->ch), true));
+        Redis::hset($this->name . ".stats", $this->pid, $connectionInfo . ";" . $poptime);
     }
 
     private function getFetchTime(){
@@ -147,8 +151,6 @@ class Searcher implements ShouldQueue
 
     private function storeResult($result, $poptime, $hashValue){
         Redis::hset('search.' . $hashValue, $this->name, $result);
-        $connectionInfo = base64_encode(json_encode(curl_getinfo($this->ch), true));
-        Redis::hset($this->name . ".stats", $this->pid, $connectionInfo . ";" . $poptime);
         $this->lastTime = microtime(true);
     }
 
@@ -159,6 +161,7 @@ class Searcher implements ShouldQueue
         }
         // We should close our curl handle before we do so
         curl_close($this->ch);
+        Log::info("Exiting here!");
     }
 
     private function initCurlHandle(){

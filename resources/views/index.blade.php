@@ -304,8 +304,6 @@
 			</form>
 		</fieldset>
 		<ul class="list-inline searchform-bonus">
-			<li><a href="https://www.boost-project.com/de/shops?charity_id=1129&amp;tag=bl" target="_blank" rel="noopener" id="foerdershops" class="btn btn-default mutelink" title="{{ trans('index.partnertitle') }}"><i class="fa fa-shopping-bag" aria-hidden="true"></i> {{ trans('index.conveyor') }}</a></li>
-			<li class="hidden-xs seperator">|</li>
 			<li id="plug"
 			@unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge' || $browser === 'Safari' || $browser === 'Vivaldi')
 				class="hidden"

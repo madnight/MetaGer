@@ -14,7 +14,7 @@ class Searcher implements ShouldQueue
 {
     use InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $name, $ch, $pid, $counter, $lastTime;
+    protected $name, $ch, $pid, $counter, $lastTime, $connectionInfo;
     protected $MAX_REQUESTS = 100;
     protected $importantEngines = array("Fastbot", "overture", "overtureAds");
     protected $recheck;
@@ -64,9 +64,7 @@ class Searcher implements ShouldQueue
             $this->updateStats(microtime(true) - $time);
             $this->switchToRunning();
             // The mission can be empty when blpop hit the timeout
-            if(empty($mission)){
-                continue;
-            }else{
+            if(!empty($mission)){
                 $mission = $mission[1];
                 $poptime = microtime(true) - $time;
 
@@ -121,7 +119,7 @@ class Searcher implements ShouldQueue
         }
     }
     private function updateStats($poptime){
-        $connectionInfo = base64_encode(json_encode(curl_getinfo($this->ch), true));
+        $connectionInfo = base64_encode(json_encode($this->connectionInfo));
         Redis::hset($this->name . ".stats", $this->pid, $connectionInfo . ";" . $poptime);
     }
 
@@ -144,8 +142,8 @@ class Searcher implements ShouldQueue
     private function retrieveUrl($url){
         // Set this URL to the Curl handle
         curl_setopt($this->ch, CURLOPT_URL, $url);
-
         $result = curl_exec($this->ch);
+        $this->connectionInfo = curl_getinfo($this->ch);
         return $result;
     }
 

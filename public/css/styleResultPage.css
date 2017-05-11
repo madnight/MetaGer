@@ -218,10 +218,10 @@ a:hover {
     background-color: white;
 }
 
-#foki li.active span + span {
+#foki li.active a i + span {
     display: inline!important;
+    margin-left: 5px;
 }
-
 
 /* Hier der Style für unseren Spruch */
 

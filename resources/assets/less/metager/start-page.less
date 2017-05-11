@@ -1,7 +1,85 @@
+@foki-edge-rounding: 7px;
 #about-us a:visited {
     color: @link-color;
 }
 
 #anpassen-label a {
-	color: #333;
+    color: #333;
+}
+
+.startpage-foki, .foki{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    input {
+        visibility: hidden;
+        &+.custom-focus-label {
+            border-radius: @foki-edge-rounding 0px 0px @foki-edge-rounding;
+        }
+        &+.custom-focus-label+.custom-focus-edit {
+            margin-left: 5px;
+            display: inline-block;
+            border-radius: 0px @foki-edge-rounding @foki-edge-rounding 0px;
+        }
+    }
+    label {
+        & span {
+            background-color: transparent;
+        }
+    }
+}
+
+.focus {
+    margin: 0px;
+}
+
+.focus~.focus {
+    margin-left: 10px;
+}
+
+.focus-radio:checked {
+    &+.focus-label,
+    &+.focus-label+.focus-edit {
+        background-color: #e3e3e3;
+    }
+}
+
+.focus-label,
+.focus-edit {
+    margin: 0px;
+    border-radius: 7px;
+    padding: 7px;
+    font-weight: normal;
+}
+
+.focus:hover {
+    .focus-label,
+    .focus-edit {
+        cursor: pointer;
+        background-color: #e3e3e3;
+    }
+}
+
+#addFocusBtnDiv {
+    margin-left: 10px;
+}
+
+#settingsBtnDiv {
+    margin-left: 10px;
+    &>* {
+        vertical-align: middle;
+    }
+}
+
+.searchform-bonus {
+    li {
+        margin: 5px;
+    }
+}
+
+.settings-modal-buttons {
+	padding: 5px;
+	button {
+		margin: 5px
+	}
 }

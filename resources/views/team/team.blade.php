@@ -31,10 +31,15 @@
 			<a href="mailto:karl@suma-ev.de">karl@suma-ev.de</a></p>
 		</li>
 		<li>
+			<p>Givi, Aria - {!! trans('team.role.6') !!} -
+			<a href="mailto:aria@suma-ev.de">aria@suma-ev.de</a></p>
+		</li>
+		<li>
 			<p>Riel, Carsten - {!! trans('team.role.7') !!} -
 			<a href="carsten@suma-ev.de">carsten@suma-ev.de</a></p>
 		</li>
 	</ul>
 	<p>{!! trans('team.contact.1') !!}</p>
 	<p>{!! trans('team.contact.2') !!}</p>
+	<p>{!! trans('team.contact.3') !!}</p>
 @endsection

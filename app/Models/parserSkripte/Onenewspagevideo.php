@@ -23,10 +23,11 @@ class Onenewspagevideo extends Searchengine
             if (sizeof($res) < 3) {
                 continue;
             }
-            $title       = $res[0];
-            $link        = $res[2];
-            $anzeigeLink = $link;
-            $descr       = $res[1];
+            $title                 = $res[0];
+            $link                  = $res[2];
+            $anzeigeLink           = $link;
+            $descr                 = $res[1];
+            $additionalInformation = sizeof($res) > 3 ? ['date' => intval($res[3])] : [];
 
             $this->counter++;
             $this->results[] = new \App\Models\Result(
@@ -36,7 +37,8 @@ class Onenewspagevideo extends Searchengine
                 $anzeigeLink,
                 $descr,
                 $this->gefVon,
-                $this->counter
+                $this->counter,
+                $additionalInformation
             );
         }
         if (count($this->results) > $this->resultCount) {

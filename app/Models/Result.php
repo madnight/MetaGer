@@ -62,8 +62,8 @@ class Result
         $this->strippedLink          = $this->getStrippedLink($this->anzeigeLink);
         $this->rank                  = 0;
         $this->partnershop           = isset($additionalInformation["partnershop"]) ? $additionalInformation["partnershop"] : false;
-        $this->image                 = isset($additionalInformation["image"]) ? $additionalInformation["image"] :  "";
-        $this->price                 = isset($additionalInformation["price"]) ? $additionalInformation["price"] :  0;
+        $this->image                 = isset($additionalInformation["image"]) ? $additionalInformation["image"] : "";
+        $this->price                 = isset($additionalInformation["price"]) ? $additionalInformation["price"] : 0;
         $this->additionalInformation = $additionalInformation;
     }
 
@@ -384,6 +384,15 @@ return "https://proxy.suma-ev.de/mger/nph-proxy.cgi/en/w0/" . $tmp;
     public function getRank()
     {
         return $this->rank;
+    }
+
+    public function getDate()
+    {
+        if (isset($this->additionalInformation["date"])) {
+            return $this->additionalInformation["date"];
+        } else {
+            return null;
+        }
     }
 
     public function getLangString()

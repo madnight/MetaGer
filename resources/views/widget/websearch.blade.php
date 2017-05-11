@@ -13,7 +13,7 @@
 		<input type="hidden" name="encoding" value="utf8">
 		<button class="metager-searchbutton" type="submit">{{ trans('websearch.head.8') }}</button>
 	</form>
-	<h2>{{ trans('websearch.head.7') }} <button id="copyButton" class="btn btn-default" type="button"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> {{ trans('websearch.head.copy') }}</button></h2>
+	<h2>{{ trans('websearch.head.7') }} <button id="copyButton" class="btn btn-default" type="button"><i class="fa fa-paperclip" aria-hidden="true"></i></span> {{ trans('websearch.head.copy') }}</button></h2>
 	<textarea id="codesnippet" readonly style="width:100%;height:500px">
 		<form class="metager-searchform" action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}/meta/meta.ger3" method="get" accept-charset="UTF-8" >
 			<style type="text/css" scoped>
@@ -65,4 +65,6 @@
 			<input type="hidden" name="lang" value="{{ trans('websearch.head.6') }}">
 		</form>
 	</textarea>
+	<script src="{{ elixir('js/lib.js') }}"></script>
+	<script src="{{ elixir('js/widgets.js') }}"></script>
 @endsection

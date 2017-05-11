@@ -229,7 +229,7 @@ function productWidget () {
       easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
       speed: 600,
       pager: false,
-      prevHtml: '<i class="fa fa-chevron-left" aria-hidden="true"></i></span><span class="sr-only">Previous</span>',
+      prevHtml: '<i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>',
       nextHtml: '<i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span>',
       responsive: [{
         breakpoint: 1400,
@@ -273,8 +273,8 @@ function productWidget () {
       pager: false,
       enableTouch: false,
       enableDrag: false,
-      prevHtml: '<a class="fa fa-chevron-left" aria-hidden="true"></a><span class="sr-only">Previous</span>',
-      nextHtml: '<a class="fa fa-chevron-right" aria-hidden="true"></a><span class="sr-only">Next</span>',
+      prevHtml: '<i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>',
+      nextHtml: '<i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span>',
       responsive: [{
         breakpoint: 1400,
         settings: {

@@ -10,12 +10,6 @@ class AdminInterface extends Controller
 {
     public function index(Request $request)
     {
-        $localFetcher = file_get_contents(action("AdminInterface@getFetcherStatus"));
-        die(var_dump($localFetcher));
-    }
-
-    public function getFetcherStatus()
-    {
         // Let's get the stats for this server.
         // First we need to check, which Fetcher could be available by parsing the sumas.xml
         $names = $this->getSearchEngineNames();

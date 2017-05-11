@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\LanguageFile;
+use App\Models\LanguageData;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
@@ -88,12 +88,11 @@ class LanguageController extends Controller
                         $langTexts[$dir] += count($this->getValues([$key => $value]));
                     }
                     $filePath[basename($filename)] = preg_replace("/lang\/.*?\//si", "lang/$to/", substr($filename, strpos($filename, "lang")));
-
                 }
 
             }
         }
-        die();
+
         $langs = [];
         $fn    = "";
         $t     = [];
@@ -101,6 +100,8 @@ class LanguageController extends Controller
         if ($exclude !== "") {
             try {
                 $ex = unserialize(base64_decode($exclude));
+               // var_dump($ex);
+               // die();
             } catch (\ErrorException $e) {
                 $ex = ['files' => [], 'new' => 0];
             }
@@ -144,78 +145,50 @@ class LanguageController extends Controller
             }
 
         }
-
+        //die();
         $t = $this->htmlEscape($t, $to);
         $t = $this->createHints($t, $to);
 
         return view('languages.edit')
-            ->with('texts', $t)
-            ->with('filename', $fn)
-            ->with('title', trans('titles.languages.edit'))
-            ->with('langs', $langs)
-            ->with('to', $to)
-            ->with('langTexts', $langTexts)
-            ->with('sum', $sum)
-            ->with('new', $ex["new"])
-            ->with('email', $email);
+            ->with('texts', $t)             //Array mit vorhandenen Übersetzungen der Datei $fn in beiden Sprachen
+            ->with('filename', $fn)         //Pfad zur angezeigten Datei
+            ->with('title', trans('titles.languages.edit')) 
+            ->with('langs', $langs)         //Ausgangssprache (1 Element)
+            ->with('to', $to)               //zu bearbeitende Sprache
+            ->with('langTexts', $langTexts) //Anzahl der vorhandenen Übersetzungen
+            ->with('sum', $sum)             //Alle vorhandenen Texte (in allen Dateien) in beiden Sprachen in einem Array
+            ->with('new', $ex["new"])       //
+            ->with('email', $email);        //Email-Adresse des Benutzers
     }
 
     public function createSynopticEditPage(Request $request, $exclude = "") 
     {
         $languageFilePath = resource_path() . "/lang/";
-        $languageFolders  = scandir($languageFilePath); #relativer Pfad
+        $languageFolders  = scandir($languageFilePath); 
+        #Enthält zu jeder Sprache ein Objekt mit allen Daten
         $languageFiles    = [];
-        #Zusammensetzen zu absolutem Pfad
+
+        #Erstelle LanguageData-Objekte
         foreach ($languageFolders as $folder) {
             if (is_dir($languageFilePath . $folder) && $folder !== "." && $folder !== "..") {
-                $languageFiles[$folder] = new LanguageFile($languageFilePath.$folder);
+                $languageFiles[$folder] = new LanguageData($folder, $languageFilePath.$folder);
             }
         }
 
-
-        foreach ($languageFiles as $folderName => $languageFile) {
-            
-        }
-
-        /*
-        $texts = [];
-        $langTexts = [];
-        $sum       = [];
-        $filePath  = [];
-
-
-        foreach ($dirs as $dir) {
-            # Wir überprüfen nun für jede Datei die Anzahl der vorhandenen Übersetzungen
-            $di              = new RecursiveDirectoryIterator($languageFilePath . $dir);
-            $langTexts[$dir] = 0;
-            foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
-                //var_dump($filename." - ".$file."<br>");
-                if (!$this->endsWith($filename, ".")) {
+        #Speichere Daten in LanguageData-Objekten 
+        foreach ($languageFiles as $folder => $languageData) {
+            $di = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($languageData->filePath));
+            foreach($di as $filename => $file) {
+                if(!$this->endsWith($filename, ".")) {
                     $tmp = include $filename;
                     foreach ($tmp as $key => $value) {
-                        var_dump($key." - ".$value."<br>");
-                        $sum                                    = array_merge($sum, $this->getValues([$key => $value], basename($filename)));
-                        $texts[basename($filename)][$key][$dir] = $value;
-                        $langTexts[$dir] += count($this->getValues([$key => $value]));
+                        $languageData->saveData(basename($filename), $key, $value);
                     }
-                    //$filePath[basename($filename)] = preg_replace("/lang\/.*?\//si", "lang/$to/", substr($filename, strpos($filename, "lang")));
-                }
-            }
-        }*/
-        die();
-
-       /* foreach($texts as $a => $text) {
-            foreach($text as $b => $k) {
-                foreach($k as $c => $d) {
-                    die(var_dump($a." - ".$b." - ".$c." - ".$d));
                 }
             }
         }
-        */
-        /*
-        $langs = [];
-        $fn    = "";
-        $t     = [];
+
+
         $ex    = ['files' => [], 'new' => 0];
         if ($exclude !== "") {
             try {
@@ -224,7 +197,20 @@ class LanguageController extends Controller
                 $ex = ['files' => [], 'new' => 0];
             }
         }
-
+        die();
+/*  
+        return view('languages.edit')
+            ->with('texts', $t)             //Array mit 
+            ->with('filename', $fn)         //Pfad zur angezeigten Datei
+            ->with('title', trans('titles.languages.edit')) 
+            ->with('langs', $langs)         //Ausgangssprache (1 Element)
+            ->with('to', $to)               //zu bearbeitende Sprache
+            ->with('langTexts', $langTexts) //Anzahl der vorhandenen Übersetzungen
+            ->with('sum', $sum)             //Alle vorhandenen Texte in beiden Sprachen in einem Array
+            ->with('new', $ex["new"])       //
+            ->with('email', $email);        //Email-Adresse des Benutzers
+*/
+/*
         foreach ($texts as $filename => $text) {
             $has = false;
             foreach ($ex['files'] as $file) {
@@ -266,7 +252,7 @@ class LanguageController extends Controller
 
         $t = $this->htmlEscape($t, $to);
         $t = $this->createHints($t, $to);
-    */
+        */
 
         return view('languages.synoptic');
     }

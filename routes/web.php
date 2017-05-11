@@ -129,9 +129,8 @@ Route::group(
 
         Route::get('zitat-suche', 'ZitatController@zitatSuche');
 
-        Route::group([/*'middleware' => ['referer.check'],*/ 'prefix' => 'admin'], function () {
+        Route::group(['middleware' => ['referer.check'], 'prefix' => 'admin'], function () {
             Route::get('/', 'AdminInterface@index');
-            Route::get('fetcher-status', "AdminInterface@getFetcherStatus");
             Route::get('count', 'AdminInterface@count');
             Route::get('check', 'AdminInterface@check');
             Route::get('engines', 'AdminInterface@engines');

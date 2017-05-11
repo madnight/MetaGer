@@ -105,7 +105,7 @@ abstract class Searchengine
     # Prüft, ob die Suche bereits gecached ist, ansonsted wird sie als Job dispatched
     public function startSearch(\App\MetaGer $metager)
     {
-        if ($this->canCache && Cache::has($this->hash) && 0 == 1) {
+        if ($this->canCache && Cache::has($this->hash)) {
             $this->cached = true;
             $this->retrieveResults($metager);
         } else {
@@ -155,7 +155,6 @@ abstract class Searchengine
             // of course need to spawn a new one.
             if(sizeof($searcherData) === 0){
                 $needSearcher = true;
-                Log::info("Request new Searcher beacause none is running");
             }else{
                 // There we go:
                 // There's at least one Fetcher running for this search engine.
@@ -171,7 +170,6 @@ abstract class Searchengine
                 $median /= sizeof($searcherData);
                 if($median < .1){
                     $needSearcher = true;
-                    Log::info("Requesting new Searcher because: $median \n" . print_r($searcherData, true));
                 }
             }
             if($needSearcher && Redis::get($this->name) !== "locked"){
@@ -234,14 +232,13 @@ abstract class Searchengine
         }
 
         $body = "";
-        if ($this->canCache && $this->cacheDuration > 0 && Cache::has($this->hash) && 0 === 1) {
+        if ($this->canCache && $this->cacheDuration > 0 && Cache::has($this->hash)) {
             $body = Cache::get($this->hash);
         } elseif (Redis::hexists('search.' . $this->resultHash, $this->name)) {
             $body = Redis::hget('search.' . $this->resultHash, $this->name);
-            if ($this->canCache && $this->cacheDuration > 0 && 0 === 1) {
+            if ($this->canCache && $this->cacheDuration > 0) {
                 Cache::put($this->hash, $body, $this->cacheDuration);
             }
-
         }
         if ($body !== "") {
             $this->loadResults($body);

@@ -161,7 +161,6 @@ class Searcher implements ShouldQueue
         }
         // We should close our curl handle before we do so
         curl_close($this->ch);
-        Log::info("Exiting here!");
     }
 
     private function initCurlHandle(){

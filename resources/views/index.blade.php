@@ -76,7 +76,7 @@
 					@elseif ($browser === 'IE')
 						<ol>
 							<li>{!! trans('index.plugin.IE.1') !!}</li>
-							<li>{!! trans('index.plugin.IE.4') !!} (<span class="glyphicon glyphicon-cog"></span>)</li>
+							<li>{!! trans('index.plugin.IE.4') !!} (<i class="fa fa-cog" aria-hidden="true"></i>)</li>
 							<li>{!! trans('index.plugin.IE.5') !!}</li>
 							<li>{!! trans('index.plugin.IE.6') !!}</li>
 							<li>{!! trans('index.plugin.IE.7') !!}</li>
@@ -90,7 +90,7 @@
 						</ol>
 					@elseif ($browser === 'Edge')
 						<ol>
-							<li>{!! trans('index.plugin.edge.1') !!}<span class="glyphicon glyphicon-option-horizontal"></span>{!! trans('index.plugin.edge.2') !!}</li>
+							<li>{!! trans('index.plugin.edge.1') !!}<i class="fa fa-ellipsis-h" aria-hidden="true"></i>{!! trans('index.plugin.edge.2') !!}</li>
 							<li>{!! trans('index.plugin.edge.3') !!}</li>
 							<li>{!! trans('index.plugin.edge.4') !!}</li>
 							<li>{!! trans('index.plugin.edge.5') !!}</li>
@@ -181,7 +181,7 @@
 										<div class="checkbox settings-checkbox">
 											<label>
 												<input type="checkbox" name="engine_{{ $name }}" class="focusCheckbox"  @if ($fokus == 'web') checked @endif >{{ $data['displayName'] }}
-												<a class="glyphicon settings-glyphicon glyphicon-link" target="_blank" rel="noopener" href="{{ $data['url'] }}"></a>
+												<a class="settings-icon" target="_blank" rel="noopener" href="{{ $data['url'] }}"><i class="fa fa-link" aria-hidden="true"></i></a>
 											</label>
 										</div>
 									</div>
@@ -209,7 +209,7 @@
 		<div class="focus">
 			<input id="web" class="focus-radio hide" type="radio" name="focus" value="web" form="searchForm" @if ($focus === 'web') checked @endif required="">
 			<label id="web-label" class="focus-label" for="web">
-				<span class="glyphicon glyphicon-globe"></span>
+				<i class="fa fa-globe" aria-hidden="true"></i>
 				<span class="content">{{ trans('index.foki.web') }}</span>
 			</label>
 		</div class="focus">
@@ -223,21 +223,21 @@
 		<div class="focus">
 			<input id="nachrichten" class="focus-radio hide" type="radio" name="focus" value="nachrichten" form="searchForm" @if ($focus === 'nachrichten') checked @endif required="">
 			<label id="nachrichten-label" class="focus-label" for="nachrichten">
-				<span class="glyphicon glyphicon-bullhorn"></span>
+				<i class="fa fa-bullhorn" aria-hidden="true"></i>
 				<span class="content">{{ trans('index.foki.nachrichten') }}</span>
 			</label>
 		</div>
 		<div class="focus">
 			<input id="wissenschaft" class="focus-radio hide" type="radio" name="focus" value="wissenschaft" form="searchForm" @if ($focus === 'wissenschaft') checked @endif required="">
 			<label id="wissenschaft-label" class="focus-label" for="wissenschaft">
-				<span class="glyphicon glyphicon-file"></span>
+				<i class="fa fa-file-text" aria-hidden="true"></i>
 				<span class="content">{{ trans('index.foki.wissenschaft') }}</span>
 			</label>
 		</div>
 		<div class="focus">
 			<input id="produkte" class="focus-radio hide" type="radio" name="focus" value="produktsuche" form="searchForm" @if ($focus === 'produkte') checked @endif required="">
 			<label id="produkte-label" class="focus-label" for="produkte">
-				<span class="glyphicon glyphicon-shopping-cart"></span>
+				<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 				<span class="content">{{ trans('index.foki.produkte') }}</span>
 			</label>
 		</div>
@@ -246,19 +246,19 @@
 			<div class="focus">
 				<input id="angepasst" class="focus-radio hide" type="radio" name="focus" value="angepasst" form="searchForm" checked required="">
 				<label id="anpassen-label" class="focus-label" for="angepasst">
-					<span class="glyphicon glyphicon-cog"></span>
+					<i class="fa fa-cog" aria-hidden="true"></i>
 					<span class="content">{{ trans('index.foki.angepasst') }}</span>
 				</label>
 			</div>
 		@endif
 		<div id="addFocusBtnDiv">
 			<button id="addFocusBtn" class="btn btn-default hide">
-			<span class="glyphicon glyphicon-plus"></span>
+			<i class="fa fa-plus" aria-hidden="true"></i>
 			</button>
 		</div>
 		<div id="settingsBtnDiv">
 			<a id="settings-btn" class="mutelink btn btn-default" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "settings") }}">
-			<span class="glyphicon glyphicon-cog"></span>
+			<i class="fa fa-cog" aria-hidden="true"></i>
 			</a>
 		</div>
 	</div>
@@ -280,7 +280,7 @@
 							&lt;li &gt;&lt;a id="black" data-rgba="238,238,238,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
 							&lt;li &gt;&lt;a id="blackHard" data-rgba="50,50,50,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
 						&lt;/ul&gt;'>
-							<span class="glyphicon glyphicon-tint"></span>
+							<i class="fa fa-tint" aria-hidden="true"></i>
 						</button>
 					</div>
 					<input type="text" name="eingabe" required="" autofocus="" autocomplete="{{$autocomplete}}" class="form-control" placeholder="{{ trans('index.placeholder') }}">
@@ -297,7 +297,7 @@
 					<input type="hidden" name="theme" value={{ $theme }}>
 					<div class="input-group-addon">
 						<button type="submit">
-							<span class="glyphicon glyphicon-search"></span>
+							<i class="fa fa-search" aria-hidden="true"></i>
 						</button>
 					</div>
 				</div>
@@ -308,7 +308,7 @@
 			@unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge' || $browser === 'Safari' || $browser === 'Vivaldi')
 				class="hidden"
 			@endunless
-			<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><span class="glyphicon glyphicon-log-in"></span> {{ trans('index.plugin') }}</a></li>
+			<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a></li>
 		</ul>
 	<script src="{{ elixir('js/lib.js') }}"></script>
 	<script src="{{ elixir('js/scriptStartPage.js') }}"></script>

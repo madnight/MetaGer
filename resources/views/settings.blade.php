@@ -55,7 +55,7 @@
 			</div>
 		</container>
 		<div id="settingsButtons">
-			<a id="settings-abort-btn" class="btn btn-danger mutelink" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}">@lang('settings.abort') <i class="fa fa-times" aria-hidden="true"></i></span></a>
+			<a id="settings-abort-btn" class="btn btn-danger mutelink" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}">@lang('settings.abort') <span class="glyphicon glyphicon-remove"></span></a>
 			<input id="unten" class="btn btn-primary settings-btn" type="submit" value="{!! trans('settings.speichern.1') !!}">
 			<input id="save" class="btn btn-primary settings-btn hidden" type="button" data-href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}" value="{!! trans('settings.speichern.2') !!}">
 			<input id="plugin" class="btn btn-primary settings-btn" type="submit" value="{!! trans('settings.speichern.3') !!}">

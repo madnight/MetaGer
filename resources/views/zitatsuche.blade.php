@@ -10,7 +10,7 @@
 			<label class="sr-only" for="q">Suchworte eingeben</label>
 			<div class="input-group">
 				<input type="text" class="form-control" id="q" name="q" placeholder="Suchworte" value="{{ $q }}">
-				<div class="input-group-addon"><button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button></div>
+				<div class="input-group-addon"><button type="submit"><span class="glyphicon glyphicon-search"></span></button></div>
 			</div>
 		</div>
 	</form>

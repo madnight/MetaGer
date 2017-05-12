@@ -66,7 +66,7 @@ return [
     "tor.2"                          => "MetaGer Tor address: http://b7cxf4dkdsko6ah2.onion/tor/",
     "proxy.title"                    => "MetaGer proxy server",
     "proxy.1"                        => "Looking at the MetaGer result page, you will find a link \"open anonymously\" marked by a small lock at the right of every single result. Use this link to hide behind the MetaGer proxy server. The provided protection is limited to the website you reached from our result page. Protection persists while you see https://proxy.suma-ev.de/?url=...in your webbrowser‘s address field.",
-    "infobutton.title"               => "I see a <i class=\"fa fa-info-circle info-details-available\" aria-hidden=\"true\"></i> in some spots. What is it?",
+    "infobutton.title"               => "I see a <span class=\"glyphicon glyphicon-info-sign info-details-available\" aria-hidden=\"true\"></span> in some spots. What is it?",
     "infobutton.1"                   => "You gain more information on the specific theme by clicking it (e.g. weather data or something).",
     "maps.title"                     => "MetaGer maps",
     "maps.1"                         => "MetaGer provides a map function: On a result page you see a new focus on the upper right, called \"maps.MetaGer.de\". You receive a map according to your search by click (only Germany for the moment). Use the \"customize\" page for toggling maps function \"show/hide\", you will get a durably embedded small map on the result page, then.",

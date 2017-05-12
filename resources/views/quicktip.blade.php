@@ -36,7 +36,7 @@
 									<div>{!! $mq['summary'] !!}</div>
 								</div>
 								<div class="media-right">
-									<i class="fa fa-info-circle info-details-available" aria-hidden="true"></i>
+									<span class="glyphicon glyphicon-info-sign info-details-available" aria-hidden="true"></span>
 								</div>
 							</div>
 						</summary>

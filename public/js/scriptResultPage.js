@@ -90,7 +90,7 @@ function popovers () {
     $(this).popover('destroy')
     $(this).popover({
       // html          :   true,
-      // title         :   "<i class="fa fa-cog" aria-hidden="true"></i> Optionen",
+      // title         :   "<span class="glyphicon glyphicon-cog"></span> Optionen",
       content: $(this).parent().find('.content').html()
     })
   })
@@ -229,9 +229,8 @@ function productWidget () {
       easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
       speed: 600,
       pager: false,
-      prevHtml: '<i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>',
-      nextHtml: '<i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span>',
-      responsive: [{
+      prevHtml: '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><span class="sr-only">Previous</span>',
+      nextHtml: '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span><span class="sr-only">Next</span>',
         breakpoint: 1400,
         settings: {
           item: 4,
@@ -273,8 +272,8 @@ function productWidget () {
       pager: false,
       enableTouch: false,
       enableDrag: false,
-      prevHtml: '<i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>',
-      nextHtml: '<i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span>',
+      prevHtml: '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><span class="sr-only">Previous</span>',
+      nextHtml: '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span><span class="sr-only">Next</span>',
       responsive: [{
         breakpoint: 1400,
         settings: {
@@ -332,14 +331,14 @@ function createCustomFocuses () {
  * @if( $metager->getFokus() === "produktsuche" )
  *     <li id="produktsucheTabSelector" class="active tab-selector" role="presentation" data-loaded="1">
  *        <a aria-controls="produktsuche" data-href="#produktsuche" href="#produktsuche">
- *             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+ *             <span class='glyphicon glyphicon-shopping-cart'></span>
  *             <span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
  *         </a>
  *     </li>
  * @else
  *     <li id="produktsucheTabSelector" class="tab-selector" role="presentation" data-loaded="0">
  *         <a aria-controls="produktsuche" data-href="{!! $metager->generateSearchLink('produktsuche') !!}" href="{!! $metager->generateSearchLink('produktsuche', false) !!}">
- *             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+ *             <span class='glyphicon glyphicon-shopping-cart'></span>
  *             <span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
  *         </a>
  *     </li>
@@ -367,10 +366,9 @@ function addFocus (focus, active = false) {
   focusElementLink.setAttribute('data-href', searchLink)
   focusElementLink.setAttribute('href', searchLink)
   // create <a> icon
-  var focusElementIcon = document.createElement('i')
-  focusElementIcon.classList.add('fa')
-  focusElementIcon.classList.add('fa-cog')
-  focusElementIcon.setAttribute('aria-hidden', 'true')
+  var focusElementIcon = document.createElement('span')
+  focusElementIcon.classList.add('glyphicon')
+  focusElementIcon.classList.add('glyphicon-cog')
   // create <span> focusname
   var focusElementName = document.createElement('span')
   focusElementName.classList.add('hidden-xs')

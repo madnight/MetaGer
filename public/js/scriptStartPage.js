@@ -74,13 +74,13 @@ function setSettings () {
     $('input[name=eingabe]').attr('autocomplete', value)
   }
   if ($('fieldset#foki.mobile').length) {
-    $('fieldset.mobile input#bilder').val('angepasst');
-    $('fieldset.mobile input#bilder').prop('checked', true);
-    $('fieldset.mobile input#bilder').attr('id', 'angepasst');
-    $('fieldset.mobile label#bilder-label').attr('id', 'anpassen-label');
-    $('fieldset.mobile label#anpassen-label').attr('for', 'angepasst');
-    $("fieldset.mobile label#anpassen-label span.glyphicon").attr("class", "glyphicon glyphicon-cog");
-    $('fieldset.mobile label#anpassen-label span.content').html('angepasst');
+    $('fieldset.mobile input#bilder').val('angepasst')
+    $('fieldset.mobile input#bilder').prop('checked', true)
+    $('fieldset.mobile input#bilder').attr('id', 'angepasst')
+    $('fieldset.mobile label#bilder-label').attr('id', 'anpassen-label')
+    $('fieldset.mobile label#anpassen-label').attr('for', 'angepasst')
+    $('fieldset.mobile label#anpassen-label a.fa').attr('class', 'fa fa-cog')
+    $('fieldset.mobile label#anpassen-label span.content').html('angepasst')
   }
 }
 // Polyfill for form attribute
@@ -89,11 +89,11 @@ function setSettings () {
    * polyfill for html5 form attr
    */
   // detect if browser supports this
-  var sampleElement = $('[form]').get(0);
-  var isIE11 = !(window.ActiveXObject) && 'ActiveXObject' in window;
+  var sampleElement = $('[form]').get(0)
+  var isIE11 = !(window.ActiveXObject) && 'ActiveXObject' in window
   if (sampleElement && window.HTMLFormElement && sampleElement.form instanceof HTMLFormElement && !isIE11) {
     // browser supports it, no need to fix
-    return;
+    return
   }
   /**
    * Append a field to a form
@@ -101,44 +101,44 @@ function setSettings () {
    */
   $.fn.appendField = function (data) {
     // for form only
-    if (!this.is('form')) return;
+    if (!this.is('form')) return
     // wrap data
     if (!$.isArray(data) && data.name && data.value) {
-      data = [data];
+      data = [data]
     }
-    var $form = this;
+    var $form = this
     // attach new params
     $.each(data, function (i, item) {
-      $('<input/>').attr('type', 'hidden').attr('name', item.name).val(item.value).appendTo($form);
+      $('<input/>').attr('type', 'hidden').attr('name', item.name).val(item.value).appendTo($form)
     })
-    return $form;
+    return $form
   }
   /**
    * Find all input fields with form attribute point to jQuery object
    * 
    */
   $('form[id]').submit(function (e) {
-    var $form = $(this);
+    var $form = $(this)
     // serialize data
-    var data = $('[form=' + $form.attr('id') + ']').serializeArray();
+    var data = $('[form=' + $form.attr('id') + ']').serializeArray()
     // append data to form
-    $form.appendField(data);
+    $form.appendField(data)
   }).each(function () {
-    var form = this;
-      $form = $(form);
-      $fields = $('[form=' + $form.attr('id') + ']');
+    var form = this,
+      $form = $(form),
+      $fields = $('[form=' + $form.attr('id') + ']')
     $fields.filter('button, input').filter('[type=reset],[type=submit]').click(function () {
-      var type = this.type.toLowerCase();
+      var type = this.type.toLowerCase()
       if (type === 'reset') {
         // reset form
-        form.reset();
+        form.reset()
         // for elements outside form
         $fields.each(function () {
-          this.value = this.defaultValue;
-          this.checked = this.defaultChecked;
+          this.value = this.defaultValue
+          this.checked = this.defaultChecked
         }).filter('select').each(function () {
           $(this).find('option').each(function () {
-            this.selected = this.defaultSelected;
+            this.selected = this.defaultSelected
           })
         })
       } else if (type.match(/^submit|image$/i)) {
@@ -151,27 +151,27 @@ function setSettings () {
   })
 })(jQuery)
 // Opera 8.0+
-var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0
 // Firefox 1.0+
-var isFirefox = typeof InstallTrigger !== 'undefined';
+var isFirefox = typeof InstallTrigger !== 'undefined'
 // At least Safari 3+: "[object HTMLElementConstructor]"
-var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0
 // Internet Explorer 6-11
-var isIE = /*@cc_on!@*/ false || !!document.documentMode;
+var isIE = /*@cc_on!@*/ false || !!document.documentMode
 // Edge 20+
-var isEdge = !isIE && !!window.StyleMedia;
+var isEdge = !isIE && !!window.StyleMedia
 // Chrome 1+
-var isChrome = !!window.chrome && !!window.chrome.webstore;
+var isChrome = !!window.chrome && !!window.chrome.webstore
 // Blink engine detection
-var isBlink = (isChrome || isOpera) && !!window.CSS;
+var isBlink = (isChrome || isOpera) && !!window.CSS
 // Prüft, ob der URL-Parameter "usage" auf "once" gesetzt ist.
 function isUseOnce () {
-  var url = document.location.search;
-  var pos = url.indexOf('usage=');
+  var url = document.location.search
+  var pos = url.indexOf('usage=')
   if (pos >= 0 && url.substring(pos + 6, pos + 11) == 'once') {
-    return true;
+    return true
   } else {
-    return false;
+    return false
   }
 }
 /**
@@ -180,8 +180,8 @@ function isUseOnce () {
 function loadInitialCustomFocuses () {
   for (var key in localStorage) {
     if (key.startsWith('focus_')) {
-      var focus = loadFocusById(key);
-      addFocus(focus.name);
+      var focus = loadFocusById(key)
+      addFocus(focus.name)
     }
   }
 }
@@ -193,24 +193,24 @@ function showFocusCreateDialog (id) {
   if(id === undefined){
     id = '';
   }
-  document.getElementById('original-id').value = id;
-  $('#create-focus-modal').modal('show');
-  var storedFocus = loadFocusById(id);
-  var focus = {};
+  document.getElementById('original-id').value = id
+  $('#create-focus-modal').modal('show')
+  var storedFocus = loadFocusById(id)
+  var focus = {}
   // Try to load a focus for the given id
-  $('#focus-name').val('');
-  uncheckAll();
+  $('#focus-name').val('')
+  uncheckAll()
   if (storedFocus !== null) {
     try {
-      focus = JSON.parse(localStorage.getItem(id));
-      $('#focus-name').val(focus.name);
+      focus = JSON.parse(localStorage.getItem(id))
+      $('#focus-name').val(focus.name)
       for (var key in focus) {
         if (key.startsWith('engine_')) {
-          $('.focusCheckbox[name=' + key + ']').prop('checked', true);
+          $('.focusCheckbox[name=' + key + ']').prop('checked', true)
         }
       }
     } catch (ex) {
-      console.error(ex);
+      console.error(ex)
     }
   }
 }
@@ -218,41 +218,41 @@ function showFocusCreateDialog (id) {
  * Shows the focus create dialog for a given id
  */
 function showFocusEditDialog (id) {
-  showFocusCreateDialog(id);
+  showFocusCreateDialog(id)
 }
 /**
  * Save the current Focus
  * Listens for save button
  */
 function saveFocus () {
-  var name = document.getElementById('focus-name').value;
+  var name = document.getElementById('focus-name').value
   if (isValidName(name) && atLeastOneChecked()) {
-    var oldId = document.getElementById('original-id').value;
-    var id = getIdFromName(name);
-    var overwrite = true;
+    var oldId = document.getElementById('original-id').value
+    var id = getIdFromName(name)
+    var overwrite = true
     if (alreadyInUse(name) && oldId !== id) {
-      overwrite = confirm('Name bereits genutzt\nüberschreiben?');
+      overwrite = confirm('Name bereits genutzt\nüberschreiben?')
       if (overwrite) {
-        localStorage.removeItem(id);
-        removeFocusById(id);
+        localStorage.removeItem(id)
+        removeFocusById(id)
       }
     }
     if (overwrite) {
-      var focus = {};
+      var focus = {}
       $('input[type=checkbox]:checked').each(function (el) {
-        focus[$(this).attr('name')] = $(this).val();
+        focus[$(this).attr('name')] = $(this).val()
       })
-      focus['name'] = name;
+      focus['name'] = name
       if (oldId !== '') {
-        localStorage.removeItem(oldId);
-        removeFocusById(oldId);
+        localStorage.removeItem(oldId)
+        removeFocusById(oldId)
       }
-      localStorage.setItem(id, JSON.stringify(focus));
-      addFocus(name);
-      $('#create-focus-modal').modal('hide');
+      localStorage.setItem(id, JSON.stringify(focus))
+      addFocus(name)
+      $('#create-focus-modal').modal('hide')
     }
   } else {
-    alert('Bitte gültigen Namen eingeben:\n* Keine Sonderzeichen\n* Mindestens 1 Buchstabe\n* Mindestens 1 Suchmaschine auswählen');
+    alert('Bitte gültigen Namen eingeben:\n* Keine Sonderzeichen\n* Mindestens 1 Buchstabe\n* Mindestens 1 Suchmaschine auswählen')
   }
 }
 /**
@@ -260,13 +260,13 @@ function saveFocus () {
  * Listens for delete button
  */
 function deleteFocus () {
-  var oldId = document.getElementById('original-id').value;
+  var oldId = document.getElementById('original-id').value
   if ($('#' + oldId).prop('checked')) {
-    setFocusToDefault();
+    setFocusToDefault()
   }
-  localStorage.removeItem(oldId);
-  removeFocusById(oldId);
-  $('#create-focus-modal').modal('hide');
+  localStorage.removeItem(oldId)
+  removeFocusById(oldId)
+  $('#create-focus-modal').modal('hide')
 }
 /**
  * Is the name valid (in terms of characters)?
@@ -274,147 +274,149 @@ function deleteFocus () {
 function isValidName (name) {
   // no Characters other then a-z, A-Z, 0-9, ä, ö, ü, ß, -, _ allowed
   // at least 1 character
-  return /^[a-zA-Z0-9äöüß\-_ ]*$/.test(name);
+  return /^[a-zA-Z0-9äöüß\-_ ]*$/.test(name)
 }
 /**
  * Is at least one focus selected?
  */
 function atLeastOneChecked () {
-  return $('input[type=checkbox]:checked').length > 0;
+  return $('input[type=checkbox]:checked').length > 0
 }
 /**
  * Is there already a focus with this name?
  */
 function alreadyInUse (name) {
-  return localStorage.hasOwnProperty(getIdFromName(name));
+  return localStorage.hasOwnProperty(getIdFromName(name))
 }
 /**
  * Adds a focus html-element to the focus selection
  * 
  * <input id="NAME" class="hide" type="radio" name="focus" value="NAME" form="searchForm" checked required>
  * <label id="NAME-label" for="NAME">
- *     <span class="glyphicon glyphicon-star"></span>
+ *     <i class="fa fa-star" aria-hidden="true"></i>
  *     <span class="content">NAME</span>
  *     <button class="btn btn-default">
- *         <span class="glyphicon glyphicon-pencil"></span>
+ *         <i class="fa fa-pencil" aria-hidden="true"></i>
  *     </button>
  * </label>
  */
 function addFocus (name) {
   var id = getIdFromName(name)
-  var foki = document.getElementById('foki');
+  var foki = document.getElementById('foki')
   // create <div> to wrap all Elements
-  var wrapper = document.createElement('div');
-  wrapper.classList.add('focus');
+  var wrapper = document.createElement('div')
+  wrapper.classList.add('focus')
   // create <input>
-  var newFocus = document.createElement('input');
-  newFocus.id = id;
-  newFocus.classList.add('focus-radio');
-  newFocus.classList.add('custom-focus');
-  newFocus.classList.add('hide');
-  newFocus.type = 'radio';
-  newFocus.name = 'focus';
-  newFocus.value = id;
-  newFocus.setAttribute('Form', 'searchForm');
-  newFocus.checked = true;
-  newFocus.required = true;
+  var newFocus = document.createElement('input')
+  newFocus.id = id
+  newFocus.classList.add('focus-radio')
+  newFocus.classList.add('custom-focus')
+  newFocus.classList.add('hide')
+  newFocus.type = 'radio'
+  newFocus.name = 'focus'
+  newFocus.value = id
+  newFocus.setAttribute('Form', 'searchForm')
+  newFocus.checked = true
+  newFocus.required = true
   // create <label>
-  var newFocusLabel = document.createElement('label');
-  newFocusLabel.id = id + '-label';
-  newFocusLabel.classList.add('focus-label');
-  newFocusLabel.classList.add('custom-focus-label');
-  newFocusLabel.htmlFor = id;
-  // create glyphicon
-  var newFocusGlyphicon = document.createElement("span");
-  newFocusGlyphicon.classList.add("glyphicon");
-  newFocusGlyphicon.classList.add("glyphicon-star");
+  var newFocusLabel = document.createElement('label')
+  newFocusLabel.id = id + '-label'
+  newFocusLabel.classList.add('focus-label')
+  newFocusLabel.classList.add('custom-focus-label')
+  newFocusLabel.htmlFor = id
+  // create <i> icon
+  var newFocusIcon = document.createElement('i')
+  newFocusIcon.classList.add('fa')
+  newFocusIcon.classList.add('fa-star')
+  newFocusIcon.setAttribute('aria-hidden', 'true')
   // create content
-  var newFocusContent = document.createElement('span');
-  newFocusGlyphicon.classList.add("content");
-  newFocusContent.textContent = name;
+  var newFocusContent = document.createElement('span')
+  newFocusIcon.classList.add('content')
+  newFocusContent.textContent = ' ' + name
   // create edit button
-  var newFocusEditLink = document.createElement('a');
-  newFocusEditLink.classList.add('focus-edit');
-  newFocusEditLink.classList.add('custom-focus-edit');
-  newFocusEditLink.classList.add('mutelink');
-  newFocusEditLink.href = '#';
+  var newFocusEditLink = document.createElement('a')
+  newFocusEditLink.classList.add('focus-edit')
+  newFocusEditLink.classList.add('custom-focus-edit')
+  newFocusEditLink.classList.add('mutelink')
+  newFocusEditLink.href = '#'
   newFocusEditLink.onclick = function () {
-    showFocusEditDialog(id);
+    showFocusEditDialog(id)
   }
-  var newFocusEditLinkGlyphicon = document.createElement("span");
-  newFocusEditLinkGlyphicon.classList.add("glyphicon");
-  newFocusEditLinkGlyphicon.classList.add("glyphicon-pencil");
+  var newFocusEditLinkIcon = document.createElement('i')
+  newFocusEditLinkIcon.classList.add('fa')
+  newFocusEditLinkIcon.classList.add('fa-pencil')
+  newFocusEditLinkIcon.setAttribute('aria-hidden', 'true')
   // add new elements
-  var addFocusBtn = document.getElementById('addFocusBtnDiv');
-  foki.insertBefore(wrapper, addFocusBtn);
-  wrapper.appendChild(newFocus);
-  wrapper.appendChild(newFocusLabel);
-  newFocusLabel.appendChild(newFocusGlyphicon);
-  newFocusLabel.appendChild(newFocusContent);
-  wrapper.appendChild(newFocusEditLink);
-  newFocusEditLink.appendChild(newFocusEditLinkGlyphicon);
+  var addFocusBtn = document.getElementById('addFocusBtnDiv')
+  foki.insertBefore(wrapper, addFocusBtn)
+  wrapper.appendChild(newFocus)
+  wrapper.appendChild(newFocusLabel)
+  newFocusLabel.appendChild(newFocusIcon)
+  newFocusLabel.appendChild(newFocusContent)
+  wrapper.appendChild(newFocusEditLink)
+  newFocusEditLink.appendChild(newFocusEditLinkIcon)
 }
 /**
  * Remove the focuses html-elements
  */
 function removeFocus (name) {
-  removeFocusById(getIdFromName(name));
+  removeFocusById(getIdFromName(name))
 }
 /**
  * Remove the focuses html-elements
  */
 function removeFocusById (id) {
-  var focusRadio = document.getElementById(id);
-  var focus = focusRadio.parentNode;
-  var parent = focus.parentNode;
-  parent.removeChild(focus);
+  var focusRadio = document.getElementById(id)
+  var focus = focusRadio.parentNode
+  var parent = focus.parentNode
+  parent.removeChild(focus)
 }
 /**
  * Turns a name into an id
  * Converts special characters and spaces
  */
 function getIdFromName (name) {
-  name = name.toLowerCase();
-  name = name.split(' ').join('_');
-  name = name.split('ä').join('ae');
-  name = name.split('ö').join('oe');
-  name = name.split('ü').join('ue');
-  return 'focus_' + name;
+  name = name.toLowerCase()
+  name = name.split(' ').join('_')
+  name = name.split('ä').join('ae')
+  name = name.split('ö').join('oe')
+  name = name.split('ü').join('ue')
+  return 'focus_' + name
 }
 /**
  * Loads the focus object for the given id from local storage
  */
 function loadFocusById (id) {
-  return JSON.parse(localStorage.getItem(id));
+  return JSON.parse(localStorage.getItem(id))
 }
 /**
  * Unchecks all focuses from the focus creator dialog
  */
 function uncheckAll () {
-  $('.focusCheckbox').prop('checked', false);
+  $('.focusCheckbox').prop('checked', false)
 }
 /**
  * Resets all settings
  */
 function resetOptions () {
-  localStorage.removeItem('pers');
-  var keys = [];
+  localStorage.removeItem('pers')
+  var keys = []
   for (var i = 0; i < localStorage.length; i++) {
-    var key = localStorage.key(i);
-    keys.push(key);
+    var key = localStorage.key(i)
+    keys.push(key)
   }
   for (var i = 0; i < keys.length; i++) {
-    var key = keys[i];
+    var key = keys[i]
     if (key.startsWith('param_' || key.startsWith('focus'))) {
-      localStorage.removeItem(key);
+      localStorage.removeItem(key)
     }
   }
 }
 
 function setFocusToDefault () {
-  setFocus('web');
+  setFocus('web')
 }
 
 function setFocus (focusID) {
-  $('#' + focusID).prop('checked', true);
+  $('#' + focusID).prop('checked', true)
 }

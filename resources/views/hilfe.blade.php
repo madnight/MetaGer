@@ -94,7 +94,7 @@
 			<div style="margin-top: 315px; margin-bottom: 10px;">
 				<div class="popover fade bottom in" role="tooltip" style="top: auto; left: auto; display: block; position: relative">
 					<div class="arrow" style="left: 50%;"></div>
-					<h3 class="popover-title"><span class="glyphicon glyphicon-cog"></span> Optionen</h3>
+					<h3 class="popover-title"><i class="fa fa-cog" aria-hidden="true"></i> Optionen</h3>
 					<div class="popover-content">
 						<ul class="options-list list-unstyled small">
 							<li>

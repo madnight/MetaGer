@@ -13,9 +13,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 		<meta rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<meta rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
-		<meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE" />
 		<link rel="search" type="application/opensearchdescription+xml" title="{{ trans('staticPages.opensearch') }}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
+		<link type="text/css" rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
 		<link type="text/css" rel="stylesheet" href="{{ elixir('css/themes/default.css') }}" />
 		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
 		@if (isset($css))

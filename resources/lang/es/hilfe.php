@@ -64,7 +64,7 @@ return [
     "tor.2"                          => "MetaGer es accesible en el navegador especial de TOR (Tor-Browser) bajo esta URL: http://b7cxf4dkdsko6ah2.onion .",
     "proxy.title"                    => "MetaGer servidor proxy",
     "proxy.1"                        => "Para usarlo, hacer click en \"abrir anónimo\" en la página de resultados de MetaGer, al lado derecha del link de resultado. Su consulta a la página meta sera redireccionado anonimizado sobre nuestros servidor proxy y sus datos personales están protegidos en adelante. Importante: si desde allí usted hace click en links y sigue a otra páginas sigue protegido por nuestro proxy. Pero usted no debe en la barra de direcciones introducir una nueva dirección de un sitio web. En este caso pierde la protección. Si aun esta protegido se puede ver también en la barra de direcciones (URL). La barra muestra https://proxy.suma-ev.de/?url=aquí la URL del sitio que esta visitando.",
-    "infobutton.title"               => "¿Qué representa la <span class=\"glyphicon glyphicon-info-sign info-details-available\" aria-hidden=\"true\"></span>?",
+    "infobutton.title"               => "¿Qué representa la <i class=\"fa fa-info-circle info-details-available\" aria-hidden=\"true\"></i>?",
     "infobutton.1"                   => "Hacer click en \"I\" e recibe más informaciones por la tema (el tiempo por ejemplo).",
     "maps.title"                     => "MetaGer mapas",
     "maps.1"                         => "MetaGer ofrece mapas. Para usarla, hacer click en el foco \"maps.MetaGer.de\" en la página de resultados de MetaGer. Usáis el foco \"adaptar\" para encender mapas perdurable.",

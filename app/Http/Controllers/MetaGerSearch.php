@@ -169,7 +169,7 @@ class MetaGerSearch extends Controller
 
             }
         }
-
+    /*
         # Wikipedia Quicktip
         $url             = "https://" . APP::getLocale() . ".wikipedia.org/w/api.php?action=opensearch&search=" . urlencode($q) . "&limit=10&namespace=0&format=json&redirects=resolve";
     	try{
@@ -203,7 +203,7 @@ class MetaGerSearch extends Controller
             $quicktips[] = $quicktip;
         }
         $mquicktips = array_merge($mquicktips, $quicktips);
-
+    */
         if (APP::getLocale() === "de") {
             # Dict.cc Quicktip
             if (count(explode(' ', $q)) < 3) {

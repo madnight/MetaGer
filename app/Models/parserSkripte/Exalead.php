@@ -22,7 +22,6 @@ class Exalead extends Searchengine
             if (!$content) {
                 return;
             }
-
             $results   = $content;
             $prefix    = "";
             $namespace = "";
@@ -36,7 +35,7 @@ class Exalead extends Searchengine
             }
             $results->registerXPathNamespace($prefix, $namespace);
             try {
-                $results = $results->xpath("//a:searchResult/a:item");
+                $results = $results->xpath("//a:hits/a:Hit");
             } catch (\ErrorException $e) {
                 return;
             }
@@ -44,7 +43,7 @@ class Exalead extends Searchengine
                 try {
                     $result->registerXPathNamespace($prefix, $namespace);
                     $title       = $result->xpath("a:metas/a:Meta[@name='title']/a:MetaString[@name='value']")[0]->__toString();
-                    $link        = $result->xpath("a:metas/a:Meta[@name='url']/a:MetaString[@name='value']")[0]->__toString();
+                    $link        = $result["url"]->__toString();
                     $anzeigeLink = $link;
                     $descr       = "";
                     if (sizeOf($result->xpath("a:metas/a:Meta[@name='metadesc']/a:MetaString[@name='value']")) === 0 && sizeOf($result->xpath("a:metas/a:Meta[@name='summary']/a:MetaText[@name='value']")) !== 0) {
@@ -55,7 +54,6 @@ class Exalead extends Searchengine
                     } else {
                         $descr = $result->xpath("a:metas/a:Meta[@name='metadesc']/a:MetaString[@name='value']")[0]->__toString();
                     }
-
                     $this->counter++;
                     $this->results[] = new \App\Models\Result(
                         $this->engine,

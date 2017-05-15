@@ -1,8 +1,9 @@
 $(document).ready(function () {
-  createCustomFocuses()
-  var focus = $('#foki > li.active > a').attr('aria-controls')
-  var custom = $('#foki > li.active').hasClass('custom-focus-tab-selector')
-  getDocumentReadyForUse(focus, custom)
+  createCustomFocuses();
+  var focus = $('#foki > li.active > a').attr('aria-controls');
+  var custom = $('#foki > li.active').hasClass('custom-focus-tab-selector');
+  getDocumentReadyForUse(focus, custom);
+  botProtection();
 })
 
 function tabs () {
@@ -31,18 +32,18 @@ function tabs () {
 }
 
 function getDocumentReadyForUse (fokus, custom = false) {
-  clickLog()
-  popovers()
-  if (fokus === 'bilder') imageLoader()
-  if (custom) initialLoadContent(fokus)
+  clickLog();
+  popovers();
+  if (fokus === 'bilder') imageLoader();
+  if (custom) initialLoadContent(fokus);
   // pagination()
-  tabs()
-  theme()
-  fokiChanger()
-  pluginInfo()
-  productWidget()
-  $('iframe:not(.resized)').iFrameResize()
-  $('iframe').addClass('resized')
+  tabs();
+  theme();
+  fokiChanger();
+  pluginInfo();
+  productWidget();
+  $('iframe:not(.resized)').iFrameResize();
+  $('iframe').addClass('resized');
 }
 
 function pluginInfo () {
@@ -83,6 +84,14 @@ function clickLog () {
       url: $(this).attr('href')
     })
   })
+}
+
+function botProtection() {
+    if ($("meta[name=pqr]").length > 0) {
+        var link = atob($("meta[name=pqr]").attr("content"));
+        var hash = $("meta[name=pq]").attr("content");
+        document.location.href = link + "&bot=" + hash;
+    }
 }
 
 function popovers () {

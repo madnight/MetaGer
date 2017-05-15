@@ -7,6 +7,8 @@
   "devDependencies": {
     "bootstrap-sass": "^3.3.7",
     "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.2.0",
+    "gulp-uglify": "^2.1.2",
     "jquery": "^3.1.0",
     "laravel-elixir": "^6.0.0-9",
     "laravel-elixir-vue-2": "^0.2.0",

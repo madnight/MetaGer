@@ -21,7 +21,7 @@
 							<div class="input-group">
 								<input autocomplete="off" class="form-control" form="submitForm" id="eingabeTop" name="eingabe" placeholder="Suchbegriffe erweitern/verändern, oder völlig neue Suche:" tabindex="1" type="text" value="{{ $eingabe }}" required />
 								<div class="input-group-addon">
-									<button type='submit' form="submitForm" id='search'><i class="fa fa-search" aria-hidden="true"></i></span>
+									<button type='submit' form="submitForm" id='search'><i class="fa fa-search" aria-hidden="true"></i>
 									</button>
 								</div>
 							</div>

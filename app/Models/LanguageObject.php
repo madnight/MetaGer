@@ -5,13 +5,14 @@ namespace App\Models;
 /*
 *	Beinhaltet zu je einer Sprache Angaben zum Pfad der jeweiligen Datei, sowie die vorhandenen Übersetzungen
 */
-class LanguageData 
+class LanguageObject 
 {
 	public $language = "";
 
 	public $filePath = "";
 
-	public $stringMap = [[]];
+	#2D-Array der Form [$filename][$key]
+	public $stringMap;
 
 	public function __construct($lang, $path) 
     {
@@ -19,6 +20,7 @@ class LanguageData
         $this->filePath = $path;
     }
 
+    #Speichert Daten in $stringMap, entdimensionalisiert ggbf. $value
     public function saveData($filename, $key, $value)
     {	
     	if(is_array($value)) {

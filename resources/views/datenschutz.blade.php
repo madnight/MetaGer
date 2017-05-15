@@ -6,7 +6,7 @@
 
 @section('content')
 	<h1>{!! trans('datenschutz.head') !!}</h1>
-	<p>{!! trans('datenschutz.general.1') !!}</a></p>
+	<p>{!! trans('datenschutz.general.1') !!}</p>
 	<p>{!! trans('datenschutz.general.3') !!}</p>
 	<h2>{!! trans('datenschutz.policy.1') !!}</h2>
 	<ul class="dotlist">

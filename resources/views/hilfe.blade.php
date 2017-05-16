@@ -12,18 +12,29 @@
 		</div>
 		<div class="panel-body">
 			<ul class="dotlist">
-				<li>{!! trans('hilfe.allgemein.1') !!}</li>
+				<li>{!! trans('hilfe.allgemein.1') !!}
+					<a id="settings-btn" class="mutelink btn btn-default" href="#">
+						<i class="fa fa-cog" aria-hidden="true"></i>
+					</a>
+				</li>
 				<li>{!! trans('hilfe.allgemein.2') !!}</li>
 				<li>{!! trans('hilfe.allgemein.3') !!}</li>
 			</ul>
 		</div>
 	</div>
-	<div class="panel panel-default">
+	<div id="custom-focus-help" class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">{!! trans('hilfe.suchfokus.title') !!}</h3>
 		</div>
 		<div class="panel-body">
 			<p>{!! trans('hilfe.suchfokus.1') !!}</p>
+			<p>{!! trans('hilfe.suchfokus.2') !!}
+				<button id="addFocusBtn" class="btn btn-default" data-original-title="" title="">
+					<i class="fa fa-plus" aria-hidden="true"></i>
+				</button>
+			</p>
+			<p>{!! trans('hilfe.suchfokus.3') !!}</p>
+			<p>{!! trans('hilfe.suchfokus.4') !!}</p>
 		</div>
 	</div>
 	<h2>{!! trans('hilfe.sucheingabe.title') !!}</h2>

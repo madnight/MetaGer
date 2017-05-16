@@ -1,5 +1,5 @@
 @if( strpos(rtrim(Request::header('REFERER'), '/'), LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") )  === 0 && ( $browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'IE' || $browser === 'Edge') )
-	<div id="searchplugin" class="alert alert-warning alert-dismissible" role="alert" style="">
+	<div id="searchplugin" class="alert alert-warning alert-dismissible hide" role="alert" style="">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		{!! trans('researchandtabs.plugin.1', ['browser' => $browser]) !!}
 		<br />
@@ -10,7 +10,7 @@
 @endif
 <div class="content-wrapper container">
 	<header id="research" class="row">
-		<nav class="navbar navbar-default  navbar-fixed-top navbar-resultpage">
+		<nav class="navbar navbar-default navbar-fixed-top navbar-resultpage">
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-3 logo dense-col">

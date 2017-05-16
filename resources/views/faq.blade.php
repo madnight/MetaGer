@@ -169,4 +169,21 @@
 			<p>{!! trans('faq.faq.18.b') !!}</p>
 		</div>
 	</div>
+	<div id="custom-focus-faq" class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">{!! trans('faq.faq.19.h') !!}</h3>
+		</div>
+		<div class="panel-body">
+			<p>{!! trans('faq.faq.19.b.1') !!}</p>
+			<p>{!! trans('faq.faq.19.b.2') !!}</p>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">{!! trans('faq.faq.20.h') !!}</h3>
+		</div>
+		<div class="panel-body">
+			<p>{!! trans('faq.faq.20.b') !!}</p>
+		</div>
+	</div>
 @endsection

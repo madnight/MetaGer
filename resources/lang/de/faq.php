@@ -57,4 +57,9 @@ return [
     'faq.17.b.10' => 'Sie können MetaGer natürlich immer auch <em>ohne</em> Plugin benutzen, indem Sie in die Adresszeile Ihres Browsers "metager.de" eintippen.',
     'faq.18.h'    => 'Warum werden !bangs nicht direkt geöffnet?',
     'faq.18.b'    => 'Die !bang-„Weiterleitungen“ sind bei uns ein Teil unserer Quicktips und benötigen einen zusätzlichen „Klick“. Das war für uns eine schwierige Entscheidung, da die !bang dadurch weniger nützlich sind. Jedoch ist es leider nötig, da die Links, auf die weitergeleitet wird, nicht von uns stammen, sondern von einem Drittanbieter, DuckDuckGo.<p>Wir achten stehts darauf, dass unsere Nutzer jederzeit die Kontrolle behalten. Wir schützen daher auf zwei Arten: Zum Einen wird der eingegebene Suchbegriff niemals an DuckDuckGo übertragen, sondern nur das !bang. Zum Anderen bestätigt der Nutzer den Besuch des !bang-Ziels explizit. Leider können wir derzeit aus Personalgründen nicht alle diese !bangs prüfen oder selbst pflegen.',
+    'faq.19.h'    => 'Kann ich auch selber auswählen welche Suchmaschinen abgefragt werden?',
+    'faq.19.b.1'  => 'Ja, Sie können einen eigenen Suchfokus erstellen.',
+    'faq.19.b.2'  => 'Siehe: <a href=hilfe#custom-focus-help>Hilfe</a>',
+    'faq.20.h'    => 'Wo sind die Einstellungen zur Auswahl der Suchmaschinen hin?',
+    'faq.20.b'    => 'Siehe: <a href="#custom-focus-faq">"Kann ich auch selber auswählen welche Suchmaschinen abgefragt werden?"</a>',
 ];

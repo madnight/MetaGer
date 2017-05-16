@@ -10,12 +10,6 @@ class AdminInterface extends Controller
 {
     public function index(Request $request)
     {
-        $localFetcher = file_get_contents(action("AdminInterface@getFetcherStatus"));
-        die(var_dump($localFetcher));
-    }
-
-    public function getFetcherStatus()
-    {
         // Let's get the stats for this server.
         // First we need to check, which Fetcher could be available by parsing the sumas.xml
         $names = $this->getSearchEngineNames();
@@ -42,9 +36,11 @@ class AdminInterface extends Controller
         }
 
         // So now we can generate Median Times for every Fetcher
+        $fetcherCount = 0;
         foreach($stati as $engineName => $engineStats){
             $connection = array();
             $poptime = 0;
+            $fetcherCount += sizeof($engineStats["fetcher"]);
             foreach($engineStats["fetcher"] as $pid => $stats){
                 foreach($stats["connection"] as $key => $value){
                     if(!isset($connection[$key])){
@@ -66,7 +62,8 @@ class AdminInterface extends Controller
 
         return view('admin.admin')
             ->with('title', 'Fetcher Status')
-            ->with('stati', $stati);
+            ->with('stati', $stati)
+            ->with('fetcherCount', $fetcherCount);
         $stati = json_encode($stati);
         $response = Response::make($stati, 200);
         $response->header("Content-Type", "application/json");

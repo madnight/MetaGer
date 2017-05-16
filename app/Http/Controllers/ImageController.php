@@ -11,6 +11,7 @@ class ImageController extends Controller
 {
     public function generateImage(Request $request)
     {
+        /*
         #Piwik Code
         PiwikTracker::$URL = 'http://piwik.metager3.de';
         $piwikTracker      = new PiwikTracker($idSite = 1);
@@ -23,7 +24,7 @@ class ImageController extends Controller
 
         // Sendet Tracker request per http
         $piwikTracker->doTrackPageView($site);
-
+        */
         $path     = public_path() . '/img/1px.png';
         $fileType = File::type($path);
         $response = Response::make(File::get($path), 200);

@@ -189,7 +189,10 @@ function loadInitialCustomFocuses () {
  * Shows the focus create dialog
  * If an id is given it will try to load a focus for the given id
  */
-function showFocusCreateDialog (id = '') {
+function showFocusCreateDialog (id) {
+  if(id === undefined){
+    id = '';
+  }
   document.getElementById('original-id').value = id
   $('#create-focus-modal').modal('show')
   var storedFocus = loadFocusById(id)

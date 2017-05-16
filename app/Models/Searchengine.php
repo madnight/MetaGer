@@ -105,7 +105,7 @@ abstract class Searchengine
     # Prüft, ob die Suche bereits gecached ist, ansonsted wird sie als Job dispatched
     public function startSearch(\App\MetaGer $metager)
     {
-        if ($this->canCache && Cache::has($this->hash) && 0 == 1) {
+        if ($this->canCache && Cache::has($this->hash)) {
             $this->cached = true;
             $this->retrieveResults($metager);
         } else {
@@ -122,8 +122,13 @@ abstract class Searchengine
             }else{
                 $url = "http://";
             }
-            $url .= $this->host . $this->getString;
-            $mission = $this->resultHash . ";" . $url;
+            $url .= $this->host;
+            if($this->port !== 80 && $this->port !== 443){
+                $url .= ":" . $this->port;
+            }
+            $url .= $this->getString;
+            $url = base64_encode($url);
+            $mission = $this->resultHash . ";" . $url . ";" . $metager->getTime();
             // Submit this mission to the corresponding Redis Queue
             // Since each Searcher is dedicated to one specific search engine
             // each Searcher has it's own queue lying under the redis key <name>.queue
@@ -163,7 +168,7 @@ abstract class Searchengine
                     $median += floatval($data[1]);
                 }
                 $median /= sizeof($searcherData);
-                if($median < 100){
+                if($median < .1){
                     $needSearcher = true;
                 }
             }
@@ -227,14 +232,13 @@ abstract class Searchengine
         }
 
         $body = "";
-        if ($this->canCache && $this->cacheDuration > 0 && Cache::has($this->hash) && 0 === 1) {
+        if ($this->canCache && $this->cacheDuration > 0 && Cache::has($this->hash)) {
             $body = Cache::get($this->hash);
         } elseif (Redis::hexists('search.' . $this->resultHash, $this->name)) {
             $body = Redis::hget('search.' . $this->resultHash, $this->name);
-            if ($this->canCache && $this->cacheDuration > 0 && 0 === 1) {
+            if ($this->canCache && $this->cacheDuration > 0) {
                 Cache::put($this->hash, $body, $this->cacheDuration);
             }
-
         }
         if ($body !== "") {
             $this->loadResults($body);

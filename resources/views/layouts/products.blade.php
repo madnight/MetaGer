@@ -2,7 +2,7 @@
 	<div class="col-sm-1 hidden-xs"></div>
 	<div class="resultInformation col-xs-12 col-sm-11">
 		<span id="mark">Produktanzeigen:</span>
-		<ul class="lightSlider" >
+		<ul id="products" class="lightSlider" >
 			@foreach($products as $product)
 				<li>
 					<div class="product">

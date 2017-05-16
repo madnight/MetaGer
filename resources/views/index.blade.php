@@ -212,14 +212,14 @@
 				<i class="fa fa-globe" aria-hidden="true"></i>
 				<span class="content">{{ trans('index.foki.web') }}</span>
 			</label>
-		</div class="focus">
+		</div>
 		<div class="focus">
 			<input id="bilder" class="focus-radio hide" type="radio" name="focus" value="bilder" form="searchForm" @if ($focus === 'bilder') checked @endif required="">
 			<label id="bilder-label" class="focus-label" for="bilder">
 				<i class="fa fa-picture-o" aria-hidden="true"></i>
 				<span class="content">{{ trans('index.foki.bilder') }}</span>
 			</label>
-		</div class="focus">
+		</div>
 		<div class="focus">
 			<input id="nachrichten" class="focus-radio hide" type="radio" name="focus" value="nachrichten" form="searchForm" @if ($focus === 'nachrichten') checked @endif required="">
 			<label id="nachrichten-label" class="focus-label" for="nachrichten">
@@ -304,12 +304,10 @@
 			</form>
 		</fieldset>
 		<ul class="list-inline searchform-bonus">
-			<li><a href="https://www.boost-project.com/de/shops?charity_id=1129&amp;tag=bl" target="_blank" rel="noopener" id="foerdershops" class="btn btn-default mutelink" title="{{ trans('index.partnertitle') }}"><i class="fa fa-shopping-bag" aria-hidden="true"></i> {{ trans('index.conveyor') }}</a></li>
-			<li class="hidden-xs seperator">|</li>
 			<li id="plug"
 			@unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge' || $browser === 'Safari' || $browser === 'Vivaldi')
 				class="hidden"
-			@endunless
+			@endunless>
 			<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a></li>
 		</ul>
 	<script src="{{ elixir('js/lib.js') }}"></script>

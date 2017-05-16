@@ -60,6 +60,6 @@ input[type=text]:focus, textarea:focus, input[type=email]:focus, input[type=tel]
     box-shadow: none;
 }
 
-.lSPrev > span, .lSNext > span {
+.lSPrev > i, .lSNext > i {
 	color: <?=$color?>;
 }

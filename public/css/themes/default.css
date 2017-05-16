@@ -6672,6 +6672,12 @@ button.close {
     display: none !important;
   }
 }
+<<<<<<< HEAD
+=======
+summary {
+  cursor: pointer;
+}
+>>>>>>> development
 summary::-webkit-details-marker {
   display: none;
 }
@@ -6687,12 +6693,15 @@ summary::-o-details-marker {
 summary::details-marker {
   display: none;
 }
+<<<<<<< HEAD
 summary {
   cursor: pointer;
 }
 .quicktip.aufruf-winter {
   border-left: 3px solid #AB2121 !important;
 }
+=======
+>>>>>>> development
 .aufruf-winter h1 {
   font-size: 32px;
 }
@@ -6715,6 +6724,12 @@ summary {
   background-position: right top;
   background-size: 100px 100px;
 }
+<<<<<<< HEAD
+=======
+.aufruf-winter.quicktip {
+  border-left: 3px solid #AB2121 !important;
+}
+>>>>>>> development
 .new-feature.badge {
   background-color: #ff8000;
 }
@@ -6736,6 +6751,7 @@ summary {
     width: 940px;
   }
 }
+<<<<<<< HEAD
 #spruch .author {
   font-size: 14px;
   color: #888;
@@ -6781,6 +6797,34 @@ By ID
 #mglogo {
   width: 100%;
   text-align: center;
+=======
+* {
+  font-family: Liberation Sans, sans-serif;
+}
+body {
+  margin: 0;
+}
+body > div {
+  padding-top: 70px;
+}
+body.quicktips {
+  background-color: white;
+}
+footer {
+  margin: 30px 0px;
+  bottom: 0;
+  width: 100%;
+}
+footer ul.list-inline {
+  width: 100%;
+}
+footer li {
+  width: 33%;
+  text-align: center;
+}
+footer img {
+  max-width: 100%;
+>>>>>>> development
 }
 #spruch {
   margin-bottom: 20px;
@@ -6791,6 +6835,20 @@ By ID
   font-size: 16px;
   font-family: Georgia, "Times New Roman", Palatino, Times, serif;
 }
+<<<<<<< HEAD
+=======
+#spruch .author {
+  font-size: 14px;
+  color: #888;
+}
+ul.startpage {
+  list-style-type: none;
+}
+#mglogo {
+  width: 100%;
+  text-align: center;
+}
+>>>>>>> development
 nav.navbar-resultpage {
   position: absolute;
 }
@@ -6798,23 +6856,38 @@ nav.navbar-resultpage > ul > li {
   padding-left: 0;
   padding-right: 0;
 }
+<<<<<<< HEAD
 #navbar-static-pages {
   z-index: 4;
   width: 100%;
 }
+=======
+>>>>>>> development
 nav.navbar-resultpage > ul > li > a:not(.metager-navbar-toggle) {
   display: block;
   padding: 10px;
   color: #777;
 }
 nav.navbar-resultpage > ul > li.active > a,
+<<<<<<< HEAD
 a.metager-dropdown-toggle:hover,
 a.metager-dropdown-toggle:focus {
+=======
+nav.navbar-resultpage > ul > li a.metager-dropdown-toggle:hover,
+nav.navbar-resultpage > ul > li a.metager-dropdown-toggle:focus {
+>>>>>>> development
   background-color: #e7e7e7;
 }
 nav.navbar-resultpage > ul.list-inline {
   margin-bottom: 0;
 }
+<<<<<<< HEAD
+=======
+#navbar-static-pages {
+  z-index: 4;
+  width: 100%;
+}
+>>>>>>> development
 ul.metager-dropdown-menu {
   list-style-type: none;
   padding-left: 0;
@@ -6838,7 +6911,11 @@ ul.metager-dropdown-menu {
   -webkit-transition: max-height 1s ease;
   transition: max-height 1s ease;
 }
+<<<<<<< HEAD
 .metager-dropdown-menu > li > a {
+=======
+ul.metager-dropdown-menu > li > a {
+>>>>>>> development
   display: block;
   padding: 3px 20px;
   clear: both;
@@ -6847,11 +6924,27 @@ ul.metager-dropdown-menu {
   color: #333333;
   white-space: nowrap;
 }
+<<<<<<< HEAD
 .metager-dropdown-menu > li > a:hover {
+=======
+ul.metager-dropdown-menu > li > a:hover {
+>>>>>>> development
   text-decoration: none;
   color: #262626;
   background-color: #f5f5f5;
 }
+<<<<<<< HEAD
+=======
+#gutscheine > a {
+  display: inline-block;
+}
+#gutscheine > a:first-child {
+  padding-right: 0;
+}
+#gutscheine > a:first-child + a {
+  padding-left: 0;
+}
+>>>>>>> development
 a.metager-dropdown-toggle:hover + ul.metager-dropdown-menu,
 a.metager-dropdown-toggle:focus + ul.metager-dropdown-menu,
 ul.metager-dropdown-menu:hover,
@@ -6912,6 +7005,7 @@ ul.metager-dropdown-menu:hover,
     display: none;
   }
 }
+<<<<<<< HEAD
 /* 
 
 
@@ -6926,6 +7020,20 @@ Mixed
 
 
 */
+=======
+#color-chooser {
+  padding: 0;
+}
+#color-chooser a {
+  display: block;
+  width: 50px;
+  height: 50px;
+}
+#color-chooser li {
+  width: 50px;
+  margin: 0;
+}
+>>>>>>> development
 #color-chooser #standard {
   background-color: #ffc26b;
 }
@@ -6983,6 +7091,7 @@ Mixed
 #sponsors h2 {
   font-size: 1.5em;
 }
+<<<<<<< HEAD
 #color-chooser a {
   display: block;
   width: 50px;
@@ -6991,6 +7100,13 @@ Mixed
 #color-chooser li {
   width: 50px;
   margin: 0;
+=======
+#moreInformation {
+  box-shadow: none;
+  margin-top: 5%;
+  text-align: center;
+  -moz-box-shadow: none;
+>>>>>>> development
 }
 #moreInformation ul {
   padding: 0;
@@ -7047,6 +7163,7 @@ textarea#message {
 #plugin-modal ol > li {
   margin-bottom: 5px;
 }
+<<<<<<< HEAD
 /* 
 
 
@@ -7061,6 +7178,8 @@ By Class
 
 
 */
+=======
+>>>>>>> development
 .quicktip {
   margin-bottom: 15px;
   padding: 10px;
@@ -7070,6 +7189,17 @@ By Class
   border-left: 3px solid #FB0;
   font-size: 14px;
 }
+<<<<<<< HEAD
+=======
+.quicktip h1 {
+  font-size: 22px;
+  margin-top: 0px;
+}
+.quicktip.aufruf {
+  border-left: 3px solid #FF4000;
+  color: #FF4000;
+}
+>>>>>>> development
 .wikiqtextract {
   font-family: Georgia, "Times New Roman", Palatino, Times, serif;
 }
@@ -7212,6 +7342,7 @@ By Class
 .non-bold {
   font-weight: normal;
 }
+<<<<<<< HEAD
 /* 
 
 
@@ -7229,13 +7360,18 @@ Mixed
   border-left: 3px solid #FF4000;
   color: #FF4000;
 }
+=======
+>>>>>>> development
 .settings-checkbox .settings-icon {
   margin-left: 5px;
   font-size: 12px;
 }
+<<<<<<< HEAD
 .settings-btn + .settings-btn {
   margin-left: 10px;
 }
+=======
+>>>>>>> development
 .wikiqtextract p {
   margin-bottom: 0;
 }
@@ -7279,6 +7415,7 @@ label.select-label {
 .donation-form-group label {
   font-weight: bold;
 }
+<<<<<<< HEAD
 .quicktip h1 {
   font-size: 22px;
   margin-top: 0px;
@@ -7300,11 +7437,14 @@ By Element
 * {
   font-family: Liberation Sans, sans-serif;
 }
+=======
+>>>>>>> development
 section {
   padding: 10px;
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.55);
   -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.55);
 }
+<<<<<<< HEAD
 body {
   margin: 0;
 }
@@ -7315,6 +7455,8 @@ body {
     width: 100%;
     height: 50px;
 }*/
+=======
+>>>>>>> development
 address {
   white-space: pre;
 }
@@ -7323,6 +7465,7 @@ code {
   overflow-wrap: break-word;
   word-break: break-word;
 }
+<<<<<<< HEAD
 /* 
 
 
@@ -7337,6 +7480,8 @@ Mixed
 
 
 */
+=======
+>>>>>>> development
 label a {
   color: inherit;
 }
@@ -7344,6 +7489,7 @@ label a:hover {
   text-decoration: none;
   color: inherit;
 }
+<<<<<<< HEAD
 footer {
   margin: 30px 0px;
   bottom: 0;
@@ -7362,6 +7508,8 @@ footer img {
 main ul li:not(.lslide) {
   margin: 0 10px;
 }
+=======
+>>>>>>> development
 .searchform-bonus {
   list-style-type: none;
   text-align: center;
@@ -7389,8 +7537,13 @@ nav h1 {
   line-height: 1;
   white-space: nowrap;
 }
+<<<<<<< HEAD
 body > div {
   padding-top: 70px;
+=======
+.panel-title {
+  font-weight: bold;
+>>>>>>> development
 }
 #map,
 #map div {
@@ -7560,14 +7713,22 @@ a:hover {
   color: grey;
   padding: 8px 12px;
 }
+<<<<<<< HEAD
 .resultpage-foki li a i + span,
 .foki li a i + span {
   margin-left: 5px;
+=======
+.resultpage-foki li.active a,
+.foki li.active a {
+  color: black;
+  background-color: white;
+>>>>>>> development
 }
 .resultpage-foki li span,
 .foki li span {
   margin-left: 3px;
 }
+<<<<<<< HEAD
 .resultpage-foki li.active i + span,
 .foki li.active i + span {
   display: inline!important;
@@ -7577,6 +7738,12 @@ a:hover {
   color: black;
   background-color: white;
 }
+=======
+.resultpage-foki li.active span,
+.foki li.active span {
+  display: inline!important;
+}
+>>>>>>> development
 #spenden {
   white-space: nowrap;
   overflow: hidden;
@@ -7624,6 +7791,7 @@ a:hover {
   margin: 0;
   line-height: 1.5;
 }
+<<<<<<< HEAD
 .result .link-link {
   white-space: nowrap;
   max-width: 60%;
@@ -7631,6 +7799,8 @@ a:hover {
   text-overflow: ellipsis;
   float: left;
 }
+=======
+>>>>>>> development
 .result .link > div {
   white-space: nowrap;
 }
@@ -7642,10 +7812,13 @@ a:hover {
   color: #333;
   float: left;
 }
+<<<<<<< HEAD
 /*
 .result .link:hover {
     cursor: pointer;
 }*/
+=======
+>>>>>>> development
 .result .link .options > a {
   color: #333;
   display: block;
@@ -7655,6 +7828,16 @@ a:hover {
 .result .link .options > a > span {
   font-size: 10px;
 }
+<<<<<<< HEAD
+=======
+.result .link-link {
+  white-space: nowrap;
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  float: left;
+}
+>>>>>>> development
 .result .description {
   margin-bottom: 3px;
   color: black;
@@ -7691,30 +7874,52 @@ a:hover {
 .result .hoster a {
   color: #333;
 }
+<<<<<<< HEAD
 .result .result-image > img {
   height: 100px;
   padding: 10px;
 }
+=======
+>>>>>>> development
 .result .proxy {
   font-size: 13px;
   margin-top: 0;
   white-space: nowrap;
 }
+<<<<<<< HEAD
+=======
+.result .proxy img {
+  margin-bottom: 0px;
+  margin-right: 2px;
+}
+>>>>>>> development
 .result .partnershop-info {
   font-size: 13px;
   margin-top: 0;
   margin-left: 10px;
 }
+<<<<<<< HEAD
 .result .proxy img {
   margin-bottom: 0px;
   margin-right: 2px;
 }
 .description-container {
   margin: 0!important;
+=======
+.result .result-image > img {
+  height: 100px;
+  padding: 10px;
+>>>>>>> development
 }
 .result .image > img {
   max-width: 100%;
 }
+<<<<<<< HEAD
+=======
+.description-container {
+  margin: 0!important;
+}
+>>>>>>> development
 .options-list > li:hover {
   background-color: lightgrey;
 }
@@ -7732,6 +7937,10 @@ a:hover {
 }
 #quicktips iframe {
   width: 100%;
+<<<<<<< HEAD
+=======
+  height: 800px;
+>>>>>>> development
   background-color: transparent;
   border: 0px none transparent;
   padding: 0px;
@@ -7779,7 +7988,11 @@ footer a {
   text-align: center;
   padding-top: 5px;
 }
+<<<<<<< HEAD
 #searchplugin > div > a {
+=======
+#searchplugin > a {
+>>>>>>> development
   color: white;
 }
 @media (min-width: 768px) {
@@ -7796,6 +8009,12 @@ footer a {
 .product a {
   color: #333;
 }
+<<<<<<< HEAD
+=======
+.product img {
+  max-width: 100px;
+}
+>>>>>>> development
 .product .price {
   position: relative;
   top: 20px;
@@ -7845,12 +8064,18 @@ footer a {
 #mark a {
   margin-left: 3px;
 }
+<<<<<<< HEAD
 .product {
   height: 210px;
 }
 .product img {
   max-width: 100px;
 }
+=======
+#mark .product {
+  height: 210px;
+}
+>>>>>>> development
 .result .description img {
   border: solid 1px #eeeeee;
 }
@@ -7860,6 +8085,20 @@ footer a {
     padding-right: 0;
   }
 }
+<<<<<<< HEAD
+=======
+.image-container {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+.image-item {
+  margin: 5px;
+}
+.image-item .img {
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
+}
+>>>>>>> development
 .qtheader {
   font-size: 16px;
   margin: 0px;
@@ -7911,6 +8150,14 @@ footer a {
 .focus ~ .focus {
   margin-left: 10px;
 }
+<<<<<<< HEAD
+=======
+.focus:hover .focus-label,
+.focus:hover .focus-edit {
+  cursor: pointer;
+  background-color: #e3e3e3;
+}
+>>>>>>> development
 .focus-radio:checked + .focus-label,
 .focus-radio:checked + .focus-label + .focus-edit {
   background-color: #e3e3e3;
@@ -7922,11 +8169,14 @@ footer a {
   padding: 7px;
   font-weight: normal;
 }
+<<<<<<< HEAD
 .focus:hover .focus-label,
 .focus:hover .focus-edit {
   cursor: pointer;
   background-color: #e3e3e3;
 }
+=======
+>>>>>>> development
 #addFocusBtnDiv {
   margin-left: 10px;
 }
@@ -7961,6 +8211,7 @@ footer a {
 .settings-btn {
   margin: 5px;
 }
+<<<<<<< HEAD
 /*input[type=text]:focus, textarea:focus, input[type=email]:focus, input[type=tel]:focus {
     outline-color: rgb(255, 128, 0);
     -webkit-box-shadow: 0px 0px 2px 2px rgba(255, 128, 0, 1);
@@ -7969,6 +8220,8 @@ footer a {
     border: 1px solid rgba(255, 128, 0, 1);
 }
 */
+=======
+>>>>>>> development
 #mglogo > a {
   background-color: #ff8000;
   color: white;
@@ -7986,9 +8239,13 @@ footer a {
   border-color: #ff8000;
 }
 .pagination > li > a,
+<<<<<<< HEAD
 .pagination > li > span {
   color: #ff8000;
 }
+=======
+.pagination > li > span,
+>>>>>>> development
 .pagination > li > a:hover,
 .pagination > li > span:hover,
 .pagination > li > a:focus,

@@ -24,6 +24,7 @@ class MetaGer
     protected $site;
     protected $hostBlacklist   = [];
     protected $domainBlacklist = [];
+    private   $urlBlacklist    = [];
     protected $stopWords       = [];
     protected $phrases         = [];
     protected $engines         = [];
@@ -1023,12 +1024,13 @@ class MetaGer
         $this->searchCheckSitesearch($site);
         $this->searchCheckHostBlacklist();
         $this->searchCheckDomainBlacklist();
+        $this->searchCheckUrlBlacklist();
         $this->searchCheckPhrase();
         $this->searchCheckStopwords();
         $this->searchCheckNoSearch();
     }
 
-    public function searchCheckSitesearch($site)
+    private function searchCheckSitesearch($site)
     {
         // matches '[... ]site:test.de[ ...]'
         while (preg_match("/(^|.+\s)site:(\S+)(?:\s(.+)|($))/si", $this->q, $match)) {
@@ -1040,13 +1042,14 @@ class MetaGer
         }
     }
 
-    public function searchCheckHostBlacklist()
+    private function searchCheckHostBlacklist()
     {
         // matches '[... ]-site:test.de[ ...]'
         while (preg_match("/(^|.+\s)-site:([^\s\*]\S*)(?:\s(.+)|($))/si", $this->q, $match)) {
             $this->hostBlacklist[] = $match[2];
             $this->q               = $match[1] . $match[3];
         }
+        // print the host blacklist as a user warning
         if (sizeof($this->hostBlacklist) > 0) {
             $hostString = "";
             foreach ($this->hostBlacklist as $host) {
@@ -1057,13 +1060,14 @@ class MetaGer
         }
     }
 
-    public function searchCheckDomainBlacklist()
+    private function searchCheckDomainBlacklist()
     {
         // matches '[... ]-site:*.test.de[ ...]'
         while (preg_match("/(^|.+\s)-site:\*\.(\S+)(?:\s(.+)|($))/si", $this->q, $match)) {
             $this->domainBlacklist[] = $match[2];
             $this->q                 = $match[1] . $match[3];
         }
+        // print the domain blacklist as a user warning
         if (sizeof($this->domainBlacklist) > 0) {
             $domainString = "";
             foreach ($this->domainBlacklist as $domain) {
@@ -1074,13 +1078,32 @@ class MetaGer
         }
     }
 
-    public function searchCheckStopwords()
+    private function searchCheckUrlBlacklist()
+    {
+        // matches '[... ]-site:*.test.de[ ...]'
+        while (preg_match("/(^|.+\s)-url:(\S+)(?:\s(.+)|($))/si", $this->q, $match)) {
+            $this->urlBlacklist[] = $match[2];
+            $this->q              = $match[1] . $match[3];
+        }
+        // print the url blacklist as a user warning
+        if (sizeof($this->urlBlacklist) > 0) {
+            $urlString = "";
+            foreach ($this->urlBlacklist as $url) {
+                $urlString .= $url . ", ";
+            }
+            $urlString     = rtrim($urlString, ", ");
+            $this->warnings[] = trans('metaGer.formdata.urlBlacklist', ['url' => $urlString]);
+        }
+    }
+
+    private function searchCheckStopwords()
     {
         // matches '[... ]-test[ ...]'
         while (preg_match("/(^|.+\s)-(\S+)(?:\s(.+)|($))/si", $this->q, $match)) {
             $this->stopWords[] = $match[2];
             $this->q           = $match[1] . $match[3];
         }
+        // print the stopwords as a user warning
         if (sizeof($this->stopWords) > 0) {
             $stopwordsString = "";
             foreach ($this->stopWords as $stopword) {
@@ -1091,7 +1114,7 @@ class MetaGer
         }
     }
 
-    public function searchCheckPhrase()
+    private function searchCheckPhrase()
     {
         $p   = "";
         $tmp = $this->q;
@@ -1109,7 +1132,7 @@ class MetaGer
         }
     }
 
-    public function searchCheckNoSearch()
+    private function searchCheckNoSearch()
     {
         if ($this->q === "") {
             $this->warnings[] = trans('metaGer.formdata.noSearch');
@@ -1445,6 +1468,11 @@ class MetaGer
     public function getUserDomainBlacklist()
     {
         return $this->domainBlacklist;
+    }
+
+    public function getUserUrlBlacklist()
+    {
+        return $this->urlBlacklist;
     }
 
     public function getDomainBlacklist()

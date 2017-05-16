@@ -11,8 +11,8 @@ return [
     'formdata.noSearch'        => 'Achtung: Sie haben keinen Suchbegriff eingegeben. Sie können ihre Suchbegriffe oben eingeben und es erneut versuchen.',
     'formdata.dartEurope'      => 'Hinweis: Sie haben Dart-Europe aktiviert. Die Suche kann deshalb länger dauern und die maximale Suchzeit wurde auf 10 Sekunden hochgesetzt.',
     'formdata.hostBlacklist'   => 'Ergebnisse von folgenden Hosts werden nicht angezeigt: ":host"',
-
     'formdata.domainBlacklist' => 'Ergebnisse von folgenden Domains werden nicht angezeigt: ":domain"',
+    'formdata.urlBlacklist'    => 'Ergebnisse mit URLs die folgendes nicht beinhalten werden nicht angezeigt: ":url"',
     'formdata.stopwords'       => 'Sie machen eine Ausschlusssuche. Ergebnisse mit folgenden Wörtern werden nicht angezeigt: ":stopwords"',
     'formdata.phrase'          => 'Sie führen eine Phrasensuche durch: :phrase',
 

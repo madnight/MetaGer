@@ -6,7 +6,7 @@ return [
     "einstellungen"                  => "Einstellungen",
 
     "allgemein.title"                => "Allgemeine Einstellungen",
-    "allgemein.1"                    => "Alle Einstellungen zur Suche finden Sie unter diesem dem Knopf auf der Startseite: ",
+    "allgemein.1"                    => "Alle Einstellungen zur Suche finden Sie unter diesem Knopf auf der Startseite: ",
     "allgemein.2"                    => "Der Farbtropfen links neben dem Suchfeld ermöglicht Ihnen eine individuelle Farbeinstellung für die Startseite. (so wie Sie es am schönsten finden).",
     "allgemein.3"                    => "Ein Plugin für die allermeisten Browser finden Sie <a href=\"/#plugin-modal\" target=\"_blank\" rel=\"noopener\">direkt unter dem Suchfeld</a>, wo die meisten Browser bereits voreingestellt sind.",
 

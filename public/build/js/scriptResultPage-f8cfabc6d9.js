@@ -384,7 +384,7 @@ function addFocus (focus, active = false) {
   // create <a> icon
   var focusElementIcon = document.createElement('i')
   focusElementIcon.classList.add('fa')
-  focusElementIcon.classList.add('fa-cog')
+  focusElementIcon.classList.add('fa-star')
   focusElementIcon.setAttribute('aria-hidden', 'true')
   // create <span> focusname
   var focusElementName = document.createElement('span')

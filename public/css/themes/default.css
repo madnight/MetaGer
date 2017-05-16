@@ -7206,6 +7206,9 @@ textarea#message {
   margin-left: 5px;
   font-size: 12px;
 }
+.settings-btn + .settings-btn {
+  margin-left: 10px;
+}
 .wikiqtextract p {
   margin-bottom: 0;
 }
@@ -7268,6 +7271,24 @@ label a {
 label a:hover {
   text-decoration: none;
   color: inherit;
+}
+footer {
+  margin: 30px 0px;
+  bottom: 0;
+  width: 100%;
+}
+footer ul.list-inline {
+  width: 100%;
+}
+footer li {
+  width: 33%;
+  text-align: center;
+}
+footer img {
+  max-width: 100%;
+}
+main ul li:not(.lslide) {
+  margin: 0 10px;
 }
 .searchform-bonus {
   list-style-type: none;
@@ -7467,18 +7488,22 @@ a:hover {
   color: grey;
   padding: 8px 12px;
 }
-.resultpage-foki li.active a,
-.foki li.active a {
-  color: black;
-  background-color: white;
+.resultpage-foki li a i + span,
+.foki li a i + span {
+  margin-left: 5px;
 }
 .resultpage-foki li span,
 .foki li span {
   margin-left: 3px;
 }
-.resultpage-foki li.active span,
-.foki li.active span {
+.resultpage-foki li.active i + span,
+.foki li.active i + span {
   display: inline!important;
+}
+.resultpage-foki li.active a,
+.foki li.active a {
+  color: black;
+  background-color: white;
 }
 #spenden {
   white-space: nowrap;

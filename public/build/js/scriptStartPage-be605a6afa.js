@@ -87,7 +87,7 @@ function setSettings () {
     $('fieldset.mobile input#bilder').attr('id', 'angepasst')
     $('fieldset.mobile label#bilder-label').attr('id', 'anpassen-label')
     $('fieldset.mobile label#anpassen-label').attr('for', 'angepasst')
-    $('fieldset.mobile label#anpassen-label a.fa').attr('class', 'fa fa-cog')
+    $('fieldset.mobile label#anpassen-label i.fa').attr('class', 'fa fa-cog')
     $('fieldset.mobile label#anpassen-label span.content').html('angepasst')
   }
 }

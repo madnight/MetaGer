@@ -195,7 +195,6 @@ class LanguageController extends Controller
             }
         }
 
-        $t = [];
         $fn = "";
 
         #Wähle die erste Datei aus, welche nicht ausgeschlossen worden ist
@@ -209,29 +208,33 @@ class LanguageController extends Controller
                 }                
             }
         }
-        
-        #Speichere den Inhalt der ausgewählten Datei in Array $t ab
+
+        $snippets = [];
+
+        #Speichere den Inhalt der ausgewählten Datei in allen Sprachen in $snippets ab
         foreach($languageObjects as $folder => $languageObject) {
             foreach($languageObject->stringMap as $languageFileName => $languageFile) {
                 if($languageFileName === $fn) {
-                    $t[$languageObject->language] = $languageFile;
+                    foreach($languageFile as $key => $value) {
+                        $snippets[$key][$languageObject->language] = $value;      
+                    }
                     continue 2;
                 }
             }
         }
 
-        foreach($t as $language => $text) {
-           // foreach($text as $key => $value) {
-                echo("<p>");
-                var_dump($text);
-                echo("</p>");
-            //}
+        #Fülle $snippets auf mit leeren Einträgen für übrige Sprachen
+        foreach($to as $t) {
+            foreach($snippets as $key => $langArray) {
+                if(!isset($langArray[$t])) {
+                    $snippets[$key][$t] = "";
+                }
+            }
         }
-        die();
 
         return view('languages.synoptic')
             ->with('to', $to)           #Alle vorhandenen Sprachen
-            ->with('texts', $t)         #Array mit Sprachsnippets
+            ->with('texts', $snippets)         #Array mit Sprachsnippets
             ->with('filename', $fn)     #Name der Datei
             ->with('title', trans('titles.languages.edit'));
     }

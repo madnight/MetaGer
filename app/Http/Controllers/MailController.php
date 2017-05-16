@@ -204,11 +204,11 @@ class MailController extends Controller
 
         if ($new > 0) {
             if($emailAddress !== "") { 
-                Mail::to("aria@suma-ev.de")
+                Mail::to("dev@suma-ev.de")
                 ->send(new Sprachdatei($message, $output, basename($filename), $emailAddress));
             }
             else {
-                Mail::to("aria@suma-ev.de")
+                Mail::to("dev@suma-ev.de")
                 ->send(new Sprachdatei($message, $output, basename($filename)));
             }
         }

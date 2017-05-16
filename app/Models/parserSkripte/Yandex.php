@@ -23,6 +23,15 @@ class Yandex extends Searchengine
                 return;
             }
 
+            # let's check if the query got unquoted
+            # in that case we will ignore all results because that would mean
+            # a string search (query between "") was wished and no results for that foudn
+            $reask = $content->xpath("//yandexsearch/response/reask");
+            if(sizeof($reask) !== 0 && $reask[0]->{"rule"}->__toString()){
+                return;
+            }
+
+
             $results = $content->xpath("//yandexsearch/response/results/grouping/group");
             foreach ($results as $result) {
                 $title       = strip_tags($result->{"doc"}->{"title"}->asXML());

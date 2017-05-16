@@ -13,9 +13,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 		<meta rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<meta rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
-		<meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE" />
 		<link rel="search" type="application/opensearchdescription+xml" title="{{ trans('staticPages.opensearch') }}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
+		<link type="text/css" rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
 		<link type="text/css" rel="stylesheet" href="{{ elixir('css/themes/default.css') }}" />
 		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
 		@if (isset($css))
@@ -38,14 +37,14 @@
 				<li id="toggle-nav-hide" class="hidden">
 					<a class="metager-navbar-toggle pull-right" href="#" data-original-title="" title="">
 									<span class="sr-only">Navigation anzeigen</span>
-									<span class="glyphicon glyphicon-menu-hamburger"></span>
+									<i class="fa fa-bars" aria-hidden="true"></i>
 					</a>
 					<div class="clearfix"></div>
 				</li>
 				<li id="toggle-nav-show">
 					<a class="metager-navbar-toggle pull-right" href="#metager-static-nav-list" data-original-title="" title="">
 									<span class="sr-only">Navigation anzeigen</span>
-									<span class="glyphicon glyphicon-menu-hamburger"></span>
+									<i class="fa fa-bars" aria-hidden="true"></i>
 					</a>
 					<div class="clearfix"></div>
 				</li>
@@ -70,7 +69,7 @@
 							@if(LaravelLocalization::getCurrentLocale() === "de")
 							<li id="gutscheine"@if (isset($navbarFocus) && $navbarFocus === 'gutscheine') class="metager-dropdown active" @else class="metager-dropdown" @endif >
 								{!! trans('staticPages.gutscheineToggle') !!}
-								<a class="metager-dropdown-toggle" data-role="button" aria-expanded="false" tabindex="205"><span class="caret"></span></span>
+								<a class="metager-dropdown-toggle" data-role="button" aria-expanded="false" tabindex="205"><span class="caret"></span></a>
 								<ul class="metager-dropdown-menu">
 									<li>
 										<a href="https://metager.de/gutscheine/congstar/" tabindex="206" >{{ trans('staticPages.gutscheine.2') }}</a>

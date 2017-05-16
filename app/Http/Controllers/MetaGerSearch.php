@@ -11,6 +11,14 @@ class MetaGerSearch extends Controller
 {
     public function search(Request $request, MetaGer $metager)
     {
+        $focus = $request->input("focus", "web");
+        if ($focus !== "angepasst" && $this->startsWith($focus, "focus_")) {
+            $metager->parseFormData($request);
+            if ($metager->doBotProtection($request->input('bot', ""))) {
+                return redirect(LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), url("/noaccess", ['redirect' => base64_encode(url()->full())])));
+            }
+            return $metager->createView();
+        }
         #die($request->header('User-Agent'));
         $time = microtime();
         # Mit gelieferte Formulardaten parsen und abspeichern:
@@ -161,10 +169,15 @@ class MetaGerSearch extends Controller
 
             }
         }
-
+    /*
         # Wikipedia Quicktip
         $url             = "https://" . APP::getLocale() . ".wikipedia.org/w/api.php?action=opensearch&search=" . urlencode($q) . "&limit=10&namespace=0&format=json&redirects=resolve";
-        $decodedResponse = json_decode($this->get($url), true);
+    	try{
+    		$content = $this->get($url);
+    	}catch(\ErrorException $e){
+    		$content = "";
+    	}
+        $decodedResponse = json_decode($content, true);
         if (isset($decodedResponse[1][0]) && isset($decodedResponse[2][0]) && isset($decodedResponse[3][0])) {
             $quicktip     = [];
             $firstSummary = $decodedResponse[2][0];
@@ -190,7 +203,7 @@ class MetaGerSearch extends Controller
             $quicktips[] = $quicktip;
         }
         $mquicktips = array_merge($mquicktips, $quicktips);
-
+    */
         if (APP::getLocale() === "de") {
             # Dict.cc Quicktip
             if (count(explode(' ', $q)) < 3) {
@@ -253,6 +266,13 @@ class MetaGerSearch extends Controller
 
     public function get($url)
     {
-        return file_get_contents($url);
+	   $ctx = stream_context_create(array('http'=>array('timeout' => 2,)));
+        return file_get_contents($url, false, $ctx);
+    }
+
+    private function startsWith($haystack, $needle)
+    {
+        $length = strlen($needle);
+        return (substr($haystack, 0, $length) === $needle);
     }
 }

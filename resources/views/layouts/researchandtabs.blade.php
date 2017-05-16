@@ -21,7 +21,7 @@
 							<div class="input-group">
 								<input autocomplete="off" class="form-control" form="submitForm" id="eingabeTop" name="eingabe" placeholder="Suchbegriffe erweitern/verändern, oder völlig neue Suche:" tabindex="1" type="text" value="{{ $eingabe }}" required />
 								<div class="input-group-addon">
-									<button type='submit' form="submitForm" id='search'><span class="glyphicon glyphicon-search"></span>
+									<button type='submit' form="submitForm" id='search'><i class="fa fa-search" aria-hidden="true"></i>
 									</button>
 								</div>
 							</div>
@@ -35,19 +35,19 @@
 				</div>
 			</div>
 		</nav>
-		<ul class="nav nav-tabs" id="foki" role="tablist">
+		<ul id="foki" class=" resultpage-foki nav nav-tabs" role="tablist">
 
 			@if( $metager->getFokus() === "web" )
 				<li id="webTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
 					<a aria-controls="web" data-href="#web" href="#web">
-						<span class='glyphicon glyphicon-globe'></span>
+						<i class="fa fa-globe" aria-hidden="true"></i>
 						<span class="hidden-xs">{{ trans('index.foki.web') }}</span>
 					</a>
 				</li>
 			@else
 				<li data-loaded="0" id="webTabSelector" class="tab-selector" role="presentation">
 					<a aria-controls="web" data-href="{!! $metager->generateSearchLink('web') !!}" href="{!! $metager->generateSearchLink('web', false) !!}">
-						<span class='glyphicon glyphicon-globe'></span>
+						<i class="fa fa-globe" aria-hidden="true"></i>
 						<span class="hidden-xs">{{ trans('index.foki.web') }}</span>
 					</a>
 				</li>
@@ -56,14 +56,14 @@
 			@if( $metager->getFokus() === "bilder" )
 				<li id="bilderTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
 					<a aria-controls="bilder" data-href="#bilder" href="#bilder">
-						<span class='glyphicon glyphicon-picture'></span>
+						<i class="fa fa-picture-o" aria-hidden="true"></i>
 						<span class="hidden-xs">{{ trans('index.foki.bilder') }}</span>
 					</a>
 				</li>
 			@else
 				<li data-loaded="0" id="bilderTabSelector" class="tab-selector" role="presentation">
 					<a aria-controls="bilder" data-href="{!! $metager->generateSearchLink('bilder') !!}" href="{!! $metager->generateSearchLink('bilder', false) !!}">
-						<span class='glyphicon glyphicon-picture'></span>
+						<i class="fa fa-picture-o" aria-hidden="true"></i>
 						<span class="hidden-xs">{{ trans('index.foki.bilder') }}</span>
 					</a>
 				</li>
@@ -72,14 +72,14 @@
 			@if( $metager->getFokus() === "nachrichten" )
 				<li id="nachrichtenTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
 					<a aria-controls="nachrichten" data-href="#nachrichten" href="#nachrichten">
-						<span class='glyphicon glyphicon-bullhorn'></span>
+						<i class="fa fa-bullhorn" aria-hidden="true"></i>
 						<span class="hidden-xs">{{ trans('index.foki.nachrichten') }}</span>
 					</a>
 				</li>
 			@else
 				<li data-loaded="0" id="nachrichtenTabSelector" class="tab-selector" role="presentation" >
 					<a aria-controls="nachrichten" data-href="{!! $metager->generateSearchLink('nachrichten') !!}" href="{!! $metager->generateSearchLink('nachrichten', false) !!}">
-						<span class='glyphicon glyphicon-bullhorn'></span>
+						<i class="fa fa-bullhorn" aria-hidden="true"></i>
 						<span class="hidden-xs">{{ trans('index.foki.nachrichten') }}</span>
 					</a>
 				</li>
@@ -88,14 +88,14 @@
 			@if( $metager->getFokus() === "wissenschaft" )
 				<li id="wissenschaftTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
 					<a aria-controls="wissenschaft" data-href="#wissenschaft" href="#wissenschaft">
-						<span class='glyphicon glyphicon-file'></span>
+						<i class="fa fa-file-text" aria-hidden="true"></i>
 						<span class="hidden-xs">{{ trans('index.foki.wissenschaft') }}</span>
 					</a>
 				</li>
 			@else
 				<li data-loaded="0" id="wissenschaftTabSelector" class="tab-selector" role="presentation">
 					<a aria-controls="wissenschaft" data-href="{!! $metager->generateSearchLink('wissenschaft') !!}" href="{!! $metager->generateSearchLink('wissenschaft', false) !!}">
-						<span class='glyphicon glyphicon-file'></span>
+						<i class="fa fa-file-text" aria-hidden="true"></i>
 						<span class="hidden-xs">{{ trans('index.foki.wissenschaft') }}</span>
 					</a>
 				</li>
@@ -104,14 +104,14 @@
 			@if( $metager->getFokus() === "produktsuche" )
 				<li id="produktsucheTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
 					<a aria-controls="produktsuche" data-href="#produktsuche" href="#produktsuche">
-						<span class='glyphicon glyphicon-shopping-cart'></span>
+						<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 						<span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
 					</a>
 				</li>
 			@else
 				<li data-loaded="0" id="produktsucheTabSelector" class="tab-selector" role="presentation" >
 					<a aria-controls="produktsuche" data-href="{!! $metager->generateSearchLink('produktsuche') !!}" href="{!! $metager->generateSearchLink('produktsuche', false) !!}">
-						<span class='glyphicon glyphicon-shopping-cart'></span>
+						<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 						<span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
 					</a>
 				</li>
@@ -121,7 +121,7 @@
 			@if( $metager->getFokus() === "angepasst" )
 				<li id="angepasstTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
 					<a aria-controls="angepasst" data-href="#angepasst" href="#angepasst">
-						<span class='glyphicon glyphicon-cog'></span>
+						<i class="fa fa-cog" aria-hidden="true"></i>
 						<span class="hidden-xs">{{ trans('index.foki.angepasst') }}</span>
 					</a>
 				</li>
@@ -129,7 +129,7 @@
 
 			<li id="mapsTabSelector" role="presentation" class="tab-selector">
 				<a href="https://maps.metager.de/map/{{ $metager->getQ() }}/-6.781309835595698/44.85855550132342/33.9779675081543/58.25372144666716" target="_blank">
-					<span class='glyphicon glyphicon-map-marker'></span>
+					<i class="fa fa-map-marker" aria-hidden="true"></i>
 					<span class="hidden-xs">{!! trans('index.foki.maps') !!}</span>
 				</a>
 			</li>

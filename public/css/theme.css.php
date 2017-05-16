@@ -25,7 +25,7 @@ input[type=text]:focus, textarea:focus, input[type=email]:focus, input[type=tel]
 	-webkit-box-shadow: 0px 0px 2px 2px <?=$colorRGBA?>;
 	-moz-box-shadow: 0px 0px 2px 2px <?=$colorRGBA?>;
 	box-shadow: 0px 0px 2px 2px <?=$colorRGBA?>;
-	border-color: <?=$color?>;
+    border-color: <?=$colorRGBA?>;
 }
 
 #mglogo > a {
@@ -61,6 +61,6 @@ input[type=text]:focus, textarea:focus, input[type=email]:focus, input[type=tel]
     box-shadow: none;
 }
 
-.lSPrev > span, .lSNext > span {
+.lSPrev > i, .lSNext > i {
 	color: <?=$color?>;
 }

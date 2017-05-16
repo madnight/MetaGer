@@ -1,19 +1,21 @@
-#map, #map div{
-    display:flex;
-    margin:0;
+#map,
+#map div {
+    display: flex;
+    margin: 0;
 }
 
-.nav-tabs > li > a {
--webkit-border-radius: 0;
--moz-border-radius: 0;
-border-radius: 0;
+.nav-tabs>li>a {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 }
 
 .tab-content {
     padding-top: 10px;
 }
 
-.hostlabel a:link, .hostlabel a:visited {
+.hostlabel a:link,
+.hostlabel a:visited {
     color: #FFFFFF;
 }
 
@@ -29,10 +31,10 @@ border-radius: 0;
 }
 
 .tab-pane.active {
-    -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.55);
     padding: 10px 0;
     padding-top: 0;
 }
+
 
 /* Hier der Style für unsere Suchleiste */
 
@@ -41,7 +43,7 @@ border-radius: 0;
     left: initial;
     margin-bottom: 0px;
 }
- 
+
 @media (max-width: @screen-xs-max) {
     .navbar-resultpage {
         right: 0px!important;
@@ -67,15 +69,15 @@ border-radius: 0;
 .navbar-resultpage .logo {
     padding-top: 0px;
 }
+
 .navbar-resultpage .input-group {
     margin: 0px 5px;
 }
 
-
-
 .dense-col {
     padding: 0px
 }
+
 
 /* Logo */
 
@@ -84,7 +86,7 @@ border-radius: 0;
     padding: 5px 0;
 }
 
-.logo > a {
+.logo>a {
     line-height: 100%;
     height: 100%;
     display: block;
@@ -120,15 +122,14 @@ nav .input-group {
     vertical-align: middle;
 }*/
 
-#research nav ul > li {
-    width: 20%;
-    //height: 45px;
+#research nav ul>li {
+    width: 20%; //height: 45px;
     vertical-align: middle;
     padding-left: 15px;
     padding-right: 15px;
 }
 
-#research nav ul > li.visible-xs {
+#research nav ul>li.visible-xs {
     width: 10%;
     padding-left: 15px;
     padding-right: 15px;
@@ -176,9 +177,8 @@ body {
     background-color: rgba(2, 93, 140, .03);
 }
 
-a#donation:hover {}
-
-a#donation, a#donation:visited {
+a#donation,
+a#donation:visited {
     color: inherit;
 }
 
@@ -198,25 +198,32 @@ a:hover {
 
 /* Hier der Style für unsere Tabliste */
 
-#foki {
+.resultpage-foki,
+.foki {
     background-color: white;
-}
-
-#foki li a {
-    color: grey;
-}
-
-#foki li.active a {
-    color: black;
-    background-color: white;
-}
-
-#foki li.active i + span {
-    display: inline!important;
-}
-
-#foki li a i + span {
-    margin-left: 5px;
+    li {
+        margin: 0px;
+        margin-bottom: -1px;
+        a {
+            color: grey;
+            padding: 8px 12px;
+            i + span {
+                margin-left: 5px;
+            }
+        }
+        span {
+            margin-left: 3px;
+        }
+        &.active {
+            i + span {
+                display: inline!important;
+            }
+            a {
+                color: black;
+                background-color: white;
+            }
+        }
+    }
 }
 
 #spenden {
@@ -232,11 +239,11 @@ a:hover {
     color: #333333;
 }
 
-#spruch > p {
+#spruch>p {
     margin-bottom: 0;
 }
 
-#spruch > p + p {
+#spruch>p+p {
     margin-top: 4px;
 }
 
@@ -248,13 +255,13 @@ a:hover {
     width: 100%
 }
 
-.result > .number {
+.result>.number {
     font-size: 15px;
     line-height: 1;
     text-align: right;
 }
 
-.result > .resultInformation {
+.result>.resultInformation {
     border-radius: 5px;
 }
 
@@ -285,11 +292,11 @@ a:hover {
     float: left;
 }
 
-.result .link > div {
+.result .link>div {
     white-space: nowrap;
 }
 
-.result .link > span {
+.result .link>span {
     white-space: nowrap;
     margin: 0 5px;
 }
@@ -299,19 +306,20 @@ a:hover {
     float: left;
 }
 
+
 /*
 .result .link:hover {
     cursor: pointer;
 }*/
 
-.result .link .options > a {
+.result .link .options>a {
     color: #333;
     display: block;
     padding-left: 5px;
     padding-right: 5px;
 }
 
-.result .link .options > a > span {
+.result .link .options>a>span {
     font-size: 10px;
 }
 
@@ -357,7 +365,7 @@ a:hover {
     color: #333;
 }
 
-.result .result-image > img {
+.result .result-image>img {
     height: 100px;
     padding: 10px;
 }
@@ -383,22 +391,22 @@ a:hover {
     margin: 0!important;
 }
 
-.result .image > img {
+.result .image>img {
     max-width: 100%;
 }
 
-.options-list > li:hover {
+.options-list>li:hover {
     background-color: lightgrey;
 }
 
-.options-list > li > a {
+.options-list>li>a {
     color: #333;
     white-space: nowrap;
     display: block;
     padding: 5px 14px;
 }
 
-.options-list > li input[type=submit] {
+.options-list>li input[type=submit] {
     width: 100%;
     background-color: transparent;
     border: 0;
@@ -449,7 +457,7 @@ footer a {
     margin-top: 20px;
 }
 
-.loader > img {
+.loader>img {
     width: 30px;
 }
 
@@ -466,12 +474,12 @@ footer a {
     width: 25%;
 }
 
-#searchplugin > div {
+#searchplugin>div {
     text-align: center;
     padding-top: 5px;
 }
 
-#searchplugin > div > a {
+#searchplugin>div>a {
     color: white;
 }
 
@@ -527,7 +535,16 @@ footer a {
     overflow: visible!important;
 }
 
-.lSPrev > span, .lSNext > span {
+#products {
+    width: 100%;
+    height: 210px;
+    padding-bottom: 0;
+    transform: translate3d(0px,0px,0px);
+    margin-bottom: 10px;
+}
+
+.lSPrev>i,
+.lSNext>i {
     background-color: black;
     padding: 5px;
 }
@@ -540,8 +557,16 @@ footer a {
     margin-left: 3px;
 }
 
+.product {
+    height: 210px;
+}
+
 .product img {
     max-width: 100px;
+}
+
+.result .description img {
+    border: solid 1px #eeeeee;
 }
 
 @media(max-width: @screen-xs-max) {

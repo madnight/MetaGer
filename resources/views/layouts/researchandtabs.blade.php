@@ -21,7 +21,7 @@
 							<div class="input-group">
 								<input autocomplete="off" class="form-control" form="submitForm" id="eingabeTop" name="eingabe" placeholder="Suchbegriffe erweitern/verändern, oder völlig neue Suche:" tabindex="1" type="text" value="{{ $eingabe }}" required />
 								<div class="input-group-addon">
-									<button type='submit' form="submitForm" id='search'><i class="fa fa-search" aria-hidden="true"></i></span>
+									<button type='submit' form="submitForm" id='search'><i class="fa fa-search" aria-hidden="true"></i>
 									</button>
 								</div>
 							</div>
@@ -35,7 +35,7 @@
 				</div>
 			</div>
 		</nav>
-		<ul class="nav nav-tabs" id="foki" role="tablist">
+		<ul id="foki" class=" resultpage-foki nav nav-tabs" role="tablist">
 
 			@if( $metager->getFokus() === "web" )
 				<li id="webTabSelector" role="presentation" data-loaded="1" class="active tab-selector">

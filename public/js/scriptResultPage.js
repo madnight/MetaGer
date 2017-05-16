@@ -1,8 +1,9 @@
 $(document).ready(function () {
-  createCustomFocuses()
-  var focus = $('#foki > li.active > a').attr('aria-controls')
-  var custom = $('#foki > li.active').hasClass('custom-focus-tab-selector')
-  getDocumentReadyForUse(focus, custom)
+    createCustomFocuses();
+  var focus = $('#foki > li.active > a').attr('aria-controls');
+  var custom = $('#foki > li.active').hasClass('custom-focus-tab-selector');
+  getDocumentReadyForUse(focus, custom);
+  botProtection();
 })
 
 function tabs () {
@@ -31,18 +32,18 @@ function tabs () {
 }
 
 function getDocumentReadyForUse (fokus, custom = false) {
-  clickLog()
-  popovers()
-  if (fokus === 'bilder') imageLoader()
-  if (custom) initialLoadContent(fokus)
+  clickLog();
+  popovers();
+  if (fokus === 'bilder') imageLoader();
+  if (custom) initialLoadContent(fokus);
   // pagination()
-  tabs()
-  theme()
-  fokiChanger()
-  pluginInfo()
-  productWidget()
-  $('iframe:not(.resized)').iFrameResize()
-  $('iframe').addClass('resized')
+  tabs();
+  theme();
+  fokiChanger();
+  pluginInfo();
+  productWidget();
+  $('iframe:not(.resized)').iFrameResize();
+  $('iframe').addClass('resized');
 }
 
 function pluginInfo () {
@@ -83,6 +84,14 @@ function clickLog () {
       url: $(this).attr('href')
     })
   })
+}
+
+function botProtection() {
+    if ($("meta[name=pqr]").length > 0) {
+        var link = atob($("meta[name=pqr]").attr("content"));
+        var hash = $("meta[name=pq]").attr("content");
+        document.location.href = link + "&bot=" + hash;
+    }
 }
 
 function popovers () {
@@ -229,7 +238,7 @@ function productWidget () {
       easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
       speed: 600,
       pager: false,
-      prevHtml: '<i class="fa fa-chevron-left" aria-hidden="true"></i></span><span class="sr-only">Previous</span>',
+      prevHtml: '<i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>',
       nextHtml: '<i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span>',
       responsive: [{
         breakpoint: 1400,
@@ -273,8 +282,8 @@ function productWidget () {
       pager: false,
       enableTouch: false,
       enableDrag: false,
-      prevHtml: '<a class="fa fa-chevron-left" aria-hidden="true"></a><span class="sr-only">Previous</span>',
-      nextHtml: '<a class="fa fa-chevron-right" aria-hidden="true"></a><span class="sr-only">Next</span>',
+      prevHtml: '<i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>',
+      nextHtml: '<i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span>',
       responsive: [{
         breakpoint: 1400,
         settings: {

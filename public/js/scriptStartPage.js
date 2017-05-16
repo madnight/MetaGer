@@ -49,8 +49,8 @@ function setActionListeners () {
   $('#addFocusBtn').click(function () {
     showFocusCreateDialog('')
   })
-  $('#save-focus-btn').click(saveFocus)
-  $('#delete-focus-btn').click(deleteFocus)
+  $('.save-focus-btn').click(saveFocus);
+  $('.delete-focus-btn').click(deleteFocus);
   $('#focus-name').keyup(function (event) {
     if (event.keyCode == 13) {
       $('#save-focus-btn').click()
@@ -197,7 +197,10 @@ function loadInitialCustomFocuses () {
  * Shows the focus create dialog
  * If an id is given it will try to load a focus for the given id
  */
-function showFocusCreateDialog (id = '') {
+function showFocusCreateDialog (id) {
+  if(id === undefined){
+    id = '';
+  }
   document.getElementById('original-id').value = id
   $('#create-focus-modal').modal('show')
   var storedFocus = loadFocusById(id)
@@ -352,7 +355,7 @@ function addFocus (name) {
   newFocusEditLinkIcon.classList.add('fa-pencil')
   newFocusEditLinkIcon.setAttribute('aria-hidden', 'true')
   // add new elements
-  var addFocusBtn = document.getElementById('addFocusBtn')
+  var addFocusBtn = document.getElementById('addFocusBtnDiv')
   foki.insertBefore(wrapper, addFocusBtn)
   wrapper.appendChild(newFocus)
   wrapper.appendChild(newFocusLabel)

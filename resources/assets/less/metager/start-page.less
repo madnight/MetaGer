@@ -7,34 +7,34 @@
     color: #333;
 }
 
+.startpage-foki, .foki{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    input {
+        visibility: hidden;
+        &+.custom-focus-label {
+            border-radius: @foki-edge-rounding 0px 0px @foki-edge-rounding;
+        }
+        &+.custom-focus-label+.custom-focus-edit {
+            margin-left: 5px;
+            display: inline-block;
+            border-radius: 0px @foki-edge-rounding @foki-edge-rounding 0px;
+        }
+    }
+    label {
+        & span {
+            background-color: transparent;
+        }
+    }
+}
+
 .focus {
     margin: 0px;
 }
 
 .focus~.focus {
     margin-left: 10px;
-}
-
-#foki {
-    display: flex;
-    flex-wrap: wrap;
-    input+.custom-focus-label {
-        border-radius: @foki-edge-rounding 0px 0px @foki-edge-rounding;
-    }
-    input+.custom-focus-label+.custom-focus-edit {
-        margin-left: 5px;
-        display: inline-block;
-        border-radius: 0px @foki-edge-rounding @foki-edge-rounding 0px;
-    }
-    label>span {
-        margin-right: 5px;
-    }
-    label span {
-        background-color: transparent;
-    }
-    input {
-        visibility: hidden;
-    }
 }
 
 .focus-radio:checked {
@@ -60,13 +60,26 @@
     }
 }
 
-#addFocusBtn {
+#addFocusBtnDiv {
     margin-left: 10px;
 }
 
-#settings-btn {
-    margin-left: auto;
+#settingsBtnDiv {
+    margin-left: 10px;
     &>* {
         vertical-align: middle;
     }
+}
+
+.searchform-bonus {
+    li {
+        margin: 5px;
+    }
+}
+
+.settings-modal-buttons {
+	padding: 5px;
+	button {
+		margin: 5px
+	}
 }

@@ -5,7 +5,7 @@
 @section('navbarFocus.donate', 'class="dropdown active"')
 
 @section('content')
-	<link type="text/css" rel="stylesheet" href="{{ mix('/css/beitritt.css') }}" />
+	<link type="text/css" rel="stylesheet" href="{{ elixir('/css/beitritt.css') }}" />
 	<h1>{{ trans('beitritt.heading.1') }}</h1>
 	<form>
 		<div class="form-group beitritt-form-group">

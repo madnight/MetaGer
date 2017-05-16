@@ -7,7 +7,8 @@
     color: #333;
 }
 
-.startpage-foki, .foki{
+.startpage-foki,
+.foki {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -31,10 +32,16 @@
 
 .focus {
     margin: 0px;
-}
-
-.focus~.focus {
-    margin-left: 10px;
+    &~.focus {
+        margin-left: 10px;
+    }
+    &:hover {
+        .focus-label,
+        .focus-edit {
+            cursor: pointer;
+            background-color: #e3e3e3;
+        }
+    }
 }
 
 .focus-radio:checked {
@@ -50,14 +57,6 @@
     border-radius: 7px;
     padding: 7px;
     font-weight: normal;
-}
-
-.focus:hover {
-    .focus-label,
-    .focus-edit {
-        cursor: pointer;
-        background-color: #e3e3e3;
-    }
 }
 
 #addFocusBtnDiv {
@@ -78,8 +77,8 @@
 }
 
 .settings-modal-buttons {
-	padding: 5px;
-	button {
-		margin: 5px
-	}
+    padding: 5px;
+    button {
+        margin: 5px
+    }
 }

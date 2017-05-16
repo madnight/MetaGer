@@ -7717,6 +7717,7 @@ footer a {
   border: 1px dotted lightgrey;
   padding: 5px;
   max-width: 150px;
+  height: 210px;
 }
 .product a {
   color: #333;
@@ -7772,9 +7773,6 @@ footer a {
 }
 #mark a {
   margin-left: 3px;
-}
-#mark .product {
-  height: 210px;
 }
 .result .description img {
   border: solid 1px #eeeeee;

@@ -1,17 +1,8 @@
 {
-<<<<<<< HEAD
   "js/editLanguage.js": "js/editLanguage-7a1cbfb2ba.js",
   "js/kontakt.js": "js/kontakt-de49d68db3.js",
-  "js/scriptResultPage.js": "js/scriptResultPage-74eb359e72.js",
-  "js/scriptStartPage.js": "js/scriptStartPage-330e649107.js",
+  "js/scriptResultPage.js": "js/scriptResultPage-e3ad18a4a0.js",
+  "js/scriptStartPage.js": "js/scriptStartPage-f63fab5e8d.js",
   "js/settings.js": "js/settings-6ff0eab621.js",
   "js/widgets.js": "js/widgets-866379dd63.js"
-=======
-  "js/editLanguage.js": "js/editLanguage-1ce447084a.js",
-  "js/kontakt.js": "js/kontakt-9365c46d5a.js",
-  "js/scriptResultPage.js": "js/scriptResultPage-fb8443e82a.js",
-  "js/scriptStartPage.js": "js/scriptStartPage-5e21fefbc8.js",
-  "js/settings.js": "js/settings-0af8170dff.js",
-  "js/widgets.js": "js/widgets-40195be855.js"
->>>>>>> development
 }

@@ -813,39 +813,41 @@ class MetaGer
 
     public function waitForResults($enginesToLoad, $overtureEnabled, $canBreak)
     {
-        $loadedEngines = 0;
+
         $timeStart     = microtime(true);
-
-        # Auf wie viele Suchmaschinen warten wir?
-        $engineCount = count($enginesToLoad);
-
+        $results = null;
         while (true) {
-            $time          = (microtime(true) - $timeStart) * 1000;
-            $loadedEngines = intval(Redis::hlen('search.' . $this->getHashCode()));
-            if ($overtureEnabled && (Redis::hexists('search.' . $this->getHashCode(), 'overture') || Redis::hexists('search.' . $this->getHashCode(), 'overtureAds'))) {
-                $canBreak = true;
+            $results = Redis::hgetall('search.' . $this->getHashCode());
+
+            $ready = true;
+            // When every 
+            $connected = true;
+            foreach($results as $key => $value){
+                if($value === "waiting" || $value === "connected"){
+                    $ready = false;
+                }
+                if($value === "waiting"){
+                    $connected = false;
+                }
             }
 
-            # Abbruchbedingung
-            if ($time < 500) {
-                if (($engineCount === 0 || $loadedEngines >= $engineCount) && $canBreak) {
-                    break;
-                }
+            // If $ready is false at this point, we're waiting for more searchengines
+            // But we have to check for the timeout, too
+            if(!$connected) $timeStart = microtime(true);
+            $time = (microtime(true) - $timeStart) * 1000;
+            // We will apply the timeout only if it's not Yahoo we're waiting for since they are one the most
+            // important search engines.
+            $canTimeout = !((isset($results["overture"]) && $results["overture"] === "waiting") || (isset($results["overtureAds"]) && $results["overtureAds"] === "waiting"));
+            if($time > $this->time && $canTimeout) $ready = true;
 
-            } elseif ($time >= 500 && $time < $this->time) {
-                if (($engineCount === 0 || ($loadedEngines / ($engineCount * 1.0)) >= 0.8) && $canBreak) {
-                    break;
-                }
-
-            } else {
+            if($ready){
                 break;
             }
             usleep(50000);
         }
 
         # Wir haben nun so lange wie möglich gewartet. Wir registrieren nun noch die Suchmaschinen, die geanwortet haben.
-        $answered = Redis::hgetall('search.' . $this->getHashCode());
-        foreach ($answered as $key => $value) {
+        foreach ($results as $key => $value) {
             $enginesToLoad[$key] = true;
         }
         $this->enginesToLoad = $enginesToLoad;
@@ -882,7 +884,7 @@ class MetaGer
     {
         $this->request = $request;
         # Sichert, dass der request in UTF-8 formatiert ist
-        if ($request->input('encoding', '') !== "utf8") {
+        if ($request->input('encoding', 'utf8') !== "utf8") {
             # In früheren Versionen, als es den Encoding Parameter noch nicht gab, wurden die Daten in ISO-8859-1 übertragen
             $input = $request->all();
             foreach ($input as $key => $value) {
@@ -921,7 +923,7 @@ class MetaGer
         # Category
         $this->category = $request->input('category', '');
         # Request Times
-        $this->time = $request->input('time', 1000);
+        $this->time = $request->input('time', 1500);
         # Page
         $this->page = 1;
         # Lang

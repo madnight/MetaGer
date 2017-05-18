@@ -121,7 +121,6 @@ class MailController extends Controller
     public function isEdited($k, $v, $filename)
     {
         $temp = include resource_path()."/".$filename;
-
         foreach ($temp as $key => $value) {
             if($k === $key && $v !== $value) {
                 return true;
@@ -219,6 +218,7 @@ class MailController extends Controller
 
 
     public function downloadModifiedLanguagefiles(Request $request, $exclude = "") {
+
         $filename = $request->input('filename');
         # Wir erstellen nun zunächst den Inhalt der Datei:
         $data = [];
@@ -230,17 +230,15 @@ class MailController extends Controller
             if ($key === "filename" || $value === "") {
                 continue;
             }
-            if($key === "email") {
-                $emailAddress = $value;
-                continue;
-            }
             $key = base64_decode($key);
+            #Pfad zur Datei anhand des Schlüsselnamens rekonstruieren (Schlüssel enthält Sprachkürzel)
+            $filename = "languages/".substr($key, strpos($key, "/_\w\w_/"), strripos($key, "_"))."/".$filename;
             if (strpos($key, "_new_") === 0 && $value !== "") {
                 $new++;
-                $key = substr($key, strpos($key, "_new_") + 5);
+                $key = preg_filter("/_\w*_/", "", $key);
                 $editedKeys = $editedKeys."\n".$key;
 
-            }
+            }   
             else if ($this->isEdited($key, $value, $filename)) {
                 $new++;
                 $editedKeys = $editedKeys."\n".$key;
@@ -293,8 +291,6 @@ class MailController extends Controller
             
         }
 
-       // var_dump($ex);
-        //die();
         $ex = base64_encode(serialize($ex));
 
         return redirect(url('synoptic', ['exclude' => $ex]));

@@ -204,11 +204,11 @@ class MailController extends Controller
 
         if ($new > 0) {
             if($emailAddress !== "") { 
-                Mail::to("dev@suma-ev.de")
+                Mail::to("aria@suma-ev.de")
                 ->send(new Sprachdatei($message, $output, basename($filename), $emailAddress));
             }
             else {
-                Mail::to("dev@suma-ev.de")
+                Mail::to("aria@suma-ev.de")
                 ->send(new Sprachdatei($message, $output, basename($filename)));
             }
         }
@@ -216,4 +216,91 @@ class MailController extends Controller
 
         return redirect(url('languages/edit', ['from' => $from, 'to' => $to, 'exclude' => $ex, 'email' => $emailAddress]));
     }
+
+
+    public function downloadModifiedLanguagefiles(Request $request, $exclude = "") {
+        $filename = $request->input('filename');
+        # Wir erstellen nun zunächst den Inhalt der Datei:
+        $data = [];
+        $new  = 0;
+        $emailAddress = "";
+        $editedKeys = "";
+        foreach ($request->all() as $key => $value) {
+
+            if ($key === "filename" || $value === "") {
+                continue;
+            }
+            if($key === "email") {
+                $emailAddress = $value;
+                continue;
+            }
+            $key = base64_decode($key);
+            if (strpos($key, "_new_") === 0 && $value !== "") {
+                $new++;
+                $key = substr($key, strpos($key, "_new_") + 5);
+                $editedKeys = $editedKeys."\n".$key;
+
+            }
+            else if ($this->isEdited($key, $value, $filename)) {
+                $new++;
+                $editedKeys = $editedKeys."\n".$key;
+            }
+
+            $key = trim($key);
+            if (!strpos($key, "#")) {
+                $data[$key] = $value;
+            } else {
+                $ref = &$data;
+                do {
+                    $ref = &$ref[substr($key, 0, strpos($key, "#"))];
+                    $key = substr($key, strpos($key, "#") + 1);
+                } while (strpos($key, "#"));
+                $ref = &$ref[$key];
+                $ref = $value;
+            }
+        }
+
+        $output = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $output = preg_replace("/\{/si", "[", $output);
+        $output = preg_replace("/\}/si", "]", $output);
+        $output = preg_replace("/\": ([\"\[])/si", "\"\t=>\t$1", $output);
+        
+        $output = "<?php\n\nreturn $output;\n";
+
+        $message = "Moin moin,\n\nein Benutzer hat eine Sprachdatei aktualisiert.\nBearbeitet wurden die Einträge: $editedKeys\n\nSollten die Texte so in Ordnung sein, ersetzt, oder erstellt die Datei aus dem Anhang in folgendem Pfad:\n$filename\n\nFolgend zusätzlich der Inhalt der Datei:\n\n$output";
+
+        # Wir haben nun eine Mail an uns geschickt, welche die entsprechende Datei beinhaltet.
+        # Nun müssen wir den Nutzer eigentlich nur noch zurück leiten und die Letzte bearbeitete Datei ausschließen:
+        $ex = [];
+        if ($exclude !== "") {
+            try {
+                $ex = unserialize(base64_decode($exclude));
+            } catch (\ErrorException $e) {
+                $ex = [];
+            }
+
+            if (!isset($ex["files"])) {
+                $ex["files"] = [];
+            }
+        }
+        if (!isset($ex["new"])) {
+            $ex["new"] = 0;
+        }
+        $ex['files'][] = basename($filename);
+        $ex["new"] += $new;
+
+        if ($new > 0) {
+            
+        }
+
+       // var_dump($ex);
+        //die();
+        $ex = base64_encode(serialize($ex));
+
+        return redirect(url('synoptic', ['exclude' => $ex]));
+
+    }
+
+
+
 }

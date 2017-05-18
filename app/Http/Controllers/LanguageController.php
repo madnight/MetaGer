@@ -200,13 +200,18 @@ class LanguageController extends Controller
         #Wähle die erste Datei aus, welche nicht ausgeschlossen worden ist
         foreach($languageObjects as $folder => $languageObject) {
             foreach($languageObject->stringMap as $languageFileName => $languageFile) {
-                if(isset($ex[$languageFileName])) {
-                    continue 2;
-                } else {
-                    $fn = $languageFileName;
-                    break 2;
-                }                
+                foreach($ex['files'] as $file) {
+                    if($file === $languageFileName) {
+                        continue 2;
+                    }
+                }
+                $fn = $languageFileName;
+                break 2;            
             }
+        }
+
+        if($fn === "") {
+            //Alles bearbeitet -> zeige entsprechende Nachricht
         }
 
         $snippets = [];

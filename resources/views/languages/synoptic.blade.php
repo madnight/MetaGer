@@ -31,21 +31,27 @@
 				<tr> <!--Key -->
 				<td class="name language-name">{{preg_replace("/(\s*).*#(.*)$/si", "$1$2", $key)}}</td>
 				@foreach($language as $lang => $languageValue)
-					<td>
-						<textarea class="language-text-area" rows="1" cols="50" form="submit" name="{{base64_encode("_new_" . $key)}}">{{ $languageValue }} </textarea>
-					</td>
+					@if($lang === "de")
+						<td>
+							<textarea class="language-text-area" rows="1" readonly cols="20" form="submit" name="{{base64_encode("_new_".$lang."_".$key)}}">{{ $languageValue }} </textarea>
+						</td>
+					@else
+						<td>
+							<textarea class="language-text-area" rows="1" cols="20" form="submit" name="{{base64_encode("_new_".$lang."_".$key)}}">{{ $languageValue }} </textarea>
+						</td>
+					@endif
 				@endforeach
 				</tr>
 			@endforeach
 		</tbody>  
 
 	</table>
-	<!--
+<!--
 	<p>{{ trans('languages.hinweis.1') }}</p>
 	<p>{!! trans('languages.hinweis.2') !!}</p>
 	<p>{!! trans('languages.hinweis.3') !!}</p>
 	<p>{!! trans('languages.email') !!}</p>
-	-->
+-->
 	<button class="btn btn-success" type="submit" form="submit">Daten übermitteln</button>
 	<script type="text/javascript" src="{{ elixir('js/lib.js') }}"></script>
 	<script type="text/javascript" src="{{ elixir('js/editLanguage.js') }}"></script>

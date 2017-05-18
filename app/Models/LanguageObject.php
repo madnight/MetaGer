@@ -3,7 +3,7 @@
 namespace App\Models;
 
 /*
-*	Beinhaltet zu je einer Sprache Angaben zum Pfad der jeweiligen Datei, sowie die vorhandenen Übersetzungen
+*	Hilfsklasse, welche zu je einer Sprache Angaben zum Pfad der jeweiligen Datei, sowie die vorhandenen Übersetzungen enthält
 */
 class LanguageObject 
 {

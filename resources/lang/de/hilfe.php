@@ -11,7 +11,7 @@ return [
     "allgemein.3"                    => "Ein Plugin für die allermeisten Browser finden Sie <a href=\"/#plugin-modal\" target=\"_blank\" rel=\"noopener\">direkt unter dem Suchfeld</a>, wo die meisten Browser bereits voreingestellt sind.",
 
     "suchfokus.title"                => "Auswahl des Suchfokus",
-    "suchfokus.1"                    => "Über dem Suchfeld finden Sie fünf Sucheinstellungen, die für die meisten Suchwünsche genügen ( \"Web\", \"Bilder\", \"Nachrichten\", \"Wissenschaft\" sowie \"Produkte\" ).",
+    "suchfokus.1"                    => "Über dem Suchfeld finden Sie fünf Sucheinstellungen, die für die meisten Suchwünsche genügen ( „Web“, „Bilder“, „Nachrichten“, „Wissenschaft“ sowie „Produkte“ ).",
     "suchfokus.2"                    => "Mit diesem Knopf können Sie einen neuen eigenen Suchfokus erstellen:",
     "suchfokus.3"                    => "Geben Sie zunächst einen Namen für ihren neuen Suchfokus ein und wählen sie anschließend alle Suchmaschinen aus deren Ergebnisse Sie erhalten möchten. Abschließend klicken Sie auf den blauen Knopf \"Suchfokus speichern\"",
     "suchfokus.4"                    => "Sie können auch einen vorhandenen eigenen Suchfokus verändern, indem Sie auf den Stift (<i class=\"fa fa-pencil\" aria-hidden=\"true\"></i>) neben dem Namen des Suchfokus klicken.",

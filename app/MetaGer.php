@@ -558,6 +558,10 @@ class MetaGer
 
         if ($this->requestIsCached($request)) {
             $engines = $this->getCachedEngines($request);
+            # We need to edit some Options of the Cached Search Engines
+            foreach($engines as $engine){
+                $engine->setResultHash($this->getHashCode());
+            }
         } else {
             $engines = $this->actuallyCreateSearchEngines($enabledSearchengines, $siteSearchFailed);
         }
@@ -1349,6 +1353,7 @@ class MetaGer
     public function getHashCode()
     {
         $string = url()->full();
+        Log::info($string . "\n" . md5($string));
         return md5($string);
     }
 

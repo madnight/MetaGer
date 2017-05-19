@@ -49,8 +49,8 @@ function setActionListeners () {
   $('#addFocusBtn').click(function () {
     showFocusCreateDialog('')
   })
-  $('.save-focus-btn').click(saveFocus);
-  $('.delete-focus-btn').click(deleteFocus);
+  $('#save-focus-btn').click(saveFocus);
+  $('#delete-focus-btn').click(deleteFocus);
   $('#focus-name').keyup(function (event) {
     if (event.keyCode == 13) {
       $('#save-focus-btn').click()

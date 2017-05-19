@@ -51,6 +51,7 @@ class Searcher implements ShouldQueue
         $this->counter = 0;                 // Counts the number of answered jobs
         $time = microtime(true);
         while(true){
+            Log:info("Durchlauf");
             // Update the expire
             Redis::expire($this->name, 5);
             Redis::expire($this->name . ".stats", 5);
@@ -111,7 +112,7 @@ class Searcher implements ShouldQueue
         *   When a search engine needs more time to produce search results than the timeout of the MetaGer process, we won't even bother of spawning
         *   more and more Searchers because they would just block free worker processes from serving the important engines which will give results in time.
         **/
-        if($this->counter === 3){
+        if($this->counter === 3 || getenv("QUEUE_DRIVER") === "sync"){
             # If the MetaGer process waits longer for the results than this Fetcher will probably need to fetch
             # Or if this engine is in the array of important engines which we will always try to serve
             Redis::set($this->name, "running");

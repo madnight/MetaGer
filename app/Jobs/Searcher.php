@@ -151,6 +151,8 @@ class Searcher implements ShouldQueue
 
     private function storeResult($result, $poptime, $hashValue){
         Redis::hset('search.' . $hashValue, $this->name, $result);
+        // After 60 seconds the results should be read by the MetaGer Process and stored in the Cache instead
+        Redis::expire('search.' . $hashValue, 60);
         $this->lastTime = microtime(true);
     }
 

@@ -207,6 +207,10 @@ abstract class Searchengine
         $this->enabled = true;
     }
 
+    public function setResultHash($hash){
+        $this->resultHash = $hash;
+    }
+
     public function closeFp()
     {
         fclose($this->fp);
@@ -233,9 +237,11 @@ abstract class Searchengine
 
         $body = "";
         if ($this->canCache && $this->cacheDuration > 0 && Cache::has($this->hash)) {
+            Log::info("Aus dem Cache: " . $this->hash);
             $body = Cache::get($this->hash);
         } elseif (Redis::hexists('search.' . $this->resultHash, $this->name)) {
             $body = Redis::hget('search.' . $this->resultHash, $this->name);
+            Log::info("Schon vorhanden: " . $this->resultHash . "\n" . $body);
             Redis::hdel('search.' . $this->resultHash, $this->name);
             if ($this->canCache && $this->cacheDuration > 0) {
                 Cache::put($this->hash, $body, $this->cacheDuration);

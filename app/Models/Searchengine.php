@@ -236,6 +236,7 @@ abstract class Searchengine
             $body = Cache::get($this->hash);
         } elseif (Redis::hexists('search.' . $this->resultHash, $this->name)) {
             $body = Redis::hget('search.' . $this->resultHash, $this->name);
+            Redis::hdel('search.' . $this->resultHash, $this->name);
             if ($this->canCache && $this->cacheDuration > 0) {
                 Cache::put($this->hash, $body, $this->cacheDuration);
             }
@@ -244,7 +245,6 @@ abstract class Searchengine
             $this->loadResults($body);
             $this->getNext($metager, $body);
             $this->loaded = true;
-            Redis::hdel('search.' . $this->hash, $this->name);
             return true;
         } else {
             return false;

@@ -1,10 +1,16 @@
 $(document).ready(function () {
+  activateJSOnlyContent()
   createCustomFocuses();
   var focus = $('#foki > li.active > a').attr('aria-controls');
   var custom = $('#foki > li.active').hasClass('custom-focus-tab-selector');
   getDocumentReadyForUse(focus, custom);
   botProtection();
 })
+
+function activateJSOnlyContent() {
+    $('#searchplugin').removeClass('hide')
+    $('.options').removeClass('hide')
+}
 
 function tabs () {
   $('#foki > li.tab-selector > a').each(function () {
@@ -378,7 +384,7 @@ function addFocus (focus, active = false) {
   // create <a> icon
   var focusElementIcon = document.createElement('i')
   focusElementIcon.classList.add('fa')
-  focusElementIcon.classList.add('fa-cog')
+  focusElementIcon.classList.add('fa-star')
   focusElementIcon.setAttribute('aria-hidden', 'true')
   // create <span> focusname
   var focusElementName = document.createElement('span')

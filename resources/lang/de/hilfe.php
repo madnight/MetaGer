@@ -4,22 +4,31 @@ return [
     "achtung"                        => "Achtung, da unsere Suchmaschine ständig weiterentwickelt und verbessert wird, kann es dazu kommen, dass sich immer wieder Änderungen an Aufbau und Funktion ergeben. Wir versuchen zwar die Hilfe schnellstmöglich den Änderungen entsprechend anzupassen, können jedoch nicht ausschließen, dass es zu temporären Unstimmigkeiten in Teilen der Erklärungen kommt.",
     "title"                          => "MetaGer - Hilfe",
     "einstellungen"                  => "Einstellungen",
+
     "allgemein.title"                => "Allgemeine Einstellungen",
-    "allgemein.1"                    => "Alle Einstellungen zur Suche finden Sie unter dem Suchfokus \"anpassen\".",
+    "allgemein.1"                    => "Alle Einstellungen zur Suche finden Sie unter diesem Knopf auf der Startseite: ",
     "allgemein.2"                    => "Der Farbtropfen links neben dem Suchfeld ermöglicht Ihnen eine individuelle Farbeinstellung für die Startseite. (so wie Sie es am schönsten finden).",
     "allgemein.3"                    => "Ein Plugin für die allermeisten Browser finden Sie <a href=\"/#plugin-modal\" target=\"_blank\" rel=\"noopener\">direkt unter dem Suchfeld</a>, wo die meisten Browser bereits voreingestellt sind.",
+
     "suchfokus.title"                => "Auswahl des Suchfokus",
-    "suchfokus.1"                    => "Über dem Suchfeld finden Sie fünf Sucheinstellungen, die für die meisten Suchwünsche genügen ( \"Web\", \"Bilder\", \"Nachrichten\", \"Wissenschaft\" sowie \"Produkte\" ). Über den Button \"anpassen\" rechts daneben können Sie persönliche Feineinstellungen dazu vornehmen. Zuletzt entscheiden immer Sie über die Verwendung Ihrer Einstellungen. Sie finden ganz unten unter den Einstellungen drei Buttons: entweder benutzen Sie die Einstellung nur für eine Suche (hierfür können Sie auch ein Lesezeichen setzen), für eine dauerhafte Verwendung, oder Sie können dafür ein Plugin erstellen. MetaGer speichert Ihre Einstellungen dann im sogenannten \"Local Storage\" (des Browsers), hierfür benötigen Sie Javascript.",
+    "suchfokus.1"                    => "Über dem Suchfeld finden Sie fünf Sucheinstellungen, die für die meisten Suchwünsche genügen ( \"Web\", \"Bilder\", \"Nachrichten\", \"Wissenschaft\" sowie \"Produkte\" ).",
+    "suchfokus.2"                    => "Mit diesem Knopf können Sie einen neuen eigenen Suchfokus erstellen:",
+    "suchfokus.3"                    => "Geben Sie zunächst einen Namen für ihren neuen Suchfokus ein und wählen sie anschließend alle Suchmaschinen aus deren Ergebnisse Sie erhalten möchten. Abschließend klicken Sie auf den blauen Knopf \"Suchfokus speichern\"",
+    "suchfokus.4"                    => "Sie können auch einen vorhandenen eigenen Suchfokus verändern, indem Sie auf den Stift (<i class=\"fa fa-pencil\" aria-hidden=\"true\"></i>) neben dem Namen des Suchfokus klicken.",
+
     "sucheingabe.title"              => "Sucheingabe",
     "sucheingabe.hint"               => "Die im folgenden verwendeten <i>Suchen und Webseiten</i> sind lediglich Beispiele. Sie müssen diese in der Praxis durch ihre eigenen ersetzen.",
+
     "stopworte.title"                => "Stoppworte",
     "stopworte.1"                    => "Wenn Sie unter den MetaGer-Suchergebnissen solche ausschließen wollen, in denen bestimmte Worte (Ausschlussworte / Stopworte) vorkommen, dann erreichen Sie das, indem Sie diese Worte mit einem Minus versehen.",
     "stopworte.2"                    => "Beispiel: Sie suchen ein neues Auto, aber auf keinen Fall einen BMW. Ihre Eingabe lautet also: <div class=\"well well-sm\">auto neu -bmw</div>",
+
     "mehrwortsuche.title"            => "Mehrwortsuche",
     "mehrwortsuche.1"                => "Wenn Sie bei MetaGer nach mehr als einem Wort suchen, versuchen wir automatisch Ihnen Ergebnisse zu liefern, in denen alle Wörter vorkommen, oder die diesen möglichst nahe kommen.",
     "mehrwortsuche.2"                => "Sollte Ihnen das nicht ausreichen, habe Sie 2 Möglichkeiten ihre Suche genauer zu machen:",
     "mehrwortsuche.3"                => "Wenn Sie sicher gehen wollen, dass Wörter aus Ihrer Suche auch in den Ergebnissen vorkommen, dann müssen Sie diese in Anführungszeichen setzen.",
     "mehrwortsuche.4"                => "Mit einer Phrasensuche können Sie statt nach einzelnen Wörtern auch nach Wortkombinationen suchen. Setzen Sie dazu einfach diejenigen Wörter, die gemeinsam vorkommen sollen in Anführungszeichen.",
+
     "grossklein.title"               => "Groß-/ Kleinschreibung",
     "grossklein.1"                   => "Groß- und Kleinschreibung wird bei der Suche nicht unterschieden, es handelt sich um eine rein inhaltliche Suche.",
     "grossklein.2"                   => "Beispiel: Die Suche nach <div class=\"well well-sm\">großschreibung</div> sollte die gleichen Ergebnisse liefern wie <div class=\"well well-sm\">GROẞSCHREIBUNG</div>",

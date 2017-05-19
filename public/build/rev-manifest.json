@@ -1,8 +1,5 @@
 {
-  "js/editLanguage.js": "js/editLanguage-1ce447084a.js",
-  "js/kontakt.js": "js/kontakt-9365c46d5a.js",
-  "js/scriptResultPage.js": "js/scriptResultPage-fb8443e82a.js",
-  "js/scriptStartPage.js": "js/scriptStartPage-5e21fefbc8.js",
-  "js/settings.js": "js/settings-0af8170dff.js",
-  "js/widgets.js": "js/widgets-40195be855.js"
+  "css/themes/default.css": "css/themes/default-005a752e4d.css",
+  "js/lib.js": "js/lib-62ec3bb556.js",
+  "js/quicktips.js": "js/quicktips-6fceaafa1a.js"
 }

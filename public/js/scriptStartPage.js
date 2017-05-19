@@ -49,8 +49,16 @@ function setActionListeners () {
   $('#addFocusBtn').click(function () {
     showFocusCreateDialog('')
   })
-  $('.save-focus-btn').click(saveFocus)
-  $('.delete-focus-btn').click(deleteFocus)
+  $('#save-focus-btn').click(saveFocus);
+  $('#delete-focus-btn').click(deleteFocus);
+  $('#focus-name').keyup(function (event) {
+    if (event.keyCode == 13) {
+      $('#save-focus-btn').click()
+    }
+  })
+  $('#create-focus-modal').on('shown.bs.modal', function () {
+    $('#focus-name').focus()
+  })
 }
 
 function setSettings () {
@@ -79,7 +87,7 @@ function setSettings () {
     $('fieldset.mobile input#bilder').attr('id', 'angepasst')
     $('fieldset.mobile label#bilder-label').attr('id', 'anpassen-label')
     $('fieldset.mobile label#anpassen-label').attr('for', 'angepasst')
-    $('fieldset.mobile label#anpassen-label a.fa').attr('class', 'fa fa-cog')
+    $('fieldset.mobile label#anpassen-label i.fa').attr('class', 'fa fa-cog')
     $('fieldset.mobile label#anpassen-label span.content').html('angepasst')
   }
 }

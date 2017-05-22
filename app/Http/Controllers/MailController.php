@@ -262,17 +262,38 @@ class MailController extends Controller
                 $editedFiles[$langdir] = $filename;
             }
 
+            #Überspringe Datei, falls diese nicht bearbeitet worden ist
+            if(!isset($editedFiles[$langdir])) {
+                continue;
+            }
             #Key verarbeiten, sodass er nur den eigentlichen Keynamen enthält
             $key = $this->processKey($key);
-            $data[$langdir][$key] = $value;
-        }     
-        $output = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        $output = preg_replace("/\{/si", "[", $output);
-        $output = preg_replace("/\}/si", "]", $output);
-        $output = preg_replace("/\": ([\"\[])/si", "\"\t=>\t$1", $output);
-        
-        $output = "<?php\n\nreturn $output;\n";
 
+            #Aufdröseln von 2D-Arrays
+            if (!strpos($key, "#")) {
+                $data[$langdir][$key] = $value;
+
+            } else {
+                $ref = &$data;
+                do {
+                    $ref = &$ref[$langdir][substr($key, 0, strpos($key, "#"))];
+                    $key = substr($key, strpos($key, "#") + 1);
+                } while (strpos($key, "#"));
+                $ref = &$ref[$key];
+                $ref = $value;
+            }
+        }     
+
+        #Erstelle Ausgabedateien
+        foreach($data as $lang => $entries) {
+            $output[$lang] = json_encode($entries, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            $output[$lang] = preg_replace("/\{/si", "[", $output[$lang]);
+            $output[$lang] = preg_replace("/\}/si", "]", $output[$lang]);
+            $output[$lang] = preg_replace("/\": ([\"\[])/si", "\"\t=>\t$1", $output[$lang]);
+            $output[$lang] = "<?php\n\nreturn $output[$lang];\n";
+        }
+
+        
         $ex = [];
         if ($exclude !== "") {
             try {
@@ -297,7 +318,13 @@ class MailController extends Controller
 
         $ex = base64_encode(serialize($ex));
 
-        return redirect(url('synoptic', ['exclude' => $ex]));
+        $zip = new ZipArchive();
+        
+        return response()->make($output["fr"])
+            ->header("Content-type","text/plain; charset=utf-8")
+            ->header("Content-disposition","attachment; filename=\"".$filename."\"");
+        //return response()->download($output["fr"], $filename);
+        //return redirect(url('synoptic', ['exclude' => $ex]));
 
     }
 

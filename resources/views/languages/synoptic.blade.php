@@ -52,7 +52,8 @@
 	<p>{!! trans('languages.hinweis.3') !!}</p>
 	<p>{!! trans('languages.email') !!}</p>
 -->
-	<button class="btn btn-success" type="submit" form="submit">Daten übermitteln</button>
+	<button class="btn btn-success" type="submit" form="submit">Dateien herunterladen</button>
+	<button class="btn btn-success" type="submit" form="submit">Nächste Seite</button>
 	<script type="text/javascript" src="{{ elixir('js/lib.js') }}"></script>
 	<script type="text/javascript" src="{{ elixir('js/editLanguage.js') }}"></script>
 @endsection

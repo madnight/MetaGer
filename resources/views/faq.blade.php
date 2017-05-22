@@ -186,4 +186,12 @@
 			<p>{!! trans('faq.faq.20.b') !!}</p>
 		</div>
 	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">{!! trans('faq.faq.21.h') !!}</h3>
+		</div>
+		<div class="panel-body">
+			<p>{!! trans('faq.faq.21.b') !!}</p>
+		</div>
+	</div>
 @endsection

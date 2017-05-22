@@ -209,9 +209,6 @@ class MetaGer
         }
         $this->results = $newResults;
 
-        # Boost implementation
-        $this->results = $this->parseBoost($this->results);
-
         #Adgoal Implementation
         $this->results = $this->parseAdgoal($this->results);
 
@@ -388,22 +385,6 @@ class MetaGer
             }
         }
 
-    }
-
-    public function parseBoost($results)
-    {
-        foreach ($results as $result) {
-            if (preg_match('/^(http[s]?\:\/\/)?(www.)?amazon\.de/', $result->anzeigeLink)) {
-                if (preg_match('/\?/', $result->anzeigeLink)) {
-                    $result->link .= '&tag=boostmg01-21';
-                } else {
-                    $result->link .= '?tag=boostmg01-21';
-                }
-                $result->partnershop = true;
-
-            }
-        }
-        return $results;
     }
 
     public function parseAdgoal($results)

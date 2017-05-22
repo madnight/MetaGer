@@ -29,15 +29,15 @@
  <tbody> 
 			@foreach($texts as $key => $language)
 				<tr> <!--Key -->
-				<td class="name language-name">{{preg_replace("/(\s*).*#(.*)$/si", "$1$2", $key)}}</td>
+				<td class="name language-name">{{$key}}</td>
 				@foreach($language as $lang => $languageValue)
 					@if($languageValue !== "")
 						<td>
-							<textarea class="language-text-area" rows="1" readonly cols="20" form="submit" name="{{base64_encode($lang."_".$key)}}">{{ $languageValue }} </textarea>
+							<textarea class="language-text-area" rows="1" cols="20" form="submit" name="{{base64_encode($lang."_".$key)}}">{{ $languageValue }} </textarea>
 						</td>
 					@else
 						<td>
-							<textarea class="language-text-area" rows="1" cols="20" form="submit" name="{{base64_encode("_new_".$lang."_".$key)}}">{{ $languageValue }} </textarea>
+							<textarea class="language-text-area" rows="1" cols="20" form="submit" name="{{base64_encode("_new_".$lang."_".$key)}}"></textarea>
 						</td>
 					@endif
 				@endforeach

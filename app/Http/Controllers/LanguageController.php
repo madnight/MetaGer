@@ -164,27 +164,6 @@ class LanguageController extends Controller
         $languageObjects  = [];
         $to = [];
 
-        #Instanziiere LanguageObject
-        foreach ($languageFolders as $folder) {
-            if (is_dir($languageFilePath . $folder) && $folder !== "." && $folder !== "..") {
-                $languageObjects[$folder] = new LanguageObject($folder, $languageFilePath.$folder);
-            }
-        }
-
-        #Speichere Daten in LanguageObject
-        foreach ($languageObjects as $folder => $languageObject) {
-            $to[] = $folder;
-            $di = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($languageObject->filePath));
-            foreach($di as $filename => $file) {
-                if(!$this->endsWith($filename, ".")) {
-                    $tmp = include $filename;
-                    foreach ($tmp as $key => $value) {
-                        $languageObject->saveData(basename($filename), $key, $value);
-                    }
-                }
-            }
-        }
-
         #Dekodieren ausgeschlossener Dateien anhand des URL-Parameters
         $ex    = ['files' => [], 'new' => 0];
         if ($exclude !== "") {
@@ -195,16 +174,37 @@ class LanguageController extends Controller
             }
         }
 
-        $fn = "";
+        #Instanziiere LanguageObject
+        foreach ($languageFolders as $folder) {
+            if (is_dir($languageFilePath . $folder) && $folder !== "." && $folder !== "..") {
+                $languageObjects[$folder] = new LanguageObject($folder, $languageFilePath.$folder);
+            }
+        }
 
-        #Wähle die erste Datei aus, welche nicht ausgeschlossen worden ist
-        foreach($languageObjects as $folder => $languageObject) {
-            foreach($languageObject->stringMap as $languageFileName => $languageFile) {
+        #Speichere Daten in LanguageObject, überspringe ausgeschlossene Dateien
+        foreach ($languageObjects as $folder => $languageObject) {
+            $to[] = $folder;
+            $di = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($languageObject->filePath));
+            foreach($di as $filename => $file) {
                 foreach($ex['files'] as $file) {
-                    if($file === $languageFileName) {
+                    if($file === basename($filename)) {
                         continue 2;
                     }
                 }
+                if(!$this->endsWith($filename, ".")) {
+                    $tmp = include $filename;
+                    foreach ($tmp as $key => $value) {
+                        $languageObject->saveData(basename($filename), $key, $value);
+                    }
+                }
+            }
+        }
+
+        $fn = "";
+
+        #Wähle die erste Datei aus
+        foreach($languageObjects as $folder => $languageObject) {
+            foreach($languageObject->stringMap as $languageFileName => $languageFile) {
                 $fn = $languageFileName;
                 break 2;            
             }

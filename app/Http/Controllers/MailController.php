@@ -333,7 +333,7 @@ class MailController extends Controller
 
         $zip->close();
 
-        return response()->download("langfiles.zip", "langfiles.zip");
+        return response()->download("langfiles.zip", $filename.".zip");
 
 
     }

@@ -51,7 +51,6 @@ class Searcher implements ShouldQueue
         $this->counter = 0;                 // Counts the number of answered jobs
         $time = microtime(true);
         while(true){
-            Log:info("Durchlauf");
             // Update the expire
             Redis::expire($this->name, 5);
             Redis::expire($this->name . ".stats", 5);

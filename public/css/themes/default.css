@@ -7526,6 +7526,18 @@ a#donation:hover {
 #spruch > p + p {
   margin-top: 4px;
 }
+.saver-options {
+  display: -webkit-box;
+  display: flex;
+  padding-bottom: 15px;
+}
+.saver-options > input {
+  min-width: 35%;
+  max-width: 80%;
+}
+.ui-effects-transfer {
+  border: 1px dotted black;
+}
 .result {
   margin-bottom: 10px;
   width: 100%;
@@ -7537,6 +7549,17 @@ a#donation:hover {
 }
 .result > .resultInformation {
   border-radius: 5px;
+}
+.result > .resultInformation > .save {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  cursor: pointer;
+}
+.result > .remover {
+  cursor: pointer;
+  text-align: right;
+  color: #777;
 }
 .result .title {
   color: black;

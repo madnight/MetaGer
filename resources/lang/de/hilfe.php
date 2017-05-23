@@ -30,7 +30,6 @@ return [
     "domains.sitesearch.example.2"   => "<i>meine suche</i> site:de.wikipedia.org",
     "domains.sitesearch.example.3"   => "Beispiel: Sie möchten auch Ergebnisse von Wikipedia in anderen Sprachen (wikipedia.org) erhalten. Ihre Suche lautet also:",
     "domains.sitesearch.example.4"   => "<i>meine suche</i> site:wikipedia.org",
-
     "domains.blacklist.explanation"  => "Manchmal kann es auch passieren, dass Sie Ergebnisse einer bestimmten Domain nicht mehr sehen möchten. In diesem Fall haben Sie zwei Möglichkeiten: Den Ausschluss einer Subdomain und den Ausschluss einer Top-Level-Domain. Dies erreichen Sie, indem Sie -site:<i>unterseite.ihre-seite.de</i> beziehungsweise -site:*.<i>ihre-seite.de</i> zu Ihrer Suche hinzufügen.",
     "domains.blacklist.example.1"    => "Beispiel: Sie haben genug von den ganzen Wikipedia-Ergebnissen. Nun haben Sie zwei Möglichkeiten:",
     "domains.blacklist.example.2"    => "Sie schließen alle Ergebnisse von der deutschen Wikipedia-Domain, also de.wikipedia.org, aus",
@@ -45,6 +44,12 @@ return [
     "domains.showcase.menu.3"        => "Eine Suche ohne Ergebnisse der Subdomain (de.wikipedia.de) starten",
     "domains.showcase.menu.4"        => "Eine Suche ohne Ergebnisse der Top-Level-Domain (wikipedia.de) starten",
     "domains.showcase.menu.5"        => "Probieren Sie es doch gleich einmal aus, indem Sie die Optionen anklicken.",
+
+    'urls.title' => 'URLs ausschließen',
+    'urls.explanation' => 'Sie können Suchergebnisse ausschließen, deren Ergebnislinks bestimmte Worte enthalten, indem Sie in ihrer Suche "-url:" verwenden.',
+    'urls.example.1' => 'Beispiel: Sie möchten keine Ergebnisse bei denen im Ergebnislink das Wort "Hund" auftaucht:',
+    'urls.example.2' => '<i>meine suche</i> -url:hund',
+
     "dienste"                        => "Weitere Dienste um die Suche herum",
     "app.title"                      => "Android-App",
     "app.1"                          => "Sie können MetaGer auch als App nutzen. Laden Sie sich dazu einfach die <a href=\"https://play.google.com/store/apps/details?id=de.metager.metagerapp\" target=\"_blank\" rel=\"noopener\">MetaGer App</a> auf ihr Android Smartphone.",

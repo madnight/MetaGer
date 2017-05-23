@@ -3497,4 +3497,204 @@ return(65535&d)<<16|65535&c},C=function(a,b,c,d){var e=(65535&a)+(65535&b)+(6553
 
 !function(a){"use strict";function b(b,c,d){"addEventListener"in a?b.addEventListener(c,d,!1):"attachEvent"in a&&b.attachEvent("on"+c,d)}function c(b,c,d){"removeEventListener"in a?b.removeEventListener(c,d,!1):"detachEvent"in a&&b.detachEvent("on"+c,d)}function d(){var b,c=["moz","webkit","o","ms"];for(b=0;b<c.length&&!N;b+=1)N=a[c[b]+"RequestAnimationFrame"];N||h("setup","RequestAnimationFrame not supported")}function e(b){var c="Host page: "+b;return a.top!==a.self&&(c=a.parentIFrame&&a.parentIFrame.getId?a.parentIFrame.getId()+": "+b:"Nested host page: "+b),c}function f(a){return K+"["+e(a)+"]"}function g(a){return P[a]?P[a].log:G}function h(a,b){k("log",a,b,g(a))}function i(a,b){k("info",a,b,g(a))}function j(a,b){k("warn",a,b,!0)}function k(b,c,d,e){!0===e&&"object"==typeof a.console&&console[b](f(c),d)}function l(d){function e(){function a(){s(V),p(W)}g("Height"),g("Width"),t(a,V,"init")}function f(){var a=U.substr(L).split(":");return{iframe:P[a[0]].iframe,id:a[0],height:a[1],width:a[2],type:a[3]}}function g(a){var b=Number(P[W]["max"+a]),c=Number(P[W]["min"+a]),d=a.toLowerCase(),e=Number(V[d]);h(W,"Checking "+d+" is in range "+c+"-"+b),c>e&&(e=c,h(W,"Set "+d+" to min value")),e>b&&(e=b,h(W,"Set "+d+" to max value")),V[d]=""+e}function k(){function a(){function a(){var a=0,d=!1;for(h(W,"Checking connection is from allowed list of origins: "+c);a<c.length;a++)if(c[a]===b){d=!0;break}return d}function d(){var a=P[W].remoteHost;return h(W,"Checking connection is from: "+a),b===a}return c.constructor===Array?a():d()}var b=d.origin,c=P[W].checkOrigin;if(c&&""+b!="null"&&!a())throw new Error("Unexpected message received from: "+b+" for "+V.iframe.id+". Message was: "+d.data+". This error can be disabled by setting the checkOrigin: false option or by providing of array of trusted domains.");return!0}function l(){return K===(""+U).substr(0,L)&&U.substr(L).split(":")[0]in P}function w(){var a=V.type in{"true":1,"false":1,undefined:1};return a&&h(W,"Ignoring init message from meta parent page"),a}function y(a){return U.substr(U.indexOf(":")+J+a)}function z(a){h(W,"MessageCallback passed: {iframe: "+V.iframe.id+", message: "+a+"}"),N("messageCallback",{iframe:V.iframe,message:JSON.parse(a)}),h(W,"--")}function A(){var b=document.body.getBoundingClientRect(),c=V.iframe.getBoundingClientRect();return JSON.stringify({iframeHeight:c.height,iframeWidth:c.width,clientHeight:Math.max(document.documentElement.clientHeight,a.innerHeight||0),clientWidth:Math.max(document.documentElement.clientWidth,a.innerWidth||0),offsetTop:parseInt(c.top-b.top,10),offsetLeft:parseInt(c.left-b.left,10),scrollTop:a.pageYOffset,scrollLeft:a.pageXOffset})}function B(a,b){function c(){u("Send Page Info","pageInfo:"+A(),a,b)}x(c,32)}function C(){function d(b,c){function d(){P[g]?B(P[g].iframe,g):e()}["scroll","resize"].forEach(function(e){h(g,b+e+" listener for sendPageInfo"),c(a,e,d)})}function e(){d("Remove ",c)}function f(){d("Add ",b)}var g=W;f(),P[g].stopPageInfo=e}function D(){P[W]&&P[W].stopPageInfo&&(P[W].stopPageInfo(),delete P[W].stopPageInfo)}function E(){var a=!0;return null===V.iframe&&(j(W,"IFrame ("+V.id+") not found"),a=!1),a}function F(a){var b=a.getBoundingClientRect();return o(W),{x:Math.floor(Number(b.left)+Number(M.x)),y:Math.floor(Number(b.top)+Number(M.y))}}function G(b){function c(){M=g,H(),h(W,"--")}function d(){return{x:Number(V.width)+f.x,y:Number(V.height)+f.y}}function e(){a.parentIFrame?a.parentIFrame["scrollTo"+(b?"Offset":"")](g.x,g.y):j(W,"Unable to scroll to requested position, window.parentIFrame not found")}var f=b?F(V.iframe):{x:0,y:0},g=d();h(W,"Reposition requested from iFrame (offset x:"+f.x+" y:"+f.y+")"),a.top!==a.self?e():c()}function H(){!1!==N("scrollCallback",M)?p(W):q()}function I(b){function c(){var a=F(g);h(W,"Moving to in page link (#"+e+") at x: "+a.x+" y: "+a.y),M={x:a.x,y:a.y},H(),h(W,"--")}function d(){a.parentIFrame?a.parentIFrame.moveToAnchor(e):h(W,"In page link #"+e+" not found and window.parentIFrame not found")}var e=b.split("#")[1]||"",f=decodeURIComponent(e),g=document.getElementById(f)||document.getElementsByName(f)[0];g?c():a.top!==a.self?d():h(W,"In page link #"+e+" not found")}function N(a,b){return m(W,a,b)}function O(){switch(P[W].firstRun&&T(),V.type){case"close":n(V.iframe);break;case"message":z(y(6));break;case"scrollTo":G(!1);break;case"scrollToOffset":G(!0);break;case"pageInfo":B(P[W].iframe,W),C();break;case"pageInfoStop":D();break;case"inPageLink":I(y(9));break;case"reset":r(V);break;case"init":e(),N("initCallback",V.iframe),N("resizedCallback",V);break;default:e(),N("resizedCallback",V)}}function Q(a){var b=!0;return P[a]||(b=!1,j(V.type+" No settings for "+a+". Message was: "+U)),b}function S(){for(var a in P)u("iFrame requested init",v(a),document.getElementById(a),a)}function T(){P[W].firstRun=!1}var U=d.data,V={},W=null;"[iFrameResizerChild]Ready"===U?S():l()?(V=f(),W=R=V.id,!w()&&Q(W)&&(h(W,"Received: "+U),E()&&k()&&O())):i(W,"Ignored: "+U)}function m(a,b,c){var d=null,e=null;if(P[a]){if(d=P[a][b],"function"!=typeof d)throw new TypeError(b+" on iFrame["+a+"] is not a function");e=d(c)}return e}function n(a){var b=a.id;h(b,"Removing iFrame: "+b),a.parentNode.removeChild(a),m(b,"closedCallback",b),h(b,"--"),delete P[b]}function o(b){null===M&&(M={x:void 0!==a.pageXOffset?a.pageXOffset:document.documentElement.scrollLeft,y:void 0!==a.pageYOffset?a.pageYOffset:document.documentElement.scrollTop},h(b,"Get page position: "+M.x+","+M.y))}function p(b){null!==M&&(a.scrollTo(M.x,M.y),h(b,"Set page position: "+M.x+","+M.y),q())}function q(){M=null}function r(a){function b(){s(a),u("reset","reset",a.iframe,a.id)}h(a.id,"Size reset requested by "+("init"===a.type?"host page":"iFrame")),o(a.id),t(b,a,"reset")}function s(a){function b(b){a.iframe.style[b]=a[b]+"px",h(a.id,"IFrame ("+e+") "+b+" set to "+a[b]+"px")}function c(b){H||"0"!==a[b]||(H=!0,h(e,"Hidden iFrame detected, creating visibility listener"),y())}function d(a){b(a),c(a)}var e=a.iframe.id;P[e]&&(P[e].sizeHeight&&d("height"),P[e].sizeWidth&&d("width"))}function t(a,b,c){c!==b.type&&N?(h(b.id,"Requesting animation frame"),N(a)):a()}function u(a,b,c,d){function e(){var e=P[d].targetOrigin;h(d,"["+a+"] Sending msg to iframe["+d+"] ("+b+") targetOrigin: "+e),c.contentWindow.postMessage(K+b,e)}function f(){i(d,"["+a+"] IFrame("+d+") not found"),P[d]&&delete P[d]}function g(){c&&"contentWindow"in c&&null!==c.contentWindow?e():f()}d=d||c.id,P[d]&&g()}function v(a){return a+":"+P[a].bodyMarginV1+":"+P[a].sizeWidth+":"+P[a].log+":"+P[a].interval+":"+P[a].enablePublicMethods+":"+P[a].autoResize+":"+P[a].bodyMargin+":"+P[a].heightCalculationMethod+":"+P[a].bodyBackground+":"+P[a].bodyPadding+":"+P[a].tolerance+":"+P[a].inPageLinks+":"+P[a].resizeFrom+":"+P[a].widthCalculationMethod}function w(a,c){function d(){function b(b){1/0!==P[w][b]&&0!==P[w][b]&&(a.style[b]=P[w][b]+"px",h(w,"Set "+b+" = "+P[w][b]+"px"))}function c(a){if(P[w]["min"+a]>P[w]["max"+a])throw new Error("Value for min"+a+" can not be greater than max"+a)}c("Height"),c("Width"),b("maxHeight"),b("minHeight"),b("maxWidth"),b("minWidth")}function e(){var a=c&&c.id||S.id+F++;return null!==document.getElementById(a)&&(a+=F++),a}function f(b){return R=b,""===b&&(a.id=b=e(),G=(c||{}).log,R=b,h(b,"Added missing iframe ID: "+b+" ("+a.src+")")),b}function g(){h(w,"IFrame scrolling "+(P[w].scrolling?"enabled":"disabled")+" for "+w),a.style.overflow=!1===P[w].scrolling?"hidden":"auto",a.scrolling=!1===P[w].scrolling?"no":"yes"}function i(){("number"==typeof P[w].bodyMargin||"0"===P[w].bodyMargin)&&(P[w].bodyMarginV1=P[w].bodyMargin,P[w].bodyMargin=""+P[w].bodyMargin+"px")}function k(){var b=P[w].firstRun,c=P[w].heightCalculationMethod in O;!b&&c&&r({iframe:a,height:0,width:0,type:"init"})}function l(){Function.prototype.bind&&(P[w].iframe.iFrameResizer={close:n.bind(null,P[w].iframe),resize:u.bind(null,"Window resize","resize",P[w].iframe),moveToAnchor:function(a){u("Move to anchor","moveToAnchor:"+a,P[w].iframe,w)},sendMessage:function(a){a=JSON.stringify(a),u("Send Message","message:"+a,P[w].iframe,w)}})}function m(c){function d(){u("iFrame.onload",c,a),k()}b(a,"load",d),u("init",c,a)}function o(a){if("object"!=typeof a)throw new TypeError("Options is not an object")}function p(a){for(var b in S)S.hasOwnProperty(b)&&(P[w][b]=a.hasOwnProperty(b)?a[b]:S[b])}function q(a){return""===a||"file://"===a?"*":a}function s(b){b=b||{},P[w]={firstRun:!0,iframe:a,remoteHost:a.src.split("/").slice(0,3).join("/")},o(b),p(b),P[w].targetOrigin=!0===P[w].checkOrigin?q(P[w].remoteHost):"*"}function t(){return w in P&&"iFrameResizer"in a}var w=f(a.id);t()?j(w,"Ignored iFrame, already setup."):(s(c),g(),d(),i(),m(v(w)),l())}function x(a,b){null===Q&&(Q=setTimeout(function(){Q=null,a()},b))}function y(){function b(){function a(a){function b(b){return"0px"===P[a].iframe.style[b]}function c(a){return null!==a.offsetParent}c(P[a].iframe)&&(b("height")||b("width"))&&u("Visibility change","resize",P[a].iframe,a)}for(var b in P)a(b)}function c(a){h("window","Mutation observed: "+a[0].target+" "+a[0].type),x(b,16)}function d(){var a=document.querySelector("body"),b={attributes:!0,attributeOldValue:!1,characterData:!0,characterDataOldValue:!1,childList:!0,subtree:!0},d=new e(c);d.observe(a,b)}var e=a.MutationObserver||a.WebKitMutationObserver;e&&d()}function z(a){function b(){B("Window "+a,"resize")}h("window","Trigger event: "+a),x(b,16)}function A(){function a(){B("Tab Visable","resize")}"hidden"!==document.visibilityState&&(h("document","Trigger event: Visiblity change"),x(a,16))}function B(a,b){function c(a){return"parent"===P[a].resizeFrom&&P[a].autoResize&&!P[a].firstRun}for(var d in P)c(d)&&u(a,b,document.getElementById(d),d)}function C(){b(a,"message",l),b(a,"resize",function(){z("resize")}),b(document,"visibilitychange",A),b(document,"-webkit-visibilitychange",A),b(a,"focusin",function(){z("focus")}),b(a,"focus",function(){z("focus")})}function D(){function a(a,c){function d(){if(!c.tagName)throw new TypeError("Object is not a valid DOM element");if("IFRAME"!==c.tagName.toUpperCase())throw new TypeError("Expected <IFRAME> tag, found <"+c.tagName+">")}c&&(d(),w(c,a),b.push(c))}var b;return d(),C(),function(c,d){switch(b=[],typeof d){case"undefined":case"string":Array.prototype.forEach.call(document.querySelectorAll(d||"iframe"),a.bind(void 0,c));break;case"object":a(c,d);break;default:throw new TypeError("Unexpected data type ("+typeof d+")")}return b}}function E(a){a.fn?a.fn.iFrameResize=function(a){function b(b,c){w(c,a)}return this.filter("iframe").each(b).end()}:i("","Unable to bind to jQuery, it is not fully loaded.")}var F=0,G=!1,H=!1,I="message",J=I.length,K="[iFrameSizer]",L=K.length,M=null,N=a.requestAnimationFrame,O={max:1,scroll:1,bodyScroll:1,documentElementScroll:1},P={},Q=null,R="Host Page",S={autoResize:!0,bodyBackground:null,bodyMargin:null,bodyMarginV1:8,bodyPadding:null,checkOrigin:!0,inPageLinks:!1,enablePublicMethods:!0,heightCalculationMethod:"bodyOffset",id:"iFrameResizer",interval:32,log:!1,maxHeight:1/0,maxWidth:1/0,minHeight:0,minWidth:0,resizeFrom:"parent",scrolling:!1,sizeHeight:!0,sizeWidth:!1,tolerance:0,widthCalculationMethod:"scroll",closedCallback:function(){},initCallback:function(){},messageCallback:function(){j("MessageCallback function not defined")},resizedCallback:function(){},scrollCallback:function(){return!0}};a.jQuery&&E(jQuery),"function"==typeof define&&define.amd?define([],D):"object"==typeof module&&"object"==typeof module.exports?module.exports=D():a.iFrameResize=a.iFrameResize||D()}(window||{});
 //# sourceMappingURL=iframeResizer.map
+var MD5 = function (string) {
+
+   function RotateLeft(lValue, iShiftBits) {
+           return (lValue<<iShiftBits) | (lValue>>>(32-iShiftBits));
+   }
+
+   function AddUnsigned(lX,lY) {
+           var lX4,lY4,lX8,lY8,lResult;
+           lX8 = (lX & 0x80000000);
+           lY8 = (lY & 0x80000000);
+           lX4 = (lX & 0x40000000);
+           lY4 = (lY & 0x40000000);
+           lResult = (lX & 0x3FFFFFFF)+(lY & 0x3FFFFFFF);
+           if (lX4 & lY4) {
+                   return (lResult ^ 0x80000000 ^ lX8 ^ lY8);
+           }
+           if (lX4 | lY4) {
+                   if (lResult & 0x40000000) {
+                           return (lResult ^ 0xC0000000 ^ lX8 ^ lY8);
+                   } else {
+                           return (lResult ^ 0x40000000 ^ lX8 ^ lY8);
+                   }
+           } else {
+                   return (lResult ^ lX8 ^ lY8);
+           }
+   }
+
+   function F(x,y,z) { return (x & y) | ((~x) & z); }
+   function G(x,y,z) { return (x & z) | (y & (~z)); }
+   function H(x,y,z) { return (x ^ y ^ z); }
+   function I(x,y,z) { return (y ^ (x | (~z))); }
+
+   function FF(a,b,c,d,x,s,ac) {
+           a = AddUnsigned(a, AddUnsigned(AddUnsigned(F(b, c, d), x), ac));
+           return AddUnsigned(RotateLeft(a, s), b);
+   };
+
+   function GG(a,b,c,d,x,s,ac) {
+           a = AddUnsigned(a, AddUnsigned(AddUnsigned(G(b, c, d), x), ac));
+           return AddUnsigned(RotateLeft(a, s), b);
+   };
+
+   function HH(a,b,c,d,x,s,ac) {
+           a = AddUnsigned(a, AddUnsigned(AddUnsigned(H(b, c, d), x), ac));
+           return AddUnsigned(RotateLeft(a, s), b);
+   };
+
+   function II(a,b,c,d,x,s,ac) {
+           a = AddUnsigned(a, AddUnsigned(AddUnsigned(I(b, c, d), x), ac));
+           return AddUnsigned(RotateLeft(a, s), b);
+   };
+
+   function ConvertToWordArray(string) {
+           var lWordCount;
+           var lMessageLength = string.length;
+           var lNumberOfWords_temp1=lMessageLength + 8;
+           var lNumberOfWords_temp2=(lNumberOfWords_temp1-(lNumberOfWords_temp1 % 64))/64;
+           var lNumberOfWords = (lNumberOfWords_temp2+1)*16;
+           var lWordArray=Array(lNumberOfWords-1);
+           var lBytePosition = 0;
+           var lByteCount = 0;
+           while ( lByteCount < lMessageLength ) {
+                   lWordCount = (lByteCount-(lByteCount % 4))/4;
+                   lBytePosition = (lByteCount % 4)*8;
+                   lWordArray[lWordCount] = (lWordArray[lWordCount] | (string.charCodeAt(lByteCount)<<lBytePosition));
+                   lByteCount++;
+           }
+           lWordCount = (lByteCount-(lByteCount % 4))/4;
+           lBytePosition = (lByteCount % 4)*8;
+           lWordArray[lWordCount] = lWordArray[lWordCount] | (0x80<<lBytePosition);
+           lWordArray[lNumberOfWords-2] = lMessageLength<<3;
+           lWordArray[lNumberOfWords-1] = lMessageLength>>>29;
+           return lWordArray;
+   };
+
+   function WordToHex(lValue) {
+           var WordToHexValue="",WordToHexValue_temp="",lByte,lCount;
+           for (lCount = 0;lCount<=3;lCount++) {
+                   lByte = (lValue>>>(lCount*8)) & 255;
+                   WordToHexValue_temp = "0" + lByte.toString(16);
+                   WordToHexValue = WordToHexValue + WordToHexValue_temp.substr(WordToHexValue_temp.length-2,2);
+           }
+           return WordToHexValue;
+   };
+
+   function Utf8Encode(string) {
+           string = string.replace(/\r\n/g,"\n");
+           var utftext = "";
+
+           for (var n = 0; n < string.length; n++) {
+
+                   var c = string.charCodeAt(n);
+
+                   if (c < 128) {
+                           utftext += String.fromCharCode(c);
+                   }
+                   else if((c > 127) && (c < 2048)) {
+                           utftext += String.fromCharCode((c >> 6) | 192);
+                           utftext += String.fromCharCode((c & 63) | 128);
+                   }
+                   else {
+                           utftext += String.fromCharCode((c >> 12) | 224);
+                           utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+                           utftext += String.fromCharCode((c & 63) | 128);
+                   }
+
+           }
+
+           return utftext;
+   };
+
+   var x=Array();
+   var k,AA,BB,CC,DD,a,b,c,d;
+   var S11=7, S12=12, S13=17, S14=22;
+   var S21=5, S22=9 , S23=14, S24=20;
+   var S31=4, S32=11, S33=16, S34=23;
+   var S41=6, S42=10, S43=15, S44=21;
+
+   string = Utf8Encode(string);
+
+   x = ConvertToWordArray(string);
+
+   a = 0x67452301; b = 0xEFCDAB89; c = 0x98BADCFE; d = 0x10325476;
+
+   for (k=0;k<x.length;k+=16) {
+           AA=a; BB=b; CC=c; DD=d;
+           a=FF(a,b,c,d,x[k+0], S11,0xD76AA478);
+           d=FF(d,a,b,c,x[k+1], S12,0xE8C7B756);
+           c=FF(c,d,a,b,x[k+2], S13,0x242070DB);
+           b=FF(b,c,d,a,x[k+3], S14,0xC1BDCEEE);
+           a=FF(a,b,c,d,x[k+4], S11,0xF57C0FAF);
+           d=FF(d,a,b,c,x[k+5], S12,0x4787C62A);
+           c=FF(c,d,a,b,x[k+6], S13,0xA8304613);
+           b=FF(b,c,d,a,x[k+7], S14,0xFD469501);
+           a=FF(a,b,c,d,x[k+8], S11,0x698098D8);
+           d=FF(d,a,b,c,x[k+9], S12,0x8B44F7AF);
+           c=FF(c,d,a,b,x[k+10],S13,0xFFFF5BB1);
+           b=FF(b,c,d,a,x[k+11],S14,0x895CD7BE);
+           a=FF(a,b,c,d,x[k+12],S11,0x6B901122);
+           d=FF(d,a,b,c,x[k+13],S12,0xFD987193);
+           c=FF(c,d,a,b,x[k+14],S13,0xA679438E);
+           b=FF(b,c,d,a,x[k+15],S14,0x49B40821);
+           a=GG(a,b,c,d,x[k+1], S21,0xF61E2562);
+           d=GG(d,a,b,c,x[k+6], S22,0xC040B340);
+           c=GG(c,d,a,b,x[k+11],S23,0x265E5A51);
+           b=GG(b,c,d,a,x[k+0], S24,0xE9B6C7AA);
+           a=GG(a,b,c,d,x[k+5], S21,0xD62F105D);
+           d=GG(d,a,b,c,x[k+10],S22,0x2441453);
+           c=GG(c,d,a,b,x[k+15],S23,0xD8A1E681);
+           b=GG(b,c,d,a,x[k+4], S24,0xE7D3FBC8);
+           a=GG(a,b,c,d,x[k+9], S21,0x21E1CDE6);
+           d=GG(d,a,b,c,x[k+14],S22,0xC33707D6);
+           c=GG(c,d,a,b,x[k+3], S23,0xF4D50D87);
+           b=GG(b,c,d,a,x[k+8], S24,0x455A14ED);
+           a=GG(a,b,c,d,x[k+13],S21,0xA9E3E905);
+           d=GG(d,a,b,c,x[k+2], S22,0xFCEFA3F8);
+           c=GG(c,d,a,b,x[k+7], S23,0x676F02D9);
+           b=GG(b,c,d,a,x[k+12],S24,0x8D2A4C8A);
+           a=HH(a,b,c,d,x[k+5], S31,0xFFFA3942);
+           d=HH(d,a,b,c,x[k+8], S32,0x8771F681);
+           c=HH(c,d,a,b,x[k+11],S33,0x6D9D6122);
+           b=HH(b,c,d,a,x[k+14],S34,0xFDE5380C);
+           a=HH(a,b,c,d,x[k+1], S31,0xA4BEEA44);
+           d=HH(d,a,b,c,x[k+4], S32,0x4BDECFA9);
+           c=HH(c,d,a,b,x[k+7], S33,0xF6BB4B60);
+           b=HH(b,c,d,a,x[k+10],S34,0xBEBFBC70);
+           a=HH(a,b,c,d,x[k+13],S31,0x289B7EC6);
+           d=HH(d,a,b,c,x[k+0], S32,0xEAA127FA);
+           c=HH(c,d,a,b,x[k+3], S33,0xD4EF3085);
+           b=HH(b,c,d,a,x[k+6], S34,0x4881D05);
+           a=HH(a,b,c,d,x[k+9], S31,0xD9D4D039);
+           d=HH(d,a,b,c,x[k+12],S32,0xE6DB99E5);
+           c=HH(c,d,a,b,x[k+15],S33,0x1FA27CF8);
+           b=HH(b,c,d,a,x[k+2], S34,0xC4AC5665);
+           a=II(a,b,c,d,x[k+0], S41,0xF4292244);
+           d=II(d,a,b,c,x[k+7], S42,0x432AFF97);
+           c=II(c,d,a,b,x[k+14],S43,0xAB9423A7);
+           b=II(b,c,d,a,x[k+5], S44,0xFC93A039);
+           a=II(a,b,c,d,x[k+12],S41,0x655B59C3);
+           d=II(d,a,b,c,x[k+3], S42,0x8F0CCC92);
+           c=II(c,d,a,b,x[k+10],S43,0xFFEFF47D);
+           b=II(b,c,d,a,x[k+1], S44,0x85845DD1);
+           a=II(a,b,c,d,x[k+8], S41,0x6FA87E4F);
+           d=II(d,a,b,c,x[k+15],S42,0xFE2CE6E0);
+           c=II(c,d,a,b,x[k+6], S43,0xA3014314);
+           b=II(b,c,d,a,x[k+13],S44,0x4E0811A1);
+           a=II(a,b,c,d,x[k+4], S41,0xF7537E82);
+           d=II(d,a,b,c,x[k+11],S42,0xBD3AF235);
+           c=II(c,d,a,b,x[k+2], S43,0x2AD7D2BB);
+           b=II(b,c,d,a,x[k+9], S44,0xEB86D391);
+           a=AddUnsigned(a,AA);
+           b=AddUnsigned(b,BB);
+           c=AddUnsigned(c,CC);
+           d=AddUnsigned(d,DD);
+   		}
+
+   	var temp = WordToHex(a)+WordToHex(b)+WordToHex(c)+WordToHex(d);
+
+   	return temp.toLowerCase();
+}
 //# sourceMappingURL=lib.js.map

@@ -1,4 +1,4 @@
-<div class="result row">
+<div class="result row" data-count="{{ $result->number }}">
 	<div class="number col-sm-1 hidden-xs" style="color:{{ $result->color }}">
 		{{ $result->number }})
 	</div>
@@ -24,6 +24,11 @@
 						</a>
 						<div class="content hidden">
 							<ul class="options-list list-unstyled small">
+								<li>
+									<a href="javascript:resultSaver({{ $result->number }});" class="saver" data-counter="{{ $result->number }}">
+										<i class="glyphicon glyphicon-floppy-disk"></i> Ergebnis abspeichern.
+									</a>
+								</li>
 								<li>
 									<a href="{{ $metager->generateSiteSearchLink($result->strippedHost) }}">
 										{!! trans('result.options.1') !!}
@@ -82,4 +87,5 @@
 			@endif
 		@endif
 	</div>
+
 </div>

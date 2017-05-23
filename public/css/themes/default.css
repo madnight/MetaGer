@@ -7503,6 +7503,15 @@ a:hover {
   margin-top: 4px;
 }
 /* Hier der Style für die einzelnen Ergebnisboxen */
+.saver-options {
+  display: -webkit-box;
+  display: flex;
+  padding-bottom: 15px;
+}
+.saver-options > input {
+  min-width: 35%;
+  max-width: 80%;
+}
 .result {
   margin-bottom: 10px;
   width: 100%;
@@ -7514,6 +7523,17 @@ a:hover {
 }
 .result > .resultInformation {
   border-radius: 5px;
+}
+.result > .resultInformation > .save {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  cursor: pointer;
+}
+.result > .remover {
+  cursor: pointer;
+  text-align: right;
+  color: #777;
 }
 .result .title {
   color: black;

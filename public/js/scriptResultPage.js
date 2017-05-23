@@ -520,15 +520,15 @@ function initialLoadContent (fokus) {
 /*
  * This object gathers all stored Result Objects and can Update the Interface to show them.
 */
-function Results(option){
+function Results(){
   if(!localStorage) return;
   this.prefix = "result_";
   this.results = [];
-  this.updateResults(option);
+  this.updateResults();
   this.updateInterface();
 }
 
-Results.prototype.updateResults = function(option){
+Results.prototype.updateResults = function(){
   // Iterate over all Keys in the LocalStorage
   for(var i = 0; i < localStorage.length; i++){
     if(localStorage.key(i).indexOf(this.prefix) === 0){
@@ -536,25 +536,42 @@ Results.prototype.updateResults = function(option){
       key = key.substr(this.prefix.length);
       var tmpResult = new Result(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, key);
       tmpResult.setIndex(i);
-      if(option !== undefined && option === "remove"){
-        localStorage.removeItem(key);
-      }else{
-        this.results.push(tmpResult);
-      }
+      this.results.push(tmpResult);
     }
   }
 }
 
+Results.prototype.deleteResults = function(){
+  var keys = [];
+  for(var i = 0; i < localStorage.length; i++){
+    if(localStorage.key(i).indexOf(this.prefix) === 0){
+      var key = localStorage.key(i);
+      keys.push(key);
+    }
+  }
+  $.each(keys, function(index, value){
+    localStorage.removeItem(value);
+  });
+}
+
 Results.prototype.updateInterface = function(){
+  if(this.results.length === 0){
+    $("#savedFokiTabSelector, #savedFoki").remove();
+    $($("#foki > li[data-loaded=1]").get(0)).find(">a").tab("show");
+    return;
+  }
   if($("#savedFokiTabSelector").length === 0){
     var savedFoki = $('\
       <li id="savedFokiTabSelector" data-loaded="1" class="tab-selector" role="presentation">\
         <a aria-controls="savedFoki" href="#savedFoki" role="tab" data-toggle="tab">\
           <span class="glyphicon glyphicon-floppy-disk"></span> gespeicherte Ergebnisse\
+          <span class="badge">' + this.results.length + '</span>\
         </a>\
       </li>\
       ');
     $("#foki").append(savedFoki);
+  }else{
+    $("#savedFokiTabSelector span.badge").html(this.results.length);
   }
     if($("#savedFoki").length === 0){
       // Now append the Tab Panel
@@ -582,8 +599,9 @@ Results.prototype.addToContainer = function(container){
     ');
   $(container).prepend(options);
 
-  $(options).find("button").click(function(){
-      new Results("remove");
+  $(options).find("button").click({caller: this}, function(event){
+      event.data.caller.deleteResults();
+      new Results();
   });
 
   $(options).find("input").keyup(function(){
@@ -611,6 +629,8 @@ function resultSaver(index) {
   var color = $(".result[data-count=" + index + "] div.number").css("color");
   
   new Result(title, link, anzeigeLink, gefVon, hoster, anonym, description, color, undefined);
+  var to = $("#savedFokiTabSelector").length ? $("#savedFokiTabSelector") : $("#foki");
+  $(".result[data-count=" + index + "]").transfer({to: to, duration: 1000});
   new Results();
 }
 
@@ -631,7 +651,7 @@ function Result(title, link, anzeigeLink, gefVon, hoster, anonym, description, c
     this.anonym = anonym;
     this.description = description;
     this.color = color;
-    this.save();
+    this.save()
   }
 }
 

@@ -26,7 +26,7 @@
 							<ul class="options-list list-unstyled small">
 								<li>
 									<a href="javascript:resultSaver({{ $result->number }});" class="saver" data-counter="{{ $result->number }}">
-										<i class="glyphicon glyphicon-floppy-disk"></i> Ergebnis abspeichern.
+										<i class="glyphicon glyphicon-floppy-disk"></i> Ergebnis in Tab speichern.
 									</a>
 								</li>
 								<li>

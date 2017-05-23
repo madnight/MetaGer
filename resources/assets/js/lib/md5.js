@@ -83,7 +83,7 @@ var MD5 = function (string) {
            return WordToHexValue;
    };
 
-   function Utf8Encode(string) {
+   function md5Utf8Encode(string) {
            string = string.replace(/\r\n/g,"\n");
            var utftext = "";
 
@@ -116,7 +116,7 @@ var MD5 = function (string) {
    var S31=4, S32=11, S33=16, S34=23;
    var S41=6, S42=10, S43=15, S44=21;
 
-   string = Utf8Encode(string);
+   string = md5Utf8Encode(string);
 
    x = ConvertToWordArray(string);
 

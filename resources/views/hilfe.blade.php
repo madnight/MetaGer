@@ -255,6 +255,7 @@
 			<p>{!! trans('hilfe.maps.1') !!}</p>
 			<p>{!! trans('hilfe.maps.2') !!}</p>
 			<p>{!! trans('hilfe.maps.3') !!}</p>
+			<p>{!! trans('hilfe.maps.4') !!}</p>
 		</div>
 	</div>
 @endsection

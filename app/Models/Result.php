@@ -216,10 +216,15 @@ class Result
     # Überprüft ob das Ergebnis aus irgendwelchen Gründen unerwünscht ist.
     public function isValid(\App\MetaGer $metager)
     {
-        # Perönliche URL und Domain Blacklist
-        if (in_array($this->strippedHost, $metager->getUserHostBlacklist())
-            || in_array($this->strippedDomain, $metager->getUserDomainBlacklist())) {
+        # Perönliche Host und Domain Blacklist
+        if (in_array(strtolower($this->strippedHost), $metager->getUserHostBlacklist())
+            || in_array(strtolower($this->strippedDomain), $metager->getUserDomainBlacklist())) {
             return false;
+        }
+
+        # Persönliche URL Blacklist
+        foreach ($metager->getUserUrlBlacklist() as $word) {
+            if (strpos(strtolower($this->link), $word)) return false;
         }
 
         # Allgemeine URL und Domain Blacklist

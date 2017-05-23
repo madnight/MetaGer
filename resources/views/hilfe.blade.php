@@ -146,6 +146,18 @@
 			</div>
 		</div>
 	</div>
+	<div id="urls" class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">{!! trans('hilfe.urls.title') !!}</h3>
+		</div>
+		<div class="panel-body">
+			<p>{!! trans('hilfe.urls.explanation') !!}</p>
+			<ul class="dotlist">
+				<li>{!! trans('hilfe.urls.example.1') !!}</li>
+				<div class = "well well-sm">{!! trans('hilfe.urls.example.2') !!}</div>
+			</ul>
+		</div>
+	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">{!! trans('hilfe.bang.title') !!}</h3>

@@ -33,7 +33,7 @@
 				@foreach($language as $lang => $languageValue)
 					@if($languageValue !== "")
 						<td>
-							<textarea class="language-text-area" rows="1" cols="20" form="submit" name="{{base64_encode($lang."_".$key)}}">{{ $languageValue }} </textarea>
+							<textarea class="language-text-area" rows="1" cols="20" form="submit" name="{{base64_encode($lang."_".$key)}}">{{$languageValue}}</textarea>
 						</td>
 					@else
 						<td>
@@ -52,8 +52,8 @@
 	<p>{!! trans('languages.hinweis.3') !!}</p>
 	<p>{!! trans('languages.email') !!}</p>
 -->
-	<button class="btn btn-success" type="submit" form="submit">Dateien herunterladen</button>
-	<button class="btn btn-success" type="submit" form="submit">Nächste Seite</button>
+	<button name="download" class="btn btn-success" type="submit" form="submit">Dateien herunterladen</button>
+	<button name="nextpage" class="btn btn-success" type="submit" form="submit">Nächste Seite</button>
 	<script type="text/javascript" src="{{ elixir('js/lib.js') }}"></script>
 	<script type="text/javascript" src="{{ elixir('js/editLanguage.js') }}"></script>
 @endsection

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use LaravelLocalization;
 use Mail;
+use ZipArchive;
 
 class MailController extends Controller
 {
@@ -141,7 +142,7 @@ class MailController extends Controller
     private function processKey($key) 
     {   
         $key = trim($key);
-        preg_match("/^(?:_new_)?(?:[^_]*)_(\w*#?\w*)/", $key, $matches);
+        preg_match("/^(?:_new_)?(?:[^_]*)_(\w*.?\w*#?.?\w*)/", $key, $matches);
         foreach($matches as $processedKey) {
             if(strpos($processedKey, "_") === FALSE) {
                 return $processedKey;
@@ -237,9 +238,34 @@ class MailController extends Controller
 
 
 
-    public function downloadModifiedLanguagefiles(Request $request, $exclude = "") {
+    public function processSynopticPageInput(Request $request, $exclude = "") {
 
         $filename = $request->input('filename');
+
+        if(isset($request['nextpage'])) {
+
+            $ex = [];
+
+            if ($exclude !== "") {
+                try {
+                    $ex = unserialize(base64_decode($exclude));
+                } catch (\ErrorException $e) {
+                    $ex = [];
+                }
+
+                if (!isset($ex["files"])) {
+                    $ex["files"] = [];
+                }
+            }
+            if (!isset($ex["new"])) {
+                $ex["new"] = 0;
+            }
+            $ex['files'][] = basename($filename);
+            $ex = base64_encode(serialize($ex));
+
+            return redirect(url('synoptic', ['exclude' => $ex]));
+        }
+
         $data = [];
         $new  = 0;
         $editedFiles = [];
@@ -257,7 +283,7 @@ class MailController extends Controller
             if (strpos($key, "_new_") === 0 && $value !== "") {
                 $new++;
                 $editedFiles[$langdir] = $filename;
-            } else if ($this->isEdited($key, $value, $fn)) {
+            } else if ($this->isEdited($this->processKey($key), $value, $fn)) {
                 $new++;
                 $editedFiles[$langdir] = $filename;
             }
@@ -284,47 +310,31 @@ class MailController extends Controller
             }
         }     
 
-        #Erstelle Ausgabedateien
-        foreach($data as $lang => $entries) {
-            $output[$lang] = json_encode($entries, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-            $output[$lang] = preg_replace("/\{/si", "[", $output[$lang]);
-            $output[$lang] = preg_replace("/\}/si", "]", $output[$lang]);
-            $output[$lang] = preg_replace("/\": ([\"\[])/si", "\"\t=>\t$1", $output[$lang]);
-            $output[$lang] = "<?php\n\nreturn $output[$lang];\n";
+        if(empty($data)) {
+            return redirect(url('synoptic', ['exclude' => $exclude]));
         }
-
-        
-        $ex = [];
-        if ($exclude !== "") {
-            try {
-                $ex = unserialize(base64_decode($exclude));
-            } catch (\ErrorException $e) {
-                $ex = [];
-            }
-
-            if (!isset($ex["files"])) {
-                $ex["files"] = [];
-            }
-        }
-        if (!isset($ex["new"])) {
-            $ex["new"] = 0;
-        }
-        $ex['files'][] = basename($filename);
-        $ex["new"] += $new;
-
-        if ($new > 0) {
-            
-        }
-
-        $ex = base64_encode(serialize($ex));
 
         $zip = new ZipArchive();
-        
-        return response()->make($output["fr"])
-            ->header("Content-type","text/plain; charset=utf-8")
-            ->header("Content-disposition","attachment; filename=\"".$filename."\"");
-        //return response()->download($output["fr"], $filename);
-        //return redirect(url('synoptic', ['exclude' => $ex]));
+
+        if ($zip->open("langfiles.zip", ZipArchive::OVERWRITE)!==TRUE) {
+            exit("cannot open <$filename>\n");
+        }
+
+        #Erstelle Ausgabedateien
+        foreach($data as $lang => $entries) {
+            $output = json_encode($entries, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            $output = preg_replace("/\{/si", "[", $output);
+            $output = preg_replace("/\}/si", "]", $output);
+            $output = preg_replace("/\": ([\"\[])/si", "\"\t=>\t$1", $output);
+            $output = "<?php\n\nreturn $output;\n";
+            $zip->addEmptyDir($lang);
+            $zip->addFromString($lang."/".$filename, $output);
+        }
+
+        $zip->close();
+
+        return response()->download("langfiles.zip", "langfiles.zip");
+
 
     }
 

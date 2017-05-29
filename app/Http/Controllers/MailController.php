@@ -121,17 +121,23 @@ class MailController extends Controller
     #Ueberprueft ob ein bereits vorhandener Eintrag bearbeitet worden ist
     private function isEdited($k, $v, $filename)
     {
-        $temp = include resource_path()."/".$filename;
-        foreach ($temp as $key => $value) {
-            if($k === $key && $v !== $value) {
-                return true;
-            }
+        try {
+            $temp = include resource_path()."/".$filename;
+            foreach ($temp as $key => $value) {
+                if($k === $key && $v !== $value) {
+                    return true;
+                }
+            }  
+        } catch (\ErrorException $e) {
+            #Datei existiert noch nicht
+            return true;
         }
         return false;
     }
 
     private function extractLanguage($key) 
-    {
+    {   
+        #Kürzt bspw. "_new_de_redirect bzw. "de_redirect" zu "de"
         preg_match("/^(?:_new_)?([^_]*)/", $key, $matches);
         foreach($matches as $dir) {
             if(strlen($dir) == 2)
@@ -142,6 +148,7 @@ class MailController extends Controller
     private function processKey($key) 
     {   
         $key = trim($key);
+        #Kürzt bspw. "_new_de_redirect bzw. "de_redirect" zu "redirect"
         preg_match("/^(?:_new_)?(?:[^_]*)_(\w*.?\w*#?.?\w*)/", $key, $matches);
         foreach($matches as $processedKey) {
             if(strpos($processedKey, "_") === FALSE) {
@@ -242,8 +249,9 @@ class MailController extends Controller
 
         $filename = $request->input('filename');
 
+        #Identifizieren des gedrückten Buttons
         if(isset($request['nextpage'])) {
-
+            #Leite weiter zur nächsten Seite
             $ex = [];
 
             if ($exclude !== "") {
@@ -266,6 +274,7 @@ class MailController extends Controller
             return redirect(url('synoptic', ['exclude' => $ex]));
         }
 
+        #Andernfalls auslesen, zippen und herunterladen der veränderten Dateien 
         $data = [];
         $new  = 0;
         $editedFiles = [];
@@ -275,30 +284,42 @@ class MailController extends Controller
             if ($key === "filename" || $value === "") {
                 continue;
             }
+
             $key = base64_decode($key);
 
             #Pfad zur Datei anhand des Schlüsselnamens rekonstruieren (Schlüssel enthält Sprachkürzel)
             $langdir = $this->extractLanguage($key);
-            $fn = "lang/".$langdir."/".$filename;
-            if (strpos($key, "_new_") === 0 && $value !== "") {
+            $filepath = "lang/".$langdir."/".$filename;
+ 
+            if (strpos($key, "_new_") === 0 && $value !== "" || $this->isEdited($this->processKey($key), $value, $filepath)) {
                 $new++;
-                $editedFiles[$langdir] = $filename;
-            } else if ($this->isEdited($this->processKey($key), $value, $fn)) {
-                $new++;
-                $editedFiles[$langdir] = $filename;
+                $editedFiles[$langdir] = $filepath;
+            } 
+        }     
+
+        #Erneute Iteration über Request, damit Dateien mitsamt vorherigen Einträgen abgespeichert werden 
+        foreach($request->all() as $key => $value) {
+
+            if ($key === "filename" || $value === "") {
+                continue;
             }
+
+            $key = base64_decode($key);
+
+            #Pfad zur Datei anhand des Schlüsselnamens rekonstruieren (Schlüssel enthält Sprachkürzel)
+            $langdir = $this->extractLanguage($key);
 
             #Überspringe Datei, falls diese nicht bearbeitet worden ist
             if(!isset($editedFiles[$langdir])) {
                 continue;
             }
-            #Key verarbeiten, sodass er nur den eigentlichen Keynamen enthält
-            $key = $this->processKey($key);
 
-            #Aufdröseln von 2D-Arrays
+            #Key kuerzen, sodass er nur den eigentlichen Keynamen enthält
+            $key = $this->processKey($key);
+            
             if (!strpos($key, "#")) {
                 $data[$langdir][$key] = $value;
-
+            #Aufdröseln von 2D-Arrays
             } else {
                 $ref = &$data;
                 do {
@@ -308,7 +329,7 @@ class MailController extends Controller
                 $ref = &$ref[$key];
                 $ref = $value;
             }
-        }     
+        }
 
         if(empty($data)) {
             return redirect(url('synoptic', ['exclude' => $exclude]));
@@ -316,8 +337,9 @@ class MailController extends Controller
 
         $zip = new ZipArchive();
 
-        if ($zip->open("langfiles.zip", ZipArchive::OVERWRITE)!==TRUE) {
-            exit("cannot open <$filename>\n");
+        if ($zip->open("langfiles.zip", ZipArchive::OVERWRITE)!==TRUE) {  
+        } else if ($zip->open("langfiles.zip", ZipArchive::CREATE)!==TRUE) {
+            exit("Cannot open".$filename);
         }
 
         #Erstelle Ausgabedateien

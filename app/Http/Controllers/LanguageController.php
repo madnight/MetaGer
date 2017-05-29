@@ -100,7 +100,7 @@ class LanguageController extends Controller
         if ($exclude !== "") {
             try {
                 $ex = unserialize(base64_decode($exclude));
-            } catch (\ErrorException $e) {
+            } catch (ErrorException $e) {
                 $ex = ['files' => [], 'new' => 0];
             }
         }
@@ -202,7 +202,7 @@ class LanguageController extends Controller
 
         $fn = "";
 
-        #Wähle die erste Datei aus
+        #Wähle die erste, unbearbeitete Datei aus
         foreach($languageObjects as $folder => $languageObject) {
             foreach($languageObject->stringMap as $languageFileName => $languageFile) {
                 $fn = $languageFileName;

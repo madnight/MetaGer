@@ -7839,8 +7839,8 @@ footer a {
   display: inline-block;
   border-radius: 0px 7px 7px 0px;
 }
-.startpage-foki label span,
-.foki label span {
+.startpage-foki label span:not(.badge),
+.foki label span:not(.badge) {
   background-color: transparent;
 }
 .focus {

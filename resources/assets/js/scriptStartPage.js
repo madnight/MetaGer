@@ -21,6 +21,7 @@ $(document).ready(function () {
   }
   setActionListeners();
   loadInitialCustomFocuses();
+  loadSavedResults();
 });
 
 function setActionListeners () {
@@ -427,4 +428,24 @@ function setFocusToDefault () {
 
 function setFocus (focusID) {
   $('#' + focusID).prop('checked', true);
+}
+
+function loadSavedResults() {
+  var results = new Results();
+  if(results.length > 0){
+    var html = $('\
+    <div class="focus">\
+      <input id="savedResults" class="focus-radio hide" name="focus" value="container" form="searchForm" type="radio" required="">\
+      <label id="saved-results-label" class="focus-label" for="savedResults">\
+        <span class="glyphicon glyphicon-floppy-disk"></span>\
+        <span class="content">gespeicherte Ergebnisse</span>\
+        <span class="badge">' + results.length + '</span>\
+      </label>\
+    </div>\
+    ');
+    $("#addFocusBtnDiv").before(html);
+    $("#foki input#savedResults").change(function(){
+      if($(this).prop("checked")) $("#searchForm").submit();
+    });
+  }
 }

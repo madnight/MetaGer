@@ -4,8 +4,8 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title>{{ $eingabe }} - MetaGer</title>
-		<link rel="stylesheet" title="Material" href="/css/material-default.css" />
-		<link rel="stylesheet" title="Material-Invers" href="/css/material-inverse.css" />
+		<link @if(app('request')->input('theme', 'default')!=='default'&&app('request')->input('theme', 'default')!=='material')rel="alternate stylesheet" @else rel="stylesheet" @endif title="Material" href="/css/material-default.css" />
+		<link @if(app('request')->input('theme', 'default')!=='material-inverse')rel="alternate stylesheet" @else rel="stylesheet" @endif  title="Material-Invers" href="/css/material-inverse.css" />
 		<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 		<link href="/favicon.ico" rel="icon" type="image/x-icon" />
 		<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />

@@ -7,19 +7,19 @@ body {
 	margin: 0px;
 	padding: 0px;
 	color: #fff;
-	background-color: #050505;
+	background-color:  #000;
   font-family: Roboto,"Noto Sans",sans-serif;
 }
 
 .card {
-	background-color: hsl(0, 0%, 20%);;
+	background-color: hsl(0, 0%, 20%);
 	margin: 8px;
 	padding: 8px;
 	border-radius: 2px;
 	display: block;
 }
 .card-inline {
-	background-color: #000;
+	background-color: hsl(0, 0%, 20%);
 	margin: 8px;
 	padding: 8px;
 	border-radius: 2px;
@@ -27,10 +27,10 @@ body {
 
 .elevation-1 {
 
-	box-shadow: 0px 1px 1.5px 0px rgba(255,255,255,0.12), 1px 0px 1px 0px rgba(255,255,255,0.24);
+	box-shadow: 0px 1px 1.5px 0px rgba(0,0,0,0.12), 1px 0px 1px 0px rgba(0,0,0,0.24);
 }
 .elevation-2 {
-	box-shadow: 0px 3px 3px 0px rgba(255,255,255,0.16), 3px 0px 3px 0px rgba(255,255,255,0.23);
+	box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.16), 3px 0px 3px 0px rgba(0,0,0,0.23);
 }
 
 .search-card {

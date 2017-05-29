@@ -38,7 +38,7 @@
 						<td class="name language-name">{{preg_replace("/(\s*).*#(.*)$/si", "$1$2", $name)}}</td>
 						<td>
 							@if(isset($langValues[$to]))
-								<textarea class="language-text-area" type="text" rows="1" cols="50" form="submit" name="{{ base64_encode($name) }}" readonly >{{$langValues[$to]}}</textarea>
+								<textarea class="language-text-area" type="text" rows="1" cols="50" form="submit" name="{{ base64_encode($name) }}">{{$langValues[$to]}}</textarea>
 							@else
 								<textarea class="language-text-area" rows="1" cols="50" form="submit" name="{{base64_encode("_new_" . $name)}}"></textarea>
 							@endif
@@ -54,7 +54,7 @@
 	<p>{{ trans('languages.hinweis.1') }}</p>
 	<p>{!! trans('languages.hinweis.2') !!}</p>
 	<p>{!! trans('languages.hinweis.3') !!}</p>
-	<p><b>E-Mail-Adresse für Rückfragen</b> (optional):</p>
+	<p>{!! trans('languages.email') !!}</p>
 	<p><input type="email" name="email" form="submit" value="{{$email}}"/></p>
 	<button class="btn btn-success" type="submit" form="submit">Daten übermitteln</button>
 	<script type="text/javascript" src="{{ elixir('js/lib.js') }}"></script>

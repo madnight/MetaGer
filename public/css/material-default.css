@@ -1,0 +1,271 @@
+/* Mobile styles */
+
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	margin: 0px;
+	padding: 0px;
+	background-color: #FAFAFA;
+  font-family: Roboto,"Noto Sans",sans-serif;
+}
+
+.card {
+	background-color: #FFFFFF;
+	margin: 8px;
+	padding: 8px;
+	border-radius: 2px;
+	display: block;
+}
+.card-inline {
+	background-color: #FFFFFF;
+	margin: 8px;
+	padding: 8px;
+	border-radius: 2px;
+}
+
+.elevation-1 {
+	box-shadow: 0px 1px 1.5px 0px rgba(0,0,0,0.12), 1px 0px 1px 0px rgba(0,0,0,0.24);
+}
+.elevation-2 {
+	box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.16), 3px 0px 3px 0px rgba(0,0,0,0.23);
+}
+
+.search-card {
+	height: 30px;
+	display: flex;
+	justify-content: space-between;
+	
+	position: sticky;
+	top: 10px;
+	
+	z-index: 100;
+}
+
+.persistent-search {
+    top: 0px;
+	position: sticky;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,0) 60%,rgba(255,255,255,0) 100%);
+}
+
+.search-card button, .search-card input {
+	border: none;
+	background: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.search-card input[type=text] {
+	font-size: 18px;
+	overflow-x: hidden;
+}
+
+.search-card .back {
+	height: 100%;
+	margin-right:8px;
+}
+
+.search-button {
+	width: 50px;
+}
+
+.search-button img {
+	height: 100%;
+}
+
+.search-card .back img {
+	height: 100%;
+}
+
+.search-card .query-input {
+	flex-grow: 1;
+}
+
+.results-container {
+	z-index: 10;
+}
+
+.search-result {
+	position:relative;
+}
+
+.result-content {
+	margin: 16px 8px 8px 8px;
+}
+
+.result-title {
+	font-size: 18px;
+	font-weight: 500;
+	color: hsl(0, 0%, 13%);
+	margin: 0px;
+	padding: 0px;
+}
+.result-display-link {
+	color: hsl(0, 0%, 13%);
+	font-size: 14px;
+	font-weight: 400;
+	margin: 0px;
+	padding: 0px;
+}
+
+.result-description {
+	font-size: 16px;
+}
+
+.result-source {
+	display: none;
+	
+}
+
+.result-thumbnail {
+	position: absolute;
+	right: 16px;
+	top: 16px;
+	max-width: 80px;
+	max-height: 80px;
+}
+
+.result-action-area {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	margin: 0px;
+	padding: 0px;
+}
+
+.result-action {
+	color: hsl(0, 0%, 13%);
+	font-size: 14px;
+	font-weight: 500;
+	text-decoration: none;
+	text-transform: uppercase;
+	margin: 0px 0px 0px 0px;
+	padding: 8px;
+	border-radius: 2px;
+}
+
+.result-action:hover, .result-action:focus {
+	background-color: hsla(0, 0%, 13%, 12%);
+}
+.result-action:active {
+	background-color: hsla(0, 0%, 13%, 40%);
+}
+
+.result-action:first-child.primary {
+	color: hsl(21, 100%, 50%);
+}
+
+.result-action:first-child.primary:hover, .result-action:first-child.primary:focus {
+	background-color: hsla(21, 100%, 50%, 12%);
+}
+.result-action:first-child.primary:active {
+	background-color: hsla(21, 100%, 50%, 40%);
+}
+
+.result-action.more {
+	float:right;
+}
+
+.footer-text {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	color: hsl(0, 0%, 46%);
+	text-align: center;
+}
+
+.pagenav-button-next{
+	color: hsl(0, 0%, 13%);
+	font-size: 20px;
+	text-decoration: none;
+	padding: 12px;
+	height:27px;
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	
+}
+.pagenav-button-first{
+	color: hsl(0, 0%, 13%);
+	font-size: 20px;
+	text-decoration: none;
+	height:27px;
+	padding: 12px;
+	align-self: flex-start;
+}
+
+.pagenav-following {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+}
+
+.pagenav-current {
+	color: hsl(0, 0%, 46%);
+	font-size: 18px;
+	padding: 12px;
+}
+
+
+.icon-right {
+	margin-left: 5px;
+}
+
+.focus-card {
+	background-color: hsl(0,0%,50%);
+}
+
+.focus-cell {
+	line-height: 34px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.focus-cell-label b {
+	font-weight: 500;
+}
+
+.focus-cell-action {
+	font-size: 14px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.focus-cell {
+	text-decoration: none;
+	background-color: hsl(0,0%,50%);
+	color: rgba(255, 255, 255, 1);
+	padding: 0px 5px;
+}
+
+li .focus-cell:hover {
+  background-color: hsl(0,0%,55%);
+}
+
+.focus-card[open] .focus-cell .focus-cell-action {
+	display: none;
+}
+
+.focus-list {
+	list-style-type: none;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-left: 0px;
+}
+
+@media (max-width: 330px) { /*für sehr kleine mobile Viewports (z.B. iPhone 5S)*/
+	.result-action {
+	font-size: 13px;
+}
+
+.pagenav-current-annotation {
+	display: none;
+}
+.pagenav-current {
+	color: hsl(0, 0%, 46%);
+	font-size: 20px;
+	padding: 12px;
+}
+}
+
+

@@ -341,7 +341,7 @@ class MailController extends Controller
 
         $zip = new ZipArchive();
 
-        if ($zip->open("langfiles.zip", ZipArchive::CREATE)) {  
+        if ($zip->open("langfiles.zip", ZipArchive::CREATE) !== TRUE) {  
             exit("Cannot open ".$filename);
         } 
             

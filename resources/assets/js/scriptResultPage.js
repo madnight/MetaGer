@@ -108,7 +108,6 @@ function botProtection () {
 
 function popovers () {
   $('[data-toggle=popover]').each(function (e) {
-    $(this).popover('destroy');
     $(this).popover({
       // html          :   true,
       // title         :   "<i class="fa fa-cog" aria-hidden="true"></i> Optionen",

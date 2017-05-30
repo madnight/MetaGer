@@ -335,22 +335,29 @@ class MailController extends Controller
             return redirect(url('synoptic', ['exclude' => $exclude]));
         }
 
+
+        if(file_exists("langfiles.zip"))
+            unlink("langfiles.zip");
+
         $zip = new ZipArchive();
 
-        if ($zip->open("langfiles.zip", ZipArchive::OVERWRITE)!==TRUE) {  
-        } else if ($zip->open("langfiles.zip", ZipArchive::CREATE)!==TRUE) {
-            exit("Cannot open".$filename);
-        }
-
+        if ($zip->open("langfiles.zip", ZipArchive::CREATE)) {  
+            exit("Cannot open ".$filename);
+        } 
+            
+        try{
         #Erstelle Ausgabedateien
-        foreach($data as $lang => $entries) {
-            $output = json_encode($entries, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-            $output = preg_replace("/\{/si", "[", $output);
-            $output = preg_replace("/\}/si", "]", $output);
-            $output = preg_replace("/\": ([\"\[])/si", "\"\t=>\t$1", $output);
-            $output = "<?php\n\nreturn $output;\n";
-            $zip->addEmptyDir($lang);
-            $zip->addFromString($lang."/".$filename, $output);
+            foreach($data as $lang => $entries) {
+                $output = json_encode($entries, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $output = preg_replace("/\{/si", "[", $output);
+                $output = preg_replace("/\}/si", "]", $output);
+                $output = preg_replace("/\": ([\"\[])/si", "\"\t=>\t$1", $output);
+                $output = "<?php\n\nreturn $output;\n";
+                $zip->addEmptyDir($lang);
+                $zip->addFromString($lang."/".$filename, $output);
+            }
+        } catch(ErrorException $e) {
+            exit("Failed to write ".$filename);
         }
 
         $zip->close();

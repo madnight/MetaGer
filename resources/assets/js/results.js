@@ -113,7 +113,7 @@ Results.prototype.addToContainer = function(container, sortType){
       </div>\
     ');
 
-  $(options).find("option[value=" + sortType + "]").prop("selected", true);
+  $(options).find("select").val(sortType);
 
   $(container).prepend(options);
 

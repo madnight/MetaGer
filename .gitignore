@@ -8,6 +8,7 @@ Homestead.yaml
 .orig
 .vscode
 # The Files created by Gulp in the build process
+/public/build
 /public/js/lib.js
 /public/js/quicktips.js
 /public/js/scriptStartPage.js

@@ -4,14 +4,16 @@
 function Results(sort){
   if(!localStorage) return;
   this.prefix = "result_";
+  this.sort = sort;
   this.results = [];
   this.updateResults();
   this.length = this.results.length;
-  this.sortResults(sort);
+  this.sortResults();
 }
 
-Results.prototype.sortResults = function(sortType){
-  if(sortType === undefined) sortType = "chronological";
+Results.prototype.sortResults = function(){
+  if(this.sort === undefined) this.sort = "chronological";
+  var sortType = this.sort;
   switch(sortType){
     case "chronological":
       this.results.sort(function(a,b){
@@ -63,7 +65,8 @@ Results.prototype.deleteResults = function(){
   });
 }
 
-Results.prototype.updateResultPageInterface = function(sortType){
+Results.prototype.updateResultPageInterface = function(){
+  var sortType = this.sort;
   if(this.results.length === 0){
     $("#savedFokiTabSelector, #savedFoki").remove();
     $($("#foki > li[data-loaded=1]").get(0)).find(">a").tab("show");
@@ -96,7 +99,8 @@ Results.prototype.updateResultPageInterface = function(sortType){
     this.addToContainer(tabPanel, sortType);
 }
 
-Results.prototype.addToContainer = function(container, sortType){
+Results.prototype.addToContainer = function(container){
+  var sortType = this.sort;
   $.each(this.results, function(index, result){
     $(container).append(result.toHtml());
   });

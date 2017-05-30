@@ -7592,11 +7592,12 @@ a#donation:hover {
 .result .link .options > a {
   color: #404040;
   display: block;
-  padding-left: 5px;
+  padding-left: 8px;
   padding-right: 5px;
 }
-.result .link .options > a > span {
-  font-size: 10px;
+.result .link .options > a > i {
+  font-size: 16px;
+  color: #2A2ADE;
 }
 .result .link-link {
   white-space: nowrap;
@@ -7851,8 +7852,8 @@ a#donation:hover {
   display: inline-block;
   border-radius: 0px 7px 7px 0px;
 }
-.startpage-foki label span,
-.foki label span {
+.startpage-foki label span:not(.badge),
+.foki label span:not(.badge) {
   background-color: transparent;
 }
 .focus {

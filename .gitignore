@@ -13,3 +13,5 @@ Homestead.yaml
 /public/js/scriptStartPage.js
 /public/js/scriptResultPage.js
 /public/css/beitritt.css
+/public/css/themes/default.css
+**.map

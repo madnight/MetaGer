@@ -65,6 +65,7 @@ update(metager2):
     - chmod 777 config/sumas.xml config/sumasEn.xml database/metager.sqlite
     - chmod -R 777 storage
     - chmod -R 777 bootstrap/cache
+    - ./gulpbuild.sh
     - if [ -f ~/MetaGer/artisan ]; then php ~/MetaGer/artisan down;fi
     - cd ~/
     - while [ -d ~/MetaGer ]; do rm -rf ~/MetaGer;done
@@ -102,6 +103,7 @@ update(metager3.de):
     - chmod 777 config/sumas.xml config/sumasEn.xml database/metager.sqlite
     - chmod -R 777 storage
     - chmod -R 777 bootstrap/cache
+    - ./gulpbuild.sh
     - if [ -f ~/MetaGer/artisan ]; then php ~/MetaGer/artisan down;fi
     - cd ~/
     - while [ -d ~/MetaGer ]; do rm -rf ~/MetaGer;done

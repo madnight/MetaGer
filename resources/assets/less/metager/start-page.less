@@ -1,10 +1,14 @@
-@foki-edge-rounding: 7px;
-#about-us a:visited {
-    color: @link-color;
+.searchform-bonus {
+    li {
+        margin: 5px;
+    }
 }
 
-#anpassen-label a {
-    color: #333;
+.settings-modal-buttons {
+    padding: 5px;
+    button {
+        margin: 5px
+    }
 }
 
 .startpage-foki,
@@ -39,7 +43,7 @@
         .focus-label,
         .focus-edit {
             cursor: pointer;
-            background-color: #e3e3e3;
+            background-color: @focus-hover-focus-edit-background-color;
         }
     }
 }
@@ -47,7 +51,7 @@
 .focus-radio:checked {
     &+.focus-label,
     &+.focus-label+.focus-edit {
-        background-color: #e3e3e3;
+        background-color: @focus-radio-checked-focus-label-focus-edit-background-color;
     }
 }
 
@@ -59,6 +63,14 @@
     font-weight: normal;
 }
 
+#about-us a:visited {
+    color: @link-color;
+}
+
+#anpassen-label a {
+    color: @anpassen-label-color;
+}
+
 #addFocusBtnDiv {
     margin-left: 10px;
 }
@@ -67,18 +79,5 @@
     margin-left: 10px;
     &>* {
         vertical-align: middle;
-    }
-}
-
-.searchform-bonus {
-    li {
-        margin: 5px;
-    }
-}
-
-.settings-modal-buttons {
-    padding: 5px;
-    button {
-        margin: 5px
     }
 }

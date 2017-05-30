@@ -1,3 +1,39 @@
+@quicktip-background-color: @static-pages-color-white;
+@metager-dropdown-menu-background-color: @static-pages-color-white;
+@metager-dropdown-menu-box-shadow-color: fade(@static-pages-color-black, 17.5%);
+@metager-dropdown-menu-li-a-color: @static-pages-color-almost-black;
+@metager-dropdown-menu-li-a-hover-color: @static-pages-color-strong-grey;
+@metager-dropdown-menu-li-a-hover-background-color: @static-pages-color-almost-white;
+@spruch-color: @static-pages-spruch-color;
+@spruch-border-left-color: @spruch-color;
+@spruch-author-color: @static-pages-color-grey;
+@metager-dropdown-toggle-hover-or-focus-color: fade(@static-pages-color-black, 15%);
+@metager-navbar-toggle-color: @static-pages-color-grey;
+@metager-navbar-toggle-background-color: @static-pages-color-white;
+@metager-navbar-toggle-border-color: @static-pages-color-almost-white;
+@metager-navbar-toggle-visited-color: @static-pages-color-grey;
+@metager-navbar-toggle-hover-background-color: @static-pages-color-almost-white;
+@toggle-nav-hide-or-metager-navbar-toggle-background-color: @static-pages-color-almost-white;
+@more-information-ul-li-color: @static-pages-color-grey;
+@more-information-h2-color: @static-pages-color-grey;
+@div-right-background-color: @static-pages-color-almost-white;
+@div-right-p-border-bottom-color: @static-pages-color-black;
+@quicktip-color: @static-pages-color-black;
+@quicktip-border-left-color: @static-pages-quicktip-aufruf-color;
+@quicktip-aufruf-color: @static-pages-quicktip-aufruf-background;
+@quicktip-aufruf-border-left-color: @quicktip-aufruf-color;
+@navbar-default-background-color: @static-pages-color-white;
+@mg-panel-background-color: @static-pages-color-white;
+@form-group-color: @static-pages-color-black;
+@metager-searchinput-color: @static-pages-color-strong-grey;
+@metager-searchinput-background-color: @static-pages-color-white;
+@metager-searchinput-border-color: @static-pages-color-almost-white;
+@metager-searchbutton-color: @static-pages-color-strong-grey;
+@metager-searchbutton-background-color: @static-pages-color-almost-white;
+@metager-searchbutton-border-color: @static-pages-color-almost-white;
+@modal-content-box-shadow-color: fade(@static-pages-color-black, 30%);
+@a-content-hidden-xs-color: @static-pages-color-almost-black;
+@section-box-shadow-color: fade(@static-pages-color-black, 55%);
 * {
     font-family: Liberation Sans, sans-serif;
 }
@@ -8,7 +44,7 @@ body {
         padding-top: 70px;
     }
     &.quicktips {
-        background-color: white;
+        background-color: @quicktip-background-color;
     }
 }
 
@@ -28,53 +64,26 @@ footer {
     }
 }
 
-#spruch {
-    margin-bottom: 20px;
-    padding: 5px;
-    line-height: 1.2;
-    color: #070;
-    border-left: 3px solid #070;
-    font-size: 16px;
-    font-family: Georgia, "Times New Roman", Palatino, Times, serif;
-    .author {
-        font-size: 14px;
-        color: #888;
-    }
-}
-
 ul.startpage {
     list-style-type: none;
 }
 
-#mglogo {
-    width: 100%;
-    text-align: center;
-}
-
-nav.navbar-resultpage {
-    position: absolute;
-    &>ul>li {
-        padding-left: 0;
-        padding-right: 0;
-        &>a:not(.metager-navbar-toggle) {
-            display: block;
-            padding: 10px;
-            color: #777;
-        }
-        &.active>a,
-        a.metager-dropdown-toggle:hover,
-        a.metager-dropdown-toggle:focus {
-            background-color: #e7e7e7;
-        }
+nav {
+    h1 {
+        margin: 0;
+        height: 100%;
+        padding-left: 20px;
+        padding-top: 8px;
+        font-family: sans-serif;
+        font-style: italic;
+        margin: 0;
+        font-weight: bold;
+        line-height: 1;
+        white-space: nowrap;
     }
-    &>ul.list-inline {
-        margin-bottom: 0;
+    .navbar-brand>div.logo {
+        height: 100%;
     }
-}
-
-#navbar-static-pages {
-    z-index: 4;
-    width: 100%;
 }
 
 ul.metager-dropdown-menu {
@@ -91,9 +100,9 @@ ul.metager-dropdown-menu {
     list-style: none;
     font-size: 14px;
     text-align: left;
-    background-color: #fff;
+    background-color: @metager-dropdown-menu-background-color;
     border-radius: 4px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px @metager-dropdown-menu-box-shadow-color;
     background-clip: padding-box;
     max-height: 0px;
     overflow: hidden;
@@ -104,14 +113,38 @@ ul.metager-dropdown-menu {
         clear: both;
         font-weight: normal;
         line-height: 1.42857143;
-        color: #333333;
+        color: @metager-dropdown-menu-li-a-color;
         white-space: nowrap;
         &:hover {
             text-decoration: none;
-            color: #262626;
-            background-color: #f5f5f5;
+            color: @metager-dropdown-menu-li-a-hover-color;
+            background-color: @metager-dropdown-menu-li-a-hover-background-color;
         }
     }
+}
+
+#mglogo {
+    width: 100%;
+    text-align: center;
+}
+
+#spruch {
+    margin-bottom: 20px;
+    padding: 5px;
+    line-height: 1.2;
+    color: @spruch-color;
+    border-left: 3px solid @spruch-border-left-color;
+    font-size: 16px;
+    font-family: Georgia, "Times New Roman", Palatino, Times, serif;
+    .author {
+        font-size: 14px;
+        color: @spruch-author-color;
+    }
+}
+
+#navbar-static-pages {
+    z-index: 4;
+    width: 100%;
 }
 
 #gutscheine {
@@ -132,29 +165,29 @@ ul.metager-dropdown-menu:hover,
 #gutscheine>a:first-child:hover+a+ul.metager-dropdown-menu {
     max-height: 1000px;
     padding: 5px 0;
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    border: 1px solid @metager-dropdown-toggle-hover-or-focus-color;
 }
 
 .metager-navbar-toggle {
-    color: #777;
-    background-color: white;
+    color: @metager-navbar-toggle-color;
+    background-color: @metager-navbar-toggle-background-color;
     padding: 5px 10px;
     margin: 5px 8px 5px 0;
     border-radius: 7px;
-    border: 1px solid #ddd;
+    border: 1px solid @metager-navbar-toggle-border-color;
     display: block;
     width: 36px;
     height: 30px;
     &:visited {
-        color: #777;
+        color: @metager-navbar-toggle-visited-color;
     }
     &:hover {
-        background-color: #ddd;
+        background-color: @metager-navbar-toggle-hover-background-color;
     }
 }
 
 #toggle-nav-hide .metager-navbar-toggle {
-    background-color: #ddd;
+    background-color: @toggle-nav-hide-or-metager-navbar-toggle-background-color;
 }
 
 @media (max-width: 979px) {
@@ -273,13 +306,13 @@ ul.metager-dropdown-menu:hover,
         padding: 0;
     }
     ul li {
-        color: grey;
+        color: @more-information-ul-li-color;
     }
     &>div {
         font-size: 15px;
     }
     h2 {
-        color: grey;
+        color: @more-information-h2-color;
         font-size: 25px;
     }
     a:hover {
@@ -306,13 +339,13 @@ main div#foki {
 }
 
 div#right {
-    background-color: #FFDCC1;
+    background-color: @div-right-background-color;
     border-radius: 5px;
     padding: 20px;
     padding-top: 0;
     p {
         white-space: normal;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid @div-right-p-border-bottom-color;
         margin-bottom: 15px;
         padding-bottom: 15px;
     }
@@ -339,16 +372,16 @@ textarea#message {
     padding: 10px;
     line-height: 1.2 !important;
     font-family: Georgia, "Times New Roman", Palatino, Times, serif;
-    color: #000;
-    border-left: 3px solid #FB0;
+    color: @quicktip-color;
+    border-left: 3px solid @quicktip-border-left-color;
     font-size: 14px;
     h1 {
         font-size: 22px;
         margin-top: 0px;
     }
     &.aufruf {
-        border-left: 3px solid #FF4000;
-        color: #FF4000;
+        color: @quicktip-aufruf-color;
+        border-left: 3px solid @quicktip-aufruf-border-left-color;
     }
 }
 
@@ -374,7 +407,7 @@ textarea#message {
 }
 
 .navbar-default {
-    background-color: white;
+    background-color: @navbar-default-background-color;
     border-radius: 0;
 }
 
@@ -389,7 +422,7 @@ textarea#message {
     margin-top: 20px;
     padding: 10px 20px;
     margin-bottom: 0;
-    background-color: white;
+    background-color: @mg-panel-background-color;
     -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
@@ -406,7 +439,7 @@ textarea#message {
 .form-group {
     font-family: sans-serif;
     font-size: 16px;
-    color: black;
+    color: @form-group-color;
     background-color: transparent;
     text-align: center;
 }
@@ -421,10 +454,10 @@ textarea#message {
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.42857;
-    color: #555;
-    background-color: #FFF;
+    color: @metager-searchinput-color;
+    background-color: @metager-searchinput-background-color;
     background-image: none;
-    border: 1px solid #CCC;
+    border: 1px solid @metager-searchinput-border-color;
     border-right: 0px none;
     border-radius: 4px;
     border-top-right-radius: 0px;
@@ -440,16 +473,16 @@ textarea#message {
     border-bottom-right-radius: 4px;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
-    border: 1px solid #CCC;
+    color: @metager-searchbutton-color;
+    background-color: @metager-searchbutton-background-color;
+    border: 1px solid @metager-searchbutton-border-color;
     padding: 6px 12px;
     margin: 0px;
     font-size: 14px;
     font-weight: normal;
     line-height: 1;
     white-space: nowrap;
-    color: #555;
     text-align: center;
-    background-color: #EEE;
 }
 
 .metager-logo {
@@ -492,9 +525,9 @@ textarea#message {
 
 .modal-content {
     border-radius: 0;
-    -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
-    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 1px 1px 3px 1px @modal-content-box-shadow-color;
+    -moz-box-shadow: 1px 1px 3px 1px @modal-content-box-shadow-color;
+    box-shadow: 1px 1px 3px 1px @modal-content-box-shadow-color;
 }
 
 .bold {
@@ -541,7 +574,7 @@ i.fa {
 }
 
 a.content.hidden-xs {
-    color: #333;
+    color: @a-content-hidden-xs-color;
 }
 
 a.navbar-brand {
@@ -550,10 +583,6 @@ a.navbar-brand {
     position: absolute;
     z-index: 5;
     left: 10px;
-}
-
-nav .navbar-brand>div.logo {
-    height: 100%;
 }
 
 .logo {
@@ -588,9 +617,9 @@ label.select-label {
 
 section {
     padding: 10px;
-    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.55);
-    -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.55);
-    -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.55);
+    box-shadow: 5px 5px 10px 0px @section-box-shadow-color;
+    -moz-box-shadow: 5px 5px 10px 0px @section-box-shadow-color;
+    -moz-box-shadow: 5px 5px 10px 0px @section-box-shadow-color;
 }
 
 address {
@@ -648,19 +677,6 @@ fieldset input[type=text] {
 
 main fieldset {
     border: 0;
-}
-
-nav h1 {
-    margin: 0;
-    height: 100%;
-    padding-left: 20px;
-    padding-top: 8px;
-    font-family: sans-serif;
-    font-style: italic;
-    margin: 0;
-    font-weight: bold;
-    line-height: 1;
-    white-space: nowrap;
 }
 
 .panel-title {

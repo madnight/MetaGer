@@ -1,3 +1,21 @@
+@body-background-color: @base-body-backround-color;
+@aufruf-winter-a-normal-or-visited: @base-aufruf-winter-color!important;
+@aufruf-winter-aufruf-action-btn-color: @base-aufruf-winter-btn-color!important;
+@aufruf-winter-aufruf-action-btn-background-color: @base-aufruf-winter-color!important;
+@aufruf-winter-aufruf-action-btn-border-color: @base-aufruf-winter-border-color;
+@aufruf-winter-aufruf-action-btn-hover-background-color: @base-aufruf-winter-btn-hover-background-color !important;
+@aufruf-winter-aufruf-action-btn-hover-border-color: @base-aufruf-winter-border-color;
+@aufruf-winter-quicktip-border-color: @base-aufruf-winter-color!important;
+@new-feature-badge-background-color: @base-new-feature-badge-background-color;
+body {
+    background-color: @body-background-color;
+    background-attachment: fixed;
+}
+
+body#resultBody {
+    background-image: inherit;
+}
+
 summary {
     cursor: pointer;
     &::-webkit-details-marker {
@@ -20,52 +38,47 @@ summary {
 .aufruf-winter {
     h1 {
         font-size: 32px;
+        @media(max-width: @screen-md-max) {
+            .aufruf-winter h1 {
+                font-size: 27px;
+            }
+        }
     }
     a,
     a:visited {
-        color: #AB2121;
+        color: @aufruf-winter-a-normal-or-visited;
     }
     .aufruf-action-btn {
-        color: white!important;
-        background-color: #AB2121 !important;
-        border-color: #953535;
+        color: @aufruf-winter-aufruf-action-btn-color;
+        background-color: @aufruf-winter-aufruf-action-btn-background-color;
+        border-color: @aufruf-winter-aufruf-action-btn-border-color;
     }
     .aufruf-action-btn:hover {
-        background-color: #BD0D0D !important;
-        border-color: #953535;
+        background-color: @aufruf-winter-aufruf-action-btn-hover-background-color;
+        border-color: @aufruf-winter-aufruf-action-btn-hover-border-color;
     }
     &.mg-panel {
         background-image: url("/img/snowflake.svg");
         background-repeat: no-repeat;
         background-position: right top;
         background-size: 100px 100px;
+        @media(max-width: @screen-sm-max) {
+            background-size: 60px 60px;
+        }
+        @media(min-width: @screen-lg) {
+            width: 940px;
+        }
     }
     &.quicktip {
-        border-left: 3px solid #AB2121 !important;
+        border-left: 3px solid @aufruf-winter-quicktip-border-color;
+    }
+    @media(max-width: @screen-md-max) {
+        .lead {
+            font-size: 18px;
+        }
     }
 }
 
 .new-feature.badge {
-    background-color: rgb(255, 128, 0);
-}
-
-@media(max-width: @screen-sm-max) {
-    .aufruf-winter.mg-panel {
-        background-size: 60px 60px;
-    }
-}
-
-@media(max-width: @screen-md-max) {
-    .aufruf-winter h1 {
-        font-size: 27px;
-    }
-    .aufruf-winter .lead {
-        font-size: 18px;
-    }
-}
-
-@media(min-width: @screen-lg) {
-    .aufruf-winter.mg-panel {
-        width: 940px;
-    }
+    background-color: @new-feature-badge-background-color;
 }

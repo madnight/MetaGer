@@ -255,8 +255,10 @@ class MetaGer
         }
         
         if ($this->validated) {
-                $this->validated = true;
-            }
+            $this->ads       = [];
+            $this->products  = [];
+            $this->maps      = false;
+        }
 
         if (count($this->results) <= 0) {
             $this->errors[] = trans('metaGer.results.failed');

@@ -253,23 +253,10 @@ class MetaGer
         if (LaravelLocalization::getCurrentLocale() === "en") {
             $this->ads = [];
         }
-
-        $this->validated = false;
-        if (isset($this->password)) {
-            # Wir bieten einen bezahlten API-Zugriff an, bei dem dementsprechend die Werbung ausgeblendet wurde:
-            # Aktuell ist es nur die Uni-Mainz. Deshalb überprüfen wir auch nur diese.
-            $password       = getenv('mainz');
-            $passwordBerlin = getenv('berlin');
-            $eingabe        = $this->eingabe;
-            $password       = md5($eingabe . $password);
-            $passwordBerlin = md5($eingabe . $passwordBerlin);
-            if ($this->password === $password || $this->password === $passwordBerlin) {
-                $this->ads       = [];
-                $this->products  = [];
+        
+        if ($this->validated) {
                 $this->validated = true;
-                $this->maps      = false;
             }
-        }
 
         if (count($this->results) <= 0) {
             $this->errors[] = trans('metaGer.results.failed');
@@ -979,6 +966,21 @@ class MetaGer
         } else {
             $this->quicktips = true;
         }
+        
+        $this->validated = false;
+        if (isset($this->password)) {
+            # Wir bieten einen bezahlten API-Zugriff an, bei dem dementsprechend die Werbung ausgeblendet wurde:
+            # Aktuell ist es nur die Uni-Mainz. Deshalb überprüfen wir auch nur diese.
+            $password       = getenv('mainz');
+            $passwordBerlin = getenv('berlin');
+            $eingabe        = $this->eingabe;
+            $password       = md5($eingabe . $password);
+            $passwordBerlin = md5($eingabe . $passwordBerlin);
+            if ($this->password === $password || $this->password === $passwordBerlin) {
+                $this->validated = true;
+            }
+        }
+        
         $this->out = $request->input('out', "html");
         # Standard output format html
         if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style" && $this->out !== "result-count" && $this->out !== "rss20") {

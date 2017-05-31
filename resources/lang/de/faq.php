@@ -62,4 +62,6 @@ return [
     'faq.19.b.2'  => 'Siehe: <a href=hilfe#custom-focus-help>Hilfe</a>',
     'faq.20.h'    => 'Wo sind die Einstellungen zur Auswahl der Suchmaschinen hin?',
     'faq.20.b'    => 'Siehe: <a href="#custom-focus-faq">"Kann ich auch selber auswählen welche Suchmaschinen abgefragt werden?"</a>',
+    'faq.21.h'    => 'Warum stellt MetaGer Umlaute falsch dar?',
+    'faq.21.b'    => 'Wenn die Umlaute bei MetaGer nicht richtig dargestellt werden, dann liegt es üblicherweise:<p><ul><li>An einem veralteten Plugin: Falls das bei Ihrem Browser der Fall ist:<br>Bitte deinstallieren Sie es und klicken Sie auf der <a href="https://metager.de" target="_blank">MetaGer-Startseite</a> auf „MetaGer-Plugin hinzufügen“.<li>Daran, dass nicht die offizielle <a href="https://metager.de" target="_blank">MetaGer-Startseite</a> benutzt wird, sondern eine uralt-Version „MetaGer-Klassik“ (oder eine andere uns unbekannte Version).  Falls es so sein sollte:<br>Bitte benutzen Sie nur <a href="https://metager.de" target="_blank">https://metager.de</a>.</ul><p>Damit sollte alles behoben sein. Falls nicht:<br>Melden Sie sich bitte unter: <a href="mailto:office@suma-ev.de">office@suma-ev.de</a>',
 ];

@@ -7,3 +7,12 @@ Homestead.yaml
 .env
 .orig
 .vscode
+# The Files created by Gulp in the build process
+/public/build
+/public/js/lib.js
+/public/js/quicktips.js
+/public/js/scriptStartPage.js
+/public/js/scriptResultPage.js
+/public/css/beitritt.css
+/public/css/themes/default.css
+**/*.map

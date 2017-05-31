@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\LanguageObject;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
@@ -87,11 +88,11 @@ class LanguageController extends Controller
                         $langTexts[$dir] += count($this->getValues([$key => $value]));
                     }
                     $filePath[basename($filename)] = preg_replace("/lang\/.*?\//si", "lang/$to/", substr($filename, strpos($filename, "lang")));
-
                 }
 
             }
         }
+
         $langs = [];
         $fn    = "";
         $t     = [];
@@ -99,10 +100,11 @@ class LanguageController extends Controller
         if ($exclude !== "") {
             try {
                 $ex = unserialize(base64_decode($exclude));
-            } catch (\ErrorException $e) {
+            } catch (ErrorException $e) {
                 $ex = ['files' => [], 'new' => 0];
             }
         }
+
         foreach ($texts as $filename => $text) {
             $has = false;
             foreach ($ex['files'] as $file) {
@@ -118,7 +120,6 @@ class LanguageController extends Controller
             }
             # Hier können wir später die bereits bearbeiteten Dateien ausschließen.
             foreach ($text as $textname => $languages) {
-
                 if ($languages === "") {
                     continue;
                 }
@@ -136,25 +137,111 @@ class LanguageController extends Controller
                 if (!isset($languages[$to])) {
                     $fn = $filePath[$filename];
                     $t  = $text;
-                    break;
+                    break 2;
                 }
             }
-
         }
-
         $t = $this->htmlEscape($t, $to);
         $t = $this->createHints($t, $to);
 
         return view('languages.edit')
-            ->with('texts', $t)
-            ->with('filename', $fn)
-            ->with('title', trans('titles.languages.edit'))
-            ->with('langs', $langs)
-            ->with('to', $to)
-            ->with('langTexts', $langTexts)
-            ->with('sum', $sum)
-            ->with('new', $ex["new"])
-            ->with('email', $email);
+            ->with('texts', $t)             //Array mit vorhandenen Übersetzungen der Datei $fn in beiden Sprachen
+            ->with('filename', $fn)         //Pfad zur angezeigten Datei
+            ->with('title', trans('titles.languages.edit')) 
+            ->with('langs', $langs)         //Ausgangssprache (1 Element)
+            ->with('to', $to)               //zu bearbeitende Sprache
+            ->with('langTexts', $langTexts) //Anzahl der vorhandenen Übersetzungen
+            ->with('sum', $sum)             //Alle vorhandenen Texte (in allen Dateien) in beiden Sprachen in einem Array
+            ->with('new', $ex["new"])       //
+            ->with('email', $email);        //Email-Adresse des Benutzers
+    }
+
+    public function createSynopticEditPage(Request $request, $exclude = "") 
+    {
+        $languageFilePath = resource_path() . "/lang/";
+        $languageFolders  = scandir($languageFilePath); 
+        #Enthält zu jeder Sprache ein Objekt mit allen Daten
+        $languageObjects  = [];
+        $to = [];
+
+        #Dekodieren ausgeschlossener Dateien anhand des URL-Parameters
+        $ex    = ['files' => [], 'new' => 0];
+        if ($exclude !== "") {
+            try {
+                $ex = unserialize(base64_decode($exclude));
+            } catch (\ErrorException $e) {
+                $ex = ['files' => [], 'new' => 0];
+            }
+        }
+
+        #Instanziiere LanguageObject
+        foreach ($languageFolders as $folder) {
+            if (is_dir($languageFilePath . $folder) && $folder !== "." && $folder !== "..") {
+                $languageObjects[$folder] = new LanguageObject($folder, $languageFilePath.$folder);
+            }
+        }
+
+        #Speichere Daten in LanguageObject, überspringe ausgeschlossene Dateien
+        foreach ($languageObjects as $folder => $languageObject) {
+            $to[] = $folder;
+            $di = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($languageObject->filePath));
+            foreach($di as $filename => $file) {
+                foreach($ex['files'] as $file) {
+                    if($file === basename($filename)) {
+                        continue 2;
+                    }
+                }
+                if(!$this->endsWith($filename, ".")) {
+                    $tmp = include $filename;
+                    foreach ($tmp as $key => $value) {
+                        $languageObject->saveData(basename($filename), $key, $value);
+                    }
+                }
+            }
+        }
+
+        $fn = "";
+
+        #Wähle die erste, unbearbeitete Datei aus
+        foreach($languageObjects as $folder => $languageObject) {
+            foreach($languageObject->stringMap as $languageFileName => $languageFile) {
+                $fn = $languageFileName;
+                break 2;            
+            }
+        }
+
+        if($fn === "") {
+            //Alles bearbeitet -> zeige entsprechende Nachricht
+        }
+
+        $snippets = [];
+
+        #Speichere den Inhalt der ausgewählten Datei in allen Sprachen in $snippets ab
+        foreach($languageObjects as $folder => $languageObject) {
+            foreach($languageObject->stringMap as $languageFileName => $languageFile) {
+                if($languageFileName === $fn) {
+                    foreach($languageFile as $key => $value) {
+                        $snippets[$key][$languageObject->language] = $value;      
+                    }
+                    continue 2;
+                }
+            }
+        }
+
+        #Fülle $snippets auf mit leeren Einträgen für übrige Sprachen
+        foreach($to as $t) {
+            foreach($snippets as $key => $langArray) {
+                if(!isset($langArray[$t])) {
+                    $snippets[$key][$t] = "";
+                }
+            }
+        }
+
+        return view('languages.synoptic')
+            ->with('to', $to)           #Alle vorhandenen Sprachen
+            ->with('texts', $snippets)         #Array mit Sprachsnippets
+            ->with('filename', $fn)     #Name der Datei
+            ->with('title', trans('titles.languages.edit'));
     }
 
     private function htmlEscape($t, $to)

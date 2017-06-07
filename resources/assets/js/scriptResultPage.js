@@ -42,6 +42,7 @@ function tabs () {
 }
 
 function getDocumentReadyForUse (fokus, custom = false) {
+  activateJSOnlyContent();
   clickLog();
   popovers();
   if (fokus === 'bilder') imageLoader();

@@ -1,8 +1,8 @@
 [	
 	{
-		"title" : "MetaGer auf Ihrer Webseite",
-		"summary" : "Verwenden Sie unser einfaches und kostenloses <a href=\"https://metager.de/widget/\" target=_blank>Widget</a>.<br/> Für maßgeschneiderte Suchlösungen für Ihr Unternehmen - fragen Sie uns:  <a href=\"mailto:office@suma-ev.de\">office@suma-ev.de</a>.",
-		"URL" : "https://metager.de/widget/"
+		"title" : "MetaGer-Neuentwicklung: Die Suche in der Suche",
+		"summary" : "",
+		"URL" : "http://blog.suma-ev.de/node/225"
 
 	}
 ]

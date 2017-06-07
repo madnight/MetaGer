@@ -107,6 +107,8 @@ body {
 	font-weight: 400;
 	margin: 0px;
 	padding: 0px;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .result-description {
@@ -115,7 +117,14 @@ body {
 
 .result-source {
 	display: none;
-	
+}
+
+.ad .result-source {
+	display: block;
+}
+
+.result-source a {
+	color: hsl(0, 0%, 13%);
 }
 
 .result-thumbnail {
@@ -253,7 +262,7 @@ li .focus-cell:hover {
 	padding-left: 0px;
 }
 
-@media (max-width: 330px) { /*für sehr kleine mobile Viewports (z.B. iPhone 5S)*/
+@media (max-width: 330px) { /*fÃ¼r sehr kleine mobile Viewports (z.B. iPhone 5S)*/
 	.result-action {
 	font-size: 13px;
 }

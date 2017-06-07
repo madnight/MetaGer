@@ -4,11 +4,11 @@ namespace App;
 use App;
 use Cache;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use Jenssegers\Agent\Agent;
 use LaravelLocalization;
 use Log;
 use Predis\Connection\ConnectionException;
-use Illuminate\Support\Facades\Redis;
 
 class MetaGer
 {
@@ -24,7 +24,7 @@ class MetaGer
     protected $site;
     protected $hostBlacklist   = [];
     protected $domainBlacklist = [];
-    private   $urlBlacklist    = [];
+    private $urlBlacklist      = [];
     protected $stopWords       = [];
     protected $phrases         = [];
     protected $engines         = [];
@@ -139,6 +139,16 @@ class MetaGer
                         ->with('errors', $this->errors)
                         ->with('metager', $this)
                         ->with('suspendheader', "yes")
+                        ->with('browser', (new Agent())->browser());
+                    break;
+                case 'rich':
+                    return view('metager3rich')
+                        ->with('results', $viewResults)
+                        ->with('eingabe', $this->eingabe)
+                        ->with('mobile', $this->mobile)
+                        ->with('warnings', $this->warnings)
+                        ->with('errors', $this->errors)
+                        ->with('metager', $this)
                         ->with('browser', (new Agent())->browser());
                     break;
                 case 'rss20':
@@ -530,7 +540,7 @@ class MetaGer
         if ($this->requestIsCached($request)) {
             $engines = $this->getCachedEngines($request);
             # We need to edit some Options of the Cached Search Engines
-            foreach($engines as $engine){
+            foreach ($engines as $engine) {
                 $engine->setResultHash($this->getHashCode());
             }
         } else {
@@ -789,33 +799,38 @@ class MetaGer
     public function waitForResults($enginesToLoad, $overtureEnabled, $canBreak)
     {
 
-        $timeStart     = microtime(true);
-        $results = null;
+        $timeStart = microtime(true);
+        $results   = null;
         while (true) {
             $results = Redis::hgetall('search.' . $this->getHashCode());
 
             $ready = true;
-            // When every 
+            // When every
             $connected = true;
-            foreach($results as $key => $value){
-                if($value === "waiting" || $value === "connected"){
+            foreach ($results as $key => $value) {
+                if ($value === "waiting" || $value === "connected") {
                     $ready = false;
                 }
-                if($value === "waiting"){
+                if ($value === "waiting") {
                     $connected = false;
                 }
             }
 
             // If $ready is false at this point, we're waiting for more searchengines
             // But we have to check for the timeout, too
-            if(!$connected) $timeStart = microtime(true);
+            if (!$connected) {
+                $timeStart = microtime(true);
+            }
+
             $time = (microtime(true) - $timeStart) * 1000;
             // We will apply the timeout only if it's not Yahoo we're waiting for since they are one the most
             // important search engines.
             $canTimeout = !((isset($results["overture"]) && $results["overture"] === "waiting") || (isset($results["overtureAds"]) && $results["overtureAds"] === "waiting"));
-            if($time > $this->time && $canTimeout) $ready = true;
+            if ($time > $this->time && $canTimeout) {
+                $ready = true;
+            }
 
-            if($ready){
+            if ($ready) {
                 break;
             }
             usleep(50000);
@@ -985,7 +1000,7 @@ class MetaGer
         
         $this->out = $request->input('out', "html");
         # Standard output format html
-        if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style" && $this->out !== "result-count" && $this->out !== "rss20") {
+        if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style" && $this->out !== "result-count" && $this->out !== "rss20" && $this->out !== "rich") {
             $this->out = "html";
         }
         # Wir schalten den Cache aus, wenn die Ergebniszahl überprüft werden soll
@@ -1080,7 +1095,7 @@ class MetaGer
             foreach ($this->urlBlacklist as $url) {
                 $urlString .= $url . ", ";
             }
-            $urlString     = rtrim($urlString, ", ");
+            $urlString        = rtrim($urlString, ", ");
             $this->warnings[] = trans('metaGer.formdata.urlBlacklist', ['url' => $urlString]);
         }
     }
@@ -1171,7 +1186,7 @@ class MetaGer
     public function popAd()
     {
         if (count($this->ads) > 0) {
-            return get_object_vars(array_shift($this->ads));
+            return array_shift($this->ads);
         } else {
             return null;
         }

@@ -117,7 +117,10 @@ body {
 
 .result-source {
 	display: none;
-	
+}
+
+.ad .result-source {
+	display: block;
 }
 
 .result-source a {
@@ -259,7 +262,7 @@ li .focus-cell:hover {
 	padding-left: 0px;
 }
 
-@media (max-width: 330px) { /*für sehr kleine mobile Viewports (z.B. iPhone 5S)*/
+@media (max-width: 330px) { /*fÃ¼r sehr kleine mobile Viewports (z.B. iPhone 5S)*/
 	.result-action {
 	font-size: 13px;
 }

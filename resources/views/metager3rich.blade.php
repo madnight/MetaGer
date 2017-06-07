@@ -23,38 +23,20 @@
 				<button type="submit" class="search-button fa"></button>
 				@foreach( $metager->request->all() as $key => $value)
 					@if($key !== "eingabe" && $key !== "page" && $key !== "next")
-						<input type='hidden' name='{{ $key }}' value='{{ $value }}' form='submitForm' />
+						<input type="hidden" name="{{ $key }}" value="{{ $value }}"/>
 					@endif
 				@endforeach
 			</form>
 			</header>
 			<details class="focus-card card elevation-1">
-
-			@if( $metager->getFokus() === "web" )
 				<summary class="focus-cell"><div class="focus-cell-label"><span class="icon fa" aria-hidden="true"></span> <b>Web</b></div></summary>
-			@endif
 			</details>
 		<main class="results-container">
 		@foreach($metager->getResults() as $result)
 			@if($result->number % 7 === 0)
-				@include('layouts.ad', ['ad' => $metager->popAd()])
+				@include('layouts.rich.ad', ['result' => $metager->popAd()])
 			@endif
-			<article class="search-result card elevation-1">
-				<div class="result-content">
-                    <h1 class="result-title">{{ $result->titel }}</h1>
-                    <h2 class="result-display-link">{{ $result->anzeigeLink }}</h2>
-                    <p class="result-description">{{ $result->descr }}</p>
-                    <p class="result-source">gefunden von {!! $result->gefVon !!}</p>
-					@if( isset($result->logo) )
-                    	<img class="result-thumbnail" src="{{ $metager->getImageProxyLink($result->logo) }}" alt="" />
-					@endif
-				</div>
-				<div class="result-action-area">
-                    <a class="result-action primary" href="{{ $result->link }}">Öffnen</a>
-                    <a class="result-action primary" target="_blank" href="{{ $result->link }}">Neuer Tab</a>
-                    <a class="result-action" target="_blank" href="{{ $result->proxyLink }}">Anonym Öffnen</a>
-				</div>
-			</article>
+				@include('layouts.rich.result', ['result' => $result])
 		@endforeach
 		</main>
 		@if($metager->getPage() === 1)

@@ -143,6 +143,7 @@ class MetaGer
                     break;
                 case 'rich':
                     return view('metager3rich')
+                        ->with('results', $viewResults)
                         ->with('eingabe', $this->eingabe)
                         ->with('mobile', $this->mobile)
                         ->with('warnings', $this->warnings)
@@ -1181,7 +1182,7 @@ class MetaGer
     public function popAd()
     {
         if (count($this->ads) > 0) {
-            return get_object_vars(array_shift($this->ads));
+            return array_shift($this->ads);
         } else {
             return null;
         }

@@ -107,6 +107,8 @@ body {
 	font-weight: 400;
 	margin: 0px;
 	padding: 0px;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .result-description {
@@ -116,6 +118,10 @@ body {
 .result-source {
 	display: none;
 	
+}
+
+.result-source a {
+	color: hsl(0, 0%, 13%);
 }
 
 .result-thumbnail {

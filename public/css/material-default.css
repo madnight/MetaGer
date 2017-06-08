@@ -111,6 +111,10 @@ body {
 	overflow: hidden;
 }
 
+.result-display-link a {
+	text-decoration: none;
+}
+
 .result-description {
 	font-size: 16px;
 }

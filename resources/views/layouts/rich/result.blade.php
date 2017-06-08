@@ -1,7 +1,7 @@
 <article class="search-result card elevation-1">
 	<div class="result-content">
         <h1 class="result-title">{{ $result->titel }}</h1>
-        <h2 class="result-display-link">{{ $result->anzeigeLink }}</h2>
+        <h2 class="result-display-link"><a href="{{ $result->link }}">{{ $result->anzeigeLink }}</a></h2>
         <p class="result-description">{{ $result->descr }}</p>
         <p class="result-source">gefunden von {!! $result->gefVon !!}</p>
 		@if( isset($result->logo) )

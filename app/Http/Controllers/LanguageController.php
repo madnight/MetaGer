@@ -97,6 +97,7 @@ class LanguageController extends Controller
         $fn    = "";
         $t     = [];
         $ex    = ['files' => [], 'new' => 0];
+        
         if ($exclude !== "") {
             try {
                 $ex = unserialize(base64_decode($exclude));
@@ -143,7 +144,6 @@ class LanguageController extends Controller
         }
         $t = $this->htmlEscape($t, $to);
         $t = $this->createHints($t, $to);
-
         return view('languages.edit')
             ->with('texts', $t)             //Array mit vorhandenen Übersetzungen der Datei $fn in beiden Sprachen
             ->with('filename', $fn)         //Pfad zur angezeigten Datei
@@ -162,7 +162,7 @@ class LanguageController extends Controller
         $languageFolders  = scandir($languageFilePath); 
         #Enthält zu jeder Sprache ein Objekt mit allen Daten
         $languageObjects  = [];
-        $to = [];
+        $to = []; #Alle vorhandenen Sprachen
 
         #Dekodieren ausgeschlossener Dateien anhand des URL-Parameters
         $ex    = ['files' => [], 'new' => 0];
@@ -208,10 +208,6 @@ class LanguageController extends Controller
                 $fn = $languageFileName;
                 break 2;            
             }
-        }
-
-        if($fn === "") {
-            //Alles bearbeitet -> zeige entsprechende Nachricht
         }
 
         $snippets = [];

@@ -7,6 +7,7 @@ Homestead.yaml
 .env
 .orig
 .vscode
+langfiles.zip
 # The Files created by Gulp in the build process
 /public/build
 /public/js/lib.js

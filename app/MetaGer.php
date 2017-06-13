@@ -108,6 +108,7 @@ class MetaGer
                         ->with('mobile', $this->mobile)
                         ->with('warnings', $this->warnings)
                         ->with('errors', $this->errors)
+                        ->with('apiAuthorized', $this->apiAuthorized)
                         ->with('metager', $this)
                         ->with('browser', (new Agent())->browser());
                 default:
@@ -117,6 +118,7 @@ class MetaGer
                         ->with('mobile', $this->mobile)
                         ->with('warnings', $this->warnings)
                         ->with('errors', $this->errors)
+                        ->with('apiAuthorized', $this->apiAuthorized)
                         ->with('metager', $this)
                         ->with('browser', (new Agent())->browser());
             }
@@ -129,6 +131,7 @@ class MetaGer
                         ->with('mobile', $this->mobile)
                         ->with('warnings', $this->warnings)
                         ->with('errors', $this->errors)
+                        ->with('apiAuthorized', $this->apiAuthorized)
                         ->with('metager', $this)
                         ->with('browser', (new Agent())->browser());
                     break;
@@ -139,6 +142,7 @@ class MetaGer
                         ->with('mobile', $this->mobile)
                         ->with('warnings', $this->warnings)
                         ->with('errors', $this->errors)
+                        ->with('apiAuthorized', $this->apiAuthorized)
                         ->with('metager', $this)
                         ->with('suspendheader', "yes")
                         ->with('browser', (new Agent())->browser());
@@ -172,6 +176,7 @@ class MetaGer
                         ->with('mobile', $this->mobile)
                         ->with('warnings', $this->warnings)
                         ->with('errors', $this->errors)
+                        ->with('apiAuthorized', $this->apiAuthorized)
                         ->with('metager', $this)
                         ->with('browser', (new Agent())->browser());
                     break;

@@ -1,4 +1,4 @@
-@if(isset($result) && !$metager->apiAuthorized)
+@if(isset($result) && !$apiAuthorized)
 <article class="search-result ad card elevation-1">
         <div class="result-content">
         <h1 class="result-title">{{ $result->titel }}</h1>

@@ -7,5 +7,6 @@ return [
     "progress"	=>	":uebersetzteTexte/:textCount snippets translated (:percentage%)",
     "hinweis.1"	=>	"Please click \"Submit data\" when finished. You don't have to translate all items.",
     "hinweis.2"	=>	"<b>Hint</b>: You won't see your translations until we checked and inserted it. Save your work by setting a bookmark.",
-    "hinweis.3"	=>	"<b>Note</b>: We publish the hole content of your work on  a<a href=\"https://gitlab.metager3.de/open-source/MetaGer\" target=\"_blank\" rel=\"noopener\">Publication</a>. This is subject to a AGPL-v3-License. You agree with clicking the \"Submit data\" button."
+    "hinweis.3"	=>	"<b>Note</b>: We publish the hole content of your work on  a<a href=\"https://gitlab.metager3.de/open-source/MetaGer\" target=\"_blank\" rel=\"noopener\">Publication</a>. This is subject to a AGPL-v3-License. You agree with clicking the \"Submit data\" button.",
+    "email"		=> "<b>Email address for possible inquiries</b> (optional):"
 ];

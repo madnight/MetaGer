@@ -10,16 +10,6 @@ if (isset($_GET['r']) && isset($_GET['g']) && isset($_GET['b']) && isset($_GET['
 
 @CHARSET "UTF-8";
 
-body{
-	background-color: rgb(250, 250, 250);
-	background-attachment: fixed;
-}
-
-body#resultBody{
-	background-image: inherit;
-}
-
-
 input[type=text]:focus, textarea:focus, input[type=email]:focus, input[type=tel]:focus {
 	outline-color: <?=$color?>;
 	-webkit-box-shadow: 0px 0px 2px 2px <?=$colorRGBA?>;

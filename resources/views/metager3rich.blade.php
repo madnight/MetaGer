@@ -33,7 +33,7 @@
 			</details>
 		<main class="results-container">
 		@foreach($metager->getResults() as $result)
-			@if($result->number % 7 === 0)
+			@if($result->number % 7 === 0 && !$apiAuthorized)
 				@include('layouts.rich.ad', ['result' => $metager->popAd()])
 			@endif
 				@include('layouts.rich.result', ['result' => $result])

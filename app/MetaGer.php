@@ -40,6 +40,8 @@ class MetaGer
     protected $ip;
     protected $language;
     protected $agent;
+    protected $apiKey        = "";
+    protected $apiAuthorized = false;
     # Konfigurationseinstellungen:
     protected $sumaFile;
     protected $mobile;
@@ -148,6 +150,7 @@ class MetaGer
                         ->with('mobile', $this->mobile)
                         ->with('warnings', $this->warnings)
                         ->with('errors', $this->errors)
+                        ->with('apiAuthorized', $this->apiAuthorized)
                         ->with('metager', $this)
                         ->with('browser', (new Agent())->browser());
                     break;
@@ -155,6 +158,7 @@ class MetaGer
                     return view('metager3resultsrss20')
                         ->with('results', $viewResults)
                         ->with('eingabe', $this->eingabe)
+                        ->with('apiAuthorized', $this->apiAuthorized)
                         ->with('metager', $this)
                         ->with('resultcount', sizeof($viewResults));
                     break;
@@ -190,6 +194,9 @@ class MetaGer
         // filter
         // augment (boost&adgoal)
         // authorize
+        if ($this->apiKey) {
+            $this->apiAuthorized = $this->authorize($this->apiKey);
+        }
         // misc (WiP)
         if ($this->fokus == "nachrichten") {
             $this->results = array_filter($this->results, function ($v, $k) {
@@ -449,6 +456,34 @@ class MetaGer
         }
 
         return $results;
+    }
+
+    public function authorize($key)
+    {
+        $postdata = http_build_query(array(
+            'dummy' => rand(),
+        ));
+        $opts = array('http' => array(
+            'method'  => 'POST',
+            'header'  => 'Content-type: application/x-www-form-urlencoded',
+            'content' => $postdata,
+        ),
+        );
+
+        $context = stream_context_create($opts);
+
+        try {
+            $link   = "https://key.metager3.de/" . urlencode($key) . "/request-permission/api-access";
+            $result = json_decode(file_get_contents($link, false, $context));
+            if ($result->{'api-access'} == true) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (\ErrorException $e) {
+            return false;
+        }
     }
 
     /*
@@ -983,6 +1018,8 @@ class MetaGer
         } else {
             $this->quicktips = true;
         }
+
+        $this->apiKey = $request->input('key', '');
         
         $this->validated = false;
         if (isset($this->password)) {

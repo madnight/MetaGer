@@ -8,6 +8,7 @@
      <opensearch:totalResults>{{ $resultcount }}</opensearch:totalResults>
      <opensearch:Query role="request" searchTerms="{{ htmlspecialchars($eingabe, ENT_QUOTES) }}"/>
 
+  @if($apiAuthorized)
   @foreach($metager->getResults() as $result)
      <item>
        <title>{!! htmlspecialchars($result->titel, ENT_XML1, 'UTF-8'); !!}</title>
@@ -18,5 +19,6 @@
        </description>
      </item>
   @endforeach
+  @endif
    </channel>
  </rss>

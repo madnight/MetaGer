@@ -1,4 +1,4 @@
-@if(isset($ad)  && !$metager->apiAuthorized)
+@if(isset($ad)  && !apiAuthorized)
 	<div class="result ad row">
 		<div class="number col-sm-1"></div>
 		<div class="resultInformation col-sm-10">

@@ -303,7 +303,7 @@ class Result
     public function getStrippedLink($link)
     {
         $match = $this->getUrlElements($link);
-        return $match['host'] . $match['path'];
+        return $match['host'] . $match['path'] . $match['query'];
     }
 
     /* Liest aus einem Link die Domain.

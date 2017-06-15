@@ -311,7 +311,7 @@
 			<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a></li>
 			<li>
                 <a href="http://blog.suma-ev.de/node/225" target="_blank" class="btn btn-default mutelink">
-                    MetaGer-Neuentwicklung: Die Suche in der Suche
+                    Neu: Die Suche in der Suche
                 </a>
             </li>
 		</ul>

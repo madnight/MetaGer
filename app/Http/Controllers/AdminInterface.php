@@ -82,8 +82,10 @@ class AdminInterface extends Controller
         return $names;
     }
 
-    public function count()
+    public function count(Request $request)
     {
+        $days = intval($request->input('days', 28));
+        if(!is_int($days) || $days <= 0) $days = 28;
         $logToday = "mg3.log";
         if (file_exists("/var/log/metager/" . $logToday)) {
             $logToday = file("/var/log/metager/" . $logToday);
@@ -96,7 +98,7 @@ class AdminInterface extends Controller
         $rekordTagDate = "";
         $size          = 0;
         $count         = 0;
-        for ($i = 1; $i <= 28; $i++) {
+        for ($i = 1; $i <= $days; $i++) {
             $logDate = "/var/log/metager/archive/mg3.log.$i";
             if (file_exists($logDate)) {
                 $sameTime  = exec("grep -n '" . date('H') . ":" . date('i') . ":' $logDate | tail -1 | cut -f1 -d':'");
@@ -118,13 +120,28 @@ class AdminInterface extends Controller
             }
         }
 
-        return view('admin.count')
-            ->with('title', 'Suchanfragen - MetaGer')
-            ->with('today', number_format(floatval(sizeof($logToday)), 0, ",", "."))
-            ->with('oldLogs', $oldLogs)
-            ->with('rekordCount', number_format(floatval($rekordTag), 0, ",", "."))
-            ->with('rekordTagSameTime', number_format(floatval($rekordTagSameTime), 0, ",", "."))
-            ->with('rekordDate', $rekordTagDate);
+        if($request->input('out', 'web') === "web"){
+            return view('admin.count')
+                ->with('title', 'Suchanfragen - MetaGer')
+                ->with('today', number_format(floatval(sizeof($logToday)), 0, ",", "."))
+                ->with('oldLogs', $oldLogs)
+                ->with('rekordCount', number_format(floatval($rekordTag), 0, ",", "."))
+                ->with('rekordTagSameTime', number_format(floatval($rekordTagSameTime), 0, ",", "."))
+                ->with('rekordDate', $rekordTagDate)
+                ->with('days', $days);
+        }else{
+                $result = "";
+                foreach($oldLogs as $key => $value){
+                    $result .= '"' . date("D, d M y", mktime(date("H"),date("i"), date("s"), date("m"), date("d")-$key, date("Y"))) . '",';
+                    $result .= '"' . $value['sameTime'] . '",';
+                    $result .= '"' . $value['insgesamt'] . '",';
+                    $result .= '"' . $value['median'] . '"' . "\r\n";
+                }
+                return response($result, 200)
+                    ->header('Content-Type', 'text/csv')
+                    ->header('Content-Disposition', 'attachment; filename="count.csv"');
+        }
+
     }
     public function check()
     {

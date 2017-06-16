@@ -4,8 +4,9 @@
 
 @section('content')
 	<h2>{{ exec("uptime") }}</h2>
+	<h2>
 	<table class="table table-striped">
-		<caption>Daten der letzten Tage</caption>
+		<caption>Daten der letzten <form method="POST"><input type="number" name="days" value="{{days}}" /> Tage <button type="submit" class="btn btn-sm btn-default">Aktualisieren</button><button type="submit" name="out" value="csv" class="btn btn-sm btn-default">Als CSV exportieren</button></form></caption>
 		<tr>
 			<th>Datum</th>
 			<th>Suchanfragen zur gleichen Zeit</th>

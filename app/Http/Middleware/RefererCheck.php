@@ -17,7 +17,7 @@ class RefererCheck
     {
         $refererCorrect = env('referer_check');
         $referer        = $request->server('HTTP_REFERER');
-        if ($refererCorrect !== $referer) {
+        if ($refererCorrect !== $referer && "https://metager.de/admin/count" !== $referer) {
             abort(403, 'Unauthorized');
         } else {
             return $next($request);

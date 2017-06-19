@@ -9,14 +9,19 @@ use RecursiveIteratorIterator;
 
 class LanguageController extends Controller
 {
+
+    public function __construct() 
+    {
+       $this->languageFilePath = resource_path()."/lang/";
+    }
+
     public function createOverview(Request $request)
     {
-        $languageFilePath = resource_path() . "/lang/";
-        $files            = scandir($languageFilePath);
+        $languageFolders            = scandir($this->languageFilePath);
         $dirs             = [];
-        foreach ($files as $file) {
-            if (is_dir($languageFilePath . $file) && $file !== "." && $file !== "..") {
-                $dirs[] = $file;
+        foreach ($languageFolders as $folder) {
+            if (is_dir($this->languageFilePath . $folder) && $folder !== "." && $folder !== "..") {
+                $dirs[] = $folder;
             }
 
         }
@@ -26,7 +31,7 @@ class LanguageController extends Controller
         $sum       = [];
         foreach ($dirs as $dir) {
             # Wir überprüfen nun für jede Datei die Anzahl der vorhandenen Übersetzungen
-            $di                           = new RecursiveDirectoryIterator($languageFilePath . $dir);
+            $di                           = new RecursiveDirectoryIterator($this->languageFilePath . $dir);
             $langTexts[$dir]["textCount"] = 0;
             $langTexts[$dir]["fileCount"] = 0;
             foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
@@ -52,15 +57,15 @@ class LanguageController extends Controller
 
     public function createEditPage($from, $to, $exclude = "", $email = "")
     {
-        $languageFilePath = resource_path() . "/lang/";
-        $files            = scandir($languageFilePath);
+        $languageFolders  = scandir($this->languageFilePath);
         $dirs             = [];
-        foreach ($files as $file) {
-            if (is_dir($languageFilePath . $file) && $file !== "." && $file !== "..") {
-                $dirs[$file] = $file;
+        
+        foreach ($languageFolders as $folder) {
+            if (is_dir($this->languageFilePath . $folder) && $folder !== "." && $folder !== "..") {
+                $dirs[$folder] = $folder;
             }
-
         }
+
         # Abbruchbedingungen:
         if ($from === "" || $to === "" || ($from !== "de" && $from !== "all") || ($from === "all" && $to !== "de") && !array_has($dirs, $to)) {
             return redirect(url('languages'));
@@ -77,7 +82,7 @@ class LanguageController extends Controller
             }
 
             # Wir überprüfen nun für jede Datei die Anzahl der vorhandenen Übersetzungen
-            $di              = new RecursiveDirectoryIterator($languageFilePath . $dir);
+            $di              = new RecursiveDirectoryIterator($this->languageFilePath . $dir);
             $langTexts[$dir] = 0;
             foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
                 if (!$this->endsWith($filename, ".")) {
@@ -107,14 +112,10 @@ class LanguageController extends Controller
         }
 
         foreach ($texts as $filename => $text) {
-            $has = false;
             foreach ($ex['files'] as $file) {
                 if ($file === $filename) {
-                    $has = true;
+                    continue 2;
                 }
-            }
-            if ($has) {
-                continue;
             }
             while ($this->hasToMuchDimensions($text)) {
                 $text = $this->deMultidimensionalizeArray($text);
@@ -158,8 +159,7 @@ class LanguageController extends Controller
 
     public function createSynopticEditPage(Request $request, $exclude = "") 
     {
-        $languageFilePath = resource_path() . "/lang/";
-        $languageFolders  = scandir($languageFilePath); 
+        $languageFolders  = scandir($this->languageFilePath); 
         #Enthält zu jeder Sprache ein Objekt mit allen Daten
         $languageObjects  = [];
         $to = []; #Alle vorhandenen Sprachen
@@ -176,8 +176,8 @@ class LanguageController extends Controller
 
         #Instanziiere LanguageObject
         foreach ($languageFolders as $folder) {
-            if (is_dir($languageFilePath . $folder) && $folder !== "." && $folder !== "..") {
-                $languageObjects[$folder] = new LanguageObject($folder, $languageFilePath.$folder);
+            if (is_dir($this->languageFilePath . $folder) && $folder !== "." && $folder !== "..") {
+                $languageObjects[$folder] = new LanguageObject($folder, $this->languageFilePath.$folder);
             }
         }
 

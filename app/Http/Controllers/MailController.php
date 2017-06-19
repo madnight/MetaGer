@@ -356,13 +356,14 @@ class MailController extends Controller
                 $zip->addEmptyDir($lang);
                 $zip->addFromString($lang."/".$filename, $output);
             }
-        } catch(ErrorException $e) {
-            exit("Failed to write ".$filename);
-        }
+
 
         $zip->close();
 
         return response()->download("langfiles.zip", $filename.".zip");
+                } catch(ErrorException $e) {
+            exit("Failed to write ".$filename);
+        }
 
 
     }

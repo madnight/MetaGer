@@ -49,7 +49,6 @@ class LanguageController extends Controller
 
             }
         }
-        die(var_dump($sum));
         $deComplete = $langTexts["de"]["textCount"] === count($sum) ? true : false;
         return view('languages.overview')
             ->with('title', trans('titles.languages'))
@@ -129,15 +128,10 @@ class LanguageController extends Controller
                     continue;
                 }
 
-                $complete = true;
                 foreach ($languages as $lang => $value) {
                     if ($lang !== $to) {
                         $langs = array_add($langs, $lang, $lang);
                     }
-                    if (!isset($languages[$to]) && isset($languages[$lang])) {
-                        $complete = false;
-                    }
-
                 }
                 if (!isset($languages[$to])) {
                     $fn = $filePath[$filename];
@@ -478,7 +472,7 @@ class LanguageController extends Controller
         return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);
     }
 
-        private function extractLanguage($key) 
+    private function extractLanguage($key) 
     {   
         #Kürzt bspw. "_new_de_redirect bzw. "de_redirect" zu "de"
         preg_match("/^(?:_new_)?([^_]*)/", $key, $matches);

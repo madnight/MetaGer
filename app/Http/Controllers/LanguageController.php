@@ -25,7 +25,6 @@ class LanguageController extends Controller
             if (is_dir($this->languageFilePath . $folder) && $folder !== "." && $folder !== "..") {
                 $dirs[] = $folder;
             }
-
         }
         # Im Array "$dirs" haben wir nun alle Verzeichnisse mit dem entsprechenden Sprachkürzel
         # Alle von uns bislang unterstützen Sprachen sind hier eingetragen.
@@ -44,9 +43,7 @@ class LanguageController extends Controller
                         $sum = array_merge($sum, $this->getValues([$key => $value], basename($filename)));
                         $langTexts[$dir]["textCount"] += count($this->getValues([$key => $value]));
                     }
-
                 }
-
             }
         }
         $deComplete = $langTexts["de"]["textCount"] === count($sum) ? true : false;
@@ -96,22 +93,13 @@ class LanguageController extends Controller
                     }
                     $filePath[basename($filename)] = preg_replace("/lang\/.*?\//si", "lang/$to/", substr($filename, strpos($filename, "lang")));
                 }
-
             }
         }
 
         $langs = [];
         $fn    = "";
         $t     = [];
-        $ex    = ['files' => [], 'new' => 0];
-        
-        if ($exclude !== "") {
-            try {
-                $ex = unserialize(base64_decode($exclude));
-            } catch (ErrorException $e) {
-                $ex = ['files' => [], 'new' => 0];
-            }
-        }
+        $ex = $this->decodeExcludedFiles($exclude);
 
         foreach ($texts as $filename => $text) {
             foreach ($ex['files'] as $file) {
@@ -162,14 +150,7 @@ class LanguageController extends Controller
         $to = []; #Alle vorhandenen Sprachen
 
         #Dekodieren ausgeschlossener Dateien anhand des URL-Parameters
-        $ex    = ['files' => [], 'new' => 0];
-        if ($exclude !== "") {
-            try {
-                $ex = unserialize(base64_decode($exclude));
-            } catch (\ErrorException $e) {
-                $ex = ['files' => [], 'new' => 0];
-            }
-        }
+        $ex = $this->decodeExcludedFiles($exclude);
 
         #Instanziiere LanguageObject
         foreach ($languageFolders as $folder) {
@@ -257,120 +238,118 @@ class LanguageController extends Controller
 
         #Identifizieren des gedrückten Buttons
         if(isset($request['nextpage'])) {
-            #Leite weiter zur nächsten Seite
-            $ex = [];
 
-            if ($exclude !== "") {
-                try {
-                    $ex = unserialize(base64_decode($exclude));
-                } catch (\ErrorException $e) {
-                    $ex = [];
-                }
+        #Leite weiter zur nächsten Seite
+        $ex = [];
 
-                if (!isset($ex["files"])) {
-                    $ex["files"] = [];
-                }
+        if ($exclude !== "") {
+            try {
+                $ex = unserialize(base64_decode($exclude));
+            } catch (\ErrorException $e) {
+                $ex = [];
             }
-            if (!isset($ex["new"])) {
-                $ex["new"] = 0;
-            }
-            $ex['files'][] = basename($filename);
-            $ex = base64_encode(serialize($ex));
 
-            return redirect(url('synoptic', ['exclude' => $ex]));
+            if (!isset($ex["files"])) {
+                $ex["files"] = [];
+            }
         }
+        if (!isset($ex["new"])) {
+            $ex["new"] = 0;
+        }
+        $ex['files'][] = basename($filename);
+        $ex = base64_encode(serialize($ex));
 
+        return redirect(url('synoptic', ['exclude' => $ex]));
+
+        } elseif(isset($request['download'])) {
         #Andernfalls auslesen, zippen und herunterladen der veränderten Dateien 
-        $data = [];
-        $new  = 0;
-        $editedFiles = [];
+         
+            $data = [];
+            $new  = 0;
+            $editedFiles = [];
 
-        foreach ($request->all() as $key => $value) {
+            foreach ($request->all() as $key => $value) {
 
-            if ($key === "filename" || $value === "") {
-                continue;
+                if ($key === "filename" || $value === "") {
+                    continue;
+                }
+
+                $key = base64_decode($key);
+
+                #Pfad zur Datei anhand des Schlüsselnamens rekonstruieren (Schlüssel enthält Sprachkürzel)
+                $langdir = $this->extractLanguage($key);
+                $filepath = "lang/".$langdir."/".$filename;
+     
+                if (strpos($key, "_new_") === 0 && $value !== "" || MailController::isEdited($this->processKey($key), $value, $filepath)) {
+                    $new++;
+                    $editedFiles[$langdir] = $filepath;
+                } 
+            }     
+
+            #Erneute Iteration über Request, damit Dateien mitsamt vorherigen Einträgen abgespeichert werden 
+            foreach($request->all() as $key => $value) {
+
+                if ($key === "filename" || $value === "") {
+                    continue;
+                }
+
+                $key = base64_decode($key);
+
+                #Pfad zur Datei anhand des Schlüsselnamens rekonstruieren (Schlüssel enthält Sprachkürzel)
+                $langdir = $this->extractLanguage($key);
+
+                #Überspringe Datei, falls diese nicht bearbeitet worden ist
+                if(!isset($editedFiles[$langdir])) {
+                    continue;
+                }
+
+                #Key kuerzen, sodass er nur den eigentlichen Keynamen enthält
+                $key = $this->processKey($key);
+                
+                if (!strpos($key, "#")) {
+                    $data[$langdir][$key] = $value;
+                #Aufdröseln von 2D-Arrays
+                } else {
+                    $ref = &$data;
+                    do {
+                        $ref = &$ref[$langdir][substr($key, 0, strpos($key, "#"))];
+                        $key = substr($key, strpos($key, "#") + 1);
+                    } while (strpos($key, "#"));
+                    $ref = &$ref[$key];
+                    $ref = $value;
+                }
             }
 
-            $key = base64_decode($key);
+            if(file_exists("langfiles.zip"))
+                unlink("langfiles.zip");
 
-            #Pfad zur Datei anhand des Schlüsselnamens rekonstruieren (Schlüssel enthält Sprachkürzel)
-            $langdir = $this->extractLanguage($key);
-            $filepath = "lang/".$langdir."/".$filename;
- 
-            if (strpos($key, "_new_") === 0 && $value !== "" || MailController::isEdited($this->processKey($key), $value, $filepath)) {
-                $new++;
-                $editedFiles[$langdir] = $filepath;
+            $zip = new ZipArchive();
+
+            if (empty($data) || $zip->open("langfiles.zip", ZipArchive::CREATE) !== TRUE) {
+                return redirect(url('synoptic', ['exclude' => $exclude]));
             } 
-        }     
+                
+            try{
+            #Erstelle Ausgabedateien
+                foreach($data as $lang => $entries) {
+                    $output = json_encode($entries, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                    $output = preg_replace("/\{/si", "[", $output);
+                    $output = preg_replace("/\}/si", "]", $output);
+                    $output = preg_replace("/\": ([\"\[])/si", "\"\t=>\t$1", $output);
+                    $output = "<?php\n\nreturn $output;\n";
+                    $zip->addEmptyDir($lang);
+                    $zip->addFromString($lang."/".$filename, $output);
+                }
 
-        #Erneute Iteration über Request, damit Dateien mitsamt vorherigen Einträgen abgespeichert werden 
-        foreach($request->all() as $key => $value) {
+            $zip->close();
 
-            if ($key === "filename" || $value === "") {
-                continue;
-            }
-
-            $key = base64_decode($key);
-
-            #Pfad zur Datei anhand des Schlüsselnamens rekonstruieren (Schlüssel enthält Sprachkürzel)
-            $langdir = $this->extractLanguage($key);
-
-            #Überspringe Datei, falls diese nicht bearbeitet worden ist
-            if(!isset($editedFiles[$langdir])) {
-                continue;
-            }
-
-            #Key kuerzen, sodass er nur den eigentlichen Keynamen enthält
-            $key = $this->processKey($key);
-            
-            if (!strpos($key, "#")) {
-                $data[$langdir][$key] = $value;
-            #Aufdröseln von 2D-Arrays
-            } else {
-                $ref = &$data;
-                do {
-                    $ref = &$ref[$langdir][substr($key, 0, strpos($key, "#"))];
-                    $key = substr($key, strpos($key, "#") + 1);
-                } while (strpos($key, "#"));
-                $ref = &$ref[$key];
-                $ref = $value;
-            }
-        }
-
-        if(empty($data)) {
-            return redirect(url('synoptic', ['exclude' => $exclude]));
-        }
-
-
-        if(file_exists("langfiles.zip"))
-            unlink("langfiles.zip");
-
-        $zip = new ZipArchive();
-
-        if ($zip->open("langfiles.zip", ZipArchive::CREATE) !== TRUE) {  
-            exit("Cannot open ".$filename);
-        } 
-            
-        try{
-        #Erstelle Ausgabedateien
-            foreach($data as $lang => $entries) {
-                $output = json_encode($entries, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-                $output = preg_replace("/\{/si", "[", $output);
-                $output = preg_replace("/\}/si", "]", $output);
-                $output = preg_replace("/\": ([\"\[])/si", "\"\t=>\t$1", $output);
-                $output = "<?php\n\nreturn $output;\n";
-                $zip->addEmptyDir($lang);
-                $zip->addFromString($lang."/".$filename, $output);
-            }
-
-
-        $zip->close();
-
-        return response()->download("langfiles.zip", $filename.".zip");
-                } catch(ErrorException $e) {
-            exit("Failed to write ".$filename);
+            return response()->download("langfiles.zip", $filename.".zip");
+                    } catch(ErrorException $e) {
+                echo("Failed to write ".$filename);
+                }
         }
     }
+
     private function createHints($t, $to)
     {
         foreach ($t as $key => $langTexts) {
@@ -389,6 +368,21 @@ class LanguageController extends Controller
             }
         }
         return $t;
+    }
+
+    private function decodeExcludedFiles($exclude)
+    {
+        $ex = ['files' => [], 'new' => 0];
+
+        if ($exclude !== "") {
+            try {
+                $ex = unserialize(base64_decode($exclude));
+            } catch (ErrorException $e) {
+                $ex = ['files' => [], 'new' => 0];
+            }
+        }
+
+        return $ex;
     }
 
     private function getValues($values, $prefix = "")

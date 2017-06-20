@@ -36,9 +36,12 @@ return [
 
     'request'           => 'Abfragemethode',
 
-    'autocomplete'      => 'Auto-Vervollständigung (Sucheingabe)',
+    'autocomplete.label'=> 'Auto-Vervollständigung (Sucheingabe)',
     'autocomplete.on'   => 'ein',
     'autocomplete.off'  => 'aus',
+
+    'key.label'       => 'Schlüssel für Werbefreie Suche',
+    'key.placeholder' => 'Schlüssel eingeben',
 
     "foki.web"          => "Web",
     "foki.andere"       => "Andere",

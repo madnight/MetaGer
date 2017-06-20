@@ -5,10 +5,13 @@ $(document).ready(function () {
     $('#save').removeClass('hidden');
     $('#save').click(function () {
       localStorage.setItem('pers', true);
-      $('input[type=checkbox]:checked, input[type=hidden]').each(function (el) {
+      $('input[type=checkbox]:checked, input[type=hidden]').each(function () {
         localStorage.setItem($(this).attr('name'), $(this).val());
       });
-      $('select').each(function (el) {
+      $('select').each(function () {
+        localStorage.setItem($(this).attr('name'), $(this).val());
+      });
+      $('input[type=text]').each(function () {
         localStorage.setItem($(this).attr('name'), $(this).val());
       });
       document.location.href = $('#save').attr('data-href');

@@ -132,14 +132,16 @@ class AdminInterface extends Controller
         }else{
                 $result = "";
                 foreach($oldLogs as $key => $value){
-                    $result .= '"' . date("D, d M y", mktime(date("H"),date("i"), date("s"), date("m"), date("d")-$key, date("Y"))) . '",';
-                    $result .= '"' . $value['sameTime'] . '",';
-                    $result .= '"' . $value['insgesamt'] . '",';
-                    $result .= '"' . $value['median'] . '"' . "\r\n";
+                    $resultTmp = '"' . date("D, d M y", mktime(date("H"),date("i"), date("s"), date("m"), date("d")-$key, date("Y"))) . '",';
+                    $resultTmp .= '"' . $value['sameTime'] . '",';
+                    $resultTmp .= '"' . $value['insgesamt'] . '",';
+                    $resultTmp .= '"' . $value['median'] . '"' . "\r\n";
+                    $result = $resultTmp . $result;
                 }
                 return response($result, 200)
                     ->header('Content-Type', 'text/csv')
                     ->header('Content-Disposition', 'attachment; filename="count.csv"');
+
         }
 
     }

@@ -40,7 +40,7 @@ return [
     'autocomplete.on'   => 'ein',
     'autocomplete.off'  => 'aus',
 
-    'key.label'       => 'Schlüssel für Werbefreie Suche',
+    'key.label'       => 'Schlüssel für werbefreie Suche',
     'key.placeholder' => 'Schlüssel eingeben',
 
     "foki.web"          => "Web",

@@ -291,6 +291,7 @@
 					<input type="hidden" name="sprueche" value={{ $sprueche }} >
 					<input type="hidden" name="newtab" value={{ $newtab }} >
 					<input type="hidden" name="maps" value={{ $maps }} >
+					<input type="hidden" name="key" value={{ $key }} >
 					@foreach ($focusPages as $fp)
 						<input type="hidden" name={{ $fp }} value="on">
 					@endforeach

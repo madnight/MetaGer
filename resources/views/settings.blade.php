@@ -46,11 +46,15 @@
 					</select>
 				</div>
 				<div class="col-sm-6 col-md-4 col-lg-3">
-					<label class="select-label">@lang('settings.autocomplete'):</label>
+					<label class="select-label">@lang('settings.autocomplete.label'):</label>
 					<select class="form-control settings-form-control" name="param_autocomplete">
 						<option value="on" selected>@lang('settings.autocomplete.on')</option>
 						<option value="off">@lang('settings.autocomplete.off')</option>
 					</select>
+				</div>
+				<div class="col-sm-6 col-md-4 col-lg-3">
+					<label class="select-label">@lang('settings.key.label'):</label>
+					<input type="text" class="form-control settings-form-control" name="param_key" placeholder="@lang('settings.key.placeholder')">
 				</div>
 			</div>
 		</container>

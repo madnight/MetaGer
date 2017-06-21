@@ -25,7 +25,10 @@
 		<div class="col-xs-12 col-md-12 resultContainer">
 	@endif
 		@if($metager->hasProducts())
-			@include('layouts.products', ['products' => $metager->getProducts()])
+    		@if( $metager->getFokus() !== "produktsuche" && !$apiAuthorized)
+    		    @include('layouts.products', ['products' => $metager->getProducts()])
+    		@endif
+
 		@else
 			@for($i = 0; $i <= 2; $i++)
 				@include('layouts.ad', ['ad' => $metager->popAd()])

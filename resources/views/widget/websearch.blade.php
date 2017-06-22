@@ -65,6 +65,5 @@
 			<input type="hidden" name="lang" value="{{ trans('websearch.head.6') }}">
 		</form>
 	</textarea>
-	<script src="{{ elixir('js/lib.js') }}"></script>
 	<script src="{{ elixir('js/widgets.js') }}"></script>
 @endsection

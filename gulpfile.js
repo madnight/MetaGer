@@ -26,6 +26,7 @@ elixir(function (mix) {
   mix.scripts(['lib/jquery.js', 'lib/iframeResizer.contentWindow.min.js'], 'public/js/quicktips.js')
   mix.scripts(['scriptStartPage.js', 'results.js'], 'public/js/scriptStartPage.js');
   mix.scripts(['scriptResultPage.js', 'results.js'], 'public/js/scriptResultPage.js');
+  mix.scripts(['scriptSubpages.js'], 'public/js/scriptSubpages.js');
   mix.version(['css/themes/default.css', 'js/lib.js', 'js/quicktips.js']);
   mix.less('metager/beitritt.less', 'public/css/beitritt.css')
   mix.version(['css/beitritt.css'])

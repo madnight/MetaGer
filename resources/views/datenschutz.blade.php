@@ -37,5 +37,4 @@
 	<p>&gt; 8.4.2014 stupidit&eacute; pue @dummheitstinkt
 	&gt; wow, is this the MetaGer I used in the end 90s in internet cafes???
 	&gt; "Anonymes Suchen und Finden mit MetaGer | heise"</p></pre>
-
 @endsection

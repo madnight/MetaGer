@@ -222,4 +222,6 @@
 			<img src="{{ action('ImageController@generateImage')}}?site={{ urlencode(url()->current()) }}" class="hidden" />
 		</div>
 	</body>
+	<script src="{{ elixir('js/lib.js') }}"></script>
+	<script src="{{ elixir('js/scriptSubPages.js') }}"></script>
 </html>

@@ -316,7 +316,6 @@
                 </a>
             </li>
 		</ul>
-	<script src="{{ elixir('js/lib.js') }}"></script>
 	<script src="{{ elixir('js/scriptStartPage.js') }}"></script>
 @endsection
 

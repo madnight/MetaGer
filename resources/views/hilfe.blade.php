@@ -99,7 +99,7 @@
 				<div class="well well-sm">{!! trans('hilfe.domains.blacklist.example.6') !!}</div></li>
 			</ul>
 			<p>{!! trans('hilfe.domains.showcase.explanation.1') !!}</p>
-			<img src="/img/blacklist-tutorial-searchexample.png">
+			<img id = "exampleimg" src="/img/blacklist-tutorial-searchexample.png">
 			<p>{!! trans('hilfe.domains.showcase.explanation.2') !!}<p>
 			<div id="result_option_showcase" style="margin-top: -300px"></div>
 			<div style="margin-top: 315px; margin-bottom: 10px;">
@@ -109,7 +109,7 @@
 					<div class="popover-content">
 						<ul class="options-list list-unstyled small">
 							<li>
-								<a href="#">
+								<a href="#exampleimg">
 								<i class="glyphicon glyphicon-floppy-disk"></i>
 									Ergebnis in Tab speichern.
 								</a>

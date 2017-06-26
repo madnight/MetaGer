@@ -109,6 +109,12 @@
 					<div class="popover-content">
 						<ul class="options-list list-unstyled small">
 							<li>
+								<a href="#">
+								<i class="glyphicon glyphicon-floppy-disk"></i>
+									Ergebnis in Tab speichern.
+								</a>
+							</li>
+							<li>
 								<a href="javascript:setDummySearch('wikipedia site:de.wikipedia.org')">
 									Suche auf dieser Domain neu starten
 								</a>
@@ -164,6 +170,14 @@
 		</div>
 		<div class="panel-body">
 			<p>{!! trans('hilfe.bang.1') !!}</p>
+		</div>
+	</div>
+	<div class="panel panel-default"> <!-------------------------------------------------------------------------------->
+		<div class="panel-heading">
+			<h3 class="panel-title">{!! trans('hilfe.searchinsearch.title') !!}</h3>
+		</div>
+		<div class="panel-body">
+			<p>{!! trans('hilfe.searchinsearch.1') !!}</p>
 		</div>
 	</div>
 	<h2 id="dienste">{!! trans('hilfe.dienste') !!}</h2>

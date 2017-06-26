@@ -310,11 +310,13 @@
 				class="hidden"
 			@endunless>
 			<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a></li>
+			@if (LaravelLocalization::getCurrentLocale() == "de")
 			<li>
-                <a href="http://blog.suma-ev.de/node/225" target="_blank" class="btn btn-default mutelink">
-                    Neu: Die Suche in der Suche
+                <a href="https://suma-ev.de/presse/Werbefreie-Suche-mit-MetaGer.html" target="_blank" class="btn btn-default mutelink">
+                    Neu: Werbefreie Suche mit MetaGer
                 </a>
             </li>
+            @endif
 		</ul>
 	<script src="{{ elixir('js/scriptStartPage.js') }}"></script>
 @endsection

@@ -313,7 +313,7 @@
 			@if (LaravelLocalization::getCurrentLocale() == "de")
 			<li>
                 <a href="https://suma-ev.de/presse/Werbefreie-Suche-mit-MetaGer.html" target="_blank" class="btn btn-default mutelink">
-                    Neu: Werbefreie Suche mit MetaGer
+                    Werbefreie Suche mit MetaGer
                 </a>
             </li>
             @endif

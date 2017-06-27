@@ -6,19 +6,26 @@ use Illuminate\Http\Request;
 use App\Models\LanguageObject;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use ZipArchive;
 
 class LanguageController extends Controller
 {
+
+    public function __construct() 
+    {
+       $this->languageFilePath = resource_path()."/lang/";
+       $this->languages = array('de','en','fr','es','nd');
+    }
+
     public function createOverview(Request $request)
     {
-        $languageFilePath = resource_path() . "/lang/";
-        $files            = scandir($languageFilePath);
+        $languageFolders  = scandir($this->languageFilePath);
         $dirs             = [];
-        foreach ($files as $file) {
-            if (is_dir($languageFilePath . $file) && $file !== "." && $file !== "..") {
-                $dirs[] = $file;
-            }
 
+        foreach ($languageFolders as $folder) {
+            if (is_dir($this->languageFilePath . $folder) && $folder !== "." && $folder !== "..") {
+                $dirs[] = $folder;
+            }
         }
         # Im Array "$dirs" haben wir nun alle Verzeichnisse mit dem entsprechenden Sprachkürzel
         # Alle von uns bislang unterstützen Sprachen sind hier eingetragen.
@@ -26,7 +33,7 @@ class LanguageController extends Controller
         $sum       = [];
         foreach ($dirs as $dir) {
             # Wir überprüfen nun für jede Datei die Anzahl der vorhandenen Übersetzungen
-            $di                           = new RecursiveDirectoryIterator($languageFilePath . $dir);
+            $di                           = new RecursiveDirectoryIterator($this->languageFilePath . $dir);
             $langTexts[$dir]["textCount"] = 0;
             $langTexts[$dir]["fileCount"] = 0;
             foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
@@ -37,9 +44,7 @@ class LanguageController extends Controller
                         $sum = array_merge($sum, $this->getValues([$key => $value], basename($filename)));
                         $langTexts[$dir]["textCount"] += count($this->getValues([$key => $value]));
                     }
-
                 }
-
             }
         }
         $deComplete = $langTexts["de"]["textCount"] === count($sum) ? true : false;
@@ -52,17 +57,17 @@ class LanguageController extends Controller
 
     public function createEditPage($from, $to, $exclude = "", $email = "")
     {
-        $languageFilePath = resource_path() . "/lang/";
-        $files            = scandir($languageFilePath);
+        $languageFolders  = scandir($this->languageFilePath);
         $dirs             = [];
-        foreach ($files as $file) {
-            if (is_dir($languageFilePath . $file) && $file !== "." && $file !== "..") {
-                $dirs[$file] = $file;
-            }
 
+        foreach ($languageFolders as $folder) {
+            if (is_dir($this->languageFilePath . $folder) && $folder !== "." && $folder !== "..") {
+                $dirs[$folder] = $folder;
+            }
         }
+
         # Abbruchbedingungen:
-        if ($from === "" || $to === "" || ($from !== "de" && $from !== "all") || ($from === "all" && $to !== "de") && !array_has($dirs, $to)) {
+        if (!in_array($to, $this->languages) || $from === "" || $to === "" || ($from !== "de" && $from !== "all") || ($from === "all" && $to !== "de") && !array_has($dirs, $to)) {
             return redirect(url('languages'));
         }
 
@@ -77,7 +82,7 @@ class LanguageController extends Controller
             }
 
             # Wir überprüfen nun für jede Datei die Anzahl der vorhandenen Übersetzungen
-            $di              = new RecursiveDirectoryIterator($languageFilePath . $dir);
+            $di              = new RecursiveDirectoryIterator($this->languageFilePath . $dir);
             $langTexts[$dir] = 0;
             foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
                 if (!$this->endsWith($filename, ".")) {
@@ -89,31 +94,19 @@ class LanguageController extends Controller
                     }
                     $filePath[basename($filename)] = preg_replace("/lang\/.*?\//si", "lang/$to/", substr($filename, strpos($filename, "lang")));
                 }
-
             }
         }
 
         $langs = [];
         $fn    = "";
         $t     = [];
-        $ex    = ['files' => [], 'new' => 0];
-        if ($exclude !== "") {
-            try {
-                $ex = unserialize(base64_decode($exclude));
-            } catch (ErrorException $e) {
-                $ex = ['files' => [], 'new' => 0];
-            }
-        }
+        $ex = $this->decodeExcludedFiles($exclude);
 
         foreach ($texts as $filename => $text) {
-            $has = false;
             foreach ($ex['files'] as $file) {
                 if ($file === $filename) {
-                    $has = true;
+                    continue 2;
                 }
-            }
-            if ($has) {
-                continue;
             }
             while ($this->hasToMuchDimensions($text)) {
                 $text = $this->deMultidimensionalizeArray($text);
@@ -124,15 +117,10 @@ class LanguageController extends Controller
                     continue;
                 }
 
-                $complete = true;
                 foreach ($languages as $lang => $value) {
                     if ($lang !== $to) {
                         $langs = array_add($langs, $lang, $lang);
                     }
-                    if (!isset($languages[$to]) && isset($languages[$lang])) {
-                        $complete = false;
-                    }
-
                 }
                 if (!isset($languages[$to])) {
                     $fn = $filePath[$filename];
@@ -143,7 +131,6 @@ class LanguageController extends Controller
         }
         $t = $this->htmlEscape($t, $to);
         $t = $this->createHints($t, $to);
-
         return view('languages.edit')
             ->with('texts', $t)             //Array mit vorhandenen Übersetzungen der Datei $fn in beiden Sprachen
             ->with('filename', $fn)         //Pfad zur angezeigten Datei
@@ -158,30 +145,22 @@ class LanguageController extends Controller
 
     public function createSynopticEditPage(Request $request, $exclude = "") 
     {
-        $languageFilePath = resource_path() . "/lang/";
-        $languageFolders  = scandir($languageFilePath); 
-        #Enthält zu jeder Sprache ein Objekt mit allen Daten
+        $languageFolders  = scandir($this->languageFilePath); 
+        # Enthält zu jeder Sprache ein Objekt mit allen Daten
         $languageObjects  = [];
-        $to = [];
+        $to = []; # Alle vorhandenen Sprachen
 
-        #Dekodieren ausgeschlossener Dateien anhand des URL-Parameters
-        $ex    = ['files' => [], 'new' => 0];
-        if ($exclude !== "") {
-            try {
-                $ex = unserialize(base64_decode($exclude));
-            } catch (\ErrorException $e) {
-                $ex = ['files' => [], 'new' => 0];
-            }
-        }
+        # Dekodieren ausgeschlossener Dateien anhand des URL-Parameters
+        $ex = $this->decodeExcludedFiles($exclude);
 
-        #Instanziiere LanguageObject
+        # Instanziiere LanguageObject
         foreach ($languageFolders as $folder) {
-            if (is_dir($languageFilePath . $folder) && $folder !== "." && $folder !== "..") {
-                $languageObjects[$folder] = new LanguageObject($folder, $languageFilePath.$folder);
+            if (is_dir($this->languageFilePath . $folder) && $folder !== "." && $folder !== "..") {
+                $languageObjects[$folder] = new LanguageObject($folder, $this->languageFilePath.$folder);
             }
         }
 
-        #Speichere Daten in LanguageObject, überspringe ausgeschlossene Dateien
+        # Speichere Daten in LanguageObject, überspringe ausgeschlossene Dateien
         foreach ($languageObjects as $folder => $languageObject) {
             $to[] = $folder;
             $di = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($languageObject->filePath));
@@ -202,7 +181,7 @@ class LanguageController extends Controller
 
         $fn = "";
 
-        #Wähle die erste, unbearbeitete Datei aus
+        # Wähle die erste, unbearbeitete Datei aus
         foreach($languageObjects as $folder => $languageObject) {
             foreach($languageObject->stringMap as $languageFileName => $languageFile) {
                 $fn = $languageFileName;
@@ -210,13 +189,9 @@ class LanguageController extends Controller
             }
         }
 
-        if($fn === "") {
-            //Alles bearbeitet -> zeige entsprechende Nachricht
-        }
-
         $snippets = [];
 
-        #Speichere den Inhalt der ausgewählten Datei in allen Sprachen in $snippets ab
+        # Speichere den Inhalt der ausgewählten Datei in allen Sprachen in $snippets ab
         foreach($languageObjects as $folder => $languageObject) {
             foreach($languageObject->stringMap as $languageFileName => $languageFile) {
                 if($languageFileName === $fn) {
@@ -228,7 +203,7 @@ class LanguageController extends Controller
             }
         }
 
-        #Fülle $snippets auf mit leeren Einträgen für übrige Sprachen
+        # Fülle $snippets auf mit leeren Einträgen für übrige Sprachen
         foreach($to as $t) {
             foreach($snippets as $key => $langArray) {
                 if(!isset($langArray[$t])) {
@@ -238,9 +213,9 @@ class LanguageController extends Controller
         }
 
         return view('languages.synoptic')
-            ->with('to', $to)           #Alle vorhandenen Sprachen
-            ->with('texts', $snippets)         #Array mit Sprachsnippets
-            ->with('filename', $fn)     #Name der Datei
+            ->with('to', $to)           # Alle vorhandenen Sprachen
+            ->with('texts', $snippets)         # Array mit Sprachsnippets
+            ->with('filename', $fn)     # Name der Datei
             ->with('title', trans('titles.languages.edit'));
     }
 
@@ -256,6 +231,124 @@ class LanguageController extends Controller
             }
         }
         return $t;
+    }
+
+    public function processSynopticPageInput(Request $request, $exclude = "") {
+
+        $filename = $request->input('filename');
+
+        # Identifizieren des gedrückten Buttons
+        if(isset($request['nextpage'])) {
+
+            # Leite weiter zur nächsten Seite
+            $ex = [];
+
+            if ($exclude !== "") {
+                try {
+                    $ex = unserialize(base64_decode($exclude));
+                } catch (\ErrorException $e) {
+                    $ex = [];
+                }
+
+                if (!isset($ex["files"])) {
+                    $ex["files"] = [];
+                }
+            }
+            if (!isset($ex["new"])) {
+                $ex["new"] = 0;
+            }
+            $ex['files'][] = basename($filename);
+            $ex = base64_encode(serialize($ex));
+
+            return redirect(url('synoptic', ['exclude' => $ex]));
+
+        } elseif(isset($request['download'])) {
+        # Andernfalls auslesen, zippen und herunterladen der veränderten Dateien 
+         
+            $data = [];
+            $new  = 0;
+            $editedFiles = [];
+
+            foreach ($request->all() as $key => $value) {
+
+                if ($key === "filename" || $value === "") {
+                    continue;
+                }
+
+                $key = base64_decode($key);
+
+                # Pfad zur Datei anhand des Schlüsselnamens rekonstruieren (Schlüssel enthält Sprachkürzel)
+                $langdir = $this->extractLanguage($key);
+                $filepath = "lang/".$langdir."/".$filename;
+     
+                if (strpos($key, "_new_") === 0 && $value !== "" || MailController::isEdited($this->processKey($key), $value, $filepath)) {
+                    $new++;
+                    $editedFiles[$langdir] = $filepath;
+                } 
+            }     
+
+            # Erneute Iteration über Request, damit Dateien mitsamt vorherigen Einträgen abgespeichert werden 
+            foreach($request->all() as $key => $value) {
+
+                if ($key === "filename" || $value === "") {
+                    continue;
+                }
+
+                $key = base64_decode($key);
+
+                # Pfad zur Datei anhand des Schlüsselnamens rekonstruieren (Schlüssel enthält Sprachkürzel)
+                $langdir = $this->extractLanguage($key);
+
+                # Überspringe Datei, falls diese nicht bearbeitet worden ist
+                if(!isset($editedFiles[$langdir])) {
+                    continue;
+                }
+
+                # Key kuerzen, sodass er nur den eigentlichen Keynamen enthält
+                $key = $this->processKey($key);
+                
+                if (!strpos($key, "#")) {
+                    $data[$langdir][$key] = $value;
+                # Aufdröseln von 2D-Arrays
+                } else {
+                    $ref = &$data;
+                    do {
+                        $ref = &$ref[$langdir][substr($key, 0, strpos($key, "#"))];
+                        $key = substr($key, strpos($key, "#") + 1);
+                    } while (strpos($key, "#"));
+                    $ref = &$ref[$key];
+                    $ref = $value;
+                }
+            }
+
+            if(file_exists("langfiles.zip"))
+                unlink("langfiles.zip");
+
+            $zip = new ZipArchive();
+
+            if (empty($data) || $zip->open("langfiles.zip", ZipArchive::CREATE) !== TRUE) {
+                return redirect(url('synoptic', ['exclude' => $exclude]));
+            } 
+                
+            try{
+            # Erstelle Ausgabedateien
+                foreach($data as $lang => $entries) {
+                    $output = json_encode($entries, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                    $output = preg_replace("/\{/si", "[", $output);
+                    $output = preg_replace("/\}/si", "]", $output);
+                    $output = preg_replace("/\": ([\"\[])/si", "\"\t=>\t$1", $output);
+                    $output = "<?php\n\nreturn $output;\n";
+                    $zip->addEmptyDir($lang);
+                    $zip->addFromString($lang."/".$filename, $output);
+                }
+
+            $zip->close();
+
+            return response()->download("langfiles.zip", $filename.".zip");
+                    } catch(ErrorException $e) {
+                echo("Failed to write ".$filename);
+                }
+        }
     }
 
     private function createHints($t, $to)
@@ -276,6 +369,21 @@ class LanguageController extends Controller
             }
         }
         return $t;
+    }
+
+    private function decodeExcludedFiles($exclude)
+    {
+        $ex = ['files' => [], 'new' => 0];
+
+        if ($exclude !== "") {
+            try {
+                $ex = unserialize(base64_decode($exclude));
+            } catch (ErrorException $e) {
+                $ex = ['files' => [], 'new' => 0];
+            }
+        }
+
+        return $ex;
     }
 
     private function getValues($values, $prefix = "")
@@ -324,7 +432,6 @@ class LanguageController extends Controller
                     if (is_array($val)) {
                         $isArray = true;
                     }
-
                 }
             } else {
                 $tmp[$key] = $value;
@@ -358,5 +465,28 @@ class LanguageController extends Controller
     {
         // search forward starting from end minus needle length characters
         return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);
+    }
+
+    private function extractLanguage($key) 
+    {   
+        # Kürzt bspw. "_new_de_redirect bzw. "de_redirect" zu "de"
+        preg_match("/^(?:_new_)?([^_]*)/", $key, $matches);
+        foreach($matches as $dir) {
+            if(strlen($dir) == 2)
+                return $dir;
+            }
+    }
+
+    private function processKey($key) 
+    {   
+        $key = trim($key);
+        # Kürzt bspw. "_new_de_redirect bzw. "de_redirect" zu "redirect"
+        preg_match("/^(?:_new_)?(?:[^_]*)_(\w*.?\w*#?.?\w*)/", $key, $matches);
+        foreach($matches as $processedKey) {
+            if(strpos($processedKey, "_") === FALSE) {
+                return $processedKey;
+            }
+        }
+        return $key;
     }
 }

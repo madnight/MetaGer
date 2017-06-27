@@ -30,7 +30,7 @@ class LanguageObject
  	   }
 	}
 
-
+    #Helferfunktion für saveData
     private function deMultiDimensionalize($filename, $key, $value)
     {
     	foreach($value as $key2 => $value2) {

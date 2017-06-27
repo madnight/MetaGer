@@ -42,6 +42,15 @@ class Minisucher extends Searchengine
                     $descr .= $description->__toString();
                 }
                 $descr    = strip_tags($descr);
+
+                $dateString = $result->xpath('//doc/date[@name="documentDate"]')[0]->__toString();
+
+                $date = date_create_from_format("Y-m-d\TH:i:s\Z", $dateString);
+
+                $dateVal = $date->getTimestamp();
+
+                $additionalInformation = ['date' => $dateVal];
+
                 $provider = $result->xpath('//doc/str[@name="subcollection"]')[0]->__toString();
 
                 if (isset($providerCounter[$provider]) && $providerCounter[$provider] > 10) {
@@ -67,7 +76,8 @@ class Minisucher extends Searchengine
                     $link,
                     $descr,
                     $gefVon,
-                    $counter
+                    $counter,
+                    $additionalInformation
                 );
             } catch (\ErrorException $e) {
                 continue;

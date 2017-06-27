@@ -49,10 +49,11 @@ return [
     "domains.showcase.explanation.1" => "Zusätzlich bieten wir Ihnen die Möglichkeit Subdomains beziehungsweise Top-Level-Domains direkt auf der Ergebnisseite auszuschließen. Bei jedem unserer Ergebnisse erscheint dieses kleine Symbol für die Optionen:",
     "domains.showcase.explanation.2" => "Wenn Sie auf dieses Symbol klicken, erscheint folgendes Menü:",
     "domains.showcase.menu.1"        => "Mit diesem Menü lassen sich:",
-    "domains.showcase.menu.2"        => "Eine neue Suche nur auf der Domain des Ergebnisses (de.wikipedia.de) starten",
-    "domains.showcase.menu.3"        => "Eine Suche ohne Ergebnisse der Subdomain (de.wikipedia.de) starten",
-    "domains.showcase.menu.4"        => "Eine Suche ohne Ergebnisse der Top-Level-Domain (wikipedia.de) starten",
-    "domains.showcase.menu.5"        => "Probieren Sie es doch gleich einmal aus, indem Sie die Optionen anklicken.",
+    "domains.showcase.menu.2"        => "Ergebnisse zwischenspeichern zum weiteren filtern (siehe <a href=\"#searchinsearch\"> hier</a>)",
+    "domains.showcase.menu.3"        => "Eine neue Suche nur auf der Domain des Ergebnisses (de.wikipedia.de) starten",
+    "domains.showcase.menu.4"        => "Eine Suche ohne Ergebnisse der Subdomain (de.wikipedia.de) starten",
+    "domains.showcase.menu.5"        => "Eine Suche ohne Ergebnisse der Top-Level-Domain (wikipedia.de) starten",
+    "domains.showcase.menu.6"        => "Probieren Sie es doch gleich einmal aus, indem Sie die Optionen anklicken.",
 
     'urls.title' => 'URLs ausschließen',
     'urls.explanation' => 'Sie können Suchergebnisse ausschließen, deren Ergebnislinks bestimmte Worte enthalten, indem Sie in ihrer Suche "-url:" verwenden.',
@@ -92,4 +93,7 @@ return [
     "sucheingabe"                    => "Sucheingabe",
     "bang.title"                     => "!bangs",
     "bang.1"                         => "MetaGer unterstützt in geringem Umfang eine Schreibweise, die oft als „!bang“-Syntax bezeichnet wird.<br>Ein solches „!bang“ beginnt immer mit einem Ausrufezeichen und enthält keine Leerzeichen. Beispiele sind hier „!twitter“ oder „!facebook“.<br>Wird ein !bang, das wir unterstützen, in der Suchanfrage verwendet, erscheint in unseren Quicktips ein Eintrag, über den man die Suche auf Knopfdruck mit dem jeweiligen Dienst (hier Twitter oder Facebook) fortführen kann.<p>Warum sich unser Vorgehen hier von anderen Anbietern unterscheidet lesen Sie in <a href=\"/faq/#bangs\" target=\"_blank\" rel=\"noopener\">unseren FAQ</a>.",
+    "searchinsearch.title"           => "Suche in der Suche",
+    "searchinsearch.1"               => "Auf die Funktion der Suche in der Suche kann mit Hilfe des <a href=\"#exampleimg\"> kleinen blauen Dreiecks </a> rechts neben der Ergebnis-URL zugegriffen werden. Beim Klick auf dieses öffnet sich ein Kontextmenü mit dem Eintrag \"Ergebnis in Tab speichern\". Hierdurch wird das jeweilige Ergebnis in einem separaten Speicher abgelegt. Der Inhalt dieses Speichers kann mit einem Klick auf \"gespeicherte Ergebnisse\" unterhalb des Suchfeldes angezeigt werden. Innerhalb dieser Ansicht können Sie die gespeicherten Ergebnisse nach Schlüsselworten filtern oder umsortieren lassen. Mit einem Klick auf \"Web\", links von \"gespeicherte Ergebnisse\" gelangen Sie wieder in die ursprüngliche Suchergebnis-Ansicht. 
+        Mehr Infos dazu unter <a href=\"http://blog.suma-ev.de/node/225\" target=\"_blank\" rel=\"noopener\"> http://blog.suma-ev.de/node/225</a>."
 ];

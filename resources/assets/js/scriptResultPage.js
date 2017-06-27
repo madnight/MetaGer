@@ -5,9 +5,9 @@ $(document).ready(function () {
   var custom = $('#foki > li.active').hasClass('custom-focus-tab-selector');
   getDocumentReadyForUse(focus, custom);
   botProtection();
-  new Results().updateResultPageInterface();      // Adds the saved Results if they are present
-  if(document.location.href.indexOf("focus=container") !== -1){
-    $($("#foki > li#savedFokiTabSelector").get(0)).find(">a").tab("show");
+  new Results().updateResultPageInterface(); // Adds the saved Results if they are present
+  if (document.location.href.indexOf('focus=container') !== -1) {
+    $($('#foki > li#savedFokiTabSelector').get(0)).find('>a').tab('show');
   }
 });
 
@@ -69,8 +69,6 @@ function pluginInfo () {
     });
   }
 }
-
-
 
 function theme () {
   if (localStorage) {
@@ -520,18 +518,18 @@ function initialLoadContent (fokus) {
   });
 }
 
-function resultSaver(index) {
-  var title = $("div.tab-pane.active .result[data-count=" + index + "] a.title").html();
-  var link = $("div.tab-pane.active .result[data-count=" + index + "] a.title").attr("href");
-  var anzeigeLink = $("div.tab-pane.active .result[data-count=" + index + "] div.link-link > a").html();
-  var gefVon = $("div.tab-pane.active .result[data-count=" + index + "] span.hoster").html();
-  var hoster =  $("div.tab-pane.active .result[data-count=" + index + "] a.title").attr("data-hoster");
-  var anonym = $("div.tab-pane.active .result[data-count=" + index + "] a.proxy").attr("href");
-  var description = $("div.tab-pane.active .result[data-count=" + index + "] div.description").html();
-  var color = $("div.tab-pane.active .result[data-count=" + index + "] div.number").css("color");
-  var rank = parseFloat($("div.tab-pane.active .result[data-count=" + index + "]").attr("data-rank"));
+function resultSaver (index) {
+  var title = $('div.tab-pane.active .result[data-count=' + index + '] a.title').html();
+  var link = $('div.tab-pane.active .result[data-count=' + index + '] a.title').attr('href');
+  var anzeigeLink = $('div.tab-pane.active .result[data-count=' + index + '] div.link-link > a').html();
+  var gefVon = $('div.tab-pane.active .result[data-count=' + index + '] span.hoster').html();
+  var hoster = $('div.tab-pane.active .result[data-count=' + index + '] a.title').attr('data-hoster');
+  var anonym = $('div.tab-pane.active .result[data-count=' + index + '] a.proxy').attr('href');
+  var description = $('div.tab-pane.active .result[data-count=' + index + '] div.description').html();
+  var color = $('div.tab-pane.active .result[data-count=' + index + '] div.number').css('color');
+  var rank = parseFloat($('div.tab-pane.active .result[data-count=' + index + ']').attr('data-rank'));
   new Result(title, link, anzeigeLink, gefVon, hoster, anonym, description, color, rank, undefined);
-  var to = $("#savedFokiTabSelector").length ? $("#savedFokiTabSelector") : $("#foki");
-  $("div.tab-pane.active .result[data-count=" + index + "]").transfer({to: to, duration: 1000});
+  var to = $('#savedFokiTabSelector').length ? $('#savedFokiTabSelector') : $('#foki');
+  $('div.tab-pane.active .result[data-count=' + index + ']').transfer({to: to, duration: 1000});
   new Results().updateResultPageInterface();
 }

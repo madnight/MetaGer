@@ -99,7 +99,7 @@
 				<div class="well well-sm">{!! trans('hilfe.domains.blacklist.example.6') !!}</div></li>
 			</ul>
 			<p>{!! trans('hilfe.domains.showcase.explanation.1') !!}</p>
-			<img src="/img/blacklist-tutorial-searchexample.png">
+			<img id="exampleimg" src="/img/blacklist-tutorial-searchexample.png">
 			<p>{!! trans('hilfe.domains.showcase.explanation.2') !!}<p>
 			<div id="result_option_showcase" style="margin-top: -300px"></div>
 			<div style="margin-top: 315px; margin-bottom: 10px;">
@@ -108,6 +108,12 @@
 					<h3 class="popover-title"><i class="fa fa-cog" aria-hidden="true"></i> Optionen</h3>
 					<div class="popover-content">
 						<ul class="options-list list-unstyled small">
+							<li>
+								<a href="#exampleimg">
+								<i class="glyphicon glyphicon-floppy-disk"></i>
+									Ergebnis in Tab speichern.
+								</a>
+							</li>
 							<li>
 								<a href="javascript:setDummySearch('wikipedia site:de.wikipedia.org')">
 									Suche auf dieser Domain neu starten
@@ -138,8 +144,9 @@
 					<li>{!! trans('hilfe.domains.showcase.menu.2') !!}</li>
 					<li>{!! trans('hilfe.domains.showcase.menu.3') !!}</li>
 					<li>{!! trans('hilfe.domains.showcase.menu.4') !!}</li>
+					<li>{!! trans('hilfe.domains.showcase.menu.5') !!}</li>
 				</ul>
-				<p>{!! trans('hilfe.domains.showcase.menu.5') !!}</p>
+				<p>{!! trans('hilfe.domains.showcase.menu.6') !!}</p>
 			</div>
 			<div>
 				<div class="well well-sm"><i>meine suche</i> <span id="dummy_search"></span></div>
@@ -164,6 +171,14 @@
 		</div>
 		<div class="panel-body">
 			<p>{!! trans('hilfe.bang.1') !!}</p>
+		</div>
+	</div>
+	<div class="panel panel-default" id="searchinsearch">
+		<div class="panel-heading">
+			<h3 class="panel-title">{!! trans('hilfe.searchinsearch.title') !!}</h3>
+		</div>
+		<div class="panel-body">
+			<p>{!! trans('hilfe.searchinsearch.1') !!}</p>
 		</div>
 	</div>
 	<h2 id="dienste">{!! trans('hilfe.dienste') !!}</h2>

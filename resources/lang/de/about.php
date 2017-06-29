@@ -12,7 +12,7 @@ return [
     '3.4' => 'realisiert auf mehreren Wegen: durch anonymen Proxy und TOR-hidden-Zugang',
     '3.5' => 'als Open-Source-Software und damit nachprüfbar (nur Open-Source-Software ist wirklich vertrauenswürdig)',
     '3.6' => 'dies alles nicht nur für die Informationssuche, sondern auch für die Routenplanung und geographische Suche (<a href="https://maps.metager.de" target="_blank">maps.metager.de</a>), OHNE Speicherung des Standortverlaufes der Nutzer',
-    '3.7' => 'in einer transparenten Organisationsstrukur (gemeinnütziger Träger-Verein <a href="https://SUMA-EV"target="_blank">SUMA-EV</a>), in der JEDE/R Mitglied werden kann',
+    '3.7' => 'in einer transparenten Organisationsstrukur (gemeinnütziger Träger-Verein <a href="https://suma-ev.de" target="_blank">SUMA-EV</a>), in der JEDE/R Mitglied werden kann',
     
     'list.1' => 'Datenschutz und Privatsphäre sind bei uns einfach und selbstverständlich: Fertig eingebaut und automatisch bei jeder Suche angewandt. <a href="/datenschutz/">Mehr dazu…</a>',
     'list.2' => 'Wir arbeiten nicht gewinnorientiert, wir sind ein <a href="/spende/">gemeinnütziger Verein</a>: Wir haben nicht das Ziel, uns durch Ihre Klicks und schon gar nicht durch Ihre Daten zu bereichern.',

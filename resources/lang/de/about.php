@@ -7,7 +7,7 @@ return [
 
     '3.0' => 'Verwirklichung von freiem Wissenszugang und digitaler Demokratie, durch:',
     '3.1' => 'Wissenszugang ohne Überwachung und ohne Bevormundung durch Staaten oder Konzerne',
-    '3.2' => 'Verwirklichung von freiem Wissenszugang und digitaler Demokratie, durch:',
+    '3.2' => 'Keine Speicherung von Nutzerdaten, höchste Anforderungen an Datenschutz und Privatsphäre',
     '3.3' => 'damit auch anonymen Zugang, AUCH zu den SuchERGEBNISSEN',
     '3.4' => 'realisiert auf mehreren Wegen: durch anonymen Proxy und TOR-hidden-Zugang',
     '3.5' => 'als Open-Source-Software und damit nachprüfbar (nur Open-Source-Software ist wirklich vertrauenswürdig)',

@@ -1,4 +1,4 @@
-Mit dem kleinen schwarzen Dreieck rechts neben den Suchergebnis-Links können Sie Ihre Suche präzisieren: eine Suche <strong>nur</strong> auf dieser Domain starten, oder diese Domain mit einer neuen Suche <strong>ausschließen</strong>.
+Mit dem kleinen blauen Dreieck rechts neben den Suchergebnis-Links können Sie Ihre Suche präzisieren: eine Suche <strong>nur</strong> auf dieser Domain starten, oder diese Domain mit einer neuen Suche <strong>ausschließen</strong>.
 Wenn Sie eine bestimmte Wortfolge suchen, können Sie diese "Wörter in Anführungszeichen" einschließen. So stellen Sie sicher, dass diese Wörter in genau dieser Reihenfolge im Suchergebnis vorkommen.
 Sie können die Suche auf eine Website einschränken, indem sie den site-Parameter benutzen, z.B. "site:de.wikipedia.org" (für Treffer aus der deutschen Wikipedia) an die Suchwörter rechts anfügen.
 Sie können Suchbegriffe von der Suche ausschließen, indem Sie ihnen ein Minus voranstellen, z.B.: Sport -Fußball

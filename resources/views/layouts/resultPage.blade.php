@@ -25,6 +25,10 @@
 				@yield('results')
 			</div>
 		@endif
+		<div id="feedback" style="width:50%;margin-left:25%;position: relative; top:10px;" class="alert alert-danger alert-dismissable">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  			<strong> Nichts passendes auf dabei? Geben Sie uns Feedback über das <a href="{{URL::to('')}}/kontakt/{{base64_encode(Request::fullUrl())}}/{{base64_encode($eingabe)}}"  target="_blank">Kontaktformular</a>!</strong>
+		</div>
 		<footer>
 			<div class="row">
 				<div @if(LaravelLocalization::getCurrentLocale() === "de") class="col-xs-4"@else class="col-xs-6"@endif>
@@ -43,9 +47,5 @@
 		<img src="{{ action('ImageController@generateImage')}}?site={{ urlencode(url()->current()) }}" class="hidden" />
 		<script type="text/javascript" src="{{ elixir('js/lib.js') }}"></script>
 		<script type="text/javascript" src="{{ elixir('js/scriptResultPage.js') }}"></script>
-		<div id="feedback" style="width:50%;margin-left:25%;position: relative; bottom:10px;" class="alert alert-danger alert-dismissable">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  			<strong> Nichts passendes auf dabei? Geben Sie uns Feedback über das <a href="{{URL::to('/')}}/kontakt/{{base64_encode(Request::fullUrl())}}/{{base64_encode($eingabe)}}"  target="_blank">Kontaktformular</a>!</strong>
-		</div>
 	</body>
 </html>

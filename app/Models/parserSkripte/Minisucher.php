@@ -10,6 +10,10 @@ class Minisucher extends Searchengine
     public function __construct(\SimpleXMLElement $engine, \App\MetaGer $metager)
     {
         parent::__construct($engine, $metager);
+        # Für die Newssuche stellen wir die Minisucher auf eine Sortierung nach Datum um.
+        if($metager->getFokus() === "nachrichten"){
+            $this->getString .= "sort=" . $this->urlencode("documentDate desc");
+        }
     }
 
     public function loadResults($content)

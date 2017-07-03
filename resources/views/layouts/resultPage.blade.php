@@ -45,7 +45,7 @@
 		<script type="text/javascript" src="{{ elixir('js/scriptResultPage.js') }}"></script>
 		<div id="feedback" style="width:50%;margin-left:25%;position: relative; bottom:10px;" class="alert alert-danger alert-dismissable">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  			<strong> Nichts passendes auf dabei? Geben Sie uns Feedback über das <a href="localhost:8000/kontakt/{{base64_encode(Request::fullUrl())}}/{{base64_encode($eingabe)}}"  target="_blank">Kontaktformular</a>!</strong>
+  			<strong> Nichts passendes auf dabei? Geben Sie uns Feedback über das <a href="{{URL::to('/')}}/kontakt/{{base64_encode(Request::fullUrl())}}/{{base64_encode($eingabe)}}"  target="_blank">Kontaktformular</a>!</strong>
 		</div>
 	</body>
 </html>

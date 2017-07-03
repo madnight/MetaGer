@@ -27,7 +27,9 @@
 		@endif
 		<div id="feedback" style="width:50%;margin-left:25%;position: relative; top:10px;" class="alert alert-danger alert-dismissable">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  			<strong> Nichts passendes auf dabei? Geben Sie uns Feedback über das <a href="{{URL::to('')}}/kontakt/{{base64_encode(Request::fullUrl())}}/{{base64_encode($eingabe)}}"  target="_blank">Kontaktformular</a>!</strong>
+  				<strong> {!! trans('metaGer.feedback') !!}<a href="{{URL::to('')}}/kontakt/{{base64_encode(Request::fullUrl())}}/" target="_blank">
+  					{!! trans('kontakt.form.1') !!}</a>
+  				</strong>
 		</div>
 		<footer>
 			<div class="row">

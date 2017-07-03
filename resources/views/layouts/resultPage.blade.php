@@ -9,13 +9,13 @@
 		<meta content="{{ $eingabe }}" name="q" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
-		<meta http-equiv="language" content="{!! trans('staticPages.meta.language') !!}" /
->		<meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE" />
+		<meta http-equiv="language" content="{!! trans('staticPages.meta.language') !!}" />		
+		<meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE" />
 		<link rel="search" type="application/opensearchdescription+xml" title="{!! trans('resultPage.opensearch') !!}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
 		<link type="text/css" rel="stylesheet" href="{{ elixir('css/themes/default.css') }}" />
 		<link type="text/css" rel="stylesheet" href="/css/lightslider.css" />
-		<link type="text/css" rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" /
->		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
+		<link type="text/css" rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />		
+		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
 	</head>
 	<body id="resultBody">
 		@if( !isset($suspendheader) )

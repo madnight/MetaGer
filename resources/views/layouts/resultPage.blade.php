@@ -9,13 +9,13 @@
 		<meta content="{{ $eingabe }}" name="q" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
-		<meta http-equiv="language" content="{!! trans('staticPages.meta.language') !!}" />
-		<meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE" />
+		<meta http-equiv="language" content="{!! trans('staticPages.meta.language') !!}" /
+>		<meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE" />
 		<link rel="search" type="application/opensearchdescription+xml" title="{!! trans('resultPage.opensearch') !!}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
 		<link type="text/css" rel="stylesheet" href="{{ elixir('css/themes/default.css') }}" />
 		<link type="text/css" rel="stylesheet" href="/css/lightslider.css" />
-		<link type="text/css" rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
-		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
+		<link type="text/css" rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" /
+>		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
 	</head>
 	<body id="resultBody">
 		@if( !isset($suspendheader) )
@@ -43,5 +43,9 @@
 		<img src="{{ action('ImageController@generateImage')}}?site={{ urlencode(url()->current()) }}" class="hidden" />
 		<script type="text/javascript" src="{{ elixir('js/lib.js') }}"></script>
 		<script type="text/javascript" src="{{ elixir('js/scriptResultPage.js') }}"></script>
+		<div id="feedback" style="width:50%;margin-left:25%;position: relative; bottom:10px;" class="alert alert-danger alert-dismissable">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  			<strong> Nichts passendes auf dabei? Geben Sie uns Feedback über das <a href="localhost:8000/kontakt/{{base64_encode(Request::fullUrl())}}/{{base64_encode($eingabe)}}"  target="_blank">Kontaktformular</a>!</strong>
+		</div>
 	</body>
 </html>

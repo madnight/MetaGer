@@ -28,7 +28,7 @@ return [
 	'list.4.2'		=> 'Stammt die Mail wirklich von dem angegebenen Absender? Header der EMail genau prüfen, und die dort genannten IP-Adressen und Zustellwege untersuchen (nicht einfach).  Hinweise dazu unter: <a href="http://cert.uni-stuttgart.de/themen/spam/header.html" target="_blank" rel="noopener">http://cert.uni-stuttgart.de/themen/spam/header.html</a>',
 	'list.4.3'		=> 'Signierte und am besten auch verschlüsselte EMail nutzen (nicht einfach); Hinweise dazu hier: <a href="https://www.heise.de/ct/artikel/Ausgebootet-289538.html" target="_blank" rel="noopener">https://www.heise.de/ct/artikel/Ausgebootet-289538.html</a>',
 	'list.5'		=> 'Bilder, Videos',
-	'list.5.1'		=> 'Hintergrund genau ansehen. Lamdschaft, Gebäude, Autos und Kennzeichen, Kleidung, Personen. Ist das stimmig, passt es ggf. mit dem zugegörigen Text zusammen?',
+	'list.5.1'		=> 'Hintergrund genau ansehen. Landschaft, Gebäude, Autos und Kennzeichen, Kleidung, Personen. Ist das stimmig, passt es ggf. mit dem zugehörigen Text zusammen?',
 	'list.5.2'		=> 'Sind mit der Reverse-Image-Search von Bildsuchmaschinen ähnliche Bilder zu finden?',
 	'list.5.3'		=> 'Kann man mit Grafikprogramme Metadaten der Bilder auslesen? Passen diese Metadaten mit dem Bildinhalt zusammen?',
 	'list.6'		=> 'Für SmartPhones gibt es eine "Fake News Check"-App, die auch sehr subjektive und emotionale Aspekt berücksichtigt.  Dazu weitere Links zum Fact-Checking',

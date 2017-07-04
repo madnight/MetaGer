@@ -252,7 +252,7 @@
 			</div>
 		@endif
 		<div id="addFocusBtnDiv">
-			<button id="addFocusBtn" class="btn btn-default hide">
+			<button id="addFocusBtn" class="btn btn-default js-only">
 			<i class="fa fa-plus" aria-hidden="true"></i>
 			</button>
 		</div>
@@ -265,7 +265,7 @@
 		<fieldset>
 			<form id="searchForm" @if(Request::has('request') && Request::input('request') === "POST") method="POST" @elseif(Request::has('request') && Request::input('request') === "GET") method="GET" @else method="GET" @endif action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/meta/meta.ger3") }}" accept-charset="UTF-8">
 				<div class="input-group">
-					<div class="input-group-addon">
+					<div class="input-group-addon js-only">
 						<button type="button" data-toggle="popover" data-html="true" data-container="body" title="{{ trans('index.design') }}" data-content='&lt;ul id="color-chooser" class="list-inline list-unstyled"&gt;
 							&lt;li &gt;&lt;a id="standard" data-rgba="255,194,107,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
 							&lt;li &gt;&lt;a id="standardHard" data-rgba="255,128,0,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
@@ -305,11 +305,11 @@
 			</form>
 		</fieldset>
 		<ul class="list-inline searchform-bonus">
-			<li id="plug"
 			@unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge' || $browser === 'Safari' || $browser === 'Vivaldi')
-				class="hidden"
-			@endunless>
-			<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a></li>
+			<li id="plug"	class="js-only">
+				<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a>
+			</li>
+			@endunless
 			@if (LaravelLocalization::getCurrentLocale() == "de")
 			<li>
                 <a href="https://suma-ev.de/presse/Werbefreie-Suche-mit-MetaGer.html" target="_blank" class="btn btn-default mutelink">
@@ -319,6 +319,7 @@
             @endif
 		</ul>
 	<script src="{{ elixir('js/scriptStartPage.js') }}"></script>
+	<script type="text/javascript" src="{{ elixir('js/utility.js') }}"></script>
 @endsection
 
 @section('optionalContent')

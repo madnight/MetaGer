@@ -5,7 +5,6 @@ $(document).ready(function () {
   if (location.href.indexOf('#plugin-modal') > -1) {
     $('#plugin-modal').modal('show');
   }
-  $('#addFocusBtn').removeClass('hide');
   $('button').popover();
 
   loadLocalStorage();

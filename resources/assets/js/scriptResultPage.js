@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  activateJSOnlyContent();
   createCustomFocuses();
   var focus = $('#foki > li.active > a').attr('aria-controls');
   var custom = $('#foki > li.active').hasClass('custom-focus-tab-selector');
@@ -10,11 +9,6 @@ $(document).ready(function () {
     $($('#foki > li#savedFokiTabSelector').get(0)).find('>a').tab('show');
   }
 });
-
-function activateJSOnlyContent () {
-  $('#searchplugin').removeClass('hide');
-  $('.options').removeClass('hide');
-}
 
 function tabs () {
   $('#foki > li.tab-selector > a').each(function () {
@@ -42,7 +36,6 @@ function tabs () {
 }
 
 function getDocumentReadyForUse (fokus, custom = false) {
-  activateJSOnlyContent();
   clickLog();
   popovers();
   if (fokus === 'bilder') imageLoader();

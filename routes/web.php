@@ -108,6 +108,12 @@ Route::group(
                 ->with('navbarFocus', 'hilfe');
         });
 
+        Route::get('hilfe/faktencheck', function(){
+            return view('faktencheck')
+                ->with('title', trans('titles.faktencheck'))
+                ->with('navbarFocus', 'hilfe');
+        });
+
         Route::get('faq', function () {
             return view('faq')
                 ->with('title', trans('titles.faq'))

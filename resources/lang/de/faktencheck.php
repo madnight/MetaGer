@@ -31,6 +31,6 @@ return [
 	'list.5.1'		=> 'Hintergrund genau ansehen. Landschaft, Gebäude, Autos und Kennzeichen, Kleidung, Personen. Ist das stimmig, passt es ggf. mit dem zugehörigen Text zusammen?',
 	'list.5.2'		=> 'Sind mit der Reverse-Image-Search von Bildsuchmaschinen ähnliche Bilder zu finden?',
 	'list.5.3'		=> 'Kann man mit Grafikprogramme Metadaten der Bilder auslesen? Passen diese Metadaten mit dem Bildinhalt zusammen?',
-	'list.6'		=> 'Für SmartPhones gibt es eine "Fake News Check"-App, die auch sehr subjektive und emotionale Aspekt berücksichtigt.  Dazu weitere Links zum Fact-Checking',
+	'list.6'		=> 'Für SmartPhones gibt es eine "Fake News Check"-App, die auch sehr subjektive und emotionale Aspekte berücksichtigt.  Dazu weitere Links zum Fact-Checking',
 	'list.7'		=> 'Es gibt KEINE absolute Sicherheit gegen Fälschungen!!',
 ];

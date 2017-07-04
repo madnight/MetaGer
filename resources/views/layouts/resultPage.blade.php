@@ -16,6 +16,7 @@
 		<link type="text/css" rel="stylesheet" href="/css/lightslider.css" />
 		<link type="text/css" rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
 		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
+		<link type="text/css" rel="stylesheet" href="{{ elixir('css/utility.css') }}" />
 	</head>
 	<body id="resultBody">
 		@if( !isset($suspendheader) )
@@ -43,5 +44,6 @@
 		<img src="{{ action('ImageController@generateImage')}}?site={{ urlencode(url()->current()) }}" class="hidden" />
 		<script type="text/javascript" src="{{ elixir('js/lib.js') }}"></script>
 		<script type="text/javascript" src="{{ elixir('js/scriptResultPage.js') }}"></script>
+		<script type="text/javascript" src="{{ elixir('js/utility.js') }}"></script>
 	</body>
 </html>

@@ -34,9 +34,9 @@ elixir(function (mix) {
     // versioning
   mix.version(['css/themes/default.css', 'js/lib.js', 'js/quicktips.js']);
   // utility
-  mix.scripts('utility.js', 'public/js/utility.js');
+  mix.scripts(['utility.js'], 'public/js/utility.js');
   mix.less('utility.less', 'public/css/utility.css');
-  mix.version('js/utility.js', 'css/utility.css');
+  mix.version(['js/utility.js', 'css/utility.css']);
   // beitritt
   mix.less('metager/beitritt.less', 'public/css/beitritt.css');
   mix.version(['css/beitritt.css']);

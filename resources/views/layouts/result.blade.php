@@ -81,7 +81,7 @@
 			</div>
 		@else
 			@if( $metager->getFokus() == "nachrichten" )
-			<div class="description">{{ isset($result->additionalInformation["date"])?date("Y-m-d H:i:s", $result->additionalInformation["date"]):"" }} {{ $result->descr }}</div>
+			<div class="description"><span class="date">{{ isset($result->additionalInformation["date"])?date("Y-m-d H:i:s", $result->additionalInformation["date"]):"" }}</span> {{ $result->descr }}</div>
 			@else
 			<div class="description">{{ $result->descr }}</div>
 			@endif

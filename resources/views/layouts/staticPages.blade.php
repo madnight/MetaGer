@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{!! trans('staticPages.meta.language') !!}">
 	<head>
+		<script src="{{ elixir('js/lib.js') }}"></script>
 		<meta charset="utf-8" />
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title>@yield('title')</title>
@@ -223,4 +224,5 @@
 			<img src="{{ action('ImageController@generateImage')}}?site={{ urlencode(url()->current()) }}" class="hidden" />
 		</div>
 	</body>
+	<script src="{{ elixir('js/scriptSubPages.js') }}"></script>
 </html>

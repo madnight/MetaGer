@@ -1,9 +1,22 @@
+const DEFAULT_FOCUS = 'web';
+
 $(document).ready(function () {
   // checkPlugin()
   if (location.href.indexOf('#plugin-modal') > -1) {
     $('#plugin-modal').modal('show');
   }
   $('button').popover();
+
+  loadLocalStorage();
+  setActionListeners();
+  loadInitialCustomFocuses();
+  loadSavedResults();
+});
+
+/**
+ * Loads the user theme and stored settings from local storage
+ */
+function loadLocalStorage () {
   if (localStorage) {
     var theme = localStorage.getItem('theme');
     if (theme != null) {
@@ -18,11 +31,11 @@ $(document).ready(function () {
       setSettings();
     }
   }
-  setActionListeners();
-  loadInitialCustomFocuses();
-  loadSavedResults();
-});
+}
 
+/**
+ * Sets all action listeners for this page
+ */
 function setActionListeners () {
   $('button').on('shown.bs.popover', function () {
     $('#color-chooser a').click(function () {
@@ -46,11 +59,10 @@ function setActionListeners () {
       window.location = './settings/';
     });
   }
-  $('#addFocusBtn').click(function () {
-    showFocusCreateDialog('');
-  });
+  $('#addFocusBtn').click(() => showFocusCreateDialog(''));
   $('#save-focus-btn').click(saveFocus);
   $('#delete-focus-btn').click(deleteFocus);
+  // Save Focus on clicking enter while in the focus name input
   $('#focus-name').keyup(function (event) {
     if (event.keyCode == 13) {
       $('#save-focus-btn').click();
@@ -61,9 +73,11 @@ function setActionListeners () {
   });
 }
 
+/**
+ * Loads stored settings from local storage
+ */
 function setSettings () {
-  for (var i = 0; i < localStorage.length; i++) {
-    var key = localStorage.key(i);
+  for (var key in localStorage) {
     var value = localStorage.getItem(key);
     if (key.startsWith('param_') && !key.endsWith('lang') && !key.endsWith('autocomplete')) {
       key = key.substring(key.indexOf('param_') + 6);
@@ -71,15 +85,15 @@ function setSettings () {
     }
     $('#foki input[type=radio]#angepasst').attr('checked', true);
   }
-  if (localStorage.getItem('param_lang') !== null) {
-    var value = localStorage.getItem('param_lang');
-    // Change the value of the lang input field to the given parameter
-    $('input[name=lang]').val(value);
+  // Change the value of the lang input field to the given parameter
+  var lang = localStorage.getItem('param_lang');
+  if (lang !== null) {
+    $('input[name=lang]').val(lang);
   }
-  if (localStorage.getItem('param_autocomplete') !== null) {
-    var value = localStorage.getItem('param_autocomplete');
-    // Change the value of the lang input field to the given parameter
-    $('input[name=eingabe]').attr('autocomplete', value);
+  // Change the value of the lang input field to the given parameter
+  var autocomplete = localStorage.getItem('param_autocomplete');
+  if (autocomplete !== null) {
+    $('input[name=eingabe]').attr('autocomplete', autocomplete);
   }
   if ($('fieldset#foki.mobile').length) {
     $('fieldset.mobile input#bilder').val('angepasst');
@@ -421,17 +435,24 @@ function resetOptions () {
   }
 }
 
+/**
+ * Sets the selected focus to default
+ */
 function setFocusToDefault () {
-  setFocus('web');
+  setFocus(DEFAULT_FOCUS);
 }
 
+/**
+ * Sets the selected focus
+ * @param {String} focusID The id of the focus, without #
+ */
 function setFocus (focusID) {
   $('#' + focusID).prop('checked', true);
 }
 
-function loadSavedResults() {
+function loadSavedResults () {
   var results = new Results();
-  if(results.length > 0){
+  if (results.length > 0) {
     var html = $('\
     <div class="focus">\
       <input id="savedResults" class="focus-radio hide" name="focus" value="container" form="searchForm" type="radio" required="">\
@@ -442,9 +463,9 @@ function loadSavedResults() {
       </label>\
     </div>\
     ');
-    $("#addFocusBtnDiv").before(html);
-    $("#foki input#savedResults").change(function(){
-      if($(this).prop("checked")) $("#searchForm").submit();
+    $('#addFocusBtnDiv').before(html);
+    $('#foki input#savedResults').change(function () {
+      if ($(this).prop('checked')) $('#searchForm').submit();
     });
   }
 }

@@ -291,6 +291,7 @@
 					<input type="hidden" name="sprueche" value={{ $sprueche }} >
 					<input type="hidden" name="newtab" value={{ $newtab }} >
 					<input type="hidden" name="maps" value={{ $maps }} >
+					<input type="hidden" name="key" value={{ $key }} >
 					@foreach ($focusPages as $fp)
 						<input type="hidden" name={{ $fp }} value="on">
 					@endforeach
@@ -309,11 +310,14 @@
 				<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a>
 			</li>
 			@endunless
+			@if (LaravelLocalization::getCurrentLocale() == "de")
 			<li>
-				<a href="http://blog.suma-ev.de/node/225" target="_blank" class="btn btn-default mutelink">Neu: Die Suche in der Suche</a>
-			</li>
+                <a href="https://suma-ev.de/presse/Werbefreie-Suche-mit-MetaGer.html" target="_blank" class="btn btn-default mutelink">
+                    Werbefreie Suche mit MetaGer
+                </a>
+            </li>
+            @endif
 		</ul>
-	<script src="{{ elixir('js/lib.js') }}"></script>
 	<script src="{{ elixir('js/scriptStartPage.js') }}"></script>
 	<script type="text/javascript" src="{{ elixir('js/utility.js') }}"></script>
 @endsection

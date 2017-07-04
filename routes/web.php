@@ -48,10 +48,11 @@ Route::group(
                 ->with('navbarFocus', 'kontakt');
         });
 
-        Route::get('kontakt', function () {
+        Route::get('kontakt/{url?}', function ($url = "") {
             return view('kontakt.kontakt')
                 ->with('title', trans('titles.kontakt'))
-                ->with('navbarFocus', 'kontakt');
+                ->with('navbarFocus', 'kontakt')
+                ->with('url', $url);
         });
 
         Route::post('kontakt', 'MailController@contactMail');
@@ -159,7 +160,7 @@ Route::group(
         });
         Route::get('languages', 'LanguageController@createOverview');
         Route::get('synoptic/{exclude?}', 'LanguageController@createSynopticEditPage');
-        Route::post('synoptic/{exclude?}', 'MailController@processSynopticPageInput');
+        Route::post('synoptic/{exclude?}', 'LanguageController@processSynopticPageInput');
         Route::get('languages/edit/{from}/{to}/{exclude?}/{email?}', 'LanguageController@createEditPage');
         Route::post('languages/edit/{from}/{to}/{exclude?}/{email?}', 'MailController@sendLanguageFile');
         Route::get('berlin', 'StartpageController@berlin');

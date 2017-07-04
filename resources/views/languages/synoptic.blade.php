@@ -3,7 +3,7 @@
 @section('title', $title )
 
 @section('content')
-	<h1>Übersicht</h1>
+	<h1>{{ trans('languages.header') }}</h1>
 <?php /*
 	<!--
 	<div class="progress">

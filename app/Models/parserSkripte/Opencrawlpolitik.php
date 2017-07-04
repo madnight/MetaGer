@@ -3,6 +3,7 @@
 namespace app\Models\parserSkripte;
 
 use App\Models\Searchengine;
+use Log;
 
 class Opencrawlpolitik extends Searchengine
 {
@@ -29,6 +30,14 @@ class Opencrawlpolitik extends Searchengine
                     break;
                 }
 
+                $dateString = $result->{"opencrawlDate"}->__toString();
+
+                $date = date_create_from_format("Ymd-Hi", $dateString);
+
+                $dateVal = $date->getTimestamp();
+
+                $additionalInformation = ['date' => $dateVal];
+
                 $title       = $result->{"title"}->__toString();
                 $link        = $result->{"link"}->__toString();
                 $anzeigeLink = $link;
@@ -41,7 +50,8 @@ class Opencrawlpolitik extends Searchengine
                     $anzeigeLink,
                     $descr,
                     $this->gefVon,
-                    $this->counter
+                    $this->counter,
+                    $additionalInformation
                 );
                 $count++;
             }

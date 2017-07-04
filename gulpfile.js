@@ -30,7 +30,8 @@ elixir(function (mix) {
   mix.scripts(['scriptStartPage.js', 'results.js'], 'public/js/scriptStartPage.js');
   // result page
   mix.scripts(['scriptResultPage.js', 'results.js'], 'public/js/scriptResultPage.js');
-  // versioning
+  mix.scripts(['scriptSubpages.js'], 'public/js/scriptSubpages.js');
+    // versioning
   mix.version(['css/themes/default.css', 'js/lib.js', 'js/quicktips.js']);
   // utility
   mix.scripts('utility.js', 'public/js/utility.js');

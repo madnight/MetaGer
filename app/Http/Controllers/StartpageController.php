@@ -51,7 +51,8 @@ class StartpageController extends Controller
             ->with('time', $request->input('param_time', '1500'))
             ->with('sprueche', $request->input('param_sprueche', 'on'))
             ->with('newtab', $request->input('param_newtab', 'on'))
-            ->with('maps', $maps = $request->input('param_maps', 'off'));
+            ->with('maps', $maps = $request->input('param_maps', 'off'))
+            ->with('key', $request->input('param_key', ''));
     }
 
     public function loadPage($subpage)

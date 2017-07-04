@@ -10,6 +10,10 @@ class Minisucher extends Searchengine
     public function __construct(\SimpleXMLElement $engine, \App\MetaGer $metager)
     {
         parent::__construct($engine, $metager);
+        # Für die Newssuche stellen wir die Minisucher auf eine Sortierung nach Datum um.
+        if($metager->getFokus() === "nachrichten"){
+            $this->getString .= "sort=" . $this->urlencode("documentDate desc");
+        }
     }
 
     public function loadResults($content)
@@ -42,6 +46,15 @@ class Minisucher extends Searchengine
                     $descr .= $description->__toString();
                 }
                 $descr    = strip_tags($descr);
+
+                $dateString = $result->xpath('//doc/date[@name="documentDate"]')[0]->__toString();
+
+                $date = date_create_from_format("Y-m-d\TH:i:s\Z", $dateString);
+
+                $dateVal = $date->getTimestamp();
+
+                $additionalInformation = ['date' => $dateVal];
+
                 $provider = $result->xpath('//doc/str[@name="subcollection"]')[0]->__toString();
 
                 if (isset($providerCounter[$provider]) && $providerCounter[$provider] > 10) {
@@ -67,7 +80,8 @@ class Minisucher extends Searchengine
                     $link,
                     $descr,
                     $gefVon,
-                    $counter
+                    $counter,
+                    $additionalInformation
                 );
             } catch (\ErrorException $e) {
                 continue;

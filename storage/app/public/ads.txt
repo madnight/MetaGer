@@ -1,5 +1,11 @@
 [	
 	{
+		"title" : "Werbefreie Suche mit MetaGer:",
+		"summary" : "SUMA-EV-Mitglieder suchen werbefrei!",
+		"URL" : "http://suma-ev.de/presse/Werbefreie-Suche-mit-MetaGer.html"
+
+	},	
+	{
 		"title" : "MetaGer-Neuentwicklung: Die Suche in der Suche",
 		"summary" : "",
 		"URL" : "http://blog.suma-ev.de/node/225"

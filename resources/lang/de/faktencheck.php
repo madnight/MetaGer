@@ -10,7 +10,7 @@ return [
 	'list.1.5'		=> 'Sind im Text Fakten genannt, die an anderer Stelle überprüft werden können? Auch außerhalb von Internet-Quellen?',
 	'list.1.6'		=> 'Gibt der Stil des Schreibens Hinweise, ob der Text evtl. satirisch/ironisch gemeint ist?',
 	'list.1.7'		=> 'Sind im Text Zitate enthalten, deren Korrektheit an anderer Stelle überprüfbar ist?',
-	'list.1.8'		=> 'Ist die Argumentaion im Text logisch und plausibel?',
+	'list.1.8'		=> 'Ist die Argumentation im Text logisch und plausibel?',
 	'list.2'		=> 'Facebook oder andere soziale Netze oder Foren',
 	'list.2.1'		=> 'Ist ein Autor mit einem Namen genannt, der real erscheint? Wenn nicht: Nachricht äußerst fragwürdig.',
 	'list.2.2'		=> 'Welche zusätzliche Info gibt es zu diesem Namen?',

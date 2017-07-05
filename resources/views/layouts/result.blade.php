@@ -16,7 +16,7 @@
 							{{ $result->anzeigeLink }}
 						</a>
 					</div>
-					<div class="options js-only">
+					<div class="options hide">
 						<a tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="auto bottom" data-container="body" data-html="true" data-title="<i class='fa fa-cog' aria-hidden='true'></i> Optionen">
 							@if(strlen($metager->getSite()) === 0)
 								<i class="fa fa-caret-down" aria-hidden="true"></i>

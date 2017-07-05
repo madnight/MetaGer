@@ -48,10 +48,11 @@ Route::group(
                 ->with('navbarFocus', 'kontakt');
         });
 
-        Route::get('kontakt', function () {
+        Route::get('kontakt/{url?}', function ($url = "") {
             return view('kontakt.kontakt')
                 ->with('title', trans('titles.kontakt'))
-                ->with('navbarFocus', 'kontakt');
+                ->with('navbarFocus', 'kontakt')
+                ->with('url', $url);
         });
 
         Route::post('kontakt', 'MailController@contactMail');
@@ -104,6 +105,12 @@ Route::group(
         Route::get('hilfe', function () {
             return view('hilfe')
                 ->with('title', trans('titles.hilfe'))
+                ->with('navbarFocus', 'hilfe');
+        });
+
+        Route::get('hilfe/faktencheck', function(){
+            return view('faktencheck')
+                ->with('title', trans('titles.faktencheck'))
                 ->with('navbarFocus', 'hilfe');
         });
 

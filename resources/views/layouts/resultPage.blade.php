@@ -25,6 +25,12 @@
 				@yield('results')
 			</div>
 		@endif
+		<div id="feedback" style="width:50%;margin-left:25%;position: relative; top:10px;" class="alert alert-danger alert-dismissable">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  				<strong> {!! trans('metaGer.feedback') !!}<a href="{{URL::to('')}}/kontakt/{{base64_encode(Request::fullUrl())}}/" target="_blank">
+  					{!! trans('kontakt.form.1') !!}</a>
+  				</strong>
+		</div>
 		<footer>
 			<div class="row">
 				<div @if(LaravelLocalization::getCurrentLocale() === "de") class="col-xs-4"@else class="col-xs-6"@endif>

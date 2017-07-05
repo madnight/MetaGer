@@ -230,6 +230,15 @@
 	<h2>{!! trans('hilfe.datenschutz.title') !!}</h2>
 	<div class="panel panel-default">
 		<div class="panel-heading">
+			<h3 class="panel-title">{!! trans('hilfe.datenschutz.faktencheck.heading') !!}</h3>
+		</div>
+		<div class="panel-body">
+			<p>@lang('hilfe.datenschutz.faktencheck.body.1')</p>
+			<p>@lang('hilfe.datenschutz.faktencheck.body.2')</p>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
 			<h3 class="panel-title">{!! trans('hilfe.datenschutz.1') !!}</h3>
 		</div>
 		<div class="panel-body">

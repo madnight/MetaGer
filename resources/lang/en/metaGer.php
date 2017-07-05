@@ -12,5 +12,6 @@ return [
     "formdata.stopwords"	=>	"You have excluded results with the following words: \":stopwords\"",
     "formdata.phrase"	=>	"You are doing a string search: :phrase",
     "sitesearch.failed"	=>	"You intend to do a site search on :site. Unfortunately the chosen search engines do not support that. You can do a site search <a href=\":searchLink\">here</a> within the Web focus",
-    "sitesearch.success"	=>	"You are doing a site search. Only results of the website <a href=\"http://:site\" target=\"_blank\" rel=\"noopener\">\":site\"</a> will be shown."
+    "sitesearch.success"	=>	"You are doing a site search. Only results of the website <a href=\"http://:site\" target=\"_blank\" rel=\"noopener\">\":site\"</a> will be shown.",
+    "feedback"              => "Not what you were looking for? Give us feedback: ",
 ];

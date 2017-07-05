@@ -18,7 +18,6 @@
 		<link type="text/css" rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
 		<link type="text/css" rel="stylesheet" href="{{ elixir('css/themes/default.css') }}" />
 		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
-		<link type="text/css" rel="stylesheet" href="{{ elixir('css/utility.css') }}" />
 		@if (isset($css))
 			@if(is_array($css))
 				@foreach($css as $el)

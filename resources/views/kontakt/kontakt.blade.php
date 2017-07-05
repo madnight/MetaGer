@@ -16,7 +16,9 @@
 		<div class="form-group kontakt-form-group">
 			<input class="form-control" name="email" placeholder="{!! trans('kontakt.form.5') !!}" type="text"></div>
 			<div class="form-group kontakt-form-group">
-				<textarea class="form-control" id="message" name="message" placeholder="{!! trans('kontakt.form.6') !!}">@if($url !== "")Die Suche unter "{{ base64_decode($url) }}" ist unvollständig.@endif</textarea>
+				<textarea class="form-control" id="message" name="message" placeholder="{!! trans('kontakt.form.6') !!}">@if($url !== "")Die Suche unter "{{ base64_decode($url) }}" ist unvollständig.\n\nWenn MetaGer bestimmte Webseiten nicht angezeigt hat, von denen Sie wissen, dass es sie gibt: Bitte nennen Sie deren Adresse/n (http:// ...???...).
+Wir werden das detailliert untersuchen.
+@endif</textarea>
 			</div>
 			<div class="form-group kontakt-form-group">
 			<p>{!! trans('kontakt.form.7') !!}</p>

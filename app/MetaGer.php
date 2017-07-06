@@ -36,6 +36,7 @@ class MetaGer
     protected $addedHosts      = [];
     protected $startCount      = 0;
     protected $canCache        = false;
+    public $subcollections  = "";
     # Daten über die Abfrage
     protected $ip;
     protected $language;
@@ -534,7 +535,7 @@ class MetaGer
         }
 
         # Sonderregelung für alle Suchmaschinen, die zu den Minisuchern gehören. Diese können alle gemeinsam über einen Link abgefragt werden
-        $subcollections = [];
+        $this->subcollections = [];
 
         $tmp = [];
         // Es gibt den Schalter "minism=on" Dieser soll bewirken, dass alle Minisucher angeschaltet werden.
@@ -544,7 +545,7 @@ class MetaGer
             // Wir laden alle Minisucher
             foreach ($sumas as $engine) {
                 if (isset($engine["minismCollection"])) {
-                    $subcollections[] = $engine["minismCollection"]->__toString();
+                    $this->subcollections[] = $engine["minismCollection"]->__toString();
                 }
             }
             # Nur noch alle eventuell angeschalteten Minisucher deaktivieren
@@ -557,15 +558,15 @@ class MetaGer
             // Wir schalten eine Teilmenge, oder aber gar keine an
             foreach ($enabledSearchengines as $engine) {
                 if (isset($engine['minismCollection'])) {
-                    $subcollections[] = $engine['minismCollection']->__toString();
+                    $this->subcollections[] = $engine['minismCollection']->__toString();
                 } else {
                     $tmp[] = $engine;
                 }
             }
         }
         $enabledSearchengines = $tmp;
-        if (sizeof($subcollections) > 0) {
-            $enabledSearchengines[] = $this->loadMiniSucher($xml, $subcollections);
+        if (sizeof($this->subcollections) > 0) {
+            $enabledSearchengines[] = $this->loadMiniSucher($xml, $this->subcollections);
         }
         if ($sumaCount <= 0) {
             $this->errors[] = trans('metaGer.settings.noneSelected');
@@ -584,14 +585,13 @@ class MetaGer
                 $engine->setResultHash($this->getHashCode());
             }
         } else {
-            $engines = $this->actuallyCreateSearchEngines($enabledSearchengines, $siteSearchFailed);
+            $engines = $this->actuallyCreateSearchEngines($enabledSearchengines, $siteSearchFailed, $this->subcollections);
         }
 
         # Wir starten alle Suchen
         foreach ($engines as $engine) {
             $engine->startSearch($this);
         }
-
         // Derzeit deaktiviert, da es die eigene Suche gibt
         // $this->adjustFocus($sumas, $enabledSearchengines);
 

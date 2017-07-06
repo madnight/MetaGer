@@ -14,6 +14,7 @@ class Minisucher extends Searchengine
         if($metager->getFokus() === "nachrichten"){
             $this->getString .= "sort=" . $this->urlencode("documentDate desc");
         }
+
     }
 
     public function loadResults($content)
@@ -55,23 +56,8 @@ class Minisucher extends Searchengine
 
                 $additionalInformation = ['date' => $dateVal];
 
-                $provider = $result->xpath('//doc/str[@name="subcollection"]')[0]->__toString();
-
-                if (isset($providerCounter[$provider]) && $providerCounter[$provider] > 10) {
-                    continue;
-                } else {
-                    if (!isset($providerCounter[$provider])) {
-                        $providerCounter[$provider] = 0;
-                    }
-
-                    $providerCounter[$provider] += 1;
-                }
-
-                if (isset($provider)) {
-                    $gefVon = "<a href=\"https://metager.de\" target=\"_blank\" rel=\"noopener\">Minisucher: $provider</a>";
-                } else {
-                    $gefVon = $this->gefVon;
-                }
+                $minism = implode(", ", $this->subcollections);
+                $gefVon = "<a href=\"https://metager.de\" target=\"_blank\" rel=\"noopener\">Minisucher: $minism </a>";
 
                 $this->results[] = new \App\Models\Result(
                     $this->engine,

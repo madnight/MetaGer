@@ -18,5 +18,6 @@ return [
     "partnershops"	=>	"Partnershops - MetaGer",
     "languages"	=>	"translation tool - MetaGer",
     "languages.edit"	=>	"Edit language files - MetaGer",
-    "app"	=>	"Apps - MetaGer"
+    "app"	=>	"Apps - MetaGer",
+    "faktencheck"	=>	"Fact-checks versus fake news"
 ];

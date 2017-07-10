@@ -70,9 +70,11 @@ class MetaGerSearch extends Controller
                 if ($word[0] === "!") {
                     $dummyQuery .= $word . " ";
                 } else {
-                    $realQuery .= $word;
+                    $realQuery .= $word . " ";
                 }
             }
+            $realQuery = rtrim($realQuery);
+            
             if ($dummyQuery !== "") {
                 $dummyQuery .= $placeholder;
                 $url = "https://api.duckduckgo.com/?format=json&no_redirect=1&t=MetaGerDE&q=" . urlencode($dummyQuery);

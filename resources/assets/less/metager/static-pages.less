@@ -106,7 +106,16 @@ ul.metager-dropdown-menu {
     background-clip: padding-box;
     max-height: 0px;
     overflow: hidden;
-    transition: max-height 1s ease;
+    -webkit-transition: max-height 1s ease, padding 1s ease;
+    -moz-transition: max-height 1s ease, padding 1s ease;
+    -ms-transition: max-height 1s ease, padding 1s ease;
+    -o-transition: max-height 1s ease, padding 1s ease;
+    transition: max-height 1s ease, padding 1s ease;
+    -webkit-transition-delay:.2s;
+    -moz-transition-delay:.2s;
+    -ms-transition-delay:.2s;
+    -o-transition-delay:.2s;
+    transition-delay:.2s;
     &>li>a {
         display: block;
         padding: 3px 20px;

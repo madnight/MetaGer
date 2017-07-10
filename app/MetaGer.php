@@ -36,7 +36,7 @@ class MetaGer
     protected $addedHosts      = [];
     protected $startCount      = 0;
     protected $canCache        = false;
-    # Daten über die Abfrage
+    # Daten über die Abfrage$
     protected $ip;
     protected $language;
     protected $agent;
@@ -591,7 +591,6 @@ class MetaGer
         foreach ($engines as $engine) {
             $engine->startSearch($this);
         }
-
         // Derzeit deaktiviert, da es die eigene Suche gibt
         // $this->adjustFocus($sumas, $enabledSearchengines);
 
@@ -746,6 +745,7 @@ class MetaGer
     public function loadMiniSucher($xml, $subcollections)
     {
         $minisucherEngine             = $xml->xpath('suma[@name="minism"]')[0];
+        $minisucherEngine["subcollections"] = implode(", ", $subcollections);
         $subcollections               = urlencode("(" . implode(" OR ", $subcollections) . ")");
         $minisucherEngine["formData"] = str_replace("<<SUBCOLLECTIONS>>", $subcollections, $minisucherEngine["formData"]);
         $minisucherEngine["formData"] = str_replace("<<COUNT>>", sizeof($subcollections) * 10, $minisucherEngine["formData"]);

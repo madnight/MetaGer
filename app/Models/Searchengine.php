@@ -22,7 +22,6 @@ abstract class Searchengine
     public $products = []; # Die geladenen Produkte
     public $loaded   = false; # wahr, sobald die Ergebnisse geladen wurden
     public $cached   = false;
-    public $subcollections = "";
 
     public $ip; # Die IP aus der metager
     public $gefVon; # Der HTML-Code für die Verlinkung des Suchanbieters
@@ -51,9 +50,6 @@ abstract class Searchengine
         if (!isset($this->homepage)) {
             $this->homepage = "https://metager.de";
         }
-
-        # Minisucher speichern
-        $this->subcollections = $metager->subcollections;
 
         # Speichert die XML der Engine
         $this->engine = $engine->asXML();

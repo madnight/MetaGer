@@ -6,7 +6,6 @@ use App\Models\Searchengine;
 
 class Minisucher extends Searchengine
 {
-
     public function __construct(\SimpleXMLElement $engine, \App\MetaGer $metager)
     {
         parent::__construct($engine, $metager);
@@ -14,7 +13,6 @@ class Minisucher extends Searchengine
         if($metager->getFokus() === "nachrichten"){
             $this->getString .= "sort=" . $this->urlencode("documentDate desc");
         }
-
     }
 
     public function loadResults($content)
@@ -56,7 +54,7 @@ class Minisucher extends Searchengine
 
                 $additionalInformation = ['date' => $dateVal];
 
-                $minism = implode(", ", $this->subcollections);
+                $minism = simplexml_load_string($this->engine)["subcollections"];
                 $gefVon = "<a href=\"https://metager.de\" target=\"_blank\" rel=\"noopener\">Minisucher: $minism </a>";
 
                 $this->results[] = new \App\Models\Result(

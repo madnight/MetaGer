@@ -71,12 +71,35 @@
 			</form>
 		<p>{!! trans('spende.lastschrift.10') !!}</p>
 		</div>
+
+			<style>
+
+			#right h3 {
+				display:inline;
+				vertical-align: middle; 
+			}
+
+			#expand {
+			  height: 0px;
+			  overflow: hidden;
+			}
+
+
+			#toggle:checked ~ #expand {
+			  height: 100%;
+			}
+			
+			</style>
+
 		<div class="col-lg-6 col-md-12 col-sm-12 others" id="right">
-		<h3>{!! trans('spende.about.1') !!}</h3>
-		<p>{!! trans('spende.about.2') !!}</p>
-		<p>{!! trans('spende.about.3') !!}</p>
-		<p>{!! trans('spende.about.4') !!}</p>
-		<p>{!! trans('spende.about.5') !!}</p>
+		 <input id="toggle" type="checkbox">
+			<h3>{!! trans('spende.about.1') !!}</h3>
+			<div id="expand" >
+				<p>{!! trans('spende.about.2') !!}</p>
+				<p>{!! trans('spende.about.3') !!}</p>
+				<p>{!! trans('spende.about.4') !!}</p>
+				<p>{!! trans('spende.about.5') !!}</p>
+			</div>
 		</div>
 		<div class="clearfix"></div>
 	</div>

@@ -70,59 +70,6 @@
 			</form>
 		<p>{!! trans('spende.lastschrift.10') !!}</p>
 		</div>
-
-			<style>
-
-			#right {
-				width: 75%;
-				margin-left: auto;
-				margin-right: auto;
-			}
-
-			#right label {
-				display: block;
-				vertical-align: middle;
-				text-align: center;
-				margin-top: 8px;
-				font-size: 18px; 
-				color: #666;
-			}
-
-			#right label:hover {
-  				color: #000;
-			}
-
-			#right label::after {
-			  font-size: 15px;
-			  content: "▼";
-			  width: 20px;
-			  height: 20px;
-  			  margin-left: 3px;
-			}
-
-			#expand {
-			  max-height: 0px;
-			  overflow: hidden; 
-			  -webkit-transition: max-height 0.2s;  /* Chrome 1-25, Safari 3.2+ */
-              -moz-transition: max-height 0.2s;  /* Firefox 4-15 */
-              -o-transition: max-height 0.2s;  /* Opera 10.50–12.00 */
-              transition: max-height 0.2s;
-			}
-
-			#toggle:checked ~ #expand {
-			  max-height: 900px;
-			}
-
-			#toggle {
-				display: none;
-				visibility: hidden;
-			}
-			#toggle:checked ~ label::after {
-			  content: "▲";
-			}
-
-			</style>
-
 		<div id="right">
 			<input id="toggle" type="checkbox">
 			<label for="toggle">{!! trans('spende.about.1') !!}</label>

@@ -351,7 +351,7 @@ div#right {
     background-color: @div-right-background-color;
     border-radius: 5px;
     padding: 20px;
-    padding-top: 0;
+    padding-top: 5px;
     p {
         white-space: normal;
         border-bottom: 1px solid @div-right-p-border-bottom-color;
@@ -362,6 +362,53 @@ div#right {
 
 div#left {
     padding-right: 35px;
+}
+
+div#right {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#right label {
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 18px; 
+    color: #666;
+}
+
+div#right label:hover {
+    color: #000;
+}
+
+div#right label::after {
+  font-size: 18px;
+  content: "▼";
+  width: 20px;
+  height: 20px;
+  margin-left: 3px;
+}
+
+div#expand {
+  max-height: 0px;
+  overflow: hidden; 
+  -webkit-transition: max-height 0.2s;  /* Chrome 1-25, Safari 3.2+ */
+  -moz-transition: max-height 0.2s;  /* Firefox 4-15 */
+  -o-transition: max-height 0.2s;  /* Opera 10.50–12.00 */
+  transition: max-height 0.2s;
+}
+
+input#toggle:checked ~ #expand {
+  max-height: 900px;
+}
+
+input#toggle {
+    display: none;
+    visibility: hidden;
+}
+input#toggle:checked ~ label::after {
+  content: "▲";
 }
 
 textarea#message {

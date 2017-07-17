@@ -7,8 +7,7 @@
 @section('content')
 <h1>{!! trans('spende.headline.1') !!}</h1>
 <h2 class="subheading">{!! trans('spende.headline.2') !!}</h2>
-	<div class="col">
-		<div id="left" class="col-lg-6 col-md-12 col-sm-12 others">
+		<div id="left" >
 		<h3>{!! trans('spende.bankinfo.1') !!}</h3>
 		<p>{!! trans('spende.bankinfo.2') !!}</p>
 		<p class="text-muted">{!! trans('spende.bankinfo.3') !!}</p>
@@ -74,6 +73,12 @@
 
 			<style>
 
+			#right {
+				width: 75%;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
 			#right label {
 				display: block;
 				vertical-align: middle;
@@ -88,7 +93,6 @@
 			}
 
 			#right label::after {
-			  font-weight: bold;
 			  font-size: 15px;
 			  content: "▼";
 			  width: 20px;
@@ -97,16 +101,16 @@
 			}
 
 			#expand {
-			  height: 0px;
+			  max-height: 0px;
 			  overflow: hidden; 
-			  -webkit-transition: height 0.2s;  /* Chrome 1-25, Safari 3.2+ */
-              -moz-transition: height 0.2s;  /* Firefox 4-15 */
-              -o-transition: height 0.2s;  /* Opera 10.50–12.00 */
-              transition: height 0.2s;
+			  -webkit-transition: max-height 0.2s;  /* Chrome 1-25, Safari 3.2+ */
+              -moz-transition: max-height 0.2s;  /* Firefox 4-15 */
+              -o-transition: max-height 0.2s;  /* Opera 10.50–12.00 */
+              transition: max-height 0.2s;
 			}
 
 			#toggle:checked ~ #expand {
-			  height: 100%;
+			  max-height: 900px;
 			}
 
 			#toggle {
@@ -119,7 +123,7 @@
 
 			</style>
 
-		<div class="col-lg-6 col-md-12 col-sm-12 others" id="right">
+		<div id="right">
 			<input id="toggle" type="checkbox">
 			<label for="toggle">{!! trans('spende.about.1') !!}</label>
 			<div id="expand" >
@@ -130,5 +134,4 @@
 			</div>
 		</div>
 		<div class="clearfix"></div>
-	</div>
 @endsection

@@ -74,26 +74,54 @@
 
 			<style>
 
-			#right h3 {
-				display:inline;
-				vertical-align: middle; 
+			#right label {
+				display: block;
+				vertical-align: middle;
+				text-align: center;
+				margin-top: 8px;
+				font-size: 18px; 
+				color: #666;
+			}
+
+			#right label:hover {
+  				color: #000;
+			}
+
+			#right label::after {
+			  font-weight: bold;
+			  font-size: 15px;
+			  content: "▼";
+			  width: 20px;
+			  height: 20px;
+  			  margin-left: 3px;
 			}
 
 			#expand {
 			  height: 0px;
-			  overflow: hidden;
+			  overflow: hidden; 
+			  -webkit-transition: height 0.2s;  /* Chrome 1-25, Safari 3.2+ */
+              -moz-transition: height 0.2s;  /* Firefox 4-15 */
+              -o-transition: height 0.2s;  /* Opera 10.50–12.00 */
+              transition: height 0.2s;
 			}
-
 
 			#toggle:checked ~ #expand {
 			  height: 100%;
 			}
-			
+
+			#toggle {
+				display: none;
+				visibility: hidden;
+			}
+			#toggle:checked ~ label::after {
+			  content: "▲";
+			}
+
 			</style>
 
 		<div class="col-lg-6 col-md-12 col-sm-12 others" id="right">
-		 <input id="toggle" type="checkbox">
-			<h3>{!! trans('spende.about.1') !!}</h3>
+			<input id="toggle" type="checkbox">
+			<label for="toggle">{!! trans('spende.about.1') !!}</label>
 			<div id="expand" >
 				<p>{!! trans('spende.about.2') !!}</p>
 				<p>{!! trans('spende.about.3') !!}</p>

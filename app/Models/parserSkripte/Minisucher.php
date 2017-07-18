@@ -6,7 +6,6 @@ use App\Models\Searchengine;
 
 class Minisucher extends Searchengine
 {
-
     public function __construct(\SimpleXMLElement $engine, \App\MetaGer $metager)
     {
         parent::__construct($engine, $metager);
@@ -55,23 +54,8 @@ class Minisucher extends Searchengine
 
                 $additionalInformation = ['date' => $dateVal];
 
-                $provider = $result->xpath('//doc/str[@name="subcollection"]')[0]->__toString();
-
-                if (isset($providerCounter[$provider]) && $providerCounter[$provider] > 10) {
-                    continue;
-                } else {
-                    if (!isset($providerCounter[$provider])) {
-                        $providerCounter[$provider] = 0;
-                    }
-
-                    $providerCounter[$provider] += 1;
-                }
-
-                if (isset($provider)) {
-                    $gefVon = "<a href=\"https://metager.de\" target=\"_blank\" rel=\"noopener\">Minisucher: $provider</a>";
-                } else {
-                    $gefVon = $this->gefVon;
-                }
+                $minism = simplexml_load_string($this->engine)["subcollections"];
+                $gefVon = "<a href=\"https://metager.de\" target=\"_blank\" rel=\"noopener\">Minisucher: $minism </a>";
 
                 $this->results[] = new \App\Models\Result(
                     $this->engine,

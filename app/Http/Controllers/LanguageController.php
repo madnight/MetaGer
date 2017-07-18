@@ -321,12 +321,12 @@ class LanguageController extends Controller
                 }
             }
 
-            if(file_exists("langfiles.zip"))
-                unlink("langfiles.zip");
+            if(file_exists("/tmp/langfiles.zip"))
+                unlink("/tmp/langfiles.zip");
 
             $zip = new ZipArchive();
 
-            if (empty($data) || $zip->open("langfiles.zip", ZipArchive::CREATE) !== TRUE) {
+            if (empty($data) || $zip->open("/tmp/langfiles.zip", ZipArchive::CREATE) !== TRUE) {
                 return redirect(url('synoptic', ['exclude' => $exclude]));
             } 
                 
@@ -344,7 +344,7 @@ class LanguageController extends Controller
 
             $zip->close();
 
-            return response()->download("langfiles.zip", $filename.".zip");
+            return response()->download("/tmp/langfiles.zip", $filename.".zip");
                     } catch(ErrorException $e) {
                 echo("Failed to write ".$filename);
                 }

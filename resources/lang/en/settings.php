@@ -26,13 +26,16 @@ return [
     "speichern.3"	=>	"Generate plugin with these settings",
     "speichern.4"	=>	"Reset saved settings",
     "request"	=>	"Query method",
-    "autocomplete"	=>	"autocomplete (search input)",
+    "autocomplete.label"	=>	"Auto complete (of search input)",
     "autocomplete.on"	=>	"on",
     "autocomplete.off"	=>	"off",
+    "key.label"	=>	"The key for ad-free search",
+    "key.placeholder"	=>	"Put in the key here",
     "foki.web"	=>	"Web",
     "foki.andere"	=>	"Others",
     "foki.produktsuche"	=>	"Shopping",
     "foki.wissenschaft"	=>	"Science",
     "foki.nachrichten"	=>	"News/Politics",
-    "foki.bilder"	=>	"Pictures"
+    "foki.bilder"	=>	"Pictures",
+    "autocomplete"	=>	"autocomplete (search input)"
 ];

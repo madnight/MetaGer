@@ -111,11 +111,11 @@ ul.metager-dropdown-menu {
     -ms-transition: max-height 1s ease, padding 1s ease;
     -o-transition: max-height 1s ease, padding 1s ease;
     transition: max-height 1s ease, padding 1s ease;
-    -webkit-transition-delay:.2s;
-    -moz-transition-delay:.2s;
-    -ms-transition-delay:.2s;
-    -o-transition-delay:.2s;
-    transition-delay:.2s;
+    -webkit-transition-delay: .2s;
+    -moz-transition-delay: .2s;
+    -ms-transition-delay: .2s;
+    -o-transition-delay: .2s;
+    transition-delay: .2s;
     &>li>a {
         display: block;
         padding: 3px 20px;
@@ -168,13 +168,32 @@ ul.metager-dropdown-menu {
     }
 }
 
-a.metager-dropdown-toggle:hover+ul.metager-dropdown-menu,
-a.metager-dropdown-toggle:focus+ul.metager-dropdown-menu,
-ul.metager-dropdown-menu:hover,
-#gutscheine>a:first-child:hover+a+ul.metager-dropdown-menu {
-    max-height: 1000px;
-    padding: 5px 0;
-    border: 1px solid @metager-dropdown-toggle-hover-or-focus-color;
+@keyframes dropdown-animation {
+    0% {
+        max-height: 0px;
+        padding: 0px 0;
+        border: none
+    }
+    1% {
+        padding: 5px 0;
+        border: 1px solid @metager-dropdown-toggle-hover-or-focus-color;
+    }
+    100% {
+        max-height: 1000px;
+        padding: 5px 0;
+        border: 1px solid @metager-dropdown-toggle-hover-or-focus-color;
+    }
+}
+
+.metager-dropdown:hover {
+    background-color: @metager-navbar-toggle-hover-background-color;
+    &>.metager-dropdown-menu {
+        animation-name: dropdown-animation;
+        animation-duration: 0.7s;
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
+        animation-delay: 0.1s;
+    }
 }
 
 .metager-navbar-toggle {
@@ -189,9 +208,6 @@ ul.metager-dropdown-menu:hover,
     height: 30px;
     &:visited {
         color: @metager-navbar-toggle-visited-color;
-    }
-    &:hover {
-        background-color: @metager-navbar-toggle-hover-background-color;
     }
 }
 

@@ -80,8 +80,15 @@ function setActionListeners () {
 function setSettings () {
   for (var key in localStorage) {
     var value = localStorage.getItem(key);
-    if (key.startsWith('param_') && !key.endsWith('lang') && !key.endsWith('autocomplete')) {
-      key = key.substring(key.indexOf('param_') + 6);
+    var acceptedParams = ['autocomplete', 'key', 'lang', 'maps', 'newtab', 'sprueche', 'autocomplete'];
+    var accepted = false;
+    for (var i in acceptedParams) {
+      if (key === 'param_' + acceptedParams[i]) {
+        accepted = true;
+      }
+    } 
+    if (accepted) {
+      key = key.substring(6);
       $('#searchForm').append('<input type="hidden" name="' + key + '" value="' + value + '">');
     }
     $('#foki input[type=radio]#angepasst').attr('checked', true);

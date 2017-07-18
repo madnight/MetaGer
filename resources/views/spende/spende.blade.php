@@ -7,7 +7,7 @@
 @section('content')
 <h1>{!! trans('spende.headline.1') !!}</h1>
 <h2 class="subheading">{!! trans('spende.headline.2') !!}</h2>
-		<div id="left" >
+		<div id="top" >
 		<h3>{!! trans('spende.bankinfo.1') !!}</h3>
 		<p>{!! trans('spende.bankinfo.2') !!}</p>
 		<p class="text-muted">{!! trans('spende.bankinfo.3') !!}</p>
@@ -70,8 +70,8 @@
 			</form>
 		<p>{!! trans('spende.lastschrift.10') !!}</p>
 		</div>
-		<div id="right">
-			<input id="toggle" type="checkbox">
+		<div id="bottom">
+			<input id="toggle" type="checkbox" checked>
 			<label for="toggle">{!! trans('spende.about.1') !!}</label>
 			<div id="expand" >
 				<p>{!! trans('spende.about.2') !!}</p>

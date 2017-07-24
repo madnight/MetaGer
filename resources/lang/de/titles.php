@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'index'          => 'MetaGer: Sicher suchen & finden, Privatsphäre schützen',
+    'index'          => 'MetaGer, mehr als eine Suchmaschine: unabhängig, transparent, demokratisch, quellcode-offen, datensicher, privatsphären-geschützt ',
     'impressum'      => 'Impressum - MetaGer',
     'about'          => 'Über Uns - MetaGer',
     'team'           => 'Team - MetaGer',

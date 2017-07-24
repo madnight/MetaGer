@@ -4,6 +4,7 @@ return [
     'head.1' => 'Über uns',
     'head.2' => 'Welche Vorteile bietet die Nutzung von MetaGer?',
     'head.3' => 'Was MetaGer auszeichnet',
+    'head.4' => 'Wie kann ich MetaGer bzw. den SUMA-EV unterstützen?',
 
     '3.0' => 'Verwirklichung von freiem Wissenszugang und digitaler Demokratie, durch:',
     '3.1' => 'Wissenszugang ohne Überwachung und ohne Bevormundung durch Staaten oder Konzerne',

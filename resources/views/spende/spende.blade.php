@@ -7,6 +7,7 @@
 @section('content')
 <h1>{!! trans('spende.headline.1') !!}</h1>
 <h2 class="subheading">{!! trans('spende.headline.2') !!}</h2>
+<p>{!! trans('spende.about.2') !!}</p>
 		<div id="top" >
 			<div class="col-lg-6 col-md-12 col-sm-12 others">	
 				<h3 id="lastschrift">{!! trans('spende.lastschrift.1') !!}</h3>

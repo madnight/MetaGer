@@ -2,7 +2,7 @@
 
 return [
     'headline.1'                => 'Ihre Spende für SUMA-EV und MetaGer',
-    'headline.2'                => 'Helfen Sie mit, dass freie Suchmaschinen im Internet frei bleiben. Das digitale Wissen der Welt muss ohne Bevormundung durch Staaten oder Konzerne frei zugänglich sein und bleiben.',
+    'headline.2'                => 'Helfen Sie mit, dass freie Suchmaschinen im Internet frei bleiben. Das digitale Wissen der Welt muss ohne Bevormundung durch Staaten oder Konzerne frei zugänglich sein und bleiben. Für mehr Informationen über uns und wofür wir stehen klicken Sie <a href="https://metager.de/about" rel="noopener" target=_blank>hier</a>.',
 
     'bankinfo.1'                => 'Durch eine Überweisung',
     'bankinfo.2'                => 'SUMA-EV

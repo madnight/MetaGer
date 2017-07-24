@@ -75,15 +75,5 @@
 		</div>
 		<p>{!! trans('spende.lastschrift.10') !!}</p>
 		<hr>
-		<div id="bottom">
-			<input id="toggle" type="checkbox" checked>
-			<label for="toggle">{!! trans('spende.about.1') !!}</label>
-			<div id="expand" >
-				<p>{!! trans('spende.about.2') !!}</p>
-				<p>{!! trans('spende.about.3') !!}</p>
-				<p>{!! trans('spende.about.4') !!}</p>
-				<p>{!! trans('spende.about.5') !!}</p>
-			</div>
-		</div>
 		<div class="clearfix"></div>
 @endsection

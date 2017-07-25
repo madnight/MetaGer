@@ -7,6 +7,7 @@
      <title>{!! htmlspecialchars($eingabe, ENT_XML1, 'UTF-8'); !!} - MetaGer</title>
      <opensearch:totalResults>{{ $resultcount }}</opensearch:totalResults>
      <opensearch:Query role="request" searchTerms="{{ htmlspecialchars($eingabe, ENT_QUOTES) }}"/>
+     <mg:nextSearchResults url="{{htmlspecialchars($metager->nextSearchLink() ,ENT_QUOTES)}}" />
 
   @if($apiAuthorized)
   @foreach($metager->getResults() as $result)

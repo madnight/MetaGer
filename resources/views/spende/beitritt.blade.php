@@ -40,7 +40,7 @@
 			<label class="non-bold" for="betrag">{{ trans('beitritt.beitritt.8') }}</label>
 			<div class="row">
 				<div class="pull-left donation-amount-input">
-					<input type="text" class="form-control" name="betrag">
+					<input type="text" class="form-control" name="betrag" required>
 				</div>
 				<div class="pull-left" style="padding-left: 10px">
 					<p class="help-block"> {{ trans('beitritt.beitritt.9') }}</p>
@@ -69,24 +69,33 @@
 				</div>
 			</div>
 		</div>
+		<div class="form-group beitritt-form-group">
+			<label for="ort">{{ trans('beitritt.beitritt.14') }}</label>
+			<input type="text" class="form-control" id="ort" placeholder="">
+		</div>
+		<br>
+		<p class="signature">{{ trans('beitritt.abbuchung.1') }}</p>
 		<h3>{{ trans('beitritt.abbuchung.2') }}</h3>
 		<p>{{ trans('beitritt.abbuchung.3') }}</p>
 		<div class="form-group beitritt-form-group">
 			<label for="kontoname" class="non-bold">{{ trans('beitritt.abbuchung.4') }}</label>
 			<input type="text" class="form-control" name="kontoname" placeholder="">
 		</div>
-		<div class="form-group beitritt-form-group">
-			<label for="bankverbindung" class="non-bold">{{ trans('beitritt.abbuchung.5') }}</label>
-			<input type="text" class="form-control" name="bankverbindung" placeholder="">
+		<div class="row">
+			<div class="col-lg-4 col-sm-4 form-group beitritt-form-group">
+				<label for="bankverbindung" class="non-bold">{{ trans('beitritt.abbuchung.5') }}</label>
+				<input type="text" class="form-control" name="bankverbindung" placeholder="">
+			</div>
+			<div class="col-lg-5 col-sm-5 form-group beitritt-form-group">
+				<label for="iban" class="non-bold">{{ trans('beitritt.abbuchung.6') }}</label>
+				<input type="text" class="form-control" name="iban" maxlength="22" placeholder="">
+			</div>
+			<div class="col-lg-3 col-sm-3 form-group beitritt-form-group">
+				<label for="bic" class="non-bold">{{ trans('beitritt.abbuchung.7') }}</label>
+				<input type="text" class="form-control" name="bic" placeholder="">
+			</div>
 		</div>
-		<div class="form-group beitritt-form-group">
-			<label for="iban" class="non-bold">{{ trans('beitritt.abbuchung.6') }}</label>
-			<input type="text" class="form-control" name="iban" placeholder="">
-		</div>
-		<div class="form-group beitritt-form-group">
-			<label for="bic" class="non-bold">{{ trans('beitritt.abbuchung.7') }}</label>
-			<input type="text" class="form-control" name="bic" placeholder="">
-		</div>
+		<br>
 		<div class="form-group beitritt-form-group">
 			<label for="ort2" class="non-bold">{{ trans('beitritt.abbuchung.8') }}</label>
 			<input type="text" class="form-control" id="ort2" placeholder="">
@@ -95,15 +104,16 @@
 		<p class="signature">{{ trans('beitritt.abbuchung.1') }}</p>
 	</form>
 	<hr>
-	<div class="noprint">
-		<p class="pagebreak">{{ trans('beitritt.anweisung.1') }}</p>
-		<ul class="dotlist">
-			<li>{{ trans('beitritt.anweisung.2') }}</li>
-			<li>{{ trans('beitritt.anweisung.3') }}</li>
-			<li>{{ trans('beitritt.anweisung.4') }}</li>
-		</ul>
-		<p>{{ trans('beitritt.anweisung.5') }}</p>
+	<div class=noprint>
+	<p class="pagebreak">{{ trans('beitritt.anweisung.1') }}</p>
+	<ul class="dotlist">
+		<li>{{ trans('beitritt.anweisung.2') }}</li>
+		<li>{{ trans('beitritt.anweisung.3') }}</li>
+		<li>{{ trans('beitritt.anweisung.4') }}</li>
+	</ul>
 	</div>
+	<p>{{ trans('beitritt.anweisung.5') }}</p>
 	<p>{{ trans('beitritt.anweisung.6') }}</p>
-	<button type="button" class="btn btn-lg btn-primary noprint" onclick="checkFormBeforePrinting();">{{ trans('beitritt.anweisung.7') }}</button>
+	<button type="button" class="btn btn-lg btn-primary noprint" onclick="window.print();">{{ trans('beitritt.anweisung.7') }}</button>
+	<!-- <script src="{{ elixir('js/scriptJoinPage.js') }}"></script> -->
 @endsection

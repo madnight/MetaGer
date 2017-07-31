@@ -105,5 +105,5 @@
 		<p>{{ trans('beitritt.anweisung.5') }}</p>
 	</div>
 	<p>{{ trans('beitritt.anweisung.6') }}</p>
-	<button type="button" class="btn btn-lg btn-primary noprint" onclick="window.print();">{{ trans('beitritt.anweisung.7') }}</button>
+	<button type="button" class="btn btn-lg btn-primary noprint" onclick="checkFormBeforePrinting();">{{ trans('beitritt.anweisung.7') }}</button>
 @endsection

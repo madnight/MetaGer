@@ -29,49 +29,6 @@
 		@endif
 	</head>
 	<body>
-	<style>
-
-
-nav ul {
-	padding: 0;
-  margin: 0;
-	list-style: none;
-	position: relative;
-	}
-	
-nav ul li {
-	display:inline-block;
-	background-color: #E64A19;
-	}
-
-
-/* Hide Dropdowns by Default */
-nav ul ul {
-	display: none;
-	position: absolute; 
-	top: 60px; /* the height of the main nav */
-}
-	
-/* Display Dropdowns on Hover */
-nav ul li:hover > ul {
-	display:inherit;
-}
-	
-/* Fisrt Tier Dropdown */
-nav ul ul li {
-	width:170px;
-	float:none;
-	display:list-item;
-	position: relative;
-}
-
-/* Second, Third and more Tiers	*/
-nav ul ul ul li {
-	position: relative;
-	top:-60px; 
-	left:170px;
-}
-	</style>
 		<header>
 			@yield('homeIcon')
 		<nav id="navbar-static-pages" class="navbar-resultpage">

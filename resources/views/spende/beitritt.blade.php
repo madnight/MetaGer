@@ -69,13 +69,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="form-group beitritt-form-group">
-			<label for="ort">{{ trans('beitritt.beitritt.14') }}</label>
-			<input type="text" class="form-control" id="ort" placeholder="">
-		</div>
-		<br />
-		<p class="sign">---------------------------------------------------------</p>
-		<p>{{ trans('beitritt.abbuchung.1') }}</p>
 		<h3>{{ trans('beitritt.abbuchung.2') }}</h3>
 		<p>{{ trans('beitritt.abbuchung.3') }}</p>
 		<div class="form-group beitritt-form-group">
@@ -98,18 +91,19 @@
 			<label for="ort2" class="non-bold">{{ trans('beitritt.abbuchung.8') }}</label>
 			<input type="text" class="form-control" id="ort2" placeholder="">
 		</div>
-		<br />
-		<p class="sign">---------------------------------------------------------</p>
-		<p>{{ trans('beitritt.abbuchung.9') }}</p>
+		<br/>
+		<p class="signature">{{ trans('beitritt.abbuchung.1') }}</p>
 	</form>
 	<hr>
-<p class="pagebreak">{{ trans('beitritt.anweisung.1') }}</p>
-	<ul class="dotlist">
-		<li>{{ trans('beitritt.anweisung.2') }}</li>
-		<li>{{ trans('beitritt.anweisung.3') }}</li>
-		<li>{{ trans('beitritt.anweisung.4') }}</li>
-	</ul>
-	<p>{{ trans('beitritt.anweisung.5') }}</p>
+	<div class="noprint">
+		<p class="pagebreak">{{ trans('beitritt.anweisung.1') }}</p>
+		<ul class="dotlist">
+			<li>{{ trans('beitritt.anweisung.2') }}</li>
+			<li>{{ trans('beitritt.anweisung.3') }}</li>
+			<li>{{ trans('beitritt.anweisung.4') }}</li>
+		</ul>
+		<p>{{ trans('beitritt.anweisung.5') }}</p>
+	</div>
 	<p>{{ trans('beitritt.anweisung.6') }}</p>
 	<button type="button" class="btn btn-lg btn-primary noprint" onclick="window.print();">{{ trans('beitritt.anweisung.7') }}</button>
 @endsection

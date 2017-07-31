@@ -25,4 +25,10 @@
 		<li>{!! trans('about.list.6') !!}</li>
 		<li>{!! trans('about.list.7') !!}</li>
 	</ul>
+	<h2>{{ trans('about.head.4') }}</h2>
+	<ul class="dotlist">
+		<li><p>{!! trans('spende.about.3') !!}</p></li>
+		<li><p>{!! trans('spende.about.4') !!}</p></li>
+		<li><p>{!! trans('spende.about.5') !!}</p></li>
+	</ul>
 @endsection

@@ -27,7 +27,7 @@ return [
     "nav23"	=>	"Admitting formular SUMA-EV",
     "nav24"	=>	"MetaGer source code",
     "nav25"	=>	"MetaGer App",
-    "gutscheineToggle"	=>	" \t<a href=\"https://metager.de/gutscheine/\">Coupons</a>",
+    "gutscheineToggle"	=>	"Coupons",
     "gutscheine.1"	=>	"Coupons",
     "gutscheine.2"	=>	"Congstar Coupons",
     "gutscheine.3"	=>	"Check 24 Coupons",

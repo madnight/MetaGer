@@ -83,5 +83,10 @@ return [
     "maps.1"	=>	"MetaGer provides a map function: On a result page you see a new focus on the upper right, called \"maps.MetaGer.de\". You receive a map according to your search by click (only Germany for the moment). Use the \"customize\" page for toggling maps function \"show/hide\", you will get a durably embedded small map on the result page, then.",
     "maps.2"	=>	"After loading the map shows POIs according to the MetaGer results. You see them in the right column too. Mouseover a POI highlights its counterpart. Click \"Details\" to get further information (Nominatim data base) to this POI.",
     "maps.3"	=>	"The maps are rendered before (except for the last three ones) and fast available. Affect the zoom level by mouse-wheel or the \"+ / -\" buttons in the upper left corner of the map.",
-    "sucheingabe"	=>	"Enter search words"
+    "maps.4"	=>	"All maps are prerendered and quickly useable (but the 3 highest levels).  Please regulate the zoom level with the mousewheel or the \"+ / -\" buttons in the upper left corner of the map.",
+    "sucheingabe"	=>	"Enter search words",
+    "bang.title"	=>	"!bangs",
+    "bang.1"	=>	"MetaGer uses a little a special spelling called \"!bang syntax\". A !bang starts with the \"!\" and doesn' t contain blanks (\"!twitter\", \"!facebook\" for example). If you use a !bang supported by MetaGer you will see a new entry in the \"Quicktips\". We direct then to the specified service (click the button). Read more about our method departing from others:  <a href=\"/faq/#bangs\" target=\"_blank\" rel=\"noopener\">unseren FAQ</a>",
+    "searchinsearch.title"	=>	"Search in search",
+    "searchinsearch.1"	=>	"To use \"Search in search\" click the small blue triangle <a href=\"#exampleimg\"> at the right of the results URL. Then click \"Save result in TAB\" in the context menu. The result will then be stored in a new TAB appearing at the right of the other TABs (\"Web\", \"Shopping\" etc.). It is called \"Saved results\". You can store here single results from several searches. The TAB persists. Entering this TAB you get your personal result list with tools to filter and sort the results. Click another TAB to go back for further searches. More info (only german so far): <a href=\"http://blog.suma-ev.de/node/225\" target=\"_blank\" rel=\"noopener\"> http://blog.suma-ev.de/node/225</a>."
 ];

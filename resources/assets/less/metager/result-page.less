@@ -285,14 +285,16 @@ a {
 .saver-options {
     display: flex;
     padding-bottom: 15px;
-    &>input{
+    &>input {
         min-width: 35%;
         max-width: 80%;
     }
 }
+
 .ui-effects-transfer {
     border: 1px dotted black;
 }
+
 .result {
     margin-bottom: 10px;
     width: 100%;
@@ -310,13 +312,11 @@ a {
             cursor: pointer;
         }
     }
-
     &>.remover {
-        cursor:pointer;
+        cursor: pointer;
         text-align: right;
         color: #777;
     }
-
     .title {
         color: @result-title-color;
         text-decoration: none;
@@ -349,10 +349,6 @@ a {
             display: block;
             padding-left: 8px;
             padding-right: 5px;
-        }
-        .options>a>i {
-            font-size: 16px;
-            color: #2A2ADE;
         }
     }
     .link-link {
@@ -397,6 +393,45 @@ a {
         white-space: nowrap;
         a {
             color: @result-hoster-a-color;
+        }
+    }
+    .options {
+        .option-opener-icon {
+            display: block;
+            padding-left: 8px;
+            padding-right: 5px;
+            font-size: 16px;
+            color: #2A2ADE;
+        }
+        .option-checkbox {
+            visibility: hidden;
+        }
+        .option-content {
+            display: none;
+            background-color: white;
+            z-index: 1000;
+            position: absolute;
+            border: grey solid 1px;
+            color: black;
+            font-size: 16px;
+            border-radius: 5px;
+            hr {
+                margin: 5px;
+            }
+            li {
+                padding: 5px
+            }
+            li:not(.option-title):hover {
+                background-color: #e0e0e0;
+            }
+            a, a:hover, a:focus, a:visited {
+                color: black;
+                display: block;
+            }
+        }
+        .option-opener:focus+.option-content, .option-content:hover {
+            display: initial;
+            animation-name: open-contents;
         }
     }
     .proxy {
@@ -451,6 +486,10 @@ a {
     border: 0px none transparent;
     padding: 0px;
     overflow: hidden;
+}
+
+.js-only {
+    display: none;
 }
 
 

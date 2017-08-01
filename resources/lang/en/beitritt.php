@@ -35,6 +35,6 @@ return [
     "anweisung.3"	=>	"- send it by mail to: SUMA-EV, Roeselerstr. 3, D-30159 Hanover, Germany or",
     "anweisung.4"	=>	"- scan and email it to office@suma-ev.de. ",
     "anweisung.5"	=>	"When sending by mail or fax, please let us know this. Write a short mail to: office@suma-ev.de",
-    "anweisung.6"	=>	"Member contributions to the SUMA-EV are tax deductible under German law, since the association by the tax office Hannover Nord is a non profit organization. A tax receipt will be automatically in January or February of the following year sent. ",
+    "anweisung.6"	=>	"Member contributions to the SUMA-EV are tax deductible under German law, since the association by the tax office Hannover Nord is a non profit organization. A tax receipt will sent if desired. ",
     "anweisung.7"	=>	"Print"
 ];

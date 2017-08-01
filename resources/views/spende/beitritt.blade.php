@@ -8,33 +8,45 @@
 	<link type="text/css" rel="stylesheet" href="{{ elixir('/css/beitritt.css') }}" />
 	<h1>{{ trans('beitritt.heading.1') }}</h1>
 	<form>
-		<div class="form-group beitritt-form-group">
-			<label for="name" class="non-bold">{{ trans('beitritt.beitritt.1') }}</label>
-			<input type="text" class="form-control" name="name" placeholder="{{trans('beitritt.placeholder.1')}}" required>
+		<div class="col-sm-6">
+			<div class="form-group beitritt-form-group">
+				<label for="name" class="non-bold">{{ trans('beitritt.beitritt.1') }}</label>
+				<input type="text" class="form-control beitritt-input" name="name" placeholder="{{trans('beitritt.placeholder.1')}}" required>
+			</div>
+			<div class="form-group beitritt-form-group">
+				<label for="firma" class="non-bold">{{ trans('beitritt.beitritt.2') }}</label>
+				<input type="text" class="form-control beitritt-input" name="firma" placeholder="{{trans('beitritt.placeholder.2')}}">
+			</div>
+			<div class="form-group beitritt-form-group">
+				<label for="funktion" class="non-bold">{{ trans('beitritt.beitritt.3') }}</label>
+				<input type="text" class="form-control beitritt-input" name="funktion" placeholder="{{trans('beitritt.placeholder.3')}}">
+			</div>
+			<div class="form-group beitritt-form-group">
+				<label for="adresse" class="non-bold">{{ trans('beitritt.beitritt.4') }}</label>
+				<input type="text" class="form-control beitritt-input" name="adresse" placeholder="{{trans('beitritt.placeholder.4')}}" required>
+			</div>
+			<div class="form-group beitritt-form-group">
+				<label for="email" class="non-bold">{{ trans('beitritt.beitritt.5') }}</label>
+				<input type="email" class="form-control beitritt-input" name="email" placeholder="">
+			</div>
+			<div class="form-group beitritt-form-group">
+				<label for="homepage" class="non-bold">{{ trans('beitritt.beitritt.6') }}</label>
+				<input type="text" class="form-control beitritt-input" name="homepage" placeholder="http://">
+			</div>
+			<div class="form-group beitritt-form-group">
+				<label for="telefon" class="non-bold">{{ trans('beitritt.beitritt.7') }}</label>
+				<input type="text" class="form-control beitritt-input" name="telefon" placeholder="{{trans('beitritt.placeholder.7')}}">
+			</div>
 		</div>
-		<div class="form-group beitritt-form-group">
-			<label for="firma" class="non-bold">{{ trans('beitritt.beitritt.2') }}</label>
-			<input type="text" class="form-control" name="firma" placeholder="{{trans('beitritt.placeholder.2')}}">
-		</div>
-		<div class="form-group beitritt-form-group">
-			<label for="funktion" class="non-bold">{{ trans('beitritt.beitritt.3') }}</label>
-			<input type="text" class="form-control" name="funktion" placeholder="{{trans('beitritt.placeholder.3')}}">
-		</div>
-		<div class="form-group beitritt-form-group">
-			<label for="adresse" class="non-bold">{{ trans('beitritt.beitritt.4') }}</label>
-			<input type="text" class="form-control" name="adresse" placeholder="{{trans('beitritt.placeholder.4')}}" required>
-		</div>
-		<div class="form-group beitritt-form-group">
-			<label for="email" class="non-bold">{{ trans('beitritt.beitritt.5') }}</label>
-			<input type="email" class="form-control" name="email" placeholder="">
-		</div>
-		<div class="form-group beitritt-form-group">
-			<label for="homepage" class="non-bold">{{ trans('beitritt.beitritt.6') }}</label>
-			<input type="text" class="form-control" name="homepage" placeholder="http://">
-		</div>
-		<div class="form-group beitritt-form-group">
-			<label for="telefon" class="non-bold">{{ trans('beitritt.beitritt.7') }}</label>
-			<input type="text" class="form-control" name="telefon" placeholder="{{trans('beitritt.placeholder.7')}}">
+		<div class="col-sm-6 beitritt-info">
+			<p>{{ trans('beitritt.anweisung.1') }}</p>
+			<ul class="dotlist">
+				<li>{{ trans('beitritt.anweisung.2') }}</li>
+				<li>{{ trans('beitritt.anweisung.3') }}</li>
+				<li>{{ trans('beitritt.anweisung.4') }}</li>
+			</ul>
+			<p>{{ trans('beitritt.anweisung.5') }}</p>
+			<p>{{ trans('beitritt.anweisung.6') }}</p>
 		</div>
 		<div class="form-group beitritt-form-group">
 			<label class="non-bold" for="betrag">{{ trans('beitritt.beitritt.8') }}</label>
@@ -71,7 +83,7 @@
 		</div>
 		<div class="form-group beitritt-form-group">
 			<label for="ort">{{ trans('beitritt.beitritt.14') }}</label>
-			<input type="text" class="form-control" id="ort" placeholder="">
+			<input type="text" class="form-control beitritt-input" id="ort" placeholder="">
 		</div>
 		<br>
 		<p class="signature">{{ trans('beitritt.abbuchung.1') }}</p>
@@ -98,20 +110,12 @@
 		<br>
 		<div class="form-group beitritt-form-group">
 			<label for="ort2" class="non-bold">{{ trans('beitritt.abbuchung.8') }}</label>
-			<input type="text" class="form-control" id="ort2" placeholder="">
+			<input type="text" class="form-control beitritt-input" id="ort2" placeholder="">
 		</div>
 		<br>
 		<p class="signature">{{ trans('beitritt.abbuchung.1') }}</p>
 	</form>
 	<hr>
-	<p class="pagebreak">{{ trans('beitritt.anweisung.1') }}</p>
-	<ul class="dotlist">
-		<li>{{ trans('beitritt.anweisung.2') }}</li>
-		<li>{{ trans('beitritt.anweisung.3') }}</li>
-		<li>{{ trans('beitritt.anweisung.4') }}</li>
-	</ul>
-	<p>{{ trans('beitritt.anweisung.5') }}</p>
-	<p>{{ trans('beitritt.anweisung.6') }}</p>
 	<button type="button" class="btn btn-lg btn-primary noprint" onclick="window.print();">{{ trans('beitritt.anweisung.7') }}</button>
 	<!-- <script src="{{ elixir('js/scriptJoinPage.js') }}"></script> -->
 @endsection

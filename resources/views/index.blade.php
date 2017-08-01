@@ -241,6 +241,17 @@
 				<span class="content">{{ trans('index.foki.produkte') }}</span>
 			</label>
 		</div>
+
+		https://maps.metager.de/map/hannover/1240908.5493525574,6638783.2192695495,6
+
+		<div class="focus">
+			<input id="maps" class="focus-radio hide" type="radio" name="focus" value="maps" form="searchForm" @if ($focus === 'maps') checked @endif required="">
+			<label id="maps-label" class="focus-label" for="maps">
+				<i class="fa fa-map" aria-hidden="true"></i>
+				<span class="content">{{ trans('index.foki.maps') }}</span>
+			</label>
+		</div>
+
 		{{-- Fix for older Versions --}}
 		@if ($focus === 'angepasst')
 			<div class="focus">
@@ -312,11 +323,11 @@
 			<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a></li>
 			@if (LaravelLocalization::getCurrentLocale() == "de")
 			<li>
-                <a href="https://suma-ev.de/presse/Werbefreie-Suche-mit-MetaGer.html" target="_blank" class="btn btn-default mutelink">
-                    Werbefreie Suche mit MetaGer
-                </a>
-            </li>
-            @endif
+				<a href="https://suma-ev.de/presse/Werbefreie-Suche-mit-MetaGer.html" target="_blank" class="btn btn-default mutelink">
+						Werbefreie Suche mit MetaGer
+				</a>
+			</li>
+			@endif
 		</ul>
 	<script src="{{ elixir('js/scriptStartPage.js') }}"></script>
 @endsection

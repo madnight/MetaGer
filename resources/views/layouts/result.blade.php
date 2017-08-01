@@ -23,12 +23,12 @@
 							<div class="option-content">
 								<ul class="option-list list-unstyled small">
 									<li class="option-title">
-										<i class="fa fa-cog"></i> Optionen
+										<i class="fa fa-cog"></i> {!! trans('result.options.headline') !!}
 									</li>
 									<hr>
 									<li class="js-only">
 										<a href="javascript:resultSaver({{ $result->number }});" class="saver" data-counter="{{ $result->number }}">
-											<i class="fa fa-floppy-disk"></i> Ergebnis in Tab speichern.
+											<i class="fa fa-floppy-disk"></i> {!! trans('result.options.savetab') !!}
 										</a>
 									</li>
 									@if(strlen($metager->getSite()) === 0)

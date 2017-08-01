@@ -241,9 +241,6 @@
 				<span class="content">{{ trans('index.foki.produkte') }}</span>
 			</label>
 		</div>
-
-		https://maps.metager.de/map/hannover/1240908.5493525574,6638783.2192695495,6
-
 		<div class="focus">
 			<input id="maps" class="focus-radio hide" type="radio" name="focus" value="maps" form="searchForm" @if ($focus === 'maps') checked @endif required="">
 			<label id="maps-label" class="focus-label" for="maps">
@@ -251,7 +248,6 @@
 				<span class="content">{{ trans('index.foki.maps') }}</span>
 			</label>
 		</div>
-
 		{{-- Fix for older Versions --}}
 		@if ($focus === 'angepasst')
 			<div class="focus">

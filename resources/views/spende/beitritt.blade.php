@@ -82,15 +82,15 @@
 			<input type="text" class="form-control" name="kontoname" placeholder="">
 		</div>
 		<div class="row">
-			<div class="col-lg-4 col-sm-4 form-group beitritt-form-group">
+			<div class="col-sm-4 form-group beitritt-form-group">
 				<label for="bankverbindung" class="non-bold">{{ trans('beitritt.abbuchung.5') }}</label>
 				<input type="text" class="form-control" name="bankverbindung" placeholder="">
 			</div>
-			<div class="col-lg-5 col-sm-5 form-group beitritt-form-group">
+			<div class="col-sm-5 form-group beitritt-form-group">
 				<label for="iban" class="non-bold">{{ trans('beitritt.abbuchung.6') }}</label>
 				<input type="text" class="form-control" name="iban" maxlength="22" placeholder="">
 			</div>
-			<div class="col-lg-3 col-sm-3 form-group beitritt-form-group">
+			<div class="col-sm-3 form-group beitritt-form-group">
 				<label for="bic" class="non-bold">{{ trans('beitritt.abbuchung.7') }}</label>
 				<input type="text" class="form-control" name="bic" placeholder="">
 			</div>
@@ -100,18 +100,16 @@
 			<label for="ort2" class="non-bold">{{ trans('beitritt.abbuchung.8') }}</label>
 			<input type="text" class="form-control" id="ort2" placeholder="">
 		</div>
-		<br/>
+		<br>
 		<p class="signature">{{ trans('beitritt.abbuchung.1') }}</p>
 	</form>
 	<hr>
-	<div class=noprint>
 	<p class="pagebreak">{{ trans('beitritt.anweisung.1') }}</p>
 	<ul class="dotlist">
 		<li>{{ trans('beitritt.anweisung.2') }}</li>
 		<li>{{ trans('beitritt.anweisung.3') }}</li>
 		<li>{{ trans('beitritt.anweisung.4') }}</li>
 	</ul>
-	</div>
 	<p>{{ trans('beitritt.anweisung.5') }}</p>
 	<p>{{ trans('beitritt.anweisung.6') }}</p>
 	<button type="button" class="btn btn-lg btn-primary noprint" onclick="window.print();">{{ trans('beitritt.anweisung.7') }}</button>

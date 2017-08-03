@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'options.headline' => 'Optionen',
+    'options.savetab' => 'Ergebnis in Tab speichern.',
     'options.1' => 'Suche auf dieser Domain neu starten',
     'options.2' => ':host ausblenden',
     'options.3' => '*.:domain ausblenden',

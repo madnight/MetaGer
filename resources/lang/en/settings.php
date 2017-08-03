@@ -2,7 +2,7 @@
 
 return [
     "head.1"	=>	"Settings",
-    "head.2"	=>	"Here you can customize your MetaGer: After selecting your desired settings, you have to choose whether you want to save the settings permanently or just for once, <a href=\"#unten\">on the bottom of this page.</a>",
+    "head.2"	=>	"Here you can customize your MetaGer: After selecting your desired settings, you have to choose whether you want to save the settings permanently or for one time use. Please confirm with one of the buttons on the bottom of this page.",
     "allgemein.1"	=>	"General",
     "quotes.label"	=>	"Sayings",
     "quotes.on"	=>	"show",

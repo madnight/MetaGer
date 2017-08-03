@@ -214,13 +214,6 @@
 			</label>
 		</div>
 		<div class="focus">
-			<input id="bilder" class="focus-radio hide" type="radio" name="focus" value="bilder" form="searchForm" @if ($focus === 'bilder') checked @endif required="">
-			<label id="bilder-label" class="focus-label" for="bilder">
-				<i class="fa fa-picture-o" aria-hidden="true"></i>
-				<span class="content">{{ trans('index.foki.bilder') }}</span>
-			</label>
-		</div>
-		<div class="focus">
 			<input id="nachrichten" class="focus-radio hide" type="radio" name="focus" value="nachrichten" form="searchForm" @if ($focus === 'nachrichten') checked @endif required="">
 			<label id="nachrichten-label" class="focus-label" for="nachrichten">
 				<i class="fa fa-bullhorn" aria-hidden="true"></i>
@@ -239,6 +232,13 @@
 			<label id="produkte-label" class="focus-label" for="produkte">
 				<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 				<span class="content">{{ trans('index.foki.produkte') }}</span>
+			</label>
+		</div>
+		<div class="focus">
+			<input id="maps" class="focus-radio hide" type="radio" name="focus" value="maps" form="searchForm" @if ($focus === 'maps') checked @endif required="">
+			<label id="maps-label" class="focus-label" for="maps">
+				<i class="fa fa-map" aria-hidden="true"></i>
+				<span class="content">{{ trans('index.foki.maps') }}</span>
 			</label>
 		</div>
 		{{-- Fix for older Versions --}}
@@ -312,11 +312,11 @@
 			<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a></li>
 			@if (LaravelLocalization::getCurrentLocale() == "de")
 			<li>
-                <a href="https://suma-ev.de/presse/Werbefreie-Suche-mit-MetaGer.html" target="_blank" class="btn btn-default mutelink">
-                    Werbefreie Suche mit MetaGer
-                </a>
-            </li>
-            @endif
+				<a href="https://suma-ev.de/presse/Werbefreie-Suche-mit-MetaGer.html" target="_blank" class="btn btn-default mutelink">
+						Werbefreie Suche mit MetaGer
+				</a>
+			</li>
+			@endif
 		</ul>
 	<script src="{{ elixir('js/scriptStartPage.js') }}"></script>
 @endsection

@@ -36,7 +36,8 @@
 				<input type="text" class="form-control" id="bic" required="" name="Bankleitzahl" placeholder="BIC" value="{{ old('Bankleitzahl') }}">
 			</div>
 			<div class="form-group donation-form-group">
-			<label for="msg">{!! trans('spende.lastschrift.8') !!}</label>
+			<label for="msg">{!! trans('spende.lastschrift.8')!!}</label>
+			<label for="msg"><u>{!! trans('spende.bankinfo.3')!!}</u></label>
 			<textarea class="form-control" id="msg" required="" name="Nachricht" placeholder="{!! trans('spende.lastschrift.8.placeholder') !!}">{{ old('Nachricht') }}</textarea>
 			</div>
 			<button type="submit" form="donate" class="btn btn-default">{!! trans('spende.lastschrift.9') !!}</button>

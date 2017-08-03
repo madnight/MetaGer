@@ -13,26 +13,38 @@
 				<label for="name" class="non-bold">{{ trans('beitritt.beitritt.1') }}</label>
 				<input type="text" class="form-control beitritt-input" name="name" placeholder="{{trans('beitritt.placeholder.1')}}" required>
 			</div>
+		</div>	
+		<div class="col-sm-6">
 			<div class="form-group beitritt-form-group">
 				<label for="firma" class="non-bold">{{ trans('beitritt.beitritt.2') }}</label>
 				<input type="text" class="form-control beitritt-input" name="firma" placeholder="{{trans('beitritt.placeholder.2')}}">
 			</div>
+		</div>
+		<div class="col-sm-6">
 			<div class="form-group beitritt-form-group">
 				<label for="funktion" class="non-bold">{{ trans('beitritt.beitritt.3') }}</label>
 				<input type="text" class="form-control beitritt-input" name="funktion" placeholder="{{trans('beitritt.placeholder.3')}}">
 			</div>
+		</div>
+		<div class="col-sm-6">
 			<div class="form-group beitritt-form-group">
 				<label for="adresse" class="non-bold">{{ trans('beitritt.beitritt.4') }}</label>
 				<input type="text" class="form-control beitritt-input" name="adresse" placeholder="{{trans('beitritt.placeholder.4')}}" required>
 			</div>
+		</div>
+		<div class="col-sm-6">
 			<div class="form-group beitritt-form-group">
 				<label for="email" class="non-bold">{{ trans('beitritt.beitritt.5') }}</label>
 				<input type="email" class="form-control beitritt-input" name="email" placeholder="">
 			</div>
+		</div>
+		<div class="col-sm-6">
 			<div class="form-group beitritt-form-group">
 				<label for="homepage" class="non-bold">{{ trans('beitritt.beitritt.6') }}</label>
 				<input type="text" class="form-control beitritt-input" name="homepage" placeholder="http://">
 			</div>
+		</div>
+		<div class="col-sm-6">
 			<div class="form-group beitritt-form-group">
 				<label for="telefon" class="non-bold">{{ trans('beitritt.beitritt.7') }}</label>
 				<input type="text" class="form-control beitritt-input" name="telefon" placeholder="{{trans('beitritt.placeholder.7')}}">
@@ -106,7 +118,7 @@
 		<p class="signature">{{ trans('beitritt.abbuchung.1') }}</p>
 	</form>
 	<hr>
-	<div class="beitritt-forumlar-info">
+	<div class="beitritt-formular-info">
 		<p>{{ trans('beitritt.anweisung.1') }}</p>
 		<ul class="dotlist">
 			<li>{{ trans('beitritt.anweisung.2') }}</li>

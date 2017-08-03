@@ -214,13 +214,6 @@
 			</label>
 		</div>
 		<div class="focus">
-			<input id="bilder" class="focus-radio hide" type="radio" name="focus" value="bilder" form="searchForm" @if ($focus === 'bilder') checked @endif required="">
-			<label id="bilder-label" class="focus-label" for="bilder">
-				<i class="fa fa-picture-o" aria-hidden="true"></i>
-				<span class="content">{{ trans('index.foki.bilder') }}</span>
-			</label>
-		</div>
-		<div class="focus">
 			<input id="nachrichten" class="focus-radio hide" type="radio" name="focus" value="nachrichten" form="searchForm" @if ($focus === 'nachrichten') checked @endif required="">
 			<label id="nachrichten-label" class="focus-label" for="nachrichten">
 				<i class="fa fa-bullhorn" aria-hidden="true"></i>

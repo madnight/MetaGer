@@ -38,16 +38,6 @@
 				<input type="text" class="form-control beitritt-input" name="telefon" placeholder="{{trans('beitritt.placeholder.7')}}">
 			</div>
 		</div>
-		<div class="col-sm-6 beitritt-info">
-			<p>{{ trans('beitritt.anweisung.1') }}</p>
-			<ul class="dotlist">
-				<li>{{ trans('beitritt.anweisung.2') }}</li>
-				<li>{{ trans('beitritt.anweisung.3') }}</li>
-				<li>{{ trans('beitritt.anweisung.4') }}</li>
-			</ul>
-			<p>{{ trans('beitritt.anweisung.5') }}</p>
-			<p>{{ trans('beitritt.anweisung.6') }}</p>
-		</div>
 		<div class="form-group beitritt-form-group">
 			<label class="non-bold" for="betrag">{{ trans('beitritt.beitritt.8') }}</label>
 			<div class="row">
@@ -116,6 +106,16 @@
 		<p class="signature">{{ trans('beitritt.abbuchung.1') }}</p>
 	</form>
 	<hr>
+	<div class="beitritt-forumlar-info">
+		<p>{{ trans('beitritt.anweisung.1') }}</p>
+		<ul class="dotlist">
+			<li>{{ trans('beitritt.anweisung.2') }}</li>
+			<li>{{ trans('beitritt.anweisung.3') }}</li>
+			<li>{{ trans('beitritt.anweisung.4') }}</li>
+		</ul>
+		<p>{{ trans('beitritt.anweisung.5') }}</p>
+		<p>{{ trans('beitritt.anweisung.6') }}</p>
+	</div>
 	<button type="button" class="btn btn-lg btn-primary noprint" onclick="window.print();">{{ trans('beitritt.anweisung.7') }}</button>
 	<!-- <script src="{{ elixir('js/scriptJoinPage.js') }}"></script> -->
 @endsection

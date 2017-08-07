@@ -2,7 +2,7 @@
 
 return [
     "headline.1"	=>	"Your Donation for MetaGer to SUMA-EV",
-    "headline.2"	=>	'Please help to keep free and open search engines free and open on the Internet.  The digital knowledge of the world must stay free from surveillance and control by governments or companies and must be publicly accessible to everyone. Click <a href="https://metager.de/en/about" rel="noopener" target=_blank>here</a> for more information about us.',
+    "headline.2"	=>	'Please help to keep free and open search engines free and open on the Internet.  The digital knowledge of the world must stay free from surveillance and control by governments or companies and must be publicly accessible to everyone. Please click <a href="https://metager.de/en/about" rel="noopener" target=_blank>here</a> for more information about us.',
     "bankinfo.1"	=>	"By bank transfer",
     "bankinfo.2"	=>	"SUMA-EV\r\nIBAN: DE64 4306 0967 4075 0332 01\r\nBIC: GENODEM1GLS\r\n(Account-No.: 4075 0332 01, Bank Code: 43060967)\r\nGLS Gemeinschaftsbank, Bochum",
     "bankinfo.3"	=>	"If you wish to receive a donation receipt,\r\nplease specify your full adress and (if available)\r\nyour E-Mail adress on the money transfer form.",

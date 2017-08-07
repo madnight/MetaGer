@@ -1418,7 +1418,6 @@ class MetaGer
     public function getHashCode()
     {
         $string = url()->full();
-        Log::info($string . "\n" . md5($string));
         return md5($string);
     }
 

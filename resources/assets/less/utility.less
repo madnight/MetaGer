@@ -1,3 +1,34 @@
+/* Zweck: Inhalt der nur gezeigt werden soll wenn Javascript aktiviert ist
+ */
 .js-only {
   display: none !important;
+}
+
+/* Zweck: Beim klick auf den .dropdown-opener soll der .dropdown-content angezeigt werden.
+ * Verwendung: <a class="dropdown-opener" href="javascript:void(0);">...</a>
+ *             <div class="dropdown-content">...</div>
+ */
+.dropdown-content {
+  display: none;
+  background-color: white;
+  z-index: 1000;
+  position: absolute;
+  border: grey solid 1px;
+  border-radius: 5px;
+}
+
+.dropdown-opener:focus+.dropdown-content, .dropdown-content:hover {
+  display: initial;
+  animation-name: dropdown-open-contents;
+  animation-fill-mode: forwards;
+  animation-duration: 0.5s;
+}
+
+@keyframes dropdown-open-contents {
+  0% {
+    max-height: 200px;
+  }
+  100% {
+    max-height: 1000px;
+  }
 }

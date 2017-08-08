@@ -16,6 +16,7 @@
 		<link type="text/css" rel="stylesheet" href="/css/lightslider.css" />
 		<link type="text/css" rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
 		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
+		@include('layouts.utility')
 	</head>
 	<body id="resultBody">
 		@if( !isset($suspendheader) )

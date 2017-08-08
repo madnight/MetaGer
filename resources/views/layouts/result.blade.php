@@ -17,10 +17,10 @@
 						</a>
 					</div>
 					<div class="options">
-							<a class="option-opener" href="javascript:void(0);">
+							<a class="dropdown-opener" href="javascript:void(0);">
 								<i class="fa fa-caret-down option-opener-icon" aria-hidden="true"></i>
 							</a>
-							<div class="option-content">
+							<div class="dropdown-content option-content">
 								<ul class="option-list list-unstyled small">
 									<li class="option-title">
 										<i class="fa fa-cog"></i> {!! trans('result.options.headline') !!}

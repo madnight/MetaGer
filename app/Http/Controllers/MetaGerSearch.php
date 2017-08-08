@@ -30,11 +30,6 @@ class MetaGerSearch extends Controller
         # Mit gelieferte Formulardaten parsen und abspeichern:
         $metager->parseFormData($request);
 
-        # Ein Schutz gegen bestimmte Bot-Angriffe, die uns passiert sind.
-        if ($metager->doBotProtection($request->input('bot', ""))) {
-            return redirect(LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), url("/noaccess", ['redirect' => base64_encode(url()->full())])));
-        }
-
         # Nach Spezialsuchen überprüfen:
         $metager->checkSpecialSearches($request);
 

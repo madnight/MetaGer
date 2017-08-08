@@ -146,7 +146,6 @@ Route::group(
         Route::get('settings', 'StartpageController@loadSettings');
 
         Route::match(['get', 'post'], 'meta/meta.ger3', 'MetaGerSearch@search');
-        Route::get('noaccess/{redirect}', 'MetaGerSearch@botProtection');
         Route::get('meta/picture', 'Pictureproxy@get');
         Route::get('clickstats', 'LogController@clicklog');
         Route::get('pluginClose', 'LogController@pluginClose');

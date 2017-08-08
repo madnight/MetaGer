@@ -203,7 +203,7 @@
 			</div>
 		</div>
 	</div>
-	<h1 id="mglogo"><a class="hidden-xs js-only" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}">MetaGer</a></h1>
+	<h1 id="mglogo"><a class="hidden-xs" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}">MetaGer</a></h1>
 	<!-- Create the focus selection and options -->
 	<div id="foki" class="startpage-foki">
 		<div class="focus">

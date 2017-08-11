@@ -20,9 +20,6 @@ class MetaGerSearch extends Controller
 
         if ($focus !== "angepasst" && $this->startsWith($focus, "focus_")) {
             $metager->parseFormData($request);
-            if ($metager->doBotProtection($request->input('bot', ""))) {
-                return redirect(LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), url("/noaccess", ['redirect' => base64_encode(url()->full())])));
-            }
             return $metager->createView();
         }
         #die($request->header('User-Agent'));

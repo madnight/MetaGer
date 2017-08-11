@@ -153,9 +153,6 @@
 										<a href="https://metager.de/klassik/asso/" tabindex="228">{{ trans('staticPages.nav11') }}</a>
 									</li>
 									<li>
-										<a href="http://code.metager.de/" tabindex="229">{{ trans('staticPages.nav12') }}</a>
-									</li>
-									<li>
 										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/app/") }}" tabindex="230">@lang('staticPages.nav25')</a>
 									</li>
 									<li>

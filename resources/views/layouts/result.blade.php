@@ -16,38 +16,42 @@
 							{{ $result->anzeigeLink }}
 						</a>
 					</div>
-					<div class="options hide">
-						<a tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="auto bottom" data-container="body" data-html="true" data-title="<i class='fa fa-cog' aria-hidden='true'></i> Optionen">
-							@if(strlen($metager->getSite()) === 0)
-								<i class="fa fa-caret-down" aria-hidden="true"></i>
-							@endif
-						</a>
-						<div class="content hidden">
-							<ul class="options-list list-unstyled small">
-								<li>
-									<a href="javascript:resultSaver({{ $result->number }});" class="saver" data-counter="{{ $result->number }}">
-										<i class="glyphicon glyphicon-floppy-disk"></i> Ergebnis in Tab speichern.
-									</a>
-								</li>
-								<li>
-									<a href="{{ $metager->generateSiteSearchLink($result->strippedHost) }}">
-										{!! trans('result.options.1') !!}
-									</a>
-								</li>
-								<li>
-									<a href="{{ $metager->generateRemovedHostLink($result->strippedHost) }}">
-										{!! trans('result.options.2', ['host' => $result->strippedHost]) !!}
-									</a>
-								</li>
-								@if( $result->strippedHost !== $result->strippedDomain )
-									<li>
-										<a href="{{ $metager->generateRemovedDomainLink($result->strippedDomain) }}">
-											{!! trans('result.options.3', ['domain' => $result->strippedDomain]) !!}
+					<div class="options">
+							<a class="dropdown-opener" href="javascript:void(0);">
+								<i class="fa fa-caret-down option-opener-icon" aria-hidden="true"></i>
+							</a>
+							<div class="dropdown-content option-content">
+								<ul class="option-list list-unstyled small">
+									<li class="option-title">
+										<i class="fa fa-cog"></i> {!! trans('result.options.headline') !!}
+									</li>
+									<hr>
+									<li class="js-only">
+										<a href="javascript:resultSaver({{ $result->number }});" class="saver" data-counter="{{ $result->number }}">
+											<i class="fa fa-floppy-disk"></i> {!! trans('result.options.savetab') !!}
 										</a>
 									</li>
-								@endif
-							</ul>
-						</div>
+									@if(strlen($metager->getSite()) === 0)
+										<li>
+											<a href="{{ $metager->generateSiteSearchLink($result->strippedHost) }}">
+												{!! trans('result.options.1') !!}
+											</a>
+										</li>
+									@endif
+									<li>
+										<a href="{{ $metager->generateRemovedHostLink($result->strippedHost) }}">
+											{!! trans('result.options.2', ['host' => $result->strippedHost]) !!}
+										</a>
+									</li>
+									@if( $result->strippedHost !== $result->strippedDomain )
+										<li>
+											<a href="{{ $metager->generateRemovedDomainLink($result->strippedDomain) }}">
+												{!! trans('result.options.3', ['domain' => $result->strippedDomain]) !!}
+											</a>
+										</li>
+									@endif
+								</ul>
+							</div>
 					</div>
 				</div>
 				<span class="hoster">
@@ -81,7 +85,7 @@
 			</div>
 		@else
 			@if( $metager->getFokus() == "nachrichten" )
-			<div class="description">{{ isset($result->additionalInformation["date"])?date("Y-m-d H:i:s", $result->additionalInformation["date"]):"" }} {{ $result->descr }}</div>
+			<div class="description"><span class="date">{{ isset($result->additionalInformation["date"])?date("Y-m-d H:i:s", $result->additionalInformation["date"]):"" }}</span> {{ $result->descr }}</div>
 			@else
 			<div class="description">{{ $result->descr }}</div>
 			@endif

@@ -14,7 +14,6 @@ return [
     'nav9'                => 'Hilfe',
     'nav10'               => 'Widget',
     'nav11'               => 'Assoziator',
-    'nav12'               => 'Code-Suche',
     'nav13'               => 'URL-Verkürzer',
     'nav14'               => 'TOR-Hidden-Service',
     'nav15'               => 'Dienste',

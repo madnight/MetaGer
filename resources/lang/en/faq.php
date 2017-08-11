@@ -60,5 +60,6 @@ return [
     "faq.19.b.2"	=>	"Here: <a href=hilfe#custom-focus-help>Help</a>",
     "faq.20.h"	=>	"Where can I find the search engines settings?",
     "faq.20.b"	=>	"See here: <a href=\"#custom-focus-faq\">\"Is it possible to chose the requested search engines by myself?\"</a>",
-    "faq.21.h"	=>	"Why is MetaGer presenting the umlauts in a wrong way?"
+    "faq.21.h"	=>	"Why is MetaGer presenting the umlauts in a wrong way?",
+    "faq.21.b"	=>	"A wrong presentation of umlauts is commonly caused by an outdated Plugin. If so: please deinstall the old one an then click \"Add MetaGer-Plugin\" on <a href=\"https://metager.de\" target=\"_blank\">MetaGer-Startpage</a>. Perhaps, there is another reason: you didn't use the correct startpage. Always use <a href=\"https://metager.de\" target=\"_blank\">MetaGer.de</a>.\r\nIf all this doesn't work, please contact us: <a href=\"mailto:office@suma-ev.de\">office@suma-ev.de</a>"
 ];

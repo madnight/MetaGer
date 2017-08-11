@@ -13,7 +13,6 @@ return [
     "nav9"                => "Ayuda",
     "nav10"               => "Widget",
     "nav11"               => "Asociador",
-    "nav12"               => "Búsqueda de código",
     "nav13"               => "Cortador de URL",
     "nav14"               => "TOR-Hidden-Service",
     "nav15"               => "Servicios",

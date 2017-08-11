@@ -346,35 +346,6 @@ class MetaGer
         }
     }
 
-    /**
-     * Diese Funktion überprüft, ob wir einen erweiterten Check auf Bots machen müssen.
-     * Z.B.: Wurden wir von einem Bot (dessen Anfragen aus dem Tor-Netzwerk kamen) mit tausenden
-     * Anfragen zu Telefonnummern überschwemmt. Bei diesen werden wir nun eine erweiterte Überprüfung
-     * durchführen.
-     * Für den Anfang werden wir alle Anfragen, die unter diese Kriterien fallen, nur noch beantworten, wenn
-     * JavaScript ausgeführt wird. (Mal schauen ob und wie lange dies ausreicht)
-     */
-    public function doBotProtection($bot)
-    {
-        $hash = md5(date('YmdHi'));
-
-        $shouldCheck = false;
-
-        foreach ($this->request->all() as $key => $value) {
-            if (strpos($key, "amp;") !== false) {
-                $shouldCheck = true;
-                break;
-            }
-        }
-
-        if ((preg_match("/^\d+$/s", $this->getEingabe()) || $shouldCheck) && $bot !== $hash) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
     public function combineResults($engines)
     {
         foreach ($engines as $engine) {
@@ -1418,7 +1389,6 @@ class MetaGer
     public function getHashCode()
     {
         $string = url()->full();
-        Log::info($string . "\n" . md5($string));
         return md5($string);
     }
 

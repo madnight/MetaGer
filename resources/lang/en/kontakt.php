@@ -3,11 +3,11 @@
 return [
     'headline.1' => 'Contact',
     'headline.2' => 'Forum',
-    'headline.3' => 'If you have a technical question, ask it at our <a href="http://forum.suma-ev.de/" target="_blank" rel="noopener">board</a> first, please',
-    'headline.4' => 'By this way others can benefit from an answer.',
+    'headline.3' => 'If you have a technical question, ask the community at our <a href="http://forum.suma-ev.de/" target="_blank" rel="noopener">board</a> first, please.',
+    'headline.4' => 'So others could benefit from an answer.',
 
     'form.1'     => 'Secure Contact Form',
-    'form.2'     => 'Via this form you can contact us by encrypted <a href="mailto:office@suma-ev.de">email</a>.',
+    'form.2'     => 'Via this form you can contact us by encrypted e-mail.',
 
     'form.3'     => 'Please note that due to a lot of requests we are personnel-wise not able to answer everything promptly.',
     'form.4'     => 'If you do not enter an email-adress, we can not answer you.',

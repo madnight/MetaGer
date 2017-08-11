@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 function activateJSOnlyContent () {
   $('#searchplugin').removeClass('hide');
-  $('.options').removeClass('hide');
+  $('.js-only').removeClass('js-only');
 }
 
 function tabs () {

@@ -6,7 +6,7 @@
 		<div class="col-xs-10 col-sm-11" style="padding:0; ">
 			<p class="title">
 				<a class="title" href="{{ $result->link }}" target="{{ $metager->getNewtab() }}" data-hoster="{{ strip_tags($result->gefVon) }}" data-count="{{ $result->number }}"  rel="noopener">
-					{{ $result->titel }}
+					{!! $result->titel !!}
 				</a>
 			</p>
 			<div class="link">

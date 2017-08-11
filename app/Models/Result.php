@@ -33,6 +33,9 @@ class Result
     {
         $provider          = simplexml_load_string($provider);
         $this->titel       = strip_tags(trim($titel));
+        if(stripos($anzeigeLink, "twitter.com")){
+            $this->titel = '<i class="fa fa-twitter" aria-hidden="true"></i> ' . $this->titel;
+        }
         $this->link        = trim($link);
         $this->anzeigeLink = trim($anzeigeLink);
         $this->descr       = strip_tags(trim($descr), '<p>');

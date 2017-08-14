@@ -14,9 +14,6 @@
 	--> 
 */?>
 	<h2>{{$filename}}</h2>
-	<p>Eine gelb hinterlegte Spalte bedeutet, dass mindestens ein Eintrag in dieser Datei kürzlich verändert worden ist. Eine genaue Bestimmung des zuletzt veränderten Textes ist
-	nicht möglich. Dementsprechend müssen die Texte der anderen Spalten angepasst werden.
-	</p>
 	<form id="submit" method="POST">
 		<input type="hidden" name="filename" value="{{$filename}}" />
 	</form>
@@ -25,10 +22,11 @@
 			<tr>
 				<th>#ID</th>
 				@foreach($to as $t)
-					<th>{{$t}}<br>
-					@if(in_array($t, $recentlyChangedFiles))
-						<span style="">Datei wurde vor kurzem bearbeitet.</span>
-					@endif
+					<th>
+						{{$t}}
+						@if(in_array($t, $recentlyChangedFiles))
+							<span style="background-color: Khaki;font-weight: normal;"><u><br>Datei wurde vor kurzem bearbeitet.</u><br></span>
+						@endif
 					</th>
 				@endforeach				
 			</tr>

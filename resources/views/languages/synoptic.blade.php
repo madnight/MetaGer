@@ -14,6 +14,9 @@
 	--> 
 */?>
 	<h2>{{$filename}}</h2>
+	<p>Eine gelb hinterlegte Spalte bedeutet, dass mindestens ein Eintrag in dieser Datei kürzlich verändert worden ist. Eine genaue Bestimmung des zuletzt veränderten Textes ist
+	nicht möglich. Dementsprechend müssen die Texte der anderen Spalten angepasst werden.
+	</p>
 	<form id="submit" method="POST">
 		<input type="hidden" name="filename" value="{{$filename}}" />
 	</form>
@@ -22,7 +25,11 @@
 			<tr>
 				<th>#ID</th>
 				@foreach($to as $t)
-					<th>{{$t}}</th>
+					<th>{{$t}}<br>
+					@if(in_array($t, $recentlyChangedFiles))
+						<span style="">Datei wurde vor kurzem bearbeitet.</span>
+					@endif
+					</th>
 				@endforeach				
 			</tr>
 		</thead>
@@ -32,15 +39,9 @@
 				<td class="name language-name">{{$key}}</td>
 				@foreach($language as $lang => $languageValue)
 					@if($languageValue !== "")
-						@if(in_array($lang, $recentlyChangedFiles))
-							<td>
-								<textarea class="language-text-area" rows="1" cols="20" style="background-color: Khaki;" form="submit" name="{{base64_encode($lang."_".$key)}}">{{$languageValue}}</textarea>
-							</td>
-						@else
-							<td>
-								<textarea class="language-text-area" rows="1" cols="20" form="submit" name="{{base64_encode($lang."_".$key)}}">{{$languageValue}}</textarea>
-							</td>
-						@endif
+						<td>
+							<textarea class="language-text-area" rows="1" cols="20" form="submit" name="{{base64_encode($lang."_".$key)}}">{{$languageValue}}</textarea>
+						</td>
 					@else
 						<td>
 							<textarea class="language-text-area" rows="1" cols="20" form="submit" name="{{base64_encode("_new_".$lang."_".$key)}}"></textarea>

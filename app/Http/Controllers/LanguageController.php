@@ -197,8 +197,11 @@ class LanguageController extends Controller
         foreach($languageObjects as $folder => $languageObject) {
             foreach($languageObject->stringMap as $languageFileName => $languageFile) {
                 if($languageFileName === $fn) {
-                    if($changeTime <= filemtime($languageObject->filePath."/".$languageFileName)) {
+                    if($changeTime < filemtime($languageObject->filePath."/".$languageFileName)) {
+                        unset($recentlyChangedFiles);
                         $changeTime = filemtime($languageObject->filePath."/".$languageFileName);
+                        $recentlyChangedFiles[] = $languageObject->language; 
+                    } else if($changeTime === filemtime($languageObject->filePath."/".$languageFileName)) {
                         $recentlyChangedFiles[] = $languageObject->language; 
                     }
                     foreach($languageFile as $key => $value) {
@@ -217,7 +220,7 @@ class LanguageController extends Controller
                 }
             }
         }
-        
+
         return view('languages.synoptic')
             ->with('to', $to)           # Alle vorhandenen Sprachen
             ->with('texts', $snippets)         # Array mit Sprachsnippets

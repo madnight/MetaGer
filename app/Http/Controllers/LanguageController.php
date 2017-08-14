@@ -190,11 +190,17 @@ class LanguageController extends Controller
         }
 
         $snippets = [];
+        $changeTime = 0;
+        $recentlyChangedFiles = [];
 
         # Speichere den Inhalt der ausgewählten Datei in allen Sprachen in $snippets ab
         foreach($languageObjects as $folder => $languageObject) {
             foreach($languageObject->stringMap as $languageFileName => $languageFile) {
                 if($languageFileName === $fn) {
+                    if($changeTime <= filemtime($languageObject->filePath."/".$languageFileName)) {
+                        $changeTime = filemtime($languageObject->filePath."/".$languageFileName);
+                        $recentlyChangedFiles[] = $languageObject->language; 
+                    }
                     foreach($languageFile as $key => $value) {
                         $snippets[$key][$languageObject->language] = $value;      
                     }
@@ -203,7 +209,7 @@ class LanguageController extends Controller
             }
         }
 
-        # Fülle $snippets auf mit leeren Einträgen für übrige Sprachen
+        # Fülle $snippets auf mit leeren Einträgen für die restlichen Sprachen
         foreach($to as $t) {
             foreach($snippets as $key => $langArray) {
                 if(!isset($langArray[$t])) {
@@ -211,11 +217,12 @@ class LanguageController extends Controller
                 }
             }
         }
-
+        
         return view('languages.synoptic')
             ->with('to', $to)           # Alle vorhandenen Sprachen
             ->with('texts', $snippets)         # Array mit Sprachsnippets
             ->with('filename', $fn)     # Name der Datei
+            ->with('recentlyChangedFiles', $recentlyChangedFiles)
             ->with('title', trans('titles.languages.edit'));
     }
 

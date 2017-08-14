@@ -11,7 +11,7 @@ class LanguageObject
 
 	public $filePath = "";
 
-	#2D-Array der Form [$filename][$key]
+	# 2D-Array der Form [$filename][$key]
 	public $stringMap = [];
 
 	public function __construct($lang, $path) 

@@ -32,9 +32,15 @@
 				<td class="name language-name">{{$key}}</td>
 				@foreach($language as $lang => $languageValue)
 					@if($languageValue !== "")
-						<td>
-							<textarea class="language-text-area" rows="1" cols="20" form="submit" name="{{base64_encode($lang."_".$key)}}">{{$languageValue}}</textarea>
-						</td>
+						@if(in_array($lang, $recentlyChangedFiles))
+							<td>
+								<textarea class="language-text-area" rows="1" cols="20" style="background-color: Khaki;" form="submit" name="{{base64_encode($lang."_".$key)}}">{{$languageValue}}</textarea>
+							</td>
+						@else
+							<td>
+								<textarea class="language-text-area" rows="1" cols="20" form="submit" name="{{base64_encode($lang."_".$key)}}">{{$languageValue}}</textarea>
+							</td>
+						@endif
 					@else
 						<td>
 							<textarea class="language-text-area" rows="1" cols="20" form="submit" name="{{base64_encode("_new_".$lang."_".$key)}}"></textarea>

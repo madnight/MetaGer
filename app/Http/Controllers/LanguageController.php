@@ -146,9 +146,12 @@ class LanguageController extends Controller
     public function createSynopticEditPage(Request $request, $exclude = "") 
     {
         $languageFolders  = scandir($this->languageFilePath); 
+
         # Enthält zu jeder Sprache ein Objekt mit allen Daten
         $languageObjects  = [];
-        $to = []; # Alle vorhandenen Sprachen
+
+        # Alle vorhandenen Sprachen
+        $to = [];
 
         # Dekodieren ausgeschlossener Dateien anhand des URL-Parameters
         $ex = $this->decodeExcludedFiles($exclude);
@@ -159,12 +162,15 @@ class LanguageController extends Controller
                 $languageObjects[$folder] = new LanguageObject($folder, $this->languageFilePath.$folder);
             }
         }
-
+        $fileNames = [];
         # Speichere Daten in LanguageObject, überspringe ausgeschlossene Dateien
         foreach ($languageObjects as $folder => $languageObject) {
             $to[] = $folder;
             $di = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($languageObject->filePath));
             foreach($di as $filename => $file) {
+                if(!$this->endsWith($filename, ".") && !in_array(basename($filename), $fileNames)) {
+                    $fileNames[] = basename($filename);
+                }
                 foreach($ex['files'] as $file) {
                     if($file === basename($filename)) {
                         continue 2;
@@ -226,6 +232,7 @@ class LanguageController extends Controller
             ->with('texts', $snippets)         # Array mit Sprachsnippets
             ->with('filename', $fn)     # Name der Datei
             ->with('recentlyChangedFiles', $recentlyChangedFiles)
+            ->with('otherFiles', $fileNames) # Namen der restlichen Sprachdateien
             ->with('title', trans('titles.languages.edit'));
     }
 

@@ -9,6 +9,7 @@ class LanguageObject
 {
 	public $language = "";
 
+    # bspw. /home/MetaGer/resources/lang/de
 	public $filePath = "";
 
 	# 2D-Array der Form [$filename][$key]

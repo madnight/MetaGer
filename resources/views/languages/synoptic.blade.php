@@ -13,10 +13,16 @@
 	</div> 
 	--> 
 */?>
-	<h2>{{$filename}}</h2>
+	<h2>Aktuelle Datei: {{$filename}}</h2>
 	<form id="submit" method="POST">
 		<input type="hidden" name="filename" value="{{$filename}}" />
 	</form>
+	<p style="display: inline;"> Andere Datei auswählen: </p>
+	<select name="chooseFile" form="submit" type="submit">
+	@foreach($otherFiles as $otherFile)
+		<option value={{$otherFile}}>{{ $otherFile }}</option>
+	@endforeach
+	</select>
 	<table class="table">
 		<thead>
 			<tr>

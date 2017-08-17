@@ -37,10 +37,8 @@ class Minisucher extends Searchengine
             try {
                 $counter++;
                 $result = simplexml_load_string($result->saveXML());
-
                 $title         = $result->xpath('//doc/arr[@name="title"]/str')[0]->__toString();
                 $link          = $result->xpath('//doc/str[@name="url"]')[0]->__toString();
-                $subcollection = $result->xpath('//doc/str[@name="subcollection"]')[0]->__toString();
                 $anzeigeLink  = $link;
                 $descr        = "";
                 $descriptions = $content->xpath("//response/lst[@name='highlighting']/lst[@name='$link']/arr[@name='content']/str");
@@ -57,7 +55,11 @@ class Minisucher extends Searchengine
 
                 $additionalInformation = ['date' => $dateVal];
 
-                $gefVon = "<a href=\"https://metager.de\" target=\"_blank\" rel=\"noopener\">Minisucher: $subcollection </a>";
+                $subcollection = explode(' ', $result->xpath('//doc/str[@name="subcollection"]')[0]->__toString());
+                $minism = explode(', ', simplexml_load_string($this->engine)["subcollections"]);
+                $result = implode(', ',array_intersect($subcollection, $minism));
+
+                $gefVon = "<a href=\"https://metager.de\" target=\"_blank\" rel=\"noopener\">Minisucher: $result </a>";
 
                 $this->results[] = new \App\Models\Result(
                     $this->engine,

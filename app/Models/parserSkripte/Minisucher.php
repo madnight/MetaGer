@@ -55,9 +55,9 @@ class Minisucher extends Searchengine
 
                 $additionalInformation = ['date' => $dateVal];
 
-                $subcollection = explode(' ', $result->xpath('//doc/str[@name="subcollection"]')[0]->__toString());
-                $minism = explode(', ', simplexml_load_string($this->engine)["subcollections"]);
-                $result = implode(', ',array_intersect($subcollection, $minism));
+                $subcollection = array_map('strtolower', explode(' ', $result->xpath('//doc/str[@name="subcollection"]')[0]->__toString()));
+                $minism = array_map('strtolower', explode(', ', simplexml_load_string($this->engine)["subcollections"]));
+                $result = implode(', ', array_intersect($subcollection, $minism));
 
                 $gefVon = "<a href=\"https://metager.de\" target=\"_blank\" rel=\"noopener\">Minisucher: $result </a>";
 

@@ -25,7 +25,9 @@ class Minisucher extends Searchengine
         if (!$content) {
             return;
         }
+
         $results = $content->xpath('//response/result/doc');
+
 
         $string = "";
 
@@ -36,8 +38,8 @@ class Minisucher extends Searchengine
                 $counter++;
                 $result = simplexml_load_string($result->saveXML());
 
-                $title        = $result->xpath('//doc/arr[@name="title"]/str')[0]->__toString();
-                $link         = $result->xpath('//doc/str[@name="url"]')[0]->__toString();
+                $title         = $result->xpath('//doc/arr[@name="title"]/str')[0]->__toString();
+                $link          = $result->xpath('//doc/str[@name="url"]')[0]->__toString();
                 $anzeigeLink  = $link;
                 $descr        = "";
                 $descriptions = $content->xpath("//response/lst[@name='highlighting']/lst[@name='$link']/arr[@name='content']/str");
@@ -55,8 +57,17 @@ class Minisucher extends Searchengine
                 $additionalInformation = ['date' => $dateVal];
 
                 $minism = simplexml_load_string($this->engine)["subcollections"];
-                $gefVon = "<a href=\"https://metager.de\" target=\"_blank\" rel=\"noopener\">Minisucher: $minism </a>";
+                $subcollection = $result->xpath('//doc/str[@name="subcollection"]')[0]->__toString();
 
+                if(!$subcollection) {
+                    $gefVon = "<a href=\"https://metager.de\" target=\"_blank\" rel=\"noopener\">Minisucher: $minism </a>";
+                } else {
+                    $minism = array_map('strtolower', explode(', ', $minism));
+                    $subcollection = array_map('strtolower', explode(' ', $subcollection));
+                    $result = implode(', ', array_intersect($subcollection, $minism));
+                    $gefVon = "<a href=\"https://metager.de\" target=\"_blank\" rel=\"noopener\">Minisucher: $result </a>";
+                }
+                
                 $this->results[] = new \App\Models\Result(
                     $this->engine,
                     $title,

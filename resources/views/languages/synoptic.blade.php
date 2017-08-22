@@ -18,7 +18,7 @@
 		<input type="hidden" name="filename" value="{{$filename}}" />
 	</form>
 	<p style="display: inline;"> Andere Datei auswählen: </p>
-	<select name="chooseFile" form="submit" type="submit">
+	<select name="chosenFile" form="submit" onchange="this.form.submit()" type="submit">
 	@foreach($otherFiles as $otherFile)
 		<option value={{$otherFile}}>{{ $otherFile }}</option>
 	@endforeach

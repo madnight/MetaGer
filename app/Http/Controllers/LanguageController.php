@@ -143,7 +143,7 @@ class LanguageController extends Controller
             ->with('email', $email);        //Email-Adresse des Benutzers
     }
 
-    public function createSynopticEditPage(Request $request, $exclude = "") 
+    public function createSynopticEditPage(Request $request, $exclude = "", $chosenFile = "") 
     {
         $languageFolders  = scandir($this->languageFilePath); 
 
@@ -188,13 +188,16 @@ class LanguageController extends Controller
         $fn = "";
 
         # Wähle die erste, unbearbeitete Datei aus
-        foreach($languageObjects as $folder => $languageObject) {
-            foreach($languageObject->stringMap as $languageFileName => $languageFile) {
-                $fn = $languageFileName;
-                break 2;            
+        if($chosenFile !== "") {
+            $fn = $chosenFile;
+        } else {
+            foreach($languageObjects as $folder => $languageObject) {
+                foreach($languageObject->stringMap as $languageFileName => $languageFile) {
+                    $fn = $languageFileName;
+                    break 2;            
+                }
             }
         }
-
         $snippets = [];
         $changeTime = 0;
         $recentlyChangedFiles = [];
@@ -255,32 +258,8 @@ class LanguageController extends Controller
         $filename = $request->input('filename');
 
         # Identifizieren des gedrückten Buttons
-        if(isset($request['nextpage'])) {
-
-            # Leite weiter zur nächsten Seite
-            $ex = [];
-
-            if ($exclude !== "") {
-                try {
-                    $ex = unserialize(base64_decode($exclude));
-                } catch (\ErrorException $e) {
-                    $ex = [];
-                }
-
-                if (!isset($ex["files"])) {
-                    $ex["files"] = [];
-                }
-            }
-            if (!isset($ex["new"])) {
-                $ex["new"] = 0;
-            }
-            $ex['files'][] = basename($filename);
-            $ex = base64_encode(serialize($ex));
-
-            return redirect(url('synoptic', ['exclude' => $ex]));
-
-        } elseif(isset($request['download'])) {
-        # Andernfalls auslesen, zippen und herunterladen der veränderten Dateien 
+        if(isset($request['download'])) {
+        # Auslesen, zippen und herunterladen der veränderten Dateien 
          
             $data = [];
             $new  = 0;
@@ -365,6 +344,33 @@ class LanguageController extends Controller
                     } catch(ErrorException $e) {
                 echo("Failed to write ".$filename);
                 }
+        # Andernfalls weiterleiten zur nächsten Seite
+        } else {
+
+            $ex = [];
+
+            if ($exclude !== "") {
+                try {
+                    $ex = unserialize(base64_decode($exclude));
+                } catch (\ErrorException $e) {
+                    $ex = [];
+                }
+
+                if (!isset($ex["files"])) {
+                    $ex["files"] = [];
+                }
+            }
+            if (!isset($ex["new"])) {
+                $ex["new"] = 0;
+            }
+            $ex['files'][] = basename($filename);
+            $ex = base64_encode(serialize($ex));
+
+            if(isset($request['nextpage'])) {
+                return redirect(url('synoptic', ['exclude' => $ex]));
+            } elseif(isset($request['chosenFile'])) {
+                return redirect(url('synoptic', ['exclude' => $ex], ['chosenFile' => $request['chosenFile']]));
+            }
         }
     }
 

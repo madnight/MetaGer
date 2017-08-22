@@ -171,11 +171,6 @@ class LanguageController extends Controller
                 if(!$this->endsWith($filename, ".") && !in_array(basename($filename), $fileNames)) {
                     $fileNames[] = basename($filename);
                 }
-                foreach($ex['files'] as $file) {
-                    if($file === basename($filename)) {
-                        continue 2;
-                    }
-                }
                 if(!$this->endsWith($filename, ".")) {
                     $tmp = include $filename;
                     foreach ($tmp as $key => $value) {
@@ -187,12 +182,17 @@ class LanguageController extends Controller
 
         $fn = "";
 
-        # Wähle die erste, unbearbeitete Datei aus
+        # Wähle die erste, unbearbeitete Datei aus, überspringe bereits bearbeitete Dateien
         if($chosenFile !== "") {
             $fn = $chosenFile;
         } else {
             foreach($languageObjects as $folder => $languageObject) {
                 foreach($languageObject->stringMap as $languageFileName => $languageFile) {
+                    foreach($ex['files'] as $file) {
+                        if($file === basename($languageFileName)) {
+                            continue 2;
+                        }
+                    }   
                     $fn = $languageFileName;
                     break 2;            
                 }
@@ -369,7 +369,7 @@ class LanguageController extends Controller
             if(isset($request['nextpage'])) {
                 return redirect(url('synoptic', ['exclude' => $ex]));
             } elseif(isset($request['chosenFile'])) {
-                return redirect(url('synoptic', ['exclude' => $ex], ['chosenFile' => $request['chosenFile']]));
+                return redirect(url('synoptic', ['exclude' => $ex, 'chosenFile' => $request['chosenFile']]));
             }
         }
     }

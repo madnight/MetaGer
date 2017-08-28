@@ -95,7 +95,6 @@ class MetaGer
         foreach ($this->results as $result) {
             $viewResults[] = get_object_vars($result);
         }
-
         # Wir müssen natürlich noch den Log für die durchgeführte Suche schreiben:
         $this->createLogs();
         if ($this->fokus === "bilder") {

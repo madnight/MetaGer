@@ -143,7 +143,7 @@ class LanguageController extends Controller
             ->with('email', $email);        //Email-Adresse des Benutzers
     }
 
-    public function createSynopticEditPage(Request $request, $exclude = "", $chosenFile = "") 
+    public function createSynopticEditPage(Request $request, $exclude = '', $chosenFile = '') 
     {
         $languageFolders  = scandir($this->languageFilePath); 
 
@@ -253,7 +253,7 @@ class LanguageController extends Controller
         return $t;
     }
 
-    public function processSynopticPageInput(Request $request, $exclude = "") {
+    public function processSynopticPageInput(Request $request, $exclude = '', $chosenFile = '') {
 
         $filename = $request->input('filename');
 

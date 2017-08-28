@@ -31,7 +31,7 @@
 					<th>
 						{{$t}}
 						@if(in_array($t, $recentlyChangedFiles))
-							<span style="background-color: Khaki;font-weight: normal;"><u><br>Datei wurde vor kurzem bearbeitet.</u><br></span>
+							<span style="background-color: Khaki;font-weight: normal;"><u><br>{{ trans('languages.synoptic.hinweis') }}</u><br></span>
 						@endif
 					</th>
 				@endforeach				

@@ -98,7 +98,6 @@ class MetaGer
 
         # Wir müssen natürlich noch den Log für die durchgeführte Suche schreiben:
         $this->createLogs();
-
         if ($this->fokus === "bilder") {
             switch ($this->out) {
                 case 'results':
@@ -160,6 +159,14 @@ class MetaGer
                     break;
                 case 'rss20':
                     return view('metager3resultsrss20')
+                        ->with('results', $viewResults)
+                        ->with('eingabe', $this->eingabe)
+                        ->with('apiAuthorized', $this->apiAuthorized)
+                        ->with('metager', $this)
+                        ->with('resultcount', sizeof($viewResults));
+                    break;
+                case 'atom10':
+                    return view('metager3resultsatom10')
                         ->with('results', $viewResults)
                         ->with('eingabe', $this->eingabe)
                         ->with('apiAuthorized', $this->apiAuthorized)

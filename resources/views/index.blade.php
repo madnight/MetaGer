@@ -154,10 +154,10 @@
 							<input id="original-id" type="hidden" name="original-id" value="">
 						</div>
 						<div class="settings-modal-buttons pull-right">
-							<button id="delete-focus-btn" class="btn btn-danger">
+							<button class="delete-focus-btn btn btn-danger">
 								@lang('index.focus-creator.delete')
 							</button>
-							<button id="save-focus-btn" class="btn btn-primary">
+							<button class="save-focus-btn btn btn-primary">
 								@lang('index.focus-creator.save')
 							</button>
 						</div>

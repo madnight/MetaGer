@@ -26,14 +26,11 @@ elixir(function (mix) {
   mix.scripts(['lib/jquery.js', 'lib/iframeResizer.contentWindow.min.js'], 'public/js/quicktips.js')
   mix.scripts(['scriptStartPage.js', 'results.js'], 'public/js/scriptStartPage.js');
   mix.scripts(['scriptResultPage.js', 'results.js'], 'public/js/scriptResultPage.js');
-  mix.scripts(['scriptSubpages.js'], 'public/js/scriptSubpages.js');
-  mix.version(['css/themes/default.css', 'js/lib.js', 'js/quicktips.js']);
+  //mix.scripts(['scriptSubpages.js'], 'public/js/scriptSubpages.js');
   mix.less('metager/beitritt.less', 'public/css/beitritt.css')
-  mix.version(['css/beitritt.css'])
-  mix.version(['js/widgets.js', 'js/editLanguage.js', 'js/kontakt.js', 'js/scriptResultPage.js', 'js/scriptStartPage.js', 'js/settings.js'])
   // utility
   mix.scripts(['utility.js'], 'public/js/utility.js');
   mix.less('utility.less', 'public/css/utility.css');
-  mix.version(['js/utility.js', 'css/utility.css']);
+  mix.version(['css/themes/default.css', 'js/lib.js', 'js/quicktips.js', 'js/utility.js', 'css/utility.css', 'js/widgets.js', 'js/editLanguage.js', 'js/kontakt.js', 'js/scriptResultPage.js', 'js/scriptStartPage.js', 'js/settings.js', 'css/beitritt.css']);
 
 })

@@ -60,7 +60,7 @@ function setActionListeners () {
       window.location = './settings/';
     });
   }
-  $('.focusCheckbox').click(toggleFocusButtons);
+  $('.focusCheckbox').click(toggleDeleteButton);
   $('#addFocusBtn').click(() => showFocusCreateDialog(''));
   $('.save-focus-btn').click(saveFocus);
   $('.delete-focus-btn').click(deleteFocus);
@@ -244,7 +244,7 @@ function showFocusCreateDialog (id) {
       console.error(ex);
     }
   } else { 
-    toggleFocusButtons();
+    toggleDeleteButton();
   }
 }
 /**
@@ -255,14 +255,12 @@ function showFocusEditDialog (id) {
 }
 
 /**
-* Shows/Hides the save and delete buttons if (no) checkboxes are selected
+* Shows/Hides the delete button if (no) checkboxes are selected
 */
-function toggleFocusButtons() {
+function toggleDeleteButton() {
   if(atLeastOneChecked()) {
-    $('.save-focus-btn').show();
     $('.delete-focus-btn').show();
   } else {
-    $('.save-focus-btn').hide();
     $('.delete-focus-btn').hide();
   }
 }
@@ -413,6 +411,9 @@ function removeFocus (name) {
  * Remove the focuses html-elements
  */
 function removeFocusById (id) {
+  if(id == '') {
+    return;
+  }
   var focusRadio = document.getElementById(id);
   var focus = focusRadio.parentNode;
   var parent = focus.parentNode;

@@ -6,7 +6,6 @@ use App\Jobs\Searcher;
 use App\MetaGer;
 use Cache;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Log;
 use Illuminate\Support\Facades\Redis;
 
 abstract class Searchengine
@@ -200,7 +199,6 @@ abstract class Searchengine
     # Entfernt wenn gesetzt das disabled="1" für diese Suchmaschine aus der sumas.xml
     public function enable($sumaFile, $message)
     {
-        Log::info($message);
         $xml = simplexml_load_file($sumaFile);
         unset($xml->xpath("//sumas/suma[@name='" . $this->name . "']")['0']['disabled']);
         $xml->saveXML($sumaFile);
@@ -237,11 +235,9 @@ abstract class Searchengine
 
         $body = "";
         if ($this->canCache && $this->cacheDuration > 0 && Cache::has($this->hash)) {
-            Log::info("Aus dem Cache: " . $this->hash);
             $body = Cache::get($this->hash);
         } elseif (Redis::hexists('search.' . $this->resultHash, $this->name)) {
             $body = Redis::hget('search.' . $this->resultHash, $this->name);
-            Log::info("Schon vorhanden: " . $this->resultHash . "\n" . $body);
             Redis::hdel('search.' . $this->resultHash, $this->name);
             if ($this->canCache && $this->cacheDuration > 0) {
                 Cache::put($this->hash, $body, $this->cacheDuration);

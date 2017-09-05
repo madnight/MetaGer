@@ -7,7 +7,7 @@ return [
     "foki.wissenschaft"	=>	"Sciènces",
     "foki.produkte"	    =>	"Produits",
     "foki.angepasst"	=>	"ajusté(e)",
-    "foki.maps"     	=>	"Maps.metager.de <span class=\"badge new-feature\">Nouveau</span>",
+    "foki.maps"     	=>	"Maps.metager.de",
     "design"	        =>	"Choisir un design personnel",
     "partnertitle"  	=>	"Soutenir MetaGer, sans frais supplémentaires pour vous",
     "plugin"	        =>	"Ajouter un plug-in MetaGer",

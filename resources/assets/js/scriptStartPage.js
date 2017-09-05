@@ -61,12 +61,12 @@ function setActionListeners () {
     });
   }
   $('#addFocusBtn').click(() => showFocusCreateDialog(''));
-  $('#save-focus-btn').click(saveFocus);
-  $('#delete-focus-btn').click(deleteFocus);
+  $('.save-focus-btn').click(saveFocus);
+  $('.delete-focus-btn').click(deleteFocus);
   // Save Focus on clicking enter while in the focus name input
   $('#focus-name').keyup(function (event) {
     if (event.keyCode == 13) {
-      $('#save-focus-btn').click();
+      $('.save-focus-btn').click();
     }
   });
   $('#create-focus-modal').on('shown.bs.modal', function () {

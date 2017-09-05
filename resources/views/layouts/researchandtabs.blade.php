@@ -53,22 +53,6 @@
 				</li>
 			@endif
 
-			@if( $metager->getFokus() === "bilder" )
-				<li id="bilderTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
-					<a aria-controls="bilder" data-href="#bilder" href="#bilder">
-						<i class="fa fa-picture-o" aria-hidden="true"></i>
-						<span class="hidden-xs">{{ trans('index.foki.bilder') }}</span>
-					</a>
-				</li>
-			@else
-				<li data-loaded="0" id="bilderTabSelector" class="tab-selector" role="presentation">
-					<a aria-controls="bilder" data-href="{!! $metager->generateSearchLink('bilder') !!}" href="{!! $metager->generateSearchLink('bilder', false) !!}">
-						<i class="fa fa-picture-o" aria-hidden="true"></i>
-						<span class="hidden-xs">{{ trans('index.foki.bilder') }}</span>
-					</a>
-				</li>
-			@endif
-
 			@if( $metager->getFokus() === "nachrichten" )
 				<li id="nachrichtenTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
 					<a aria-controls="nachrichten" data-href="#nachrichten" href="#nachrichten">

@@ -129,6 +129,8 @@ class MetaGerSearch extends Controller
             }
 
             # Wetter
+            /* Derzeit Deaktiviert, da bei unseren Abfragezahlen nicht kostenlos */
+            /*
             try {
                 $url = "http://api.openweathermap.org/data/2.5/weather?type=accurate&units=metric&lang=" . APP::getLocale() . "&q=" . urlencode($q) . "&APPID=" . getenv("openweathermap");
 
@@ -168,6 +170,7 @@ class MetaGerSearch extends Controller
             } catch (\ErrorException $e) {
 
             }
+            */
         }
     
         # Wikipedia Quicktip

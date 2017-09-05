@@ -60,6 +60,7 @@ function setActionListeners () {
       window.location = './settings/';
     });
   }
+  $('.focusCheckbox').click(toggleFocusButtons);
   $('#addFocusBtn').click(() => showFocusCreateDialog(''));
   $('.save-focus-btn').click(saveFocus);
   $('.delete-focus-btn').click(deleteFocus);
@@ -242,6 +243,8 @@ function showFocusCreateDialog (id) {
     } catch (ex) {
       console.error(ex);
     }
+  } else { 
+    toggleFocusButtons();
   }
 }
 /**
@@ -250,6 +253,20 @@ function showFocusCreateDialog (id) {
 function showFocusEditDialog (id) {
   showFocusCreateDialog(id);
 }
+
+/**
+* Shows/Hides the save and delete buttons if (no) checkboxes are selected
+*/
+function toggleFocusButtons() {
+  if(atLeastOneChecked()) {
+    $('.save-focus-btn').show();
+    $('.delete-focus-btn').show();
+  } else {
+    $('.save-focus-btn').hide();
+    $('.delete-focus-btn').hide();
+  }
+}
+
 /**
  * Save the current Focus
  * Listens for save button

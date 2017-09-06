@@ -18,6 +18,7 @@
 		<link type="text/css" rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
 		<link type="text/css" rel="stylesheet" href="{{ elixir('css/themes/default.css') }}" />
 		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
+		<script src="{{ elixir('js/scriptSubPages.js') }}"></script>
 		@if (isset($css))
 			@if(is_array($css))
 				@foreach($css as $el)
@@ -220,5 +221,4 @@
 			<img src="{{ action('ImageController@generateImage')}}?site={{ urlencode(url()->current()) }}" class="hidden" />
 		</div>
 	</body>
-	<script src="{{ elixir('js/scriptSubPages.js') }}"></script>
 </html>

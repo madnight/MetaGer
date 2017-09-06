@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="{!! trans('staticPages.meta.language') !!}">
 	<head>
-		<script src="{{ elixir('js/lib.js') }}"></script>
 		<meta charset="utf-8" />
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title>@yield('title')</title>
@@ -19,6 +18,7 @@
 		<link type="text/css" rel="stylesheet" href="{{ elixir('css/themes/default.css') }}" />
 		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
 		<script src="{{ elixir('js/scriptSubPages.js') }}"></script>
+		<script src="{{ elixir('js/lib.js') }}"></script>
 		@if (isset($css))
 			@if(is_array($css))
 				@foreach($css as $el)

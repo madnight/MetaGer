@@ -103,6 +103,11 @@ function setSettings () {
   if (autocomplete !== null) {
     $('input[name=eingabe]').attr('autocomplete', autocomplete);
   }
+  // Change the request method to the given parameter
+  var requestMethod = localStorage.getItem('request');
+  if (requestMethod !== null && (requestMethod === 'GET' || requestMethod === 'POST')) {
+    $('#searchForm').attr('method', requestMethod);
+  }
   if ($('fieldset#foki.mobile').length) {
     $('fieldset.mobile input#bilder').val('angepasst');
     $('fieldset.mobile input#bilder').prop('checked', true);

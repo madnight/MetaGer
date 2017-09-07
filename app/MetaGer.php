@@ -165,12 +165,13 @@ class MetaGer
                         ->with('resultcount', sizeof($viewResults));
                     break;
                 case 'atom10':
-                    return view('metager3resultsatom10')
+                    return response()->view('metager3resultsatom10')
                         ->with('results', $viewResults)
                         ->with('eingabe', $this->eingabe)
                         ->with('apiAuthorized', $this->apiAuthorized)
                         ->with('metager', $this)
-                        ->with('resultcount', sizeof($viewResults));
+			->with('resultcount', sizeof($viewResults))
+			->header('Content-Type', 'application/xml');
                     break;
                 case 'result-count':
                     # Wir geben die Ergebniszahl und die benötigte Zeit zurück:

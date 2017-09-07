@@ -9,7 +9,6 @@
      <opensearch:Query role="request" searchTerms="{{ htmlspecialchars($eingabe, ENT_QUOTES) }}"/>
      <link rel="next" href="{{htmlspecialchars($metager->nextSearchLink() ,ENT_QUOTES)}}" type="application/atom+xml"/>
      <id>urn:uuid:1d634a8c-2764-424f-b082-6c96494b7240</id>
-  @if($apiAuthorized)
   @foreach($metager->getResults() as $result)
      <entry>
        <title>{!! htmlspecialchars($result->titel, ENT_XML1, 'UTF-8'); !!}</title>
@@ -20,7 +19,6 @@
        </content>
      </entry>
   @endforeach
-  @endif
  </feed>
 
  <!-- Muster zu finden unter http://www.opensearch.org/Specifications/OpenSearch/1.1#Example_of_OpenSearch_response_elements_in_RSS_2.0 --> 

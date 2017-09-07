@@ -165,7 +165,7 @@ class MetaGer
                         ->with('resultcount', sizeof($viewResults));
                     break;
                 case 'atom10':
-                    return response()->view('metager3resultsatom10', ['results' => $viewResults,'eingabe' => $this->eingabe,'metager' => $this,'resultcount' => sizeof($viewresults)])
+                    return response()->view('metager3resultsatom10', ['results' => $viewResults,'eingabe' => $this->eingabe,'metager' => $this,'resultcount' => sizeof($viewResults)])
 			->header('Content-Type', 'application/xml');
                     break;
                 case 'result-count':

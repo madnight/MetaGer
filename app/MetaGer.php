@@ -451,15 +451,15 @@ class MetaGer
             $info = parse_url($link);
             if(isset($info["host"])){
                 $host = $info['host'];
+                $newurl = $link;
                 if(strpos($host, "amazon") !== FALSE){
                     # This is Probably an Amazon Link. We'll add our tag as get parameter
                     if(isset($info["query"])){
-                        $info["query"] .= "&tag=metager04-21";
+                        $newurl .= "&tag=metager04-21";
                     }else{
-                        $info["query"] = "tag=metager04-21";
+                        $newurl .= "?tag=metager04-21";
                     }
                 }
-                $newurl = http_build_url($info);
                 $result->link = $newurl;
                 $result->partnershop = true;
             }

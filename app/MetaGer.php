@@ -448,7 +448,7 @@ class MetaGer
             if (strpos($link, "http") !== 0) {
                 $link = "http://" . $link;
             }
-            $info = parse_url($url);
+            $info = parse_url($link);
             if(isset($info["host"])){
                 $host = $info['host'];
                 if(strpos($host, "amazon") !== FALSE){

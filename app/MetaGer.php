@@ -95,10 +95,8 @@ class MetaGer
         foreach ($this->results as $result) {
             $viewResults[] = get_object_vars($result);
         }
-
         # Wir müssen natürlich noch den Log für die durchgeführte Suche schreiben:
         $this->createLogs();
-
         if ($this->fokus === "bilder") {
             switch ($this->out) {
                 case 'results':
@@ -165,6 +163,10 @@ class MetaGer
                         ->with('apiAuthorized', $this->apiAuthorized)
                         ->with('metager', $this)
                         ->with('resultcount', sizeof($viewResults));
+                    break;
+                case 'atom10':
+                    return response()->view('metager3resultsatom10', ['results' => $viewResults,'eingabe' => $this->eingabe,'metager' => $this,'resultcount' => sizeof($viewResults)])
+			->header('Content-Type', 'application/xml');
                     break;
                 case 'result-count':
                     # Wir geben die Ergebniszahl und die benötigte Zeit zurück:
@@ -234,6 +236,9 @@ class MetaGer
 
         #Adgoal Implementation
         $this->results = $this->parseAdgoal($this->results);
+
+        #Amazon Affiliate (MetaGers tag ist: metager04-21)
+        $this->results = $this->parseAmazon($this->results);
 
         $counter   = 0;
         $firstRank = 0;
@@ -431,6 +436,34 @@ class MetaGer
             return $results;
         }
 
+        return $results;
+    }
+    
+    public function parseAmazon($results)
+    {
+        $amazonTag = "metager04-21";
+        
+        foreach ($results as $result) {
+            $link = $result->anzeigeLink;
+            if (strpos($link, "http") !== 0) {
+                $link = "http://" . $link;
+            }
+            $info = parse_url($link);
+            if(isset($info["host"])){
+                $host = $info['host'];
+                $newurl = $link;
+                if(strpos($host, "amazon") !== FALSE){
+                    # This is Probably an Amazon Link. We'll add our tag as get parameter
+                    if(isset($info["query"])){
+                        $newurl .= "&tag=metager04-21";
+                    }else{
+                        $newurl .= "?tag=metager04-21";
+                    }
+                }
+                $result->link = $newurl;
+                $result->partnershop = true;
+            }
+        }
         return $results;
     }
 
@@ -1013,7 +1046,7 @@ class MetaGer
         
         $this->out = $request->input('out', "html");
         # Standard output format html
-        if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style" && $this->out !== "result-count" && $this->out !== "rss20" && $this->out !== "rich") {
+        if ($this->out !== "html" && $this->out !== "json" && $this->out !== "results" && $this->out !== "results-with-style" && $this->out !== "result-count" && $this->out !== "rss20" && $this->out !== "atom10" && $this->out !== "rich") {
             $this->out = "html";
         }
         # Wir schalten den Cache aus, wenn die Ergebniszahl überprüft werden soll

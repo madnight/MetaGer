@@ -164,8 +164,8 @@ Route::group(
             return redirect('https://metager.de/klassik/databund');
         });
         Route::get('languages', 'LanguageController@createOverview');
-        Route::get('synoptic/{exclude?}', 'LanguageController@createSynopticEditPage');
-        Route::post('synoptic/{exclude?}', 'LanguageController@processSynopticPageInput');
+        Route::get('synoptic/{exclude?}/{chosenFile?}', 'LanguageController@createSynopticEditPage');
+        Route::post('synoptic/{exclude?}/{chosenFile?}', 'LanguageController@processSynopticPageInput');
         Route::get('languages/edit/{from}/{to}/{exclude?}/{email?}', 'LanguageController@createEditPage');
         Route::post('languages/edit/{from}/{to}/{exclude?}/{email?}', 'MailController@sendLanguageFile');
         Route::get('berlin', 'StartpageController@berlin');

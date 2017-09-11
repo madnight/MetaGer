@@ -13,16 +13,27 @@
 	</div> 
 	--> 
 */?>
-	<h2>{{$filename}}</h2>
+	<h2>Aktuelle Datei: {{$filename}}</h2>
 	<form id="submit" method="POST">
 		<input type="hidden" name="filename" value="{{$filename}}" />
 	</form>
+	<p style="display: inline;"> Andere Datei auswählen: </p>
+	<select name="chosenFile" form="submit" onchange="this.form.submit()" type="submit">
+	@foreach($otherFiles as $otherFile)
+		<option value={{$otherFile}}>{{ $otherFile }}</option>
+	@endforeach
+	</select>
 	<table class="table">
 		<thead>
 			<tr>
 				<th>#ID</th>
 				@foreach($to as $t)
-					<th>{{$t}}</th>
+					<th>
+						{{$t}}
+						@if(in_array($t, $recentlyChangedFiles))
+							<span style="background-color: Khaki;font-weight: normal;"><u><br>{{ trans('languages.synoptic.hinweis') }}</u><br></span>
+						@endif
+					</th>
 				@endforeach				
 			</tr>
 		</thead>

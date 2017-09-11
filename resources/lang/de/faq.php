@@ -1,8 +1,7 @@
 <?php
 
 return [
-    'achtung'     => 'Achtung, da sich unsere Website in der aktiven Entwicklung befindet, kann es dazu kommen, dass sich immer wieder Änderungen an Aufbau und Funktion der Website ergeben. Wir versuchen stets das FAQ schnellstmöglich den Änderungen entsprechend anzupassen, können jedoch nicht verhindern, dass es zu temporären Unstimmigkeiten in Teilen der Erklärungen kommt.',
-
+    'achtung'     => 'Achtung, da unsere Suchmaschine ständig weiterentwickelt und verbessert wird, kann es dazu kommen, dass sich immer wieder Änderungen an Aufbau und Funktion ergeben. Wir versuchen zwar die Hilfe schnellstmöglich den Änderungen entsprechend anzupassen, können jedoch nicht ausschließen, dass es zu temporären Unstimmigkeiten in Teilen der Erklärungen kommt.',
     'title'       => 'MetaGer - FAQ',
 
     'faq.1.h'     => 'Was ist MetaGer?',

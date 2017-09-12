@@ -264,7 +264,6 @@
 	</div>
 		<fieldset>
 			<form id="searchForm" @if(Request::has('request') && Request::input('request') === "POST") method="POST" @elseif(Request::has('request') && Request::input('request') === "GET") method="GET" @else method="GET" @endif action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/meta/meta.ger3") }}" accept-charset="UTF-8">
-
 				<div class="input-group">
 					<div class="input-group-addon">
 						<button type="button" data-toggle="popover" data-html="true" data-container="body" title="{{ trans('index.design') }}" data-content='&lt;ul id="color-chooser" class="list-inline list-unstyled"&gt;

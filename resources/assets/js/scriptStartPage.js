@@ -297,7 +297,7 @@ function saveFocus () {
       $('#create-focus-modal').modal('hide');
     }
   } else {
-    alert('Bitte gültigen Namen eingeben:\n* Keine Sonderzeichen\n* Mindestens 1 Buchstabe\n* Mindestens 1 Suchmaschine auswählen');
+    alert('Bitte mindestens 1 Suchmaschine auswählen');
   }
 }
 /**

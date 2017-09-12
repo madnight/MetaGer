@@ -10,18 +10,18 @@
      <opensearch:Query role="request" searchTerms="{{ htmlspecialchars($eingabe, ENT_QUOTES) }}"/>
      <link rel="next" href="{{ htmlspecialchars($metager->nextSearchLink() ,ENT_QUOTES) }}" type="application/atom+xml"/>
      <id>urn:uuid:1d634a8c-2764-424f-b082-6c96494b7240</id>
-     @include('layouts.atom10-ad', ['ad' => $metager->popAd()])
-  @foreach($metager->getResults() as $result)
-    @if($result->number % 5 === 0)
-      @include('layouts.atom10-ad', ['ad' => $metager->popAd()])
-    @endif
-     <entry>
-       <title>{!! htmlspecialchars($result->titel, ENT_XML1, 'UTF-8'); !!}</title>
-       <link href="{!! htmlspecialchars($result->link, ENT_XML1, 'UTF-8'); !!}" />
-       <mg:anzeigeLink>{!! htmlspecialchars($result->anzeigeLink, ENT_XML1, 'UTF-8'); !!}</mg:anzeigeLink>
-       <content type="text">
-          {!! htmlspecialchars($result->longDescr, ENT_XML1, 'UTF-8'); !!}
-       </content>
-     </entry>
-  @endforeach
+     @include('layouts.atom10ad', ['ad' => $metager->popAd()])
+    @foreach($metager->getResults() as $result)
+      @if($result->number % 5 === 0)
+        @include('layouts.atom10ad', ['ad' => $metager->popAd()])
+      @endif
+       <entry>
+         <title>{!! htmlspecialchars($result->titel, ENT_XML1, 'UTF-8'); !!}</title>
+         <link href="{!! htmlspecialchars($result->link, ENT_XML1, 'UTF-8'); !!}" />
+         <mg:anzeigeLink>{!! htmlspecialchars($result->anzeigeLink, ENT_XML1, 'UTF-8'); !!}</mg:anzeigeLink>
+         <content type="text">
+            {!! htmlspecialchars($result->longDescr, ENT_XML1, 'UTF-8'); !!}
+         </content>
+       </entry>
+    @endforeach
  </feed>

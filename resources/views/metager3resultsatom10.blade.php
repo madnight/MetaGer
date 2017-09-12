@@ -12,19 +12,8 @@
      <id>urn:uuid:1d634a8c-2764-424f-b082-6c96494b7240</id>
      @include('layouts.atom10-ad', ['ad' => $metager->popAd()])
   @foreach($metager->getResults() as $result)
-    @if($result->number % 7 === 0)
-      <ad:advertisement>
-       <ad:callOut atom:type="TEXT">[Ad]</ad:callOut>
-       <ad:title atom:type="TEXT">20% Off Coffee</ad:title>
-       <ad:subTitle atom:type="TEXT">Walk in and show us this ad on your phone</ad:subTitle>
-       <ad:displayUrl atom:type="TEXT">example.com/coffee</ad:displayUrl>
-       <ad:image ad:id="cprp20" ad:width="170" ad:height="30">
-         <ad:link href="http://example.com/ads/20_off_coffee.jpg" />
-         <ad:altText atom:type="TEXT">Click for Cafes Near You</ad:altText>
-       </ad:image>
-       <atom:link href="http://example.com/coffee/" />
-       <ad:id>1234567890</ad:id>
-   </ad:advertisement> 
+    @if($result->number % 5 === 0)
+      @include('layouts.atom10-ad', ['ad' => $metager->popAd()])
     @endif
      <entry>
        <title>{!! htmlspecialchars($result->titel, ENT_XML1, 'UTF-8'); !!}</title>

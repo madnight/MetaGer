@@ -243,9 +243,9 @@ function showFocusCreateDialog (id) {
     } catch (ex) {
       console.error(ex);
     }
-  } else { 
-    toggleDeleteButton();
   }
+  toggleDeleteButton();
+  
 }
 /**
  * Shows the focus create dialog for a given id
@@ -297,7 +297,17 @@ function saveFocus () {
       $('#create-focus-modal').modal('hide');
     }
   } else {
-    alert('Bitte mindestens 1 Suchmaschine auswählen');
+     switch(document.documentElement.lang) {
+      case 'en':
+        alert('Please select at least 1 search engine.');
+        break;
+      case 'es':
+        alert('Por favor, seleccione al menos un motor de búsqueda.');
+        break;
+      default:
+        alert('Bitte mindestens 1 Suchmaschine auswählen.');
+        break;
+     }
   }
 }
 /**

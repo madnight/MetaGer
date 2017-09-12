@@ -24,7 +24,4 @@
        </content>
      </entry>
   @endforeach
-  
  </feed>
-
- <!-- Muster zu finden unter http://www.opensearch.org/Specifications/OpenSearch/1.1#Example_of_OpenSearch_response_elements_in_RSS_2.0 --> 

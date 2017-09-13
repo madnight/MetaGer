@@ -459,9 +459,9 @@ class MetaGer
                     }else{
                         $newurl .= "?tag=metager04-21";
                     }
+                    $result->link = $newurl;
+                    $result->partnershop = true;
                 }
-                $result->link = $newurl;
-                $result->partnershop = true;
             }
         }
         return $results;

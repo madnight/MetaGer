@@ -9,9 +9,10 @@ class LanguageObject
 {
 	public $language = "";
 
+    # bspw. /home/MetaGer/resources/lang/de
 	public $filePath = "";
 
-	#2D-Array der Form [$filename][$key]
+	# 2D-Array der Form [$filename][$key]
 	public $stringMap = [];
 
 	public function __construct($lang, $path) 

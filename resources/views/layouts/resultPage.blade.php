@@ -37,11 +37,6 @@
 				<div @if(LaravelLocalization::getCurrentLocale() === "de") class="col-xs-4"@else class="col-xs-6"@endif>
 					<a class="btn btn-default" href="/">{!! trans('resultPage.startseite') !!}</a>
 				</div>
-				@if(LaravelLocalization::getCurrentLocale() === "de"  && !$metager->validated)
-				<div class="col-xs-4">
-					<a class="btn btn-default" href="https://metager.de/gutscheine/">Gutscheine</a>
-				</div>
-				@endif
 				<div @if(LaravelLocalization::getCurrentLocale() === "de") class="col-xs-4"@else class="col-xs-6"@endif>
 					<a class="btn btn-default" href="/impressum/">{!! trans('resultPage.impressum') !!}</a>
 				</div>

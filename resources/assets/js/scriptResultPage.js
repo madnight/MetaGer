@@ -9,6 +9,8 @@ $(document).ready(function () {
   if (document.location.href.indexOf('focus=container') !== -1) {
     $($('#foki > li#savedFokiTabSelector').get(0)).find('>a').tab('show');
   }
+  
+  loadQuicktips();
 });
 
 function activateJSOnlyContent () {
@@ -532,4 +534,28 @@ function resultSaver (index) {
   var to = $('#savedFokiTabSelector').length ? $('#savedFokiTabSelector') : $('#foki');
   $('div.tab-pane.active .result[data-count=' + index + ']').transfer({to: to, duration: 1000});
   new Results().updateResultPageInterface();
+}
+
+function loadQuicktips () {
+  /*
+  {{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/qt") }}
+  ?q={{ $metager->getQ() }}
+  &sprueche={{ $metager->getSprueche() }}
+  &lang={{ Request::input('lang', 'all') }}
+  &unfilteredLink={{ base64_encode($metager->getUnfilteredLink()) }}
+  */
+
+  var mainDiv = $('#quicktips');
+  mainDiv.attr('status', 'loading');
+  mainDiv.append('<h1>Hello World</h1>');
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      mainDiv.append(this.responseXML);
+      console.log(this);
+    }
+  };
+  xhttp.open("GET", "/quicktips.xml?search=test" /*TODO change*/, true);
+  xhttp.send();
 }

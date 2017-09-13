@@ -9,8 +9,8 @@ $(document).ready(function () {
   if (document.location.href.indexOf('focus=container') !== -1) {
     $($('#foki > li#savedFokiTabSelector').get(0)).find('>a').tab('show');
   }
-  
-  loadQuicktips();
+
+  loadQuicktips('test', 'de', true); // TODO
 });
 
 function activateJSOnlyContent () {
@@ -536,7 +536,11 @@ function resultSaver (index) {
   new Results().updateResultPageInterface();
 }
 
-function loadQuicktips () {
+function loadQuicktips (search, locale, sprueche) {
+  getQuicktips(search, locale, sprueche, createQuicktips);
+}
+
+function getQuicktips (search, locale, sprueche, loadedHandler) {
   /*
   {{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/qt") }}
   ?q={{ $metager->getQ() }}
@@ -545,17 +549,53 @@ function loadQuicktips () {
   &unfilteredLink={{ base64_encode($metager->getUnfilteredLink()) }}
   */
 
-  var mainDiv = $('#quicktips');
-  mainDiv.attr('status', 'loading');
-  mainDiv.append('<h1>Hello World</h1>');
-
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      mainDiv.append(this.responseXML);
-      console.log(this);
+  $.get('http://localhost:8080/quicktips.xml?search=' + search + '&locale=' + locale, function (data, status) {
+    if (status === 'success') {
+      var quicktips = $(data).find('entry').map(function () {
+        return quicktip = {
+          type: $(this).children('type').text(),
+          title: $(this).children('title').text(),
+          summary: $(this).children('summary').text(),
+          details: $(this).children('details').map(function () {
+            return {
+              title: $(this).children('title').text(),
+              text: $(this).children('text').text(),
+              url: $(this).children('url').text()
+            }
+          }).toArray(),
+          url: $(this).children('url').text(),
+          gefVon: $(this).children('gefVon').text()
+        };
+      }).toArray();
+      loadedHandler(quicktips);
+    } else {
+      console.error('Loading quicktips failed with status ' + status);
     }
-  };
-  xhttp.open("GET", "/quicktips.xml?search=test" /*TODO change*/, true);
-  xhttp.send();
+  }, 'xml');
+}
+
+function createQuicktips (quicktips) {
+  var quicktipsDiv = $('#quicktips');
+  quicktips.forEach(function (quicktip) {
+    var detailsElem;
+    if (quicktip.details.length > 0) {
+      detailsElem = $('<details><summary><h1>' + quicktip.title + '</h1></summary></details>');
+      quicktip.details.forEach(function (detail) {
+        var detailDiv = $('<div>');
+        detailDiv
+          .append('<h2>' + detail.title + '</h2>')
+          .append('<p>' + detail.text + '</p>');
+        // .append('<a href=' + detail.url + '>TODO</a>')
+        detailsElem.append(detailDiv);
+      });
+    } else {
+      detailsElem = $('<h1>' + quicktip.title + '</h1>');
+    }
+    var quicktipDiv = $('<div>');
+    quicktipDiv
+      .append(detailsElem)
+      // .append('<a href=' + quicktip.url + '>TODO</a>')
+      .append('<span>' + quicktip.gefVon + '</span>');
+    quicktipsDiv.append(quicktipDiv);
+  });
 }

@@ -16,9 +16,3 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
-
-Route::get('/quicktips', function (Request $request) {
-    return view('quicktips')
-    ->with('search', 'TODO')
-    ->with('time', 'TODO');
-})->middleware('auth:api');

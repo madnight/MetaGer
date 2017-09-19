@@ -60,6 +60,7 @@ function setActionListeners () {
       window.location = './settings/';
     });
   }
+  $('.focusCheckbox').click(toggleDeleteButton);
   $('#addFocusBtn').click(() => showFocusCreateDialog(''));
   $('.save-focus-btn').click(saveFocus);
   $('.delete-focus-btn').click(deleteFocus);
@@ -248,6 +249,8 @@ function showFocusCreateDialog (id) {
       console.error(ex);
     }
   }
+  toggleDeleteButton();
+  
 }
 /**
  * Shows the focus create dialog for a given id
@@ -255,6 +258,18 @@ function showFocusCreateDialog (id) {
 function showFocusEditDialog (id) {
   showFocusCreateDialog(id);
 }
+
+/**
+* Shows/Hides the delete button if (no) checkboxes are selected
+*/
+function toggleDeleteButton() {
+  if(atLeastOneChecked()) {
+    $('.delete-focus-btn').show();
+  } else {
+    $('.delete-focus-btn').hide();
+  }
+}
+
 /**
  * Save the current Focus
  * Listens for save button
@@ -287,7 +302,17 @@ function saveFocus () {
       $('#create-focus-modal').modal('hide');
     }
   } else {
-    alert('Bitte gültigen Namen eingeben:\n* Keine Sonderzeichen\n* Mindestens 1 Buchstabe\n* Mindestens 1 Suchmaschine auswählen');
+     switch(document.documentElement.lang) {
+      case 'en':
+        alert('Please select at least 1 search engine.');
+        break;
+      case 'es':
+        alert('Por favor, seleccione al menos un motor de búsqueda.');
+        break;
+      default:
+        alert('Bitte mindestens 1 Suchmaschine auswählen.');
+        break;
+     }
   }
 }
 /**
@@ -401,6 +426,9 @@ function removeFocus (name) {
  * Remove the focuses html-elements
  */
 function removeFocusById (id) {
+  if(id == '') {
+    return;
+  }
   var focusRadio = document.getElementById(id);
   var focus = focusRadio.parentNode;
   var parent = focus.parentNode;

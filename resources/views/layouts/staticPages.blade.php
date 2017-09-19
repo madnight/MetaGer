@@ -68,42 +68,6 @@
 									</li>
 								</ul>
 							</li>
-							@if(LaravelLocalization::getCurrentLocale() === "de")
-							<li id="gutscheine"@if (isset($navbarFocus) && $navbarFocus === 'gutscheine') class="metager-dropdown active" @else class="metager-dropdown" @endif >
-								<a href="https://metager.de/gutscheine/">{!! trans('staticPages.gutscheineToggle') !!}</a>
-								<a class="metager-dropdown-toggle" data-role="button" aria-expanded="false" tabindex="205"><span class="caret"></span></a>
-								<ul class="metager-dropdown-menu">
-									<li>
-										<a href="https://metager.de/gutscheine/congstar/" tabindex="206" >{{ trans('staticPages.gutscheine.2') }}</a>
-									</li>
-									<li>
-										<a href="https://metager.de/gutscheine/check24/" tabindex="207" >{{ trans('staticPages.gutscheine.3') }}</a>
-									</li>
-									<li>
-										<a href="https://metager.de/gutscheine/handyflash/" tabindex="208" >{{ trans('staticPages.gutscheine.4') }}</a>
-									</li>
-									<li>
-										<a href="https://metager.de/gutscheine/groupon/" tabindex="209" >{{ trans('staticPages.gutscheine.5') }}</a>
-									</li>
-									<li>
-										<a href="https://metager.de/gutscheine/medion/" tabindex="210" >{{ trans('staticPages.gutscheine.6') }}</a>
-									</li>
-									<li>
-										<a href="https://metager.de/gutscheine/navabi/" tabindex="211" >{{ trans('staticPages.gutscheine.7') }}</a>
-									</li>
-									<li>
-										<a href="https://metager.de/gutscheine/netcologne/" tabindex="212" >{{ trans('staticPages.gutscheine.8') }}</a>
-									</li>
-									<li>
-										<a href="https://metager.de/gutscheine/teufel/" tabindex="213" >{{ trans('staticPages.gutscheine.9') }}</a>
-									</li>
-									<li role="separator" class="divider"></li>
-									<li>
-										<a href="https://metager.de/gutscheine/alle-gutscheine/" tabindex="214" >{{ trans('staticPages.gutscheine.10') }}</a>
-									</li>
-								</ul>
-							</li>
-							@endif
 							<li @if (isset($navbarFocus) && $navbarFocus === 'datenschutz') class="active" @endif >
 								<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/datenschutz/") }}" id="navigationPrivacy" tabindex="215">{{ trans('staticPages.nav3') }}</a>
 							</li>

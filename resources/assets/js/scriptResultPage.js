@@ -564,7 +564,8 @@ function getQuicktips (search, locale, sprueche, loadedHandler) {
             }
           }).toArray(),
           url: $(this).children('url').text(),
-          gefVon: $(this).children('gefVon').text()
+          gefVon: $(this).children('gefVon').text(),
+          priority: $(this).children('priority').text()
         };
       }).toArray();
       loadedHandler(quicktips);
@@ -574,28 +575,71 @@ function getQuicktips (search, locale, sprueche, loadedHandler) {
   }, 'xml');
 }
 
+/**
+ * <div id="quicktips">
+ *   <div class="quicktip" type="TYPE">
+ *     <details>
+ *       <summary>
+ *         <h1><a href="URL">TITLE
+ *         <p>SUMMARY
+ *       <div class="quicktip-detail">
+ *         <h1><a href="DETAILURL">DETAILTITLE
+ *         <p>DETAILSUMMARY
+ *     <span>GEFVON
+ * </...>
+ *             
+ * 
+ * @param {*} quicktips 
+ */
 function createQuicktips (quicktips) {
+  console.log(quicktips);
   var quicktipsDiv = $('#quicktips');
-  quicktips.forEach(function (quicktip) {
-    var detailsElem;
+  quicktips.sort(function (a, b) {
+    return b.priority - a.priority;
+  }).forEach(function (quicktip) {
+    var mainElem;
     if (quicktip.details.length > 0) {
-      detailsElem = $('<details><summary><h1>' + quicktip.title + '</h1></summary></details>');
+      mainElem = $('<details>');
+      var summaryElem = $('<summary class="quicktip-summary">');
+      var headlineElem = $('<h1>');
+      if (quicktip.url.length > 0) {
+        headlineElem.append('<a href=' + quicktip.url + '>' + quicktip.title + '</a>');
+      } else {
+        headlineElem.text(quicktip.title);
+      }
+      summaryElem
+        .append(headlineElem)
+        .append('<p>' + quicktip.summary + '</p>');
+      mainElem.append(summaryElem);
       quicktip.details.forEach(function (detail) {
-        var detailDiv = $('<div>');
-        detailDiv
-          .append('<h2>' + detail.title + '</h2>')
+        var detailElem = $('<div class="quicktip-detail">');
+        var detailHeadlineElem = $('<h2>');
+        if (detail.url.length > 0) {
+          detailHeadlineElem.append('<a href=' + detail.url + '>' + detail.title + '</a>');
+        } else {
+          detailHeadlineElem.text(detail.title);
+        }
+        detailElem
+          .append(detailHeadlineElem)
           .append('<p>' + detail.text + '</p>');
-        // .append('<a href=' + detail.url + '>TODO</a>')
-        detailsElem.append(detailDiv);
+          mainElem.append(detailElem);
       });
     } else {
-      detailsElem = $('<h1>' + quicktip.title + '</h1>');
+      mainElem = $('<div class="quicktip-summary">');
+      var headlineElem = $('<h1>');
+      if (quicktip.url.length > 0) {
+        headlineElem.append('<a href=' + quicktip.url + '>' + quicktip.title + '</a>');
+      } else {
+        headlineElem.text(quicktip.title);
+      }
+      mainElem
+        .append(headlineElem)
+        .append('<p>' + quicktip.summary + '</p>');
     }
-    var quicktipDiv = $('<div>');
+    var quicktipDiv = $('<div class="quicktip" type="' + quicktip.type + '">');
     quicktipDiv
-      .append(detailsElem)
-      // .append('<a href=' + quicktip.url + '>TODO</a>')
-      .append('<span>' + quicktip.gefVon + '</span>');
+      .append(mainElem)
+      .append('<span class="gefVon">' + quicktip.gefVon + '</span>');
     quicktipsDiv.append(quicktipDiv);
   });
 }

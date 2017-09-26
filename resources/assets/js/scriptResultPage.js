@@ -10,8 +10,16 @@ $(document).ready(function () {
     $($('#foki > li#savedFokiTabSelector').get(0)).find('>a').tab('show');
   }
 
-  loadQuicktips('test', 'de', true); // TODO
+  var sprueche = getURLParameter('sprueche') === 'on'; // load the sprueche url parameter
+  if (localStorage.hasOwnProperty('param_sprueche')) {
+    sprueche = localStorage.getItem('param_sprueche') === 'on'; // check for sprueche local storage parameter
+  }
+  loadQuicktips('test', 'de', sprueche); // load the quicktips
 });
+
+function getURLParameter(name) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+}
 
 function activateJSOnlyContent () {
   $('#searchplugin').removeClass('hide');
@@ -537,35 +545,45 @@ function resultSaver (index) {
 }
 
 function loadQuicktips (search, locale, sprueche) {
-  getQuicktips(search, locale, sprueche, createQuicktips);
+  var blacklist = [];
+  if (!sprueche) {
+    blacklist.push('sprueche');
+  }
+  getQuicktips(search, locale, blacklist, createQuicktips);
 }
 
-function getQuicktips (search, locale, sprueche, loadedHandler) {
-  /*
-  {{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/qt") }}
-  ?q={{ $metager->getQ() }}
-  &sprueche={{ $metager->getSprueche() }}
-  &lang={{ Request::input('lang', 'all') }}
-  &unfilteredLink={{ base64_encode($metager->getUnfilteredLink()) }}
-  */
+const QUICKTIP_SERVER = 'http://localhost:63825';
 
-  $.get('http://localhost:8080/quicktips.xml?search=' + search + '&locale=' + locale, function (data, status) {
+/**
+ * Requests quicktips from the quicktip server and passes them to the loadedHandler
+ * 
+ * @param {String} search search term
+ * @param {String} locale 2 letter locale identifier
+ * @param {Array<String>} blacklist excluded loaders
+ * @param {Function} loadedHandler handler for loaded quicktips
+ */
+function getQuicktips (search, locale, blacklist, loadedHandler) {
+  var getString = QUICKTIP_SERVER + '/quicktips.xml?search=' + search + '&locale=' + locale;
+  blacklist.forEach(function (value) {
+    getString += '&loader_' + value + '=false';
+  });
+  $.get(getString, function (data, status) {
     if (status === 'success') {
       var quicktips = $(data).find('entry').map(function () {
         return quicktip = {
           type: $(this).children('type').text(),
           title: $(this).children('title').text(),
           summary: $(this).children('summary').text(),
+          url: $(this).children('url').text(),
+          gefVon: $(this).children('gefVon').text(),
+          priority: $(this).children('priority').text(),
           details: $(this).children('details').map(function () {
             return {
               title: $(this).children('title').text(),
               text: $(this).children('text').text(),
               url: $(this).children('url').text()
             }
-          }).toArray(),
-          url: $(this).children('url').text(),
-          gefVon: $(this).children('gefVon').text(),
-          priority: $(this).children('priority').text()
+          }).toArray()
         };
       }).toArray();
       loadedHandler(quicktips);
@@ -580,19 +598,25 @@ function getQuicktips (search, locale, sprueche, loadedHandler) {
  *   <div class="quicktip" type="TYPE">
  *     <details>
  *       <summary>
- *         <h1><a href="URL">TITLE
- *         <p>SUMMARY
+ *         <h1><a href="URL">TITLE</a></h1>
+ *         <p>SUMMARY</p>
+ *       </summary>
  *       <div class="quicktip-detail">
- *         <h1><a href="DETAILURL">DETAILTITLE
- *         <p>DETAILSUMMARY
+ *         <h2><a href="DETAILURL">DETAILTITLE</a></h1>
+ *         <p>DETAILSUMMARY</p>
+ *       </div>
+ *       <div class="quicktip-detail">
+ *         ...
+ *       </div>
+ *       ...
+ *     </details>
  *     <span>GEFVON
- * </...>
- *             
+ *   </div>
+ * </div>
  * 
- * @param {*} quicktips 
+ * @param {Object} quicktips 
  */
-function createQuicktips (quicktips) {
-  console.log(quicktips);
+function createQuicktips (quicktips, sprueche) {
   var quicktipsDiv = $('#quicktips');
   quicktips.sort(function (a, b) {
     return b.priority - a.priority;

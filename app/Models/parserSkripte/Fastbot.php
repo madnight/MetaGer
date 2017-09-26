@@ -26,6 +26,7 @@ class Fastbot extends Searchengine
             if (strlen($line) > 0) {
                 # Hier bekommen wir jedes einzelne Ergebnis
                 $result = explode("|:|", $line);
+                if(count($result) < 4) continue;
                 $link   = $result[1];
                 $link   = substr($link, strpos($link, "href=\"") + 6);
                 $link   = substr($link, 0, strpos($link, "\""));

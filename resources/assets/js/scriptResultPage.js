@@ -14,8 +14,14 @@ $(document).ready(function () {
   if (localStorage.hasOwnProperty('param_sprueche')) {
     sprueche = localStorage.getItem('param_sprueche') === 'on'; // check for sprueche local storage parameter
   }
-  loadQuicktips('test', 'de', sprueche); // load the quicktips
+  var search = getUrlParameter('eingabe');
+  var locale = readLocaleFromUrl('de');
+  loadQuicktips(search, locale, sprueche); // load the quicktips
 });
+
+function readLocaleFromUrl(defaultLocale) {
+  return location.pathname.substr(1, location.pathname.indexOf('/meta', 0) - 1) || 'de';
+}
 
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;

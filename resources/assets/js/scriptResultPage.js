@@ -14,8 +14,13 @@ $(document).ready(function () {
   if (localStorage.hasOwnProperty('param_sprueche')) {
     sprueche = localStorage.getItem('param_sprueche') === 'on'; // check for sprueche local storage parameter
   }
-  loadQuicktips('test', 'de', sprueche); // load the quicktips
+  var locale = readLocaleFromUrl('de');
+  loadQuicktips('test', locale, sprueche); // load the quicktips
 });
+
+function readLocaleFromUrl(defaultLocale) {
+  return location.pathname.substr(1, location.pathname.indexOf('/meta', 0) - 1) || 'de';
+}
 
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
@@ -552,7 +557,7 @@ function loadQuicktips (search, locale, sprueche) {
   getQuicktips(search, locale, blacklist, createQuicktips);
 }
 
-const QUICKTIP_SERVER = 'http://localhost:63825';
+const QUICKTIP_SERVER = 'http://quicktips.metager3.de:63825';
 
 /**
  * Requests quicktips from the quicktip server and passes them to the loadedHandler

@@ -130,7 +130,7 @@ footer {
     }
 }
 
-.fa.fa-twitter{
+.fa.fa-twitter {
     color: #6faedc
 }
 
@@ -425,7 +425,10 @@ a {
             li:not(.option-title):hover {
                 background-color: #e0e0e0;
             }
-            a, a:hover, a:focus, a:visited {
+            a,
+            a:hover,
+            a:focus,
+            a:visited {
                 color: black;
                 display: block;
             }
@@ -619,5 +622,90 @@ a {
     .resultContainer {
         padding-left: 0;
         padding-right: 0;
+    }
+}
+
+
+/*
+ * <div id="quicktips">
+ *   <div class="quicktip" type="TYPE">
+ *     <details>
+ *       <summary>
+ *         <h1><a href="URL">TITLE
+ *         <p>SUMMARY
+ *       <div class="quicktip-detail">
+ *         <h1><a href="DETAILURL">DETAILTITLE
+ *         <p>DETAILSUMMARY
+ *     <span>GEFVON
+ * </...>
+ */
+
+#quicktips {
+    display: flex;
+    flex-direction: column;
+    // border: 2px solid #ccc;
+    .quicktip {
+        margin: 10px 0px;
+        padding-left: 10px;
+        border-left: 3px solid #fb0;
+        .quicktip-summary {
+            h1 {
+                font-size: 16px;
+                font-weight: bold;
+            }
+            p {}
+        }
+        .quicktip-detail {
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            h2 {
+                margin: 10px 0px;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            p {
+                display: none;
+                font-size: 12px;
+            }
+        }
+        .gefVon {
+            font-size: 14px;
+        }
+        &[type=spruch] {
+            border-left: 3px solid #070;
+            p {
+                color: #070;
+                .author {
+                    color: #404040;
+                    font-style: italic;
+                }
+            }
+        }
+        &[type=spendenaufruf] {
+            border-left: #ddd;
+            color: #ff8000;
+            .quicktip-summary {
+                display: flex;
+                justify-content: space-between;
+                h1 {
+                    margin-right: 15px;
+                }
+                p {
+                    margin: 5px;
+                    .spendenaufruf-btn {
+                        color: white;
+                        background-color: #ff8000;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+        &[type=dictCC] {
+            .quicktip-summary {
+                p {
+                    font-weight: bold;
+                }
+            }
+        }
     }
 }

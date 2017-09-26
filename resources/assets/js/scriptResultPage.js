@@ -14,8 +14,9 @@ $(document).ready(function () {
   if (localStorage.hasOwnProperty('param_sprueche')) {
     sprueche = localStorage.getItem('param_sprueche') === 'on'; // check for sprueche local storage parameter
   }
+  var search = getUrlParameter('eingabe');
   var locale = readLocaleFromUrl('de');
-  loadQuicktips('test', locale, sprueche); // load the quicktips
+  loadQuicktips(search, locale, sprueche); // load the quicktips
 });
 
 function readLocaleFromUrl(defaultLocale) {

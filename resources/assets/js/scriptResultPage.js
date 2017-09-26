@@ -552,7 +552,7 @@ function loadQuicktips (search, locale, sprueche) {
   getQuicktips(search, locale, blacklist, createQuicktips);
 }
 
-const QUICKTIP_SERVER = 'http://localhost:63825';
+const QUICKTIP_SERVER = 'https://quicktips.metager3.de';
 
 /**
  * Requests quicktips from the quicktip server and passes them to the loadedHandler

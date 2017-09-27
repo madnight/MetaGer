@@ -640,10 +640,22 @@ a {
  * </...>
  */
 
+@keyframes quicktip-extender-turn {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(180deg);
+    }
+}
+
 #quicktips {
     display: flex;
-    flex-direction: column;
-    // border: 2px solid #ccc;
+    flex-direction: column; // border: 2px solid #ccc;
+    details[open=""] .quicktip-extender {
+        animation-name: quicktip-extender-turn;
+        animation-fill-mode: forwards;
+    }
     .quicktip {
         margin: 10px 0px;
         padding-left: 10px;
@@ -652,8 +664,14 @@ a {
             h1 {
                 font-size: 16px;
                 font-weight: bold;
+                display: flex;
+                justify-content: space-between;
+                .quicktip-extender {
+                    margin-left: 10px;
+                    color: #777;
+                    font-size: 20px;
+                }
             }
-            p {}
         }
         .quicktip-detail {
             border-top: 1px solid #ddd;

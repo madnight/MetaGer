@@ -19,11 +19,11 @@ $(document).ready(function () {
   loadQuicktips(search, locale, sprueche); // load the quicktips
 });
 
-function readLocaleFromUrl(defaultLocale) {
+function readLocaleFromUrl (defaultLocale) {
   return location.pathname.substr(1, location.pathname.indexOf('/meta', 0) - 1) || 'de';
 }
 
-function getURLParameter(name) {
+function getURLParameter (name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
 
@@ -588,7 +588,7 @@ function getQuicktips (search, locale, blacklist, loadedHandler) {
               title: $(this).children('title').text(),
               text: $(this).children('text').text(),
               url: $(this).children('url').text()
-            }
+            };
           }).toArray()
         };
       }).toArray();
@@ -637,6 +637,7 @@ function createQuicktips (quicktips, sprueche) {
       } else {
         headlineElem.text(quicktip.title);
       }
+      headlineElem.append('<i class="quicktip-extender fa fa-chevron-circle-down" aria-hidden="true"></i>');
       summaryElem
         .append(headlineElem)
         .append('<p>' + quicktip.summary + '</p>');
@@ -652,7 +653,7 @@ function createQuicktips (quicktips, sprueche) {
         detailElem
           .append(detailHeadlineElem)
           .append('<p>' + detail.text + '</p>');
-          mainElem.append(detailElem);
+        mainElem.append(detailElem);
       });
     } else {
       mainElem = $('<div class="quicktip-summary">');

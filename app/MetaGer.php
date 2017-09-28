@@ -237,9 +237,6 @@ class MetaGer
         #Adgoal Implementation
         $this->results = $this->parseAdgoal($this->results);
 
-        #Amazon Affiliate (MetaGers tag ist: metager04-21)
-        $this->results = $this->parseAmazon($this->results);
-
         $counter   = 0;
         $firstRank = 0;
 
@@ -436,34 +433,6 @@ class MetaGer
             return $results;
         }
 
-        return $results;
-    }
-    
-    public function parseAmazon($results)
-    {
-        $amazonTag = "metager04-21";
-        
-        foreach ($results as $result) {
-            $link = $result->anzeigeLink;
-            if (strpos($link, "http") !== 0) {
-                $link = "http://" . $link;
-            }
-            $info = parse_url($link);
-            if(isset($info["host"])){
-                $host = $info['host'];
-                $newurl = $link;
-                if(strpos($host, "amazon") !== FALSE){
-                    # This is Probably an Amazon Link. We'll add our tag as get parameter
-                    if(isset($info["query"])){
-                        $newurl .= "&tag=metager04-21";
-                    }else{
-                        $newurl .= "?tag=metager04-21";
-                    }
-                    $result->link = $newurl;
-                    $result->partnershop = true;
-                }
-            }
-        }
         return $results;
     }
 

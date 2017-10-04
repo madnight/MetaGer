@@ -10,21 +10,28 @@ $(document).ready(function () {
     $($('#foki > li#savedFokiTabSelector').get(0)).find('>a').tab('show');
   }
 
-  var sprueche = getURLParameter('sprueche') === 'on'; // load the sprueche url parameter
   if (localStorage.hasOwnProperty('param_sprueche')) {
-    sprueche = localStorage.getItem('param_sprueche') === 'on'; // check for sprueche local storage parameter
+    var sprueche = localStorage.getItem('param_sprueche') === 'on'; // check for sprueche local storage parameter
+  } else {
+    var sprueche = getURLParameter('sprueche') === 'on'; // load the sprueche url parameter
   }
-  var search = getURLParameter('eingabe');
-  var locale = readLocaleFromUrl('de');
+  var search = getMetaTag('q');
+  var locale = getMetaTag('l');
   loadQuicktips(search, locale, sprueche); // load the quicktips
 });
 
+/*
 function readLocaleFromUrl(defaultLocale) {
   return location.pathname.substr(1, location.pathname.indexOf('/meta', 0) - 1) || 'de';
 }
+*/
 
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+}
+
+function getMetaTag(name) {
+  return $('meta[name="' + name + '"')[0].content;
 }
 
 function activateJSOnlyContent () {

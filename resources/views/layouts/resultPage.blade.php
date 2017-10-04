@@ -5,8 +5,9 @@
 		<link href="/favicon.ico" rel="icon" type="image/x-icon" />
 		<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport" />
-		<meta content="{{ getmypid() }}" name="p" />
-		<meta content="{{ $eingabe }}" name="q" />
+		<meta name="p" content="{{ getmypid() }}" />
+		<meta name="q" content="{{ $eingabe }}" />
+		<meta name="l" content="{{ LaravelLocalization::getCurrentLocale() }}" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
 		<meta http-equiv="language" content="{!! trans('staticPages.meta.language') !!}" />

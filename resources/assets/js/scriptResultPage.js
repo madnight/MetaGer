@@ -583,15 +583,16 @@ function getQuicktips (search, locale, blacklist, loadedHandler) {
   });
   $.get(getString, function (data, status) {
     if (status === 'success') {
-      var quicktips = $(data).find('entry').map(function () {
+      var quicktips = $(data).children('feed').children('entry').map(function () {
+        console.log(this);
         return quicktip = {
-          type: $(this).children('type').text(),
+          type: $(this).children('mg\\:type').text(),
           title: $(this).children('title').text(),
-          summary: $(this).children('summary').text(),
-          url: $(this).children('url').text(),
+          summary: $(this).children('content').text(),
+          url: $(this).children('link').text(),
           gefVon: $(this).children('gefVon').text(),
           score: $(this).children('relevance\\:score').text(),
-          details: $(this).children('details').map(function () {
+          details: $(this).children('mg\\:details').children('entry').map(function () {
             return {
               title: $(this).children('title').text(),
               text: $(this).children('text').text(),
@@ -600,6 +601,7 @@ function getQuicktips (search, locale, blacklist, loadedHandler) {
           }).toArray()
         };
       }).toArray();
+      console.log(quicktips);
       loadedHandler(quicktips);
     } else {
       console.error('Loading quicktips failed with status ' + status);

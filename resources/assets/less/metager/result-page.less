@@ -660,6 +660,13 @@ a {
         margin: 10px 0px;
         padding-left: 10px;
         border-left: 3px solid #fb0;
+        details:not([open=""]) {
+            .quicktip-summary p {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
         .quicktip-summary {
             h1 {
                 font-size: 16px;

@@ -6,6 +6,7 @@ use App;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
 use Response;
+use LaravelLocalization;
 
 class StartpageController extends Controller
 {
@@ -15,18 +16,12 @@ class StartpageController extends Controller
      * @param  int  $id
      * @return Response
      */
-    /* public function loadStartPage($locale = "de")
-    {
-    \App::setLocale($locale);
-    return view('index', [
-    'title' => 'MetaGer: Sicher suchen & finden, Privatsphäre schützen',
-    'homeIcon']);
-    } */
 
     public function loadStartPage(Request $request)
     {
         $focusPages = [];
         $theme      = "default";
+
         foreach ($request->all() as $key => $value) {
             if ($value === 'on' && $key != 'param_sprueche' && $key != 'param_newtab' && $key !== 'param_maps' && $key !== 'param_autocomplete') {
                 $focusPages[] = str_replace('param_', '', $key);
@@ -34,6 +29,11 @@ class StartpageController extends Controller
             if ($key === 'param_theme') {
                 $theme = str_replace('param_', '', $key);
             }
+        }
+
+        $lang = LaravelLocalization::getCurrentLocale();
+        if ($lang === 'de') {
+            $lang = 'all';
         }
 
         return view('index')
@@ -46,7 +46,7 @@ class StartpageController extends Controller
             ->with('autocomplete', $request->input('param_autocomplete', 'on'))
             ->with('foki', $this->loadFoki())
             ->with('focus', $request->input('focus', 'web'))
-            ->with('lang', $request->input('param_lang', 'all'))
+            ->with('lang', $lang)
             ->with('resultCount', $request->input('param_resultCount', '20'))
             ->with('time', $request->input('param_time', '1500'))
             ->with('sprueche', $request->input('param_sprueche', 'on'))

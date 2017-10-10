@@ -21,7 +21,7 @@ $(document).ready(function () {
 });
 
 /*
-function readLocaleFromUrl(defaultLocale) {
+function readLocaleFromUrl (defaultLocale) {
   return location.pathname.substr(1, location.pathname.indexOf('/meta', 0) - 1) || 'de'
 }
 */
@@ -651,6 +651,7 @@ function createQuicktips (quicktips, sprueche) {
       } else {
         headlineElem.text(quicktip.title);
       }
+      headlineElem.append('<i class="quicktip-extender fa fa-chevron-circle-down" aria-hidden="true"></i>');
       summaryElem
         .append(headlineElem)
         .append('<p>' + quicktip.summary + '</p>');

@@ -15,14 +15,14 @@ $(document).ready(function () {
   } else {
     var sprueche = getURLParameter('sprueche') === 'on'; // load the sprueche url parameter
   }
-  var search = getMetaTag('q');
-  var locale = getMetaTag('l');
+  var search = getMetaTag('q') || '';
+  var locale = getMetaTag('l') || 'de';
   loadQuicktips(search, locale, sprueche); // load the quicktips
 });
 
 /*
 function readLocaleFromUrl (defaultLocale) {
-  return location.pathname.substr(1, location.pathname.indexOf('/meta', 0) - 1) || 'de';
+  return location.pathname.substr(1, location.pathname.indexOf('/meta', 0) - 1) || 'de'
 }
 */
 
@@ -30,8 +30,12 @@ function getURLParameter (name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
 
-function getMetaTag(name) {
-  return $('meta[name="' + name + '"')[0].content;
+function getMetaTag (name) {
+  if (typeof $('meta[name="' + name + '"')[0] !== 'undefined') {
+    return $('meta[name="' + name + '"')[0].content || null;
+  } else {
+    return null;
+  }
 }
 
 function activateJSOnlyContent () {
@@ -566,6 +570,7 @@ function loadQuicktips (search, locale, sprueche) {
 }
 
 const QUICKTIP_SERVER = 'https://quicktips.metager3.de';
+//const QUICKTIP_SERVER = 'http://localhost:63825';
 
 /**
  * Requests quicktips from the quicktip server and passes them to the loadedHandler
@@ -582,15 +587,16 @@ function getQuicktips (search, locale, blacklist, loadedHandler) {
   });
   $.get(getString, function (data, status) {
     if (status === 'success') {
-      var quicktips = $(data).find('entry').map(function () {
+      var quicktips = $(data).children('feed').children('entry').map(function () {
+        console.log(this);
         return quicktip = {
-          type: $(this).children('type').text(),
+          type: $(this).children('mg\\:type').text(),
           title: $(this).children('title').text(),
-          summary: $(this).children('summary').text(),
-          url: $(this).children('url').text(),
+          summary: $(this).children('content').text(),
+          url: $(this).children('link').text(),
           gefVon: $(this).children('gefVon').text(),
-          priority: $(this).children('priority').text(),
-          details: $(this).children('details').map(function () {
+          score: $(this).children('relevance\\:score').text(),
+          details: $(this).children('mg\\:details').children('entry').map(function () {
             return {
               title: $(this).children('title').text(),
               text: $(this).children('text').text(),
@@ -599,6 +605,7 @@ function getQuicktips (search, locale, blacklist, loadedHandler) {
           }).toArray()
         };
       }).toArray();
+      console.log(quicktips);
       loadedHandler(quicktips);
     } else {
       console.error('Loading quicktips failed with status ' + status);
@@ -632,7 +639,7 @@ function getQuicktips (search, locale, blacklist, loadedHandler) {
 function createQuicktips (quicktips, sprueche) {
   var quicktipsDiv = $('#quicktips');
   quicktips.sort(function (a, b) {
-    return b.priority - a.priority;
+    return b.score - a.score;
   }).forEach(function (quicktip) {
     var mainElem;
     if (quicktip.details.length > 0) {

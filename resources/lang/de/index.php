@@ -27,7 +27,7 @@ return [
 
     'sponsors.head.1'                => 'Weitere Informationen',
     'sponsors.head.2'                => 'Sponsoren',
-    'sponsors.woxikon'               => '<a href="http://www.suchmaschinenoptimierung.jetzt" class="mutelink" target="_blank" rel="noopener">Suchmaschinenoptimierung</a>',
+    'sponsors.woxikon'               => '<a href="http://www.tagesgeld.jetzt" class="mutelink" target="_blank" rel="noopener">Tagesgeld jetzt!</a>',
     'sponsors.gutscheine'            => '<a href="http://www.gutschein-magazin.de/" class="mutelink" target="_blank" rel="noopener">Aktuelle Gutscheine auf Gutschein-Magazin.de</a>',
     'sponsors.kredite'               => '<a href="https://www.finanzcheck.de/" class="mutelink" target="_blank" rel="noopener">Günstige Kredite auf FINANZCHECK.de vergleichen</a>',
 

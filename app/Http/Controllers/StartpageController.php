@@ -23,7 +23,7 @@ class StartpageController extends Controller
         $theme      = "default";
 
         foreach ($request->all() as $key => $value) {
-            if ($value === 'on' && $key != 'param_sprueche' && $key != 'param_newtab' && $key !== 'param_maps' && $key !== 'param_autocomplete') {
+            if ($value === 'on' && $key != 'param_sprueche' && $key != 'param_newtab' && $key !== 'param_maps' && $key !== 'param_autocomplete' && $key !== 'param_lang') {
                 $focusPages[] = str_replace('param_', '', $key);
             }
             if ($key === 'param_theme') {
@@ -46,7 +46,7 @@ class StartpageController extends Controller
             ->with('autocomplete', $request->input('param_autocomplete', 'on'))
             ->with('foki', $this->loadFoki())
             ->with('focus', $request->input('focus', 'web'))
-            ->with('lang', $lang)
+            ->with('lang', $request->input('param_lang', $lang))
             ->with('resultCount', $request->input('param_resultCount', '20'))
             ->with('time', $request->input('param_time', '1500'))
             ->with('sprueche', $request->input('param_sprueche', 'on'))

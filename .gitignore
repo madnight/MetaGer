@@ -20,3 +20,5 @@ langfiles.zip
 /public/js/utility.js
 
 **/*.map
+/.buildpath
+/.project

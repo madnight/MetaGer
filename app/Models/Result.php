@@ -264,7 +264,7 @@ class Result
          *  dass von jedem Host maximal 3 Links angezeigt werden.
          *  Diese Überprüfung führen wir unter bestimmten Bedingungen nicht durch.
          */
-        if ($metager->getSite() === "" &&
+        if (($metager->getSite() === "" || $metager->getSite() === null) &&
             strpos($this->strippedHost, "ncbi.nlm.nih.gov") === false &&
             strpos($this->strippedHost, "twitter.com") === false &&
             strpos($this->strippedHost, "www.ladenpreis.net") === false &&

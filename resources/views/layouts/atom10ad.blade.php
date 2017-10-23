@@ -1,4 +1,4 @@
-@if(isset($ad)  && !$apiAuthorized)
+@if(isset($ad))
  <ad:advertisement>
    <ad:callOut atom:type="TEXT">{!! trans('ad.von') !!} {!! $ad->gefVon !!}</ad:callOut>
    <ad:title atom:type="TEXT">{{ $ad->titel }}</ad:title>

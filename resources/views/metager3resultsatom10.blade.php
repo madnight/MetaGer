@@ -2,7 +2,7 @@
  <feed xmlns="http://www.w3.org/2005/Atom" 
        xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/"
        xmlns:mg="http://metager.de/opensearch/"
-       xmlns:advertisement="http://a9.com/-/opensearch/extensions/advertisement/1.0/">
+       xmlns:ad="http://a9.com/-/opensearch/extensions/advertisement/1.0/">
      <title>{!! htmlspecialchars($eingabe, ENT_XML1, 'UTF-8'); !!} - MetaGer</title>
      <link href="{{ url()->full() }}"/>
      <updated>{{ date('c') }}</updated>

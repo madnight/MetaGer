@@ -1,6 +1,6 @@
 [	
 	{
-		"title" : "Umfrage: Datenschutz und Suchmaschinen"
+		"title" : "Umfrage: Datenschutz und Suchmaschinen",
 		"summary" : 'zur Studienarbeit "Datenschutz und Suchmaschinen" an der FHWS Würzburg, Wirtschaftsethik',
 		"URL" : "http://befragung.wirtschaftsethik.biz/index.php/472133/lang-de"
 

@@ -1,14 +1,9 @@
 [	
 	{
-		"title" : "Werbefreie Suche mit MetaGer:",
-		"summary" : "SUMA-EV-Mitglieder suchen werbefrei!",
-		"URL" : "http://suma-ev.de/presse/Werbefreie-Suche-mit-MetaGer.html"
-
-	},	
-	{
-		"title" : "MetaGer-Neuentwicklung: Die Suche in der Suche",
-		"summary" : "",
-		"URL" : "http://blog.suma-ev.de/node/225"
+		"title" : "Umfrage: Datenschutz und Suchmaschinen"
+		"summary" : 'zur Studienarbeit "Datenschutz und Suchmaschinen" an der
+   FHWS Würzburg, Wirtschaftsethik',
+		"URL" : "http://befragung.wirtschaftsethik.biz/index.php/472133/lang-de"
 
 	}
 ]

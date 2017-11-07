@@ -3,6 +3,7 @@
 namespace App\Models\parserSkripte;
 
 use App\Models\Searchengine;
+use Log;
 
 class OvertureAds extends Searchengine
 {

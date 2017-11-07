@@ -4,6 +4,7 @@ namespace app\Models\parserSkripte;
 
 use App\Models\Searchengine;
 use Symfony\Component\DomCrawler\Crawler;
+use Log;
 
 class Bing extends Searchengine
 {

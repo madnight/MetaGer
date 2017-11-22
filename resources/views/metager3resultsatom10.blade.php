@@ -20,7 +20,7 @@
          <link href="{!! htmlspecialchars($result->link, ENT_XML1, 'UTF-8'); !!}" />
          <mg:anzeigeLink>{!! htmlspecialchars($result->anzeigeLink, ENT_XML1, 'UTF-8'); !!}</mg:anzeigeLink>
          <content type="text">
-            {!! htmlspecialchars($result->longDescr, ENT_XML1, 'UTF-8'); !!}
+            {!! htmlspecialchars($result->descr, ENT_XML1, 'UTF-8'); !!}
          </content>
        </entry>
     @endforeach

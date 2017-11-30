@@ -329,8 +329,8 @@
 				<h2>{{ trans('index.sponsors.head.2') }}</h2>
 				<ul class="startpage">
 					<li>{!! trans('index.sponsors.woxikon') !!}</li>
+					<li>{!! trans('index.sponsors.seo') !!}</li>
 					<li>{!! trans('index.sponsors.gutscheine') !!}</li>
-					<li>{!! trans('index.sponsors.kredite') !!}</li>
 				</ul>
 			</div>
 			<div id="about-us" class="col-sm-6">

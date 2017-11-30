@@ -5,6 +5,25 @@
 @section('content')
 	<div class="alert alert-warning" role="alert">{!! trans('hilfe.achtung') !!}</div>
 	<h1>{!! trans('hilfe.title') !!}</h1>
+	@if (LaravelLocalization::getCurrentLocale() == "de")
+	<!-- Vorrübergehend direkt integriert, da dieser Sponsor nicht ewig auf dieser Seite bleibt -->
+	<style>
+        #sponsor{
+         	color: #808080;   
+        }
+        #sponsor > a {
+         	color: #808080;   
+        }
+        #sponsor > a:hover {
+         	color: red!important;   
+            text-decoration: underline;
+        }
+    </style>
+	<div id="sponsor">
+        <span>Sponsor: </span>
+        <a target="_blank" rel="noopener" class="" href="https://www.luis.eu/shop/de/">Überwachungskamera, IP Kamera, Straßenbeleuchtung und Videosprechanlage von luis energy</a>
+    </div>
+    @endif
 	<h2>{!! trans('hilfe.einstellungen') !!}</h2>
 	<div class="panel panel-default">
 		<div class="panel-heading">

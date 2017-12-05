@@ -10,7 +10,7 @@ IBAN: DE64 4306 0967 4075 0332 01
 BIC: GENODEM1GLS
 (Konto-Nr.: 4075 0332 01, BLZ: 43060967)
 GLS Gemeinschaftsbank, Bochum',
-    'bankinfo.3'                => 'Falls Sie eine Spendenbescheinigung wünschen, geben Sie auf dem Überweisungsformular bitte Ihre vollständige Adresse, und (sofern vorhanden) auch Ihre E-Mail Adresse an.',
+    'bankinfo.3'                => 'Falls Sie eine Spendenbescheinigung wünschen (erst ab 200€), geben Sie auf dem Überweisungsformular bitte Ihre vollständige Adresse, und (sofern vorhanden) auch Ihre E-Mail Adresse an.',
 
     'paypal.1'                  => 'Bequem mit Paypal,<br>dort auch per Kreditkarte ohne Registrierung,',
     'paypal.2'                  => 'Spenden Sie mit PayPal - schnell, kostenlos und sicher!',

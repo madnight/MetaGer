@@ -37,7 +37,7 @@
 			</div>
 			<div class="form-group donation-form-group">
 			<label for="value">{!! trans('spende.lastschrift.8.value')!!} </label>
-				<input type="text" class="form-control" id="value" required="" name="Bankleitzahl" placeholder="BIC" value="{{ old('Bankleitzahl') }}">
+				<input type="text" class="form-control" id="value" required="" name="Bankleitzahl" placeholder="{!! trans('spende.lastschrift.8.value.placeholder') !!}" value="{{ old('Bankleitzahl') }}">
 			</div>
 			<div class="form-group donation-form-group">
 			<label for="msg">{!! trans('spende.lastschrift.8.message')!!}</label>

@@ -17,7 +17,7 @@
 	</div>
 @endif
 <div class="col-xs-12 col-md-8">
-	@if(!$apiAuthorized && LaravelLocalization::getCurrentLocale() == "de" && strpos(url()->current(), '/beitritt') === false && strpos(url()->current(), '/spendenaufruf') === false)
+	@if(!$apiAuthorized && !$metager->validated && LaravelLocalization::getCurrentLocale() == "de" && strpos(url()->current(), '/beitritt') === false && strpos(url()->current(), '/spendenaufruf') === false)
 			<div class="row" style="margin-bottom: 10px">
 				<div class="col-sm-1">
 				</div>

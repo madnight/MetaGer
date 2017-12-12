@@ -17,10 +17,6 @@
 						<td>{{ $data['name'] }}</td>
 					</tr>
 					<tr>
-						<td>{{ trans('spende.telefonnummer') }}</td>
-						<td>{{ $data['telefon'] }}</td>
-					</tr>
-					<tr>
 						<td>Email</td>
 						<td>{{ $data['email'] }}</td>
 					</tr>
@@ -31,6 +27,10 @@
 					<tr>
 						<td>{{ trans('spende.bic') }}</td>
 						<td>{{ $data['bankleitzahl'] }}</td>
+					</tr>
+					<tr>
+						<td>{{ trans('spende.betrag') }}</td>
+						<td>{{ $data['betrag'] }} €</td>
 					</tr>
 					<tr>
 						<td>{{ trans('spende.danke.message') }}</td>

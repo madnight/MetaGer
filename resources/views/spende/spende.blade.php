@@ -24,10 +24,6 @@
 				<input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ old('email') }}">
 			</div>
 			<div class="form-group donation-form-group">
-			<label for="tel">{!! trans('spende.lastschrift.5') !!}</label>
-				<input type="tel" class="form-control" id="tel" name="Telefon" placeholder="xxxx-xxxxx" value="{{ old('Telefon') }}">
-			</div>
-			<div class="form-group donation-form-group">
 			<label for="iban">{!! trans('spende.lastschrift.6') !!}</label>
 				<input type="text" class="form-control" id="iban" required="" name="Kontonummer" placeholder="IBAN" value="{{ old('Kontonummer') }}">
 			</div>
@@ -36,9 +32,13 @@
 				<input type="text" class="form-control" id="bic" required="" name="Bankleitzahl" placeholder="BIC" value="{{ old('Bankleitzahl') }}">
 			</div>
 			<div class="form-group donation-form-group">
-			<label for="msg">{!! trans('spende.lastschrift.8')!!}</label>
+			<label for="value">{!! trans('spende.lastschrift.8.value')!!} </label>
+				<input type="number" class="form-control" id="value" required="" name="Betrag" placeholder="{!! trans('spende.lastschrift.8.value.placeholder') !!}" value="{{ old('Bankleitzahl') }}">
+			</div>
+			<div class="form-group donation-form-group">
+			<label for="msg">{!! trans('spende.lastschrift.8.message')!!}</label>
 			<label for="msg"><u>{!! trans('spende.bankinfo.3')!!}</u></label>
-			<textarea class="form-control" id="msg" required="" name="Nachricht" placeholder="{!! trans('spende.lastschrift.8.placeholder') !!}">{{ old('Nachricht') }}</textarea>
+			<textarea class="form-control" id="msg" name="Nachricht" placeholder="{!! trans('spende.lastschrift.8.message.placeholder') !!}">{{ old('Nachricht') }}</textarea>
 			</div>
 			<button type="submit" form="donate" class="btn btn-default">{!! trans('spende.lastschrift.9') !!}</button>
 		</form>

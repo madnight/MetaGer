@@ -53,6 +53,7 @@ class MailController extends Controller
 
     public function donation(Request $request)
     {
+
         # Der enthaltene String wird dem Benutzer nach der Spende ausgegeben
         $messageToUser = "";
         $messageType   = ""; # [success|error]
@@ -76,7 +77,7 @@ class MailController extends Controller
             # Kontonummer ( IBAN )
             # Bankleitzahl ( BIC )
             # Nachricht
-            if (!$request->has('Kontonummer') || !$request->has('Bankleitzahl') || !$request->has('Nachricht')) {
+            if (!$request->has('Kontonummer') || !$request->has('Bankleitzahl') || !$request->has('Betrag')) {
                 $messageToUser = "Sie haben eins der folgenden Felder nicht ausgefüllt: IBAN, BIC, Nachricht. Bitte korrigieren Sie Ihre Eingabe und versuchen es erneut.\n";
                 $messageType   = "error";
             } else {
@@ -84,7 +85,11 @@ class MailController extends Controller
                 $message .= "\r\nTelefon: " . $request->input('Telefon', 'Keine Angabe');
                 $message .= "\r\nKontonummer: " . $request->input('Kontonummer');
                 $message .= "\r\nBankleitzahl: " . $request->input('Bankleitzahl');
+                $message .= "\r\nBetrag: " . $request->input('Betrag');
                 $message .= "\r\nNachricht: " . $request->input('Nachricht');
+
+                $message .= "\r\n\r\nIP: " . $request->ip();
+                $message .= "\r\nUser-Agent: " . $request->header('User-Agent', "");
 
                 $replyTo = $request->input('email', 'anonymous-user@metager.de');
                 if (!filter_var($replyTo, FILTER_VALIDATE_EMAIL)) {
@@ -92,7 +97,7 @@ class MailController extends Controller
                 }
 
                 try {
-                    Mail::to("office@suma-ev.de")
+                    Mail::to("dominik@suma-ev.de")
                         ->send(new Spende($replyTo, $message));
 
                     $messageType   = "success";
@@ -110,7 +115,7 @@ class MailController extends Controller
                 ->with('title', 'Kontakt')
                 ->with($messageType, $messageToUser);
         } else {
-            $data = ['name' => $request->input('Name', 'Keine Angabe'), 'telefon' => $request->input('Telefon', 'Keine Angabe'), 'kontonummer' => $request->input('Kontonummer'), 'bankleitzahl' => $request->input('Bankleitzahl'), 'email' => $request->input('email', 'anonymous-user@metager.de'), 'nachricht' => $request->input('Nachricht')];
+            $data = ['name' => $request->input('Name', 'Keine Angabe'), 'telefon' => $request->input('Telefon', 'Keine Angabe'), 'kontonummer' => $request->input('Kontonummer'), 'bankleitzahl' => $request->input('Bankleitzahl'), 'email' => $request->input('email', 'anonymous-user@metager.de'), 'betrag' => $request->input('Betrag'), 'nachricht' => $request->input('Nachricht')];
             $data = base64_encode(serialize($data));
             return redirect(LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), route("danke", ['data' => $data])));
         }

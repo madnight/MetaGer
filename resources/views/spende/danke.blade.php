@@ -33,6 +33,10 @@
 						<td>{{ $data['bankleitzahl'] }}</td>
 					</tr>
 					<tr>
+						<td>{{ trans('spende.betrag') }}</td>
+						<td>{{ $data['betrag'] }} €</td>
+					</tr>
+					<tr>
 						<td>{{ trans('spende.danke.message') }}</td>
 						<td>{{ $data['nachricht'] }}</td>
 					</tr>

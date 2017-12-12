@@ -17,10 +17,6 @@
 						<td>{{ $data['name'] }}</td>
 					</tr>
 					<tr>
-						<td>{{ trans('spende.telefonnummer') }}</td>
-						<td>{{ $data['telefon'] }}</td>
-					</tr>
-					<tr>
 						<td>Email</td>
 						<td>{{ $data['email'] }}</td>
 					</tr>

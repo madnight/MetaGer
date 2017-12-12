@@ -82,7 +82,6 @@ class MailController extends Controller
                 $messageType   = "error";
             } else {
                 $message = "\r\nName: " . $request->input('Name', 'Keine Angabe');
-                $message .= "\r\nTelefon: " . $request->input('Telefon', 'Keine Angabe');
                 $message .= "\r\nKontonummer: " . $request->input('Kontonummer');
                 $message .= "\r\nBankleitzahl: " . $request->input('Bankleitzahl');
                 $message .= "\r\nBetrag: " . $request->input('Betrag');
@@ -92,12 +91,15 @@ class MailController extends Controller
                 $message .= "\r\nUser-Agent: " . $request->header('User-Agent', "");
 
                 $replyTo = $request->input('email', 'anonymous-user@metager.de');
+                if($replyTo == ""){
+                    $replyTo = "noreply@metager.de";
+                }
                 if (!filter_var($replyTo, FILTER_VALIDATE_EMAIL)) {
                     $messageToUser .= "Die eingegebene Email-Addresse ($replyTo) scheint nicht korrekt zu sein.";
                 }
 
                 try {
-                    Mail::to("dominik@suma-ev.de")
+                    Mail::to("spenden@suma-ev.de")
                         ->send(new Spende($replyTo, $message));
 
                     $messageType   = "success";
@@ -115,7 +117,7 @@ class MailController extends Controller
                 ->with('title', 'Kontakt')
                 ->with($messageType, $messageToUser);
         } else {
-            $data = ['name' => $request->input('Name', 'Keine Angabe'), 'telefon' => $request->input('Telefon', 'Keine Angabe'), 'kontonummer' => $request->input('Kontonummer'), 'bankleitzahl' => $request->input('Bankleitzahl'), 'email' => $request->input('email', 'anonymous-user@metager.de'), 'betrag' => $request->input('Betrag'), 'nachricht' => $request->input('Nachricht')];
+            $data = ['name' => $request->input('Name', 'Keine Angabe'), 'kontonummer' => $request->input('Kontonummer'), 'bankleitzahl' => $request->input('Bankleitzahl'), 'email' => $request->input('email', 'anonymous-user@metager.de'), 'betrag' => $request->input('Betrag'), 'nachricht' => $request->input('Nachricht')];
             $data = base64_encode(serialize($data));
             return redirect(LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), route("danke", ['data' => $data])));
         }

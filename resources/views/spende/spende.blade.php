@@ -24,10 +24,6 @@
 				<input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ old('email') }}">
 			</div>
 			<div class="form-group donation-form-group">
-			<label for="tel">{!! trans('spende.lastschrift.5') !!}</label>
-				<input type="tel" class="form-control" id="tel" name="Telefon" placeholder="xxxx-xxxxx" value="{{ old('Telefon') }}">
-			</div>
-			<div class="form-group donation-form-group">
 			<label for="iban">{!! trans('spende.lastschrift.6') !!}</label>
 				<input type="text" class="form-control" id="iban" required="" name="Kontonummer" placeholder="IBAN" value="{{ old('Kontonummer') }}">
 			</div>

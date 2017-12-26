@@ -60,8 +60,13 @@
 					</form>
 				</div>
 				<div class="col-md-6">
-					<h2>{!! trans('spende.bitcoins.1') !!}</h2>
-					<a href="bitcoin:174SDRNZqM2WNobHhCDqD1VXbnZYFXNf8V"><img src="/img/WeAcceptBitcoin.png" style="width:120px" alt="Bitcoin"></a>
+					<h3>{!! trans('spende.bitcoins.1') !!}</h3>
+                	{!! trans('spende.bitcoins.2') !!}<br/>
+                		<a href="bitcoin:174SDRNZqM2WNobHhCDqD1VXbnZYFXNf8V">174SDRNZqM2WNobHhCDqD1VXbnZYFXNf8V</a>
+                	</div>
+                	<div class="clearfix"></div>
+                	<hr>
+
 				</div>
 			</div>
 		</div>

@@ -2,13 +2,9 @@
 
 return [
     "headline.1" => "Contacto",
-    "headline.2" => "Forum",
-    "headline.3" => "Por favor haga las preguntas técnica primero en nuestro <a href=\"http://forum.suma-ev.de/\" target=\"_blank\" rel=\"noopener\">Forum</a>",
-    "headline.4" => "Así también pueden aprovechar otros de las respuestas.",
 
     "form.1"     => "Formulario de contacto seguro",
     "form.2"     => "Con este formulario nos puede contactar encryptado. Por supuesto como vía alterna nos puede  mandar un <a href=\"mailto:office@suma-ev.de\">email</a>.",
-    "form.3"     => "Por la cantidad de consultas que recibimos no estamos siempre contestando a tiempo.",
     "form.5"     => "Su dirección de correo electrónico (opcional)",
     "form.6"     => "Su mensaje",
     'form.7'     => '<strong>Su mensaje será encryptada antes de mandarla <a href="http://openpgpjs.org/.">OpenPGP.js</a> para esto necesitamos Javascript.</strong> Sino tiene activado Javascript su mensaje será enviada sin encryptación.',

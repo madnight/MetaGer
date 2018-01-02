@@ -4,25 +4,33 @@
 
 @section('content')
 	<h1>{!! trans('kontakt.headline.1') !!}</h1>
-	<h2>{!! trans('kontakt.headline.2') !!}</h2>
-	<p><span class="bold">{!! trans('kontakt.headline.3') !!}</span>
-	<span>{!! trans('kontakt.headline.4') !!}</span></p>
 	<h2>{!! trans('kontakt.form.1') !!}</h2>
 	<p>{!! trans('kontakt.form.2') !!}</p>
-	<p>{!! trans('kontakt.form.3') !!}</p>
-	<p class="bold">{!! trans('kontakt.form.4') !!}</p>
+	@if(isset($formerrors))
+		@foreach($formerrors->errors()->all() as $errormessage)
+		<div class="alert alert-danger" role="alert">{{$errormessage}}</div>
+		@endforeach
+	@endif
+	
+	
 	<form class="contact" name="contact" method="post" action="{{ LaravelLocalization::getLocalizedURL() }}">
 		{{ csrf_field() }}
 		<div class="form-group kontakt-form-group">
-			<input class="form-control" name="email" placeholder="{!! trans('kontakt.form.5') !!}" type="text"></div>
+			<input class="form-control" name="name" placeholder="{!!trans('kontakt.form.name')!!}" type="text" required @if(isset($formerrors) && Request::has('name'))value="{{Request::input('name')}}"@endif>
+		</div>
+		<div class="form-group kontakt-form-group">
+			<input class="form-control" name="email" placeholder="{!! trans('kontakt.form.5') !!}" type="email" required @if(isset($formerrors) && Request::has('email'))value="{{Request::input('email')}}"@endif>
+		</div>
+		<div class="form-group kontakt-form-group">
+			<input class="form-control" name="subject" placeholder="{!! trans('kontakt.form.7') !!}" type="text" required @if(isset($formerrors) && Request::has('subject'))value="{{Request::input('subject')}}"@endif>
+		</div>
 			<div class="form-group kontakt-form-group">
 			    @if(isset($url) && $url !== "")
 			    <label for="message">Wenn MetaGer bestimmte Webseiten nicht angezeigt hat, von denen Sie wissen, dass es sie gibt: Bitte nennen Sie deren Adresse/n (http:// ...???...). Wir werden das detailliert untersuchen.</label>
 				@endif
-				<textarea class="form-control" id="message" name="message" placeholder="{!! trans('kontakt.form.6') !!}">@if(isset($url) && $url !== "")Die Suche unter "{{ base64_decode($url) }}" ist unvollständig.@endif</textarea>
+				<textarea class="form-control" id="message" name="message" placeholder="{!! trans('kontakt.form.6') !!}" requireds>@if(isset($formerrors) && Request::has('message')){{Request::input('message')}}@endif</textarea>
 			</div>
 			<div class="form-group kontakt-form-group">
-			<p>{!! trans('kontakt.form.7') !!}</p>
 			<button title="" data-original-title="" class="btn btn-default encrypt-btn" type="submit">{!! trans('kontakt.form.8') !!}</button>
 		</div>
 	</form>
@@ -96,5 +104,4 @@ geiG3j1J/CaDBZqPBaBflK0UWR5nxCsoOk7i5f3isUeXSVLTnA+K9HkQ6D/Gt5vx
 <p>{!! trans('kontakt.letter.2') !!}</p>
 <address>{!! trans('kontakt.letter.3') !!}</address>
 <script type="text/javascript" src="{{ elixir('js/lib.js') }}"></script>
-<script type="text/javascript" src="{{ elixir('js/kontakt.js') }}"></script>
 @endsection

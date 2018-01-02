@@ -28,7 +28,7 @@
 			    @if(isset($url) && $url !== "")
 			    <label for="message">Wenn MetaGer bestimmte Webseiten nicht angezeigt hat, von denen Sie wissen, dass es sie gibt: Bitte nennen Sie deren Adresse/n (http:// ...???...). Wir werden das detailliert untersuchen.</label>
 				@endif
-				<textarea class="form-control" id="message" name="message" placeholder="{!! trans('kontakt.form.6') !!}" requireds>@if(isset($formerrors) && Request::has('message')){{Request::input('message')}}@endif</textarea>
+				<textarea class="form-control" id="message" name="message" placeholder="{!! trans('kontakt.form.6') !!}" required>@if(isset($formerrors) && Request::has('message')){{Request::input('message')}}@endif</textarea>
 			</div>
 			<div class="form-group kontakt-form-group">
 			<button title="" data-original-title="" class="btn btn-default encrypt-btn" type="submit">{!! trans('kontakt.form.8') !!}</button>

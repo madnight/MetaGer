@@ -51,7 +51,7 @@ class MailController extends Controller
 
         if (!$request->has('message') || !$request->has('subject')) {
             $messageType   = "error";
-            $returnMessage = "Tut uns leid, aber leider haben wir mit Ihrer Kontaktanfrage keine Daten erhalten. Die Email wurde nicht versand";
+            $returnMessage = "Tut uns leid, aber leider haben wir mit Ihrer Kontaktanfrage keine Daten erhalten. Die Nachricht wurde nicht versandt.";
         } else {
             # Wir versenden die Mail des Benutzers an uns:
             $message = $request->input('message');
@@ -59,7 +59,7 @@ class MailController extends Controller
             Mail::to("support@suma-ev.de")
                 ->send(new Kontakt($name, $replyTo, $subject, $message));
 
-            $returnMessage = 'Ihre Email wurde uns erfolgreich zugestellt. Vielen Dank dafür! Wir werden diese schnellstmöglich bearbeiten und uns dann ggf. wieder bei Ihnen melden.';
+            $returnMessage = 'Ihre Nachricht wurde uns erfolgreich zugestellt. Vielen Dank dafür! Wir werden diese schnellstmöglich bearbeiten und uns dann ggf. wieder bei Ihnen melden.';
             $messageType   = "success";
         }
 

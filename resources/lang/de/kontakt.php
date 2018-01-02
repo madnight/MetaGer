@@ -2,19 +2,14 @@
 
 return [
     'headline.1' => 'Kontakt',
-    'headline.2' => 'Forum',
-    'headline.3' => 'Bitte stellen Sie technische Fragen zuerst in unserem <a href="http://forum.suma-ev.de/" target="_blank" rel="noopener">Forum</a>',
-    'headline.4' => 'So können auch andere von einer Antwort profitieren.',
-
     'form.1'     => 'Sicheres Kontakformular',
-    'form.2'     => 'Über dieses Formular können Sie uns verschlüsselt kontaktieren.
-Alternativ können Sie uns natürlich auch per <a href="mailto:office@suma-ev.de">email</a> erreichen.',
-    'form.3'     => 'Beachten Sie: Aufgrund der Vielzahl der Anfragen sind wir personell nicht immer in der Lage, alles zeitnah zu beantworten.',
-    'form.4'     => 'Wenn Sie keine email-Adresse angeben, können wir Ihnen nicht antworten.',
-    'form.5'     => 'Ihre e-mail-Adresse (optional)',
+    'form.2'     => 'Über dieses Formular können Sie uns kontaktieren.
+Alternativ können Sie uns natürlich auch per <a href="mailto:support@suma-ev.de">email</a> erreichen.',
+'form.name'  => "Name (Vorname Nachname)",
+    'form.5'     => 'Ihre e-mail-Adresse',
     'form.6'     => 'Ihre Nachricht',
-    'form.7'     => '<strong>Ihre Nachricht wird vor dem Absenden mit <a href="http://openpgpjs.org/.">OpenPGP.js</a> verschlüsselt. Dafür wird Javascript benötigt.</strong> Falls Sie Javascript deaktiviert haben, wird Ihre Eingabe unverschlüsselt gesendet.',
-    'form.8'     => 'Verschlüsseln und senden',
+    'form.7'     => 'Betreff',
+    'form.8'     => 'Senden',
 
     'mail.1'     => 'Per Email',
     'mail.2'     => 'Sie können uns auch direkt eine email an die folgende Adresse schicken: <a href="mailto:office@suma-ev.de">office@suma-ev.de</a>',

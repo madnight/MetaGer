@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use LaravelLocalization;
 use Mail;
+use Validator;
 
 class MailController extends Controller
 {
@@ -24,6 +25,23 @@ class MailController extends Controller
         # Nachricht, die wir an den Nutzer weiterleiten:
         $messageType   = ""; # [success|error]
         $returnMessage = '';
+
+        # Wir benötigen 3 Felder von dem Benutzer wenn diese nicht übermittelt wurden, oder nicht korrekt sind geben wir einen Error zurück
+        $validator = Validator::make(
+            [
+                'email' => $request->input('email')
+            ],
+            [
+                'email' => 'required|email'
+            ]
+        );
+
+        if($validator->fails()){
+            return view('kontakt.kontakt')->with('formerrors', $validator)->with('title', trans('titles.kontakt'))->with('navbarFocus', 'kontakt');
+        }
+
+        $name = $request->input('name', '');
+
         $replyTo       = $request->input('email', 'noreply@metager.de');
         if ($replyTo === "") {
             $replyTo = "noreply@metager.de";
@@ -31,15 +49,15 @@ class MailController extends Controller
             $replyTo = $request->input('email');
         }
 
-        if (!$request->has('message')) {
+        if (!$request->has('message') || !$request->has('subject')) {
             $messageType   = "error";
             $returnMessage = "Tut uns leid, aber leider haben wir mit Ihrer Kontaktanfrage keine Daten erhalten. Die Email wurde nicht versand";
         } else {
             # Wir versenden die Mail des Benutzers an uns:
             $message = $request->input('message');
-
-            Mail::to("office@suma-ev.de")
-                ->send(new Kontakt($replyTo, $message));
+            $subject = $request->input('subject');
+            Mail::to("support@suma-ev.de")
+                ->send(new Kontakt($name, $replyTo, $subject, $message));
 
             $returnMessage = 'Ihre Email wurde uns erfolgreich zugestellt. Vielen Dank dafür! Wir werden diese schnellstmöglich bearbeiten und uns dann ggf. wieder bei Ihnen melden.';
             $messageType   = "success";

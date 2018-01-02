@@ -15,10 +15,11 @@ class Kontakt extends Mailable
      *
      * @return void
      */
-    public function __construct($from, $message)
+    public function __construct($name, $from, $subject, $message)
     {
-        $this->subject = "[Ticket " . date("Y") . date("d") . date("m") . date("H") . date("i") . date("s") . "] MetaGer - Kontaktanfrage";
+        $this->name = $name;
         $this->reply   = $from;
+        $this->subject = $subject;
         $this->message = $message;
     }
 
@@ -29,7 +30,7 @@ class Kontakt extends Mailable
      */
     public function build()
     {
-        return $this->from($this->reply)
+        return $this->from($this->reply, $this->name)
             ->subject($this->subject)
             ->text('kontakt.mail')
             ->with('messageText', $this->message);

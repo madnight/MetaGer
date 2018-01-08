@@ -593,7 +593,7 @@ function getQuicktips (search, locale, blacklist, loadedHandler) {
           type: $(this).children('mg\\:type').text(),
           title: $(this).children('title').text(),
           summary: $(this).children('content').text(),
-          url: $(this).children('link').text(),
+          url: $(this).children('link').attr("href"),
           gefVon: $(this).children('mg\\:gefVon').text(),
           score: $(this).children('relevance\\:score').text(),
           details: $(this).children('mg\\:details').children('entry').map(function () {

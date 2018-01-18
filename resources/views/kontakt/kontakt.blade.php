@@ -13,7 +13,7 @@
 	@endif
 	
 	
-	<form class="contact" name="contact" method="post" action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/kotakt") }}">
+	<form class="contact" name="contact" method="post" action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/kontakt") }}">
 		{{ csrf_field() }}
 		<div class="form-group kontakt-form-group">
 			<input class="form-control" name="name" placeholder="{!!trans('kontakt.form.name')!!}" type="text" required @if(isset($formerrors) && Request::has('name'))value="{{Request::input('name')}}"@endif>

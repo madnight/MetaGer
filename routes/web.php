@@ -180,7 +180,6 @@ Route::group(
                 $filePath = storage_path() . "/app/public/MetaGer-release.apk";
                 return response()->download($filePath, "MetaGer-release.apk");
             });
-
             Route::get('maps', function () {
                 $filePath     = env('maps_app');
                 $fileContents = file_get_contents($filePath);
@@ -190,6 +189,7 @@ Route::group(
                     ->header('Content-Transfer-Encoding', 'Binary')
                     ->header("Content-Disposition", "attachment; filename=app-release.apk");
             });
+
             Route::get('maps/version', function () {
                 $filePath     = env('maps_version');
                 $fileContents = file_get_contents($filePath);

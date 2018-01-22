@@ -41,4 +41,3 @@ function t(key, lang) {
         return translations.de[key];
     }
 }
-//# sourceMappingURL=translations.js.map

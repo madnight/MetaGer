@@ -276,12 +276,16 @@ function toggleDeleteButton() {
  */
 function saveFocus () {
   var name = document.getElementById('focus-name').value;
-  if (isValidName(name) && atLeastOneChecked()) {
+  if(!isValidName(name)) { 
+    alert(t('select-valid-name'));
+  } else if(atLeastOneChecked()) {
+    alert(t('select-engine'));
+  } else {
     var oldId = document.getElementById('original-id').value;
     var id = getIdFromName(name);
     var overwrite = true;
     if (alreadyInUse(name) && oldId !== id) {
-      overwrite = confirm('Name bereits genutzt\nüberschreiben?');
+      overwrite = confirm(t('confirm-overwrite-name'));
       if (overwrite) {
         localStorage.removeItem(id);
         removeFocusById(id);
@@ -301,18 +305,6 @@ function saveFocus () {
       addFocus(name);
       $('#create-focus-modal').modal('hide');
     }
-  } else {
-     switch(document.documentElement.lang) {
-      case 'en':
-        alert('Please select at least 1 search engine.');
-        break;
-      case 'es':
-        alert('Por favor, seleccione al menos un motor de búsqueda.');
-        break;
-      default:
-        alert('Bitte mindestens 1 Suchmaschine auswählen.');
-        break;
-     }
   }
 }
 /**

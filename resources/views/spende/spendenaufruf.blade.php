@@ -5,34 +5,42 @@
 @section('navbarFocus.donate', 'class="dropdown active"')
 
 @section('content')
-	<h1>MetaGer: die unabhängige, nicht-kommerzielle Internet-Suche</h1>
-	<p><a href="#formular">Direkt zum Spendenformular</a></p>
-	<p>In den vergangenen Monaten hat sich MetaGer prächtig weiter entwickelt.
-	Daran haben <em>Sie</em>, die MetaGer-Nutzer, einen maßgeblichen Anteil: Ohne
-	<em>Ihre</em> Hilfe gäbe es die unabhängige, nicht-kommerzielle MetaGer-Suche
-	schon lange nicht mehr.</p>
-	<p>Für das kommende Jahr haben wir uns nun allerhand vorgenommen:</p>
-	<ul>
-		<li>
-			<p>Unsere englische Version <a href="https://metager.net" target="_blank">https://metager.net</a> muss im englischen Sprachraum expandieren. In diesem Jahr konnten wir mit unserem mehrsprachigen Interface eine sehr gute Grundlage schaffen. Für die englische Version müssen wir nun auch noch mit einer gewohnt ausgezeichneten Ergebnisqualität überzeugen.</p>
-		</li>
-		<li>
-			<p>Gleichzeitig planen wir die „Wiederbelebung“ unserer Bildersuche. Die bisherige MetaGer Bildersuche wurde dieses Jahr von uns deaktiviert, um diese grundlegend zu überarbeiten. Die Ergebnisse und Optionen waren für viele Nutzer nicht ausreichend. Genau das soll sich nun ändern. 2018 soll MetaGer wieder um eine vollumfängliche Bildersuche erweitert werden.</p>
-		</li>
-		<li>
-			<p>Frischer, schneller, produktiver: MetaGer bekommt ein neues Gewand, um euch noch besser in jeder Situation unterstützen zu können.</p>
-		</li>
-		<li>
-			<p>Neben der Suche nach Texten und Bildern ist die Suche nach räumlicher, geographischer Information einer der am häufigsten genutzten Internetdienste. Gerade hierbei sind die Standortaufzeichnungen der globalen Suchmaschinenanbieter ein Überwachungsinstrument erster Güte. Um dafür eine Alternative zu bieten, entwickeln wir <a href="https://maps.metager.de" target="_blank">maps.metager.de</a>. Diesen Dienst haben wir vor kurzem um eine generelle Offline-Funktionalität erweitert. Nun gilt es, diese zu verbessern und den Dienst auch auf die ganze Welt auszuweiten.</p>
-		</li>
-		<li>
-			<p>Daneben steht wie immer das "<i>Tagesgeschäft</i>" mit vielen Nutzeranfragen. Unser Ziel ist es, dass <em>jede/r</em> die/der uns etwas fragt, eine vernünftige Antwort bekommt.  Auch das unterscheidet uns von den globalen Suchmaschinenanbietern: Bei MetaGer findet jeder einzelne Mensch Beachtung.</p>
-		</li>
-	</ul>
-	<p class="lead">Damit wir dieses alles "<i>stemmen</i>" können, sind wir auch weiterhin auf
-	Ihre Hilfe angewiesen; wir bitten um Spenden für unsere Arbeit:</p>
-	<div class="" style="margin-top:50px">
-		<h1 id="formular">Jetzt Spenden</h1>
+<h1>MetaGer sagt: <i>Danke!</i></h1>
+<p>
+Liebe hilfsbereite Menschen und metager-ische Freunde, wir sind überwältigt von der
+wundervollen Community um MetaGer: 
+Eure großzügige Spendenbereitschaft hilft dabei, MetaGer besser schneller und bekannter
+zu machen. 
+</p>
+<p><b>Wie bereits im Spendenaufruf angekündigt, haben wir für das Jahr 2018 große
+Pläne, die wir dank Eurer Hilfe auch in die Tat umsetzen werden.
+</b></p>
+<p>
+Am 12. Dezember 2017 hatte der SUMA-EV als Betreiber von metager.de
+den Spendenaufruf auf der MetaGer-Website gestartet.  Keine zwei Minuten
+später gingen die ersten Spenden ein.  Und das ging so weiter -
+es ist unglaublich toll zu erleben, wie unsere Nutzer die unabhängige und
+nicht-kommerzielle Internet-Suche mit MetaGer unterstützen!  Sowohl mit
+Spenden als auch mit motivierenden Worten.
+</p>
+<p>
+Wir Danken! Und haben den Spendenaufruf am 23.01.2018 beendet. Die Finanzierung
+unserer freien und unabhängigen Internetsuche ist nun für die nächste Zeit
+gesichert.
+</p>
+<p>
+P.S.: Wir haben auch allen, die dies zu erkennen gegeben haben, auf Wunsch
+Spendenbescheinigungen gesandt.  Bei einigen Spendern war das nicht möglich,
+weil keine Adresse angegeben war.  Wir können auch nicht ausschließen, dass
+wir evtl. jemanden übersehen haben.  In diesem wie in jenem Fall melden Sie
+sich bitte noch einmal.
+</p>
+<p>
+Herzliche Grüße,
+das MetaGer-Team im SUMA-EV
+</p>
+<div class="" style="margin-top:50px">
+		<h1 id="formular">Weiter Spenden</h1>
 		<div class="col-sm-6">
 			<h2>{{ trans('spende.bankinfo.1') }}</h2>
 			<p style="white-space:pre;">{{ trans('spende.bankinfo.2') }}</p>
@@ -126,5 +134,9 @@
 			</ul>
 		</div>
 	</div>
-	<div id="left" class="col-lg-6 col-md-12 col-sm-12 others"></div>
+
+<div id="left" class="col-lg-6 col-md-12 col-sm-12 others">
+
+
+	</div>
 @endsection

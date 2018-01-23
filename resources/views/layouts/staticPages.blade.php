@@ -157,7 +157,7 @@
 				    width: 100%;
 				    max-width: 770px;
 				    margin-bottom: 10px;
-			    "><img src="/img/aufruf.png" alt="Spendenaufruf SuMa eV" width="100%"></a></div>
+			    "><img src="/img/danke.png" alt="Danke für Ihre Spendenbereitschaft" width="100%"></a></div>
 			@endif
 			<main class="mg-panel container">
 				@if (isset($success))

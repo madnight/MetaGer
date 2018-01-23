@@ -34,7 +34,7 @@
 			    display: inline-block;
 			    width: 100%;
 			    ">
-			    	<img src="/img/aufruf.png" alt="Spendenaufruf SuMa eV" width="100%">
+			    	<img src="/img/danke.png" alt="Spendenaufruf SuMa eV" width="100%">
 			    </a>
 			</div>
 			</div>

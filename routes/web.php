@@ -88,11 +88,6 @@ Route::group(
         Route::get('bform1.htm', function () {
             return redirect('beitritt');
         });
-        Route::get('spendenaufruf', function () {
-            return view('spende.spendenaufruf')
-                ->with('title', 'Spendenaufruf - MetaGer')
-                ->with('navbarFocus', 'foerdern');
-        });
 
         Route::post('spende', 'MailController@donation');
 

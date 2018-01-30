@@ -150,15 +150,6 @@
 
 		</header>
 		<div class="wrapper">
-			@if(LaravelLocalization::getCurrentLocale() == "de" && strpos(url()->current(), '/beitritt') === false && strpos(url()->current(), '/spendenaufruf') === false)
-			<div style="text-align: center;"><a href="/spendenaufruf" target="_blank" style="
-			        background-color: white;
-				    display: inline-block;
-				    width: 100%;
-				    max-width: 770px;
-				    margin-bottom: 10px;
-			    "><img src="/img/danke.png" alt="Danke für Ihre Spendenbereitschaft" width="100%"></a></div>
-			@endif
 			<main class="mg-panel container">
 				@if (isset($success))
 					<div class="alert alert-success" role="alert">{{ $success }}</div>

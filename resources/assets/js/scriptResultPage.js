@@ -588,7 +588,6 @@ function getQuicktips (search, locale, blacklist, loadedHandler) {
   $.get(getString, function (data, status) {
     if (status === 'success') {
       var quicktips = $(data).children('feed').children('entry').map(function () {
-        console.log(this);
         return quicktip = {
           type: $(this).children('mg\\:type').text(),
           title: $(this).children('title').text(),
@@ -605,7 +604,6 @@ function getQuicktips (search, locale, blacklist, loadedHandler) {
           }).toArray()
         };
       }).toArray();
-      console.log(quicktips);
       loadedHandler(quicktips);
     } else {
       console.error('Loading quicktips failed with status ' + status);

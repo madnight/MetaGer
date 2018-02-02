@@ -30,7 +30,6 @@ class MetaGer
     protected $engines         = [];
     protected $results         = [];
     protected $ads             = [];
-    protected $products        = [];
     protected $warnings        = [];
     protected $errors          = [];
     protected $addedHosts      = [];
@@ -280,7 +279,6 @@ class MetaGer
         
         if ($this->validated) {
             $this->ads       = [];
-            $this->products  = [];
             $this->maps      = false;
         }
 
@@ -364,9 +362,6 @@ class MetaGer
             }
             foreach ($engine->ads as $ad) {
                 $this->ads[] = $ad;
-            }
-            foreach ($engine->products as $product) {
-                $this->products[] = $product;
             }
         }
 
@@ -1247,24 +1242,6 @@ class MetaGer
         } else {
             return null;
         }
-    }
-
-    public function hasProducts()
-    {
-        if (count($this->products) > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function getProducts()
-    {
-        $return = [];
-        foreach ($this->products as $product) {
-            $return[] = get_object_vars($product);
-        }
-        return $return;
     }
 
     public function canCache()

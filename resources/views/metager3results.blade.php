@@ -17,15 +17,9 @@
 	</div>
 @endif
 <div class="col-xs-12 col-md-8">
-	@if($metager->hasProducts())
-	    @if( $metager->getFokus() !== "produktsuche" && !$apiAuthorized)
-		    @include('layouts.products', ['products' => $metager->getProducts()])
-		@endif
-	@else
-		@for($i = 0; $i <= 2; $i++)
-			@include('layouts.ad', ['ad' => $metager->popAd()])
-		@endfor
-	@endif
+	@for($i = 0; $i <= 2; $i++)
+		@include('layouts.ad', ['ad' => $metager->popAd()])
+	@endfor
 	@foreach($metager->getResults() as $result)
 		@if($result->number % 7 === 0)
 			@include('layouts.ad', ['ad' => $metager->popAd()])

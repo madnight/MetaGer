@@ -24,18 +24,15 @@
 	@else
 		<div class="col-xs-12 col-md-12 resultContainer">
 	@endif
-		@if($metager->hasProducts())
-    		@if( $metager->getFokus() !== "produktsuche" && !$apiAuthorized)
-    		    @include('layouts.products', ['products' => $metager->getProducts()])
-    		@endif
-
+		@if($mobile)
+			@include('layouts.ad', ['ad' => $metager->popAd()])
 		@else
 			@for($i = 0; $i <= 2; $i++)
 				@include('layouts.ad', ['ad' => $metager->popAd()])
 			@endfor
 		@endif
 		@foreach($metager->getResults() as $result)
-			@if($result->number % 7 === 0)
+			@if((!$mobile && $result->number % 7 === 0) || ($mobile && $result->number % 4 === 0))
 				@include('layouts.ad', ['ad' => $metager->popAd()])
 			@endif
 			@include('layouts.result', ['result' => $result])

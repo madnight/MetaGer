@@ -32,8 +32,8 @@ return [
     'sponsors.seo'                   => '<a href="https://www.semtrix.de/seo-agentur/" class="mutelink" target="_blank" rel="noopener">SEO Agentur </a>',
 
     'about.title'                    => 'Über uns',
-    'about.1.1'                      => '<a href="/datenschutz">Datenschutz & Privatsphäre</a> sind bei uns einfach & selbstverständlich.',
-    'about.2.1'                      => 'Wir arbeiten nicht gewinnorientiert, wir sind ein <a href="/spende">gemeinnütziger Verein.</a>',
+    'about.1.1'                      => '<a href="/datenschutz">Datenschutz & Privatsphäre</a>: Bei uns einfach & selbstverständlich.',
+    'about.2.1'                      => 'Wir arbeiten nicht gewinnorientiert, wir sind ein <a href="/spende">gemeinnütziger Verein.</a>: <a href="/beitritt">Werden Sie Mitglied</a>',
     'about.3.1'                      => '',
 
     'placeholder'                    => 'MetaGer: Sicher suchen & finden, Privatsphäre schützen',

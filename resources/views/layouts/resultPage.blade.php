@@ -17,6 +17,7 @@
 		<link type="text/css" rel="stylesheet" href="/css/lightslider.css" />
 		<link type="text/css" rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
 		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
+		<meta name="referrer" content="origin">
 		@include('layouts.utility')
 	</head>
 	<body id="resultBody">

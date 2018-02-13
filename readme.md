@@ -19,7 +19,7 @@
 
 ## Offizielle Dokumentation
 
-Die Dokumentation ist im Wiki des Gitlab-Projektes zu finden.
+Die Dokumentation ist im [Wiki des Gitlab-Projektes](https://gitlab.metager3.de/open-source/MetaGer/wikis/home) zu finden.
 
 ## Beiträge
 
@@ -30,10 +30,10 @@ Es steht dir jedoch frei, ein Ticket zu eröffnen.
 ## Sicherheitslücken
 
 Falls du eine Sicherheitslücke findest oder dir etwas unsicher vorkommt,
-zögere bitte nicht ein Ticket zu schreiben oder eine Mail an [office@suma-ev.de](mailto:office@suma-ev.de) zu senden.
+zögere bitte nicht ein [Ticket zu schreiben](https://gitlab.metager3.de/open-source/MetaGer/issues) oder eine Mail an [office@suma-ev.de](mailto:office@suma-ev.de) zu senden.
 
 ## Lizenzen
 
 Der MetaGer-eigene Code, sofern nicht anders anders angegeben, steht unter der [AGPL-Lizenz Version 3](https://www.gnu.org/licenses/agpl-3.0).
 
-Eine Liste der Projekte, auf denen MetaGer basiert, und deren Lizenzen sind in der Datei LICENSE zu finden. 
+Eine Liste der Projekte, auf denen MetaGer basiert, und deren Lizenzen sind in der Datei [LICENSE]( zu finden. 

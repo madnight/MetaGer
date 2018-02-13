@@ -43,6 +43,14 @@
 							<li>{!! trans('index.plugin.firefox.4') !!}</li>
 							<li>{!! trans('index.plugin.firefox.5') !!}</li>
 						</ol>
+						<hr>
+						<h4>{{ trans('index.plugin.head.8') }}</h4>
+						<ol>
+							<li>{!! trans('index.plugin.firefox-klar.1') !!}</li>
+							<li>{{ trans('index.plugin.firefox-klar.2')}}<img src="/img/FirefoxKlar-Settings.png" width="100%"/></li>
+							<li>{{ trans('index.plugin.firefox-klar.3') }}<img src="/img/FirefoxKlar-addSearchengine.png" width="100%"/></li>
+							<li>{{ trans('index.plugin.firefox-klar.4') }}</li>
+						</ol>
 					@elseif ($browser === 'Chrome')
 						<ol>
 							<li>{!! trans('index.plugin.chrome.1') !!}</li>
@@ -329,8 +337,8 @@
 			<div id="sponsors" class="col-sm-6">
 				<h2>{{ trans('index.sponsors.head.2') }}</h2>
 				<ul class="startpage">
-				    <li>{!! trans('index.sponsors.seo') !!}</li>
 					<li>{!! trans('index.sponsors.woxikon') !!}</li>
+				    <li>{!! trans('index.sponsors.seo') !!}</li>
 					<li>{!! trans('index.sponsors.gutscheine') !!}</li>
 				</ul>
 			</div>

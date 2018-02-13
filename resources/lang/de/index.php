@@ -27,13 +27,13 @@ return [
 
     'sponsors.head.1'                => 'Weitere Informationen',
     'sponsors.head.2'                => 'Sponsoren',
-    'sponsors.woxikon'               => '<a href="http://www.tagesgeld.jetzt" class="mutelink" target="_blank" rel="noopener">Tagesgeld jetzt!</a>',
+    'sponsors.woxikon'               => '<a href="http://www.tagesgeld.jetzt" class="mutelink" target="_blank" rel="noopener">Tagesgeld</a>',
     'sponsors.gutscheine'            => '<a href="http://www.gutschein-magazin.de/" class="mutelink" target="_blank" rel="noopener">Aktuelle Gutscheine auf Gutschein-Magazin.de</a>',
     'sponsors.seo'                   => '<a href="https://www.semtrix.de/seo-agentur/" class="mutelink" target="_blank" rel="noopener">SEO Agentur </a>',
 
     'about.title'                    => 'Über uns',
-    'about.1.1'                      => '<a href="/datenschutz">Datenschutz & Privatsphäre</a> sind bei uns einfach & selbstverständlich.',
-    'about.2.1'                      => 'Wir arbeiten nicht gewinnorientiert, wir sind ein <a href="/spende">gemeinnütziger Verein.</a>',
+    'about.1.1'                      => '<a href="/datenschutz">Datenschutz & Privatsphäre</a>: Bei uns einfach & selbstverständlich.',
+    'about.2.1'                      => 'Wir arbeiten nicht gewinnorientiert, wir sind ein <a href="/spende">gemeinnütziger Verein.</a>: <a href="/beitritt">Werden Sie Mitglied!</a>',
     'about.3.1'                      => '',
 
     'placeholder'                    => 'MetaGer: Sicher suchen & finden, Privatsphäre schützen',
@@ -45,6 +45,7 @@ return [
     'plugin.head.5'                  => 'MetaGer zum Microsoft Edge hinzufügen',
     'plugin.head.6'                  => 'MetaGer zum Safari hinzufügen',
     'plugin.head.7'                  => 'MetaGer zum Vivaldi hinzufügen',
+    'plugin.head.8'                  => 'MetaGer zum Firefox Klar hinzufügen',
     'plugin.head.info'               => '(aktuelle Sucheinstellungen werden übernommen)',
 
     'plugin.firefox.1'               => 'Klicken Sie in Ihrem Browser oben rechts im Suchfeld auf die Lupe mit dem kleinen "+" und dann auf "MetaGer hinzufügen" (siehe Bild)',
@@ -52,6 +53,11 @@ return [
     'plugin.firefox.3'               => 'MetaGer als Startseite im :browser einrichten',
     'plugin.firefox.4'               => 'Klicken Sie oben rechts im Browser auf <i class="fa fa-bars" aria-hidden="true"></i><span class="sr-only">die drei horizontalen Striche</span> (Menü) und öffnen Sie die "Einstellungen"',
     'plugin.firefox.5'               => 'Tragen Sie im Feld "Startseite" "https://metager.de" ein.',
+
+    'plugin.firefox-klar.1'          => 'Öffnen Sie die Einstellungen Ihres Browsers über das Zahnrad (unter Android <i class="fa fa-ellipsis-v"></i>) rechts neben der Suchleiste',
+    'plugin.firefox-klar.2'          => 'Klicken Sie unter dem Menüpunkt "Suche" auf "Suchmaschine". Aktuell wird die voreingestellte Suchmaschine angezeigt (siehe Bild)',
+    'plugin.firefox-klar.3'          => 'Klicken Sie auf "Weitere Suchmaschine hinzufügen" und füllen Sie die Felder wie im Bild aus.',
+    'plugin.firefox-klar.4'          => 'Achten Sie hierbei darauf, dass sich keine Leerzeichen am Ende des Suchstrings "einschleichen", da Firefox Klar die Speicherung der Einstellung sonst verweigert.',
 
     'plugin.chrome.1'                => 'Klicken Sie in Ihrem Chrome oben rechts auf <i class="fa fa-ellipsis-v"></i> und im folgenden Menü auf "Einstellungen", um die Einstellungen Ihres Chromes zu öffnen.',
     'plugin.chrome.2'                => 'Im Bereich "Suchen" klicken Sie auf Suchmaschinen verwalten...',

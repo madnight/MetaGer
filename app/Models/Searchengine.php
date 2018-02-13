@@ -336,9 +336,6 @@ abstract class Searchengine
     {
         $affil_data = 'ip=' . $this->ip;
         $affil_data .= '&ua=' . $this->useragent;
-        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $affil_data .= '&xfip=' . $_SERVER['HTTP_X_FORWARDED_FOR'];
-        }
         $affilDataValue = $this->urlEncode($affil_data);
         # Wir benötigen die ServeUrl:
         $serveUrl = $this->urlEncode($url);

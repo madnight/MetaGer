@@ -330,10 +330,10 @@
 @endsection
 
 @section('optionalContent')
-	<section id="moreInformation" class="hidden-xs">
+	<section id="moreInformation" class="">
 		<h1 class="hidden">{{ trans('index.sponsors.head.1') }}</h1>
 		<div class="row">
-			<div id="sponsors" class="col-sm-6">
+			<div id="sponsors" class="col-sm-6 col-xs-12">
 				<h2>{{ trans('index.sponsors.head.2') }}</h2>
 				<ul class="startpage">
 					<li>{!! trans('index.sponsors.woxikon') !!}</li>
@@ -341,7 +341,7 @@
 					<li>{!! trans('index.sponsors.gutscheine') !!}</li>
 				</ul>
 			</div>
-			<div id="about-us" class="col-sm-6">
+			<div id="about-us" class="col-sm-6 hidden-xs">
 				<h2>
 					<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "about") }}">{{ trans('index.about.title') }}</a>
 				</h2>

@@ -37,6 +37,7 @@ class MetaGer
     protected $canCache        = false;
     # Daten über die Abfrage$
     protected $ip;
+    protected $useragent;
     protected $language;
     protected $agent;
     protected $apiKey        = "";
@@ -912,6 +913,8 @@ class MetaGer
         # nicht einmal wir selbst noch Zugriff auf die Daten haben:
         $this->ip = preg_replace("/(\d+)\.(\d+)\.\d+.\d+/s", "$1.$2.0.0", $this->ip);
 
+        $this->useragent = $request->header('User-Agent');
+
         # Language
         if (isset($_SERVER['HTTP_LANGUAGE'])) {
             $this->language = $_SERVER['HTTP_LANGUAGE'];
@@ -1438,6 +1441,11 @@ class MetaGer
     public function getIp()
     {
         return $this->ip;
+    }
+    
+    public function getUserAgent()
+    {
+        return $this->useragent;
     }
 
     public function getEingabe()

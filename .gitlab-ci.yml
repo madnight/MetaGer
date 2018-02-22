@@ -47,7 +47,7 @@ update(metager2):
     # Abhängigkeiten überprüfen
     - which composer
     - which git
-    - which php7.0
+    - which php
     - which sqlite3
   script:
     # Pfad zum neu geklonten Repo
@@ -87,7 +87,7 @@ update(metager3.de):
     # Abhängigkeiten überprüfen
     - which composer
     - which git
-    - which php7.0
+    - which php
     - which sqlite3
   script:
     # Pfad zum neu geklonten Repo

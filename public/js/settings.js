@@ -27,31 +27,11 @@ $(document).ready(function () {
   });
   $('#unten').click(function () {
     $('#settings-form').append('<input type="hidden" name="usage" value="once">');
-    switch (getLanguage()) {
-      case 'de':
-        alert('Auf der folgenden Startseite sind Ihre Einstellungen nun einmalig gespeichert. Nach Ihrer ersten Suche sind diese wieder verloren. Wenn Sie diese speichern möchten, können Sie sich allerdings ein Lesezeichen für die generierte Startseite einrichten.');
-        break;
-      case 'en':
-        alert('On the following startpage your settings are saved one-time. They will be lost after your first search. Though if you want to save them, you can create a bookmark for the generated startpage.');
-        break;
-      case 'es':
-        // alert(""); TODO
-        break;
-    }
+      alert(t('saved-settings'));
   });
   $('#plugin').click(function () {
     $('form').attr('action', $('#save').attr('data-href') + '#plugin-modal');
-    switch (getLanguage()) {
-      case 'de':
-        alert('Ihr Browserplugin mit den persönlichen Sucheinstellungen wurde generiert. Folgen Sie bitte der Anleitung auf der folgenden Seite um es zu installieren. Beachten Sie: Zuvor sollten Sie ein eventuell bereits installiertes MetaGer-Plugin entfernen.');
-        break;
-      case 'en':
-        alert('Your browser plugin with personal settings was generated. Please follow the instructions on the following page to install it. Notice that beforehand you might have to delete a former MetaGer plugin.');
-        break;
-      case 'es':
-        // alert(""); TODO
-        break;
-    }
+    alert(t('generated-plugin'));
   });
   $('#settings-focus').val('angepasst');
 });

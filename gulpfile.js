@@ -25,6 +25,7 @@ elixir(function (mix) {
   mix.scripts(['lib/jquery.js', 'lib/jquery-ui.min.js', 'lib/bootstrap.js', 'lib/masonry.js', 'lib/imagesloaded.js', 'lib/openpgp.min.js', 'lib/iframeResizer.min.js', 'lib/md5.js'], 'public/js/lib.js')
   mix.scripts(['scriptStartPage.js', 'results.js'], 'public/js/scriptStartPage.js');
   mix.scripts(['scriptResultPage.js', 'results.js'], 'public/js/scriptResultPage.js');
+  mix.scripts(['translations.js'], 'public/js/translations.js');
   //mix.scripts(['scriptSubpages.js'], 'public/js/scriptSubpages.js');
   mix.less('metager/beitritt.less', 'public/css/beitritt.css')
   // utility

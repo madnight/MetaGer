@@ -6,11 +6,15 @@
 
 ## Abhängigkeiten
 * composer (https://getcomposer.org/)
-* php7.0
-  * php7.0-mbstring
-  * php7.0-dom
-  * php7.0-xml
-  * php7.0-zip
+* php
+  * php-common
+  * php-curl
+  * php-mbstring
+  * php-mysql
+  * php-sqlite3
+  * php-xml
+  * php-zip
+  * php-redis
 * sqlite3
 * redis-server
 * Die Perl-Pakete

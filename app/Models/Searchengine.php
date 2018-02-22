@@ -243,7 +243,7 @@ abstract class Searchengine
                 Cache::put($this->hash, $body, $this->cacheDuration);
             }
         }
-        if ($body !== "") {
+        if ($body !== "" && $body !== "connected" && $body !== "waiting") {
             $this->loadResults($body);
             $this->getNext($metager, $body);
             $this->loaded = true;

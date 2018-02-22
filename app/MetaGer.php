@@ -715,8 +715,8 @@ class MetaGer
     {
         $minisucherEngine             = $xml->xpath('suma[@name="minism"]')[0];
         $minisucherEngine["subcollections"] = implode(", ", $subcollections);
-        $subcollections               = urlencode("(" . implode(" OR ", $subcollections) . ")");
-        $minisucherEngine["formData"] = str_replace("<<SUBCOLLECTIONS>>", $subcollections, $minisucherEngine["formData"]);
+        $subcollectionsString               = urlencode("(" . implode(" OR ", $subcollections) . ")");
+        $minisucherEngine["formData"] = str_replace("<<SUBCOLLECTIONS>>", $subcollectionsString, $minisucherEngine["formData"]);
         $minisucherEngine["formData"] = str_replace("<<COUNT>>", sizeof($subcollections) * 10, $minisucherEngine["formData"]);
         return $minisucherEngine;
     }

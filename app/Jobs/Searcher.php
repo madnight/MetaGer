@@ -15,7 +15,11 @@ class Searcher implements ShouldQueue
     use InteractsWithQueue, Queueable, SerializesModels;
 
     protected $name, $ch, $pid, $counter, $lastTime, $connectionInfo;
+    # Each Searcher will shutdown after a specified time(s) or number of requests
     protected $MAX_REQUESTS = 100;
+    # This value should always be below the retry_after value in config/queue.php
+    protected $MAX_TIME = 240;
+    protected $startTime = null;
     protected $importantEngines = array("Fastbot", "overture", "overtureAds");
     protected $recheck;
 
@@ -35,6 +39,7 @@ class Searcher implements ShouldQueue
         $this->name = $name;
         $this->pid = getmypid();
         $this->recheck = false;
+        $this->startTime = microtime(true);
         // Submit this worker to the Redis System
         Redis::expire($this->name, 5);
     }
@@ -91,7 +96,9 @@ class Searcher implements ShouldQueue
 
             // In sync mode every Searcher may only retrieve one result because it would block
             // the execution of the remaining code otherwise:
-            if(getenv("QUEUE_DRIVER") === "sync" || $this->counter > $this->MAX_REQUESTS){
+            if(getenv("QUEUE_DRIVER") === "sync" 
+                || $this->counter > $this->MAX_REQUESTS 
+                || (microtime(true)-$this->startTime) > $this->MAX_TIME){
                break;
             } 
         }

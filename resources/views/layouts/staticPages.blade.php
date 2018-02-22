@@ -45,8 +45,8 @@
 				</li>
 				<li id="toggle-nav-show">
 					<a class="metager-navbar-toggle pull-right" href="#metager-static-nav-list" data-original-title="" title="">
-									<span class="sr-only">Navigation anzeigen</span>
-									<i class="fa fa-bars" aria-hidden="true"></i>
+						<span class="sr-only">Navigation anzeigen</span>
+						<i class="fa fa-bars" aria-hidden="true"></i>
 					</a>
 					<div class="clearfix"></div>
 				</li>
@@ -66,6 +66,12 @@
 									<li>
 										<a href="https://www.boost-project.com/de/shops?charity_id=1129&amp;tag=bl" tabindex="204">{{ trans('staticPages.nav17') }}</a>
 									</li>
+									@if(LaravelLocalization::getCurrentLocale() == "de")
+										<li>
+										<a href="https://shop.spreadshirt.de/metager/" rel="noopener" target="_blank">MetaGer-Fanshop</a>
+
+										</li>
+									@endif
 								</ul>
 							</li>
 							<li @if (isset($navbarFocus) && $navbarFocus === 'datenschutz') class="active" @endif >
@@ -167,20 +173,32 @@
 			</main>
 			@yield('optionalContent')
 			<footer class="noprint">
-				<ul class="list-inline hidden-xs">
-					<li>
+					<div class="hidden-xs mg-img">
 						<a href="https://www.suma-ev.de/"  >
 						<img src="/img/suma_ev_logo-m1-greyscale.png" alt="SUMA-EV Logo"></a>
-					</li>
-					<li id="info">
-						<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "kontakt") }}">{{ trans('staticPages.nav5') }}</a> - <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "impressum") }}">{{ trans('staticPages.nav8') }}</a>
-						{{ trans('staticPages.sumaev.1') }}<a href="https://www.suma-ev.de/">{{ trans('staticPages.sumaev.2') }}</a>
-					</li>
-					<li>
+					</div>
+					<div id="info">
+						<div class="links">
+							<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "kontakt") }}">
+								{{ trans('staticPages.nav5') }}
+							</a>
+							<span> - </span>
+							<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "impressum") }}">
+								{{ trans('staticPages.nav8') }}
+							</a>
+							@if(LaravelLocalization::getCurrentLocale() == "de")
+							<span> - </span>
+							<a href="https://shop.spreadshirt.de/metager/" rel="noopener" target="_blank">Fanshop</a>
+							@endif
+						</div>
+						<div>
+							{{ trans('staticPages.sumaev.1') }}<a href="https://www.suma-ev.de/">{{ trans('staticPages.sumaev.2') }}</a>
+						</div>
+					</div>
+					<div class="hidden-xs mg-img">
 						<a href="https://www.uni-hannover.de/"  >
 						<img src="/img/luh_metager.png" alt="LUH Logo"></a>
 					</li>
-				</ul>
 			</footer>
 			<img src="{{ action('ImageController@generateImage')}}?site={{ urlencode(url()->current()) }}" class="hidden" />
 		</div>

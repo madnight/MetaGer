@@ -7,7 +7,7 @@ update(144.76.113.134):
     # Abhängigkeiten überprüfen
     - which composer
     - which git
-    - which php7.0
+    - which php
     - which sqlite3
   script:
     # Pfad zum neu geklonten Repo

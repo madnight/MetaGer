@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{!! trans('staticPages.meta.language') !!}">
+<html>
 	<head>
 		<title>{{ $eingabe }} - MetaGer</title>
 		<link href="/favicon.ico" rel="icon" type="image/x-icon" />

@@ -270,63 +270,62 @@
 			</a>
 		</div>
 	</div>
-	<fieldset>
-		<form id="searchForm" @if(Request::has('request') && Request::input('request') === "POST") method="POST" @elseif(Request::has('request') && Request::input('request') === "GET") method="GET" @else method="GET" @endif action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/meta/meta.ger3") }}" accept-charset="UTF-8">
-			<div class="input-group">
-				<div class="input-group-addon">
-					<button type="button" data-toggle="popover" data-html="true" data-container="body" title="{{ trans('index.design') }}" data-content='&lt;ul id="color-chooser" class="list-inline list-unstyled"&gt;
-						&lt;li &gt;&lt;a id="standard" data-rgba="255,194,107,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
-						&lt;li &gt;&lt;a id="standardHard" data-rgba="255,128,0,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
-						&lt;li &gt;&lt;a id="blue" data-rgba="164,192,230,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
-						&lt;li &gt;&lt;a id="blueHard" data-rgba="2,93,140,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
-						&lt;li &gt;&lt;a id="green" data-rgba="177,226,163,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
-						&lt;li &gt;&lt;a id="greenHard" data-rgba="127,175,27,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
-						&lt;li &gt;&lt;a id="red" data-rgba="255,92,92,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
-						&lt;li &gt;&lt;a id="redHard" data-rgba="255,0,0,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
-						&lt;li &gt;&lt;a id="pink" data-rgba="255,196,246,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
-						&lt;li &gt;&lt;a id="pinkHard" data-rgba="254,67,101,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
-						&lt;li &gt;&lt;a id="black" data-rgba="238,238,238,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
-						&lt;li &gt;&lt;a id="blackHard" data-rgba="50,50,50,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
-					&lt;/ul&gt;'>
-						<i class="fa fa-tint" aria-hidden="true"></i>
-					</button>
+		<fieldset>
+			<form id="searchForm" @if(Request::has('request') && Request::input('request') === "POST") method="POST" @elseif(Request::has('request') && Request::input('request') === "GET") method="GET" @else method="GET" @endif action="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/meta/meta.ger3") }}" accept-charset="UTF-8">
+				<div class="input-group">
+					<div class="input-group-addon">
+						<button type="button" data-toggle="popover" data-html="true" data-container="body" title="{{ trans('index.design') }}" data-content='&lt;ul id="color-chooser" class="list-inline list-unstyled"&gt;
+							&lt;li &gt;&lt;a id="standard" data-rgba="255,194,107,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+							&lt;li &gt;&lt;a id="standardHard" data-rgba="255,128,0,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+							&lt;li &gt;&lt;a id="blue" data-rgba="164,192,230,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+							&lt;li &gt;&lt;a id="blueHard" data-rgba="2,93,140,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+							&lt;li &gt;&lt;a id="green" data-rgba="177,226,163,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+							&lt;li &gt;&lt;a id="greenHard" data-rgba="127,175,27,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+							&lt;li &gt;&lt;a id="red" data-rgba="255,92,92,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+							&lt;li &gt;&lt;a id="redHard" data-rgba="255,0,0,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+							&lt;li &gt;&lt;a id="pink" data-rgba="255,196,246,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+							&lt;li &gt;&lt;a id="pinkHard" data-rgba="254,67,101,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+							&lt;li &gt;&lt;a id="black" data-rgba="238,238,238,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+							&lt;li &gt;&lt;a id="blackHard" data-rgba="50,50,50,1" href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+						&lt;/ul&gt;'>
+							<i class="fa fa-tint" aria-hidden="true"></i>
+						</button>
+					</div>
+					<input type="text" name="eingabe" required="" autofocus="" autocomplete="{{$autocomplete}}" class="form-control" placeholder="{{ trans('index.placeholder') }}">
+					<input type="hidden" name="encoding" value="utf8">
+					<input type="hidden" name="lang" value={{ $lang }} >
+					<input type="hidden" name="resultCount" value={{ $resultCount }} >
+					<input type="hidden" name="time" value={{ $time }} >
+					<input type="hidden" name="sprueche" value={{ $sprueche }} >
+					<input type="hidden" name="newtab" value={{ $newtab }} >
+					<input type="hidden" name="maps" value={{ $maps }} >
+					<input type="hidden" name="key" value={{ $key }} >
+					@foreach ($focusPages as $fp)
+						<input type="hidden" name={{ $fp }} value="on">
+					@endforeach
+					<input type="hidden" name="theme" value={{ $theme }}>
+					<div class="input-group-addon">
+						<button type="submit">
+							<i class="fa fa-search" aria-hidden="true"></i>
+						</button>
+					</div>
 				</div>
-				<input type="text" name="eingabe" required="" autofocus="" autocomplete="{{$autocomplete}}" class="form-control" placeholder="{{ trans('index.placeholder') }}">
-				<input type="hidden" name="encoding" value="utf8">
-				<input type="hidden" name="lang" value={{ $lang }} >
-				<input type="hidden" name="resultCount" value={{ $resultCount }} >
-				<input type="hidden" name="time" value={{ $time }} >
-				<input type="hidden" name="sprueche" value={{ $sprueche }} >
-				<input type="hidden" name="newtab" value={{ $newtab }} >
-				<input type="hidden" name="maps" value={{ $maps }} >
-				<input type="hidden" name="key" value={{ $key }} >
-				@foreach ($focusPages as $fp)
-					<input type="hidden" name={{ $fp }} value="on">
-				@endforeach
-				<input type="hidden" name="theme" value={{ $theme }}>
-				<div class="input-group-addon">
-					<button type="submit">
-						<i class="fa fa-search" aria-hidden="true"></i>
-					</button>
-				</div>
-			</div>
-		</form>
-	</fieldset>
-	<ul class="list-inline searchform-bonus">
-		<li id="plug"
-		@unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge' || $browser === 'Safari' || $browser === 'Vivaldi')
-			class="hidden"
-		@endunless>
-		<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a></li>
-		@if (LaravelLocalization::getCurrentLocale() == "de")
-		<li>
-			<a href="https://suma-ev.de/presse/Werbefreie-Suche-mit-MetaGer.html" target="_blank" class="btn btn-default mutelink">
-					Werbefreie Suche mit MetaGer
-			</a>
-		</li>
-		@endif
-	</ul>
-	<script src="{{ elixir('js/translations.js') }}"></script>
+			</form>
+		</fieldset>
+		<ul class="list-inline searchform-bonus">
+			<li id="plug"
+			@unless ($browser === 'Firefox' || $browser === 'Mozilla' || $browser === 'Chrome' || $browser === 'Opera' || $browser === 'IE' || $browser === 'Edge' || $browser === 'Safari' || $browser === 'Vivaldi')
+				class="hidden"
+			@endunless>
+			<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a></li>
+			@if (LaravelLocalization::getCurrentLocale() == "de")
+			<li>
+				<a href="https://suma-ev.de/presse/Werbefreie-Suche-mit-MetaGer.html" target="_blank" class="btn btn-default mutelink">
+						Werbefreie Suche mit MetaGer
+				</a>
+			</li>
+			@endif
+		</ul>
 	<script src="{{ elixir('js/scriptStartPage.js') }}"></script>
 @endsection
 

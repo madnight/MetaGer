@@ -110,11 +110,12 @@ class StartpageController extends Controller
         array_forget($params, 'out');
         array_forget($params, 'page');
         array_forget($params, 'request');
-        $link = action('MetaGerSearch@search', $params);
+        $link = action('MetaGerSearch@search', []);
 
         $response = Response::make(
             view('plugin')
                 ->with('link', $link)
+                ->with('params', $params)
                 ->with('request', $request), "200");
         $response->header('Content-Type', "application/xml");
         return $response;

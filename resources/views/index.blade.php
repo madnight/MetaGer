@@ -326,7 +326,7 @@
 			</li>
 			@endif
 		</ul>
-	<script src="{{ elixir('js/scriptStartPage.js') }}"></script>
+	<script src="{{ mix('/js/scriptStartPage.js') }}"></script>
 @endsection
 
 @section('optionalContent')

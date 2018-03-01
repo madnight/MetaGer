@@ -2,7 +2,7 @@
 <html lang="{!! trans('staticPages.meta.language') !!}">
 	<head>
 		<title>{!! trans('quicktip.title') !!}</title>
-		<link type="text/css" rel="stylesheet" href="{{ elixir('css/themes/default.css') }}" />
+		<link type="text/css" rel="stylesheet" href="{{ mix('css/themes/default.css') }}" />
 	</head>
 	<body class="quicktips">
 		@if(App::isLocale("de"))
@@ -73,6 +73,6 @@
 				</div>
 			</div>
 		</div>
-		<script src="{{ elixir('js/quicktips.js') }}"></script>
+		<script src="{{ mix('js/quicktips.js') }}"></script>
 	</body>
 </html>

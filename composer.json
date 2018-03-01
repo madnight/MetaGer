@@ -7,12 +7,12 @@
     "require": {
         "php": ">=5.6.4",
         "laravel/framework": "5.4.*",
+        "laravel/tinker": "~1.0",
         "predis/predis": "^1.1",
-        "mcamara/laravel-localization": "^1.1",
-        "jenssegers/agent": "^2.3",
-        "piwik/piwik-php-tracker": "^1.0",
-        "fideloper/proxy": "^3.1",
-        "guzzlehttp/guzzle": "^6.2"
+        "mcamara/laravel-localization": "1.2.*",
+        "jenssegers/agent": "2.6.*",
+        "fideloper/proxy": "^3.3",
+        "guzzlehttp/guzzle": "6.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -30,9 +30,9 @@
         }
     },
     "autoload-dev": {
-        "classmap": [
-            "tests/TestCase.php"
-        ]
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "scripts": {
         "post-root-package-install": [
@@ -51,6 +51,8 @@
         ]
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
     }
 }

@@ -5,7 +5,7 @@
 @section('navbarFocus.donate', 'class="dropdown active"')
 
 @section('content')
-	<link type="text/css" rel="stylesheet" href="{{ elixir('/css/beitritt.css') }}" />
+	<link type="text/css" rel="stylesheet" href="{{ mix('/css/beitritt.css') }}" />
 	<h1>{{ trans('beitritt.heading.1') }}</h1>
 	<form>
 		<div class="col-sm-6">
@@ -129,5 +129,5 @@
 		<p>{{ trans('beitritt.anweisung.6') }}</p>
 	</div>
 	<button type="button" class="btn btn-lg btn-primary noprint" onclick="window.print();">{{ trans('beitritt.anweisung.7') }}</button>
-	<!-- <script src="{{ elixir('js/scriptJoinPage.js') }}"></script> -->
+	<!-- <script src="{{ mix('js/scriptJoinPage.js') }}"></script> -->
 @endsection

@@ -11,6 +11,7 @@ langfiles.zip
 # The Files created by Webpack in the build process
 /public/**/*.css
 /public/**/*.js
+/public/mix-manifest.json
 
 **/*.map
 /.buildpath

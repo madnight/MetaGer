@@ -326,7 +326,7 @@
 			</li>
 			@endif
 		</ul>
-	<script src="{{ mix('/js/scriptStartPage.js') }}"></script>
+	<script src="{{ mix('/js/scriptStartPage.js') }}" defer></script>
 @endsection
 
 @section('optionalContent')

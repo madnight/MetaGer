@@ -20,8 +20,16 @@
 			@endphp
 		</style>
 		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
-		<script src="{{ mix('js/scriptSubPages.js') }}" defer></script>
-		<script src="{{ mix('js/lib.js') }}" defer></script>
+		<script type="text/javascript">
+			@php
+				echo file_get_contents(public_path() . mix('js/scriptSubPages.js'));
+			@endphp
+		</script>
+		<script type="text/javascript">
+			@php
+				echo file_get_contents(public_path() . mix('js/lib.js'));
+			@endphp
+		</script>
 		@if (isset($css))
 			@if(is_array($css))
 				@foreach($css as $el)

@@ -326,7 +326,11 @@
 			</li>
 			@endif
 		</ul>
-	<script src="{{ mix('/js/scriptStartPage.js') }}" defer></script>
+		<script type="text/javascript">
+			@php
+				echo file_get_contents(public_path() . mix('/js/scriptStartPage.js'));
+			@endphp
+		</script>
 @endsection
 
 @section('optionalContent')

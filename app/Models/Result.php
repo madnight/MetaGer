@@ -20,7 +20,7 @@ class Result
 
     public $proxyLink; # Der Link für die Seite über unseren Proxy-Service
     public $engineBoost = 1; # Der Boost für den Provider des Suchergebnisses
-    public $valid       = true; # Ob das Ergebnis noch gültig ist (bool)
+    public $valid = true; # Ob das Ergebnis noch gültig ist (bool)
     public $host; # Der aus dem Link gelesene Host des Suchergebnisses
     public $strippedHost; # Der Host      in Form "foo.bar.de"
     public $strippedDomain; # Die Domain    in Form "bar.de"
@@ -31,23 +31,20 @@ class Result
     #public function __construct($provider, $titel, $link, $anzeigeLink, $descr, $gefVon, $sourceRank, $partnershop = false, $image = "", $price = 0, $additionalInformation = [])
     public function __construct($provider, $titel, $link, $anzeigeLink, $descr, $gefVon, $sourceRank, $additionalInformation = [])
     {
-        $provider          = simplexml_load_string($provider);
-        $this->titel       = strip_tags(trim($titel));
-        if(stripos($anzeigeLink, "twitter.com")){
-            $this->titel = '<i class="fa fa-twitter" aria-hidden="true"></i> ' . $this->titel;
-        }
-        $this->link        = trim($link);
+        $provider = simplexml_load_string($provider);
+        $this->titel = strip_tags(trim($titel));
+        $this->link = trim($link);
         $this->anzeigeLink = trim($anzeigeLink);
-        $this->descr       = strip_tags(trim($descr), '<p>');
-        $this->descr       = preg_replace("/\n+/si", " ", $this->descr);
-        $this->longDescr   = $this->descr;
+        $this->descr = strip_tags(trim($descr), '<p>');
+        $this->descr = preg_replace("/\n+/si", " ", $this->descr);
+        $this->longDescr = $this->descr;
         if (strlen($this->descr) > 250) {
             $this->descr = wordwrap($this->descr, 250);
             $this->descr = substr($this->descr, 0, strpos($this->descr, "\n"));
 
         }
-        $this->gefVon     = trim($gefVon);
-        $this->proxyLink  = $this->generateProxyLink($this->link);
+        $this->gefVon = trim($gefVon);
+        $this->proxyLink = $this->generateProxyLink($this->link);
         $this->sourceRank = $sourceRank;
         if ($this->sourceRank <= 0 || $this->sourceRank > 20) {
             $this->sourceRank = 20;
@@ -58,15 +55,15 @@ class Result
         } else {
             $this->engineBoost = 1;
         }
-        $this->valid                 = true;
-        $this->host                  = @parse_url($link, PHP_URL_HOST);
-        $this->strippedHost          = $this->getStrippedHost($this->anzeigeLink);
-        $this->strippedDomain        = $this->getStrippedDomain($this->strippedHost);
-        $this->strippedLink          = $this->getStrippedLink($this->anzeigeLink);
-        $this->rank                  = 0;
-        $this->partnershop           = isset($additionalInformation["partnershop"]) ? $additionalInformation["partnershop"] : false;
-        $this->image                 = isset($additionalInformation["image"]) ? $additionalInformation["image"] : "";
-        $this->price                 = isset($additionalInformation["price"]) ? $additionalInformation["price"] : 0;
+        $this->valid = true;
+        $this->host = @parse_url($link, PHP_URL_HOST);
+        $this->strippedHost = $this->getStrippedHost($this->anzeigeLink);
+        $this->strippedDomain = $this->getStrippedDomain($this->strippedHost);
+        $this->strippedLink = $this->getStrippedLink($this->anzeigeLink);
+        $this->rank = 0;
+        $this->partnershop = isset($additionalInformation["partnershop"]) ? $additionalInformation["partnershop"] : false;
+        $this->image = isset($additionalInformation["image"]) ? $additionalInformation["image"] : "";
+        $this->price = isset($additionalInformation["price"]) ? $additionalInformation["price"] : 0;
         $this->additionalInformation = $additionalInformation;
     }
 
@@ -114,18 +111,18 @@ class Result
         } else {
             # Wir überprüfen das Verhältnis von Kyrillischen Zeichen im Titel
             if (preg_match_all('/[А-Яа-яЁё]/u', $this->titel, $matches)) {
-                $count     = sizeof($matches[0]);
+                $count = sizeof($matches[0]);
                 $titleSize = strlen($this->titel);
-                $percKyr   = $count / $titleSize;
+                $percKyr = $count / $titleSize;
                 if ($percKyr > $maxRatio) {
                     return 5;
                 }
             }
             # Wir überprüfen das Verhältnis von Kyrillischen Zeichen in der Beschreibung
             if (preg_match_all('/[А-Яа-яЁё]/u', $this->descr, $matches)) {
-                $count     = sizeof($matches[0]);
+                $count = sizeof($matches[0]);
                 $descrSize = strlen($this->descr);
-                $percKyr   = $count / $descrSize;
+                $percKyr = $count / $descrSize;
                 if ($percKyr > $maxRatio) {
                     return 5;
                 }
@@ -141,9 +138,9 @@ class Result
         if (strpos($link, "http") !== 0) {
             $link = "http://" . $link;
         }
-        $link    = @parse_url($link, PHP_URL_HOST) . @parse_url($link, PHP_URL_PATH);
-        $tmpLi   = $link;
-        $count   = 0;
+        $link = @parse_url($link, PHP_URL_HOST) . @parse_url($link, PHP_URL_PATH);
+        $tmpLi = $link;
+        $count = 0;
         $tmpLink = "";
         # Löscht verschiedene unerwünschte Teile aus $link und $tmpEingabe
         $regex = [
@@ -156,7 +153,7 @@ class Result
             "/-/si", # "-"
         ];
         foreach ($regex as $reg) {
-            $link       = preg_replace($regex, "", $link);
+            $link = preg_replace($regex, "", $link);
             $tmpEingabe = preg_replace($regex, "", $tmpEingabe);
         }
         foreach (str_split($tmpEingabe) as $char) {
@@ -182,13 +179,13 @@ class Result
     # Berechnet den Ranking-Boost durch das Vorkommen von Suchwörtern
     private function calcSuchwortBoost($tmpEingabe)
     {
-        $maxRank        = 0.1;
-        $tmpTitle       = $this->titel;
+        $maxRank = 0.1;
+        $tmpTitle = $this->titel;
         $tmpDescription = $this->descr;
-        $isWithin       = false;
-        $tmpRank        = 0;
-        $tmpEingabe     = preg_replace("/\b\w{1,3}\b/si", "", $tmpEingabe);
-        $tmpEingabe     = preg_replace("/\s+/si", " ", $tmpEingabe);
+        $isWithin = false;
+        $tmpRank = 0;
+        $tmpEingabe = preg_replace("/\b\w{1,3}\b/si", "", $tmpEingabe);
+        $tmpEingabe = preg_replace("/\s+/si", " ", $tmpEingabe);
 
         foreach (explode(" ", trim($tmpEingabe)) as $el) {
             if (strlen($tmpTitle) === 0 || strlen($el) === 0 || strlen($tmpDescription) === 0) {
@@ -227,7 +224,10 @@ class Result
 
         # Persönliche URL Blacklist
         foreach ($metager->getUserUrlBlacklist() as $word) {
-            if (strpos(strtolower($this->link), $word)) return false;
+            if (strpos(strtolower($this->link), $word)) {
+                return false;
+            }
+
         }
 
         # Allgemeine URL und Domain Blacklist

@@ -5,7 +5,7 @@
 	<div class="resultInformation col-xs-12 col-sm-11">
 		<div class="col-xs-10 col-sm-11" style="padding:0; ">
 			<p class="title">
-				@if(stripos($result->anzeigeLink, "twitter.com"))
+				@if(stripos($result->anzeigeLink, "twitter.com") !== false)
 					<i class="fa fa-twitter" aria-hidden="true"></i>
 				@endif
 				<a class="title" href="{{ $result->link }}" target="{{ $metager->getNewtab() }}" data-hoster="{{ strip_tags($result->gefVon) }}" data-count="{{ $result->number }}"  rel="noopener">

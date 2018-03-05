@@ -906,7 +906,7 @@ class MetaGer
         }
         # Sucheingabe
         $this->eingabe = trim($request->input('eingabe', ''));
-        $this->q       = mb_strtolower($this->eingabe, "UTF-8");
+        $this->q       = $this->eingabe;
         # IP
         $this->ip = $request->ip();
         # Unser erster Schritt wird sein, IP-Adresse und USER-Agent zu anonymisieren, damit
@@ -1180,7 +1180,7 @@ class MetaGer
         // matches '[... ]"test satz"[ ...]'
         while (preg_match("/(^|.+\s)\"(.+)\"(?:\s(.+)|($))/si", $tmp, $match)) {
             $tmp             = $match[1] . $match[3];
-            $this->phrases[] = strtolower($match[2]);
+            $this->phrases[] = $match[2];
         }
         foreach ($this->phrases as $phrase) {
             $p .= "\"$phrase\", ";

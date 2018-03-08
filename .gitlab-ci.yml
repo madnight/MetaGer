@@ -30,7 +30,7 @@ update(144.76.113.134):
     - chmod -R 777 bootstrap/cache
     - npm install
     - php artisan migrate --force
-    - ./gulpbuild.sh
+    - npm run prod
     - if [ -f ~/MetaGer/artisan ]; then php ~/MetaGer/artisan down;fi
     - cd ~/
     - while [ -d ~/MetaGer ]; do rm -rf ~/MetaGer;done
@@ -70,7 +70,7 @@ update(metager2):
     - chmod -R 777 bootstrap/cache
     - npm install
     - php artisan migrate --force
-    - ./gulpbuild.sh
+    - npm run prod
     - if [ -f ~/MetaGer/artisan ]; then php ~/MetaGer/artisan down;fi
     - cd ~/
     - while [ -d ~/MetaGer ]; do rm -rf ~/MetaGer;done
@@ -110,7 +110,7 @@ update(metager3.de):
     - chmod -R 777 bootstrap/cache
     - npm install
     - php artisan migrate --force
-    - ./gulpbuild.sh
+    - npm run prod
     - if [ -f ~/MetaGer/artisan ]; then php ~/MetaGer/artisan down;fi
     - cd ~/
     - while [ -d ~/MetaGer ]; do rm -rf ~/MetaGer;done

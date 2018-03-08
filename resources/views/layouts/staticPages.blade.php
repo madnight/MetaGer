@@ -14,11 +14,22 @@
 		<meta rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<meta rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 		<link rel="search" type="application/opensearchdescription+xml" title="{{ trans('staticPages.opensearch') }}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
-		<link type="text/css" rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
-		<link type="text/css" rel="stylesheet" href="{{ elixir('css/themes/default.css') }}" />
+		<style>
+			@php
+				echo file_get_contents(public_path() . mix('css/themes/default.css'));
+			@endphp
+		</style>
 		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
-		<script src="{{ elixir('js/scriptSubPages.js') }}"></script>
-		<script src="{{ elixir('js/lib.js') }}"></script>
+		<script type="text/javascript">
+			@php
+				echo file_get_contents(public_path() . mix('js/scriptSubPages.js'));
+			@endphp
+		</script>
+		<script type="text/javascript">
+			@php
+				echo file_get_contents(public_path() . mix('js/lib.js'));
+			@endphp
+		</script>
 		@if (isset($css))
 			@if(is_array($css))
 				@foreach($css as $el)
@@ -200,7 +211,6 @@
 						<img src="/img/luh_metager.png" alt="LUH Logo"></a>
 					</li>
 			</footer>
-			<img src="{{ action('ImageController@generateImage')}}?site={{ urlencode(url()->current()) }}" class="hidden" />
 		</div>
 	</body>
 </html>

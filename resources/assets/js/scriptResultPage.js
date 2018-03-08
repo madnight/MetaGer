@@ -13,8 +13,9 @@ $(document).ready(function () {
   if (localStorage.hasOwnProperty('param_sprueche')) {
     var sprueche = localStorage.getItem('param_sprueche') === 'on'; // check for sprueche local storage parameter
   } else {
-    var sprueche = getURLParameter('sprueche') === 'on'; // load the sprueche url parameter
+    var sprueche = getURLParameter('sprueche', 'on') === 'on'; // load the sprueche url parameter
   }
+
   var search = getMetaTag('q') || '';
   var locale = getMetaTag('l') || 'de';
   loadQuicktips(search, locale, sprueche); // load the quicktips
@@ -26,8 +27,8 @@ function readLocaleFromUrl (defaultLocale) {
 }
 */
 
-function getURLParameter (name) {
-  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+function getURLParameter (name, defaultValue) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || defaultValue;
 }
 
 function getMetaTag (name) {
@@ -68,7 +69,8 @@ function tabs () {
   });
 }
 
-function getDocumentReadyForUse (fokus, custom = false) {
+function getDocumentReadyForUse (fokus, custom) {
+  if (typeof custom == 'undefined') custom = false;
   activateJSOnlyContent();
   clickLog();
   popovers();
@@ -297,7 +299,8 @@ function createCustomFocuses () {
  *     </li>
  * @endif
  */
-function addFocus (focus, active = false) {
+function addFocus (focus, active) {
+  if (typeof active == 'undefined') active = false;
   var id = getIdFromName(focus.name);
   var foki = document.getElementById('foki');
   // create <input>
@@ -351,7 +354,8 @@ function addFocus (focus, active = false) {
  *     </div>
  * @endif
  */
-function addTab (focus, active = false) {
+function addTab (focus, active) {
+  if (typeof active == 'undefined') active = false;
   var id = getIdFromName(focus.name);
   // create tab div
   var tabPane = document.createElement('div');
@@ -463,7 +467,10 @@ function resultSaver (index) {
   var rank = parseFloat($('div.tab-pane.active .result[data-count=' + index + ']').attr('data-rank'));
   new Result(title, link, anzeigeLink, gefVon, hoster, anonym, description, color, rank, undefined);
   var to = $('#savedFokiTabSelector').length ? $('#savedFokiTabSelector') : $('#foki');
-  $('div.tab-pane.active .result[data-count=' + index + ']').transfer({to: to, duration: 1000});
+  $('div.tab-pane.active .result[data-count=' + index + ']').transfer({
+    to: to,
+    duration: 1000
+  });
   new Results().updateResultPageInterface();
 }
 
@@ -476,7 +483,7 @@ function loadQuicktips (search, locale, sprueche) {
 }
 
 const QUICKTIP_SERVER = 'https://quicktips.metager3.de';
-//const QUICKTIP_SERVER = 'http://localhost:63825';
+// const QUICKTIP_SERVER = 'http://localhost:63825'
 
 /**
  * Requests quicktips from the quicktip server and passes them to the loadedHandler
@@ -498,7 +505,7 @@ function getQuicktips (search, locale, blacklist, loadedHandler) {
           type: $(this).children('mg\\:type').text(),
           title: $(this).children('title').text(),
           summary: $(this).children('content').text(),
-          url: $(this).children('link').attr("href"),
+          url: $(this).children('link').attr('href'),
           gefVon: $(this).children('mg\\:gefVon').text(),
           score: $(this).children('relevance\\:score').text(),
           details: $(this).children('mg\\:details').children('entry').map(function () {

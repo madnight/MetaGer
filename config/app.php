@@ -181,7 +181,7 @@ return [
         App\Providers\MetaGerProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
-
+        Collective\Html\HtmlServiceProvider::class,
     ],
 
     /*
@@ -231,7 +231,8 @@ return [
         'View'                => Illuminate\Support\Facades\View::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
         'Agent'               => Jenssegers\Agent\Facades\Agent::class,
-
+        'Form'                => Collective\Html\FormFacade::class,
+        'HTML'                => Collective\Html\HtmlFacade::class,
     ],
 
 ];

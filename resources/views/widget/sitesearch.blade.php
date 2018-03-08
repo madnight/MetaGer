@@ -77,5 +77,5 @@
 			</form>;
 		</textarea>
 	@endif
-	<script src="{{ elixir('js/widgets.js') }}"></script>
+	<script src="{{ mix('js/widgets.js') }}"></script>
 @endsection

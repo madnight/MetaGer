@@ -57,6 +57,6 @@
 	<p>{!! trans('languages.email') !!}</p>
 	<p><input type="email" name="email" form="submit" value="{{$email}}"/></p>
 	<button class="btn btn-success" type="submit" form="submit">Daten übermitteln</button>
-	<script type="text/javascript" src="{{ elixir('js/lib.js') }}"></script>
-	<script type="text/javascript" src="{{ elixir('js/editLanguage.js') }}"></script>
+	<script type="text/javascript" src="{{ mix('js/lib.js') }}"></script>
+	<script type="text/javascript" src="{{ mix('js/editLanguage.js') }}"></script>
 @endsection

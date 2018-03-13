@@ -320,8 +320,8 @@
 			<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a></li>
 			@if (LaravelLocalization::getCurrentLocale() == "de")
 			<li>
-				<a href="https://suma-ev.de/presse/Werbefreie-Suche-mit-MetaGer.html" target="_blank" class="btn btn-default mutelink">
-						Werbefreie Suche mit MetaGer
+				<a href="https://suma-ev.de/presse/SUMA-Awards-werden-SUMA-Stipendien.html" target="_blank" class="btn btn-default mutelink">
+						MetaGer vergibt Stipendien
 				</a>
 			</li>
 			@endif

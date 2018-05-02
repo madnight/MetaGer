@@ -17,7 +17,7 @@ Alternativ können Sie uns natürlich auch per <a href="mailto:support@suma-ev.d
     'letter.1'   => 'Per Brief-Post',
     'letter.2'   => 'Wir ziehen es vor, auf digitalem Wege kontaktiert zu werden.
 Wenn Sie jedoch eine postalische Kontaktaufnahme als unbedingt nötig erachten,
-erreichen Sie uns unter der folgenden Addresse:',
+erreichen Sie uns unter der folgenden Adresse:',
     'letter.3'   => 'SUMA-EV
 Röselerstr. 3
 30159 Hannover

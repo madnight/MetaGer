@@ -106,7 +106,7 @@
                 </ol>
             </article>
             <article class="kontext">
-                <h1>Nutzung des Kontaktformulars</h1>
+                <h1 id="contact">Nutzung des Kontaktformulars</h1>
                 Bei der Nutzung des MetaGer-Kontaktformulars fallen folgende Daten an, die wir zu Referenzzwecken bis 2 Monate nach Abschluss Ihres Anliegens speichern:
                 <ol class="datum-list">
                     <li>

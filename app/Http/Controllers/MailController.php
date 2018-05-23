@@ -105,9 +105,6 @@ class MailController extends Controller
                 $message .= "\r\nBetrag: " . $request->input('Betrag');
                 $message .= "\r\nNachricht: " . $request->input('Nachricht');
 
-                $message .= "\r\n\r\nIP: " . $request->ip();
-                $message .= "\r\nUser-Agent: " . $request->header('User-Agent', "");
-
                 $replyTo = $request->input('email', 'anonymous-user@metager.de');
                 if($replyTo == ""){
                     $replyTo = "noreply@metager.de";

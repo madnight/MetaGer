@@ -34,6 +34,7 @@
 			<button title="" data-original-title="" class="btn btn-default encrypt-btn" type="submit">{!! trans('kontakt.form.8') !!}</button>
 		</div>
 	</form>
+	<p>Es gilt unsere <a href="/datenschutz#contact" target="_blank">Datenschutzerklärung</a></p>
 	<h2>{!! trans('kontakt.mail.1') !!}</h2>
 	<p>{!! trans('kontakt.mail.2') !!}</p>
 	<p>{!! trans('kontakt.mail.3') !!}</p>

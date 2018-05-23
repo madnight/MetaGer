@@ -5,7 +5,7 @@ return [
 
     'settings.noneSelected'    => 'Achtung: Sie haben in ihren Einstellungen keine Suchmaschine ausgewählt.',
 
-    'engines.noParser'         => 'Beim Abfragen von :engine ist ein Fehler aufgetreten. Bitte benachrichtigen Sie uns unter: <a href="mailto:office@suma-ev.de?subject=Fehlender Parser: :engine">office@suma-ev.de</a>',
+    'engines.noParser'         => 'Beim Abfragen von :engine ist ein Fehler aufgetreten. Bitte benachrichtigen Sie uns unter: office@suma-ev.de',
 
     'formdata.cantLoad'        => 'Suma-File konnte nicht gefunden werden',
     'formdata.noSearch'        => 'Achtung: Sie haben keinen Suchbegriff eingegeben. Sie können ihre Suchbegriffe oben eingeben und es erneut versuchen.',
@@ -16,7 +16,7 @@ return [
     'formdata.stopwords'       => 'Sie machen eine Ausschlusssuche. Ergebnisse mit folgenden Wörtern werden nicht angezeigt: ":stopwords"',
     'formdata.phrase'          => 'Sie führen eine Phrasensuche durch: :phrase',
 
-    'sitesearch.failed'        => 'Sie wollten eine Sitesearch auf :site durchführen. Leider unterstützen die eingestellten Suchmaschinen diese nicht. Sie können <a href=":searchLink">hier</a> die Sitesearch im Web-Fokus durchführen. Es werden ihnen Ergebnisse ohne Sitesearch angezeigt.',
-    'sitesearch.success'       => 'Sie führen eine Sitesearch durch. Es werden nur Ergebnisse von der Seite: <a href="http://:site" target="_blank" rel="noopener">":site"</a> angezeigt.',
+    'sitesearch.failed'        => 'Sie wollten eine Sitesearch auf :site durchführen. Leider unterstützen die eingestellten Suchmaschinen diese nicht. Sie können die Sitesearch im Web-Fokus durchführen. Es werden ihnen Ergebnisse ohne Sitesearch angezeigt.',
+    'sitesearch.success'       => 'Sie führen eine Sitesearch durch. Es werden nur Ergebnisse von der Seite: ":site" angezeigt.',
     'feedback'                 => 'Nichts Passendes dabei? Geben Sie uns Feedback: ',
 ];

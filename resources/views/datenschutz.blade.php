@@ -132,7 +132,7 @@
                 </ol>
             </article>
             <article class="kontext">
-                <h1>Nutzung des Spendenformulars</h1>
+                <h1 id="donation">Nutzung des Spendenformulars</h1>
                 Die folgenden, im Spendenformular übermittelten, Daten werden 2 Monate zur Bearbeitung gespeichert:
                 <ol class="datum-list">
                     <li>

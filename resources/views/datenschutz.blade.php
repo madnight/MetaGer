@@ -51,7 +51,7 @@
 														  <li>Neben Spenden und Mitgliedsbeiträgen müssen wir unseren Betrieb durch nicht-personalisierte Werbung auf der Ergebnisseite finanzieren. Um diese Werbung zu erhalten, geben wir die ersten beiden Blöcke der IP in Verbindung mit Teilen vom sog. <a href="#user-agent">User-Agent</a> an unsere Werbepartner.
 													   </li>
 												</ol>
-												<h2>Welche Rechte habe ich?</h2>
+												<h2>Welche Rechte habe ich als Nutzer?</h2>
 												Da die vollständige Form der Internet-Protokoll-Adresse personenbezogen ist, haben Sie insbesondere die folgenden Rechte:
 													<a href="#ihrerechte">Rechte ansehen</a>
                         </article>
@@ -126,7 +126,6 @@
                             <h2>Beispiele</h2>
                             <samp>Feedback zu MetaGer</samp><br />
                             <samp>MetaGer als Browser-PlugIn</samp><br/>
-                            <samp>Hallo liebes MetaGer-Team, wie kann ich MetaGer auf meinem Computer installieren?</samp>
                         </article>
                     </li>
                 </ol>
@@ -197,10 +196,10 @@
                 Bei der Nutzung des MetaGer-Kartendienstes fallen folgende Daten an:
                 <ol>
                     <br/>
-                    <li><a href="#ip-address">IP-Adresse</a>: Wird nicht weiter verwendet.</li>
-                    <li><a href="#user-agent">User-Agent</a>: Wird nicht weiter verwendet.</li>
-                    <li><a href="#search-request">Suchanfrage</a>: Wird verwendet, um Suchergebnisse zu anzuzeigen.</li>
-                    <li>Ortungsdaten: Werden nicht an uns übertragen.</li>
+                    <li><a href="#ip-address">IP-Adresse</a>: Wird nicht gespeichert oder weitergegeben.</li>
+                    <li><a href="#user-agent">User-Agent</a>: Wird nicht gespeichert oder weitergegeben.</li>
+                    <li><a href="#search-request">Suchanfrage</a>: Wird nicht gespeichert oder weitergegeben.</li>
+                    <li>Ortungsdaten: Werden nicht gespeichert oder weitergegeben.</li>
                 </ol>
             </article>
             <article class="kontext">
@@ -208,19 +207,20 @@
                 Bei der Nutzung des anonymisierenden Proxy fallen folgende Daten an:
                 <ol>
                     <br/>
-                    <li><a href="#ip-address">IP-Adresse</a>: Wird nicht weiter verwendet.</li>
-                    <li><a href="#user-agent">User-Agent</a>: Wird nicht weiter verwendet.</li>
+                    <li><a href="#ip-address">IP-Adresse</a>: Wird nicht gespeichert oder weitergegeben.</li>
+                    <li><a href="#user-agent">User-Agent</a>: Wird nicht gespeichert oder weitergegeben.</li>
                 </ol>
             </article>
             <article class="kontext">
                 <h1>Nutzung der Zitat-Suche</h1>
                     Der eingegebene Suchbegriff wird genutzt, um in der Zitat-Datenbank nach Ergebnissen zu suchen.
                     Im Gegensatz zur <a href="#search-request">Websuche</a> mit MetaGer, ist die Weitergabe des Suchbegriffes an Dritte nicht erforderlich, da sich die Zitat-Datenbank auf unserem Server befindet.
+                    Andere Daten werden nicht gespeichert oder weitergegeben.
             </article>
             <article class="kontext">
                 <h1>Nutzung des Assoziators</h1>
                     Der Assoziator nutzt den Suchbegriff, um die damit assoziierten Begriffe zu bestimmen und anzuzeigen.
-                    Darüber hinaus werden die anonymisierte <a href="#ip-address">IP-Adresse</a> sowie der <a href="#user-agent">User-Agent</a> bestimmt.
+                    Andere Daten werden nicht gespeichert oder weitergegeben.
             </article>
             <article class="kontext">
                 <h1>Nutzung der MetaGer-App</h1>
@@ -231,8 +231,8 @@
 				Bei der Nutzung des MetaGer-Plugin fallen folgende Daten an:
                 <ol>
                     <br/>
-                    <li><a href="#ip-address">IP-Adresse</a>: Wird nicht weiter verwendet.</li>
-                    <li><a href="#user-agent">User-Agent</a>: Wird nicht weiter verwendet.</li>
+                    <li><a href="#ip-address">IP-Adresse</a>: Wird nicht gespeichert oder weitergegeben.</li>
+                    <li><a href="#user-agent">User-Agent</a>: Wird nicht gespeichert oder weitergegeben.</li>
                 </ol>
             </article>
         </li>
@@ -240,14 +240,14 @@
     </div>
     <div>
         <h1>Hosting</h1>
-        Die Webseiten unter der Domain „suma-ev.de“ werden von der Intares GmbH administriert. Die übrigen Dienste werden von uns, dem SUMA-EV, administriert und auf angemieteter Hardware bei der Hetzner Online GmbH betrieben. 
+        Die Webseiten unter der Domain „suma-ev.de“ werden bei der Intares GmbH gehostet und administriert. Die übrigen Dienste werden von uns, dem SUMA-EV, administriert und auf angemieteter Hardware bei der Hetzner Online GmbH betrieben. 
     </div>
     <div>
     <h1>Rechtsgrundlage zur Verarbeitung</h1>
 		Als Rechtsgrundlage zur Verarbeitung Ihrer personenbeziehbaren Daten dient uns entweder Art. 6 Abs. 1 lit. a DSGVO, wenn Sie der Verarbeitung durch Nutzung unserer Dienste zustimmen, oder Art. 6 Abs. 1 lit. f DSGVO, wenn die Verarbeitung für die Wahrung unserer berechtigeten Interessen nötig ist, oder eine andere Rechtsgrundlage, falls wir Ihnen diese gesondert mitteilen.
 	</div>
    <div>
-    <h1 id="ihrerechte">Ihre Rechte (und unsere Pflichten)</h1>
+    <h1 id="ihrerechte">Ihre Rechte als Nutzer (und unsere Pflichten)</h1>
         Damit Sie Ihre personenbezogenen Daten auch schützen können, klären wir Sie (gemäß Art. 13 DSGVO) auf, dass Sie über die folgenden Rechte verfügen:
         <ol>
             <li><b>Auskunftsrecht:</b></li>

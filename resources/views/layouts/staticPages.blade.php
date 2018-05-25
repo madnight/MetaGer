@@ -105,9 +105,6 @@
 								<span class="caret"></span></a>
 								<ul class="metager-dropdown-menu">
 									<li>
-										<a href="http://forum.suma-ev.de/" tabindex="220">{{ trans('staticPages.nav4') }}</a>
-									</li>
-									<li>
 										<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/kontakt/") }}" tabindex="221">{{ trans('staticPages.nav5') }}</a>
 									</li>
 									<li>
@@ -147,7 +144,7 @@
 										<a href="https://gitlab.metager3.de/open-source/MetaGer" tabindex="233">{{ trans('staticPages.nav24') }}</a>
 									</li>
 									<li>
-										<a href="http://forum.suma-ev.de/viewtopic.php?f=3&amp;t=43" tabindex="234">{{ trans('staticPages.nav14') }}</a>
+										<a href="https://metager.de/tor" tabindex="234">{{ trans('staticPages.nav14') }}</a>
 									</li>
 								</ul>
 							</li>

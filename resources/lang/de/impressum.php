@@ -16,7 +16,7 @@ Tel.: ++49-(0)511-34000070
 EMail: <a href="mailto:office@suma-ev.de">office@suma-ev.de</a><a href="/kontakt/"> - Public-PGP-Key</a>
 <a href="/kontakt/">Verschlüsselndes Kontakformular</a>',
     'info.4'     => 'Vorstand:
-<a href="http://www.intares.de/service_provider_info/management.html">Dr. Bernhard Biedermann</a>, <a href="http://www.nebel.de/unternehmen/vita.shtml">Michael Nebel</a>, <a href="http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann">Dr. Wolfgang Sander-Beuermann</a>',
+<a href="https://www2.ostfalia.de/cms/de/pws/jensenn/index.html">Prof.Dr. Nils Jensen</a>, Dominik Pfennig, <a href="http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann">Dr. Wolfgang Sander-Beuermann</a>',
     'info.5'     => 'Geschäftsführung:
 <a href="http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann">Dr. Wolfgang Sander-Beuermann</a>
 Public-PGP-Key: <a href="/team/pubkey-wsb">https://metager.de/team/pubkey-wsb</a>

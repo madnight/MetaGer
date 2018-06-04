@@ -18,20 +18,20 @@
 		<div>
 			<label>{{ trans('beitritt.beitritt.1') }}</label>
 			<br>
-			<input type="radio" name="membershipType"> {{ trans('beitritt.radioperson') }}
-			<input type="radio" name="membershipType"> {{ trans('beitritt.radiofirma') }}
+			<input type="radio" name="membershipType" required> {{ trans('beitritt.radioperson') }}
+			<input type="radio" name="membershipType"required> {{ trans('beitritt.radiofirma') }}
 			{{ trans('beitritt.beitritt.2') }}
 		</div>
 		<div class="col-sm-6">
 			<div class="form-group beitritt-form-group">
-				<label for="name" class="non-bold">{{ trans('beitritt.beitritt.3') }}</label>
+				<label for="name" class="non-bold beitritt-required-fields">{{ trans('beitritt.beitritt.3') }}</label>
 				<input type="text" class="form-control beitritt-input" id="name" placeholder="{{trans('beitritt.placeholder.3')}}" required>
 
 			</div>
 		</div>	
 		<div class="col-sm-6">
 			<div class="form-group beitritt-form-group">
-				<label for="firma" class="non-bold">{{ trans('beitritt.beitritt.4') }}</label>
+				<label for="firma" class="non-bold beitritt-required-fields">{{ trans('beitritt.beitritt.4') }}</label>
 				<input type="text" class="form-control beitritt-input" id="firma" placeholder="">
 			</div>
 		</div>
@@ -49,13 +49,13 @@
 		</div>
 		<div class="col-sm-6">
 			<div class="form-group beitritt-form-group">
-				<label for="adresse" class="non-bold">{{ trans('beitritt.beitritt.6') }}</label>
+				<label for="adresse" class="non-bold beitritt-required-fields">{{ trans('beitritt.beitritt.6') }}</label>
 				<input type="text" class="form-control beitritt-input" id="adresse" placeholder="{{trans('beitritt.placeholder.6')}}" required>
 			</div>
 		</div>
 		<div class="col-sm-6">
 			<div class="form-group beitritt-form-group">
-				<label for="email" class="non-bold">{{ trans('beitritt.beitritt.10') }}</label>
+				<label for="email" class="non-bold beitritt-required-fields">{{ trans('beitritt.beitritt.10') }}</label>
 				<input type="email" class="form-control beitritt-input" id="email" required>
 			</div>
 		</div>
@@ -75,24 +75,25 @@
 			<br>
 			<p class="signature">{{ trans('beitritt.unterschrift') }}</p>
 		</div>
-		<h3>{{ trans('beitritt.abbuchung.2') }}</h3>
+		<hr>
+		<h1>{{ trans('beitritt.abbuchung.2') }}</h1>
 		<p>{{ trans('beitritt.abbuchung.3') }}</p>
 		<div class="form-group beitritt-form-group">
-			<label for="kontoname" class="non-bold">{{ trans('beitritt.abbuchung.4') }}</label>
-			<input type="text" class="form-control" name="kontoname" placeholder="">
+			<label for="kontoname" class="non-bold beitritt-required-fields">{{ trans('beitritt.abbuchung.4') }}</label>
+			<input type="text" class="form-control" id="kontoname" placeholder="">
 		</div>
 		<div class="row">
 			<div class="col-sm-4 form-group beitritt-form-group">
-				<label for="bankverbindung" class="non-bold">{{ trans('beitritt.abbuchung.5') }}</label>
-				<input type="text" class="form-control" name="bankverbindung" placeholder="">
+				<label for="bankverbindung" class="non-bold beitritt-required-fields">{{ trans('beitritt.abbuchung.5') }}</label>
+				<input type="text" class="form-control" id="bankverbindung" placeholder="">
 			</div>
 			<div class="col-sm-5 form-group beitritt-form-group">
-				<label for="iban" class="non-bold">{{ trans('beitritt.abbuchung.6') }}</label>
-				<input type="text" class="form-control" name="iban" maxlength="22" placeholder="">
+				<label for="iban" class="non-bold beitritt-required-fields">{{ trans('beitritt.abbuchung.6') }}</label>
+				<input type="text" class="form-control" id="iban" maxlength="22" placeholder="">
 			</div>
 			<div class="col-sm-3 form-group beitritt-form-group">
-				<label for="bic" class="non-bold">{{ trans('beitritt.abbuchung.7') }}</label>
-				<input type="text" class="form-control" name="bic" placeholder="">
+				<label for="bic" class="non-bold beitritt-required-fields">{{ trans('beitritt.abbuchung.7') }}</label>
+				<input type="text" class="form-control" id="bic" placeholder="">
 			</div>
 		</div>
 		<br>

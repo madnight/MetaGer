@@ -62,7 +62,7 @@
 		<div class="form-group beitritt-form-group">
 			<p>{!! trans('beitritt.ansprache.6') !!}</p>
 			<p>{!! trans('beitritt.ansprache.7') !!}</p>
-			<input type="radio" name="veröffentlichung" checked> {{ trans('beitritt.radiozustimmung') }}
+			<input type="radio" name="veröffentlichung"> {{ trans('beitritt.radiozustimmung') }}
 			<input type="radio" name="veröffentlichung"> {{ trans('beitritt.radioablehnung') }}
 		</div>
 		<div class="row">

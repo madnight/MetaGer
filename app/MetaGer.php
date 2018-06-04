@@ -235,7 +235,9 @@ class MetaGer
         $this->results = $newResults;
 
         #Adgoal Implementation
-        $this->results = $this->parseAdgoal($this->results);
+        if (!$this->apiAuthorized) {
+            $this->results = $this->parseAdgoal($this->results);
+        }
 
         $counter   = 0;
         $firstRank = 0;

@@ -326,11 +326,7 @@
 			</li>
 			
 		</ul>
-		<script type="text/javascript">
-			@php
-				echo file_get_contents(public_path() . mix('/js/scriptStartPage.js'));
-			@endphp
-		</script>
+		<script type="text/javascript" src="{!! mix('/js/scriptStartPage.js') !!}"></script>
 @endsection
 
 @section('optionalContent')

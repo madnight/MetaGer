@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'role.1'    => 'Geschäftsführender Vorstand/CEO',
+    'role.1'    => 'Vorstand',
     'role.2'    => 'Büroleiter und Jugendschutzbeauftragter',
     'role.3'    => 'Pressereferentin',
     'role.4'    => 'Programmierer',

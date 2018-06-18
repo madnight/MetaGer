@@ -6,9 +6,8 @@
 	<h1>Team</h1>
 	<ul class="dotlist">
 		<li>
-			<p><a href="https://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann" target="_blank" rel="noopener">Sander-Beuermann, Wolfgang</a>, Dr.-Ing. - {!! trans('team.role.1') !!} -
-			<a href="mailto:wsb@suma-ev.de">wsb@suma-ev.de</a> -
-			<a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/team/pubkey-wsb") }}">Public Key</a></p>
+			<p><a href="https://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann" target="_blank" rel="noopener">Sander-Beuermann, Wolfgang</a>, Dr. - {!! trans('team.role.1') !!} -
+			<a href="mailto:wsb@suma-ev.de">wsb@suma-ev.de</a>
 		</li>
 		<li>
 			<p>Becker, Georg - {!! trans('team.role.2') !!} -
@@ -19,7 +18,7 @@
 			<a href="mailto:branz@suma-ev.de">branz@suma-ev.de</a></p>
 		</li>
 		<li>
-			<p>Pfennig, Dominik - {!! trans('team.role.4') !!} -
+			<p>Pfennig, Dominik - {!! trans('team.role.1') !!} -
 			<a href="mailto:dominik@suma-ev.de">dominik@suma-ev.de</a></p>
 		</li>
 		<li>

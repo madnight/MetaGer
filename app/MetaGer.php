@@ -404,7 +404,7 @@ class MetaGer
                 $hash   = $el[1];
 
                 foreach ($results as $result) {
-                    if ($hoster === $result->tld) {
+                    if ($hoster === $result->tld && !$result->partnershop) {
                         # Hier ist ein Advertiser:
                         # Das Logo hinzufügen:
                         if ($result->image !== "") {

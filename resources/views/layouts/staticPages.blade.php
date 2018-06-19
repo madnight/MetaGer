@@ -14,22 +14,13 @@
 		<meta rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<meta rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 		<link rel="search" type="application/opensearchdescription+xml" title="{{ trans('staticPages.opensearch') }}" href="{{  LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), action('StartpageController@loadPlugin', ['params' => base64_encode(serialize(Request::all()))])) }}">
-		<style>
-			@php
-				echo file_get_contents(public_path() . mix('css/themes/default.css'));
-			@endphp
-		</style>
+		<link rel ="stylesheet" href="{{ mix('css/themes/default.css') }}" />
+		
 		<link id="theme" type="text/css" rel="stylesheet" href="/css/theme.css.php" />
-		<script type="text/javascript">
-			@php
-				echo file_get_contents(public_path() . mix('js/scriptSubPages.js'));
-			@endphp
-		</script>
-		<script type="text/javascript">
-			@php
-				echo file_get_contents(public_path() . mix('js/lib.js'));
-			@endphp
-		</script>
+		<script type="text/javascript" src="{{ mix('js/scriptSubPages.js') }}" ></script>
+			
+		<script type="text/javascript" src="{{ mix('js/lib.js') }}" ></script>
+			
 		@if (isset($css))
 			@if(is_array($css))
 				@foreach($css as $el)

@@ -29,6 +29,13 @@ class Shopzilla extends Searchengine
                 $title       = $result->{"title"}->__toString();
                 $link        = $result->{"url"}->__toString();
                 $anzeigeLink = $result->{"rawUrl"}->__toString();
+                // Try to extract the display Urls:
+                
+                if(preg_match("/^http[s]{0,1}:\/\/ad.eanalyzer.de/", $anzeigeLink)){
+                    $parts = parse_url($anzeigeLink);
+                    parse_str($parts['query'], $query);
+                    $anzeigeLink = $query["url"];
+                }
                 $descr       = $result->{"description"}->__toString();
                 $image       = $result->{"Images"}->{"Image"}[1]->__toString();
                 $price       = $result->{"price"}->__toString();
@@ -40,7 +47,7 @@ class Shopzilla extends Searchengine
                     $link,
                     $anzeigeLink,
                     $descr,
-                    $this->displayName,$this->homepage,
+                    $this->gefVon,
                     $this->counter,
                     ['partnershop' => true,
                         'price'        => $price,

@@ -270,7 +270,7 @@ class Result
             strpos($this->strippedHost, "www.ladenpreis.net") === false &&
             strpos($this->strippedHost, "ncbi.nlm.nih.gov") === false &&
             strpos($this->strippedHost, "www.onenewspage.com") === false &&
-            $this->gefVon !== "Shopzilla" ){
+            strpos($this->gefVon, "Shopzilla") === false ){
             $count = $metager->getHostCount($this->strippedHost);
             if ($count >= 3) {
                 return false;
@@ -301,13 +301,14 @@ class Result
 
     /* Entfernt "http://", "www" und Parameter von einem Link
      *  Dieser wird dabei in die Form:
-     *  "http://www.foo.bar.de/test?ja=1" -> "foo.bar.de/test"
+     *  "http://www.foo.bar.de/test?ja=1" -> "foo.bar.de/test?ja=1"
      *  gebracht.
      */
     public function getStrippedLink($link)
     {
-        $match = $this->getUrlElements($link);
-        return $match['host'] . $match['path'];
+        $link = preg_replace("/^http[s]{0,1}:\/\//", "", $link);
+        $link = preg_replace("/^www\./","",$link);
+        return $link;
     }
 
     /* Liest aus einem Link die Domain.

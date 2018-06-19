@@ -269,7 +269,8 @@ class Result
             strpos($this->strippedHost, "twitter.com") === false &&
             strpos($this->strippedHost, "www.ladenpreis.net") === false &&
             strpos($this->strippedHost, "ncbi.nlm.nih.gov") === false &&
-            strpos($this->strippedHost, "www.onenewspage.com") === false) {
+            strpos($this->strippedHost, "www.onenewspage.com") === false &&
+            $this->gefVon !== "Shopzilla" ){
             $count = $metager->getHostCount($this->strippedHost);
             if ($count >= 3) {
                 return false;

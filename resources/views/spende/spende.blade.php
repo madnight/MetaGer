@@ -17,28 +17,28 @@
 			<input type="hidden" name="dt" value="{{ md5(date('Y') . date('m') . date('d')) }}">
 			<div class="form-group donation-form-group">
 			<label for="Name">{!! trans('spende.lastschrift.3') !!}</label>
-			<input type="text" class="form-control" id="Name" required="" name="Name" placeholder="{!! trans('spende.lastschrift.3.placeholder') !!}" value="{{ old('Name') }}" />
+			<input type="text" class="form-control" id="Name" required="" name="Name" placeholder="{!! trans('spende.lastschrift.3.placeholder') !!}" value="" />
 			</div>
 			<div class="form-group donation-form-group">
 			<label for="email">{!! trans('spende.lastschrift.4') !!}</label>
-				<input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ old('email') }}">
+				<input type="email" class="form-control" id="email" name="email" placeholder="Email" value="">
 			</div>
 			<div class="form-group donation-form-group">
 			<label for="iban">{!! trans('spende.lastschrift.6') !!}</label>
-				<input type="text" class="form-control" id="iban" required="" name="Kontonummer" placeholder="IBAN" value="{{ old('Kontonummer') }}">
+				<input type="text" class="form-control" id="iban" required="" name="Kontonummer" placeholder="IBAN" value="">
 			</div>
 			<div class="form-group donation-form-group">
 			<label for="bic">{!! trans('spende.lastschrift.7') !!}</label>
-				<input type="text" class="form-control" id="bic" required="" name="Bankleitzahl" placeholder="BIC" value="{{ old('Bankleitzahl') }}">
+				<input type="text" class="form-control" id="bic" required="" name="Bankleitzahl" placeholder="BIC" value="">
 			</div>
 			<div class="form-group donation-form-group">
 			<label for="value">{!! trans('spende.lastschrift.8.value')!!} </label>
-				<input type="number" class="form-control" id="value" required="" name="Betrag" placeholder="{!! trans('spende.lastschrift.8.value.placeholder') !!}" value="{{ old('Bankleitzahl') }}">
+				<input type="number" class="form-control" id="value" required="" name="Betrag" placeholder="{!! trans('spende.lastschrift.8.value.placeholder') !!}" value="">
 			</div>
 			<div class="form-group donation-form-group">
 			<label for="msg">{!! trans('spende.lastschrift.8.message')!!}</label>
 			<label for="msg"><u>{!! trans('spende.bankinfo.3')!!}</u></label>
-			<textarea class="form-control" id="msg" name="Nachricht" placeholder="{!! trans('spende.lastschrift.8.message.placeholder') !!}">{{ old('Nachricht') }}</textarea>
+			<textarea class="form-control" id="msg" name="Nachricht" placeholder="{!! trans('spende.lastschrift.8.message.placeholder') !!}"></textarea>
 			</div>
 			<button type="submit" form="donate" class="btn btn-default">{!! trans('spende.lastschrift.9') !!}</button>
 		</form>

@@ -39,4 +39,4 @@ mix
   .sourceMaps(false, 'inline-source-map')
   .version();
 
-mix.combine(['resources/assets/js/lib/jquery.js', 'resources/assets/js/lib/bootstrap.js', 'resources/assets/js/lib/md5.js', 'resources/assets/js/lib/iframeResizer.min.js'], 'public/js/lib.js');
+mix.combine(['resources/assets/js/lib/jquery.js', 'resources/assets/js/lib/jquery-ui.min.js', 'resources/assets/js/lib/bootstrap.js', 'resources/assets/js/lib/md5.js', 'resources/assets/js/lib/iframeResizer.min.js'], 'public/js/lib.js');

@@ -8,7 +8,7 @@
 <h1>{!! trans('spende.headline.1') !!}</h1>
 <h2 class="subheading">{!! trans('spende.headline.2') !!}</h2>
 <p>{!! trans('spende.about.2') !!}</p>
-<p><i class="fa fa-info fa-fw fa-lg" aria-hidden="true"></i><u>{!! trans('spende.bankinfo.3') !!}</u></p>	
+<p><i class="fa fa-info fa-fw fa-lg" aria-hidden="true"></i>{!! trans('spende.bankinfo.3') !!}</p>	
 <div id="top" >
 	<div class="col-lg-6 col-md-12 col-sm-12 others">	
 		<h3 id="lastschrift">{!! trans('spende.lastschrift.1') !!}</h3>
@@ -37,7 +37,7 @@
 			</div>
 			<div class="form-group donation-form-group">
 			<label for="msg">{!! trans('spende.lastschrift.8.message')!!}</label>
-			<label for="msg"><u>{!! trans('spende.bankinfo.3')!!}</u></label>
+			<label for="msg">{!! trans('spende.bankinfo.3')!!}</label>
 			<textarea class="form-control" id="msg" name="Nachricht" placeholder="{!! trans('spende.lastschrift.8.message.placeholder') !!}"></textarea>
 			</div>
 			<button type="submit" form="donate" class="btn btn-default">{!! trans('spende.lastschrift.9') !!}</button>

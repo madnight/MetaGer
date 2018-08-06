@@ -895,7 +895,7 @@ class MetaGer
         }
         # Create guid
         $this->id = $this->createGuid();
-        $this->oldId = $request->input('id', '');
+        $this->oldId = $request->input('d', '');
 
         $this->url = $request->url();
         # Zunächst überprüfen wir die eingegebenen Einstellungen:

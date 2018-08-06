@@ -8,7 +8,7 @@
 		<meta name="p" content="{{ getmypid() }}" />
 		<meta name="q" content="{{ $eingabe }}" />
 		<meta name="l" content="{{ LaravelLocalization::getCurrentLocale() }}" />
-		<meta name="id" content="{!! $metager->getId() !!}" />
+		<meta name="d" content="{!! $metager->getId() !!}" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
 		<meta http-equiv="language" content="{!! trans('staticPages.meta.language') !!}" />

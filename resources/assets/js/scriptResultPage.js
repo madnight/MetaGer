@@ -116,7 +116,7 @@ function clickLog () {
   $('.result a.title, .result div.link-link a').off();
   $('.result a.title, .result div.link-link a').click(function () {
     $.get('/clickstats', {
-      i: $('meta[name=p]').attr('content'),
+      i: $('meta[name=id]').attr('content'),
       s: $(this).attr('data-hoster'),
       q: $('meta[name=q]').attr('content'),
       p: $(this).attr('data-count'),

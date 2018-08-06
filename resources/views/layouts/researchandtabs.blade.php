@@ -16,10 +16,11 @@
 								</div>
 							</div>
 							@foreach( $metager->request->all() as $key => $value)
-								@if($key !== "eingabe" && $key !== "page" && $key !== "next")
+								@if($key !== "eingabe" && $key !== "page" && $key !== "next" && $key !== "id")
 									<input type='hidden' name='{{ $key }}' value='{{ $value }}' form='submitForm' />
 								@endif
 							@endforeach
+							<input type='hidden' name='id' value='{!! $metager->getId() !!}' form='submitForm' />
 						</form>
 					</div>
 				</div>

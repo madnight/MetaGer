@@ -35,7 +35,7 @@
 			g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
 		})();
 		</script>
-		<noscript><p><img src="//piwik.metager3.de/piwik.php?idsite=1&amp;rec=1" style="border:0;" alt="" /></p></noscript>
+		<noscript><p><img src="//piwik.metager3.de/piwik.php?idsite=1&amp;rec=1&amp;url={{ url()->full() }}&amp;action_name={{ $eingabe }} - MetaGer&amp;rand={{ rand(0,1000000) }}" style="border:0;" alt="" /></p></noscript>
 		<!-- End Matomo Code -->
 	</head>
 	<body id="resultBody">

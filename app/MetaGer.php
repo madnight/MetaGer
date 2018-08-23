@@ -1149,11 +1149,19 @@ class MetaGer
 
     private function searchCheckStopwords($request)
     {
+        $oldQ = $this->q;
         // matches '[... ]-test[ ...]'
-        while (preg_match("/(^|[^\s]+\s)-(\S+)(?:\s(.+)|($))/si", $this->q, $match)) {
-            $this->stopWords[] = $match[2];
-            $this->q           = trim($match[1] . $match[3]);
+        $words = preg_split("/\s+/si",$this->q);
+        $newQ = "";
+        foreach($words as $word){
+            if(strpos($word, "-") === 0 && strlen($word) > 1){
+                $this->stopWords[] = substr($word, 1);
+            }else{
+                $newQ .= " " . $word;
+            }
         }
+        $this->q = trim($newQ);
+
         # Overwrite Setting if submitted via Parameter
         if($request->has('stop')){
             $this->stopWords = [];
@@ -1167,6 +1175,7 @@ class MetaGer
             }else{
                 $this->stopWords[] = $stop;
             }
+            $this->q = $oldQ;
         }
         // print the stopwords as a user warning
         if (sizeof($this->stopWords) > 0) {

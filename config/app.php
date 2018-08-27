@@ -182,6 +182,7 @@ return [
         Jenssegers\Agent\AgentServiceProvider::class,
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
     ],
 
     /*
@@ -233,6 +234,8 @@ return [
         'Agent'               => Jenssegers\Agent\Facades\Agent::class,
         'Form'                => Collective\Html\FormFacade::class,
         'HTML'                => Collective\Html\HtmlFacade::class,
+        'Captcha'             => Mews\Captcha\Facades\Captcha::class,
+        'Carbon'              => Carbon\Carbon::class,
     ],
 
 ];

@@ -9,6 +9,7 @@ use Jenssegers\Agent\Agent;
 use LaravelLocalization;
 use Log;
 use Predis\Connection\ConnectionException;
+use Carbon;
 
 class MetaGer
 {
@@ -239,6 +240,10 @@ class MetaGer
             $this->results = $this->parseAdgoal($this->results);
         }
 
+        # Human Verification
+        $this->results = $this->humanVerification($this->results);
+
+
         $counter   = 0;
         $firstRank = 0;
 
@@ -433,6 +438,23 @@ class MetaGer
 
         return $results;
     }
+
+    public function humanVerification($results){
+        # Let's check if we need to implement a redirect for human verification
+        if($this->verificationCount > 10){
+            foreach($results as $result){
+                $link = $result->link;
+                $day = Carbon::now()->day;
+                $pw = md5($this->verificationId . $day . $link . env("PROXY_PASSWORD"));
+                $url = route('humanverification', ['mm' => $this->verificationId, 'pw' => $pw, "url" => urlencode(base64_encode($link))]);
+                $result->link = $url;
+            }
+            return $results;
+        }else{
+            return $results;
+        }
+    }
+
 
     public function authorize($key)
     {
@@ -1000,6 +1022,10 @@ class MetaGer
         } else {
             $this->quicktips = true;
         }
+
+        $this->verificationId = $request->input('verification_id', null);
+        $this->verificationCount = intval($request->input('verification_count', '0'));
+
 
         $this->apiKey = $request->input('key', '');
         

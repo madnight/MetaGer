@@ -10,7 +10,6 @@
 | to using a Closure or controller method. Build something great!
 |
  */
-
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(), /*,
@@ -140,7 +139,9 @@ Route::group(
 
         Route::get('settings', 'StartpageController@loadSettings');
 
-        Route::match(['get', 'post'], 'meta/meta.ger3', 'MetaGerSearch@search');
+        Route::match(['get', 'post'], 'meta/meta.ger3', 'MetaGerSearch@search')->middleware('humanverification');
+        Route::post('img/cat.jpg', 'HumanVerification@remove');
+        Route::get('r/metager/{mm}/{pw}/{url}', ['as' => 'humanverification', 'uses' => 'HumanVerification@removeGet']);
         Route::get('meta/picture', 'Pictureproxy@get');
         Route::get('clickstats', 'LogController@clicklog');
         Route::get('pluginClose', 'LogController@pluginClose');

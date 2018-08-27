@@ -15,6 +15,7 @@
   * php-xml
   * php-zip
   * php-redis
+  * php-gd
 * sqlite3
 * redis-server
 * Die Perl-Pakete

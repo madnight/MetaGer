@@ -126,12 +126,29 @@ function clickLog () {
 }
 
 function botProtection () {
-  if ($('meta[name=pqr]').length > 0) {
-    var link = atob($('meta[name=pqr]').attr('content'));
-    var hash = $('meta[name=pq]').attr('content');
-    document.location.href = link + '&bot=' + hash;
-  }
+  $(".result").find("a").click(function(){
+    var link = $(this).attr("href");
+    var newtab = false;
+    if($(this).attr("target") == "_blank"){
+      newtab = true;
+    }
+    $.ajax({
+      url: '/img/cat.jpg', 
+      type: "post",
+      data: { mm: $("meta[name=mm]").attr("content")},
+      timeout: 2000
+    })
+    .always(function(){
+      if(!newtab)
+        document.location.href = link;
+    });
+    if(!newtab)
+      return false;
+    else
+      return true;
+  });
 }
+
 
 function popovers () {
   $('[data-toggle=popover]').each(function (e) {

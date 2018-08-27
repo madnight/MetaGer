@@ -17,6 +17,7 @@ class CreateHumanverificationTable extends Migration
             $table->string('id')->unique();
             $table->integer('unusedResultPages');
             $table->boolean('locked');
+            $table->string('lockedKey');
             $table->timestamp('updated_at');
         });
     }

@@ -4,4 +4,4 @@
 
 Route::get('captcha/api/{config?}', '\Mews\Captcha\CaptchaController@getCaptchaApi')->middleware('session');
 Route::get('captcha/{config?}', '\Mews\Captcha\CaptchaController@getCaptcha')->middleware('session');
-Route::match(['get', 'post'], 'meta/verification/{id}/{url}', 'HumanVerification@captcha');
+Route::match(['get', 'post'], 'meta/verification/{id}/{url?}', 'HumanVerification@captcha')->name('verification');

@@ -7,22 +7,32 @@ use Validator;
 use Input;
 use DB;
 use Carbon;
+use Captcha;
+use Illuminate\Hashing\BcryptHasher as Hasher;
 
 class HumanVerification extends Controller
 {
-    public static function captcha(Request $request, $id, $url){
-        $url = base64_decode(str_replace("<<SLASH>>", "/", $url));
+    public static function captcha(Request $request, Hasher $hasher, $id, $url = null){
+        if($url != null)
+            $url = base64_decode(str_replace("<<SLASH>>", "/", $url));
+        else
+            $url = $request->input('url');
         if($request->getMethod() == 'POST'){
-            $rules = ['captcha' => 'required|captcha'];
-            $validator = Validator::make($request->all(), $rules);
-            if($validator->fails()){
-                return view('captcha')->with('title', 'Bestätigung notwendig')->with('id', $id)->with('url', $url)->with('errorMessage', 'Bitte Captcha eingeben:');
+            $user = DB::table('humanverification')->where('id', $id)->first();
+
+            $lockedKey = $user->lockedKey;
+            $key = $request->input('captcha');
+            $key = strtolower($key);
+            if(!$hasher->check($key, $lockedKey)){
+                $captcha = Captcha::create("default", true);
+                DB::table('humanverification')->where('id', $id)->update(['lockedKey' => $captcha["key"]]);
+                return view('captcha')->with('title', 'Bestätigung notwendig')
+                    ->with('id', $id)
+                    ->with('url', $url)
+                    ->with('image', $captcha["img"])
+                    ->with('errorMessage', 'Bitte Captcha eingeben:');
             }else{
                 # If we can unlock the Account of this user we will redirect him to the result page
-                $id = $request->input('id');
-                $url = $url;
-
-                $user = DB::table('humanverification')->where('id', $id)->first();
                 if($user !== null && $user->locked === 1){
                     DB::table('humanverification')->where('id', $id)->update(['locked' => false]);
                     return redirect($url);
@@ -31,7 +41,12 @@ class HumanVerification extends Controller
                 }
             }
         }
-        return view('captcha')->with('title', 'Bestätigung notwendig')->with('id', $id)->with('url', $url);
+        $captcha = Captcha::create("default", true);
+        DB::table('humanverification')->where('id', $id)->update(['lockedKey' => $captcha["key"]]);
+        return view('captcha')->with('title', 'Bestätigung notwendig')
+            ->with('id', $id)
+            ->with('url', $url)
+            ->with('image', $captcha["img"]);
     }
 
     public static function remove(Request $request){

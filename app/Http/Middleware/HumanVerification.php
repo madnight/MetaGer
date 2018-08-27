@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use DB;
 use Carbon;
+use Captcha;
+use Illuminate\Http\Response;
 
 class HumanVerification
 {
@@ -37,7 +39,7 @@ class HumanVerification
             # If this user doesn't have an entry we will create one
             if($user === null){
                 DB::table('humanverification')->insert(
-                    ['id' => $id, 'unusedResultPages' => 1, 'locked' => false, 'updated_at' => Carbon::now()]
+                    ['id' => $id, 'unusedResultPages' => 1, 'locked' => false, "lockedKey" => "", 'updated_at' => Carbon::now()]
                 );
                 # Insert the URL the user tries to reach
                 DB::table('usedurls')->insert(['user_id' => $id, 'url' => $request->url()]);
@@ -61,7 +63,16 @@ class HumanVerification
 
             # If the user is locked we will force a Captcha validation
             if($user->locked === 1){
-                return redirect('meta/verification/' . $id . '/' . urlencode(str_replace("/", "<<SLASH>>", base64_encode(url()->full()))) . "?route=.1");
+                $captcha = Captcha::create("default", true);
+                DB::table('humanverification')->where('id', $id)->update(['lockedKey' => $captcha["key"]]);
+                return 
+                new Response(
+                    view('captcha')
+                        ->with('title', "Bestätigung erforderlich")
+                        ->with('id', $id)
+                        ->with('url', url()->full())
+                        ->with('image', $captcha["img"])
+                );
             }
         }catch(\Illuminate\Database\QueryException $e){
             // Failure in contacting metager3.de 

@@ -23,7 +23,7 @@ return [
     'placeholder.10'=> 'E-Mail-Adresse',
     'beitritt.11'   => 'Eigene Webadresse: ',
     'placeholder.11'=> 'Web-Adresse',
-    'ansprache.6'   =>'Wir führen ein internes und mit Passwort geschütztes Mitgliederverzeichnis, in das Sie eingetragen werden, um die vereinsinterne Kommunikation zu erleichtern. So können sich Mitglieder leichter finden und man sieht, wer vielleicht bereits in der eigenen Stadt dabei ist. ',
+    'ansprache.6'   =>'Wir führen ein internes und mit Passwort geschütztes Mitgliederverzeichnis, in das Sie eingetragen werden, um die vereinsinterne Kommunikation zu erleichtern. So können sich Mitglieder leichter finden und man sieht, wer vielleicht bereits im eigenen Ort dabei ist. ',
     'ansprache.7'   =>'Darüber hinaus können Sie sich bereit erklären, dass wir einen Link und/oder Ihren Namen/Firmennamen und auf Wunsch weitere Informationen auf der Seite <a href="https://suma-ev.de/mitglieder/index.html">Mitgliederinformationen</a> anzeigen. Genauere Informationen erhalten Sie dann in der Begrüßungsemail. Dazu <span style="text-decoration: underline">müssen</span> Sie folgend eine Auswahl treffen:',
     'radiozustimmung'   =>'Ja',
     'radioablehnung'    =>'Nein',

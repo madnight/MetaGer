@@ -446,7 +446,7 @@ class MetaGer
                 $link = $result->link;
                 $day = Carbon::now()->day;
                 $pw = md5($this->verificationId . $day . $link . env("PROXY_PASSWORD"));
-                $url = route('humanverification', ['mm' => $this->verificationId, 'pw' => $pw, "url" => urlencode(base64_encode($link))]);
+                $url = route('humanverification', ['mm' => $this->verificationId, 'pw' => $pw, "url" => urlencode(str_replace("/", "<<SLASH>>", base64_encode($link)))]);
                 $result->link = $url;
             }
             return $results;

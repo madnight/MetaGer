@@ -11,15 +11,16 @@ use Carbon;
 class HumanVerification extends Controller
 {
     public static function captcha(Request $request, $id, $url){
+        $url = base64_decode(str_replace("<<SLASH>>", "/", $url));
         if($request->getMethod() == 'POST'){
             $rules = ['captcha' => 'required|captcha'];
             $validator = Validator::make($request->all(), $rules);
             if($validator->fails()){
-                return view('captcha')->with('title', 'Bestätigung notwendig')->with('id', $id)->with('url', base64_decode($url))->with('errorMessage', 'Bitte Captcha eingeben:');
+                return view('captcha')->with('title', 'Bestätigung notwendig')->with('id', $id)->with('url', $url)->with('errorMessage', 'Bitte Captcha eingeben:');
             }else{
                 # If we can unlock the Account of this user we will redirect him to the result page
                 $id = $request->input('id');
-                $url = $request->input('url');
+                $url = $url;
 
                 $user = DB::table('humanverification')->where('id', $id)->first();
                 if($user !== null && $user->locked === 1){
@@ -30,7 +31,7 @@ class HumanVerification extends Controller
                 }
             }
         }
-        return view('captcha')->with('title', 'Bestätigung notwendig')->with('id', $id)->with('url', base64_decode($url));
+        return view('captcha')->with('title', 'Bestätigung notwendig')->with('id', $id)->with('url', $url);
     }
 
     public static function remove(Request $request){
@@ -47,7 +48,7 @@ class HumanVerification extends Controller
     }
 
     public static function removeGet(Request $request, $mm, $password, $url){
-        $url = base64_decode($url);
+        $url = base64_decode(str_replace("<<SLASH>>", "/", $url));
 
         # If the user is correct and the password is we will delete any entry in the database
         $requiredPass = md5($mm . Carbon::NOW()->day . $url . env("PROXY_PASSWORD"));

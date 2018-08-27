@@ -127,6 +127,12 @@ return [
             'port'     => env('REDIS_CACHE_PORT', 6379),
             'database' => 2,
         ],
+        'redisSessions' => [
+            'host'     => env('REDIS_SESSION_HOST', 'localhost'),
+            'password' => env('REDIS_SESSION_PASSWORD', env('REDIS_PASSWORD', null)),
+            'port'     => env('REDIS_SESSION_PORT', 6379),
+            'database' => 3,
+        ],
 
     ],
 

@@ -16,7 +16,7 @@ class Usedurls extends Migration
         Schema::create('usedurls', function (Blueprint $table) {
             $table->increments('id')->unique();
             $table->string('user_id');
-            $table->string('url');
+            $table->string('url', 500);
             $table->timestamp('created_at');
             $table->foreign('user_id')->references('id')->on('humanverification')->onDelete('cascade');
         });

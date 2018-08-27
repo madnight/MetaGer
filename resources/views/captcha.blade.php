@@ -13,7 +13,7 @@
         {{ csrf_field() }}
         <input type="hidden" name="url" value="{!! $url !!}">
         <input type="hidden" name="id" value="{{ $id }}">
-        <p>{!! captcha_img() !!}</p>
+        <p>{!! preg_replace("/(img src=\"[^\"]+)/si", "$1&route=.1\"",captcha_img()) !!}</p>
         @if(isset($errorMessage))
         <p><font color="red">{{$errorMessage}}</font></p>
         @endif

@@ -61,7 +61,7 @@ class HumanVerification
 
             # If the user is locked we will force a Captcha validation
             if($user->locked === 1){
-                return redirect('meta/verification/' . $id . '/' . urlencode(str_replace("/", "<<SLASH>>", base64_encode(url()->full()))));
+                return redirect('meta/verification/' . $id . '/' . urlencode(str_replace("/", "<<SLASH>>", base64_encode(url()->full()))) . "?route=.1");
             }
         }catch(\Illuminate\Database\QueryException $e){
             // Failure in contacting metager3.de 

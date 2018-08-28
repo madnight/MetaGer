@@ -217,7 +217,9 @@
 			g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
 		})();
 		</script>
+		@if(isset($title))
 		<noscript><p><img src="//piwik.metager3.de/piwik.php?idsite=1&amp;rec=1&amp;url={{ url()->full() }}&amp;action_name={{ $title }}&amp;rand={{ rand(0,1000000) }}" style="border:0;" alt="" /></p></noscript>
+		@endif
 		<!-- End Matomo Code -->
 
 		

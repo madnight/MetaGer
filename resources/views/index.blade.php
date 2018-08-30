@@ -318,13 +318,13 @@
 				class="hidden"
 			@endunless>
 			<a href="#" data-toggle="modal" data-target="#plugin-modal" class="btn btn-default mutelink" title="{{ trans('index.plugintitle') }}"><i class="fa fa-plug" aria-hidden="true"></i> {{ trans('index.plugin') }}</a></li>
-			
+
 			<li>
 				<a href="https://metager.de/datenschutz" target="_blank" class="btn btn-default mutelink">
 						Datenschutz
 				</a>
 			</li>
-			
+
 		</ul>
 		<script type="text/javascript" src="{!! mix('/js/scriptStartPage.js') !!}"></script>
 @endsection
@@ -336,8 +336,8 @@
 			<div id="sponsors" class="col-sm-6 col-xs-12">
 				<h2>{{ trans('index.sponsors.head.2') }}</h2>
 				<ul class="startpage">
+					<li>{!! trans('index.sponsors.seo') !!}</li>
 					<li>{!! trans('index.sponsors.woxikon') !!}</li>
-				    <li>{!! trans('index.sponsors.seo') !!}</li>
 					<li>{!! trans('index.sponsors.gutscheine') !!}</li>
 				</ul>
 			</div>

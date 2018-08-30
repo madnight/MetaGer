@@ -336,9 +336,11 @@
 			<div id="sponsors" class="col-sm-6 col-xs-12">
 				<h2>{{ trans('index.sponsors.head.2') }}</h2>
 				<ul class="startpage">
-					<li>{!! trans('index.sponsors.seo') !!}</li>
-					<li>{!! trans('index.sponsors.woxikon') !!}</li>
-					<li>{!! trans('index.sponsors.gutscheine') !!}</li>
+					@foreach(DB::table('sponsorenlinks')->where('langcode', 'de')->orderByRaw('LENGTH(linktext)', 'ASC')->get() as $link)
+					<li>
+						<a href="{{ $link->link }}" class="mutelink" target="_blank" rel="noopener">{{ $link->linktext }}</a>
+					</li>
+					@endforeach
 				</ul>
 			</div>
 			<div id="about-us" class="col-sm-6 hidden-xs">

@@ -30,19 +30,19 @@ h1 {
 }
 
 .kontext h1 {
-   font-size: 16pt; 
+   font-size: 16pt;
    margin-bottom: inherit;
 }
 .kontext h2 {
-   font-size: 14pt; 
+   font-size: 14pt;
    margin-bottom: inherit;
 }
 .datum h1 {
-   font-size: 12pt; 
+   font-size: 12pt;
    margin-bottom: inherit;
 }
 .datum h2 {
-   font-size: 11pt; 
+   font-size: 11pt;
    margin-bottom: inherit;
    margin-top: 5pt;
 }
@@ -69,7 +69,7 @@ samp {
     <h1>Verantwortliche und Ansprechpartner</h1>
 		MetaGer und verwandte Dienste werden betrieben vom <a href="https://suma-ev.de/impressum.html">SUMA-EV</a>, der auch Verfasser dieser Erklärung ist.
 		Mit „Wir“ ist in dieser Erklärung in der Regel der SUMA-EV gemeint.
-		<br />Unsere Kontaktdaten finden Sie in unserem <a href="https://suma-ev.de/impressum.html">Impressum</a>. Per Email sind wir unter der Adresse  <a href="mailto:office@suma-ev.de">office@suma-ev.de</a> zu erreichen.
+		<br />Unsere Kontaktdaten finden Sie in unserem <a href="https://suma-ev.de/impressum.html">Impressum</a>. Per E-Mail sind wir unter der Adresse  <a href="mailto:office@suma-ev.de">office@suma-ev.de</a> zu erreichen.
 		</div>
     <div>
     <h1>Grundsätze</h1>
@@ -224,14 +224,14 @@ samp {
                                 </ul>
                 Wir verwenden die genannten Daten, um die Funktionsfähigkeit der Webseite sicherzustellen und uns vor Angriffen zu schützen. Die Rechtsgrundlage für die Verarbeitung ist damit ein berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO.
                 <br/>
-                Auf den anderen Webseiten unserer Domains verarbeiten wir die erhobenen Daten nur zur Beantwortung von Anfragen und im Rahmen der anderen Punkte dieser Datenschutzerklärung. 
+                Auf den anderen Webseiten unserer Domains verarbeiten wir die erhobenen Daten nur zur Beantwortung von Anfragen und im Rahmen der anderen Punkte dieser Datenschutzerklärung.
                 <br/>
                 Auf der Startseite unseres Dienstes MetaGer verwenden wir den von Ihnen übertragenen User-Agent, um Ihnen die passende PlugIn-Installationsanleitung zu Ihrem Browser anzuzeigen.
-                
+
             </article>
             <article class="kontext">
                 <h1>Anmeldung für den SUMA-EV-Newsletter</h1>
-                Um Sie über unsere Tätigkeiten auf dem Laufenden zu halten, bieten wir einen Email-Newsletter an. Wir speichern dafür bis zu Ihrer Abmeldung folgende Daten:
+                Um Sie über unsere Tätigkeiten auf dem Laufenden zu halten, bieten wir einen E-Mail-Newsletter an. Wir speichern dafür bis zu Ihrer Abmeldung folgende Daten:
                 <ol class="datum-list">
                     <li>
                         <article class="datum">
@@ -294,7 +294,7 @@ samp {
     </div>
     <div>
         <h1>Hosting</h1>
-        Die Webseiten unter der Domain „suma-ev.de“ werden bei der Intares GmbH gehostet und administriert. Die übrigen Dienste werden von uns, dem SUMA-EV, administriert und auf angemieteter Hardware bei der Hetzner Online GmbH betrieben. 
+        Die Webseiten unter der Domain „suma-ev.de“ werden bei der Intares GmbH gehostet und administriert. Die übrigen Dienste werden von uns, dem SUMA-EV, administriert und auf angemieteter Hardware bei der Hetzner Online GmbH betrieben.
     </div>
     <div>
     <h1>Rechtsgrundlage zur Verarbeitung</h1>
@@ -338,7 +338,7 @@ samp {
             Gemäß Artikel 19 DSGVO; falls wir Daten, die Sie uns anvertraut haben, Dritten zugänglich gemacht haben sollten (was wir niemals tun), wären wir verpflichtet, jenen mitzuteilen, dass wir auf Ihre Veranlassung hin eine Löschung, Änderung u.s.w. durchgeführt haben.
             </article>
         </ol>
-        Zur Wahrnehmung dieser Rechte genügt es, uns eine <b>Email an office@suma-ev.de</b> zu schreiben. Sollten Sie die Briefform bevorzugen, senden Sie uns Post an unsere Büroadresse:
+        Zur Wahrnehmung dieser Rechte genügt es, uns eine <b>E-Mail an office@suma-ev.de</b> zu schreiben. Sollten Sie die Briefform bevorzugen, senden Sie uns Post an unsere Büroadresse:
         <br />
         <br />SUMA-EV
         <br />Röselerstraße 3

@@ -8,9 +8,9 @@
 <h1>{!! trans('spende.headline.1') !!}</h1>
 <h2 class="subheading">{!! trans('spende.headline.2') !!}</h2>
 <p>{!! trans('spende.about.2') !!}</p>
-<p><i class="fa fa-info fa-fw fa-lg" aria-hidden="true"></i>{!! trans('spende.bankinfo.3') !!}</p>	
+<p><i class="fa fa-info fa-fw fa-lg" aria-hidden="true"></i>{!! trans('spende.bankinfo.3') !!}</p>
 <div id="top" >
-	<div class="col-lg-6 col-md-12 col-sm-12 others">	
+	<div class="col-lg-6 col-md-12 col-sm-12 others">
 		<h3 id="lastschrift">{!! trans('spende.lastschrift.1') !!}</h3>
 		<p>{!! trans('spende.lastschrift.2') !!}</p>
 		<form id="donate" role="form" method="POST">
@@ -21,7 +21,7 @@
 			</div>
 			<div class="form-group donation-form-group">
 			<label for="email">{!! trans('spende.lastschrift.4') !!}</label>
-				<input type="email" class="form-control" id="email" name="email" placeholder="Email" value="">
+				<input type="email" class="form-control" id="email" name="email" placeholder="E-Mail" value="">
 			</div>
 			<div class="form-group donation-form-group">
 			<label for="iban">{!! trans('spende.lastschrift.6') !!}</label>
@@ -43,7 +43,7 @@
 			<button type="submit" form="donate" class="btn btn-default">{!! trans('spende.lastschrift.9') !!}</button>
 		</form>
 	</div>
-	<div class="col-lg-6 col-md-12 col-sm-12 others bitcoins">	
+	<div class="col-lg-6 col-md-12 col-sm-12 others bitcoins">
 		<h3>{!! trans('spende.bankinfo.1') !!}</h3>
 		<p>{!! trans('spende.bankinfo.2') !!}</p>
 	</div>

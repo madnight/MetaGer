@@ -23,26 +23,26 @@ class MailController extends Controller
     {
 
         # Nachricht, die wir an den Nutzer weiterleiten:
-        $messageType   = ""; # [success|error]
+        $messageType = ""; # [success|error]
         $returnMessage = '';
 
         # Wir benötigen 3 Felder von dem Benutzer wenn diese nicht übermittelt wurden, oder nicht korrekt sind geben wir einen Error zurück
         $validator = Validator::make(
             [
-                'email' => $request->input('email')
+                'email' => $request->input('email'),
             ],
             [
-                'email' => 'required|email'
+                'email' => 'required|email',
             ]
         );
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return view('kontakt.kontakt')->with('formerrors', $validator)->with('title', trans('titles.kontakt'))->with('navbarFocus', 'kontakt');
         }
 
         $name = $request->input('name', '');
 
-        $replyTo       = $request->input('email', 'noreply@metager.de');
+        $replyTo = $request->input('email', 'noreply@metager.de');
         if ($replyTo === "") {
             $replyTo = "noreply@metager.de";
         } else {
@@ -50,7 +50,7 @@ class MailController extends Controller
         }
 
         if (!$request->has('message') || !$request->has('subject')) {
-            $messageType   = "error";
+            $messageType = "error";
             $returnMessage = "Tut uns leid, aber leider haben wir mit Ihrer Kontaktanfrage keine Daten erhalten. Die Nachricht wurde nicht versandt.";
         } else {
             # Wir versenden die Mail des Benutzers an uns:
@@ -60,7 +60,7 @@ class MailController extends Controller
                 ->send(new Kontakt($name, $replyTo, $subject, $message));
 
             $returnMessage = 'Ihre Nachricht wurde uns erfolgreich zugestellt. Vielen Dank dafür! Wir werden diese schnellstmöglich bearbeiten und uns dann ggf. wieder bei Ihnen melden.';
-            $messageType   = "success";
+            $messageType = "success";
         }
 
         return view('kontakt.kontakt')
@@ -74,7 +74,7 @@ class MailController extends Controller
 
         # Der enthaltene String wird dem Benutzer nach der Spende ausgegeben
         $messageToUser = "";
-        $messageType   = ""; # [success|error]
+        $messageType = ""; # [success|error]
 
         #Sicherheitsüberprüfung (Wir wurden in letzter Zeit ziemlich mit Mails zugespammt
         # Wir überprüfen also, ob das Feld für die Kontonummer tatsächlich eine Kontonummer, oder eine IBAN enthält:
@@ -85,7 +85,7 @@ class MailController extends Controller
         # einer Kombination aus Buchstaben und Zahlen
         if (!preg_match("/^\d+$/s", $iban) && !preg_match("/^[a-zA-Z]{2}\d{2}[a-zA-Z0-9]+$/s", $iban)) {
             $messageToUser = "Die eingegebene IBAN/Kontonummer scheint nicht Korrekt zu sein. Nachricht wurde nicht gesendet";
-            $messageType   = "error";
+            $messageType = "error";
         } else {
 
             # Folgende Felder werden vom Spendenformular als Input übergeben:
@@ -97,7 +97,7 @@ class MailController extends Controller
             # Nachricht
             if (!$request->has('Kontonummer') || !$request->has('Bankleitzahl') || !$request->has('Betrag')) {
                 $messageToUser = "Sie haben eins der folgenden Felder nicht ausgefüllt: IBAN, BIC, Nachricht. Bitte korrigieren Sie Ihre Eingabe und versuchen es erneut.\n";
-                $messageType   = "error";
+                $messageType = "error";
             } else {
                 $message = "\r\nName: " . $request->input('Name', 'Keine Angabe');
                 $message .= "\r\nKontonummer: " . $request->input('Kontonummer');
@@ -106,22 +106,22 @@ class MailController extends Controller
                 $message .= "\r\nNachricht: " . $request->input('Nachricht');
 
                 $replyTo = $request->input('email', 'anonymous-user@metager.de');
-                if($replyTo == ""){
+                if ($replyTo == "") {
                     $replyTo = "noreply@metager.de";
                 }
                 if (!filter_var($replyTo, FILTER_VALIDATE_EMAIL)) {
-                    $messageToUser .= "Die eingegebene Email-Addresse ($replyTo) scheint nicht korrekt zu sein.";
+                    $messageToUser .= "Die eingegebene E-Mail-Addresse ($replyTo) scheint nicht korrekt zu sein.";
                 }
 
                 try {
                     Mail::to("spenden@suma-ev.de")
                         ->send(new Spende($replyTo, $message));
 
-                    $messageType   = "success";
+                    $messageType = "success";
                     $messageToUser = "Herzlichen Dank!! Wir haben Ihre Spendenbenachrichtigung erhalten.";
                 } catch (\Swift_TransportException $e) {
-                    $messageType   = "error";
-                    $messageToUser = 'Beim Senden Ihrer Spendenbenachrichtigung ist ein Fehler auf unserer Seite aufgetreten. Bitte schicken Sie eine Email an: office@suma-ev.de, damit wir uns darum kümmern können.';
+                    $messageType = "error";
+                    $messageToUser = 'Beim Senden Ihrer Spendenbenachrichtigung ist ein Fehler auf unserer Seite aufgetreten. Bitte schicken Sie eine E-Mail an: office@suma-ev.de, damit wir uns darum kümmern können.';
                 }
             }
         }
@@ -143,12 +143,12 @@ class MailController extends Controller
     public static function isEdited($k, $v, $filename)
     {
         try {
-            $temp = include resource_path()."/".$filename;
+            $temp = include resource_path() . "/" . $filename;
             foreach ($temp as $key => $value) {
-                if($k === $key && $v !== $value) {
+                if ($k === $key && $v !== $value) {
                     return true;
                 }
-            }  
+            }
         } catch (\ErrorException $e) {
             #Datei existiert noch nicht
             return true;
@@ -156,12 +156,12 @@ class MailController extends Controller
         return false;
     }
 
-    public function sendLanguageFile(Request $request, $from, $to, $exclude = "", $email ="")
+    public function sendLanguageFile(Request $request, $from, $to, $exclude = "", $email = "")
     {
         $filename = $request->input('filename');
         # Wir erstellen nun zunächst den Inhalt der Datei:
         $data = [];
-        $new  = 0;
+        $new = 0;
         $emailAddress = "";
         $editedKeys = "";
         foreach ($request->all() as $key => $value) {
@@ -169,7 +169,7 @@ class MailController extends Controller
             if ($key === "filename" || $value === "") {
                 continue;
             }
-            if($key === "email") {
+            if ($key === "email") {
                 $emailAddress = $value;
                 continue;
             }
@@ -177,11 +177,11 @@ class MailController extends Controller
             if (strpos($key, "_new_") === 0 && $value !== "") {
                 $new++;
                 $key = substr($key, strpos($key, "_new_") + 5);
-                $editedKeys = $editedKeys."\n".$key;
+                $editedKeys = $editedKeys . "\n" . $key;
 
             } else if ($this->isEdited($key, $value, $filename)) {
                 $new++;
-                $editedKeys = $editedKeys."\n".$key;
+                $editedKeys = $editedKeys . "\n" . $key;
             }
 
             $key = trim($key);
@@ -202,7 +202,7 @@ class MailController extends Controller
         $output = preg_replace("/\{/si", "[", $output);
         $output = preg_replace("/\}/si", "]", $output);
         $output = preg_replace("/\": ([\"\[])/si", "\"\t=>\t$1", $output);
-        
+
         $output = "<?php\n\nreturn $output;\n";
 
         $message = "Moin moin,\n\nein Benutzer hat eine Sprachdatei aktualisiert.\nBearbeitet wurden die Einträge: $editedKeys\n\nSollten die Texte so in Ordnung sein, ersetzt, oder erstellt die Datei aus dem Anhang in folgendem Pfad:\n$filename\n\nFolgend zusätzlich der Inhalt der Datei:\n\n$output";
@@ -228,12 +228,12 @@ class MailController extends Controller
         $ex["new"] += $new;
 
         if ($new > 0) {
-            if($emailAddress !== "") { 
+            if ($emailAddress !== "") {
                 Mail::to("dev@suma-ev.de")
-                ->send(new Sprachdatei($message, $output, basename($filename), $emailAddress));
+                    ->send(new Sprachdatei($message, $output, basename($filename), $emailAddress));
             } else {
                 Mail::to("dev@suma-ev.de")
-                ->send(new Sprachdatei($message, $output, basename($filename)));
+                    ->send(new Sprachdatei($message, $output, basename($filename)));
             }
         }
         $ex = base64_encode(serialize($ex));

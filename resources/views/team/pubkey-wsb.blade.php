@@ -4,7 +4,7 @@
 
 @section('content')
 <h1>Wolfgang Sander-Beuermann</h1>
-<h4>Email: <a href="mailto:wsb@suma-ev.de">wsb@suma-ev.de</a></h4>
+<h4>E-Mail: <a href="mailto:wsb@suma-ev.de">wsb@suma-ev.de</a></h4>
 <h4>PGP Public Key:</h4>
 <pre>
 -----BEGIN PGP PUBLIC KEY BLOCK-----

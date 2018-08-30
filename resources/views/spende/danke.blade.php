@@ -17,7 +17,7 @@
 						<td>{{ $data['name'] }}</td>
 					</tr>
 					<tr>
-						<td>Email</td>
+						<td>E-Mail</td>
 						<td>{{ $data['email'] }}</td>
 					</tr>
 					<tr>

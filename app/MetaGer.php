@@ -242,6 +242,7 @@ class MetaGer
 
         # Human Verification
         $this->results = $this->humanVerification($this->results);
+        $this->ads = $this->humanVerification($this->ads);
 
 
         $counter   = 0;
@@ -447,7 +448,10 @@ class MetaGer
                 $day = Carbon::now()->day;
                 $pw = md5($this->verificationId . $day . $link . env("PROXY_PASSWORD"));
                 $url = route('humanverification', ['mm' => $this->verificationId, 'pw' => $pw, "url" => urlencode(str_replace("/", "<<SLASH>>", base64_encode($link)))]);
+                $proxyPw = md5($this->verificationId . $day . $result->proxyLink . env("PROXY_PASSWORD"));
+                $proxyUrl = route('humanverification', ['mm' => $this->verificationId, 'pw' => $proxyPw, "url" => urlencode(str_replace("/", "<<SLASH>>", base64_encode($result->proxyLink)))]);
                 $result->link = $url;
+                $result->proxyLink = $proxyUrl;
             }
             return $results;
         }else{

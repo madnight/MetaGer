@@ -14,7 +14,7 @@ class Searcher implements ShouldQueue
 {
     use InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $name, $ch, $pid, $counter, $lastTime, $connectionInfo;
+    protected $name, $ch, $pid, $counter, $lastTime, $connectionInfo, $user, $password;
     # Each Searcher will shutdown after a specified time(s) or number of requests
     protected $MAX_REQUESTS = 100;
     # This value should always be below the retry_after value in config/queue.php
@@ -34,12 +34,14 @@ class Searcher implements ShouldQueue
      * keep-alive requests.
      * @return void
      */
-    public function __construct($name)
+    public function __construct($name, $user = null, $password = null)
     {
         $this->name = $name;
         $this->pid = getmypid();
         $this->recheck = false;
         $this->startTime = microtime(true);
+        $this->user = $user;
+        $this->password = $password;
         // Submit this worker to the Redis System
         Redis::expire($this->name, 5);
     }
@@ -53,57 +55,61 @@ class Searcher implements ShouldQueue
     {
         // This Searches is freshly called so we need to initialize the curl handle $ch
         $this->ch = $this->initCurlHandle();
-        $this->counter = 0;                 // Counts the number of answered jobs
-        $time = microtime(true);
-        while(true){
-            // Update the expire
-            Redis::expire($this->name, 5);
-            Redis::expire($this->name . ".stats", 5);
-            // One Searcher can handle a ton of requests to the same server
-            // Each search to the server of this Searcher will be submitted to a queue
-            // stored in redis which has the same name as this searchengine appended by a ".queue"
-            // We will perform a blocking pop on this queue so the queue can remain empty for a while 
-            // without killing this searcher directly.
-            $mission = Redis::blpop($this->name . ".queue", 4);
-            $this->counter++;
-            $this->updateStats(microtime(true) - $time);
-            $this->switchToRunning();
-            // The mission can be empty when blpop hit the timeout
-            if(!empty($mission)){
-                $mission = $mission[1];
-                $poptime = microtime(true) - $time;
+        try{
+            $this->counter = 0;                 // Counts the number of answered jobs
+            $time = microtime(true);
+            while(true){
+                // Update the expire
+                Redis::expire($this->name, 5);
+                Redis::expire($this->name . ".stats", 5);
+                // One Searcher can handle a ton of requests to the same server
+                // Each search to the server of this Searcher will be submitted to a queue
+                // stored in redis which has the same name as this searchengine appended by a ".queue"
+                // We will perform a blocking pop on this queue so the queue can remain empty for a while 
+                // without killing this searcher directly.
+                $mission = Redis::blpop($this->name . ".queue", 4);
+                $this->counter++;
+                $this->updateStats(microtime(true) - $time);
+                $this->switchToRunning();
+                // The mission can be empty when blpop hit the timeout
+                if(!empty($mission)){
+                    
+                    $mission = $mission[1];
+                    $poptime = microtime(true) - $time;
 
-                // The mission is a String which can be divided to retrieve two informations:
-                // 1. The Hash Value where the result should be stored
-                // 2. The Url to Retrieve
-                // These two informations are divided by a ";" in the mission string
-                $mission = explode(";", $mission);
-                $hashValue = $mission[0];
-                $url = base64_decode($mission[1]);
-                $timeout = $mission[2]; // Timeout from the MetaGer process in ms
-                $medianFetchTime = $this->getFetchTime();   // The median Fetch time of the search engine in ms
-                Redis::hset('search.' . $hashValue, $this->name, "connected");
+                    // The mission is a String which can be divided to retrieve two informations:
+                    // 1. The Hash Value where the result should be stored
+                    // 2. The Url to Retrieve
+                    // These two informations are divided by a ";" in the mission string
+                    $mission = explode(";", $mission);
+                    $hashValue = $mission[0];
+                    $url = base64_decode($mission[1]);
+                    $timeout = $mission[2]; // Timeout from the MetaGer process in ms
+                    $medianFetchTime = $this->getFetchTime();   // The median Fetch time of the search engine in ms
+                    Redis::hset('search.' . $hashValue, $this->name, "connected");
 
-                $result = $this->retrieveUrl($url);
+                    $result = $this->retrieveUrl($url);
 
-                $this->storeResult($result, $poptime, $hashValue);
+                    $this->storeResult($result, $poptime, $hashValue);
 
-                // Reset the time of the last Job so we can calculate
-                // the time we have spend waiting for a new job
-                // We submit that calculation to the Redis systemin the method
-                $time = microtime(true);
+                    // Reset the time of the last Job so we can calculate
+                    // the time we have spend waiting for a new job
+                    // We submit that calculation to the Redis systemin the method
+                    $time = microtime(true);
+                }
+
+                // In sync mode every Searcher may only retrieve one result because it would block
+                // the execution of the remaining code otherwise:
+                if(getenv("QUEUE_DRIVER") === "sync" 
+                    || $this->counter > $this->MAX_REQUESTS 
+                    || (microtime(true)-$this->startTime) > $this->MAX_TIME){
+                break;
+                } 
             }
-
-            // In sync mode every Searcher may only retrieve one result because it would block
-            // the execution of the remaining code otherwise:
-            if(getenv("QUEUE_DRIVER") === "sync" 
-                || $this->counter > $this->MAX_REQUESTS 
-                || (microtime(true)-$this->startTime) > $this->MAX_TIME){
-               break;
-            } 
+        }finally{
+            // When we reach this point, time has come for this Searcher to retire
+            $this->shutdown();
         }
-        // When we reach this point, time has come for this Searcher to retire
-        $this->shutdown();
     }
 
     private function switchToRunning(){
@@ -185,6 +191,11 @@ class Searcher implements ShouldQueue
                 CURLOPT_LOW_SPEED_TIME => 5,
                 CURLOPT_TIMEOUT => 10
         ));
+
+        if($this->user !== null && $this->password !== null){
+            curl_setopt($ch, CURLOPT_USERPWD, $this->user . ":" . $this->password);
+        }
+            
 
         return $ch;
     }

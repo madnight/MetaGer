@@ -56,7 +56,7 @@ class HumanVerification extends Controller
         if (!$request->has('mm')) {
             abort(404, "Keine Katze gefunden.");
         }
-        $id = md5(md5($request->ip() . $_SERVER["AGENT"]));
+        $id = md5($request->ip() . $_SERVER["AGENT"]);
         if (HumanVerification::checkId($request, $request->input('mm'))) {
             # Remove the entry from the database
             DB::table('humanverification')->where('id', $id)->where('updated_at', '<', Carbon::NOW()->subSeconds(2))->delete();

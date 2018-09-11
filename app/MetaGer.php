@@ -929,7 +929,7 @@ class MetaGer
         $this->fokus = $request->input('focus', 'web');
         # Suma-File
         if (App::isLocale("en")) {
-            $this->sumaFile = config_path() . "/sumas.xml";
+            $this->sumaFile = config_path() . "/sumasEn.xml";
         } else {
             $this->sumaFile = config_path() . "/sumas.xml";
         }

@@ -34,6 +34,7 @@ class MetaGer
     protected $warnings        = [];
     protected $errors          = [];
     protected $addedHosts      = [];
+    protected $availableFoki   = [];
     protected $startCount      = 0;
     protected $canCache        = false;
     # Daten über die Abfrage$
@@ -504,6 +505,18 @@ class MetaGer
         $enabledSearchengines = [];
         $overtureEnabled      = false;
         $sumaCount            = 0;
+
+        /*
+        * Erstellt eine Liste mit Foki, die verfügbar sind
+        */
+        $this->availableFoki = [];
+        foreach($sumas as $suma){
+            $foki = explode(",", trim($suma["type"]));
+            foreach($foki as $fokus){
+                if(!empty($fokus))
+                    $this->availableFoki[$fokus] = "available";
+            }
+        }
 
         /* Erstellt die Liste der eingestellten Sumas
          * Der einzige Unterschied bei angepasstem Suchfokus ist,
@@ -1516,6 +1529,11 @@ class MetaGer
     public function getLanguage()
     {
         return $this->language;
+    }
+
+    public function getAvailableFoki()
+    {
+        return $this->availableFoki;
     }
 
     public function getLang()

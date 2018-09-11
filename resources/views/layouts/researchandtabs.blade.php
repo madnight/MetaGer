@@ -27,69 +27,73 @@
 			</div>
 		</nav>
 		<ul id="foki" class=" resultpage-foki nav nav-tabs" role="tablist">
-
-			@if( $metager->getFokus() === "web" )
-				<li id="webTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
-					<a aria-controls="web" data-href="#web" href="#web">
-						<i class="fa fa-globe" aria-hidden="true"></i>
-						<span class="hidden-xs">{{ trans('index.foki.web') }}</span>
-					</a>
-				</li>
-			@else
-				<li data-loaded="0" id="webTabSelector" class="tab-selector" role="presentation">
-					<a aria-controls="web" data-href="{!! $metager->generateSearchLink('web') !!}" href="{!! $metager->generateSearchLink('web', false) !!}">
-						<i class="fa fa-globe" aria-hidden="true"></i>
-						<span class="hidden-xs">{{ trans('index.foki.web') }}</span>
-					</a>
-				</li>
+			@if( array_has($metager->getAvailableFoki(), "web"))
+				@if( $metager->getFokus() === "web" )
+					<li id="webTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
+						<a aria-controls="web" data-href="#web" href="#web">
+							<i class="fa fa-globe" aria-hidden="true"></i>
+							<span class="hidden-xs">{{ trans('index.foki.web') }}</span>
+						</a>
+					</li>
+				@else
+					<li data-loaded="0" id="webTabSelector" class="tab-selector" role="presentation">
+						<a aria-controls="web" data-href="{!! $metager->generateSearchLink('web') !!}" href="{!! $metager->generateSearchLink('web', false) !!}">
+							<i class="fa fa-globe" aria-hidden="true"></i>
+							<span class="hidden-xs">{{ trans('index.foki.web') }}</span>
+						</a>
+					</li>
+				@endif
 			@endif
-
-			@if( $metager->getFokus() === "nachrichten" )
-				<li id="nachrichtenTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
-					<a aria-controls="nachrichten" data-href="#nachrichten" href="#nachrichten">
-						<i class="fa fa-bullhorn" aria-hidden="true"></i>
-						<span class="hidden-xs">{{ trans('index.foki.nachrichten') }}</span>
-					</a>
-				</li>
-			@else
-				<li data-loaded="0" id="nachrichtenTabSelector" class="tab-selector" role="presentation" >
-					<a aria-controls="nachrichten" data-href="{!! $metager->generateSearchLink('nachrichten') !!}" href="{!! $metager->generateSearchLink('nachrichten', false) !!}">
-						<i class="fa fa-bullhorn" aria-hidden="true"></i>
-						<span class="hidden-xs">{{ trans('index.foki.nachrichten') }}</span>
-					</a>
-				</li>
+			@if( array_has($metager->getAvailableFoki(), "nachrichten"))
+				@if( $metager->getFokus() === "nachrichten" )
+					<li id="nachrichtenTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
+						<a aria-controls="nachrichten" data-href="#nachrichten" href="#nachrichten">
+							<i class="fa fa-bullhorn" aria-hidden="true"></i>
+							<span class="hidden-xs">{{ trans('index.foki.nachrichten') }}</span>
+						</a>
+					</li>
+				@else
+					<li data-loaded="0" id="nachrichtenTabSelector" class="tab-selector" role="presentation" >
+						<a aria-controls="nachrichten" data-href="{!! $metager->generateSearchLink('nachrichten') !!}" href="{!! $metager->generateSearchLink('nachrichten', false) !!}">
+							<i class="fa fa-bullhorn" aria-hidden="true"></i>
+							<span class="hidden-xs">{{ trans('index.foki.nachrichten') }}</span>
+						</a>
+					</li>
+				@endif
 			@endif
-
-			@if( $metager->getFokus() === "wissenschaft" )
-				<li id="wissenschaftTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
-					<a aria-controls="wissenschaft" data-href="#wissenschaft" href="#wissenschaft">
-						<i class="fa fa-file-text" aria-hidden="true"></i>
-						<span class="hidden-xs">{{ trans('index.foki.wissenschaft') }}</span>
-					</a>
-				</li>
-			@else
-				<li data-loaded="0" id="wissenschaftTabSelector" class="tab-selector" role="presentation">
-					<a aria-controls="wissenschaft" data-href="{!! $metager->generateSearchLink('wissenschaft') !!}" href="{!! $metager->generateSearchLink('wissenschaft', false) !!}">
-						<i class="fa fa-file-text" aria-hidden="true"></i>
-						<span class="hidden-xs">{{ trans('index.foki.wissenschaft') }}</span>
-					</a>
-				</li>
+			@if( array_has($metager->getAvailableFoki(), "wissenschaft"))
+				@if( $metager->getFokus() === "wissenschaft" )
+					<li id="wissenschaftTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
+						<a aria-controls="wissenschaft" data-href="#wissenschaft" href="#wissenschaft">
+							<i class="fa fa-file-text" aria-hidden="true"></i>
+							<span class="hidden-xs">{{ trans('index.foki.wissenschaft') }}</span>
+						</a>
+					</li>
+				@else
+					<li data-loaded="0" id="wissenschaftTabSelector" class="tab-selector" role="presentation">
+						<a aria-controls="wissenschaft" data-href="{!! $metager->generateSearchLink('wissenschaft') !!}" href="{!! $metager->generateSearchLink('wissenschaft', false) !!}">
+							<i class="fa fa-file-text" aria-hidden="true"></i>
+							<span class="hidden-xs">{{ trans('index.foki.wissenschaft') }}</span>
+						</a>
+					</li>
+				@endif
 			@endif
-
-			@if( $metager->getFokus() === "produktsuche" )
-				<li id="produktsucheTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
-					<a aria-controls="produktsuche" data-href="#produktsuche" href="#produktsuche">
-						<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-						<span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
-					</a>
-				</li>
-			@else
-				<li data-loaded="0" id="produktsucheTabSelector" class="tab-selector" role="presentation" >
-					<a aria-controls="produktsuche" data-href="{!! $metager->generateSearchLink('produktsuche') !!}" href="{!! $metager->generateSearchLink('produktsuche', false) !!}">
-						<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-						<span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
-					</a>
-				</li>
+			@if( array_has($metager->getAvailableFoki(), "produktsuche"))
+				@if( $metager->getFokus() === "produktsuche" )
+					<li id="produktsucheTabSelector" role="presentation" data-loaded="1" class="active tab-selector">
+						<a aria-controls="produktsuche" data-href="#produktsuche" href="#produktsuche">
+							<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+							<span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
+						</a>
+					</li>
+				@else
+					<li data-loaded="0" id="produktsucheTabSelector" class="tab-selector" role="presentation" >
+						<a aria-controls="produktsuche" data-href="{!! $metager->generateSearchLink('produktsuche') !!}" href="{!! $metager->generateSearchLink('produktsuche', false) !!}">
+							<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+							<span class="hidden-xs">{{ trans('index.foki.produkte') }}</span>
+						</a>
+					</li>
+				@endif
 			@endif
 
 			{{-- Fix for older Versions --}}

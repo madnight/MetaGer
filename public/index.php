@@ -9,6 +9,11 @@
 
 # Manchmal passiert es, dass ein Proxy sowohl den HEADER HTTP_FORWARDED, als auch den HEADER "HTTP_X_FORWARDED_FOR" setzt
 # Wir löschen den einen und verwenden Ihn nicht:
+
+// This variable gets unset in the middleware later
+// We use it to build a hash value for human verification
+$_SERVER['AGENT'] = $_SERVER['HTTP_USER_AGENT'];
+
 if (isset($_SERVER["HTTP_FORWARDED"]) && isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
     unset($_SERVER["HTTP_FORWARDED"]);
 }

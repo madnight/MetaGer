@@ -214,6 +214,7 @@
 	<h1 id="mglogo"><a class="hidden-xs" href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), "/") }}">MetaGer</a></h1>
 	<!-- Create the focus selection and options -->
 	<div id="foki" class="startpage-foki">
+		@if(array_has($availableFoki, 'web'))
 		<div class="focus">
 			<input id="web" class="focus-radio hide" type="radio" name="focus" value="web" form="searchForm" @if ($focus === 'web') checked @endif required="">
 			<label id="web-label" class="focus-label" for="web">
@@ -221,6 +222,8 @@
 				<span class="content">{{ trans('index.foki.web') }}</span>
 			</label>
 		</div>
+		@endif
+		@if(array_has($availableFoki, 'nachrichten'))
 		<div class="focus">
 			<input id="nachrichten" class="focus-radio hide" type="radio" name="focus" value="nachrichten" form="searchForm" @if ($focus === 'nachrichten') checked @endif required="">
 			<label id="nachrichten-label" class="focus-label" for="nachrichten">
@@ -228,6 +231,8 @@
 				<span class="content">{{ trans('index.foki.nachrichten') }}</span>
 			</label>
 		</div>
+		@endif
+		@if(array_has($availableFoki, 'wissenschaft'))
 		<div class="focus">
 			<input id="wissenschaft" class="focus-radio hide" type="radio" name="focus" value="wissenschaft" form="searchForm" @if ($focus === 'wissenschaft') checked @endif required="">
 			<label id="wissenschaft-label" class="focus-label" for="wissenschaft">
@@ -235,6 +240,8 @@
 				<span class="content">{{ trans('index.foki.wissenschaft') }}</span>
 			</label>
 		</div>
+		@endif
+		@if(array_has($availableFoki, 'produktsuche'))
 		<div class="focus">
 			<input id="produkte" class="focus-radio hide" type="radio" name="focus" value="produktsuche" form="searchForm" @if ($focus === 'produkte') checked @endif required="">
 			<label id="produkte-label" class="focus-label" for="produkte">
@@ -242,6 +249,7 @@
 				<span class="content">{{ trans('index.foki.produkte') }}</span>
 			</label>
 		</div>
+		@endif
 		<div class="focus">
 			<input id="maps" class="focus-radio hide" type="radio" name="focus" value="maps" form="searchForm" @if ($focus === 'maps') checked @endif required="">
 			<label id="maps-label" class="focus-label" for="maps">

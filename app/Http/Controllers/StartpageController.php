@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
-use Response;
 use LaravelLocalization;
+use Response;
 
 class StartpageController extends Controller
 {
@@ -20,7 +20,7 @@ class StartpageController extends Controller
     public function loadStartPage(Request $request)
     {
         $focusPages = [];
-        $theme      = "default";
+        $theme = "default";
 
         foreach ($request->all() as $key => $value) {
             if ($value === 'on' && $key != 'param_sprueche' && $key != 'param_newtab' && $key !== 'param_maps' && $key !== 'param_autocomplete' && $key !== 'param_lang') {
@@ -32,8 +32,16 @@ class StartpageController extends Controller
         }
 
         $lang = LaravelLocalization::getCurrentLocale();
-        if ($lang === 'de') {
+        if ($lang === 'de' || $lang === "en") {
             $lang = 'all';
+        }
+
+        $foki = $this->loadFoki();
+
+        $availableFoki = [];
+        // Find out which Foki are available
+        foreach ($foki as $fokus => $sumas) {
+            $availableFoki[$fokus] = "available";
         }
 
         return view('index')
@@ -44,7 +52,8 @@ class StartpageController extends Controller
             ->with('navbarFocus', 'suche')
             ->with('theme', $theme)
             ->with('autocomplete', $request->input('param_autocomplete', 'on'))
-            ->with('foki', $this->loadFoki())
+            ->with('foki', $foki)
+            ->with('availableFoki', $availableFoki)
             ->with('focus', $request->input('focus', 'web'))
             ->with('lang', $request->input('param_lang', $lang))
             ->with('resultCount', $request->input('param_resultCount', '20'))
@@ -78,9 +87,9 @@ class StartpageController extends Controller
 
     public function loadPlugin($params, $locale = "de")
     {
-        $params   = unserialize(base64_decode($params));
+        $params = unserialize(base64_decode($params));
         $requests = $params;
-        $params   = [];
+        $params = [];
         foreach ($requests as $key => $value) {
             if (strpos($key, "param_") === 0) {
                 $key = substr($key, strpos($key, "param_") + 6);
@@ -137,12 +146,12 @@ class StartpageController extends Controller
 
     public function berlin(Request $request)
     {
-        $link     = "";
+        $link = "";
         $password = "";
         if ($request->has('eingabe')) {
             $password = getenv('berlin');
             $password = md5($request->input('eingabe') . " -host:userpage.fu-berlin.de" . $password);
-            $link     = "/meta/meta.ger3?eingabe=" . $request->input('eingabe') . " -host:userpage.fu-berlin.de&focus=web&password=" . $password . "&encoding=utf8&lang=all&site=fu-berlin.de&quicktips=off&out=results-with-style";
+            $link = "/meta/meta.ger3?eingabe=" . $request->input('eingabe') . " -host:userpage.fu-berlin.de&focus=web&password=" . $password . "&encoding=utf8&lang=all&site=fu-berlin.de&quicktips=off&out=results-with-style";
         }
         return view('berlin')
             ->with('title', 'Testseite für die FU-Berlin')
@@ -154,12 +163,12 @@ class StartpageController extends Controller
     {
         $sumaFile = "";
         if (App::isLocale('en')) {
-            $sumaFile = config_path() . "/sumas.xml";
+            $sumaFile = config_path() . "/sumasEn.xml";
         } else {
             $sumaFile = config_path() . "/sumas.xml";
         }
 
-        $xml   = simplexml_load_file($sumaFile);
+        $xml = simplexml_load_file($sumaFile);
         $sumas = $xml->xpath("suma");
 
         $foki = [];
@@ -168,13 +177,13 @@ class StartpageController extends Controller
                 if (isset($suma['type'])) {
                     $f = explode(",", $suma['type']->__toString());
                     foreach ($f as $tmp) {
-                        $displayName                             = $suma['displayName']->__toString();
-                        $url                                     = isset($suma['homepage']) ? $suma['homepage']->__toString() : "https://metager.de";
+                        $displayName = $suma['displayName']->__toString();
+                        $url = isset($suma['homepage']) ? $suma['homepage']->__toString() : "https://metager.de";
                         $foki[$tmp][$suma['name']->__toString()] = ['displayName' => $displayName, 'url' => $url];
                     }
                 } else {
-                    $displayName                                 = $suma['displayName']->__toString();
-                    $url                                         = isset($suma['homepage']) ? $suma['homepage']->__toString() : "https://metager.de";
+                    $displayName = $suma['displayName']->__toString();
+                    $url = isset($suma['homepage']) ? $suma['homepage']->__toString() : "https://metager.de";
                     $foki["andere"][$suma['name']->__toString()] = ['displayName' => $displayName, 'url' => $url];
                 }
             }

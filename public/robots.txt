@@ -2,7 +2,7 @@ User-agent: *
 Disallow: /klassik/meta/
 Disallow: /en/klassik/meta/
 Disallow: /meta/
-Disallow: /en/meta/
+Disallow: /*/meta/
 Disallow: /qt
 Disallow: /en/qt
 Disallow: /domains/

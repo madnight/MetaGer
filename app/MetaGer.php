@@ -1042,8 +1042,11 @@ class MetaGer
 
         $this->verificationId = $request->input('verification_id', null);
         $this->verificationCount = intval($request->input('verification_count', '0'));
-
-
+        // Remove Inputs that are not used
+        $this->request->request->set("verification_id", null);
+        $this->request->request->set("verification_count", null);
+        $this->request->request->set("uid", null);
+        
         $this->apiKey = $request->input('key', '');
         
         $this->validated = false;
@@ -1476,6 +1479,14 @@ class MetaGer
     }
 
 # Einfache Getter
+
+    public function getVerificationId() {
+        return $this->verificationId;
+    }
+
+    public function getVerificationCount() {
+        return $this->verificationCount;
+    }
 
     public function getSite()
     {

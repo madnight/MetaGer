@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class Usedurls extends Migration
 {
@@ -14,11 +14,12 @@ class Usedurls extends Migration
     public function up()
     {
         Schema::create('usedurls', function (Blueprint $table) {
-            $table->increments('id')->unique();
-            $table->string('user_id');
-            $table->string('url', 500);
+            $table->increments('number')->unique();
+            $table->string('uid');
+            $table->string('id');
+            $table->text('eingabe');
             $table->timestamp('created_at');
-            $table->foreign('user_id')->references('id')->on('humanverification')->onDelete('cascade');
+            $table->foreign('uid')->references('uid')->on('humanverification')->onDelete('cascade');
         });
     }
 

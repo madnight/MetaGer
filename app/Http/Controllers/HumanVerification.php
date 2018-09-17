@@ -35,13 +35,10 @@ class HumanVerification extends Controller
                     ->with('image', $captcha["img"])
                     ->with('errorMessage', 'Bitte Captcha eingeben:');
             } else {
-
-                # The Captcha was correct. We can remove the key from the user
-                DB::table('humanverification')->where('uid', $id)->update(['lockedKey' => "", 'whitelistCounter' => 0]);
-
                 # If we can unlock the Account of this user we will redirect him to the result page
                 if ($user !== null && $user->locked === 1) {
-                    DB::table('humanverification')->where('uid', $id)->update(['locked' => false]);
+                    # The Captcha was correct. We can remove the key from the user
+                    DB::table('humanverification')->where('uid', $id)->update(['locked' => false, 'lockedKey' => "", 'whitelist' => 1]);
                     return redirect($url);
                 } else {
                     return redirect('/');

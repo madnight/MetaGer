@@ -33,7 +33,7 @@ class HumanVerification extends Controller
                     ->with('id', $id)
                     ->with('url', $url)
                     ->with('image', $captcha["img"])
-                    ->with('errorMessage', 'Bitte Captcha eingeben:');
+                    ->with('errorMessage', 'Fehler: Falsches Captcha eingegeben!');
             } else {
                 # If we can unlock the Account of this user we will redirect him to the result page
                 if ($user !== null && $user->locked === 1) {

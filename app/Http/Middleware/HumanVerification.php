@@ -7,6 +7,7 @@ use Carbon;
 use Closure;
 use DB;
 use Illuminate\Http\Response;
+use URL;
 
 class HumanVerification
 {
@@ -65,9 +66,23 @@ class HumanVerification
             # Find out how many requests this IP has made
             $sum = DB::table('humanverification')->where('id', $id)->where('whitelist', false)->sum('unusedResultPages');
 
+            # A lot of automated requests are from websites that redirect users to our result page.
+            # We will detect those requests and put a captcha
+            $referer = URL::previous();
+            # Just the URL-Parameter
+            $refererLock = false;
+            if (stripos($referer, "?") !== false) {
+                $referer = substr($referer, stripos($referer, "?") + 1);
+                $referer = urldecode($referer);
+                if (preg_match("/http[s]{0,1}:\/\/metager\.de\/meta\/meta.ger3\?.*?eingabe=([\w\d]+\.){1,2}[\w\d]+/si", $referer) === 1) {
+                    $refererLock = true;
+                }
+
+            }
+
             // Defines if this is the only user using that IP Adress
             $alone = DB::table('humanverification')->where('id', $id)->count() === 1;
-            if (!$alone && $sum >= 50 && $user->whitelist !== 1) {
+            if ((!$alone && $sum >= 50 && $user->whitelist !== 1) || $refererLock) {
                 DB::table('humanverification')->where('uid', $uid)->update(['locked' => true]);
                 $user->locked = 1;
             }

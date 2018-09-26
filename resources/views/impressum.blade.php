@@ -10,7 +10,6 @@
 	<address>{!! trans('impressum.info.2') !!}</address>
 	<address>{!! trans('impressum.info.3') !!}</address>
 	<p>{!! trans('impressum.info.4') !!}</p>
-	<p>{!! trans('impressum.info.5') !!}</p>
 	<p>{!! trans('impressum.info.6') !!}</p>
 	<p>{!! trans('impressum.info.7') !!}</p>
 	<p>{!! trans('impressum.info.8') !!}</p>

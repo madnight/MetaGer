@@ -16,12 +16,7 @@ Tel.: ++49-(0)511-34000070
 E-Mail: <a href="mailto:office@suma-ev.de">office@suma-ev.de</a><a href="/kontakt/"> - Public-PGP-Key</a>
 <a href="/kontakt/">Verschlüsselndes Kontakformular</a>',
     'info.4' => 'Vorstand:
-<a href="https://www2.ostfalia.de/cms/de/pws/jensenn/index.html">Prof.Dr. Nils Jensen</a>, Dominik Pfennig, <a href="http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann">Dr. Wolfgang Sander-Beuermann</a>',
-    'info.5' => 'Geschäftsführung:
-<a href="http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann">Dr. Wolfgang Sander-Beuermann</a>
-Public-PGP-Key: <a href="/team/pubkey-wsb">https://metager.de/team/pubkey-wsb</a>
-Facebook: <a href="https://www.facebook.com/wolfgang.sanderbeuermann%0A">https://www.facebook.com/wolfgang.sanderbeuermann</a>
-Twitter: <a href="http://twitter.com/wosabeu">http://twitter.com/wosabeu</a>',
+<a href="https://www2.ostfalia.de/cms/de/pws/jensenn/index.html">Prof.Dr. Nils Jensen</a>, Dominik Hebeler, <a href="http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann">Dr. Wolfgang Sander-Beuermann</a>',
     'info.6' => 'Jugendschutzbeauftragter: Georg Becker
 <a href="mailto:jugendschutz@metager.de">jugendschutz@metager.de</a>',
     'info.7' => 'Inhaltlich Verantwortlicher gemäß § 55 Abs. 2 RStV:

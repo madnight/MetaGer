@@ -499,7 +499,7 @@ function loadQuicktips (search, locale, sprueche) {
   getQuicktips(search, locale, blacklist, createQuicktips);
 }
 
-const QUICKTIP_SERVER = 'https://quicktips.metager3.de';
+const QUICKTIP_SERVER = 'https://metager.de/quicktips';
 // const QUICKTIP_SERVER = 'http://localhost:63825'
 
 /**

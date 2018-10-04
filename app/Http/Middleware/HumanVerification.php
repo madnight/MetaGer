@@ -20,6 +20,9 @@ class HumanVerification
      */
     public function handle($request, Closure $next)
     {
+        // The specific user
+        $user = null;
+        $newUser = true;
         try {
             $id = hash("sha512", $request->ip());
             $uid = hash("sha512", $request->ip() . $_SERVER["AGENT"]);
@@ -35,16 +38,32 @@ class HumanVerification
                 return $next($request);
             }
 
-            // The specific user
-            $user = DB::table('humanverification')->where('uid', $uid)->first();
-
-            $createdAt = Carbon::now();
-            $unusedResultPages = 1;
-            $locked = false;
+            
+            $users = DB::select('select * from humanverification where id = ?', [$id]);
+            
+            # Lock out everyone in a Bot network
+            # Find out how many requests this IP has made
+            $sum = 0;
+            foreach($users as $userTmp){
+                if($uid == $userTmp->uid){
+                    $user = ['uid' => $userTmp->uid,
+                            'id' => $userTmp->id,
+                            'unusedResultPages' => intval($userTmp->unusedResultPages),
+                            'whitelist' => filter_var($userTmp->whitelist, FILTER_VALIDATE_BOOLEAN),
+                            'whitelistCounter' => $userTmp->whitelistCounter,
+                            'locked' => filter_var($userTmp->locked, FILTER_VALIDATE_BOOLEAN),
+                            "lockedKey" => $userTmp->lockedKey,
+                            'updated_at' => Carbon::now(),
+                            ];
+                    $newUser = false;
+                }
+                if($userTmp->whitelist === 0)
+                    $sum += $userTmp->unusedResultPages;
+            }
             # If this user doesn't have an entry we will create one
 
             if ($user === null) {
-                DB::table('humanverification')->insert(
+                $user =
                     [
                         'uid' => $uid,
                         'id' => $id,
@@ -54,17 +73,8 @@ class HumanVerification
                         'locked' => false,
                         "lockedKey" => "",
                         'updated_at' => Carbon::now(),
-                    ]
-                );
-                # Insert the URL the user tries to reach
-                $url = url()->full();
-                DB::table('usedurls')->insert(['uid' => $uid, 'id' => $id, 'eingabe' => $request->input('eingabe', '')]);
-                $user = DB::table('humanverification')->where('uid', $uid)->first();
+                    ];
             }
-
-            # Lock out everyone in a Bot network
-            # Find out how many requests this IP has made
-            $sum = DB::table('humanverification')->where('id', $id)->where('whitelist', false)->sum('unusedResultPages');
 
             # A lot of automated requests are from websites that redirect users to our result page.
             # We will detect those requests and put a captcha
@@ -81,16 +91,19 @@ class HumanVerification
             }
 
             // Defines if this is the only user using that IP Adress
-            $alone = DB::table('humanverification')->where('id', $id)->count() === 1;
-            if ((!$alone && $sum >= 50 && $user->whitelist !== 1) || $refererLock) {
-                DB::table('humanverification')->where('uid', $uid)->update(['locked' => true]);
-                $user->locked = 1;
+            $alone = true;
+            foreach($users as $userTmp){
+                if($userTmp->uid != $uid && !$userTmp->whitelist)
+                    $alone = false;
+            }
+            if ((!$alone && $sum >= 50 && !$user["whitelist"]) || $refererLock) {
+                $user["locked"] = true;
             }
 
             # If the user is locked we will force a Captcha validation
-            if ($user->locked === 1) {
+            if ($user["locked"]) {
                 $captcha = Captcha::create("default", true);
-                DB::table('humanverification')->where('uid', $uid)->update(['lockedKey' => $captcha["key"]]);
+                $user["lockedKey"] = $captcha["key"];
                 return
                 new Response(
                     view('humanverification.captcha')
@@ -101,11 +114,9 @@ class HumanVerification
                 );
             }
 
-            $unusedResultPages = intval($user->unusedResultPages);
-            $unusedResultPages++;
-            $locked = false;
+            $user["unusedResultPages"]++;
 
-            if ($alone || $user->whitelist === 1) {
+            if ($alone || $user["whitelist"]) {
                 # This IP doesn't need verification yet
                 # The user currently isn't locked
 
@@ -114,19 +125,44 @@ class HumanVerification
                 # If the user shows activity on our result page the counter will be deleted
                 # Maybe I'll add a ban if the user reaches 100
 
-                if ($unusedResultPages === 50 || $unusedResultPages === 75 || $unusedResultPages === 85 || $unusedResultPages >= 90) {
-                    $locked = true;
+                if ($user["unusedResultPages"] === 50 || $user["unusedResultPages"] === 75 || $user["unusedResultPages"] === 85 || $user["unusedResultPages"] >= 90) {
+                    $user["locked"] = true;
                 }
 
             }
-            DB::table('humanverification')->where('uid', $uid)->update(['unusedResultPages' => $unusedResultPages, 'locked' => $locked]);
-            # Insert the URL the user tries to reach
-            DB::table('usedurls')->insert(['uid' => $uid, 'id' => $id, 'eingabe' => $request->input('eingabe', '')]);
-
         } catch (\Illuminate\Database\QueryException $e) {
             // Failure in contacting metager3.de
+        } finally {
+            // Update the user in the database
+            if($newUser){
+                DB::table('humanverification')->insert(
+                    [
+                        'uid' => $user["uid"],
+                        'id' => $user["id"],
+                        'unusedResultPages' => $user['unusedResultPages'],
+                        'whitelist' => $user["whitelist"],
+                        'whitelistCounter' => $user["whitelistCounter"],
+                        'locked' => $user["locked"],
+                        "lockedKey" => $user["lockedKey"],
+                        'updated_at' => $user["updated_at"],
+                    ]
+                );
+            }else{
+                DB::table('humanverification')->where('uid', $uid)->update(
+                    [
+                        'uid' => $user["uid"],
+                        'id' => $user["id"],
+                        'unusedResultPages' => $user['unusedResultPages'],
+                        'whitelist' => $user["whitelist"],
+                        'whitelistCounter' => $user["whitelistCounter"],
+                        'locked' => $user["locked"],
+                        "lockedKey" => $user["lockedKey"],
+                        'updated_at' => $user["updated_at"],
+                    ]
+                    );
+            }
         }
-        $request->request->add(['verification_id' => $uid, 'verification_count' => $unusedResultPages]);
+        $request->request->add(['verification_id' => $user["uid"], 'verification_count' => $user["unusedResultPages"]]);
         return $next($request);
     }
 }

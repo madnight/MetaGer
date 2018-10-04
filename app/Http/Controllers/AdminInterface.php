@@ -145,18 +145,6 @@ class AdminInterface extends Controller
         }
 
     }
-    public function check()
-    {
-        $q     = "";
-        $redis = Redis::connection('redisLogs');
-        if ($redis) {
-            $q = $redis->lrange("logs.search", -1, -1)[0];
-            $q = substr($q, strpos($q, "search=") + 7);
-        }
-        return view('admin.check')
-            ->with('title', 'Wer sucht was? - MetaGer')
-            ->with('q', $q);
-    }
 
     public function engines()
     {

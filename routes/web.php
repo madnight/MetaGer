@@ -131,7 +131,6 @@ Route::group(
         Route::group([/*'middleware' => ['referer.check'],*/ 'prefix' => 'admin'], function () {
             Route::get('/', 'AdminInterface@index');
             Route::match(['get','post'], 'count', 'AdminInterface@count');
-            Route::get('check', 'AdminInterface@check');
             Route::get('engines', 'AdminInterface@engines');
         });
 

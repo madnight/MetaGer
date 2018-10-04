@@ -1329,7 +1329,6 @@ class MetaGer
                 IP-Adress older than one day stored on our servers. (Except the ones who got banned in that short period of course) ;-)
                  */
                 $logEntry .= " ip=" . $this->request->ip();
-                $logEntry .= " id=" . $this->id;
                 $logEntry .= " ref=" . $this->request->header('Referer');
                 $logEntry .= " time=" . round((microtime(true) - $this->starttime), 2) . " serv=" . $this->fokus;
                 $logEntry .= " interface=" . LaravelLocalization::getCurrentLocale();

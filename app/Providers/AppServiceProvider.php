@@ -24,11 +24,11 @@ class AppServiceProvider extends ServiceProvider
          * metager.org is our english Domain
          * We will change the Locale to en
          */
-        $host = Request::getHttpHost();
+        $host = Request::header("X_Forwarded_Host", "");
 
-        if($host == "metager.org"){
+        if(stripos($host, "metager.org") !== FALSE){
             App::setLocale('en');
-        }
+        }   
 
         # Wir loggen im Redis-System für jede Sekunde des Tages, wie viele Worker aktiv am Laufen waren.
         # Dies ist notwendig, damit wir mitbekommen können, ab welchem Zeitpunkt wir zu wenig Worker zur Verfügung haben.

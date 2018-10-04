@@ -344,7 +344,7 @@
 			<div id="sponsors" class="col-sm-6 col-xs-12">
 				<h2>{{ trans('index.sponsors.head.2') }}</h2>
 				<ul class="startpage">
-					@foreach(DB::table('sponsorenlinks')->where('langcode', 'de')->orderByRaw('LENGTH(linktext)', 'ASC')->get() as $link)
+					@foreach($sponsors as $link)
 					<li>
 						<a href="{{ $link->link }}" class="mutelink" target="_blank" rel="noopener">{{ $link->linktext }}</a>
 					</li>

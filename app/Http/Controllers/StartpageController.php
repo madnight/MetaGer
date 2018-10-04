@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App;
+use DB;
+use Log;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
 use LaravelLocalization;
@@ -44,6 +46,13 @@ class StartpageController extends Controller
             $availableFoki[$fokus] = "available";
         }
 
+        $sponsors = [];
+        try{
+            $sponsors = DB::table('sponsorenlinks')->where('langcode', 'de')->orderByRaw('LENGTH(linktext)', 'ASC')->get();
+        }catch(\Illuminate\Database\QueryException $e){
+            Log::error($e);
+        }
+
         return view('index')
             ->with('title', trans('titles.index'))
             ->with('homeIcon')
@@ -53,6 +62,7 @@ class StartpageController extends Controller
             ->with('theme', $theme)
             ->with('autocomplete', $request->input('param_autocomplete', 'on'))
             ->with('foki', $foki)
+            ->with('sponsors', $sponsors)
             ->with('availableFoki', $availableFoki)
             ->with('focus', $request->input('focus', 'web'))
             ->with('lang', $request->input('param_lang', $lang))

@@ -20,8 +20,6 @@ Route::group(
 
         Route::get('/', 'StartpageController@loadStartPage');
 
-        Route::get('img/piwik.png', 'ImageController@generateImage');
-
         Route::get('impressum', function () {
             return view('impressum')
                 ->with('title', trans('titles.impressum'))

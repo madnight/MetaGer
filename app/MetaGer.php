@@ -1339,7 +1339,6 @@ class MetaGer
                 $logEntry .= " time=" . round((microtime(true) - $this->starttime), 2) . " serv=" . $this->fokus;
                 $logEntry .= " interface=" . LaravelLocalization::getCurrentLocale();
                 $logEntry .= " sprachfilter=" . $this->lang;
-                $logEntry .= " search=" . $this->eingabe;
 
                 # 2 Arten von Logs in einem wird die Anzahl der Abfragen an eine Suchmaschine gespeichert und in der anderen
                 # die Anzahl, wie häufig diese Ergebnisse geliefert hat.

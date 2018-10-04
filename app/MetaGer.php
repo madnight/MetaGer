@@ -932,9 +932,6 @@ class MetaGer
             }
             $request->replace($input);
         }
-        # Create guid
-        $this->id = $this->createGuid();
-        $this->oldId = $request->input('d', '');
 
         $this->url = $request->url();
         # Zunächst überprüfen wir die eingegebenen Einstellungen:
@@ -1043,9 +1040,8 @@ class MetaGer
         $this->verificationId = $request->input('verification_id', null);
         $this->verificationCount = intval($request->input('verification_count', '0'));
         // Remove Inputs that are not used
-        $this->request->request->set("verification_id", null);
-        $this->request->request->set("verification_count", null);
-        $this->request->request->set("uid", null);
+        $this->request->request->remove("verification_id");
+        $this->request->request->remove("verification_count");
         
         $this->apiKey = $request->input('key', '');
         
@@ -1334,7 +1330,6 @@ class MetaGer
                  */
                 $logEntry .= " ip=" . $this->request->ip();
                 $logEntry .= " id=" . $this->id;
-                $logEntry .= " oldId=" . $this->oldId;
                 $logEntry .= " ref=" . $this->request->header('Referer');
                 $logEntry .= " time=" . round((microtime(true) - $this->starttime), 2) . " serv=" . $this->fokus;
                 $logEntry .= " interface=" . LaravelLocalization::getCurrentLocale();
@@ -1623,24 +1618,5 @@ class MetaGer
     public function getId()
     {
         return $this->id;
-    }
-    public function getOldId()
-    {
-        return $this->oldId;
-    }
-
-    private function createGuid() 
-    {
-        mt_srand((double)microtime()*10000); //optional for php 4.2.0 and up.
-        $charid = strtoupper(md5(uniqid(rand(), true)));
-        $hyphen = chr(45);// "-"
-        $uuid = chr(123)// "{"
-            .substr($charid, 0, 8).$hyphen
-            .substr($charid, 8, 4).$hyphen
-            .substr($charid,12, 4).$hyphen
-            .substr($charid,16, 4).$hyphen
-            .substr($charid,20,12)
-            .chr(125);// "}"
-            return $uuid;
     }
 }

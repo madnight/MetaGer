@@ -20,7 +20,6 @@
 									<input type='hidden' name='{{ $key }}' value='{{ $value }}' form='submitForm' />
 								@endif
 							@endforeach
-							<input type='hidden' name='d' value='{!! $metager->getId() !!}' form='submitForm' />
 						</form>
 					</div>
 				</div>

@@ -27,11 +27,11 @@ function readLocaleFromUrl (defaultLocale) {
 }
 */
 
-function getURLParameter (name, defaultValue) {
+function getURLParameter(name, defaultValue) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || defaultValue;
 }
 
-function getMetaTag (name) {
+function getMetaTag(name) {
   if (typeof $('meta[name="' + name + '"')[0] !== 'undefined') {
     return $('meta[name="' + name + '"')[0].content || null;
   } else {
@@ -39,12 +39,12 @@ function getMetaTag (name) {
   }
 }
 
-function activateJSOnlyContent () {
+function activateJSOnlyContent() {
   $('#searchplugin').removeClass('hide');
   $('.js-only').removeClass('js-only');
 }
 
-function tabs () {
+function tabs() {
   $('#foki > li.tab-selector > a').each(function () {
     if ($(this).attr('target') != '_blank') {
       $(this).attr('href', '#' + $(this).attr('aria-controls'));
@@ -69,10 +69,9 @@ function tabs () {
   });
 }
 
-function getDocumentReadyForUse (fokus, custom) {
+function getDocumentReadyForUse(fokus, custom) {
   if (typeof custom == 'undefined') custom = false;
   activateJSOnlyContent();
-  clickLog();
   popovers();
   if (fokus === 'bilder') imageLoader();
   if (custom) initialLoadContent(fokus);
@@ -85,7 +84,7 @@ function getDocumentReadyForUse (fokus, custom) {
   $('iframe').addClass('resized');
 }
 
-function pluginInfo () {
+function pluginInfo() {
   if (localStorage) {
     if (localStorage.getItem('pluginInfo') == 'off') $('#searchplugin').css('display', 'none');
     $('#searchplugin').on('close.bs.alert', function () {
@@ -98,7 +97,7 @@ function pluginInfo () {
   }
 }
 
-function theme () {
+function theme() {
   if (localStorage) {
     var theme = localStorage.getItem('theme');
     if (theme != null) {
@@ -112,37 +111,24 @@ function theme () {
   }
 }
 
-function clickLog () {
-  $('.result a.title, .result div.link-link a').off();
-  $('.result a.title, .result div.link-link a').click(function () {
-    $.get('/clickstats', {
-      i: $('meta[name=id]').attr('content'),
-      s: $(this).attr('data-hoster'),
-      q: $('meta[name=q]').attr('content'),
-      p: $(this).attr('data-count'),
-      url: $(this).attr('href')
-    });
-  });
-}
-
-function botProtection () {
-  $(".result").find("a").click(function(){
+function botProtection() {
+  $(".result").find("a").click(function () {
     var link = $(this).attr("href");
     var newtab = false;
-    if($(this).attr("target") == "_blank"){
+    if ($(this).attr("target") == "_blank") {
       newtab = true;
     }
     $.ajax({
-      url: '/img/cat.jpg', 
+      url: '/img/cat.jpg',
       type: "post",
-      data: { mm: $("meta[name=mm]").attr("content")},
+      data: { mm: $("meta[name=mm]").attr("content") },
       timeout: 2000
     })
-    .always(function(){
-      if(!newtab)
-        document.location.href = link;
-    });
-    if(!newtab)
+      .always(function () {
+        if (!newtab)
+          document.location.href = link;
+      });
+    if (!newtab)
       return false;
     else
       return true;
@@ -150,7 +136,7 @@ function botProtection () {
 }
 
 
-function popovers () {
+function popovers() {
   $('[data-toggle=popover]').each(function (e) {
     $(this).popover({
       // html          :   true,
@@ -160,14 +146,14 @@ function popovers () {
   });
 }
 
-function pagination () {
+function pagination() {
   $('.pagination li:not(.active) > a').attr('href', '#');
   $('.pagination li.disabled > a').removeAttr('href');
   $('.pagination li:not(.active) > a').off();
   $('.pagination li:not(.active) > a').click(paginationHandler);
 }
 
-function paginationHandler () {
+function paginationHandler() {
   var link = $(this).attr('data-href');
   if (link.length == 0) {
     return;
@@ -184,7 +170,7 @@ function paginationHandler () {
   });
 }
 
-function imageLoader () {
+function imageLoader() {
   if (typeof $('#container').masonry == 'undefined') {
     return;
   }
@@ -199,7 +185,7 @@ function imageLoader () {
   });
 }
 
-function eliminateHost (host) {
+function eliminateHost(host) {
   $('.result:not(.ad)').each(function (e) {
     var host2 = $(this).find('.link-link > a').attr('data-host');
     if (host2.indexOf(host) === 0) {
@@ -208,7 +194,7 @@ function eliminateHost (host) {
   });
 }
 
-function fokiChanger () {
+function fokiChanger() {
   $('#fokiChanger ul > li').click(function () {
     document.location.href = $(this).attr('data-href');
   });
@@ -284,7 +270,7 @@ function fokiChanger () {
 /**
  * Creates focus tab and tab selector for every stored focus in local storage
  */
-function createCustomFocuses () {
+function createCustomFocuses() {
   for (var key in localStorage) {
     if (key.startsWith('focus_')) {
       var focus = loadFocusById(key);
@@ -316,7 +302,7 @@ function createCustomFocuses () {
  *     </li>
  * @endif
  */
-function addFocus (focus, active) {
+function addFocus(focus, active) {
   if (typeof active == 'undefined') active = false;
   var id = getIdFromName(focus.name);
   var foki = document.getElementById('foki');
@@ -371,7 +357,7 @@ function addFocus (focus, active) {
  *     </div>
  * @endif
  */
-function addTab (focus, active) {
+function addTab(focus, active) {
   if (typeof active == 'undefined') active = false;
   var id = getIdFromName(focus.name);
   // create tab div
@@ -399,19 +385,19 @@ function addTab (focus, active) {
  * Turns a name into an id
  * Converts special characters and spaces
  */
-function getIdFromName (name) {
+function getIdFromName(name) {
   return 'focus_' + name.split(' ').join('_').toLowerCase();
 }
 /**
  * Loads the focus object for the given id from local storage
  */
-function loadFocusById (id) {
+function loadFocusById(id) {
   return JSON.parse(localStorage.getItem(id));
 }
 /**
  * Gets the id of the currently active focus
  */
-function getActiveFocusId () {
+function getActiveFocusId() {
   var search = window.location.search;
   var from = search.indexOf('focus=') + 'focus='.length;
   var to = search.substring(from).indexOf('&') + from;
@@ -424,7 +410,7 @@ function getActiveFocusId () {
  * Turns the link of the current page into a search link for the given focus
  */
 // TODO catch error if link is http://localhost:8000/meta/meta.ger3?
-function generateSearchLinkForFocus (focus) {
+function generateSearchLinkForFocus(focus) {
   var link = document.location.href;
   // remove old engine settings
   // not yet tested, only for compability problems with old versions of bookmarks and plugins
@@ -452,7 +438,7 @@ function generateSearchLinkForFocus (focus) {
 /**
  * Replaces the focus in a given url with the "angepasst" focus
  */
-function replaceFocusInUrl (url) {
+function replaceFocusInUrl(url) {
   var from = url.indexOf('focus=');
   var to = url.substring(from).indexOf('&') + from;
   if (to === 0) {
@@ -464,7 +450,7 @@ function replaceFocusInUrl (url) {
 /**
  * Loads the content for a given fokus
  */
-function initialLoadContent (fokus) {
+function initialLoadContent(fokus) {
   var link = $('#' + fokus + 'TabSelector a').attr('data-href');
   $.get(link, function (data) {
     $('#' + fokus).html(data);
@@ -472,7 +458,7 @@ function initialLoadContent (fokus) {
   });
 }
 
-function resultSaver (index) {
+function resultSaver(index) {
   var title = $('div.tab-pane.active .result[data-count=' + index + '] a.title').html();
   var link = $('div.tab-pane.active .result[data-count=' + index + '] a.title').attr('href');
   var anzeigeLink = $('div.tab-pane.active .result[data-count=' + index + '] div.link-link > a').html();
@@ -491,7 +477,7 @@ function resultSaver (index) {
   new Results().updateResultPageInterface();
 }
 
-function loadQuicktips (search, locale, sprueche) {
+function loadQuicktips(search, locale, sprueche) {
   var blacklist = [];
   if (!sprueche) {
     blacklist.push('sprueche');
@@ -510,7 +496,7 @@ const QUICKTIP_SERVER = 'https://metager.de/quicktips';
  * @param {Array<String>} blacklist excluded loaders
  * @param {Function} loadedHandler handler for loaded quicktips
  */
-function getQuicktips (search, locale, blacklist, loadedHandler) {
+function getQuicktips(search, locale, blacklist, loadedHandler) {
   var getString = QUICKTIP_SERVER + '/quicktips.xml?search=' + search + '&locale=' + locale;
   blacklist.forEach(function (value) {
     getString += '&loader_' + value + '=false';
@@ -564,7 +550,7 @@ function getQuicktips (search, locale, blacklist, loadedHandler) {
  * 
  * @param {Object} quicktips 
  */
-function createQuicktips (quicktips, sprueche) {
+function createQuicktips(quicktips, sprueche) {
   var quicktipsDiv = $('#quicktips');
   quicktips.sort(function (a, b) {
     return b.score - a.score;

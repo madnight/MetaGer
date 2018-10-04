@@ -10,7 +10,6 @@
 		<meta name="l" content="{{ LaravelLocalization::getCurrentLocale() }}" />
 		<meta name="mm" content="{{ $metager->getVerificationId() }}" />
 		<meta name="mn" content="{{ $metager->getVerificationCount() }}" />
-		<meta name="d" content="{!! $metager->getId() !!}" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
 		<meta http-equiv="language" content="{!! trans('staticPages.meta.language') !!}" />

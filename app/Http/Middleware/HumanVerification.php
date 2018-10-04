@@ -23,6 +23,7 @@ class HumanVerification
         // The specific user
         $user = null;
         $newUser = true;
+        $update = true;
         try {
             $id = hash("sha512", $request->ip());
             $uid = hash("sha512", $request->ip() . $_SERVER["AGENT"]);
@@ -35,6 +36,7 @@ class HumanVerification
              * might have to change it at some point.
              */
             if ($request->has('password') || $request->has('key') || $request->has('appversion') || !env('BOT_PROTECTION', false)) {
+                $update = false;
                 return $next($request);
             }
 
@@ -133,33 +135,35 @@ class HumanVerification
         } catch (\Illuminate\Database\QueryException $e) {
             // Failure in contacting metager3.de
         } finally {
-            // Update the user in the database
-            if($newUser){
-                DB::table('humanverification')->insert(
-                    [
-                        'uid' => $user["uid"],
-                        'id' => $user["id"],
-                        'unusedResultPages' => $user['unusedResultPages'],
-                        'whitelist' => $user["whitelist"],
-                        'whitelistCounter' => $user["whitelistCounter"],
-                        'locked' => $user["locked"],
-                        "lockedKey" => $user["lockedKey"],
-                        'updated_at' => $user["updated_at"],
-                    ]
-                );
-            }else{
-                DB::table('humanverification')->where('uid', $uid)->update(
-                    [
-                        'uid' => $user["uid"],
-                        'id' => $user["id"],
-                        'unusedResultPages' => $user['unusedResultPages'],
-                        'whitelist' => $user["whitelist"],
-                        'whitelistCounter' => $user["whitelistCounter"],
-                        'locked' => $user["locked"],
-                        "lockedKey" => $user["lockedKey"],
-                        'updated_at' => $user["updated_at"],
-                    ]
+            if($update){
+                // Update the user in the database
+                if($newUser){
+                    DB::table('humanverification')->insert(
+                        [
+                            'uid' => $user["uid"],
+                            'id' => $user["id"],
+                            'unusedResultPages' => $user['unusedResultPages'],
+                            'whitelist' => $user["whitelist"],
+                            'whitelistCounter' => $user["whitelistCounter"],
+                            'locked' => $user["locked"],
+                            "lockedKey" => $user["lockedKey"],
+                            'updated_at' => $user["updated_at"],
+                        ]
                     );
+                }else{
+                    DB::table('humanverification')->where('uid', $uid)->update(
+                        [
+                            'uid' => $user["uid"],
+                            'id' => $user["id"],
+                            'unusedResultPages' => $user['unusedResultPages'],
+                            'whitelist' => $user["whitelist"],
+                            'whitelistCounter' => $user["whitelistCounter"],
+                            'locked' => $user["locked"],
+                            "lockedKey" => $user["lockedKey"],
+                            'updated_at' => $user["updated_at"],
+                        ]
+                        );
+                }
             }
         }
         $request->request->add(['verification_id' => $user["uid"], 'verification_count' => $user["unusedResultPages"]]);

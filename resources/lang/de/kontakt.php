@@ -2,7 +2,7 @@
 
 return [
     'headline.1' => 'Kontakt',
-    'form.1' => 'Sicheres Kontakformular',
+    'form.1' => 'Sicheres Kontaktformular',
     'form.2' => 'Über dieses Formular können Sie uns kontaktieren.
 Alternativ können Sie uns natürlich auch per <a href="mailto:support@suma-ev.de">E-Mail</a> erreichen.',
     'form.name' => "Name (Vorname Nachname)",

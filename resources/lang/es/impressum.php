@@ -6,7 +6,7 @@ return [
     "info.1"	=>	"Articulo de Wikipedia de <a href=\"http://de.wikipedia.org/wiki/Suma_e.V.\" target=\"_blank\" rel=\"noopener\">SUMA-EV</a>",
     "info.2"	=>	" SUMA-EV Röselerstr. 3 D-30159 Hannover Deutschland/Germany",
     "info.3"	=>	"Contacto: Tel.: ++49-(0)511-34000070 EMail: <a href=\"mailto:office@suma-ev.de\">office@suma-ev.de</a><a href=\"/kontakt/\"> - Public-PGP-Key</a> <a href=\"/kontakt/\">Formulario encriptado</a>",
-    "info.4"	=>	'Junta directiva: <a href="https://www2.ostfalia.de/cms/de/pws/jensenn/index.html">Prof.Dr. Nils Jensen</a>, Dominik Pfennig, <a href="http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann">Dr. Wolfgang Sander-Beuermann</a>',
+    "info.4"	=>	'Junta directiva: <a href="https://www2.ostfalia.de/cms/de/pws/jensenn/index.html">Prof.Dr. Nils Jensen</a>, Dominik Hebeler, <a href="http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann">Dr. Wolfgang Sander-Beuermann</a>',
     "info.5"	=>	"Dirección: <a href=\"http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann\">Dr. Wolfgang Sander-Beuermann</a> Public-PGP-Key: <a href=\"/team/pubkey-wsb\">https://metager.de/team/pubkey-wsb</a> Facebook: <a href=\"https://www.facebook.com/wolfgang.sanderbeuermann%0A\">https://www.facebook.com/wolfgang.sanderbeuermann</a> Twitter: <a href=\"http://twitter.com/wosabeu\">http://twitter.com/wosabeu</a>",
     "info.6"	=>	"Encargado de protección de menores: Georg Becker <a href=\"mailto:jugendschutz@metager.de\">jugendschutz@metager.de</a>",
     "info.7"	=>	"Responsable de contenidos según § 55 Abs. 2 RStV: <a href=\"http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann\">Dr. Wolfgang Sander-Beuermann</a>",

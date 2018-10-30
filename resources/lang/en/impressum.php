@@ -15,7 +15,7 @@ Tel.: ++49-(0)511-34000070
 E-Mail: <a href="mailto:office@suma-ev.de">office@suma-ev.de</a><a href="/kontakt/"> - Public-PGP-Key</a>
 <a href="/kontakt/">encrypted contact form</a>',
     'info.4' => 'Board:
-<a href="https://www2.ostfalia.de/cms/de/pws/jensenn/index.html">Prof.Dr. Nils Jensen</a>, Dominik Pfennig, <a href="http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann">Dr. Wolfgang Sander-Beuermann</a>',
+<a href="https://www2.ostfalia.de/cms/de/pws/jensenn/index.html">Prof.Dr. Nils Jensen</a>, Dominik Hebeler, <a href="http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann">Dr. Wolfgang Sander-Beuermann</a>',
     'info.5' => 'CEO:
 <a href="http://de.wikipedia.org/wiki/Wolfgang_Sander-Beuermann">Dr. Wolfgang Sander-Beuermann</a>
 Public-PGP-Key: <a href="/en/team/pubkey-wsb">https://metager.de/en/team/pubkey-wsb</a>

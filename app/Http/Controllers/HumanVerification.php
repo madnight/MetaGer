@@ -98,12 +98,7 @@ class HumanVerification extends Controller
         }
 
         if ($user->whitelist === 1) {
-            if (
-                DB::table('humanverification')->where('uid', $uid)->update(['unusedResultPages' => 0])
-                === 1
-            ) {
-                DB::table('usedurls')->where('uid', $uid)->delete();
-            }
+            DB::table('humanverification')->where('uid', $uid)->update(['unusedResultPages' => 0]);
         } else {
             DB::table('humanverification')->where('uid', $uid)->where('updated_at', '<', Carbon::NOW()->subSeconds(2))->delete();
 

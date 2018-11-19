@@ -48,8 +48,8 @@ return [
     'plugin.head.8' => 'MetaGer zum Firefox Klar hinzufügen',
     'plugin.head.info' => '(aktuelle Sucheinstellungen werden übernommen)',
 
-    'plugin.firefox.1' => 'Klicken Sie in Ihrem Browser oben rechts im Suchfeld auf die Lupe mit dem kleinen "+" und dann auf "MetaGer hinzufügen" (siehe Bild)',
-    'plugin.firefox.2' => 'Klicken Sie nun mit der rechten Maustaste auf das neue MetaGer Logo in der Liste und auf "als Standard Suchmaschine verwenden" (siehe Bild)',
+    'plugin.firefox.1' => 'Klicken Sie in Ihrem Browser oben rechts in der Adressleiste auf "<i class="fa fa-ellipsis-h"></i>" um das Menü der Seitenaktionen zu öffnen und dann auf "Suchmaschine hinzufügen" (siehe Bild)',
+    'plugin.firefox.2' => 'Öffnen Sie die Firefox Einstellungen. Geben Sie hierfür z.B. "about:preferences" in die Adressleiste ein. Geben Sie nun in das Suchfeld oben rechts "Suchmaschine" ein. Im Bereich "Standardsuchmaschine" wählen Sie MetaGer aus (siehe Bild).',
     'plugin.firefox.3' => 'MetaGer als Startseite im :browser einrichten',
     'plugin.firefox.4' => 'Klicken Sie oben rechts im Browser auf <i class="fa fa-bars" aria-hidden="true"></i><span class="sr-only">die drei horizontalen Striche</span> (Menü) und öffnen Sie die "Einstellungen"',
     'plugin.firefox.5' => 'Tragen Sie im Feld "Startseite" "https://metager.de" ein.',

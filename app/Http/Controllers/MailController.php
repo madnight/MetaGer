@@ -10,6 +10,7 @@ use Illuminate\Http\Response;
 use LaravelLocalization;
 use Mail;
 use Validator;
+use DB;
 
 class MailController extends Controller
 {
@@ -119,6 +120,18 @@ class MailController extends Controller
 
                     $messageType = "success";
                     $messageToUser = "Herzlichen Dank!! Wir haben Ihre Spendenbenachrichtigung erhalten.";
+
+                    try{
+                        // Add the donation to our database
+                        $spenden = DB::connection('spenden')->table('spenden')->insert(
+                            ['name' => $request->input('Name', 'Keine Angabe'),
+                            'iban' => $request->input('Kontonummer'),
+                            'amount' => $request->input('Betrag')]
+                        );
+                    }catch(\Illuminate\Database\QueryException $e){
+
+                    }
+
                 } catch (\Swift_TransportException $e) {
                     $messageType = "error";
                     $messageToUser = 'Beim Senden Ihrer Spendenbenachrichtigung ist ein Fehler auf unserer Seite aufgetreten. Bitte schicken Sie eine E-Mail an: office@suma-ev.de, damit wir uns darum kümmern können.';

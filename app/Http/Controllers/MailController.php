@@ -128,6 +128,7 @@ class MailController extends Controller
                             'iban' => $request->input('Kontonummer'),
                             'amount' => $request->input('Betrag')]
                         );
+                        DB::disconnect('spenden');
                     }catch(\Illuminate\Database\QueryException $e){
 
                     }

@@ -16,29 +16,29 @@
 		<form id="donate" role="form" method="POST">
 			<input type="hidden" name="dt" value="{{ md5(date('Y') . date('m') . date('d')) }}">
 			<div class="form-group donation-form-group">
-			<label for="Name">{!! trans('spende.lastschrift.3') !!}</label>
-			<input type="text" class="form-control" id="Name" required="" name="Name" placeholder="{!! trans('spende.lastschrift.3.placeholder') !!}" value="" />
+			<label for="Name">*{!! trans('spende.lastschrift.3') !!}</label>
+			<input type="text" class="form-control" id="Name" required="" name="Name" required="" placeholder="{!! trans('spende.lastschrift.3.placeholder') !!}" @if(isset($data['name'])) value="{{$data['name']}}" @endif />
 			</div>
 			<div class="form-group donation-form-group">
 			<label for="email">{!! trans('spende.lastschrift.4') !!}</label>
-				<input type="email" class="form-control" id="email" name="email" placeholder="E-Mail" value="">
+				<input type="email" class="form-control" id="email" name="email" placeholder="E-Mail" @if(isset($data['email'])) value="{{$data['email']}}" @endif>
 			</div>
 			<div class="form-group donation-form-group">
-			<label for="iban">{!! trans('spende.lastschrift.6') !!}</label>
-				<input type="text" class="form-control" id="iban" required="" name="Kontonummer" placeholder="IBAN" value="">
+			<label for="iban">*{!! trans('spende.lastschrift.6') !!}</label>
+				<input type="text" class="form-control" id="iban" required="" name="iban" placeholder="IBAN" @if(isset($data['iban'])) value="{{$data['iban']}}" @endif>
 			</div>
 			<div class="form-group donation-form-group">
 			<label for="bic">{!! trans('spende.lastschrift.7') !!}</label>
-				<input type="text" class="form-control" id="bic" required="" name="Bankleitzahl" placeholder="BIC" value="">
+				<input type="text" class="form-control" id="bic" name="bic" placeholder="BIC" @if(isset($data['bic'])) value="{{$data['bic']}}" @endif>
 			</div>
 			<div class="form-group donation-form-group">
-			<label for="value">{!! trans('spende.lastschrift.8.value')!!} </label>
-				<input type="number" class="form-control" id="value" required="" name="Betrag" placeholder="{!! trans('spende.lastschrift.8.value.placeholder') !!}" value="">
+			<label for="value">*{!! trans('spende.lastschrift.8.value')!!} </label>
+				<input type="number" class="form-control" id="value" required="" name="Betrag" placeholder="{!! trans('spende.lastschrift.8.value.placeholder') !!}" @if(isset($data['betrag'])) value="{{$data['betrag']}}" @endif>
 			</div>
 			<div class="form-group donation-form-group">
 			<label for="msg">{!! trans('spende.lastschrift.8.message')!!}</label>
 			<label for="msg">{!! trans('spende.bankinfo.3')!!}</label>
-			<textarea class="form-control" id="msg" name="Nachricht" placeholder="{!! trans('spende.lastschrift.8.message.placeholder') !!}"></textarea>
+			<textarea class="form-control" id="msg" name="Nachricht" placeholder="{!! trans('spende.lastschrift.8.message.placeholder') !!}">@if(isset($data['nachricht'])){{$data['nachricht']}}@endif</textarea>
 			</div>
 			<button type="submit" form="donate" class="btn btn-default">{!! trans('spende.lastschrift.9') !!}</button>
 		</form>

@@ -22,11 +22,11 @@
 					</tr>
 					<tr>
 						<td>{{ trans('spende.iban') }}</td>
-						<td>{{ $data['kontonummer'] }}</td>
+						<td>{{ $data['iban'] }}</td>
 					</tr>
 					<tr>
 						<td>{{ trans('spende.bic') }}</td>
-						<td>{{ $data['bankleitzahl'] }}</td>
+						<td>{{ $data['bic'] }}</td>
 					</tr>
 					<tr>
 						<td>{{ trans('spende.betrag') }}</td>

@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Mail\Kontakt;
-use App\Mail\Spende;
 use App\Mail\Sprachdatei;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use LaravelLocalization;
 use Mail;
 use Validator;
-use DB;
+use \IBAN;
+use \IBANCountry;
 
 class MailController extends Controller
 {
@@ -72,20 +73,48 @@ class MailController extends Controller
 
     public function donation(Request $request)
     {
+        $data = [
+            'name' => $request->input('Name', ''),
+            'iban' => $request->input('iban', ''),
+            'bic' => $request->input('bic', ''),
+            'email' => $request->input('email', ''),
+            'betrag' => $request->input('Betrag', ''),
+            'nachricht' => $request->input('Nachricht', ''),
+        ];
+        $name = $request->input('Name', '');
+        $iban = $request->input('iban', '');
+        $bic = $request->input('bic', '');
+        $email = $request->input('email', 'anonymous-user@metager.de');
+        $betrag = $request->input('Betrag', '');
+        $nachricht = $request->input('Nachricht', '');
 
         # Der enthaltene String wird dem Benutzer nach der Spende ausgegeben
         $messageToUser = "";
         $messageType = ""; # [success|error]
 
-        #Sicherheitsüberprüfung (Wir wurden in letzter Zeit ziemlich mit Mails zugespammt
-        # Wir überprüfen also, ob das Feld für die Kontonummer tatsächlich eine Kontonummer, oder eine IBAN enthält:
-        $iban = $request->input('Kontonummer', '');
-        $iban = preg_replace("/\s/s", "", $iban);
-        # Eine Kontonummer besteht nur aus Zahlen
-        # Eine IBAN besteht aus einem Ländercode (2 Buchstaben), einer 2 stelligen Prüfsumme (2 Ziffern) gefolgt von
-        # einer Kombination aus Buchstaben und Zahlen
-        if (!preg_match("/^\d+$/s", $iban) && !preg_match("/^[a-zA-Z]{2}\d{2}[a-zA-Z0-9]+$/s", $iban)) {
-            $messageToUser = "Die eingegebene IBAN/Kontonummer scheint nicht Korrekt zu sein. Nachricht wurde nicht gesendet";
+        # Check the IBAN
+        $iban = new IBAN($iban);
+        $bic = $request->input('Bankleitzahl', '');
+        $country = new IBANCountry($iban->Country());
+        $isSEPA = filter_var($country->IsSEPA(), FILTER_VALIDATE_BOOLEAN);
+
+        # Check the amount
+        $validBetrag = is_numeric($betrag) && $betrag > 0;
+        $betrag = filter_var($betrag, FILTER_VALIDATE_INT);
+
+        # Validate Email
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $email = "anonymous-user@metager.de";
+        }
+
+        if (!$iban->Verify()) {
+            $messageToUser = "Die eingegebene IBAN scheint nicht Korrekt zu sein. Nachricht wurde nicht gesendet";
+            $messageType = "error";
+        } else if (!$isSEPA && $bic === '') {
+            $messageToUser = "Die eingegebene IBAN gehört nicht zu einem Land aus dem SEPA Raum. Für einen Bankeinzug benötigen wir eine BIC von Ihnen.";
+            $messageType = "error";
+        } else if (!$validBetrag) {
+            $messageToUser = "Der eingegebene Spendenbetrag ist ungültig. Bitte korrigieren Sie Ihre Eingabe und versuchen es erneut.\n";
             $messageType = "error";
         } else {
 
@@ -96,57 +125,48 @@ class MailController extends Controller
             # Kontonummer ( IBAN )
             # Bankleitzahl ( BIC )
             # Nachricht
-            if (!$request->has('Kontonummer') || !$request->has('Bankleitzahl') || !$request->has('Betrag')) {
-                $messageToUser = "Sie haben eins der folgenden Felder nicht ausgefüllt: IBAN, BIC, Nachricht. Bitte korrigieren Sie Ihre Eingabe und versuchen es erneut.\n";
-                $messageType = "error";
-            } else {
-                $message = "\r\nName: " . $request->input('Name', 'Keine Angabe');
-                $message .= "\r\nKontonummer: " . $request->input('Kontonummer');
-                $message .= "\r\nBankleitzahl: " . $request->input('Bankleitzahl');
-                $message .= "\r\nBetrag: " . $request->input('Betrag');
-                $message .= "\r\nNachricht: " . $request->input('Nachricht');
 
-                $replyTo = $request->input('email', 'anonymous-user@metager.de');
-                if ($replyTo == "") {
-                    $replyTo = "noreply@metager.de";
-                }
-                if (!filter_var($replyTo, FILTER_VALIDATE_EMAIL)) {
-                    $messageToUser .= "Die eingegebene E-Mail-Addresse ($replyTo) scheint nicht korrekt zu sein.";
-                }
+            $message = "\r\nName: " . $name;
+            $message .= "\r\nIBAN: " . $iban->HumanFormat();
+            if ($bic !== "") {
+                $message .= "\r\nBIC: " . $bic;
+            }
+
+            $message .= "\r\nBetrag: " . $betrag;
+            $message .= "\r\nNachricht: " . $nachricht;
+
+            try {
+                #Mail::to("spenden@suma-ev.de")
+                #    ->send(new Spende($email, $message));
+
+                $messageType = "success";
+                $messageToUser = "Herzlichen Dank!! Wir haben Ihre Spendenbenachrichtigung erhalten.";
 
                 try {
-                    Mail::to("spenden@suma-ev.de")
-                        ->send(new Spende($replyTo, $message));
+                    // Add the donation to our database
+                    $spenden = DB::connection('spenden')->table('spenden')->insert(
+                        ['name' => $name,
+                            'iban' => $iban->MachineFormat(),
+                            'amount' => $betrag]
+                    );
+                    DB::disconnect('spenden');
+                } catch (\Illuminate\Database\QueryException $e) {
 
-                    $messageType = "success";
-                    $messageToUser = "Herzlichen Dank!! Wir haben Ihre Spendenbenachrichtigung erhalten.";
-
-                    try{
-                        // Add the donation to our database
-                        $spenden = DB::connection('spenden')->table('spenden')->insert(
-                            ['name' => $request->input('Name', 'Keine Angabe'),
-                            'iban' => $request->input('Kontonummer'),
-                            'amount' => $request->input('Betrag')]
-                        );
-                        DB::disconnect('spenden');
-                    }catch(\Illuminate\Database\QueryException $e){
-
-                    }
-
-                } catch (\Swift_TransportException $e) {
-                    $messageType = "error";
-                    $messageToUser = 'Beim Senden Ihrer Spendenbenachrichtigung ist ein Fehler auf unserer Seite aufgetreten. Bitte schicken Sie eine E-Mail an: office@suma-ev.de, damit wir uns darum kümmern können.';
                 }
+
+            } catch (\Swift_TransportException $e) {
+                $messageType = "error";
+                $messageToUser = 'Beim Senden Ihrer Spendenbenachrichtigung ist ein Fehler auf unserer Seite aufgetreten. Bitte schicken Sie eine E-Mail an: office@suma-ev.de, damit wir uns darum kümmern können.';
             }
         }
 
         if ($messageType === "error") {
-            $request->flash();
             return view('spende.spende')
                 ->with('title', 'Kontakt')
-                ->with($messageType, $messageToUser);
+                ->with($messageType, $messageToUser)
+                ->with('data', $data);
         } else {
-            $data = ['name' => $request->input('Name', 'Keine Angabe'), 'kontonummer' => $request->input('Kontonummer'), 'bankleitzahl' => $request->input('Bankleitzahl'), 'email' => $request->input('email', 'anonymous-user@metager.de'), 'betrag' => $request->input('Betrag'), 'nachricht' => $request->input('Nachricht')];
+            $data['iban'] = $iban->HumanFormat();
             $data = base64_encode(serialize($data));
             return redirect(LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), route("danke", ['data' => $data])));
         }

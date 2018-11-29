@@ -136,18 +136,21 @@ class MailController extends Controller
             $message .= "\r\nNachricht: " . $nachricht;
 
             try {
-                Mail::to("spenden@suma-ev.de")
-                    ->send(new \App\Mail\Spende($email, $message));
+                #Mail::to("spenden@suma-ev.de")
+                #    ->send(new \App\Mail\Spende($email, $message));
 
                 $messageType = "success";
                 $messageToUser = "Herzlichen Dank!! Wir haben Ihre Spendenbenachrichtigung erhalten.";
 
                 try {
                     // Add the donation to our database
-                    $spenden = DB::connection('spenden')->table('spenden')->insert(
+                    $spenden = DB::connection('spenden')->table('debits')->insert(
                         ['name' => $name,
                             'iban' => $iban->MachineFormat(),
-                            'amount' => $betrag]
+                            'bic' => $bic,
+                            'amount' => $betrag,
+                            'message' => $nachricht,
+                        ]
                     );
                     DB::disconnect('spenden');
                 } catch (\Illuminate\Database\QueryException $e) {

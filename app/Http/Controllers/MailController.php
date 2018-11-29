@@ -136,8 +136,8 @@ class MailController extends Controller
             $message .= "\r\nNachricht: " . $nachricht;
 
             try {
-                #Mail::to("spenden@suma-ev.de")
-                #    ->send(new \App\Mail\Spende($email, $message));
+                Mail::to("spenden@suma-ev.de")
+                    ->send(new \App\Mail\Spende($email, $message));
 
                 $messageType = "success";
                 $messageToUser = "Herzlichen Dank!! Wir haben Ihre Spendenbenachrichtigung erhalten.";

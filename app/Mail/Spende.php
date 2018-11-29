@@ -15,11 +15,12 @@ class Spende extends Mailable
      *
      * @return void
      */
-    public function __construct($from, $message)
+    public function __construct($from, $message, $name)
     {
         $this->subject = "MetaGer - Spende";
-        $this->reply   = $from;
+        $this->reply = $from;
         $this->message = $message;
+        $this->name = $name;
     }
 
     /**
@@ -29,7 +30,7 @@ class Spende extends Mailable
      */
     public function build()
     {
-        return $this->from($this->reply)
+        return $this->from($this->reply, $this->name)
             ->subject($this->subject)
             ->text('kontakt.mail')
             ->with('messageText', $this->message);

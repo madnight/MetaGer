@@ -84,7 +84,7 @@ class MailController extends Controller
         $name = $request->input('Name', '');
         $iban = $request->input('iban', '');
         $bic = $request->input('bic', '');
-        $email = $request->input('email', 'anonymous-user@metager.de');
+        $email = $request->input('email', '');
         $betrag = $request->input('Betrag', '');
         $nachricht = $request->input('Nachricht', '');
 
@@ -137,7 +137,7 @@ class MailController extends Controller
 
             try {
                 Mail::to("spenden@suma-ev.de")
-                    ->send(new \App\Mail\Spende($email, $message));
+                    ->send(new \App\Mail\Spende($email, $message, $name));
 
                 $messageType = "success";
                 $messageToUser = "Herzlichen Dank!! Wir haben Ihre Spendenbenachrichtigung erhalten.";

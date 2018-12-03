@@ -158,16 +158,11 @@ class MetaGer
                         ->with('metager', $this)
                         ->with('browser', (new Agent())->browser());
                     break;
-                case 'rss20':
-                    return view('metager3resultsrss20')
-                        ->with('results', $viewResults)
-                        ->with('eingabe', $this->eingabe)
-                        ->with('apiAuthorized', $this->apiAuthorized)
-                        ->with('metager', $this)
-                        ->with('resultcount', sizeof($viewResults));
+                case 'api':
+                    return response()->view('metager3resultsatom10', ['results' => $viewResults,'eingabe' => $this->eingabe,'metager' => $this,'resultcount' => sizeof($viewResults), 'apiAuthorized' => $this->apiAuthorized])->header('Content-Type', 'application/xml');
                     break;
                 case 'atom10':
-                    return response()->view('metager3resultsatom10', ['results' => $viewResults,'eingabe' => $this->eingabe,'metager' => $this,'resultcount' => sizeof($viewResults)])
+                    return response()->view('metager3resultsatom10', ['results' => $viewResults,'eingabe' => $this->eingabe,'metager' => $this,'resultcount' => sizeof($viewResults), 'apiAuthorized' => true])
 			->header('Content-Type', 'application/xml');
                     break;
                 case 'result-count':

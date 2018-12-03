@@ -171,7 +171,10 @@ Route::group(
             });
             Route::get('metager', function () {
                 $filePath = storage_path() . "/app/public/MetaGer-release.apk";
-                return response()->download($filePath, "MetaGer-release.apk");
+                return response()->download($filePath, "MetaGer-release.apk")
+                    ->header('Cache-Control', 'public')
+                    ->header('Content-Type', 'application/vnd.android.package-archive')
+                    ->header('Content-Transfer-Encoding', 'Binary');
             });
             Route::get('maps', function () {
                 $filePath     = env('maps_app');

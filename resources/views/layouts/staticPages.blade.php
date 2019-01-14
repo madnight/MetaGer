@@ -155,6 +155,9 @@
 
 		</header>
 		<div class="wrapper">
+			<aside id="preview" class="mg-panel container alert-danger">
+				{!! trans('staticPages.preview.message') !!}
+			</aside>
 			<main class="mg-panel container">
 				@if (isset($success))
 					<div class="alert alert-success" role="alert">{{ $success }}</div>
